@@ -1,0 +1,248 @@
+# Restwert Engine v0.2: lake generator configuration (SPEC_v0.2 section 3.5).
+#
+# EVERY value in this file is a synthetic DESIGN PARAMETER. None of them is a market
+# figure, a customer figure, a supplier figure or an employer figure. The truth block
+# of each family is unused by the lake generator (kept for GeneratorConfig validation);
+# the lake truth is the calibrated block `truth_v2` (public anchor curves from
+# outputs/market_curves.csv, hair-cut and capped by the parameters below).
+#
+# The four family blocks keep the v0.1 FamilyConfig shape because the v0.1 builders
+# (rental contracts, events, refurbishment) are reused unchanged. share_of_fleet is
+# unused (fleet_mix rules); list prices are unused (the public catalogue RRP rules).
+# launch_cadence_months per segment = the catalogue's observed launch rate (usable slugs
+# per year), so that the forecaster's calendar rule for launches after as_of is on the
+# same scale as the observed count (decision D10).
+# term_mix per family = share of new rental contracts per term in months. The term set 12/24/36/48
+# is the business owner's instruction; the shares are PLACEHOLDERS without a public source (the legacy
+# scalar term_mix_36 is still accepted by the loader and means {24: 1 - term_mix_36, 36: term_mix_36}).
+version: 2
+seed: 42
+n_devices: 5000               # serials (the CLI flag --devices / --serials)
+history_start: 2022-01-01
+purchase_end: 2026-03-31   # six months before as_of, as before (2025-12-31 to 2026-06-30)
+as_of: 2026-09-13          # the date of the public price evidence (data/anchors), so simulation and market page share one Stichtag
+delivery_cadence: quarterly   # yearly | quarterly | monthly
+families:
+  iphone_like:
+    first_launch: 2020-10-15
+    launch_cadence_months: 4
+    launch_month: null
+    list_price_min: 799
+    list_price_max: 1299
+    storage_options: [128, 256, 512]
+    base_storage_gb: 128
+    discount_min: 0.06
+    discount_max: 0.12
+    freight_duty_pct: 0.0
+    share_of_fleet: 0.33
+    term_mix: {12: 0.10, 24: 0.50, 36: 0.35, 48: 0.05}   # placeholder shares, no public source (owner: term_mix in design_parameter_owners)
+    monthly_rate_pct_of_landed: 0.042
+    damage_rate_pa: 0.10
+    repair_share: 0.70
+    repair_cost_min: 60
+    repair_cost_max: 320
+    truth: {base: 0.92, lambda: 0.028, lambda_after_24: 0.017, step: 0.88, noise: 0.10, storage_exp: 0.08, grade_A: 1.00, grade_B: 0.88, grade_C: 0.72, grade_D: 0.45}
+  android_like:
+    first_launch: 2020-04-30
+    launch_cadence_months: 1
+    launch_month: null
+    list_price_min: 449
+    list_price_max: 899
+    storage_options: [128, 256]
+    base_storage_gb: 128
+    discount_min: 0.12
+    discount_max: 0.25
+    freight_duty_pct: 0.0
+    share_of_fleet: 0.27
+    term_mix: {12: 0.10, 24: 0.55, 36: 0.30, 48: 0.05}   # placeholder shares, no public source (owner: term_mix in design_parameter_owners)
+    monthly_rate_pct_of_landed: 0.045
+    damage_rate_pa: 0.11
+    repair_share: 0.65
+    repair_cost_min: 40
+    repair_cost_max: 220
+    truth: {base: 0.88, lambda: 0.036, lambda_after_24: 0.022, step: 0.85, noise: 0.12, storage_exp: 0.06, grade_A: 1.00, grade_B: 0.86, grade_C: 0.68, grade_D: 0.40}
+  tablet_like:
+    first_launch: 2020-09-15
+    launch_cadence_months: 2
+    launch_month: null
+    list_price_min: 399
+    list_price_max: 1499
+    storage_options: [128, 256, 512]
+    base_storage_gb: 128
+    discount_min: 0.08
+    discount_max: 0.20
+    freight_duty_pct: 0.0
+    share_of_fleet: 0.15
+    term_mix: {12: 0.05, 24: 0.40, 36: 0.45, 48: 0.10}   # placeholder shares, no public source (owner: term_mix in design_parameter_owners)
+    monthly_rate_pct_of_landed: 0.040
+    damage_rate_pa: 0.07
+    repair_share: 0.60
+    repair_cost_min: 50
+    repair_cost_max: 260
+    truth: {base: 0.90, lambda: 0.024, lambda_after_24: 0.016, step: 0.90, noise: 0.10, storage_exp: 0.08, grade_A: 1.00, grade_B: 0.88, grade_C: 0.72, grade_D: 0.45}
+  laptop_like:
+    first_launch: 2020-05-15
+    launch_cadence_months: 2
+    launch_month: null
+    list_price_min: 1199
+    list_price_max: 1899
+    storage_options: [256, 512, 1024]
+    base_storage_gb: 256
+    discount_min: 0.15
+    discount_max: 0.30
+    freight_duty_pct: 0.0
+    share_of_fleet: 0.25
+    term_mix: {12: 0.05, 24: 0.25, 36: 0.50, 48: 0.20}   # placeholder shares, no public source (owner: term_mix in design_parameter_owners)
+    monthly_rate_pct_of_landed: 0.038
+    damage_rate_pa: 0.08
+    repair_share: 0.75
+    repair_cost_min: 90
+    repair_cost_max: 450
+    truth: {base: 0.90, lambda: 0.022, lambda_after_24: 0.015, step: 0.93, noise: 0.09, storage_exp: 0.10, grade_A: 1.00, grade_B: 0.90, grade_C: 0.75, grade_D: 0.50}
+grade_pre_return_mix: {A: 0.35, B: 0.40, C: 0.20, D: 0.05}
+grade_drift_worse: 0.20      # share of returns inspected one grade worse than declared
+grade_drift_better: 0.05
+channel_mix_by_grade:
+  A: {employee_buyout: 0.35, marketplace: 0.45, b2b_wholesale: 0.20}
+  B: {employee_buyout: 0.20, marketplace: 0.50, b2b_wholesale: 0.30}
+  C: {employee_buyout: 0.05, marketplace: 0.40, b2b_wholesale: 0.55}
+  D: {as_is: 1.0}
+channel_mult: {employee_buyout: 0.95, marketplace: 1.00, b2b_wholesale: 0.85, as_is: 0.55}
+# fee_pct, fee_fixed_eur and days_to_cash MUST equal assumptions.yaml channel_fees (a test asserts it)
+fee_pct: {employee_buyout: 0.00, marketplace: 0.12, b2b_wholesale: 0.03, as_is: 0.05}
+fee_fixed_eur: {employee_buyout: 0.0, marketplace: 2.50, b2b_wholesale: 0.0, as_is: 0.0}
+days_to_cash: {employee_buyout: 14, marketplace: 28, b2b_wholesale: 45, as_is: 30}
+days_to_sale: {employee_buyout: [5, 20], marketplace: [10, 60], b2b_wholesale: [20, 45], as_is: [15, 60]}
+slow_mover_share: 0.04       # share of sellable devices that linger; gives aging stock for KPIs and rule R03
+slow_mover_days: [90, 400]
+launch_slip_months_max: 0    # unused by the lake generator (the catalogue carries real launch dates)
+refurb_days: {A: [3, 7], B: [5, 12], C: [8, 20], D: [2, 5]}
+refurb_cost: {A: [10, 25], B: [20, 60], C: [40, 120], D: [5, 15]}
+scrap_share_of_d: 0.10
+early_termination_rate: 0.06
+# monthly rate per contract term relative to the 24-month base: a 12-month contract must recover more of the
+# landed cost per month than a 48-month one (rent covers landed cost minus residual over the term). PLACEHOLDER
+# factors, no public source (owner: term_rate_factor in design_parameter_owners)
+term_rate_factor: {12: 1.5, 24: 1.0, 36: 0.85, 48: 0.75}
+replacement_share_of_damage: 0.30
+open_damage_share: 0.03
+otif_on_time_share: 0.78
+po_short_delivery_share: 0.10
+price_drop_share: 0.15
+price_drop_pct: 0.10
+suppliers_hardware: []       # unused by the lake generator (supplier_route decides)
+suppliers_indirect: ["Facilities provider (role-only)", "Marketing agency (role-only)", "Consulting firm (role-only)",
+                     "Packaging supplier (role-only)", "Software vendor (role-only)", "Logistics partner (role-only)"]
+indirect_categories: [logistics, repair, refurbishment, software, marketing, facilities, consulting, packaging]
+indirect_rows_per_month: 40
+indirect_has_po: 0.75
+indirect_has_contract: 0.65
+indirect_saving_share: 0.15
+indirect_confirmed_share: 0.60
+indirect_saving_type_mix: {hard_price_reduction: 0.60, cost_avoidance: 0.30, rebate: 0.10}  # only hard counts vs plan
+# ----------------------------------------------------------------------------- v0.2 blocks
+# Every block below is a synthetic design parameter with an owner: design_parameter_owners
+# names, per top-level block, the role that signs the value (placeholder "(name)" until a real
+# person does). A block listed nowhere here is a finding (tests/test_honesty_v2.py walks it).
+design_parameter_owners:
+  fleet_mix: "Head of Recommerce (name)"
+  oem_share: "Category Manager Hardware (name)"
+  supplier_route: "Head of Procurement (name)"
+  resellers: "Head of Procurement (name)"
+  discount_by_oem: "Head of Procurement (name)"
+  reseller_markup_pct: "Head of Procurement (name)"
+  newest_model_share: "Category Manager Hardware (name)"
+  previous_generation_share: "Category Manager Hardware (name)"
+  generation_window_months: "Category Manager Hardware (name)"
+  freight_per_unit_eur: "Head of Procurement (name)"
+  duty_pct_reseller_b: "Head of Procurement (name)"
+  staging_cost_eur: "Head of Service Operations (name)"
+  outbound_cost_eur: "Head of Service Operations (name)"
+  wipe_grading_cost_eur: "Head of Recommerce (name)"
+  mdm_enrolled_share: "Head of Service Operations (name)"
+  wipe_certificate_share: "Data Protection Officer (name)"
+  price_protection_claim_share: "Category Manager Hardware (name)"
+  truth_v2: "Head of Recommerce (name)"
+  defects: "Data owner (name)"
+  families: "Head of Recommerce (name)"
+  term_mix: "Head of Customer Success (name)"   # the per-family term mix inside families (nested block, own owner)
+  grade_pre_return_mix: "Head of Recommerce (name)"
+  grade_drift_worse: "Head of Recommerce (name)"
+  grade_drift_better: "Head of Recommerce (name)"
+  channel_mix_by_grade: "Head of Recommerce (name)"
+  channel_mult: "Head of Recommerce (name)"
+  fee_pct: "Head of Recommerce (name)"
+  fee_fixed_eur: "Head of Recommerce (name)"
+  days_to_cash: "Head of Recommerce (name)"
+  days_to_sale: "Head of Recommerce (name)"
+  slow_mover_share: "Head of Recommerce (name)"
+  slow_mover_days: "Head of Recommerce (name)"
+  refurb_days: "Head of Recommerce (name)"
+  refurb_cost: "Head of Recommerce (name)"
+  scrap_share_of_d: "Head of Recommerce (name)"
+  early_termination_rate: "Head of Customer Success (name)"
+  term_rate_factor: "Head of Customer Success (name)"
+  replacement_share_of_damage: "Head of Service Operations (name)"
+  open_damage_share: "Head of Service Operations (name)"
+  otif_on_time_share: "Head of Procurement (name)"
+  po_short_delivery_share: "Head of Procurement (name)"
+  price_drop_share: "Category Manager Hardware (name)"
+  price_drop_pct: "Category Manager Hardware (name)"
+  suppliers_indirect: "Head of Indirect Procurement (name)"
+  indirect_categories: "Head of Indirect Procurement (name)"
+  indirect_rows_per_month: "Head of Indirect Procurement (name)"
+  indirect_has_po: "Head of Indirect Procurement (name)"
+  indirect_has_contract: "Head of Indirect Procurement (name)"
+  indirect_saving_share: "Head of Indirect Procurement (name)"
+  indirect_confirmed_share: "Head of Indirect Procurement (name)"
+  indirect_saving_type_mix: "Head of Indirect Procurement (name)"
+fleet_mix: {Smartphone: 0.60, Tablet: 0.15, Laptop: 0.25}
+oem_share:
+  Smartphone: {Apple: 0.50, Samsung: 0.30, Google: 0.10, Motorola: 0.06, Fairphone: 0.03, "HMD Global (Nokia)": 0.01}
+  Tablet:     {Apple: 0.65, Samsung: 0.30, Microsoft: 0.05}
+  Laptop:     {Lenovo: 0.35, Dell: 0.20, HP: 0.20, Apple: 0.15, Microsoft: 0.05, Samsung: 0.05}
+supplier_route: {manufacturer: 0.40, reseller: 0.60}
+resellers: ["IT reseller A (role-only)", "IT reseller B (role-only)"]
+discount_by_oem:            # [min, max] share below net RRP on the manufacturer route (design parameters)
+  Apple: [0.05, 0.12]
+  Samsung: [0.12, 0.25]
+  Google: [0.10, 0.22]
+  Motorola: [0.15, 0.30]
+  Fairphone: [0.03, 0.08]
+  "HMD Global (Nokia)": [0.15, 0.25]
+  Lenovo: [0.15, 0.30]
+  Dell: [0.15, 0.28]
+  HP: [0.15, 0.28]
+  Microsoft: [0.08, 0.15]
+reseller_markup_pct: [0.00, 0.03]   # a reseller route pays this much less discount
+newest_model_share: 0.70            # PLACEHOLDER: p(a slug of the CURRENT generation of the oem/family at the order date); the remainder after
+                                    # newest_model_share + previous_generation_share goes to the older pool. No public source.
+previous_generation_share: 0.20     # PLACEHOLDER: p(a slug of the PREVIOUS generation); newest_model_share + previous_generation_share <= 1.
+                                    # Not a market figure; was a module constant in restwert/lakegen/fleet.py before it got an owner here.
+generation_window_months: 12        # PLACEHOLDER: the window is anchored on the NEWEST launch of the oem/family on or before the order date,
+                                    # not on the order date: every slug launched inside this many months up to that newest launch is the
+                                    # current generation (all of them, drawn uniformly); the window before it is the previous generation;
+                                    # the rest is older. So a generation stays one set however long ago it launched. No public source.
+freight_per_unit_eur: [4.0, 14.0]
+duty_pct_reseller_b: 0.025          # only "IT reseller B (role-only)" invoices duty (non-EU origin, design)
+staging_cost_eur: [6.0, 14.0]
+outbound_cost_eur: [5.5, 9.5]
+wipe_grading_cost_eur: [3.0, 8.0]
+mdm_enrolled_share: 0.98
+wipe_certificate_share: 0.97
+price_protection_claim_share: 0.60  # share of claimable drops that were actually claimed (credit note exists)
+truth_v2:
+  q_young_cap: 0.90
+  ask_to_realised: 0.85
+  grade_d_offset_default: -0.60
+  noise_sigma: 0.10
+  ratio_min: 0.02
+  ratio_max: 0.95
+  default_curve: {intercept: -0.45, slope_per_month: -0.010, grade_A_offset: 0.03, grade_C_offset: -0.15}  # used only when market_curves.csv is missing
+  owner: "Head of Recommerce (name)"
+defects:
+  unknown_serial_share: 0.003          # wms/shipments rows with a serial typo -> unresolved unknown_serial
+  identical_duplicate_share: 0.005     # rows repeated in the next delivery of the same feed -> duplicates_identical
+  conflicting_duplicate_share: 0.002   # portal/rental_invoices rows repeated with amount + 0.01 -> duplicate_conflict
+  missing_credit_note_share: 0.02      # sold orders without a credit note -> chain incomplete (credited_at missing)
+  orphan_freight_share: 0.01           # freight invoice lines referencing a PO line that does not exist -> unknown_po_line

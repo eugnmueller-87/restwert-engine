@@ -1,0 +1,11 @@
+# Pinned to the versions installed and tested on the build host (Python 3.12, September 2026).
+# pyproject.toml carries the loose lower bounds; this file reproduces the tested environment.
+pandas==3.0.5
+numpy==2.5.3
+duckdb==1.5.5
+pydantic==2.13.5
+PyYAML==6.0.3
+streamlit==1.63.0
+plotly==7.0.0
+pyarrow==25.0.1
+pytest==9.1.1

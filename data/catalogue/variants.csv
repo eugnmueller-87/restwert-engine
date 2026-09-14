@@ -1,0 +1,624 @@
+# PUBLIC DATA, researched 2026-09-13: every row carries a source URL; prices are gross EUR, Germany. No provider's number.
+slug,spec,storage_gb,ram_gb,rrp_eur_launch_de,rrp_source_url,rrp_source_date
+fairphone,8 GB / 256 GB (Gen. 6),256,8,599,https://www.computerbase.de/news/smartphones/fairphone-gen-6-das-neue-reparierbare-smartphone-kostet-599-euro.93263/,2025-06-25
+fairphone,12 GB / 256 GB (Gen. 6+),256,12,649,https://www.connect.de/news/fairphone-gen-6-plus-mediamarkt-angebote-3213154.html,2026-08-18
+fairphone-4,6 GB / 128 GB,128,6,579,https://www.teltarif.de/fairphone-4-neuvorstellung-preis-verfuegbarkeit/news/85884.html,2021-09-30
+fairphone-4,8 GB / 256 GB,256,8,649,https://www.teltarif.de/fairphone-4-neuvorstellung-preis-verfuegbarkeit/news/85884.html,2021-09-30
+fairphone-5,8 GB / 256 GB,256,8,699,https://www.teltarif.de/fairphone-5-neuvorstellung-preis-updates/news/92903.html,2023-08-30
+fairphone-6,8 GB / 256 GB,256,8,599,https://www.computerbase.de/news/smartphones/fairphone-gen-6-das-neue-reparierbare-smartphone-kostet-599-euro.93263/,2025-06-25
+google-pixel-10,128 GB,128,,899,https://www.computerbase.de/artikel/smartphones/google-pixel-10-pro-xl-test.93971/,2025-08-27
+google-pixel-10,256 GB,256,,999,https://www.computerbase.de/artikel/smartphones/google-pixel-10-pro-xl-test.93971/,2025-08-27
+google-pixel-10-fold,256 GB,256,,1899,https://www.googlewatchblog.de/2025/10/pixel-10-pro-fold-googles-neues-faltbares-smartphone-ist-jetzt-erhaeltlich-noch-mit-300-euro-eintauschbonus/,2025-10-09
+google-pixel-10-fold,512 GB,512,,2029,https://www.googlewatchblog.de/2025/10/pixel-10-pro-fold-googles-neues-faltbares-smartphone-ist-jetzt-erhaeltlich-noch-mit-300-euro-eintauschbonus/,2025-10-09
+google-pixel-10-fold,1 TB,1024,,2289,https://www.googlewatchblog.de/2025/10/pixel-10-pro-fold-googles-neues-faltbares-smartphone-ist-jetzt-erhaeltlich-noch-mit-300-euro-eintauschbonus/,2025-10-09
+google-pixel-10-pro,128 GB,128,,1099,https://www.computerbase.de/artikel/smartphones/google-pixel-10-pro-xl-test.93971/,2025-08-27
+google-pixel-10-pro,256 GB,256,,1199,https://www.computerbase.de/artikel/smartphones/google-pixel-10-pro-xl-test.93971/,2025-08-27
+google-pixel-10-pro,512 GB,512,,1329,https://www.computerbase.de/artikel/smartphones/google-pixel-10-pro-xl-test.93971/,2025-08-27
+google-pixel-10-pro,1 TB,1024,,1589,https://www.computerbase.de/artikel/smartphones/google-pixel-10-pro-xl-test.93971/,2025-08-27
+google-pixel-10-pro-xl,256 GB,256,,1299,https://www.computerbase.de/artikel/smartphones/google-pixel-10-pro-xl-test.93971/,2025-08-27
+google-pixel-10-pro-xl,512 GB,512,,1429,https://www.computerbase.de/artikel/smartphones/google-pixel-10-pro-xl-test.93971/,2025-08-27
+google-pixel-10-pro-xl,1 TB,1024,,1689,https://www.computerbase.de/artikel/smartphones/google-pixel-10-pro-xl-test.93971/,2025-08-27
+google-pixel-7a,128 GB,128,8,509,https://blog.google/intl/de-de/produkte/hardware/io-2023-pixel-7a/,2023-05-10
+google-pixel-8,128 GB,128,8,799,https://www.googlewatchblog.de/2023/10/pixel8-pro-pixel-watch2-preise-und-aktionen/,2023-10-04
+google-pixel-8,256 GB,256,8,859,https://www.googlewatchblog.de/2023/10/pixel8-pro-pixel-watch2-preise-und-aktionen/,2023-10-04
+google-pixel-8-pro,128 GB,128,12,1099,https://www.googlewatchblog.de/2023/10/pixel8-pro-pixel-watch2-preise-und-aktionen/,2023-10-04
+google-pixel-8-pro,256 GB,256,12,1159,https://www.googlewatchblog.de/2023/10/pixel8-pro-pixel-watch2-preise-und-aktionen/,2023-10-04
+google-pixel-8-pro,512 GB,512,12,1299,https://www.googlewatchblog.de/2023/10/pixel8-pro-pixel-watch2-preise-und-aktionen/,2023-10-04
+google-pixel-8a,128 GB,128,8,549,https://www.computerbase.de/news/smartphones/google-smartphone-pixel-8a-erhaelt-120-hz-display-tensor-g3-und-7-jahre-updates.88002/,2024-05-07
+google-pixel-8a,256 GB,256,8,609,https://www.computerbase.de/news/smartphones/google-smartphone-pixel-8a-erhaelt-120-hz-display-tensor-g3-und-7-jahre-updates.88002/,2024-05-07
+google-pixel-9,128 GB,128,12,899,https://www.googlewatchblog.de/2024/08/made-by-google-neue-pixel-produkte-verzoegern-sich-verkaufspreise-und-verkaufsstart-im-ueberblick/,2024-08-17
+google-pixel-9,256 GB,256,12,999,https://www.googlewatchblog.de/2024/08/made-by-google-neue-pixel-produkte-verzoegern-sich-verkaufspreise-und-verkaufsstart-im-ueberblick/,2024-08-17
+google-pixel-9-fold,256 GB,256,16,1899,https://www.computerbase.de/news/smartphones/google-pixel-9-pro-fold-das-duennste-foldable-sofern-man-china-ignoriert.89122/,2024-08-13
+google-pixel-9-fold,512 GB,512,16,2029,https://www.computerbase.de/news/smartphones/google-pixel-9-pro-fold-das-duennste-foldable-sofern-man-china-ignoriert.89122/,2024-08-13
+google-pixel-9-pro,128 GB,128,16,1099,https://www.googlewatchblog.de/2024/08/made-by-google-neue-pixel-produkte-verzoegern-sich-verkaufspreise-und-verkaufsstart-im-ueberblick/,2024-08-17
+google-pixel-9-pro,256 GB,256,16,1199,https://www.googlewatchblog.de/2024/08/made-by-google-neue-pixel-produkte-verzoegern-sich-verkaufspreise-und-verkaufsstart-im-ueberblick/,2024-08-17
+google-pixel-9-pro,512 GB,512,16,1329,https://www.googlewatchblog.de/2024/08/made-by-google-neue-pixel-produkte-verzoegern-sich-verkaufspreise-und-verkaufsstart-im-ueberblick/,2024-08-17
+google-pixel-9-pro-xl,128 GB,128,16,1199,https://www.googlewatchblog.de/2024/08/made-by-google-neue-pixel-produkte-verzoegern-sich-verkaufspreise-und-verkaufsstart-im-ueberblick/,2024-08-17
+google-pixel-9-pro-xl,256 GB,256,16,1299,https://www.googlewatchblog.de/2024/08/made-by-google-neue-pixel-produkte-verzoegern-sich-verkaufspreise-und-verkaufsstart-im-ueberblick/,2024-08-17
+google-pixel-9-pro-xl,512 GB,512,16,1429,https://www.googlewatchblog.de/2024/08/made-by-google-neue-pixel-produkte-verzoegern-sich-verkaufspreise-und-verkaufsstart-im-ueberblick/,2024-08-17
+google-pixel-9-pro-xl,1 TB,1024,16,1689,https://www.googlewatchblog.de/2024/08/made-by-google-neue-pixel-produkte-verzoegern-sich-verkaufspreise-und-verkaufsstart-im-ueberblick/,2024-08-17
+google-pixel-9a,128 GB,128,8,549,https://blog.google/intl/de-de/produkte/hardware/pixel-9a-gemini-ankuendigung/,2025-03-19
+google-pixel-9a,256 GB,256,8,649,https://blog.google/intl/de-de/produkte/hardware/pixel-9a-gemini-ankuendigung/,2025-03-19
+google-pixel-fold,256 GB,256,12,1899,https://www.googlewatchblog.de/2023/05/pixel7a-pixel-fold-tablet-preise-aktionen/,2023-05-10
+google-pixel-fold,512 GB,512,12,2019,https://www.googlewatchblog.de/2023/05/pixel7a-pixel-fold-tablet-preise-aktionen/,2023-05-10
+nokia-g22,4 GB / 64 GB,64,4,179,https://www.teltarif.de/nokia-g22-selbstreparatur/news/91328.html,2023-03-23
+nokia-g22,4 GB / 128 GB,128,4,199,https://www.teltarif.de/nokia-g22-selbstreparatur/news/91328.html,2023-03-23
+nokia-xr20,4 GB / 64 GB,64,4,499,https://www.connect.de/news/nokia-xr20-outdoor-smartphone-preis-release-3201729.html,2021-07-27
+nokia-xr20,6 GB / 128 GB,128,6,579,https://www.connect.de/news/nokia-xr20-outdoor-smartphone-preis-release-3201729.html,2021-07-27
+iphone-13-mini,128 GB,128,,799,https://www.apple.com/de/newsroom/2021/09/apple-introduces-iphone-13-and-iphone-13-mini/,2021-09-14
+iphone-13-mini,256 GB,256,,919,https://www.handyhase.de/apple/iphone-13-mini/,2026-09-13
+iphone-13-mini,512 GB,512,,1149,https://www.handyhase.de/apple/iphone-13-mini/,2026-09-13
+iphone-14-plus,128 GB,128,,1149,https://www.apple.com/de/newsroom/2022/09/apple-introduces-iphone-14-and-iphone-14-plus/,2022-09-07
+iphone-14-plus,256 GB,256,,1279,https://stadt-bremerhaven.de/apple-iphone-14-watch-series-8-und-airpods-pro-2-das-kosten-sie-in-deutschland/,2022-09-07
+iphone-14-plus,512 GB,512,,1539,https://stadt-bremerhaven.de/apple-iphone-14-watch-series-8-und-airpods-pro-2-das-kosten-sie-in-deutschland/,2022-09-07
+iphone-14-pro,128 GB,128,,1299,https://www.apple.com/de/newsroom/2022/09/apple-debuts-iphone-14-pro-and-iphone-14-pro-max/,2022-09-07
+iphone-14-pro,256 GB,256,,1429,https://stadt-bremerhaven.de/apple-iphone-14-watch-series-8-und-airpods-pro-2-das-kosten-sie-in-deutschland/,2022-09-07
+iphone-14-pro,512 GB,512,,1689,https://stadt-bremerhaven.de/apple-iphone-14-watch-series-8-und-airpods-pro-2-das-kosten-sie-in-deutschland/,2022-09-07
+iphone-14-pro,1 TB,1024,,1949,https://stadt-bremerhaven.de/apple-iphone-14-watch-series-8-und-airpods-pro-2-das-kosten-sie-in-deutschland/,2022-09-07
+iphone-14-pro-max,128 GB,128,,1449,https://www.apple.com/de/newsroom/2022/09/apple-debuts-iphone-14-pro-and-iphone-14-pro-max/,2022-09-07
+iphone-14-pro-max,256 GB,256,,1579,https://stadt-bremerhaven.de/apple-iphone-14-watch-series-8-und-airpods-pro-2-das-kosten-sie-in-deutschland/,2022-09-07
+iphone-14-pro-max,512 GB,512,,1839,https://stadt-bremerhaven.de/apple-iphone-14-watch-series-8-und-airpods-pro-2-das-kosten-sie-in-deutschland/,2022-09-07
+iphone-14-pro-max,1 TB,1024,,2099,https://stadt-bremerhaven.de/apple-iphone-14-watch-series-8-und-airpods-pro-2-das-kosten-sie-in-deutschland/,2022-09-07
+iphone-15,128 GB,128,,949,https://www.apple.com/de/newsroom/2023/09/apple-debuts-iphone-15-and-iphone-15-plus/,2023-09-12
+iphone-15,256 GB,256,,1079,https://www.notebookcheck.com/Apple-iPhone-15-und-iPhone-15-Pro-koennen-jetzt-ab-949-Euro-vorbestellt-werden.751350.0.html,2023-09-15
+iphone-15,512 GB,512,,1329,https://www.notebookcheck.com/Apple-iPhone-15-und-iPhone-15-Pro-koennen-jetzt-ab-949-Euro-vorbestellt-werden.751350.0.html,2023-09-15
+iphone-15-plus,128 GB,128,,1099,https://www.apple.com/de/newsroom/2023/09/apple-debuts-iphone-15-and-iphone-15-plus/,2023-09-12
+iphone-15-plus,256 GB,256,,1229,https://www.notebookcheck.com/Apple-iPhone-15-und-iPhone-15-Pro-koennen-jetzt-ab-949-Euro-vorbestellt-werden.751350.0.html,2023-09-15
+iphone-15-plus,512 GB,512,,1479,https://www.notebookcheck.com/Apple-iPhone-15-und-iPhone-15-Pro-koennen-jetzt-ab-949-Euro-vorbestellt-werden.751350.0.html,2023-09-15
+iphone-15-pro,128 GB,128,,1199,https://www.apple.com/de/newsroom/2023/09/apple-unveils-iphone-15-pro-and-iphone-15-pro-max/,2023-09-12
+iphone-15-pro,256 GB,256,,1329,https://www.notebookcheck.com/Apple-iPhone-15-und-iPhone-15-Pro-koennen-jetzt-ab-949-Euro-vorbestellt-werden.751350.0.html,2023-09-15
+iphone-15-pro,512 GB,512,,1579,https://www.notebookcheck.com/Apple-iPhone-15-und-iPhone-15-Pro-koennen-jetzt-ab-949-Euro-vorbestellt-werden.751350.0.html,2023-09-15
+iphone-15-pro,1 TB,1024,,1829,https://www.notebookcheck.com/Apple-iPhone-15-und-iPhone-15-Pro-koennen-jetzt-ab-949-Euro-vorbestellt-werden.751350.0.html,2023-09-15
+iphone-15-pro-max,256 GB,256,,1449,https://www.apple.com/de/newsroom/2023/09/apple-unveils-iphone-15-pro-and-iphone-15-pro-max/,2023-09-12
+iphone-15-pro-max,512 GB,512,,1699,https://www.notebookcheck.com/Apple-iPhone-15-und-iPhone-15-Pro-koennen-jetzt-ab-949-Euro-vorbestellt-werden.751350.0.html,2023-09-15
+iphone-15-pro-max,1 TB,1024,,1949,https://www.notebookcheck.com/Apple-iPhone-15-und-iPhone-15-Pro-koennen-jetzt-ab-949-Euro-vorbestellt-werden.751350.0.html,2023-09-15
+iphone-16,128 GB,128,,949,https://www.apple.com/de/newsroom/2024/09/apple-introduces-iphone-16-iphone-16-plus/,2024-09-09
+iphone-16,256 GB,256,,1079,https://www.notebookcheck.com/Apple-iPhone-16-Pro-starten-in-den-Verkauf-das-sind-die-wichtigsten-Neuerungen-und-Unterschiede.887868.0.html,2024-09-13
+iphone-16,512 GB,512,,1329,https://www.notebookcheck.com/Apple-iPhone-16-Pro-starten-in-den-Verkauf-das-sind-die-wichtigsten-Neuerungen-und-Unterschiede.887868.0.html,2024-09-13
+iphone-16-plus,128 GB,128,,1099,https://www.apple.com/de/newsroom/2024/09/apple-introduces-iphone-16-iphone-16-plus/,2024-09-09
+iphone-16-plus,256 GB,256,,1229,https://www.notebookcheck.com/Apple-iPhone-16-Pro-starten-in-den-Verkauf-das-sind-die-wichtigsten-Neuerungen-und-Unterschiede.887868.0.html,2024-09-13
+iphone-16-plus,512 GB,512,,1479,https://www.notebookcheck.com/Apple-iPhone-16-Pro-starten-in-den-Verkauf-das-sind-die-wichtigsten-Neuerungen-und-Unterschiede.887868.0.html,2024-09-13
+iphone-16-pro,128 GB,128,,1199,https://www.apple.com/de/newsroom/2024/09/apple-debuts-iphone-16-pro-iphone-16-pro-max/,2024-09-09
+iphone-16-pro,256 GB,256,,1329,https://www.notebookcheck.com/Apple-iPhone-16-Pro-starten-in-den-Verkauf-das-sind-die-wichtigsten-Neuerungen-und-Unterschiede.887868.0.html,2024-09-13
+iphone-16-pro,512 GB,512,,1579,https://www.notebookcheck.com/Apple-iPhone-16-Pro-starten-in-den-Verkauf-das-sind-die-wichtigsten-Neuerungen-und-Unterschiede.887868.0.html,2024-09-13
+iphone-16-pro,1 TB,1024,,1829,https://www.notebookcheck.com/Apple-iPhone-16-Pro-starten-in-den-Verkauf-das-sind-die-wichtigsten-Neuerungen-und-Unterschiede.887868.0.html,2024-09-13
+iphone-16-pro-max,256 GB,256,,1449,https://www.apple.com/de/newsroom/2024/09/apple-debuts-iphone-16-pro-iphone-16-pro-max/,2024-09-09
+iphone-16-pro-max,512 GB,512,,1699,https://www.notebookcheck.com/Apple-iPhone-16-Pro-starten-in-den-Verkauf-das-sind-die-wichtigsten-Neuerungen-und-Unterschiede.887868.0.html,2024-09-13
+iphone-16-pro-max,1 TB,1024,,1949,https://www.notebookcheck.com/Apple-iPhone-16-Pro-starten-in-den-Verkauf-das-sind-die-wichtigsten-Neuerungen-und-Unterschiede.887868.0.html,2024-09-13
+iphone-16e,128 GB,128,,699,https://www.apple.com/de/newsroom/2025/02/apple-debuts-iphone-16e-a-powerful-new-member-of-the-iphone-16-family/,2025-02-19
+iphone-16e,256 GB,256,,829,https://www.notebookcheck.com/Apple-iPhone-16e-startet-in-den-Verkauf-Benchmarks-zeigen-Leistung-des-beschnittenen-Apple-A18.965419.0.html,2025-02-21
+iphone-16e,512 GB,512,,1079,https://www.notebookcheck.com/Apple-iPhone-16e-startet-in-den-Verkauf-Benchmarks-zeigen-Leistung-des-beschnittenen-Apple-A18.965419.0.html,2025-02-21
+iphone-17,256 GB,256,,949,https://www.apple.com/de/newsroom/2025/09/apple-introduces-iphone-17/,2025-09-09
+iphone-17,512 GB,512,,1199,https://www.teltarif.de/iphone-17-air-pro-max-preise/news/99654.html,2025-09-10
+iphone-17-pro,256 GB,256,,1299,https://www.apple.com/de/newsroom/2025/09/apple-unveils-iphone-17-pro-and-iphone-17-pro-max-the-most-powerful-and-advanced-pro-models-ever/,2025-09-09
+iphone-17-pro,512 GB,512,,1549,https://www.teltarif.de/iphone-17-air-pro-max-preise/news/99654.html,2025-09-10
+iphone-17-pro,1 TB,1024,,1799,https://www.teltarif.de/iphone-17-air-pro-max-preise/news/99654.html,2025-09-10
+iphone-17-pro-max,256 GB,256,,1449,https://www.apple.com/de/newsroom/2025/09/apple-unveils-iphone-17-pro-and-iphone-17-pro-max-the-most-powerful-and-advanced-pro-models-ever/,2025-09-09
+iphone-17-pro-max,512 GB,512,,1699,https://www.teltarif.de/iphone-17-air-pro-max-preise/news/99654.html,2025-09-10
+iphone-17-pro-max,1 TB,1024,,1949,https://www.teltarif.de/iphone-17-air-pro-max-preise/news/99654.html,2025-09-10
+iphone-17-pro-max,2 TB,2048,,2449,https://www.teltarif.de/iphone-17-air-pro-max-preise/news/99654.html,2025-09-10
+iphone-air,256 GB,256,,1199,https://www.apple.com/de/newsroom/2025/09/introducing-iphone-air-a-powerful-new-iphone-with-a-breakthrough-design/,2025-09-09
+iphone-air,512 GB,512,,1449,https://www.teltarif.de/iphone-17-air-pro-max-preise/news/99654.html,2025-09-10
+iphone-air,1 TB,1024,,1699,https://www.teltarif.de/iphone-17-air-pro-max-preise/news/99654.html,2025-09-10
+samsung-galaxy-a04s,3 GB / 32 GB,32,3,169,https://www.inside-digital.de/handys/samsung-galaxy-a04s,2026-09-13
+samsung-galaxy-a05s,4 GB / 64 GB,64,4,159,https://news.samsung.com/de/samsung-stellt-die-neuen-modelle-der-galaxy-a-serie-vor-das-samsung-galaxy-a25-5g-das-galaxy-a15-und-galaxy-a15g-5g-sowie-das-galaxy-a05s,2024-01-04
+samsung-galaxy-a05s,128 GB,128,,179,https://www.teltarif.de/smartphone/samsung/galaxy-a05s/,2026-09-13
+samsung-galaxy-a13,4 GB / 64 GB,64,4,189,https://news.samsung.com/de/ankundigung-a-und-m-serie,2022-03-21
+samsung-galaxy-a13,3 GB / 32 GB,32,3,169,https://www.teltarif.de/smartphone/samsung/galaxy-a13/,2026-09-13
+samsung-galaxy-a13,4 GB / 128 GB,128,4,209,https://www.teltarif.de/smartphone/samsung/galaxy-a13/,2026-09-13
+samsung-galaxy-a14,4 GB / 64 GB,64,4,229,https://www.nextpit.de/news/samsung-galaxy-a14-5g-offiziell,2023-01-06
+samsung-galaxy-a16-3,4 GB / 128 GB,128,4,229,https://news.samsung.com/de/kostengunstiger-einstieg-in-das-galaxy-ecosystem-das-neue-samsung-galaxy-a16-5g-ist-da,2024-10-10
+samsung-galaxy-a16-3,8 GB / 256 GB,256,8,309,https://news.samsung.com/de/kostengunstiger-einstieg-in-das-galaxy-ecosystem-das-neue-samsung-galaxy-a16-5g-ist-da,2024-10-10
+samsung-galaxy-a25,128 GB,128,,299,https://news.samsung.com/de/samsung-stellt-die-neuen-modelle-der-galaxy-a-serie-vor-das-samsung-galaxy-a25-5g-das-galaxy-a15-und-galaxy-a15g-5g-sowie-das-galaxy-a05s,2024-01-04
+samsung-galaxy-a26,6 GB / 128 GB,128,6,299,https://news.samsung.com/de/einfach-awesome-die-neue-samsung-galaxy-a-serie-ist-ab-sofort-erhaltlich,2025-03-28
+samsung-galaxy-a26,8 GB / 256 GB,256,8,369,https://www.5g-anbieter.info/5g-news/mwc-2025-samsung-praesentiert-galaxy-a56-a36-und-a26,2025-03-04
+samsung-galaxy-a33,6 GB / 128 GB,128,6,369,https://news.samsung.com/de/samsung-stellt-das-galaxy-a53-5g-und-a33-5g-vor,2022-03-17
+samsung-galaxy-a34,6 GB / 128 GB,128,6,389,https://news.samsung.com/de/zuwachs-fur-die-galaxy-a-serie-das-samsung-galaxy-a34-5g-und-galaxy-a54-5g-erweitern-die-galaxy-familie,2023-03-15
+samsung-galaxy-a34,8 GB / 256 GB,256,8,459,https://news.samsung.com/de/zuwachs-fur-die-galaxy-a-serie-das-samsung-galaxy-a34-5g-und-galaxy-a54-5g-erweitern-die-galaxy-familie,2023-03-15
+samsung-galaxy-a35,6 GB / 128 GB,128,6,379,https://news.samsung.com/de/samsung-galaxy-a55-5g-und-galaxy-a35-5g-spannende-neuheiten-und-verbesserte-sicherheit,2024-03-11
+samsung-galaxy-a35,8 GB / 256 GB,256,8,449,https://www.teltarif.de/smartphone/samsung/galaxy-a35-5g/,2026-09-13
+samsung-galaxy-a36,6 GB / 128 GB,128,6,379,https://news.samsung.com/de/einfach-awesome-die-neue-samsung-galaxy-a-serie-ist-ab-sofort-erhaltlich,2025-03-28
+samsung-galaxy-a36,8 GB / 256 GB,256,8,449,https://www.5g-anbieter.info/5g-news/mwc-2025-samsung-praesentiert-galaxy-a56-a36-und-a26,2025-03-04
+samsung-galaxy-a53,6 GB / 128 GB,128,6,449,https://news.samsung.com/de/samsung-stellt-das-galaxy-a53-5g-und-a33-5g-vor,2022-03-17
+samsung-galaxy-a53,8 GB / 128 GB,128,8,449,https://news.samsung.com/de/samsung-stellt-das-galaxy-a53-5g-und-a33-5g-vor,2022-03-17
+samsung-galaxy-a53,8 GB / 256 GB,256,8,509,https://news.samsung.com/de/samsung-stellt-das-galaxy-a53-5g-und-a33-5g-vor,2022-03-17
+samsung-galaxy-a54,8 GB / 128 GB,128,8,489,https://news.samsung.com/de/zuwachs-fur-die-galaxy-a-serie-das-samsung-galaxy-a34-5g-und-galaxy-a54-5g-erweitern-die-galaxy-familie,2023-03-15
+samsung-galaxy-a54,8 GB / 256 GB,256,8,539,https://news.samsung.com/de/zuwachs-fur-die-galaxy-a-serie-das-samsung-galaxy-a34-5g-und-galaxy-a54-5g-erweitern-die-galaxy-familie,2023-03-15
+samsung-galaxy-a55,8 GB / 128 GB,128,8,479,https://news.samsung.com/de/samsung-galaxy-a55-5g-und-galaxy-a35-5g-spannende-neuheiten-und-verbesserte-sicherheit,2024-03-11
+samsung-galaxy-a55,8 GB / 256 GB,256,8,529,https://www.allround-pc.com/news/samsung-galaxy-a55-a35-mittelklasse-smartphones-preis-ausstattung,2024-03-11
+samsung-galaxy-a56,8 GB / 128 GB,128,8,479,https://news.samsung.com/de/einfach-awesome-die-neue-samsung-galaxy-a-serie-ist-ab-sofort-erhaltlich,2025-03-28
+samsung-galaxy-a56,8 GB / 256 GB,256,8,529,https://www.5g-anbieter.info/5g-news/mwc-2025-samsung-praesentiert-galaxy-a56-a36-und-a26,2025-03-04
+samsung-galaxy-tab-a8,32 GB Wi-Fi,32,,229,https://news.samsung.com/de/panoramadisplay-extra-power-und-performance-das-neue-galaxy-tab-a8,2021-12-15
+samsung-galaxy-tab-a8,32 GB LTE,32,,279,https://news.samsung.com/de/panoramadisplay-extra-power-und-performance-das-neue-galaxy-tab-a8,2021-12-15
+samsung-galaxy-tab-active-3,64 GB LTE Enterprise Edition,64,,477,https://news.samsung.com/de/samsung-announces-the-galaxy-tab-active3-the-smart-new-tablet-built-for-demanding-environments,2020-10-21
+samsung-galaxy-tab-s6-lite,Wi-Fi (Speichergröße in Pressemitteilung nicht genannt),,,379,https://news.samsung.com/de/work-smart-play-smart-das-galaxy-tab-s6-lite/1000,2020-04-16
+samsung-galaxy-tab-s6-lite,LTE (Speichergröße in Pressemitteilung nicht genannt),,,439,https://news.samsung.com/de/work-smart-play-smart-das-galaxy-tab-s6-lite/1000,2020-04-16
+samsung-galaxy-tab-s8,128 GB Wi-Fi,128,8,749,https://news.samsung.com/de/samsung-stellt-mit-galaxy-tab-s8-serie-neue-begleiter-fur-multitasker-und-kreative-vor,2022-02-09
+samsung-galaxy-tab-s8,256 GB Wi-Fi,256,,799,https://news.samsung.com/de/samsung-stellt-mit-galaxy-tab-s8-serie-neue-begleiter-fur-multitasker-und-kreative-vor,2022-02-09
+samsung-galaxy-tab-s8,128 GB 5G,128,8,899,https://news.samsung.com/de/samsung-stellt-mit-galaxy-tab-s8-serie-neue-begleiter-fur-multitasker-und-kreative-vor,2022-02-09
+samsung-galaxy-tab-s8,256 GB 5G,256,,949,https://news.samsung.com/de/samsung-stellt-mit-galaxy-tab-s8-serie-neue-begleiter-fur-multitasker-und-kreative-vor,2022-02-09
+samsung-galaxy-tab-s8-ultra,128 GB Wi-Fi,128,,1149,https://news.samsung.com/de/samsung-stellt-mit-galaxy-tab-s8-serie-neue-begleiter-fur-multitasker-und-kreative-vor,2022-02-09
+samsung-galaxy-tab-s8-ultra,256 GB Wi-Fi,256,,1249,https://news.samsung.com/de/samsung-stellt-mit-galaxy-tab-s8-serie-neue-begleiter-fur-multitasker-und-kreative-vor,2022-02-09
+samsung-galaxy-tab-s8-ultra,512 GB Wi-Fi,512,,1449,https://news.samsung.com/de/samsung-stellt-mit-galaxy-tab-s8-serie-neue-begleiter-fur-multitasker-und-kreative-vor,2022-02-09
+samsung-galaxy-tab-s8-ultra,128 GB 5G,128,,1299,https://news.samsung.com/de/samsung-stellt-mit-galaxy-tab-s8-serie-neue-begleiter-fur-multitasker-und-kreative-vor,2022-02-09
+samsung-galaxy-tab-s8-ultra,256 GB 5G,256,,1399,https://news.samsung.com/de/samsung-stellt-mit-galaxy-tab-s8-serie-neue-begleiter-fur-multitasker-und-kreative-vor,2022-02-09
+samsung-galaxy-tab-s8-ultra,512 GB 5G,512,,1599,https://news.samsung.com/de/samsung-stellt-mit-galaxy-tab-s8-serie-neue-begleiter-fur-multitasker-und-kreative-vor,2022-02-09
+samsunggalaxy-tab-a9,64 GB Wi-Fi,64,,179,https://news.samsung.com/de/samsung-galaxy-tab-a9-und-tab-a9-fur-immersives-entertainment-und-hohe-produktivitat,2023-10-23
+samsunggalaxy-tab-a9,64 GB LTE,64,,219,https://news.samsung.com/de/samsung-galaxy-tab-a9-und-tab-a9-fur-immersives-entertainment-und-hohe-produktivitat,2023-10-23
+samsunggalaxy-tab-a9,128 GB Wi-Fi,128,,229,https://news.samsung.com/de/samsung-galaxy-tab-a9-und-tab-a9-fur-immersives-entertainment-und-hohe-produktivitat,2023-10-23
+samsunggalaxy-tab-a9,128 GB LTE,128,,269,https://news.samsung.com/de/samsung-galaxy-tab-a9-und-tab-a9-fur-immersives-entertainment-und-hohe-produktivitat,2023-10-23
+samsunggalaxy-tab-a9-2,64 GB Wi-Fi,64,,249,https://news.samsung.com/de/samsung-galaxy-tab-a9-und-tab-a9-fur-immersives-entertainment-und-hohe-produktivitat,2023-10-23
+samsunggalaxy-tab-a9-2,64 GB 5G,64,,299,https://news.samsung.com/de/samsung-galaxy-tab-a9-und-tab-a9-fur-immersives-entertainment-und-hohe-produktivitat,2023-10-23
+samsunggalaxy-tab-a9-2,128 GB Wi-Fi,128,,299,https://news.samsung.com/de/samsung-galaxy-tab-a9-und-tab-a9-fur-immersives-entertainment-und-hohe-produktivitat,2023-10-23
+samsunggalaxy-tab-a9-2,128 GB 5G,128,,349,https://news.samsung.com/de/samsung-galaxy-tab-a9-und-tab-a9-fur-immersives-entertainment-und-hohe-produktivitat,2023-10-23
+samsunggalaxy-tab-active4-pro,4 GB / 64 GB Wi-Fi,64,4,649,"https://www.channelpartner.de/a/samsung-galaxy-tab-active4-pro-vorgestellt,3615697",2022-10-04
+samsunggalaxy-tab-active4-pro,6 GB / 128 GB 5G Enterprise Edition,128,6,819,"https://www.channelpartner.de/a/samsung-galaxy-tab-active4-pro-vorgestellt,3615697",2022-10-04
+samsunggalaxy-tab-active5,6 GB / 128 GB Wi-Fi Enterprise Edition,128,6,479,https://news.samsung.com/de/sicher-robust-und-ausdauernd-samsung-galaxy-xcover7-und-tab-active5-enterprise-edition,2024-01-10
+samsunggalaxy-tab-active5,6 GB / 128 GB 5G Enterprise Edition,128,6,579,https://news.samsung.com/de/sicher-robust-und-ausdauernd-samsung-galaxy-xcover7-und-tab-active5-enterprise-edition,2024-01-10
+samsunggalaxy-tab-s10,12 GB / 256 GB Wi-Fi,256,12,1119,https://news.samsung.com/de/speziell-fur-ai-entwickelt-die-samsung-galaxy-tab-s10-serie-mit-galaxy-ai-funktionen,2024-09-26
+samsunggalaxy-tab-s10,12 GB / 512 GB Wi-Fi,512,12,1239,https://news.samsung.com/de/speziell-fur-ai-entwickelt-die-samsung-galaxy-tab-s10-serie-mit-galaxy-ai-funktionen,2024-09-26
+samsunggalaxy-tab-s10,12 GB / 256 GB 5G,256,12,1269,https://news.samsung.com/de/speziell-fur-ai-entwickelt-die-samsung-galaxy-tab-s10-serie-mit-galaxy-ai-funktionen,2024-09-26
+samsunggalaxy-tab-s10,12 GB / 512 GB 5G,512,12,1389,https://news.samsung.com/de/speziell-fur-ai-entwickelt-die-samsung-galaxy-tab-s10-serie-mit-galaxy-ai-funktionen,2024-09-26
+samsunggalaxy-tab-s10-ultra,256 GB Wi-Fi,256,12,1339,https://news.samsung.com/de/speziell-fur-ai-entwickelt-die-samsung-galaxy-tab-s10-serie-mit-galaxy-ai-funktionen,2024-09-26
+samsunggalaxy-tab-s10-ultra,512 GB Wi-Fi,512,,1459,https://news.samsung.com/de/speziell-fur-ai-entwickelt-die-samsung-galaxy-tab-s10-serie-mit-galaxy-ai-funktionen,2024-09-26
+samsunggalaxy-tab-s10-ultra,1 TB Wi-Fi,1024,16,1759,https://news.samsung.com/de/speziell-fur-ai-entwickelt-die-samsung-galaxy-tab-s10-serie-mit-galaxy-ai-funktionen,2024-09-26
+samsunggalaxy-tab-s10-ultra,256 GB 5G,256,12,1489,https://news.samsung.com/de/speziell-fur-ai-entwickelt-die-samsung-galaxy-tab-s10-serie-mit-galaxy-ai-funktionen,2024-09-26
+samsunggalaxy-tab-s10-ultra,512 GB 5G,512,,1609,https://news.samsung.com/de/speziell-fur-ai-entwickelt-die-samsung-galaxy-tab-s10-serie-mit-galaxy-ai-funktionen,2024-09-26
+samsunggalaxy-tab-s10-ultra,1 TB 5G,1024,16,1909,https://news.samsung.com/de/speziell-fur-ai-entwickelt-die-samsung-galaxy-tab-s10-serie-mit-galaxy-ai-funktionen,2024-09-26
+samsunggalaxy-tab-s6-lite,64 GB Wi-Fi,64,,429,https://news.samsung.com/de/samsung-galaxy-tab-s6-lite-2024-gelungene-kombination-aus-stil-und-funktionalitat,2024-03-27
+samsunggalaxy-tab-s6-lite,64 GB LTE,64,,489,https://news.samsung.com/de/samsung-galaxy-tab-s6-lite-2024-gelungene-kombination-aus-stil-und-funktionalitat,2024-03-27
+samsunggalaxy-tab-s9,128 GB Wi-Fi,128,,899,https://news.samsung.com/de/mit-der-samsung-galaxy-tab-s9-serie-kreative-ideen-zum-leben-erwecken,2023-07-26
+samsunggalaxy-tab-s9,256 GB Wi-Fi,256,,1019,https://news.samsung.com/de/mit-der-samsung-galaxy-tab-s9-serie-kreative-ideen-zum-leben-erwecken,2023-07-26
+samsunggalaxy-tab-s9,128 GB 5G,128,,1049,https://news.samsung.com/de/mit-der-samsung-galaxy-tab-s9-serie-kreative-ideen-zum-leben-erwecken,2023-07-26
+samsunggalaxy-tab-s9,256 GB 5G,256,,1169,https://news.samsung.com/de/mit-der-samsung-galaxy-tab-s9-serie-kreative-ideen-zum-leben-erwecken,2023-07-26
+samsunggalaxy-tab-s9-2,256 GB Wi-Fi,256,,1119,https://news.samsung.com/de/mit-der-samsung-galaxy-tab-s9-serie-kreative-ideen-zum-leben-erwecken,2023-07-26
+samsunggalaxy-tab-s9-2,512 GB Wi-Fi,512,,1239,https://news.samsung.com/de/mit-der-samsung-galaxy-tab-s9-serie-kreative-ideen-zum-leben-erwecken,2023-07-26
+samsunggalaxy-tab-s9-2,256 GB 5G,256,,1269,https://news.samsung.com/de/mit-der-samsung-galaxy-tab-s9-serie-kreative-ideen-zum-leben-erwecken,2023-07-26
+samsunggalaxy-tab-s9-2,512 GB 5G,512,,1389,https://news.samsung.com/de/mit-der-samsung-galaxy-tab-s9-serie-kreative-ideen-zum-leben-erwecken,2023-07-26
+samsunggalaxy-tab-s9-fe,6 GB / 128 GB Wi-Fi,128,6,529,https://www.notebookcheck.com/Samsung-startet-Verkauf-von-Galaxy-Tab-S9-FE-und-FE-in-Deutschland-ab-529-Euro-mit-Launch-Bonus.757270.0.html,2023-10-04
+samsunggalaxy-tab-s9-fe,8 GB / 256 GB Wi-Fi,256,8,599,https://www.notebookcheck.com/Samsung-startet-Verkauf-von-Galaxy-Tab-S9-FE-und-FE-in-Deutschland-ab-529-Euro-mit-Launch-Bonus.757270.0.html,2023-10-04
+samsunggalaxy-tab-s9-fe,6 GB / 128 GB 5G,128,6,629,https://www.notebookcheck.com/Samsung-startet-Verkauf-von-Galaxy-Tab-S9-FE-und-FE-in-Deutschland-ab-529-Euro-mit-Launch-Bonus.757270.0.html,2023-10-04
+samsunggalaxy-tab-s9-fe,8 GB / 256 GB 5G,256,8,699,https://www.notebookcheck.com/Samsung-startet-Verkauf-von-Galaxy-Tab-S9-FE-und-FE-in-Deutschland-ab-529-Euro-mit-Launch-Bonus.757270.0.html,2023-10-04
+samsunggalaxy-tab-s9-ultra,256 GB Wi-Fi,256,,1339,https://news.samsung.com/de/mit-der-samsung-galaxy-tab-s9-serie-kreative-ideen-zum-leben-erwecken,2023-07-26
+samsunggalaxy-tab-s9-ultra,512 GB Wi-Fi,512,,1459,https://news.samsung.com/de/mit-der-samsung-galaxy-tab-s9-serie-kreative-ideen-zum-leben-erwecken,2023-07-26
+samsunggalaxy-tab-s9-ultra,1 TB Wi-Fi,1024,,1759,https://news.samsung.com/de/mit-der-samsung-galaxy-tab-s9-serie-kreative-ideen-zum-leben-erwecken,2023-07-26
+samsunggalaxy-tab-s9-ultra,256 GB 5G,256,,1489,https://news.samsung.com/de/mit-der-samsung-galaxy-tab-s9-serie-kreative-ideen-zum-leben-erwecken,2023-07-26
+samsunggalaxy-tab-s9-ultra,512 GB 5G,512,,1609,https://news.samsung.com/de/mit-der-samsung-galaxy-tab-s9-serie-kreative-ideen-zum-leben-erwecken,2023-07-26
+samsunggalaxy-tab-s9-ultra,1 TB 5G,1024,,1909,https://news.samsung.com/de/mit-der-samsung-galaxy-tab-s9-serie-kreative-ideen-zum-leben-erwecken,2023-07-26
+samsung-galaxy-book4-360,"Core 5 120U / 15,6 Zoll FHD (Basiskonfiguration)",,,1399,https://computerbase.de/2024-02/galaxy-book-4-angeschaut-samsung-bringt-fuenf-neue-notebooks-und-convertibles,2024-02-21
+samsung-galaxy-book4-360,"Core 7 150U / 15,6 Zoll FHD",,,1699,https://computerbase.de/2024-02/galaxy-book-4-angeschaut-samsung-bringt-fuenf-neue-notebooks-und-convertibles,2024-02-21
+samsung-galaxy-book4-c5,Core 5 120U / 16 GB / 512 GB (NP750XGK-KB2DE),512,16,,,
+samsung-galaxy-book4-c7,Core 7 150U / 16 GB / 512 GB (NP750XGK-KB1DE),512,16,,,
+samsung-galaxy-book4-pro,Core Ultra 7 155H / 16 GB / 512 GB / 14 Zoll,512,16,1899,https://computerbase.de/2024-02/galaxy-book-4-angeschaut-samsung-bringt-fuenf-neue-notebooks-und-convertibles,2024-02-21
+samsung-galaxy-book4-pro,Core Ultra 7 155H / 16 GB / 512 GB / 16 Zoll,512,16,1999,https://computerbase.de/2024-02/galaxy-book-4-angeschaut-samsung-bringt-fuenf-neue-notebooks-und-convertibles,2024-02-21
+samsung-galaxy-s22-ultra,128 GB,128,8,1249,https://news.samsung.com/de/samsung-gibt-nach-rekordvorbestellungen-weltweiten-verkaufsstart-der-neuen-galaxy-s22-serie-und-tab-s8-serie-bekannt,2022-02-25
+samsung-galaxy-s22-ultra,256 GB,256,12,1349,https://news.samsung.com/de/samsung-gibt-nach-rekordvorbestellungen-weltweiten-verkaufsstart-der-neuen-galaxy-s22-serie-und-tab-s8-serie-bekannt,2022-02-25
+samsung-galaxy-s22-ultra,512 GB,512,12,1449,https://news.samsung.com/de/samsung-gibt-nach-rekordvorbestellungen-weltweiten-verkaufsstart-der-neuen-galaxy-s22-serie-und-tab-s8-serie-bekannt,2022-02-25
+samsung-galaxy-s22-ultra,1 TB,1024,12,1649,https://news.samsung.com/de/samsung-gibt-nach-rekordvorbestellungen-weltweiten-verkaufsstart-der-neuen-galaxy-s22-serie-und-tab-s8-serie-bekannt,2022-02-25
+samsung-galaxy-s23-fe,128 GB,128,8,699,https://news.samsung.com/de/samsung-kuendigt-den-verkaufsstart-des-samsung-galaxy-s23-fe-an,2023-12-11
+samsung-galaxy-s23-fe,256 GB,256,8,759,https://www.connect.de/news/samsung-galaxy-s23-fe-verkaufsstart-preis-release-3204638.html,2023-12-12
+samsung-galaxy-s23-plus,256 GB,256,8,1199,https://news.samsung.com/de/die-neue-samsung-galaxy-s23-serie-entwickelt-fur-ein-premium-erlebnis-heute-und-in-der-zukunft,2023-02-01
+samsung-galaxy-s23-plus,512 GB,512,8,1319,https://news.samsung.com/de/die-neue-samsung-galaxy-s23-serie-entwickelt-fur-ein-premium-erlebnis-heute-und-in-der-zukunft,2023-02-01
+samsung-galaxy-s24,128 GB,128,8,899,https://news.samsung.com/de/samsung-enthullt-die-galaxy-s24-serie-eine-eintrittskarte-in-eine-ara-der-mobilen-ai,2024-01-17
+samsung-galaxy-s24,256 GB,256,8,959,https://www.teltarif.de/samsung-galaxy-s24-s24-plus-s24-ultra-preisvergleich/news/94591.html?page=all,2024-02-13
+samsung-galaxy-s24-2,256 GB,256,,999,https://news.samsung.com/de/samsung-galaxy-s26-serie-das-bisher-intuitivste-galaxy-ai-smartphone,2026-02-25
+samsung-galaxy-s24-2,512 GB,512,,,,
+samsung-galaxy-s24-fe,128 GB,128,8,749,https://news.samsung.com/de/zuwachs-in-der-samsung-galaxy-s24-serie-samsung-galaxy-s24-fe-mit-galaxy-ai-funktionen,2024-09-26
+samsung-galaxy-s24-fe,256 GB,256,8,809,https://news.samsung.com/de/zuwachs-in-der-samsung-galaxy-s24-serie-samsung-galaxy-s24-fe-mit-galaxy-ai-funktionen,2024-09-26
+samsung-galaxy-s24-ultra,256 GB,256,12,1449,https://news.samsung.com/de/samsung-enthullt-die-galaxy-s24-serie-eine-eintrittskarte-in-eine-ara-der-mobilen-ai,2024-01-17
+samsung-galaxy-s24-ultra,512 GB,512,12,1569,https://www.teltarif.de/samsung-galaxy-s24-s24-plus-s24-ultra-preisvergleich/news/94591.html?page=all,2024-02-13
+samsung-galaxy-s24-ultra,1 TB,1024,12,1809,https://www.teltarif.de/samsung-galaxy-s24-s24-plus-s24-ultra-preisvergleich/news/94591.html?page=all,2024-02-13
+samsung-galaxy-s25,128 GB,128,12,899,https://news.samsung.com/de/samsung-galaxy-s25-serie-ai-smartphones-so-multimodal-intelligent-und-einfach-nutzen-wie-nie-zuvor,2025-01-22
+samsung-galaxy-s25,256 GB,256,12,959,https://www.connect.de/news/samsung-galaxy-s25-ultra-plus-ausstattung-preis-release-3208074.html,2025-01-22
+samsung-galaxy-s25,512 GB,512,12,1079,https://www.connect.de/news/samsung-galaxy-s25-ultra-plus-ausstattung-preis-release-3208074.html,2025-01-22
+samsung-galaxy-s25-fe,128 GB,128,8,749,https://news.samsung.com/de/das-samsung-galaxy-s25-fe-ist-da-mit-one-ui-8-an-bord,2025-09-04
+samsung-galaxy-s25-fe,256 GB,256,8,809,https://news.samsung.com/de/das-samsung-galaxy-s25-fe-ist-da-mit-one-ui-8-an-bord,2025-09-04
+samsung-galaxy-s25-fe,512 GB,512,8,929,https://news.samsung.com/de/das-samsung-galaxy-s25-fe-ist-da-mit-one-ui-8-an-bord,2025-09-04
+samsung-galaxy-s25-plus,256 GB,256,12,1149,https://news.samsung.com/de/samsung-galaxy-s25-serie-ai-smartphones-so-multimodal-intelligent-und-einfach-nutzen-wie-nie-zuvor,2025-01-22
+samsung-galaxy-s25-plus,512 GB,512,12,1269,https://www.connect.de/news/samsung-galaxy-s25-ultra-plus-ausstattung-preis-release-3208074.html,2025-01-22
+samsung-galaxy-s25-ultra,256 GB,256,12,1449,https://news.samsung.com/de/samsung-galaxy-s25-serie-ai-smartphones-so-multimodal-intelligent-und-einfach-nutzen-wie-nie-zuvor,2025-01-22
+samsung-galaxy-s25-ultra,512 GB,512,12,1569,https://www.connect.de/news/samsung-galaxy-s25-ultra-plus-ausstattung-preis-release-3208074.html,2025-01-22
+samsung-galaxy-s25-ultra,1 TB,1024,12,1809,https://www.connect.de/news/samsung-galaxy-s25-ultra-plus-ausstattung-preis-release-3208074.html,2025-01-22
+samsung-galaxy-xcover-6-pro,128 GB,128,6,609,https://news.samsung.com/de/sicher-schnell-und-langlebig-das-neue-samsung-galaxy-xcover6-pro,2022-06-29
+samsung-galaxy-xcover7,128 GB,128,6,359,https://news.samsung.com/de/sicher-robust-und-ausdauernd-samsung-galaxy-xcover7-und-tab-active5-enterprise-edition,2024-01-10
+samsung-galaxy-z-flip5,256 GB,256,8,1199,https://news.samsung.com/de/samsung-galaxy-z-flip5-und-galaxy-z-fold5-kompromisslos-flexibel-und-vielseitig,2023-07-26
+samsung-galaxy-z-flip5,512 GB,512,8,1319,https://news.samsung.com/de/samsung-galaxy-z-flip5-und-galaxy-z-fold5-kompromisslos-flexibel-und-vielseitig,2023-07-26
+samsung-galaxy-z-flip6,256 GB,256,12,1199,https://news.samsung.com/de/samsung-verkundet-verkaufsstart-des-samsung-galaxy-z-fold6-und-galaxy-z-flip6-sowie-der-galaxy-watch7-galaxy-watch-ultra-galaxy-buds3-serie-und-des-galaxy-ring,2024-07-24
+samsung-galaxy-z-flip6,512 GB,512,12,1319,https://news.samsung.com/de/samsung-verkundet-verkaufsstart-des-samsung-galaxy-z-fold6-und-galaxy-z-flip6-sowie-der-galaxy-watch7-galaxy-watch-ultra-galaxy-buds3-serie-und-des-galaxy-ring,2024-07-24
+samsung-galaxy-z-fold5,256 GB,256,12,1899,https://news.samsung.com/de/samsung-galaxy-z-flip5-und-galaxy-z-fold5-kompromisslos-flexibel-und-vielseitig,2023-07-26
+samsung-galaxy-z-fold5,512 GB,512,12,2019,https://news.samsung.com/de/samsung-galaxy-z-flip5-und-galaxy-z-fold5-kompromisslos-flexibel-und-vielseitig,2023-07-26
+samsung-galaxy-z-fold5,1 TB,1024,12,2259,https://news.samsung.com/de/samsung-galaxy-z-flip5-und-galaxy-z-fold5-kompromisslos-flexibel-und-vielseitig,2023-07-26
+samsung-galaxy-z-fold6,256 GB,256,12,1999,https://news.samsung.com/de/samsung-verkundet-verkaufsstart-des-samsung-galaxy-z-fold6-und-galaxy-z-flip6-sowie-der-galaxy-watch7-galaxy-watch-ultra-galaxy-buds3-serie-und-des-galaxy-ring,2024-07-24
+samsung-galaxy-z-fold6,512 GB,512,12,2119,https://news.samsung.com/de/samsung-verkundet-verkaufsstart-des-samsung-galaxy-z-fold6-und-galaxy-z-flip6-sowie-der-galaxy-watch7-galaxy-watch-ultra-galaxy-buds3-serie-und-des-galaxy-ring,2024-07-24
+samsung-galaxy-z-fold6,1 TB,1024,12,2359,https://news.samsung.com/de/samsung-verkundet-verkaufsstart-des-samsung-galaxy-z-fold6-und-galaxy-z-flip6-sowie-der-galaxy-watch7-galaxy-watch-ultra-galaxy-buds3-serie-und-des-galaxy-ring,2024-07-24
+apple-macbook-air-13,M5 (10-Core CPU / 8-Core GPU) / 16 GB / 512 GB (Basis),512,16,1199,https://www.apple.com/de/newsroom/2026/03/apple-introduces-the-new-macbook-air-with-m5/,2026-03-03
+apple-macbook-air-13,M5 (10-Core GPU) / 16 GB / 512 GB (Business-Konfiguration),512,16,1324,https://www.macwelt.de/article/3176416/apple-macbooks-ipads-teurer.html,2026-06-25
+apple-macbook-air-13-6-2022,M2 (8-Core CPU / 8-Core GPU) / 8 GB / 256 GB (Basis),256,8,1499,https://www.apple.com/de/newsroom/2022/06/apple-unveils-all-new-macbook-air-supercharged-by-the-new-m2-chip/,2022-06-07
+apple-macbook-air-13-6-2022,M2 (10-Core GPU) / 16 GB / 512 GB (typische Business-Konfiguration),512,16,,,
+apple-macbook-air-15,M5 (10-Core CPU / 10-Core GPU) / 16 GB / 512 GB (Basis),512,16,1499,https://www.apple.com/de/newsroom/2026/03/apple-introduces-the-new-macbook-air-with-m5/,2026-03-03
+apple-macbook-air-serie,"13"" M5 / 16 GB / 512 GB (Basis)",512,16,1199,https://www.apple.com/de/newsroom/2026/03/apple-introduces-the-new-macbook-air-with-m5/,2026-03-03
+apple-macbook-air-serie,"15"" M5 / 16 GB / 512 GB (Basis)",512,16,1499,https://www.apple.com/de/newsroom/2026/03/apple-introduces-the-new-macbook-air-with-m5/,2026-03-03
+apple-macbook-pro,"14"" M5 / 16 GB / 512 GB (Basis)",512,16,1799,https://www.apple.com/de/newsroom/2025/10/apple-unveils-new-14-inch-macbook-pro-powered-by-the-m5-chip/,2025-10-15
+apple-macbook-pro,"14"" M5 Pro / 1 TB (Basis M5 Pro)",1024,,2499,https://www.apple.com/de/newsroom/2026/03/apple-introduces-macbook-pro-with-all-new-m5-pro-and-m5-max/,2026-03-03
+apple-macbook-pro,"16"" M5 Pro / 1 TB (Basis M5 Pro)",1024,,2999,https://www.apple.com/de/newsroom/2026/03/apple-introduces-macbook-pro-with-all-new-m5-pro-and-m5-max/,2026-03-03
+apple-macbook-pro-14,M5 / 16 GB / 512 GB (Basis),512,16,1799,https://www.apple.com/de/newsroom/2025/10/apple-unveils-new-14-inch-macbook-pro-powered-by-the-m5-chip/,2025-10-15
+apple-macbook-pro-14,"M5 Pro / 1 TB (Business-Konfiguration, Basis M5 Pro)",1024,,2499,https://www.apple.com/de/newsroom/2026/03/apple-introduces-macbook-pro-with-all-new-m5-pro-and-m5-max/,2026-03-03
+apple-macbook-pro-16,M5 Pro / 1 TB (Basis),1024,,2999,https://www.apple.com/de/newsroom/2026/03/apple-introduces-macbook-pro-with-all-new-m5-pro-and-m5-max/,2026-03-03
+apple-macbook-pro-16,M5 Max / 2 TB (Basis M5 Max),2048,,4499,https://www.apple.com/de/newsroom/2026/03/apple-introduces-macbook-pro-with-all-new-m5-pro-and-m5-max/,2026-03-03
+appleipad,128 GB Wi-Fi,128,,399,https://www.apple.com/de/newsroom/2025/03/apple-introduces-ipad-air-with-powerful-m3-chip-and-new-magic-keyboard/,2025-03-04
+appleipad,128 GB Wi-Fi + Cellular,128,,569,https://www.apple.com/de/newsroom/2025/03/apple-introduces-ipad-air-with-powerful-m3-chip-and-new-magic-keyboard/,2025-03-04
+appleipad,256 GB Wi-Fi,256,,,,
+appleipad,512 GB Wi-Fi,512,,,,
+appleipad-air-13,128 GB Wi-Fi,128,12,849,https://www.apple.com/de/newsroom/2026/03/apple-introduces-the-new-ipad-air-powered-by-m4/,2026-03-02
+appleipad-air-13,128 GB Wi-Fi + Cellular,128,12,1019,https://www.apple.com/de/newsroom/2026/03/apple-introduces-the-new-ipad-air-powered-by-m4/,2026-03-02
+appleipad-air-13,256 GB Wi-Fi,256,12,,,
+appleipad-air-13,512 GB Wi-Fi,512,12,,,
+appleipad-air-13,1 TB Wi-Fi,1024,12,1249,https://www.ifun.de/apple-stellt-ipad-air-m4-vor-neues-herz-neuer-funkchip-ab-649-euro-275396/,2026-03-02
+appleipad-air-13,1 TB Wi-Fi + Cellular,1024,12,1419,https://www.ifun.de/apple-stellt-ipad-air-m4-vor-neues-herz-neuer-funkchip-ab-649-euro-275396/,2026-03-02
+appleipad-mini-8-3,128 GB Wi-Fi,128,8,599,https://www.apple.com/de/newsroom/2024/10/apple-introduces-powerful-new-ipad-mini-with-support-for-apple-intelligence/,2024-10-15
+appleipad-mini-8-3,128 GB Wi-Fi + Cellular,128,8,769,https://www.apple.com/de/newsroom/2024/10/apple-introduces-powerful-new-ipad-mini-with-support-for-apple-intelligence/,2024-10-15
+appleipad-mini-8-3,256 GB Wi-Fi,256,8,,,
+appleipad-mini-8-3,512 GB Wi-Fi,512,8,,,
+ipad-10,64 GB Wi-Fi,64,4,579,https://www.apple.com/de/newsroom/2022/10/apple-unveils-completely-redesigned-ipad-in-four-vibrant-colors/,2022-10-18
+ipad-10,64 GB Wi-Fi + Cellular,64,4,779,https://www.apple.com/de/newsroom/2022/10/apple-unveils-completely-redesigned-ipad-in-four-vibrant-colors/,2022-10-18
+ipad-10,256 GB Wi-Fi,256,4,779,https://www.macwelt.de/article/1366994/apples-gunstigstes-ipad-ipad-10-von-2022-im-test.html,2022-11-02
+ipad-10,256 GB Wi-Fi + Cellular,256,4,979,https://www.macwelt.de/article/1366994/apples-gunstigstes-ipad-ipad-10-von-2022-im-test.html,2022-11-02
+ipad-9,64 GB Wi-Fi,64,3,379,https://www.apple.com/de/newsroom/2021/09/apples-most-popular-ipad-delivers-even-more-performance-and-advanced-features/,2021-09-14
+ipad-9,64 GB Wi-Fi + Cellular,64,3,519,https://www.apple.com/de/newsroom/2021/09/apples-most-popular-ipad-delivers-even-more-performance-and-advanced-features/,2021-09-14
+ipad-9,256 GB Wi-Fi,256,3,549,https://global.techradar.com/de-de/news/neues-apple-ipad-2021-erscheinungsdatum-preis-und-alles-was-du-wissen-musst,2021-09-17
+ipad-air-10-9,64 GB Wi-Fi,64,8,679,https://www.apple.com/de/newsroom/2022/03/apple-introduces-the-most-powerful-and-versatile-ipad-air-ever/,2022-03-08
+ipad-air-10-9,64 GB Wi-Fi + Cellular,64,8,849,https://www.apple.com/de/newsroom/2022/03/apple-introduces-the-most-powerful-and-versatile-ipad-air-ever/,2022-03-08
+ipad-air-10-9,256 GB Wi-Fi,256,8,849,https://www.netzwelt.de/apple-ipad-air-2022/testbericht.html,2022-03-29
+ipad-air-10-9,256 GB Wi-Fi + Cellular,256,8,1019,https://www.netzwelt.de/apple-ipad-air-2022/testbericht.html,2022-03-29
+ipad-air-11,128 GB Wi-Fi,128,12,649,https://www.apple.com/de/newsroom/2026/03/apple-introduces-the-new-ipad-air-powered-by-m4/,2026-03-02
+ipad-air-11,128 GB Wi-Fi + Cellular,128,12,819,https://www.apple.com/de/newsroom/2026/03/apple-introduces-the-new-ipad-air-powered-by-m4/,2026-03-02
+ipad-air-11,256 GB Wi-Fi,256,12,,,
+ipad-air-11,512 GB Wi-Fi,512,12,,,
+ipad-air-11,1 TB Wi-Fi,1024,12,1049,https://www.ifun.de/apple-stellt-ipad-air-m4-vor-neues-herz-neuer-funkchip-ab-649-euro-275396/,2026-03-02
+ipad-air-11,1 TB Wi-Fi + Cellular,1024,12,1219,https://www.ifun.de/apple-stellt-ipad-air-m4-vor-neues-herz-neuer-funkchip-ab-649-euro-275396/,2026-03-02
+ipad-pro-11,256 GB Wi-Fi,256,,1099,https://www.apple.com/de/newsroom/2025/10/apple-introduces-the-powerful-new-ipad-pro-with-the-m5-chip/,2025-10-15
+ipad-pro-11,256 GB Wi-Fi + Cellular,256,,1349,https://www.apple.com/de/newsroom/2025/10/apple-introduces-the-powerful-new-ipad-pro-with-the-m5-chip/,2025-10-15
+ipad-pro-11,512 GB Wi-Fi,512,,,,
+ipad-pro-11,1 TB Wi-Fi,1024,,,,
+ipad-pro-11,2 TB Wi-Fi,2048,,,,
+ipad-pro-12-9,128 GB Wi-Fi,128,8,1449,https://www.apple.com/de/newsroom/2022/10/apple-introduces-next-generation-ipad-pro-supercharged-by-the-m2-chip/,2022-10-18
+ipad-pro-12-9,128 GB Wi-Fi + Cellular,128,8,1649,https://www.apple.com/de/newsroom/2022/10/apple-introduces-next-generation-ipad-pro-supercharged-by-the-m2-chip/,2022-10-18
+ipad-pro-12-9,256 GB Wi-Fi,256,8,1579,https://www.notebookcheck.com/Test-Apple-iPad-Pro-12-9-2022-Apples-Riesen-Tablet-arbeitet-jetzt-mit-M2-SoC.667791.0.html,2022-11-29
+ipad-pro-12-9,512 GB Wi-Fi,512,8,1829,https://www.notebookcheck.com/Test-Apple-iPad-Pro-12-9-2022-Apples-Riesen-Tablet-arbeitet-jetzt-mit-M2-SoC.667791.0.html,2022-11-29
+ipad-pro-12-9,1 TB Wi-Fi,1024,16,2329,https://www.notebookcheck.com/Test-Apple-iPad-Pro-12-9-2022-Apples-Riesen-Tablet-arbeitet-jetzt-mit-M2-SoC.667791.0.html,2022-11-29
+ipad-pro-12-9,2 TB Wi-Fi,2048,16,2829,https://www.notebookcheck.com/Test-Apple-iPad-Pro-12-9-2022-Apples-Riesen-Tablet-arbeitet-jetzt-mit-M2-SoC.667791.0.html,2022-11-29
+ipad-pro-13,256 GB Wi-Fi,256,,1449,https://www.apple.com/de/newsroom/2025/10/apple-introduces-the-powerful-new-ipad-pro-with-the-m5-chip/,2025-10-15
+ipad-pro-13,256 GB Wi-Fi + Cellular,256,,1699,https://www.apple.com/de/newsroom/2025/10/apple-introduces-the-powerful-new-ipad-pro-with-the-m5-chip/,2025-10-15
+ipad-pro-13,512 GB Wi-Fi,512,,,,
+ipad-pro-13,1 TB Wi-Fi,1024,,,,
+ipad-pro-13,2 TB Wi-Fi,2048,,,,
+dell-latitude-3440,Core i5-1335U / 8 GB / 256 GB,256,8,,,
+dell-latitude-3440,Core i5-1345U / 16 GB / 512 GB,512,16,,,
+dell-latitude-5440,Core i5-1335U / 8 GB / 256 GB,256,8,,,
+dell-latitude-5440,Core i7-1365U / 16 GB / 512 GB,512,16,,,
+dell-pro,Core 5 120U / 16 GB / 512 GB,512,16,,,
+dell-pro,Core Ultra 7 255U / 16 GB / 512 GB,512,16,,,
+dell-pro-max,Core Ultra 5 235H / 16 GB / 256 GB / Intel Grafik (Konfigurator-Basis),256,16,,,
+dell-pro-max,Core Ultra 7 265H / 64 GB / 1 TB / RTX PRO 1000 Blackwell,1024,64,,,
+dell-pro-plus,Core Ultra 5 235U vPro / 16 GB / 512 GB,512,16,,,
+dell-pro-plus,Core Ultra 7 268V / 32 GB / 512 GB,512,32,,,
+dell-pro-premium,Core Ultra 5 (236V) / 16 GB / 512 GB / FHD+ (Basiskonfiguration laut Notebookcheck),512,16,2018,https://www.notebookcheck.com/Dell-Pro-14-Premium-Test-Flaggschiff-OLED-Subnotebook-fuers-Business.1040569.0.html,2025-06-21
+dell-pro-premium,Core Ultra 7 268V / 32 GB / 1 TB / QHD+ OLED Touch,1024,32,2514,https://www.notebookcheck.com/Dell-Pro-14-Premium-Test-Flaggschiff-OLED-Subnotebook-fuers-Business.1040569.0.html,2025-06-21
+lenovo-thinkbook,Core Ultra 5 225U / 16 GB / 512 GB (21SJ006QGE),512,16,,,
+lenovo-thinkbook,Core Ultra 5 225U / 32 GB / 512 GB (21SJ00ANGE),512,32,,,
+lenovo-thinkpad-e,Core 5 320 / 16 GB / 512 GB (21Y8001UGE),512,16,,,
+lenovo-thinkpad-e,Core Ultra 5 325 / 16 GB / 512 GB (21Y6000FGE),512,16,,,
+lenovo-thinkpad-e14,Core 5 320 / 16 GB / 512 GB (21Y8001UGE),512,16,,,
+lenovo-thinkpad-e14,Core Ultra 5 325 / 16 GB / 512 GB (21Y6000FGE),512,16,,,
+lenovo-thinkpad-l,Core Ultra 5 325 / 16 GB / 512 GB (21X2000EGE),512,16,,,
+lenovo-thinkpad-l,Core Ultra 7 355 / 16 GB / 512 GB (21X2000JGE),512,16,,,
+lenovo-thinkpad-p,"Basis (Core Ultra Arrow Lake-H, Konfiguration im Artikel nicht spezifiziert)",,,1940,https://www.notebookcheck.com/Der-Sweet-Spot-in-Lenovos-mobiler-Workstation-Reihe-erhaelt-Nvidia-RTX-Pro-2000-Das-neue-ThinkPad-P16v-Gen-3.1105580.0.html,2025-09-05
+lenovo-thinkpad-p16v-g1,AMD Ryzen 5 PRO 7560HS Basis (RAM/SSD im Artikel nicht genannt),,,,,
+lenovo-thinkpad-p16v-g1,AMD Ryzen 7 PRO 7840HS / 32 GB / 1 TB / RTX A1000,1024,32,2099,https://www.notebookcheck.com/Lenovo-ThinkPad-P16v-G1-AMD-im-Test-Entry-Level-Workstation-mit-Zen4.783947.0.html,2024-01-04
+lenovo-thinkpad-p16v-g2,Core Ultra 7 155H / 32 GB / 1 TB / RTX 500 Ada,1024,32,,,
+lenovo-thinkpad-p16v-g2,Core Ultra 7 165H / 32 GB / RTX 2000 Ada (SSD nicht genannt),,32,2400,https://www.notebookcheck.com/Lenovo-ThinkPad-P16v-G2-Ultra-7-165H-RTX-2000-Ada.984174.0.html,
+lenovo-thinkpad-t,Core Ultra 5 325 / 16 GB / 512 GB (21WN00A0GE),512,16,,,
+lenovo-thinkpad-t14,Core Ultra 5 325 / 16 GB / 512 GB (21WN00A0GE),512,16,,,
+lenovo-thinkpad-x,Core Ultra 5 325 / 32 GB / 512 GB (21V70075GE),512,32,,,
+lenovo-thinkpad-x,Core Ultra 7 355 / 32 GB / 1 TB (21V70071GE),1024,32,,,
+motorola-edge-30-pro,256 GB,256,12,799.99,https://www.computerbase.de/2022-02/edge-30-pro-motorola-bringt-snapdragon-8-gen-1-fuer-800-euro/,2022-02-24
+motorola-edge-30-pro-fusion,128 GB,128,8,599.99,https://www.hartware.de/2022/09/26/neue-motorola-edge-30-familie-ab-sofort-verfuegbar/,2022-09-26
+motorola-edge-40-neo,256 GB,256,12,399.99,https://hansmannpr.de/motorola-edge40-neo/,2023-09-21
+motorola-edge-50-fusion,256 GB,256,8,349.99,https://www.teltarif.de/motorola-edge-50-ultra-50-pro-50-fusion/news/95224.html,2024-04-16
+motorola-edge-50-neo,512 GB,512,12,499.99,https://www.connect-professional.de/hardware/motorola-bringt-neue-smartphones-nach-deutschland-331584.html,2024-10-11
+motorola-edge-50-neo,256 GB,256,8,,,
+motorola-edge-50-pro,512 GB,512,12,699.99,https://www.channelpartner.de/article/3901492/motorola-bringt-die-neue-edge-generation.html,2024-04-18
+motorola-moto-e32,64 GB,64,4,149.99,https://www.teltarif.de/motorola-moto-e32-e32s-verkaufsstart-preis-release/news/88300.html,2022-06-01
+motorola-moto-g04s,64 GB,64,4,119.99,https://stadt-bremerhaven.de/motorola-moto-g-vier-neue-smartphones-starten-in-deutschland/,2024-04-05
+motorola-moto-g22,64 GB,64,4,169.99,https://stadt-bremerhaven.de/motorola-moto-g22-startet-in-deutschland-fuer-16999-euro/,2022-03-31
+motorola-moto-g24,128 GB,128,8,129.99,https://stadt-bremerhaven.de/motorola-moto-g-vier-neue-smartphones-starten-in-deutschland/,2024-04-05
+motorola-moto-g35,128 GB,128,4,179.99,https://www.schmidtisblog.de/motorola-moto-g-serie-ein-neuer-standard-fuer-erschwingliche-smartphones-in-deutschland-verfuegbar-1760486/,2024-11-01
+motorola-moto-g52,128 GB,128,4,249.99,https://www.computerbase.de/2022-04/motorola-moto-g52-startet-mit-90-hz-oled-in-der-250-euro-klasse/,2022-04-13
+motorola-moto-g54,256 GB,256,8,199.99,https://www.notebookcheck.com/Motorola-Moto-G54-und-Moto-G84-starten-ab-199-Euro-in-Deutschland-mit-120-Hz-Display-und-50-MP-Dual-Kamera.750863.0.html,2023-09-14
+motorola-moto-g55,256 GB,256,8,249.99,https://www.schmidtisblog.de/motorola-moto-g-serie-ein-neuer-standard-fuer-erschwingliche-smartphones-in-deutschland-verfuegbar-1760486/,2024-11-01
+motorola-moto-g72,128 GB,128,6,279.99,https://www.hartware.de/2022/10/11/motorola-moto-g72-neues-mittelklasse-smartphone-fuer-27999-euro/,2022-10-11
+motorola-moto-g75,256 GB,256,8,299.99,https://www.schmidtisblog.de/motorola-moto-g-serie-ein-neuer-standard-fuer-erschwingliche-smartphones-in-deutschland-verfuegbar-1760486/,2024-11-01
+motorola-moto-g84,256 GB,256,12,299.99,https://www.notebookcheck.com/Motorola-Moto-G54-und-Moto-G84-starten-ab-199-Euro-in-Deutschland-mit-120-Hz-Display-und-50-MP-Dual-Kamera.750863.0.html,2023-09-14
+motorola-razr-2022,256 GB,256,8,1199.99,https://www.teltarif.de/motorola-razr-2022-deutschland-preis/news/89758.html,2022-10-26
+motorola-razr-40-ultra,256 GB,256,8,1199.99,https://www.teltarif.de/motorola-razr-40-ultra-marktstart-deutschland/news/92008.html,2023-06-02
+motorola-thinkphone,256 GB,256,8,999,https://www.heise.de/tests/Business-Smartphone-mit-Android-Lenovo-ThinkPhone-by-Motorola-im-Test-7546450.html,2023-03-21
+motorola-thinkphone-25,256 GB,256,8,499.99,https://www.connect-professional.de/hardware/motorola-bringt-neue-smartphones-nach-deutschland-331584.html,2024-10-11
+motorola-thinkphone-25,512 GB,512,12,,,
+hp-elitebook-6,EliteBook 6 G1a 14 / Ryzen AI 7 350 / 32 GB / 1 TB (Testgeraet Notebookcheck),1000,32,,,
+hp-elitebook-8,EliteBook 8 G1i 14 / Core Ultra 7 268V / 32 GB / SSD (Testgeraet),,32,,,
+hp-elitebook-ultra,Snapdragon X Elite X1E-78-100 / 16 GB / 512 GB,512,16,1899,https://www.computerbase.de/artikel/notebooks/hp-elitebook-ultra-g1q-ai-test.89615/,2024-11-20
+hp-elitebook-ultra,Snapdragon X Elite X1E-78-100 / 16 GB / 1 TB,1000,16,1969,https://www.computerbase.de/artikel/notebooks/hp-elitebook-ultra-g1q-ai-test.89615/,2024-11-20
+hp-elitebook-x,Core Ultra 5 226V / 16 GB / 512 GB / LTE (B66PJES),512,16,,,
+hp-elitebook-x,Core Ultra 7 258V / 32 GB / 1 TB / 5G (B69BJET),1000,32,,,
+hp-probook-4xx,ProBook 440 G11 / Core Ultra 5 125U / 16 GB / 512 GB (C7SP0ES),512,16,,,
+hp-probook-4xx,ProBook 440 G11 / Core Ultra 7 155U / 16 GB / 512 GB (9Y7J6ET),512,16,,,
+hp-zbook,ZBook 8 G1i 16 / Core Ultra 7 255H / RTX 500 Ada (A3ZT6ET),,,,,
+hp-zbook,ZBook Ultra G1a 14 / Ryzen AI Max+ 395 / Radeon 8060S (A3ZQ2ET),,,,,
+microsoft-surface-go-3,Pentium Gold 6500Y / 4 GB / 64 GB eMMC / Wi-Fi,64,4,439,https://news.microsoft.com/de-de/surface-neuheiten-fuer-windows-11-angekuendigt/,2021-09-22
+microsoft-surface-go-3,Pentium Gold 6500Y / 8 GB / 128 GB SSD / Wi-Fi,128,8,599,https://www.notebookcheck.com/Microsoft-Surface-Go-3-2-in-1-10-5-Zoll-Tablet-mit-Windows-11-ab-439-Euro-erhaeltlich.570079.0.html,2021-10-07
+microsoft-surface-go-3,Core i3-10100Y / 8 GB / 128 GB SSD / Wi-Fi,128,8,679,https://www.notebookcheck.com/Microsoft-Surface-Go-3-2-in-1-10-5-Zoll-Tablet-mit-Windows-11-ab-439-Euro-erhaeltlich.570079.0.html,2021-10-07
+microsoft-surface-go-3,Core i3-10100Y / 8 GB / 128 GB SSD / LTE Advanced,128,8,779,https://www.computerbase.de/news/notebooks/core-i3-lte-und-wlan-microsoft-erweitert-deutsche-surface-konfigurationen.79327/,2022-01-11
+microsoft-surface-go-3,Business-Einstieg (Konfiguration in der Pressemitteilung nicht genannt),,,539,https://news.microsoft.com/de-de/surface-neuheiten-fuer-windows-11-angekuendigt/,2021-09-22
+microsoft-surface-laptop,"13,8 Zoll / Snapdragon X2 Plus / 16 GB / 512 GB",512,16,1699,https://www.hardwareluxx.de/index.php/news/hardware/notebooks/69435-wechsel-auf-snapdragon-x2-microsoft-stellt-neues-surface-pro-und-surface-laptop-vor.html,2026-06-16
+microsoft-surface-laptop,"13,8 Zoll / Snapdragon X2 Elite / 16 GB / 512 GB",512,16,1799,https://www.hardwareluxx.de/index.php/news/hardware/notebooks/69435-wechsel-auf-snapdragon-x2-microsoft-stellt-neues-surface-pro-und-surface-laptop-vor.html,2026-06-16
+microsoft-surface-laptop,"13,8 Zoll / Snapdragon X2 Elite / 32 GB / 1 TB",1000,32,2749,https://www.hardwareluxx.de/index.php/news/hardware/notebooks/69435-wechsel-auf-snapdragon-x2-microsoft-stellt-neues-surface-pro-und-surface-laptop-vor.html,2026-06-16
+microsoft-surface-laptop,15 Zoll / Snapdragon X2 Plus / 16 GB / 512 GB,512,16,1799,https://www.hardwareluxx.de/index.php/news/hardware/notebooks/69435-wechsel-auf-snapdragon-x2-microsoft-stellt-neues-surface-pro-und-surface-laptop-vor.html,2026-06-16
+microsoft-surface-laptop,15 Zoll / Snapdragon X2 Elite / 64 GB / 2 TB,2000,64,4199,https://www.hardwareluxx.de/index.php/news/hardware/notebooks/69435-wechsel-auf-snapdragon-x2-microsoft-stellt-neues-surface-pro-und-surface-laptop-vor.html,2026-06-16
+microsoft-surface-laptop-go,Core i5-1235U / 8 GB / 256 GB,256,8,899,https://computerbase.de/2023-09/neue-cpus-und-gpus-das-ist-neu-an-surface-laptop-studio-2-und-laptop-go-3,2023-09-22
+microsoft-surface-laptop-go,Core i5-1235U / 16 GB / 512 GB,512,16,1149,https://computerbase.de/2023-09/neue-cpus-und-gpus-das-ist-neu-an-surface-laptop-studio-2-und-laptop-go-3,2023-09-22
+microsoft-surface-laptop-studio,Core i7-13700H / Intel Iris Xe / 16 GB / 512 GB,512,16,2239,https://computerbase.de/2023-09/neue-cpus-und-gpus-das-ist-neu-an-surface-laptop-studio-2-und-laptop-go-3,2023-09-22
+microsoft-surface-laptop-studio,Core i7-13700H / GeForce RTX 4050 / 16 GB / 512 GB,512,16,2729,https://stadt-bremerhaven.de/microsoft-surface-laptop-studio-2-und-surface-laptop-go-3-bilder-und-specs/,2023-09-14
+microsoft-surface-laptop-studio,Core i7-13700H / GeForce RTX 4050 / 32 GB / 512 GB,512,32,3199,https://computerbase.de/2023-09/neue-cpus-und-gpus-das-ist-neu-an-surface-laptop-studio-2-und-laptop-go-3,2023-09-22
+microsoft-surface-pro,Snapdragon X2 Plus / 16 GB / 256 GB / Wi-Fi,256,16,1599,https://www.hardwareluxx.de/index.php/news/hardware/notebooks/69435-wechsel-auf-snapdragon-x2-microsoft-stellt-neues-surface-pro-und-surface-laptop-vor.html,2026-06-16
+microsoft-surface-pro,Snapdragon X2 Plus / 24 GB / 512 GB / Wi-Fi,512,24,2149,https://www.hardwareluxx.de/index.php/news/hardware/notebooks/69435-wechsel-auf-snapdragon-x2-microsoft-stellt-neues-surface-pro-und-surface-laptop-vor.html,2026-06-16
+microsoft-surface-pro,Snapdragon X2 Elite / 16 GB / 512 GB / Wi-Fi,512,16,1899,https://www.hardwareluxx.de/index.php/news/hardware/notebooks/69435-wechsel-auf-snapdragon-x2-microsoft-stellt-neues-surface-pro-und-surface-laptop-vor.html,2026-06-16
+microsoft-surface-pro,Snapdragon X2 Elite / 64 GB / 1 TB / Wi-Fi,1000,64,3699,https://www.hardwareluxx.de/index.php/news/hardware/notebooks/69435-wechsel-auf-snapdragon-x2-microsoft-stellt-neues-surface-pro-und-surface-laptop-vor.html,2026-06-16
+microsoft-surface-pro-13-snapdragon-x-elite,Snapdragon X Plus / LCD / 16 GB / 256 GB (Einstieg der 11. Edition),256,16,1199,https://www.computerbase.de/news/pc-systeme/copilot-plus-pcs-im-ueberblick-ai-pcs-von-acer-asus-dell-hp-lenovo-microsoft-und-samsung.88183/,2024-05-21
+microsoft-surface-pro-13-snapdragon-x-elite,Snapdragon X Elite / OLED / Einstiegskonfiguration (RAM/SSD in Quelle nicht genannt),,,1799,https://www.computerbase.de/news/pc-systeme/copilot-plus-pcs-im-ueberblick-ai-pcs-von-acer-asus-dell-hp-lenovo-microsoft-und-samsung.88183/,2024-05-21
+microsoft-surface-pro-13-snapdragon-x-elite,Snapdragon X Elite / OLED / Maximalkonfiguration 32 GB / 1 TB,1000,32,2449,https://www.computerbase.de/news/pc-systeme/copilot-plus-pcs-im-ueberblick-ai-pcs-von-acer-asus-dell-hp-lenovo-microsoft-und-samsung.88183/,2024-05-21
+microsoft-surface-pro-8-i7,Core i5-1135G7 / 8 GB / 128 GB / Wi-Fi (Einstieg der Serie),128,8,1179,https://news.microsoft.com/de-de/surface-pro-8-ab-heute-in-deutschland-verfuegbar/,2021-10-28
+microsoft-surface-pro-8-i7,Core i7-1185G7 / 16 GB / 256 GB / Wi-Fi,256,16,1679,https://www.notebookcheck.net/Microsoft-Surface-Pro-8-Convertible-Review-Powerful-120-Hz-and-finally-Thunderbolt.581769.0.html,2021-11
+microsoft-surface-pro-8-i7,Core i7-1185G7 / 32 GB / 1 TB / Wi-Fi,1000,32,2679,https://www.notebookcheck.net/Microsoft-Surface-Pro-8-Convertible-Review-Powerful-120-Hz-and-finally-Thunderbolt.581769.0.html,2021-11
+microsoft-surface-pro-9-i5,Core i5-1235U / 8 GB / 256 GB / Wi-Fi,256,8,1299,https://news.microsoft.com/de-de/surface-pro-9-kommt-mit-neuer-auswahl-an-prozessoren-und-farben-nach-deutschland/,2022-11-08
+microsoft-surface-pro-9-i5,Core i5-1235U / 16 GB / 256 GB / Wi-Fi,256,16,1639,https://www.teltarif.de/tablet/microsoft/surface-pro-9/,2022-11-08
+microsoft-surface-pro-9-i5,Business-Einstieg Intel (Konfiguration in Pressemitteilung nicht genannt),,,1399,https://news.microsoft.com/de-de/surface-pro-9-kommt-mit-neuer-auswahl-an-prozessoren-und-farben-nach-deutschland/,2022-11-08
+microsoft-surface-pro-9-i5-sq3,SQ3 / 8 GB / 128 GB / Wi-Fi + 5G,128,8,1549,https://www.teltarif.de/tablet/microsoft/surface-pro-9/,2022-11-08
+microsoft-surface-pro-9-i5-sq3,SQ3 / 8 GB / 256 GB / Wi-Fi + 5G,256,8,1659,https://news.microsoft.com/de-de/surface-pro-9-kommt-mit-neuer-auswahl-an-prozessoren-und-farben-nach-deutschland/,2022-11-08
+microsoft-surface-pro-9-i5-sq3,SQ3 / 16 GB / 256 GB / Wi-Fi + 5G,256,16,1879,https://www.teltarif.de/tablet/microsoft/surface-pro-9/,2022-11-08
+microsoft-surface-pro-9-i5-sq3,SQ3 / 16 GB / 512 GB / Wi-Fi + 5G,512,16,2209,https://www.teltarif.de/tablet/microsoft/surface-pro-9/,2022-11-08
+microsoft-surface-pro-9-i5-sq3,SQ3 / 8 GB / 128 GB / 5G Business-Einstieg,128,8,1649,https://news.microsoft.com/de-de/surface-pro-9-kommt-mit-neuer-auswahl-an-prozessoren-und-farben-nach-deutschland/,2022-11-08
+microsoft-surface-pro-9-i7,Core i7-1255U / 16 GB / 256 GB / Wi-Fi,256,16,1859,https://www.teltarif.de/tablet/microsoft/surface-pro-9/,2022-11-08
+microsoft-surface-pro-9-i7,Core i7-1255U / 16 GB / 512 GB / Wi-Fi,512,16,2189,https://www.teltarif.de/tablet/microsoft/surface-pro-9/,2022-11-08
+microsoft-surface-pro-9-i7,Core i7-1255U / 16 GB / 1 TB / Wi-Fi,1000,16,2529,https://www.teltarif.de/tablet/microsoft/surface-pro-9/,2022-11-08
+microsoft-surface-pro-9-i7,Core i7-1255U / 32 GB / 1 TB / Wi-Fi,1000,32,2979,https://www.teltarif.de/tablet/microsoft/surface-pro-9/,2022-11-08
+microsoft-surface-pro-9-snapdragon-x-plus,Snapdragon X Plus / LCD / 16 GB / 256 GB / Wi-Fi,256,16,1199,https://www.computerbase.de/news/pc-systeme/copilot-plus-pcs-im-ueberblick-ai-pcs-von-acer-asus-dell-hp-lenovo-microsoft-und-samsung.88183/,2024-05-21
+microsoftsurface-pro-10-u7,Core Ultra 5 135U / 8 GB / 256 GB / Wi-Fi (Einstieg der Serie),256,8,1399,https://www.pcwelt.de/article/2276704/microsoft-surface-pro-10-for-business-und-laptop-6-for-business.html,2024-03-22
+microsoftsurface-pro-10-u7,Core Ultra 7 165U / 16 GB / 256 GB / 5G (EP2-14802),256,16,,,
+microsoftsurface-pro-10-u7,Core Ultra 7 165U / 32 GB / 512 GB / Wi-Fi (Y6B-00004),512,32,,,
+google-pixel-8,8 GB / 128 GB,128,8,799,https://blog.google/intl/de-de/produkte/hardware/made-by-google-pixel-8-pro/,2023-10-04
+google-pixel-8,8 GB / 256 GB,256,8,859,https://www.googlewatchblog.de/2023/10/pixel8-pro-pixel-watch2-preise-und-aktionen/,2023-10-04
+google-pixel-8-pro,12 GB / 128 GB,128,12,1099,https://blog.google/intl/de-de/produkte/hardware/made-by-google-pixel-8-pro/,2023-10-04
+google-pixel-8-pro,12 GB / 256 GB,256,12,1159,https://www.googlewatchblog.de/2023/10/pixel8-pro-pixel-watch2-preise-und-aktionen/,2023-10-04
+google-pixel-8-pro,12 GB / 512 GB,512,12,1299,https://www.googlewatchblog.de/2023/10/pixel8-pro-pixel-watch2-preise-und-aktionen/,2023-10-04
+google-pixel-fold,12 GB / 256 GB,256,12,1899,https://www.googlewatchblog.de/2023/05/pixel7a-pixel-fold-tablet-preise-aktionen/,2023-05-10
+google-pixel-fold,12 GB / 512 GB,512,12,2019,https://www.googlewatchblog.de/2023/05/pixel7a-pixel-fold-tablet-preise-aktionen/,2023-05-10
+fairphone-5,6 GB / 128 GB (nachgeschoben 09/2024),128,6,549,https://www.notebookcheck.com/Fairphone-5-Reparierbares-Smartphone-mit-Updates-bis-2031-erhaelt-guenstigere-Variante-und-70-Euro-Preissenkung.883685.0.html,2024-09-04
+motorola-edge-30-pro,12 GB / 256 GB,256,12,799.99,"https://winfuture.de/news,121324.html",2022-02-25
+motorola-edge-40-neo,12 GB / 256 GB,256,12,399,https://www.allround-pc.com/news/2023/motorola-edge-40-neo-guenstiges-smartphone-mit-144-hz-und-12-gb-ram,2023-09-14
+motorola-edge-50-pro,12 GB / 512 GB,512,12,699.99,https://www.handyhase.de/motorola/edge-50-pro/,2024-04-16
+motorola-razr-40-ultra,8 GB / 256 GB,256,8,1199.99,https://www.teltarif.de/motorola-razr-40-ultra-marktstart-deutschland/news/92008.html,2023-06-02
+motorola-thinkphone,8 GB / 256 GB,256,8,999,https://www.inside-digital.de/handys/motorola-thinkphone,2023-01-05
+samsung-galaxy-z-flip5,8 GB / 256 GB,256,8,1199,https://news.samsung.com/de/samsung-galaxy-z-flip5-und-galaxy-z-fold5-kompromisslos-flexibel-und-vielseitig,2023-07-26
+samsung-galaxy-z-flip5,8 GB / 512 GB,512,8,1319,https://news.samsung.com/de/samsung-galaxy-z-flip5-und-galaxy-z-fold5-kompromisslos-flexibel-und-vielseitig,2023-07-26
+samsung-galaxy-z-fold5,12 GB / 256 GB,256,12,1899,https://news.samsung.com/de/samsung-galaxy-z-flip5-und-galaxy-z-fold5-kompromisslos-flexibel-und-vielseitig,2023-07-26
+samsung-galaxy-z-fold5,12 GB / 512 GB,512,12,2019,https://news.samsung.com/de/samsung-galaxy-z-flip5-und-galaxy-z-fold5-kompromisslos-flexibel-und-vielseitig,2023-07-26
+samsung-galaxy-z-fold5,12 GB / 1 TB,1024,12,2259,https://news.samsung.com/de/samsung-galaxy-z-flip5-und-galaxy-z-fold5-kompromisslos-flexibel-und-vielseitig,2023-07-26
+samsung-galaxy-z-fold6,12 GB / 256 GB,256,12,1999,https://news.samsung.com/de/samsung-galaxy-z-fold6-und-z-flip6-schlagen-das-nachste-kapitel-von-galaxy-ai-auf,2024-07-10
+samsung-galaxy-z-fold6,12 GB / 512 GB,512,12,2119,https://news.samsung.com/de/samsung-galaxy-z-fold6-und-z-flip6-schlagen-das-nachste-kapitel-von-galaxy-ai-auf,2024-07-10
+samsung-galaxy-z-fold6,12 GB / 1 TB,1024,12,2359,https://news.samsung.com/de/samsung-galaxy-z-fold6-und-z-flip6-schlagen-das-nachste-kapitel-von-galaxy-ai-auf,2024-07-10
+ipad-9,256 GB Wi-Fi + Cellular,256,,689,https://global.techradar.com/de-de/news/neues-apple-ipad-2021-erscheinungsdatum-preis-und-alles-was-du-wissen-musst,2021-09-17
+apple-ipad-mini-6-a15,64 GB Wi-Fi,64,4,549,https://www.apple.com/de/newsroom/2021/09/apple-unveils-new-ipad-mini-with-breakthrough-performance-in-stunning-new-design/,2021-09-14
+apple-ipad-mini-6-a15,64 GB Wi-Fi + Cellular,64,4,719,https://www.apple.com/de/newsroom/2021/09/apple-unveils-new-ipad-mini-with-breakthrough-performance-in-stunning-new-design/,2021-09-14
+apple-ipad-mini-6-a15,256 GB Wi-Fi,256,4,719,https://www.computerbase.de/artikel/tablets/apple-ipad-mini-6-2021-test.78458/,2021-11-02
+apple-ipad-mini-6-a15,256 GB Wi-Fi + Cellular,256,4,889,https://global.techradar.com/de-de/news/neues-ipad-mini-2021-erscheinungsdatum-preis-spezifikationen-und-news,2022-01-25
+apple-ipad-pro-11-m2-2022,128 GB Wi-Fi,128,8,1049,https://www.apple.com/de/newsroom/2022/10/apple-introduces-next-generation-ipad-pro-supercharged-by-the-m2-chip/,2022-10-18
+apple-ipad-pro-11-m2-2022,128 GB Wi-Fi + Cellular,128,8,1249,https://www.apple.com/de/newsroom/2022/10/apple-introduces-next-generation-ipad-pro-supercharged-by-the-m2-chip/,2022-10-18
+apple-ipad-pro-11-m2-2022,256 GB Wi-Fi,256,8,1179,https://www.nextpit.de/tests/apple-ipad-pro-2022-11-zoll-test,2023-02-13
+apple-ipad-pro-11-m2-2022,512 GB Wi-Fi,512,8,1429,https://www.nextpit.de/tests/apple-ipad-pro-2022-11-zoll-test,2023-02-13
+apple-ipad-pro-11-m2-2022,1 TB Wi-Fi,1024,16,1929,https://www.nextpit.de/tests/apple-ipad-pro-2022-11-zoll-test,2023-02-13
+apple-ipad-pro-11-m2-2022,2 TB Wi-Fi,2048,16,2429,https://www.nextpit.de/tests/apple-ipad-pro-2022-11-zoll-test,2023-02-13
+ipad-pro-12-9,256 GB Wi-Fi + Cellular,256,8,1779,https://www.notebookcheck.com/Test-Apple-iPad-Pro-12-9-2022-Apples-Riesen-Tablet-arbeitet-jetzt-mit-M2-SoC.667791.0.html,2022-11-29
+ipad-pro-12-9,512 GB Wi-Fi + Cellular,512,8,2029,https://www.notebookcheck.com/Test-Apple-iPad-Pro-12-9-2022-Apples-Riesen-Tablet-arbeitet-jetzt-mit-M2-SoC.667791.0.html,2022-11-29
+iphone-14,128 GB,128,,999,https://www.apple.com/de/newsroom/2022/09/apple-introduces-iphone-14-and-iphone-14-plus/,2022-09-07
+iphone-14,256 GB,256,,1129,https://stadt-bremerhaven.de/apple-iphone-14-watch-series-8-und-airpods-pro-2-das-kosten-sie-in-deutschland/,2022-09-07
+lenovo-thinkpad-t14-gen3,"Core i5-1235U (Einstieg Intel, ohne vPro)",,,1350,https://www.notebookcheck.com/Lenovo-ThinkPad-T14-G3-im-Test-Business-Laptop-ist-besser-mit-AMD-Ryzen-Pro.654697.0.html,2022-09-27
+lenovo-thinkpad-t14-gen3,Ryzen 5 Pro 6650U (Einstieg AMD),,,1439,https://www.notebookcheck.com/Lenovo-ThinkPad-T14-G3-im-Test-Business-Laptop-ist-besser-mit-AMD-Ryzen-Pro.654697.0.html,2022-09-27
+lenovo-thinkpad-t14-gen3,Ryzen 7 Pro 6850U / 16 GB / 512 GB (21CF004NGE),512,16,1859,https://www.notebookcheck.com/Lenovo-ThinkPad-T14-G3-im-Test-Business-Laptop-ist-besser-mit-AMD-Ryzen-Pro.654697.0.html,2022-09-27
+lenovo-thinkpad-t14-gen3,Core i7-1260P / 16 GB / 1 TB / GeForce MX550 (21AJS00400),1024,16,1600,https://www.notebookcheck.com/Lenovo-ThinkPad-T14-G3-im-Test-Business-Laptop-ist-mit-Intel-und-Nvidia-schlechter.682011.0.html,2023-03-21
+lenovo-thinkpad-t14-gen4,Core i5-1335U / 16 GB DDR5 / 512 GB (21HD0043GE),512,16,1640,https://www.notebookcheck.com/Test-Lenovo-ThinkPad-T14-G4-Intel-Laptop-Raptor-Lake-Update-fuer-die-T-Serie.729357.0.html,2023-09-09
+lenovo-thinkpad-t14-gen5,Core Ultra 7 155U / 16 GB DDR5-5600 / 512 GB (21ML005JGE),512,16,1719,https://www.notebookcheck.com/Test-Lenovo-ThinkPad-T14-Gen-5-Intel-Laptop-Aufruestbarer-RAM-kehrt-in-die-T-Serie-zurueck.856385.0.html,2024-08-24
+lenovo-thinkpad-e14-gen4,Ryzen 5 5625U (AMD-Basis),,,600,https://www.notebookcheck.com/Lenovo-ThinkPad-E14-G4-Serie.721042.0.html,2026-09-13
+lenovo-thinkpad-e14-gen4,Core i5-1235U (Intel),,,950,https://www.notebookcheck.com/Lenovo-ThinkPad-E14-G4-Serie.721042.0.html,2026-09-13
+lenovo-thinkpad-e14-gen5,"Ryzen 7 7730U / 24 GB DDR4 / 1 TB, Campus-Version ohne OS (21JSS05C00)",1024,24,899,https://www.notebookcheck.com/Lenovo-ThinkPad-E14-G5-AMD-im-Test-Guenstiger-Office-Rechner-mit-besserem-Display.741476.0.html,2023-08-18
+lenovo-thinkpad-l14-gen3,Ryzen 5 PRO 5675U / 8 GB DDR4 / 256 GB (21C50030GE),256,8,1019,https://www.notebookcheck.com/Lenovo-ThinkPad-L14-G3-AMD-Laptop-Test-Lange-Laufzeit-plus-AMD-Power.641113.0.html,2022-10-19
+lenovo-thinkpad-l14-gen4,Ryzen 5 7530U / 16 GB DDR4 / 512 GB (21H6S00900),512,16,700,https://www.notebookcheck.com/Test-Lenovo-ThinkPad-L14-G4-AMD-Budget-Laptop-mit-guter-Aufruestbarkeit-und-Akkulaufzeit.713463.0.html,2023-08-09
+lenovo-thinkpad-x1-carbon-gen10,Core i5-1250P / 16 GB LPDDR5 / 512 GB (21CC001RGE),512,16,2300,https://notebookcheck.com/Test-Lenovo-ThinkPad-X1-Carbon-G10-Laptop-Alder-Lake-P28-ohne-durchschlagende-Wirkung.627516.0.html,2022-06-23
+lenovo-thinkpad-x1-carbon-gen11,"Core i7-1365U / 32 GB / 1 TB / LTE, Campus-Modell (21HNS00000)",1024,32,2199,https://www.notebookcheck.com/Lenovo-ThinkPad-X1-Carbon-G11-im-Test-Stillstand-beim-teuren-Business-Flagship.727107.0.html,2023-06-22
+lenovo-thinkpad-x1-carbon-gen11,"Core i7-1355U, Standard-Handelsmodell (21HM006VGE)",,,2499,https://www.notebookcheck.com/Lenovo-ThinkPad-X1-Carbon-G11-im-Test-Stillstand-beim-teuren-Business-Flagship.727107.0.html,2023-06-22
+lenovo-thinkbook-14-gen4,"Core i3 (Alder Lake) / 8 GB DDR4 (Standardkonfiguration, Lenovo-Shop-Preis 2023-01)",,8,,,
+dell-latitude-5430,Core i5-1235U / 8 GB / 256 GB (Basis),256,8,,,
+dell-latitude-5430,Core i5-1245U vPro / 16 GB / 512 GB (typische Business-Konfiguration),512,16,,,
+dell-latitude-5440,Core i5-1335U / 8 GB / 256 GB (Basis),256,8,,,
+dell-latitude-5440,Core i5-1345U vPro / 16 GB / 512 GB (typische Business-Konfiguration),512,16,,,
+dell-latitude-3440,Core i5-1345U vPro / 16 GB / 512 GB NVMe (Testgerät),512,16,1130,https://www.notebookcheck.com/Intel-Core-i5-1345U-Performance-Debakel-Dell-Latitude-3440-Laptop-im-Test.723933.0.html,2023-06-06
+dell-latitude-7440,Core i5-1345U vPro / 16 GB LPDDR5 / 512 GB / QHD+ Touch (Testgerät),512,16,,https://www.notebookcheck.com/Dell-Latitude-7440-Laptop-im-Test-Schlaegt-in-manchen-Kernbereichen-das-Latitude-9440.734497.0.html,2023-07-15
+hp-elitebook-840-g9,Core i7-1255U / 16 GB DDR5-4800 / 512 GB,512,16,1550,https://www.notebookcheck.com/HP-EliteBook-840-G9.721655.0.html,2023-04-03
+hp-elitebook-840-g10,Core i7-1355U / 16 GB DDR5-5200 / M.2 PCIe SSD (Kapazität im Datenblatt nicht genannt),,16,1300,https://www.notebookcheck.com/HP-Elitebook-840-G10.770372.0.html,2023-11-19
+hp-elitebook-840-g11,"Core Ultra 5 125U / 16 GB / 512 GB (9G0K4ET#ABD)",512,16,,,
+hp-elitebook-840-g11,Core Ultra 7 155U / 16 GB DDR5-5600 / M.2 PCIe SSD,,16,,,
+hp-elitebook-650-g9,Core i5-1235U (RAM/SSD im Datenblatt nicht genannt),,,1050,https://www.notebookcheck.com/HP-EliteBook-650-Serie.817868.0.html,2024-03-25
+hp-probook-450-g9,Core i5 / 8 GB / 256 GB / Full-HD (günstigste HP-Konfiguration),256,8,958,https://www.notebookcheck.com/HP-ProBook-450-G9-Laptop-Test-Endlich-eine-effiziente-Intel-CPU.634860.0.html,2022-08-23
+hp-probook-450-g9,Core i7-1255U / 16 GB DDR4 / 512 GB (6A180EA),512,16,1188,https://www.notebookcheck.com/HP-ProBook-450-G9-Laptop-Test-Endlich-eine-effiziente-Intel-CPU.634860.0.html,2022-08-23
+hp-probook-450-g10,Core i5-1335U / Iris Xe (RAM/SSD im Datenblatt nicht genannt),,,810,https://www.notebookcheck.com/HP-ProBook-450-G10-Serie.927106.0.html,2026-09-13
+hp-zbook-firefly-14-g9,Core i7-1265U / 32 GB / 1 TB / NVIDIA T550 / Full-HD 16:10 (6B8A2EA),1024,32,2200,https://www.notebookcheck.com/HP-ZBook-Firefly-14-G9-Laptop-im-Test-Intel-Alder-Lake-U-bremst-mobile-Workstation-aus.660735.0.html,2022-10-19
+apple-macbook-air-13-6-2022,M2 (8-Core CPU / 10-Core GPU) / 8 GB / 512 GB,512,8,1849,https://www.sir-apfelot.de/apple-macbook-air-m2-2022-42208/,2022-06-13
+apple-macbook-air-13-6-2022,M2 (8-Core CPU / 10-Core GPU) / 16 GB / 512 GB,512,16,2079,https://www.sir-apfelot.de/apple-macbook-air-m2-2022-42208/,2022-06-13
+apple-macbook-air-15-m2-2023,M2 (8-Core CPU / 10-Core GPU) / 8 GB / 256 GB (Basis),256,8,1599,https://www.apple.com/de/newsroom/2023/06/apple-introduces-the-15-inch-macbook-air/,2023-06-05
+apple-macbook-air-15-m2-2023,M2 (8-Core CPU / 10-Core GPU) / 16 GB / 512 GB,512,16,2059,https://www.sir-apfelot.de/apple-macbook-air-15-zoll-2023-technische-daten-bilder-und-preise-51555/,2023-06-06
+apple-macbook-air-13-m3-2024,M3 (8-Core CPU / 8-Core GPU) / 8 GB / 256 GB (Basis),256,8,1299,https://www.apple.com/de/newsroom/2024/03/apple-unveils-the-new-13-and-15-inch-macbook-air-with-the-powerful-m3-chip/,2024-03-04
+apple-macbook-air-13-m3-2024,M3 / 8 GB / 512 GB,512,8,1529,https://www.sir-apfelot.de/macbook-air-mit-m3-early-2024-technische-daten-bilder-und-preise-58194/,2024-03-04
+apple-macbook-air-13-m3-2024,M3 (10-Core GPU) / 16 GB / 256 GB,256,16,1529,https://www.sir-apfelot.de/macbook-air-mit-m3-early-2024-technische-daten-bilder-und-preise-58194/,2024-03-04
+apple-macbook-pro-14-m2-pro-2023,M2 Pro (10-Core CPU / 16-Core GPU) / 16 GB / 512 GB (Basis),512,16,2399,https://www.apple.com/de/newsroom/2023/01/apple-unveils-macbook-pro-featuring-m2-pro-and-m2-max/,2023-01-17
+apple-macbook-pro-14-m2-pro-2023,M2 Pro (10-Core CPU / 16-Core GPU) / 32 GB / 512 GB,512,32,2859,https://www.sir-apfelot.de/apple-macbook-pro-14-2023-technische-daten-und-preise-47706/,2023-01-17
+apple-macbook-pro-14-m2-pro-2023,M2 Pro (12-Core CPU / 19-Core GPU) / 16 GB / 1 TB (typische Business-Konfiguration),1024,16,2999,https://www.sir-apfelot.de/apple-macbook-pro-14-2023-technische-daten-und-preise-47706/,2023-01-17
+apple-macbook-pro-16-m2-pro-2023,M2 Pro (12-Core CPU / 19-Core GPU) / 16 GB / 512 GB (Basis),512,16,2999,https://www.apple.com/de/newsroom/2023/01/apple-unveils-macbook-pro-featuring-m2-pro-and-m2-max/,2023-01-17
+apple-macbook-pro-16-m2-pro-2023,M2 Pro (12-Core CPU / 19-Core GPU) / 16 GB / 1 TB,1024,16,3229,https://www.sir-apfelot.de/apple-macbook-pro-16-2023-technische-daten-und-preise-47713/,2023-01-17
+apple-macbook-pro-16-m2-pro-2023,M2 Pro (12-Core CPU / 19-Core GPU) / 32 GB / 1 TB (typische Business-Konfiguration),1024,32,3689,https://www.sir-apfelot.de/apple-macbook-pro-16-2023-technische-daten-und-preise-47713/,2023-01-17
+apple-macbook-pro-14-m3-2023,M3 (8-Core CPU / 10-Core GPU) / 8 GB / 512 GB (Basis),512,8,1999,https://www.sir-apfelot.de/apple-macbook-pro-14-late-2023-technische-daten-und-preise-55464/,2023-10-31
+apple-macbook-pro-14-m3-2023,M3 (8-Core CPU / 10-Core GPU) / 16 GB / 512 GB,512,16,2229,https://www.sir-apfelot.de/apple-macbook-pro-14-late-2023-technische-daten-und-preise-55464/,2023-10-31
+apple-macbook-pro-14-m3-2023,M3 Pro (11-Core CPU / 14-Core GPU) / 18 GB / 512 GB (typische Business-Konfiguration),512,18,2499,https://www.sir-apfelot.de/apple-macbook-pro-14-late-2023-technische-daten-und-preise-55464/,2023-10-31
+microsoft-surface-laptop-5,"13,5 Zoll / Core i5-1235U / 8 GB / 256 GB (Basis, Consumer)",256,8,1179,https://news.microsoft.com/de-de/microsoft-surface-laptop-5-startet-auf-dem-deutschen-markt/,2022-10-25
+microsoft-surface-laptop-5,"13,5 Zoll / Core i5 / 16 GB / 512 GB",512,16,1729,https://www.computerbase.de/artikel/notebooks/microsoft-surface-laptop-5-2022-test.82372/,2022-11-28
+microsoft-surface-laptop-5,"13,5 Zoll / Core i7 / 16 GB / 512 GB (typische Business-Konfiguration)",512,16,1949,https://www.computerbase.de/artikel/notebooks/microsoft-surface-laptop-5-2022-test.82372/,2022-11-28
+microsoft-surface-laptop-5,15 Zoll / Core i7-1255U / 8 GB / 256 GB (Basis 15 Zoll),256,8,1529,https://news.microsoft.com/de-de/microsoft-surface-laptop-5-startet-auf-dem-deutschen-markt/,2022-10-25
+microsoft-surface-laptop-5,15 Zoll / Core i7-1255U / 16 GB / 512 GB,512,16,2079,https://www.computerbase.de/artikel/notebooks/microsoft-surface-laptop-5-2022-test.82372/,2022-11-28
+microsoft-surface-laptop-studio,Core i7-13700H / RTX 4050 / 16 GB / 512 GB,512,16,,,
+microsoft-surface-pro-9-i5,i5-1235U / 8 GB / 256 GB,256,8,,,
+microsoft-surface-pro-9-i7,i7-1255U / 16 GB / 256 GB,256,16,,,
+microsoftsurface-pro-10-u7,Core Ultra 5 135U / 8 GB / 256 GB (Einstieg; Quellen nennen nur 'ab 1.399 EUR' ohne Konfiguration),256,8,1399,https://www.drwindows.de/news/surface-pro-10-for-business-im-innern-runderneuert-und-mit-weltrekord-webcam,2024-03-21
+microsoftsurface-pro-10-u7,Core Ultra 7 165U / 16 GB / 512 GB (Wi-Fi),512,16,,,
+microsoftsurface-pro-10-u7,Core Ultra 7 165U / 16 GB / 256 GB (Wi-Fi),256,16,,,
+samsung-galaxy-book3-pro,14 Zoll / Core i5-1340P / 8 GB / 512 GB (Basis),512,8,1699,https://www.computerbase.de/2023-02/samsung-galaxy-book3-pro-360-ultra-hands-on/,2023-02-01
+samsung-galaxy-book3-pro,14 Zoll / Core i7-1360P / 16 GB / 512 GB (typische Business-Konfiguration),512,16,1899,https://www.computerbase.de/2023-02/samsung-galaxy-book3-pro-360-ultra-hands-on/,2023-02-01
+samsung-galaxy-book3-pro,16 Zoll / Core i5 / 8 GB / 512 GB,512,8,1799,https://www.computerbase.de/2023-02/samsung-galaxy-book3-pro-360-ultra-hands-on/,2023-02-01
+samsung-galaxy-book3-pro,16 Zoll / Core i7-1360P / 16 GB / 512 GB,512,16,1999,https://www.computerbase.de/2023-02/samsung-galaxy-book3-pro-360-ultra-hands-on/,2023-02-01
+samsung-galaxy-book4-360,"Core 5 120U / 8 GB / 256 GB / 15,6 Zoll FHD OLED (Basiskonfiguration)",256,8,,,
+samsung-galaxy-book4-360,"Core 7 150U / 16 GB / 512 GB / 15,6 Zoll",512,16,,,
+iphone-12,64 GB,64,,876.30,https://www.apple.com/de/newsroom/2020/10/apple-announces-iphone-12-and-iphone-12-mini-a-new-era-for-iphone-with-5g/,2020-10-13
+iphone-12,128 GB,128,,925.05,https://www.teltarif.de/iphone-12-preise-verfuegbarkeit/news/82250.html,2020-10-13
+iphone-12,256 GB,256,,1042.05,https://www.teltarif.de/iphone-12-preise-verfuegbarkeit/news/82250.html,2020-10-13
+iphone-12-mini,64 GB,64,,778.85,https://www.apple.com/de/newsroom/2020/10/apple-announces-iphone-12-and-iphone-12-mini-a-new-era-for-iphone-with-5g/,2020-10-13
+iphone-12-mini,128 GB,128,,827.55,https://www.teltarif.de/iphone-12-preise-verfuegbarkeit/news/82250.html,2020-10-13
+iphone-12-mini,256 GB,256,,944.55,https://www.teltarif.de/iphone-12-preise-verfuegbarkeit/news/82250.html,2020-10-13
+iphone-12-pro,128 GB,128,,1120,https://www.apple.com/de/newsroom/2020/10/apple-introduces-iphone-12-pro-and-iphone-12-pro-max-with-5g/,2020-10-13
+iphone-12-pro,256 GB,256,,1237,https://www.teltarif.de/iphone-12-preise-verfuegbarkeit/news/82250.html,2020-10-13
+iphone-12-pro,512 GB,512,,1461.20,https://www.teltarif.de/iphone-12-preise-verfuegbarkeit/news/82250.html,2020-10-13
+iphone-12-pro-max,128 GB,128,,1217.50,https://www.apple.com/de/newsroom/2020/10/apple-introduces-iphone-12-pro-and-iphone-12-pro-max-with-5g/,2020-10-13
+iphone-12-pro-max,256 GB,256,,1334.45,https://www.teltarif.de/iphone-12-preise-verfuegbarkeit/news/82250.html,2020-10-13
+iphone-12-pro-max,512 GB,512,,1558.65,https://www.teltarif.de/iphone-12-preise-verfuegbarkeit/news/82250.html,2020-10-13
+iphone-13,128 GB,128,,899,https://www.apple.com/de/newsroom/2021/09/apple-introduces-iphone-13-and-iphone-13-mini/,2021-09-14
+iphone-13,256 GB,256,,1019,https://stadt-bremerhaven.de/deutsche-preise-das-teuerste-iphone-kostet-1-829-euro/,2021-09-14
+iphone-13,512 GB,512,,1249,https://stadt-bremerhaven.de/deutsche-preise-das-teuerste-iphone-kostet-1-829-euro/,2021-09-14
+iphone-13-pro,128 GB,128,,1149,https://www.apple.com/de/newsroom/2021/09/apple-unveils-iphone-13-pro-and-iphone-13-pro-max-more-pro-than-ever-before/,2021-09-14
+iphone-13-pro,256 GB,256,,1269,https://stadt-bremerhaven.de/deutsche-preise-das-teuerste-iphone-kostet-1-829-euro/,2021-09-14
+iphone-13-pro,512 GB,512,,1499,https://stadt-bremerhaven.de/deutsche-preise-das-teuerste-iphone-kostet-1-829-euro/,2021-09-14
+iphone-13-pro,1 TB,1024,,1729,https://stadt-bremerhaven.de/deutsche-preise-das-teuerste-iphone-kostet-1-829-euro/,2021-09-14
+iphone-13-pro-max,128 GB,128,,1249,https://www.apple.com/de/newsroom/2021/09/apple-unveils-iphone-13-pro-and-iphone-13-pro-max-more-pro-than-ever-before/,2021-09-14
+iphone-13-pro-max,256 GB,256,,1369,https://stadt-bremerhaven.de/deutsche-preise-das-teuerste-iphone-kostet-1-829-euro/,2021-09-14
+iphone-13-pro-max,512 GB,512,,1599,https://stadt-bremerhaven.de/deutsche-preise-das-teuerste-iphone-kostet-1-829-euro/,2021-09-14
+iphone-13-pro-max,1 TB,1024,,1829,https://stadt-bremerhaven.de/deutsche-preise-das-teuerste-iphone-kostet-1-829-euro/,2021-09-14
+iphone-se-3,64 GB,64,,519,https://www.apple.com/de/newsroom/2022/03/apple-announces-the-new-iphone-se-a-powerful-smartphone-in-an-iconic-design/,2022-03-08
+iphone-se-3,128 GB,128,,569,https://www.connect.de/news/iphone-se-2022-3-generation-preis-release-3202317.html,2022-03-08
+iphone-se-3,256 GB,256,,689,https://www.connect.de/news/iphone-se-2022-3-generation-preis-release-3202317.html,2022-03-08
+iphone-14,512 GB,512,,1389,https://stadt-bremerhaven.de/apple-iphone-14-watch-series-8-und-airpods-pro-2-das-kosten-sie-in-deutschland/,2022-09-07
+google-pixel-5,8 GB / 128 GB,128,8,613.15,https://www.connect.de/news/google-pixel-5-4a-vorgestellt-preis-release-3201176.html,2020-10-01
+google-pixel-6,8 GB / 128 GB,128,8,649,https://blog.google/intl/de-de/produkte/hardware/pixel-6-pixel-6-pro-ankuendigung/,2021-10-19
+google-pixel-6-pro,12 GB / 128 GB,128,12,899,https://blog.google/intl/de-de/produkte/hardware/pixel-6-pixel-6-pro-ankuendigung/,2021-10-19
+google-pixel-6-pro,12 GB / 256 GB,256,12,999,https://blog.google/intl/de-de/produkte/hardware/pixel-6-pixel-6-pro-ankuendigung/,2021-10-19
+google-pixel-6a,6 GB / 128 GB,128,6,459,https://blog.google/intl/de-de/produkte/hardware/io-2022-pixel-6a/,2022-05-11
+google-pixel-7,8 GB / 128 GB,128,8,649,https://blog.google/intl/de-de/produkte/hardware/pixel-7-pixel-7-pro-ankuendigung/,2022-10-06
+google-pixel-7,8 GB / 256 GB,256,8,749,https://www.techbook.de/mobile-lifestyle/smartphone/google-pixel-7-pro,2022-10-06
+google-pixel-7-pro,12 GB / 128 GB,128,12,899,https://blog.google/intl/de-de/produkte/hardware/pixel-7-pixel-7-pro-ankuendigung/,2022-10-06
+google-pixel-7-pro,12 GB / 256 GB,256,12,999,https://www.teltarif.de/google-pixel-7-pro-neuvorstellung-preis/news/89562.html,2022-10-06
+samsung-galaxy-s21,8 GB / 128 GB,128,8,849,https://news.samsung.com/de/galaxy-s21-5g-und-s21-5g-dein-leben-im-fokus,2021-01-14
+samsung-galaxy-s21,8 GB / 256 GB,256,8,899,https://news.samsung.com/de/galaxy-s21-5g-und-s21-5g-dein-leben-im-fokus,2021-01-14
+samsung-galaxy-s21-plus,8 GB / 128 GB,128,8,1049,https://news.samsung.com/de/galaxy-s21-5g-und-s21-5g-dein-leben-im-fokus,2021-01-14
+samsung-galaxy-s21-plus,8 GB / 256 GB,256,8,1099,https://news.samsung.com/de/galaxy-s21-5g-und-s21-5g-dein-leben-im-fokus,2021-01-14
+samsung-galaxy-s21-ultra,12 GB / 128 GB,128,12,1249,https://news.samsung.com/de/samsung-galaxy-s21-ultra-5g-entdecke-das-epische-in-jedem-tag,2021-01-14
+samsung-galaxy-s21-ultra,12 GB / 256 GB,256,12,1299,https://news.samsung.com/de/samsung-galaxy-s21-ultra-5g-entdecke-das-epische-in-jedem-tag,2021-01-14
+samsung-galaxy-s21-ultra,16 GB / 512 GB,512,16,1429,https://news.samsung.com/de/samsung-galaxy-s21-ultra-5g-entdecke-das-epische-in-jedem-tag,2021-01-14
+samsung-galaxy-s21-fe,6 GB / 128 GB,128,6,749,https://news.samsung.com/de/samsung-stellt-neues-flaggschiff-s21-fe-5g-vor,2022-01-04
+samsung-galaxy-s21-fe,8 GB / 256 GB,256,8,819,https://news.samsung.com/de/samsung-stellt-neues-flaggschiff-s21-fe-5g-vor,2022-01-04
+samsung-galaxy-s22,8 GB / 128 GB,128,8,849,https://news.samsung.com/de/launch-samsung-galaxy-s22-und-s22plus,2022-02-09
+samsung-galaxy-s22,8 GB / 256 GB,256,8,899,https://news.samsung.com/de/launch-samsung-galaxy-s22-und-s22plus,2022-02-09
+samsung-galaxy-s22-plus,8 GB / 128 GB,128,8,1049,https://news.samsung.com/de/launch-samsung-galaxy-s22-und-s22plus,2022-02-09
+samsung-galaxy-s22-plus,8 GB / 256 GB,256,8,1099,https://news.samsung.com/de/launch-samsung-galaxy-s22-und-s22plus,2022-02-09
+samsung-galaxy-a52s,6 GB / 128 GB,128,6,449,https://news.samsung.com/de/die-galaxy-a-serie-wachst-weiter-samsung-prasentiert-das-galaxy-a52s-5g,2021-08-24
+samsung-galaxy-a52s,8 GB / 256 GB,256,8,509,https://news.samsung.com/de/die-galaxy-a-serie-wachst-weiter-samsung-prasentiert-das-galaxy-a52s-5g,2021-08-24
+samsung-galaxy-xcover-5,Enterprise Edition 4 GB / 64 GB,64,4,289,https://www.computerbase.de/2021-03/samsung-galaxy-xcover-5-outdoor-smartphone-5.3-zoll-wechsel-akku/,2021-03-05
+apple-macbook-air-13-m1-2020,M1 (8-Core CPU / 7-Core GPU) / 8 GB / 256 GB (Basis),256,8,1100.50,https://www.apple.com/de/newsroom/2020/11/introducing-the-next-generation-of-mac/,2020-11-10
+apple-macbook-air-13-m1-2020,M1 (8-Core CPU / 8-Core GPU) / 8 GB / 512 GB,512,8,1363.70,https://www.sir-apfelot.de/macbook-air-late-2020-technische-daten-bilder-und-preis-31734/,2020-11-11
+apple-macbook-pro-13-m1-2020,M1 (8-Core CPU / 8-Core GPU) / 8 GB / 256 GB (Basis),256,8,1412.45,https://www.apple.com/de/newsroom/2020/11/introducing-the-next-generation-of-mac/,2020-11-10
+apple-macbook-pro-13-m1-2020,M1 (8-Core CPU / 8-Core GPU) / 8 GB / 512 GB,512,8,1636.65,https://www.sir-apfelot.de/macbook-pro-late-2020-technische-daten-bilder-und-preis-31741/,2020-11-11
+apple-macbook-pro-14-m1-pro-2021,M1 Pro (8-Core CPU / 14-Core GPU) / 16 GB / 512 GB (Basis),512,16,2249,https://www.apple.com/de/newsroom/2021/10/apple-unveils-game-changing-macbook-pro/,2021-10-18
+apple-macbook-pro-14-m1-pro-2021,M1 Pro (10-Core CPU / 16-Core GPU) / 16 GB / 1 TB,1024,16,2749,https://www.sir-apfelot.de/apple-macbook-pro-14-zoll-2021-37424/,2021-10-19
+apple-macbook-pro-16-m1-pro-2021,M1 Pro (10-Core CPU / 16-Core GPU) / 16 GB / 512 GB (Basis),512,16,2749,https://www.apple.com/de/newsroom/2021/10/apple-unveils-game-changing-macbook-pro/,2021-10-18
+apple-macbook-pro-16-m1-pro-2021,M1 Pro (10-Core CPU / 16-Core GPU) / 16 GB / 1 TB,1024,16,2979,https://www.sir-apfelot.de/apple-macbook-pro-16-zoll-2021-37433/,2021-10-19
+apple-macbook-pro-16-m1-pro-2021,M1 Max (10-Core CPU / 32-Core GPU) / 32 GB / 1 TB,1024,32,3849,https://www.sir-apfelot.de/apple-macbook-pro-16-zoll-2021-37433/,2021-10-19
+apple-macbook-pro-13-m2-2022,M2 (8-Core CPU / 10-Core GPU) / 8 GB / 256 GB (Basis),256,8,1599,https://www.apple.com/de/newsroom/2022/06/apple-unveils-all-new-macbook-air-supercharged-by-the-new-m2-chip/,2022-06-07
+apple-macbook-pro-13-m2-2022,M2 (8-Core CPU / 10-Core GPU) / 8 GB / 512 GB,512,8,1829,https://www.notebookcheck.com/13-Zoll-MacBook-Pro-2022-Dank-Apple-M2-Chip-wird-das-kleine-Pro-MacBook-schneller.625773.0.html,2022-06-06
+apple-ipad-air-4-2020,64 GB Wi-Fi,64,,632.60,https://www.apple.com/de/newsroom/2020/09/apple-unveils-all-new-ipad-air-with-a14-bionic-apples-most-advanced-chip/,2020-09-15
+apple-ipad-air-4-2020,64 GB Wi-Fi + Cellular,64,,769.10,https://www.apple.com/de/newsroom/2020/09/apple-unveils-all-new-ipad-air-with-a14-bionic-apples-most-advanced-chip/,2020-09-15
+apple-ipad-air-4-2020,256 GB Wi-Fi,256,,798.35,https://www.sir-apfelot.de/apple-ipad-air-2020-technische-daten-und-preis-30849/,2020-09-17
+apple-ipad-air-4-2020,256 GB Wi-Fi + Cellular,256,,934.80,https://www.sir-apfelot.de/apple-ipad-air-2020-technische-daten-und-preis-30849/,2020-09-17
+apple-ipad-8-2020,32 GB Wi-Fi,32,,369.40,https://www.apple.com/de/newsroom/2020/09/apple-introduces-eighth-generation-ipad-with-a-huge-jump-in-performance/,2020-09-15
+apple-ipad-8-2020,32 GB Wi-Fi + Cellular,32,,505.90,https://www.apple.com/de/newsroom/2020/09/apple-introduces-eighth-generation-ipad-with-a-huge-jump-in-performance/,2020-09-15
+apple-ipad-8-2020,128 GB Wi-Fi,128,,466.90,https://www.sir-apfelot.de/apple-ipad-8-generation-technische-daten-und-preis-30835/,2020-09-16
+apple-ipad-8-2020,128 GB Wi-Fi + Cellular,128,,603.35,https://www.sir-apfelot.de/apple-ipad-8-generation-technische-daten-und-preis-30835/,2020-09-16
+apple-ipad-pro-11-m1-2021,128 GB Wi-Fi,128,8,879,https://www.apple.com/de/newsroom/2021/04/apple-unveils-new-ipad-pro-with-m1-chip-and-stunning-liquid-retina-xdr-display/,2021-04-20
+apple-ipad-pro-11-m1-2021,128 GB Wi-Fi + Cellular (5G),128,8,1049,https://www.apple.com/de/newsroom/2021/04/apple-unveils-new-ipad-pro-with-m1-chip-and-stunning-liquid-retina-xdr-display/,2021-04-20
+apple-ipad-pro-11-m1-2021,256 GB Wi-Fi,256,8,989,https://www.computerbase.de/2021-04/apple-ipad-pro-erhaelt-m1-prozessor-und-mini-led-bildschirm/,2021-04-20
+apple-ipad-pro-11-m1-2021,256 GB Wi-Fi + Cellular (5G),256,8,1159,https://www.computerbase.de/2021-04/apple-ipad-pro-erhaelt-m1-prozessor-und-mini-led-bildschirm/,2021-04-20
+apple-ipad-pro-11-m1-2021,512 GB Wi-Fi,512,8,1209,https://www.computerbase.de/2021-04/apple-ipad-pro-erhaelt-m1-prozessor-und-mini-led-bildschirm/,2021-04-20
+apple-ipad-pro-11-m1-2021,512 GB Wi-Fi + Cellular (5G),512,8,1379,https://www.computerbase.de/2021-04/apple-ipad-pro-erhaelt-m1-prozessor-und-mini-led-bildschirm/,2021-04-20
+apple-ipad-pro-11-m1-2021,1 TB Wi-Fi,1024,16,1649,https://www.computerbase.de/2021-04/apple-ipad-pro-erhaelt-m1-prozessor-und-mini-led-bildschirm/,2021-04-20
+apple-ipad-pro-11-m1-2021,1 TB Wi-Fi + Cellular (5G),1024,16,1819,https://www.computerbase.de/2021-04/apple-ipad-pro-erhaelt-m1-prozessor-und-mini-led-bildschirm/,2021-04-20
+apple-ipad-pro-11-m1-2021,2 TB Wi-Fi,2048,16,2089,https://www.computerbase.de/2021-04/apple-ipad-pro-erhaelt-m1-prozessor-und-mini-led-bildschirm/,2021-04-20
+apple-ipad-pro-11-m1-2021,2 TB Wi-Fi + Cellular (5G),2048,16,2259,https://www.computerbase.de/2021-04/apple-ipad-pro-erhaelt-m1-prozessor-und-mini-led-bildschirm/,2021-04-20
+apple-ipad-pro-12-9-m1-2021,128 GB Wi-Fi,128,8,1199,https://www.apple.com/de/newsroom/2021/04/apple-unveils-new-ipad-pro-with-m1-chip-and-stunning-liquid-retina-xdr-display/,2021-04-20
+apple-ipad-pro-12-9-m1-2021,128 GB Wi-Fi + Cellular (5G),128,8,1369,https://www.apple.com/de/newsroom/2021/04/apple-unveils-new-ipad-pro-with-m1-chip-and-stunning-liquid-retina-xdr-display/,2021-04-20
+apple-ipad-pro-12-9-m1-2021,256 GB Wi-Fi,256,8,1309,https://www.computerbase.de/2021-04/apple-ipad-pro-erhaelt-m1-prozessor-und-mini-led-bildschirm/,2021-04-20
+apple-ipad-pro-12-9-m1-2021,256 GB Wi-Fi + Cellular (5G),256,8,1479,https://www.computerbase.de/2021-04/apple-ipad-pro-erhaelt-m1-prozessor-und-mini-led-bildschirm/,2021-04-20
+apple-ipad-pro-12-9-m1-2021,512 GB Wi-Fi,512,8,1529,https://www.computerbase.de/2021-04/apple-ipad-pro-erhaelt-m1-prozessor-und-mini-led-bildschirm/,2021-04-20
+apple-ipad-pro-12-9-m1-2021,512 GB Wi-Fi + Cellular (5G),512,8,1699,https://www.computerbase.de/2021-04/apple-ipad-pro-erhaelt-m1-prozessor-und-mini-led-bildschirm/,2021-04-20
+apple-ipad-pro-12-9-m1-2021,1 TB Wi-Fi,1024,16,1969,https://www.computerbase.de/2021-04/apple-ipad-pro-erhaelt-m1-prozessor-und-mini-led-bildschirm/,2021-04-20
+apple-ipad-pro-12-9-m1-2021,1 TB Wi-Fi + Cellular (5G),1024,16,2139,https://www.computerbase.de/2021-04/apple-ipad-pro-erhaelt-m1-prozessor-und-mini-led-bildschirm/,2021-04-20
+apple-ipad-pro-12-9-m1-2021,2 TB Wi-Fi,2048,16,2409,https://www.computerbase.de/2021-04/apple-ipad-pro-erhaelt-m1-prozessor-und-mini-led-bildschirm/,2021-04-20
+apple-ipad-pro-12-9-m1-2021,2 TB Wi-Fi + Cellular (5G),2048,16,2579,https://www.computerbase.de/2021-04/apple-ipad-pro-erhaelt-m1-prozessor-und-mini-led-bildschirm/,2021-04-20
+dell-latitude-5420,"Core i5-1135G7 / 8 GB / 256 GB (Basis; notebookcheck-Test 27.01.2022 nennt nur gerundet 'Fuer 1.000 Euro', kein exakter Preis)",256,8,,,
+dell-latitude-5420,"Core i7-1165G7 / 16 GB / 512 GB (notebookcheck-Datenblatt-Preisfeld, kein Hersteller-UVP)",512,16,1400,https://www.notebookcheck.com/Dell-Latitude-14-5420-i7-1165G7.557575.0.html,2021-08-30
+dell-latitude-7420,"Core i5-1135G7 / 8 GB / 256 GB (9J6PD, Einstieg DE laut Geizhals; kein Launchpreis belegt)",256,8,,,
+dell-latitude-7420,"Core i7-1185G7 / 16 GB / 512 GB (notebookcheck-Datenblatt-Preisfeld, kein Hersteller-UVP)",512,16,1900,https://www.notebookcheck.com/Dell-Latitude-14-7420-i7-1185G7.544839.0.html,2021-06-11
+dell-latitude-7430,"Core i5-1245U / 16 GB / 512 GB (9V2KM, typische DE-Konfiguration laut Geizhals; kein Launchpreis belegt)",512,16,,,
+dell-latitude-7430,"Core i5-1235U / 16 GB / 256 GB (notebookcheck-Datenblatt-Preisfeld vom 25.01.2023, kein Hersteller-UVP)",256,16,1450,https://www.notebookcheck.com/Dell-Latitude-14-7430-i5-1235U.685516.0.html,2023-01-25
+lenovo-thinkpad-x1-carbon-gen9,Core i5-1135G7 / 8 GB / 256 GB / 14 Zoll 1920x1200 (Lenovo.de-Vorbestellpreis mit Windows 10 laut notebookcheck; 1.739 Euro ohne Betriebssystem),256,8,1799,https://www.notebookcheck.com/Das-ultraleichte-Lenovo-ThinkPad-X1-Carbon-Gen-9-kann-jetzt-ab-1-739-Euro-vorbestellt-werden.530075.0.html,2021-03-29
+lenovo-thinkpad-x1-carbon-gen9,"Core i7-1165G7 / 32 GB / 1 TB / UHD+ 3840x2400 (20XWCTO1WW, notebookcheck-Testgeraetpreis)",1024,32,2520,https://www.notebookcheck.com/Test-Lenovo-ThinkPad-X1-Carbon-Gen-9-Laptop-Grosses-16-10-Upgrade-mit-Intel-Tiger-Lake.537257.0.html,2021-05-08
+lenovo-thinkpad-t14-gen2,"Core i5-1135G7 / 16 GB / 512 GB (20W0003AGE, typische DE-Konfiguration laut Geizhals; kein Launchpreis belegt)",512,16,,,
+lenovo-thinkpad-t14-gen2,"Core i7-1165G7 / 16 GB / 1 TB / GeForce MX450 (20W1S00000, Campuspoint-Testgeraet, notebookcheck-Preisfeld)",1024,16,1400,https://www.notebookcheck.com/Test-Lenovo-ThinkPad-T14-Gen-2-Laptop-Bekanntes-Design-profitiert-von-Intel-Tiger-Lake.535948.0.html,2021-05-02
+lenovo-thinkpad-l14-gen2,"Core i5-1135G7 / 8 GB / 256 GB (20X1003WGE, Campuspoint-Testgeraet, notebookcheck-Preisfeld)",256,8,1000,https://www.notebookcheck.com/Lenovo-ThinkPad-L14-G2-im-Test-Auch-mit-Intel-gut-unterwegs.571431.0.html,2021-11-24
+lenovo-thinkpad-l14-gen2,Core i5-1135G7 / 16 GB / 512 GB (20X1003TGE; kein Launchpreis belegt),512,16,,,
+lenovo-thinkpad-e14-gen3,"Ryzen 5 5500U / 8 GB / 256 GB (20Y7003QGE, Einstieg DE laut Geizhals; kein Launchpreis belegt)",256,8,,,
+lenovo-thinkpad-e14-gen3,"Ryzen 5 5500U / 16 GB / 512 GB (20Y7003SGE, notebookcheck-Testgeraetpreis; Campus 790 bzw. 640 Euro ohne OS)",512,16,870,https://www.notebookcheck.com/Lenovo-ThinkPad-E14-G3-AMD-Laptop-im-Test-Guenstiger-Business-Rechner-mit-Ryzen-Power.549483.0.html,2021-07-14
+lenovo-thinkpad-e14-gen3,"Ryzen 7 5700U / 16 GB / 512 GB (20Y7003XGE, notebookcheck-Datenblatt-Preisfeld)",512,16,900,https://www.notebookcheck.com/Lenovo-ThinkPad-E14-G3-20Y7003XGE.569878.0.html,2021-10-06
+hp-elitebook-840-g8,"Core i5-1135G7 / 8 GB / 256 GB (3C7Y9EA#ABD, Einstieg DE laut Geizhals; kein Launchpreis belegt)",256,8,,,
+hp-elitebook-840-g8,"Core i5-1135G7 / 16 GB / 512 GB (3C7Z1EA#ABD, typische Business-Konfiguration; kein Launchpreis belegt, Geizhals 2026 Restbestand 1.099,00)",512,16,,,
+hp-probook-450-g8,"Core i5-1135G7 / 8 GB / 256 GB (3C2W8ES#ABD, Einstieg DE laut Geizhals; kein Launchpreis belegt)",256,8,,,
+hp-probook-450-g8,"Core i5-1135G7 / 16 GB / 512 GB (2W1G9EA#ABD, typische Konfiguration; kein Launchpreis belegt)",512,16,,,
+microsoft-surface-laptop-4,"13,5 Zoll / Ryzen 5 4680U Surface Edition / 8 GB / 256 GB (Basis, Privatkunden, Windows 10 Home)",256,8,1129,https://news.microsoft.com/de-de/optimiert-fuer-digitale-meetings-microsoft-kuendigt-surface-und-zubehoer-neuheiten-an/,2021-04-27
+microsoft-surface-laptop-4,"13,5 Zoll / Ryzen 5 4680U Surface Edition / 16 GB / 256 GB (Privatkunden)",256,16,1349,https://www.computerbase.de/news/notebooks/microsoft-surface-laptop-4-mit-amd-oder-intel-laeuft-deutlich-laenger.76183/,2021-04-13
+microsoft-surface-laptop-4,"13,5 Zoll / Core i5-1135G7 / 8 GB / 512 GB (Privatkunden)",512,8,1449,https://www.computerbase.de/news/notebooks/microsoft-surface-laptop-4-mit-amd-oder-intel-laeuft-deutlich-laenger.76183/,2021-04-13
+microsoft-surface-laptop-4,"13,5 Zoll / Core i5-1135G7 / 16 GB / 512 GB (Privatkunden; typische Business-Konfiguration, Business-SKU mit Windows 10 Pro lag laut PM hoeher)",512,16,1649,https://www.computerbase.de/news/notebooks/microsoft-surface-laptop-4-mit-amd-oder-intel-laeuft-deutlich-laenger.76183/,2021-04-13
+microsoft-surface-laptop-4,"13,5 Zoll / Core i7-1185G7 / 16 GB / 512 GB (Privatkunden)",512,16,1849,https://www.computerbase.de/news/notebooks/microsoft-surface-laptop-4-mit-amd-oder-intel-laeuft-deutlich-laenger.76183/,2021-04-13
+microsoft-surface-laptop-4,"15 Zoll / Ryzen 7 4980U Surface Edition / 8 GB / 256 GB (Basis 15 Zoll, Privatkunden)",256,8,1449,https://news.microsoft.com/de-de/optimiert-fuer-digitale-meetings-microsoft-kuendigt-surface-und-zubehoer-neuheiten-an/,2021-04-27
+microsoft-surface-laptop-4,15 Zoll / Core i7-1185G7 / 16 GB / 512 GB (Privatkunden),512,16,1949,https://www.computerbase.de/news/notebooks/microsoft-surface-laptop-4-mit-amd-oder-intel-laeuft-deutlich-laenger.76183/,2021-04-13
+microsoft-surface-pro-7-plus,"Core i3-1115G4 / 8 GB / 128 GB / Wi-Fi (Einstieg, Windows 10 Pro)",128,8,1029,https://news.microsoft.com/de-de/microsoft-kuendigt-surface-neuheiten-fuer-unternehmenskunden-an/,2021-01-11
+microsoft-surface-pro-7-plus,Core i5-1135G7 / 8 GB / 128 GB / Wi-Fi (Windows 10 Pro),128,8,1149,https://www.computerbase.de/news/notebooks/surface-pro-7-plus.75034/,2021-01-12
+microsoft-surface-pro-7-plus,"Core i5-1135G7 / 8 GB / 256 GB / Wi-Fi (typische Business-Konfiguration, Windows 10 Pro)",256,8,1449,https://www.computerbase.de/news/notebooks/surface-pro-7-plus.75034/,2021-01-12
+microsoft-surface-pro-7-plus,Core i5-1135G7 / 16 GB / 256 GB / Wi-Fi (Windows 10 Pro),256,16,1679,https://www.computerbase.de/news/notebooks/surface-pro-7-plus.75034/,2021-01-12
+microsoft-surface-pro-7-plus,Core i7-1165G7 / 16 GB / 256 GB / Wi-Fi (Windows 10 Pro),256,16,1779,https://www.computerbase.de/news/notebooks/surface-pro-7-plus.75034/,2021-01-12
+microsoft-surface-pro-7-plus,Core i7-1165G7 / 16 GB / 512 GB / Wi-Fi (Windows 10 Pro),512,16,2219,https://www.computerbase.de/news/notebooks/surface-pro-7-plus.75034/,2021-01-12
+microsoft-surface-pro-7-plus,Core i7-1165G7 / 16 GB / 1 TB / Wi-Fi (Windows 10 Pro),1024,16,2699,https://www.computerbase.de/news/notebooks/surface-pro-7-plus.75034/,2021-01-12
+microsoft-surface-pro-7-plus,"Core i7-1165G7 / 32 GB / 1 TB / Wi-Fi (Spitzenmodell, Windows 10 Pro)",1024,32,3149,https://www.computerbase.de/news/notebooks/surface-pro-7-plus.75034/,2021-01-12
+microsoft-surface-pro-7-plus,"Core i5-1135G7 / 8 GB / 128 GB / LTE Advanced (Einstieg LTE, Windows 10 Pro)",128,8,1329,https://news.microsoft.com/de-de/microsoft-kuendigt-surface-neuheiten-fuer-unternehmenskunden-an/,2021-01-11
+microsoft-surface-pro-7-plus,Core i5-1135G7 / 8 GB / 256 GB / LTE Advanced (Windows 10 Pro),256,8,1629,https://www.computerbase.de/news/notebooks/surface-pro-7-plus.75034/,2021-01-12
+microsoft-surface-pro-7-plus,"Core i5-1135G7 / 16 GB / 256 GB / LTE Advanced (Windows 10 Pro; notebookcheck-Test 21.03.2021 nennt fuer dieses Testgeraet 2.140 Euro, Widerspruch)",256,16,1849,https://www.computerbase.de/news/notebooks/surface-pro-7-plus.75034/,2021-01-12

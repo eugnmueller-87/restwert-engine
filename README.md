@@ -1,0 +1,162 @@
+# Restwert Engine v0.2
+
+## 1. What it is: the closed device cycle in seven questions
+
+Asset P&L and residual value tool for a Device-as-a-Service provider: the company rents smartphones, tablets and laptops to business customers for 12, 24, 36 or 48 months, replaces broken devices, takes them back, refurbishes and resells them. v0.2 puts the whole cycle of every serial on a layered data lake and answers one question per page:
+
+| page | the question | what answers it |
+|---|---|---|
+| Realisation | Where does the public used market land against launch RRP? | 429 public used prices on 123 of the 233 catalogue models (asks and trade-in bids, with URLs); 361 of them match a priced variant strictly and carry the curves (101 models) |
+| 0 Data | Can we trust the numbers on the next seven pages? | landing files, typed bronze rows, unresolved rows with a reason, the timestamp chain per serial |
+| 1 Purchase | What did we pay per device against the net launch RRP, and to whom? | purchase orders, goods receipts, supplier invoices, price changes, price protection |
+| 2 TCO | What does one device cost us from order to cash, line by line? | 15 ledger line types per serial, every line with a source reference |
+| 3 Residual estimate | What will the rented fleet be worth at lease end? | the fleet forecast of record decides, the public anchor curve advises |
+| 4 Resale | What did we actually get back, and how fast? | recommerce orders and credit notes against the estimate on record at return |
+| 5 Result | Do we make money per device, and on which cohort? | `lifecycle_result_eur = SUM(amount_eur)` on closed cycles; two labelled estimates on open ones |
+| 6 Levers | Where do we tighten, and who owns the screw? | seven levers, each actual minus a named reference, with the threshold owner and the rule that acts |
+| 7 Contracts | Which contracts cover our spend, and which need action? | register v2 with the ten manufacturers and role-only partners, coverage, renewal calendar, price protection windows |
+
+> THE MODEL ADVISES, DETERMINISTIC CODE DECIDES, A NAMED HUMAN OWNS EVERY THRESHOLD.
+
+This is a working prototype and portfolio piece by a procurement leader, not a product. Read the honesty box before you read any number.
+
+## 2. Honesty box
+
+* **Synthetic fleet, public catalogue.** Every landing file under `data/lake/raw/` starts with `# SYNTHETIC DATA` (fleet feeds) or `# PUBLIC DATA` (copies of `data/catalogue/*.csv` and `outputs/market_curves.csv`, every row with its source URL) and every row carries `is_synthetic`. The fleet is drawn from the real catalogue (233 models, real launch dates, real launch RRP per variant) and priced with a truth curve calibrated to the public anchors; the truth source per family and manufacturer, the haircut and the cap are listed in `data/lake/SYNTHETIC.md` (generated on every run) with one owner for the whole truth block. A synthetic realisation that lands near the public curve is a design consequence, not evidence.
+* **No real names beyond the catalogue.** The company is "the DaaS provider". Manufacturers carry their catalogue names (Apple, Samsung, Google, Motorola, Fairphone, HMD Global (Nokia), Lenovo, Dell, HP, Microsoft). Every other counterparty is role-only: `IT reseller A (role-only)`, `Carrier partner (role-only)`, `Refurbishment and repair partner (role-only)`, `Logistics partner (role-only)`, `Marketplace channel A (role-only)`, `Financing partner A (role-only)`, `Mobile threat defense partner (role-only)`, `Rugged-device OEM (role-only)`. A test scans every landing file and every bronze text column against a base64 denylist of real providers and employers, and a second test checks that every supplier and counterparty name is a catalogue manufacturer or ends with `(role-only)`.
+* **No market benchmarks.** Thresholds (`config/thresholds.yaml`), assumptions (`config/assumptions.yaml`) and KPI targets and minimum sample sizes (`config/kpi_targets.yaml`) are placeholders, labelled `placeholder_default: true` or "placeholder" in the note, each key with an owner. The generator's design parameters (discount bands, damage rates, fees, channel mix, defect rates, the truth block) live in `config/lake.yaml` and are owned per block in its `design_parameter_owners` map (a test walks it). Contract terms are synthetic placeholders and the register says so on every row (`terms_note`).
+* **No side effects.** Nothing in the package orders, lists, sends or emails. Tests grep the package for `smtplib`, `requests`, `httpx`, `urllib.request`, `boto3`, `paramiko` and `subprocess` (allowed in `cli.py` only, where it starts Streamlit).
+* **No fake zeros, no silent guesses.** A KPI whose denominator is zero returns `status = not_measurable`, never `0`. A landing row that cannot be typed or matched lands in `bronze.unresolved` with a reason code; a lever whose reference group is too small is `is_attributed = false`; an estimate line says `is_estimate = true` and names the assumption and its owner.
+* **AI-assisted.** Written with AI assistance from a frozen human-written specification; a human reviewed the design, the formulas and the tests (section 11).
+
+## 3. Install and run
+
+Requires Python 3.12. Windows, macOS and Linux work; paths use forward slashes.
+
+```bash
+python -m venv .venv
+.venv/Scripts/activate            # Windows (Git Bash); on macOS/Linux: source .venv/bin/activate
+pip install -e .[dev]             # or: pip install -r requirements.txt
+python -m restwert all            # the v0.2 chain, see below
+python -m restwert dashboard      # Streamlit on http://localhost:8501
+pytest -q                         # add -m "not slow" to skip the 5000-serial timing test
+```
+
+`python -m restwert all` runs `generate-lake -> ingest --all -> conform -> forecast -> pnl -> timeline -> ledger -> levers -> decide -> contracts -> kpis -> export` on the default fleet of 5000 serials (quarterly deliveries, 260 landing files, 160,770 landing rows, 155,711 ledger lines on the shipped run of 13.09.2026; the run prints these counts and `data/lake/SYNTHETIC.md`, which is generated, lists the files and rows per feed).
+
+Measured on 13.09.2026 on the author's Windows laptop (Python 3.12, DuckDB 1.5) with the machine otherwise idle: **the default fleet took 31 s** (generate-lake 2.7 s, ingest 11.1 s, conform 1.1 s, forecast 4.7 s, pnl 0.8 s, timeline 1.0 s, ledger 4.1 s, levers 1.6 s, decide 0.8 s, contracts 0.8 s, kpis 0.9 s, export 1.0 s). `all --small` (500 serials) took 16 s (ingest 7 s, forecast 3 s, ledger 1.3 s); while five build agents shared the CPU the same runs took 34 s and 25 s (ingest 14 s and 15 s). After the review fixes of the same day (holding cost per stock phase, the lever checks against the ledger lines) the default fleet took 38 s with the test suite sharing the machine (ledger 5.1 s, levers 2.2 s). When `outputs/market_curves.csv` is missing (a fresh clone: `outputs/` is not tracked), `all` first fits the curves from the tracked public anchors into `--out` (step `market`, 0.4 s) and calibrates against that file, so the synthetic truth never falls back to the default curve silently. Ingest cost is per landing file (about 30 to 55 ms each, and the file count barely moves with the fleet size), not per row, which is why the small fleet is not much faster than the default one. The budget is 40 s for the default fleet, the hard limit enforced by `tests/test_cli_v2.py` is 60 s; `all --small` must stay under 20 s (enforced by two tests). `all --v01` runs the legacy v0.1 chain (`generate -> load -> ...`) on the v0.1 synthetic generator in about 6 s. Every command prints the governance banner once and then one timing line per step; `ingest` prints one report line per landing file.
+
+Commands and flags:
+
+```
+python -m restwert generate-lake [--seed 42] [--serials 5000] [--lake-dir data/lake] [--config config/lake.yaml] [--catalogue-dir data/catalogue] [--curves outputs/market_curves.csv] [--cadence yearly|quarterly|monthly]
+python -m restwert ingest        --source <feed key> --file <path> | --all [--lake-dir data/lake] [--dry-run] [--db data/restwert.duckdb]
+python -m restwert conform       [--as-of] [--db] [--csv-dir data/raw_csv] [--seed] [--docs|--no-docs]
+python -m restwert forecast      [--as-of YYYY-MM-DD] [--no-replay] [--no-backtest] [--db]
+python -m restwert pnl           [--as-of] [--db]
+python -m restwert timeline      [--as-of] [--db]
+python -m restwert ledger        [--as-of] [--db]
+python -m restwert levers        [--as-of] [--db] [--docs|--no-docs]
+python -m restwert decide        [--as-of] [--db] [--docs|--no-docs]
+python -m restwert kpis          [--as-of] [--db] [--catalogue] [--docs|--no-docs]
+python -m restwert contracts     [--as-of] [--db]
+python -m restwert export        [--db] [--out outputs] [--fmt csv|parquet|both] [--lake] [--lake-dir data/lake]
+python -m restwert all           [--seed] [--serials N] [--cadence] [--as-of] [--db] [--out outputs] [--csv-dir data/raw_csv] [--lake-dir data/lake] [--small] [--keep-db] [--v01] [--docs|--no-docs]
+python -m restwert market        [--as-of] [--out outputs] [--catalogue-dir data/catalogue] [--anchors-dir data/anchors]
+python -m restwert generate | load   (v0.1 generator and loader, unchanged)
+python -m restwert dashboard     [--db]
+```
+
+`--as-of` defaults to `config/lake.yaml` `as_of` on a lake database, to the generator's `as_of` on a v0.1 synthetic database, otherwise to today. `all` deletes an existing database file and the GENERATED landing files under `<lake-dir>/raw` first unless `--keep-db` is given: the immutable tables would otherwise carry state from an older seed, and landing files of an older fleet would be ingested next to the new ones. Only files whose first line is `# SYNTHETIC DATA` or `# PUBLIC DATA` are removed and the count is printed; a real export in the landing layer blocks the run and is named, unless `--wipe-raw` says to remove it on purpose (`generate-lake` applies the same rule to the feed folders). `--lake-dir` defaults to `data/lake` when `--csv-dir` is the default and to `<csv-dir>/../lake` otherwise, so a run into a scratch directory never touches `data/`. The generated documents (`docs/DATA_MODEL.md`, `docs/DATA_LAKE.md`, `docs/DECISION_RULES.md`, `docs/KPI_CATALOGUE.md`, `docs/GOLD_KPIS.md`, `docs/LEVERS.md`) are rewritten **only on the default database and output directory**; `--docs` forces it, `--no-docs` suppresses it.
+
+The dashboard can also be started directly: `streamlit run restwert/dashboard/app.py -- --db data/restwert.duckdb`. It navigates two groups: **Cycle** (Realisation, 0 Data to 7 Contracts, one question per page, at most four tiles, one chart, one table, everything else folded away) and **Engine** (the v0.1 pages Overview, Residual value curves, Inventory, Decision queue, Contracts (v0.1), Export). The two headline tiles, lifecycle margin per device and residual value forecast error, sit in the sidebar so they show on every page.
+
+## 4. The data lake
+
+```
+data/lake/raw/<system>/<feed>/<YYYY-MM-DD>_<feed>_<seq>.csv   landing files, one per delivery, never modified after landing
+   --ingest-->   bronze.<system>_<feed>     typed, deduplicated, keyed; bronze.deliveries and bronze.unresolved
+   --conform-->  main.<ten v0.1 tables>     the v0.1 engine runs unchanged on top
+   --ledger-->   silver.ledger_lines, silver.serial_timeline, silver.device_ledger, silver.reconciliation, silver.contracts
+   --levers, contracts, gold-->  gold.*     cohorts, levers, coverage, the 14 gold KPIs
+```
+
+One DuckDB file (`data/restwert.duckdb`) holds three schemas `bronze`, `silver`, `gold` next to the v0.1 tables in `main`; `export --lake` writes parquet mirrors under `data/lake/{bronze,silver,gold}/` for readers without DuckDB (mirrors, never the source of truth). Nineteen feeds are defined as source contracts in [docs/DATA_LAKE.md](docs/DATA_LAKE.md) (rendered from `restwert.lake.feeds.FEEDS`): which system delivers it, required columns and types, business key, which parent table a key resolves against and the reason code when it does not.
+
+| feed | delivering system | key |
+|---|---|---|
+| `catalogue/models`, `catalogue/variants`, `market/curves` | public reference copies | slug, (slug, spec), (group_kind, group, population) |
+| `contracts/register` | contract lifecycle management | contract_id |
+| `erp/purchase_orders`, `erp/po_lines`, `erp/goods_receipts`, `erp/supplier_invoices`, `erp/price_changes` | ERP | po_number, (po_number, po_line), serial (minted here), (invoice_number, invoice_line), change_id |
+| `wms/staging_log`, `wms/shipments` | warehouse and staging | staging_id, shipment_id |
+| `portal/rental_contracts`, `portal/rental_invoices` | customer portal | contract_id, invoice_id |
+| `servicedesk/tickets` | incident and repair tickets | ticket_id |
+| `returns/receipts` | returns desk (grading, wipe certificate) | receipt_id |
+| `refurb/work_orders` | refurbishment partner | work_order_id |
+| `recommerce/orders`, `recommerce/credit_notes` | resale channels | order_id, credit_note_id |
+| `finance/indirect_spend` | finance | spend_id |
+
+Rules of the door: a serial is minted by `erp/goods_receipts` and every later serial-level row must resolve against it (`unknown_serial` otherwise, never auto-created); `(source_system, external_ref)` is the business key of every bronze row and `silver.ledger_lines.source_ref = "<system>:<external_ref>"` traces every euro to one landing line; the same file twice is a no-op (sha256), the same key with a different content is a `duplicate_conflict` in `bronze.unresolved` and the first delivery stays. `python -m restwert ingest --source erp/goods_receipts --file <path> --dry-run` reports read, new, duplicate and unresolved counts and writes nothing. The generator injects defects on purpose (serial typos, repeated rows, conflicting rows, missing credit notes, orphan freight lines) so the unresolved path is exercised on every run; `bronze.unresolved` is never empty on the shipped fleet and the Data page lists it first.
+
+The timestamp chain per serial (ordered, received, staged, shipped, returned, wiped, graded, sellable, sold, credited) is a first-class output (`silver.serial_timeline`) with a data quality KPI: the share of serials whose chain is complete for their lifecycle status (a rented device is complete with four steps, a sold device needs all ten).
+
+## 5. The cycle, page by page
+
+**0 Data.** Tiles: landing files ingested, bronze rows, unresolved share (`KPI_DATA_UNRESOLVED_SHARE = sum(n_unresolved) / sum(rows_read)`), complete chains (`KPI_DATA_CHAIN_COMPLETE`). Folded: unresolved rows by reason with the raw row, the chain quality heatmap, the reconciliation failures between the ledger and the v0.1 `device_pnl` (zero on the shipped fleet), the source contracts table.
+
+**1 Purchase.** Per serial: purchase order, supplier (manufacturer or reseller), unit price, discount vs the net launch RRP, freight and duty allocated to the cent per received unit of the PO line, landed cost, contract reference, price protection window and claim status. VAT: the catalogue RRP is gross, every ledger amount is net, `rrp_net = round(rrp / (1 + vat_rate), 2)` with `vat_rate` owned by the CFO. A price protection credit received is a purchase price reduction in every purchase metric (discount, landed cost vs RRP, lever L01); the ledger keeps it as its own line with its source reference. `KPI_PUR_DISCOUNT_VS_RRP = 1 - sum(purchase_price - credit) / sum(rrp_net)` over the trailing 12 months; `KPI_PUR_LANDED_VS_RRP`; `KPI_PUR_PRICE_PROTECTION_CAPTURE = credited / (credited + missed)`.
+
+**2 TCO.** Fifteen line types per serial in `silver.ledger_lines`, signed (revenue positive, cost negative): purchase price, freight, duty, staging, outbound shipping, rental revenue, repair, replacement logistics, return logistics, wipe and grading, refurbishment, holding cost, resale gross, channel fee, price protection credit. TCO is a sum of lines, never a rate applied to a total where a transaction exists; the only rate is holding cost, booked per stock phase (inbound: goods receipt to shipment; return: return receipt to sellable; sale: sellable to sold; `days x holding_cost_per_day_eur`, `is_estimate = true`, owner CFO). The channel fee is an estimate until the credit note arrives and the PO price until the unit invoice arrives, flagged the same way; `tco_transactional_eur = tco_eur - every flagged estimate` sits beside `tco_eur` so the estimate share is visible (`KPI_TCO_ESTIMATE_SHARE`). Formulas and a hand-summed example: [docs/LEDGER.md](docs/LEDGER.md). The deposited definition of what is in the TCO, what is out and what is still missing (support and MDM operations per device-month): [docs/TCO_DEFINITION.md](docs/TCO_DEFINITION.md).
+
+**3 Residual estimate.** For every rented serial: `estimate_rv_lease_end = purchase_price x grid(model, expected grade at return, months since launch at lease end + expected return-to-sale days)` from the fleet forecast of record, next to `anchor_rv_lease_end` from the public marketplace curve of the same family and manufacturer (`outputs/market_curves.csv`, an ask and therefore an upper bound, NULL outside the anchor age range). The fleet model decides; the anchor advises and never enters a result, a rule or a lever. `KPI_RES_ESTIMATE_VS_ANCHOR` compares the two on the same serials.
+
+**4 Resale.** Realised: grade at inspection, refurbishment cost, channel, gross price, fees from the credit note, credit note date, days from return to cash. `KPI_RSL_REALISED_VS_RECORD = sum(resale_gross) / sum(estimate_rv_of_record)` on non-as-is sales of the trailing 12 months, the record being the forecast in force before the return date; `KPI_RSL_DAYS_RETURN_TO_CASH` is the median.
+
+**5 Result.** Closed cycles (sold or scrapped): `lifecycle_result_eur = SUM(amount_eur) = rental_revenue + realised_rv + price_protection_credit - landed_cost - (staging + outbound + service + return + wipe_grading + refurbishment + holding + channel_fee)` (booked lines plus the flagged estimates: holding cost per stock phase and, until the credit note arrives, the channel fee), reconciled to the cent with the v0.1 `device_pnl.lifecycle_margin` through the bridge `lifecycle_result_eur = result_v01_basis_eur - (staging + outbound_shipping + wipe_grading + holding_cost) + price_protection_credit`. Open cycles carry two numbers that are never summed: `result_if_liquidated_today` (lines to date plus today's estimate net of marketplace fees) and `result_projected_at_lease_end` (lines to date plus remaining contracted rent plus the estimate at lease end minus the expected remaining cost; its holding term uses the same stock phases the ledger books, minus the days already booked). Per cohort (purchase month and quarter, manufacturer, catalogue family, model family, term, channel, supplier role, customer) in `gold.result_by_cohort`, closed and open columns in separate blocks; no column anywhere is called `result_total` (tested).
+
+**6 Levers.** `gold.levers_summary` is the where-to-tighten table: per lever the EUR per device, the EUR per year on the fleet (trailing 12 months), that sum as a share of the lever's own basis (the landed cost of the same purchases, or the absolute closed result of the same serials; never one denominator for all seven), the threshold key and value with its owner, the rule or advisory that reacts, and the assumption the arithmetic rests on with its owner (`reference_key`, `reference_owner`). Each lever is actual minus a named reference on one ledger component, deterministic arithmetic, no model: L01 purchase discount (net of price protection credits) vs the fleet's own p75 (R07, Head of Procurement), L02 price protection claimable but missed (R05, Category Manager Hardware), L03 channel choice, the best admissible channel minus the channel used, both at the estimate of record so the lever is zero when the best channel was used (R02, Head of Recommerce; the record-vs-realised gap is forecast accuracy and stays on the Resale page), L04 grade and repair vs the forecast grid, read only where the grid orders the grades and neither grade is unsupported (R01, Head of Service Operations), L05 aging beyond `expected_return_to_sale_days` (owner Head of Recommerce; R03 and `aging_days_90` react to aged stock), L06 manufacturer mix vs the family realisation median (ADV03, Category Manager Hardware), L07 term length per month of term vs the other term, counted once per cohort as a policy comparison (ADV04, CFO). L01 and L02 are additive and their identity is checked against `silver.ledger_lines` on every run; the others are references and do not add up, and the page says so. Formulas and worked examples: [docs/LEVERS.md](docs/LEVERS.md).
+
+**7 Contracts.** Register v2 (`silver.contracts`): counterparties by role with the ten manufacturer names and role-only names for every other party; per contract category, start, end, notice days, auto renewal, price protection days and claim window, warranty, rebate tiers, volume commitment, payment terms, SLA fields, planned and actual spend, status, notice deadline and `action_required`. Coverage KPI per manufacturer (`KPI_CTR_COVERAGE_BY_OEM`: received unit value on a contract in force over all received unit value, a reseller PO for Apple devices counting as Apple spend), renewal calendar v2, rebate progress, open price protection windows. Columns and the window-vs-claim-window distinction: [docs/CONTRACTS.md](docs/CONTRACTS.md).
+
+## 6. Governance in code
+
+* **Thresholds have owners and a validity date that is enforced.** Every entry in `config/thresholds.yaml` has `value` or `values` (per family, channel or manufacturer), `unit`, `owner`, `rationale`, `valid_from`, `placeholder_default` and `rule_ids`; `Thresholds.get(key, sub, as_of)` refuses a threshold not yet in force. v0.2 adds `purchase_discount_floor_pct` per manufacturer (R07), `oem_realisation_gap_pct` (ADV03), `term_result_gap_alert_eur` (ADV04) and the `tablet_like` family everywhere; `config/assumptions.yaml` adds `vat_rate` and `lever_reference_min_n`.
+* **Rules R01 to R07.** Repair vs residual value (R01), channel choice (R02), aging write-down (R03), replacement (R04), price protection claim (R05), renewal notice (R06) and, new, the purchase discount floor (R07: a PO line whose discount vs net launch RRP is below the manufacturer's floor is queued with the value at stake). Every decision is a `DecisionRecord` with rule, version, subject, outcome, threshold key, value, unit, owner, the inputs read and an input hash; the log is append-only and a rerun appends zero rows. Generated: [docs/DECISION_RULES.md](docs/DECISION_RULES.md).
+* **Advisories are heard, never obeyed.** ADV01 sell before launch, ADV02 recalibrate the forecast, ADV03 manufacturer mix, ADV04 term gap: each is a queue row at priority 3 addressed to the human who owns the threshold; a test calls every rule with and without an advisory and asserts the outcome is identical.
+* **Levers reference the thresholds.** Every lever names the threshold of the rule or advisory that reacts, its owner, and the assumption its own arithmetic rests on with that owner; the summary never carries a total row, the per-device table flags additivity, and a break in the additivity identity (rebuilt from `silver.ledger_lines`) fails the run.
+* **KPIs.** The v0.1 registry stays at 20 KPIs in five areas ([docs/KPI_CATALOGUE.md](docs/KPI_CATALOGUE.md)); the 14 gold KPIs of the cycle pages live in their own registry with definition, formula, source tables, direction and owner ([docs/GOLD_KPIS.md](docs/GOLD_KPIS.md)); their minimum sample sizes live in `config/kpi_targets.yaml` (`min_n`, owner CFO placeholder): below `min_n` the value is stored but flagged `not_measurable` and the tile reads n/a with the reason.
+
+## 7. Mock data
+
+`python -m restwert generate-lake` draws the fleet from the real catalogue (`data/catalogue/models.csv`, `variants.csv`: 208 usable models with a launch date and a priced variant; the excluded ones are listed in `data/lake/SYNTHETIC.md`), by family mix and manufacturer share from `config/lake.yaml`, picks the model by generation (the window hangs on the newest launch of the manufacturer and family on or before the order date, not on the order date: every slug launched inside the last `generation_window_months` up to that newest launch is the current generation and is drawn uniformly with `newest_model_share`; the window before it is the previous generation, drawn with `previous_generation_share`; the rest is older; so an iPhone Plus launched three weeks after the Pro models is bought alike, not skipped, and a generation that launched long before the order stays one set instead of its latest slug taking the whole share), draws the contract term from the family's `term_mix` (12, 24, 36 or 48 months, placeholder shares) and scales the monthly rate by `term_rate_factor` (24 months = 1.0; a short term recovers more per month, a long term less; placeholder factors), buys 40 percent direct from the manufacturer and 60 percent through two role-only resellers with discount bands per manufacturer, invoices freight per PO line and duty on one reseller, and then reuses the v0.1 builders for rentals, damage events and refurbishment. Resale prices come from a truth curve calibrated to the public marketplace curve of the same family and manufacturer where the public fit is `ok`, else the family curve, else a documented default: capped at 90 percent of RRP for young devices, hair-cut by 0.85 from ask to realised, channel multipliers, log-normal noise, grade D at a documented offset. Contracts come from the counterparty list of section 2 with placeholder terms. Defects are injected at documented rates. Everything is seeded and reproducible (byte-identical landing files for the same seed), split into quarterly deliveries with no leakage (no timestamp in a file later than its delivery date), and described in `data/lake/SYNTHETIC.md` (also copied to `data/SYNTHETIC.md`).
+
+## 8. The v0.1 engine underneath
+
+The ten v0.1 source tables are materialised in `main` by the deterministic `conform` step from bronze (same DDL), so forecast, P&L, decisions, KPIs, contracts, export and the 256 v0.1 tests run unchanged; `conform` also writes them as `data/raw_csv/<table>.csv` compat copies that `python -m restwert load` accepts. `device_pnl` stays the v0.1 computation and `silver.reconciliation` proves that the ledger and `device_pnl` agree to the cent on every serial (landed cost, purchase price, months billed, rental revenue, repair, logistics, refurbishment, fees, realised residual value, margin on the v0.1 basis); the ledger run refuses to finish on a mismatch. The forecaster is unchanged and gains a fourth family, `tablet_like` (Smartphone + Apple -> `iphone_like`, Smartphone + other -> `android_like`, Tablet -> `tablet_like`, Laptop -> `laptop_like`); the v0.1 forecast, backtest, error series and public anchors are described in [docs/SPEC.md](docs/SPEC.md) and stay valid.
+
+## 9. Limitations (honest)
+
+* **Synthetic realisation is a design consequence.** The truth is calibrated to public refurbisher asks, hair-cut and capped by design parameters with owners. A synthetic realisation near the public curve says nothing about a real fleet; the anchor is labelled "ask, upper bound" everywhere and no test treats it as validation.
+* **Launch steps count segment intensity, not series successors.** `n_launches_since` counts catalogue launches of the forecast segment; `config/lake.yaml` sets the calendar cadence per segment to the catalogue's observed rate so past and projected counts share one scale. Series-scoped launch steps are a v0.3 item.
+* **Holding cost is a rate.** The only rate in the ledger (`days x holding_cost_per_day_eur` per stock phase, owner CFO), flagged on every line; with the channel fee before its credit note and the PO price before its unit invoice it forms the estimate share of TCO, shown per cohort and as `KPI_TCO_ESTIMATE_SHARE`.
+* **Anchor curves are asks.** Marketplace asks contain the refurbisher's margin; trade-in bids are the floor; a provider's own realisation lies between them and is measured in the fleet model, not here.
+* **Levers do not add up.** L01 and L02 are additive on the purchase side; L03 to L07 are references against named fleet rows and overlap by construction; the summary never carries a total row and no column relates a lever to the fleet's loss as if it explained it. L07 compares contract terms per month of term and is counted once per cohort: a policy comparison, not money per device.
+* **Two open numbers, never one.** "If liquidated today" and "projected at lease end" answer different questions; they are separate columns and tiles and are never summed with each other or with the closed result.
+* **Reconciliation by construction.** The ledger and `device_pnl` are two computations on one bronze layer; hand-computed fixtures (the ten-line serial, cent allocation, billing dates on clamped starts) assert absolute numbers so a shared bug cannot hide behind agreement.
+* **Ingest is file-bound.** About 55 ms per landing file on the author's machine, dominated by per-file typing and the column-by-column frame preparation in `db.write_df`; a fleet with monthly deliveries triples the file count and the ingest time.
+* **Survivorship, marketplace baseline, book value as a management view, full-month billing, one refurbishment per serial**: the v0.1 limitations still hold (see [docs/SPEC.md](docs/SPEC.md)).
+* **Owners are role placeholders** (`CFO (name)`). Every threshold and assumption is a placeholder until a named person signs it.
+
+## 10. Plugging in real feeds
+
+1. Export each source system as it is into `data/lake/raw/<system>/<feed>/<YYYY-MM-DD>_<feed>_<seq>.csv` with the columns of [docs/DATA_LAKE.md](docs/DATA_LAKE.md), ISO dates and timestamps, a dot decimal, no `#` header line, and `is_synthetic = false` on every row (the reader refuses a file without the column). Do NOT run `python -m restwert all` on such a landing layer: `all` regenerates the synthetic fleet and empties `raw/` first; it refuses when a file without the `# SYNTHETIC DATA` / `# PUBLIC DATA` first line is present and names it (only `--wipe-raw` overrides that). Real feeds go through the individual steps below.
+2. `python -m restwert ingest --all --dry-run` reports counts, duplicates and unresolved rows per file (on a missing database file the dry run works in memory and creates nothing); fix the source rather than the check, then `ingest --all` for real. A re-delivery is a new file; the same file twice is a no-op; an unresolved row that a new file carries again is listed once per delivery.
+3. `conform`, `forecast`, `pnl`, `timeline`, `ledger`, `levers`, `decide`, `contracts`, `kpis`, `export --lake`, all with `--as-of` set to your valuation date (on real data the default is today; `ingest --as-of` stamps the same date on `gold.ingest_summary`).
+4. Replace the placeholders in `config/thresholds.yaml`, `config/assumptions.yaml` (VAT rate, planned residual value ratios, channel fees and days to cash, expected grades, fallback costs, holding cost per day, `lever_reference_min_n`), `config/lake.yaml` `families` (the launch calendar is used by the forecast even on real data) and `config/kpi_targets.yaml` (targets and the `min_n` per gold KPI), each with a named owner and a real `valid_from`.
+5. `bronze.unresolved` and `gold.chain_quality` tell you what the source systems did not deliver; `silver.reconciliation` tells you when the ledger and the P&L disagree.
+
+## 11. Disclosure and licence
+
+This repository was written with AI assistance (Claude Code by Anthropic) from frozen human-written specifications (`docs/SPEC.md`, `docs/SPEC_v0.2.md`); a human reviewed the design, the formulas and the tests. Nothing here is advice; every number on synthetic data is a design parameter, and the public catalogue and anchors carry their sources.
+
+Licence: MIT.

@@ -1,0 +1,122 @@
+# Decision thresholds for the Restwert Engine (spec section 6.1).
+#
+# THE MODEL ADVISES, DETERMINISTIC CODE DECIDES, A NAMED HUMAN OWNS EVERY THRESHOLD.
+#
+# Every key carries an owner (a named role, placeholder "(name)" until a real person signs),
+# a rationale, a valid_from date and a placeholder_default flag. placeholder_default: true means
+# the value is a synthetic design parameter with no external source; it is NOT a market benchmark.
+# Loaded by restwert.config.load_thresholds, which raises when owner or valid_from is missing.
+# valid_from is enforced: Thresholds.get(key, sub, as_of) refuses a threshold whose valid_from lies
+# after the decision as_of, and every decision record carries threshold_valid_from. The synthetic
+# placeholders are dated 2026-01-01 so they are in force on the generator's as_of (2026-09-13).
+version: 1
+thresholds:
+  repair_max_share_of_rv:
+    values: {iphone_like: 0.40, android_like: 0.35, laptop_like: 0.45, tablet_like: 0.38}
+    unit: ratio
+    owner: "Head of Service Operations (name)"
+    rationale: "placeholder, no external source: repair only when the quote is at most this share of the forecast residual value after repair"
+    valid_from: 2026-01-01
+    placeholder_default: true
+    rule_ids: [R01]
+  repair_min_rv_eur:
+    values: {iphone_like: 60, android_like: 40, laptop_like: 120, tablet_like: 60}
+    unit: EUR
+    owner: "Head of Recommerce (name)"
+    rationale: "placeholder: below this forecast value a repair is never worth the handling"
+    valid_from: 2026-01-01
+    placeholder_default: true
+    rule_ids: [R01]
+  channel_min_net_uplift_eur:
+    value: 15
+    unit: EUR
+    owner: "Head of Recommerce (name)"
+    rationale: "placeholder: a slower channel must beat the fastest channel's net by at least this to be chosen"
+    valid_from: 2026-01-01
+    placeholder_default: true
+    rule_ids: [R02]
+  channel_max_days_to_cash:
+    value: 60
+    unit: days
+    owner: "CFO (name)"
+    rationale: "placeholder: channels slower than this are not considered"
+    valid_from: 2026-01-01
+    placeholder_default: true
+    rule_ids: [R02]
+  as_is_only_grade:
+    value: "D"
+    unit: grade
+    owner: "Head of Recommerce (name)"
+    rationale: "grade D devices are sold As Is only; other grades never go As Is"
+    valid_from: 2026-01-01
+    placeholder_default: true
+    rule_ids: [R02]
+  employee_buyout_window_days:
+    value: 60
+    unit: days
+    owner: "Head of Customer Success (name)"
+    rationale: "placeholder: employee buyout only within this many days after the rental contract ended"
+    valid_from: 2026-01-01
+    placeholder_default: true
+    rule_ids: [R02]
+  aging_days_90:            {value: 90,   unit: days,  owner: "CFO (name)", rationale: "first aging bucket", valid_from: 2026-01-01, placeholder_default: true, rule_ids: [R03]}
+  aging_days_180:           {value: 180,  unit: days,  owner: "CFO (name)", rationale: "second aging bucket", valid_from: 2026-01-01, placeholder_default: true, rule_ids: [R03]}
+  age_write_down_pct_90:    {value: 0.10, unit: ratio, owner: "CFO (name)", rationale: "placeholder: write-down share of book value after bucket 1", valid_from: 2026-01-01, placeholder_default: true, rule_ids: [R03]}
+  age_write_down_pct_180:   {value: 0.25, unit: ratio, owner: "CFO (name)", rationale: "placeholder: cumulative write-down share after bucket 2", valid_from: 2026-01-01, placeholder_default: true, rule_ids: [R03]}
+  replacement_max_months_since_launch:
+    values: {iphone_like: 24, android_like: 24, laptop_like: 36, tablet_like: 30}
+    unit: months
+    owner: "Head of Service Operations (name)"
+    rationale: "placeholder: a replacement must not be older than this relative to launch"
+    valid_from: 2026-01-01
+    placeholder_default: true
+    rule_ids: [R04]
+  replacement_min_storage_gb:
+    values: {iphone_like: 128, android_like: 128, laptop_like: 256, tablet_like: 128}
+    unit: GB
+    owner: "Head of Service Operations (name)"
+    rationale: "placeholder: minimum storage for the replacement pool"
+    valid_from: 2026-01-01
+    placeholder_default: true
+    rule_ids: [R04]
+  replacement_requires_wipe:
+    value: true
+    unit: bool
+    owner: "Data Protection Officer (name)"
+    rationale: "a device without a wipe certificate never goes back to a customer"
+    valid_from: 2026-01-01
+    placeholder_default: false
+    rule_ids: [R04]
+  price_protection_reminder_days: {value: 14,  unit: days, owner: "Category Manager Hardware (name)", rationale: "placeholder: remind when the claim window closes within this many days", valid_from: 2026-01-01, placeholder_default: true, rule_ids: [R05]}
+  price_protection_min_claim_eur: {value: 500, unit: EUR,  owner: "Category Manager Hardware (name)", rationale: "placeholder: claims below this are not worth the paperwork", valid_from: 2026-01-01, placeholder_default: true, rule_ids: [R05]}
+  renewal_alert_lead_days:  {value: 60,     unit: days, owner: "Head of Procurement (name)", rationale: "placeholder: alert this many days before the notice deadline", valid_from: 2026-01-01, placeholder_default: true, rule_ids: [R06]}
+  renewal_high_value_eur:   {value: 250000, unit: EUR,  owner: "CFO (name)", rationale: "placeholder: contracts above this escalate", valid_from: 2026-01-01, placeholder_default: true, rule_ids: [R06]}
+  rental_notice_days:       {value: 90,     unit: days, owner: "Head of Customer Success (name)", rationale: "placeholder: notice period assumed for rental contracts", valid_from: 2026-01-01, placeholder_default: true, rule_ids: [R06]}
+  sell_before_launch_lookahead_days: {value: 90,   unit: days,  owner: "Head of Recommerce (name)", rationale: "advisory only: look this far ahead for the next launch", valid_from: 2026-01-01, placeholder_default: true, rule_ids: [ADV01]}
+  sell_before_launch_min_drop_pct:   {value: 0.08, unit: ratio, owner: "Head of Recommerce (name)", rationale: "advisory only: minimum forecast drop to raise the advisory", valid_from: 2026-01-01, placeholder_default: true, rule_ids: [ADV01]}
+  forecast_recalibration_bias_pct:   {value: 0.08, unit: ratio, owner: "Head of Recommerce (name)", rationale: "advisory only: trailing 3-month bias beyond this asks a human to review the model", valid_from: 2026-01-01, placeholder_default: true, rule_ids: [ADV02]}
+  # v0.2 (spec section 3.6, module levers): R07 and the two lever advisories
+  purchase_discount_floor_pct:
+    values: {Apple: 0.06, Samsung: 0.15, Google: 0.12, Motorola: 0.18, Fairphone: 0.04, "HMD Global (Nokia)": 0.18, Lenovo: 0.18, Dell: 0.18, HP: 0.18, Microsoft: 0.10}
+    unit: ratio
+    owner: "Head of Procurement (name)"
+    rationale: "placeholder, no external source: a PO line whose discount vs net launch RRP is below the manufacturer's floor is queued for review"
+    valid_from: 2026-01-01
+    placeholder_default: true
+    rule_ids: [R07]
+  oem_realisation_gap_pct:
+    value: 0.05
+    unit: ratio
+    owner: "Category Manager Hardware (name)"
+    rationale: "advisory only: a manufacturer whose realised residual value share trails its catalogue family by more than this over the trailing 12 months asks the category manager to review the allocation"
+    valid_from: 2026-01-01
+    placeholder_default: true
+    rule_ids: [ADV03]
+  term_result_gap_alert_eur:
+    value: 50
+    unit: EUR
+    owner: "CFO (name)"
+    rationale: "advisory only: when the best contract term (of 12, 24, 36, 48) closes better than another term of the same segment and purchase half-year by at least this per device (lever L07: the widest scaled gap in the cohort, per-month gap times that term's months), the term policy is reviewed"
+    valid_from: 2026-01-01
+    placeholder_default: true
+    rule_ids: [ADV04]

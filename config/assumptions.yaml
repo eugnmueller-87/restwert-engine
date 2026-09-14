@@ -1,0 +1,85 @@
+# Restwert Engine: forward-looking assumptions (spec section 4.5, owned by module pnl).
+#
+# THE MODEL ADVISES, DETERMINISTIC CODE DECIDES, A NAMED HUMAN OWNS EVERY THRESHOLD.
+#
+# Every block carries an owner. Every number here is a placeholder design parameter
+# chosen for the synthetic prototype. None of them quotes an external market source.
+# Replace the "(name)" placeholders with real people before this file governs real money.
+version: 1
+blocks:
+  planned_rv_ratio:
+    owner: "CFO (name)"
+    values: {iphone_like: 0.20, android_like: 0.10, laptop_like: 0.15, tablet_like: 0.15}
+    note: "placeholder, management view of the planned residual value share of landed cost, not IFRS 16 / HGB; tablet_like is a placeholder copied from the neighbouring families (v0.2)"
+  depreciation_months:
+    owner: "CFO (name)"
+    values: {iphone_like: 36, android_like: 36, laptop_like: 36, tablet_like: 36}
+    note: "placeholder, straight-line horizon from landed cost down to planned residual value; tablet_like is a placeholder copied from the neighbouring families (v0.2)"
+  holding_cost_per_day_eur:
+    owner: "CFO (name)"
+    value: 0.30
+    note: "placeholder cost of capital plus storage per device-day"
+  channel_fees:
+    owner: "Head of Recommerce (name)"
+    values:
+      employee_buyout: {fee_pct: 0.00, fee_fixed_eur: 0.0, days_to_cash: 14}
+      marketplace: {fee_pct: 0.12, fee_fixed_eur: 2.50, days_to_cash: 28}
+      b2b_wholesale: {fee_pct: 0.03, fee_fixed_eur: 0.0, days_to_cash: 45}
+      as_is: {fee_pct: 0.05, fee_fixed_eur: 0.0, days_to_cash: 30}
+    note: "placeholder fee and time-to-cash structure per resale channel"
+  expected_grade_at_return:
+    owner: "Head of Recommerce (name)"
+    values: {iphone_like: B, android_like: B, laptop_like: B, tablet_like: B}
+    note: "placeholder grade assumed for devices that have not been inspected yet; tablet_like is a placeholder copied from the neighbouring families (v0.2)"
+  expected_return_to_sale_days:
+    owner: "Head of Recommerce (name)"
+    values: {iphone_like: 30, android_like: 35, laptop_like: 40, tablet_like: 35}
+    note: "placeholder days from return to sale, used to place the forecast target date; tablet_like is a placeholder copied from the neighbouring families (v0.2)"
+  as_is_ratio_fallback:
+    owner: "Head of Recommerce (name)"
+    values: {iphone_like: 0.10, android_like: 0.08, laptop_like: 0.10, tablet_like: 0.09}
+    note: "placeholder As Is value share of purchase price when fewer than 10 As Is sales exist; tablet_like is a placeholder copied from the neighbouring families (v0.2)"
+  expected_grade_mix:
+    owner: "Head of Recommerce (name)"
+    values: {A: 0.35, B: 0.40, C: 0.20, D: 0.05}
+    note: "placeholder expected grade mix at return"
+  damage_rate_pa_fallback:
+    owner: "Head of Service Operations (name)"
+    values: {iphone_like: 0.10, android_like: 0.11, laptop_like: 0.08, tablet_like: 0.07}
+    note: "placeholder damages per rented device-year when realised data is too thin; tablet_like is a placeholder copied from the neighbouring families (v0.2)"
+  repair_share_fallback:
+    owner: "Head of Service Operations (name)"
+    values: {iphone_like: 0.70, android_like: 0.65, laptop_like: 0.75, tablet_like: 0.60}
+    note: "placeholder share of damages that end in a repair instead of a replacement; tablet_like is a placeholder copied from the neighbouring families (v0.2)"
+  repair_cost_fallback_eur:
+    owner: "Head of Service Operations (name)"
+    values: {iphone_like: 150, android_like: 110, laptop_like: 220, tablet_like: 140}
+    note: "placeholder mean repair cost per repair; tablet_like is a placeholder copied from the neighbouring families (v0.2)"
+  refurb_cost_fallback_eur:
+    owner: "Head of Recommerce (name)"
+    values: {iphone_like: 40, android_like: 35, laptop_like: 60, tablet_like: 40}
+    note: "placeholder mean refurbishment cost per returned device; tablet_like is a placeholder copied from the neighbouring families (v0.2)"
+  logistics_cost_fallback_eur:
+    owner: "Head of Service Operations (name)"
+    values: {iphone_like: 12, android_like: 12, laptop_like: 18, tablet_like: 14}
+    note: "placeholder return plus replacement logistics cost per device lifecycle; tablet_like is a placeholder copied from the neighbouring families (v0.2)"
+  billing:
+    owner: "CFO (name)"
+    values: {pro_rata: false}
+    note: "v0.1 bills full months only so the arithmetic stays hand-checkable; pro_rata true is not implemented"
+  min_n_for_realised_inputs:
+    owner: "CFO (name)"
+    value: 30
+    note: "placeholder minimum row count before realised data replaces a fallback assumption in the TCO"
+  purchase_discount_pct:
+    owner: "Head of Procurement (name)"
+    value: 0.12
+    note: "placeholder share below manufacturer RRP that a volume buyer pays; used only by restwert.market to translate public realisation (vs RRP) into realisation vs purchase price. Not a fact about any provider."
+  vat_rate:
+    owner: "CFO (name)"
+    value: 0.19
+    note: "German standard VAT; the public catalogue RRP is gross, every ledger amount is net"
+  lever_reference_min_n:
+    owner: "CFO (name)"
+    value: 10
+    note: "placeholder minimum group size before a lever reference (fleet percentile or median) is used; below it the lever is not attributed"

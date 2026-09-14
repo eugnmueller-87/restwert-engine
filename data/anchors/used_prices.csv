@@ -1,0 +1,431 @@
+# PUBLIC DATA, researched 2026-09-13: every row carries a source URL; prices are gross EUR, Germany. No provider's number.
+slug,spec,condition,price_eur,source_url,date_seen,source_kind
+fairphone-4,128 GB,Sehr gut,389,https://www.refurbed.de/p/fairphone-4/,2026-09-13,refurbished-marktplatz
+fairphone-5,256 GB,Premium,549,https://www.refurbed.de/p/fairphone-5/,2026-09-13,refurbished-marktplatz
+google-pixel-7a,128 GB,Exzellent,199,https://www.refurbed.de/p/google-pixel-7a/,2026-09-13,refurbished-marktplatz
+google-pixel-8,128 GB,Sehr gut,249,https://www.refurbed.de/p/google-pixel-8/,2026-09-13,refurbished-marktplatz
+google-pixel-8,128 GB,Exzellent,253.99,https://www.refurbed.de/p/google-pixel-8/,2026-09-13,refurbished-marktplatz
+google-pixel-8,256 GB,Sehr gut,404.99,https://www.refurbed.de/p/google-pixel-8/,2026-09-13,refurbished-marktplatz
+google-pixel-8-pro,128 GB,Gut,339.9,https://www.refurbed.de/p/google-pixel-8-pro/,2026-09-13,refurbished-marktplatz
+google-pixel-8-pro,128 GB,Sehr gut,355.36,https://www.refurbed.de/p/google-pixel-8-pro/,2026-09-13,refurbished-marktplatz
+google-pixel-8-pro,256 GB,Gut,405,https://www.refurbed.de/p/google-pixel-8-pro/,2026-09-13,refurbished-marktplatz
+google-pixel-8a,128 GB,Sehr gut,219.9,https://www.refurbed.de/p/google-pixel-8a/,2026-09-13,refurbished-marktplatz
+google-pixel-9,128 GB,Gut,399,https://www.refurbed.de/p/google-pixel-9/,2026-09-13,refurbished-marktplatz
+google-pixel-9,128 GB,Sehr gut,426.99,https://www.refurbed.de/p/google-pixel-9/,2026-09-13,refurbished-marktplatz
+google-pixel-9,256 GB,Gut,502.99,https://www.refurbed.de/p/google-pixel-9/,2026-09-13,refurbished-marktplatz
+google-pixel-9-fold,512 GB,Exzellent,956.74,https://www.refurbed.de/p/google-pixel-9-pro-fold/,2026-09-13,refurbished-marktplatz
+google-pixel-9-pro,128 GB,Gut,478,https://www.refurbed.de/p/google-pixel-9-pro/,2026-09-13,refurbished-marktplatz
+google-pixel-9-pro,128 GB,Sehr gut,544.99,https://www.refurbed.de/p/google-pixel-9-pro/,2026-09-13,refurbished-marktplatz
+google-pixel-9-pro,256 GB,Gut,603.99,https://www.refurbed.de/p/google-pixel-9-pro/,2026-09-13,refurbished-marktplatz
+google-pixel-9-pro-xl,128 GB,Gut,525.24,https://www.refurbed.de/p/google-pixel-9-pro-xl/,2026-09-13,refurbished-marktplatz
+google-pixel-9-pro-xl,256 GB,Gut,533.99,https://www.refurbed.de/p/google-pixel-9-pro-xl/,2026-09-13,refurbished-marktplatz
+google-pixel-9-pro-xl,512 GB,Exzellent,822.99,https://www.refurbed.de/p/google-pixel-9-pro-xl/,2026-09-13,refurbished-marktplatz
+iphone-13-mini,128 GB,Gut,262,https://www.refurbed.de/p/iphone-13-mini/,2026-09-13,refurbished-marktplatz
+iphone-13-mini,256 GB,Sehr gut,343.99,https://www.refurbed.de/p/iphone-13-mini/,2026-09-13,refurbished-marktplatz
+iphone-13-mini,256 GB,Exzellent,349.16,https://www.refurbed.de/p/iphone-13-mini/,2026-09-13,refurbished-marktplatz
+iphone-14-plus,128 GB,Exzellent,364,https://www.refurbed.de/p/iphone-14-plus/,2026-09-13,refurbished-marktplatz
+iphone-14-plus,256 GB,Gut,418.99,https://www.refurbed.de/p/iphone-14-plus/,2026-09-13,refurbished-marktplatz
+iphone-14-plus,256 GB,Premium,485.99,https://www.refurbed.de/p/iphone-14-plus/,2026-09-13,refurbished-marktplatz
+iphone-14-pro,128 GB,Gut,464.99,https://www.refurbed.de/p/iphone-14-pro/,2026-09-13,refurbished-marktplatz
+iphone-14-pro,256 GB,Gut,480,https://www.refurbed.de/p/iphone-14-pro/,2026-09-13,refurbished-marktplatz
+iphone-14-pro,256 GB,Sehr gut,504,https://www.refurbed.de/p/iphone-14-pro/,2026-09-13,refurbished-marktplatz
+iphone-14-pro-max,128 GB,Gut,502.99,https://www.refurbed.de/p/iphone-14-pro-max/,2026-09-13,refurbished-marktplatz
+iphone-14-pro-max,256 GB,Gut,547.99,https://www.refurbed.de/p/iphone-14-pro-max/,2026-09-13,refurbished-marktplatz
+iphone-14-pro-max,256 GB,Sehr gut,655.99,https://www.refurbed.de/p/iphone-14-pro-max/,2026-09-13,refurbished-marktplatz
+iphone-15,128 GB,Sehr gut,394.68,https://www.refurbed.de/p/iphone-15/,2026-09-13,refurbished-marktplatz
+iphone-15,128 GB,Exzellent,430,https://www.refurbed.de/p/iphone-15/,2026-09-13,refurbished-marktplatz
+iphone-15,256 GB,Gut,510,https://www.refurbed.de/p/iphone-15/,2026-09-13,refurbished-marktplatz
+iphone-15-plus,128 GB,Gut,443.34,https://www.refurbed.de/p/iphone-15-plus/,2026-09-13,refurbished-marktplatz
+iphone-15-plus,128 GB,Exzellent,464.99,https://www.refurbed.de/p/iphone-15-plus/,2026-09-13,refurbished-marktplatz
+iphone-15-plus,512 GB,Premium,676.99,https://www.refurbed.de/p/iphone-15-plus/,2026-09-13,refurbished-marktplatz
+iphone-15-pro,128 GB,Sehr gut,589.99,https://www.refurbed.de/p/iphone-15-pro/,2026-09-13,refurbished-marktplatz
+iphone-15-pro,256 GB,Gut,619.99,https://www.refurbed.de/p/iphone-15-pro/,2026-09-13,refurbished-marktplatz
+iphone-15-pro,256 GB,Exzellent,674,https://www.refurbed.de/p/iphone-15-pro/,2026-09-13,refurbished-marktplatz
+iphone-15-pro-max,256 GB,Sehr gut,684.99,https://www.refurbed.de/p/iphone-15-pro-max/,2026-09-13,refurbished-marktplatz
+iphone-15-pro-max,512 GB,Gut,748.99,https://www.refurbed.de/p/iphone-15-pro-max/,2026-09-13,refurbished-marktplatz
+iphone-15-pro-max,1 TB,Premium,830.99,https://www.refurbed.de/p/iphone-15-pro-max/,2026-09-13,refurbished-marktplatz
+iphone-16,128 GB,Gut,600,https://www.refurbed.de/p/iphone-16/,2026-09-13,refurbished-marktplatz
+iphone-16,128 GB,Sehr gut,632.99,https://www.refurbed.de/p/iphone-16/,2026-09-13,refurbished-marktplatz
+iphone-16,256 GB,Exzellent,701.99,https://www.refurbed.de/p/iphone-16/,2026-09-13,refurbished-marktplatz
+iphone-16-plus,128 GB,Sehr gut,632.11,https://www.refurbed.de/p/iphone-16-plus/,2026-09-13,refurbished-marktplatz
+iphone-16-plus,128 GB,Exzellent,644,https://www.refurbed.de/p/iphone-16-plus/,2026-09-13,refurbished-marktplatz
+iphone-16-plus,256 GB,Sehr gut,711.99,https://www.refurbed.de/p/iphone-16-plus/,2026-09-13,refurbished-marktplatz
+iphone-16-pro,128 GB,Exzellent,709.79,https://www.refurbed.de/p/iphone-16-pro/,2026-09-13,refurbished-marktplatz
+iphone-16-pro,128 GB,Gut,729.99,https://www.clevertronic.de/kaufen/handy-kaufen/apple/iphone-16-pro,2026-09-13,refurbished-marktplatz
+iphone-16-pro,128 GB,Sehr gut,759.99,https://www.clevertronic.de/kaufen/handy-kaufen/apple/iphone-16-pro,2026-09-13,refurbished-marktplatz
+iphone-16-pro-max,256 GB,Gut,832.19,https://www.refurbed.de/p/iphone-16-pro-max/,2026-09-13,refurbished-marktplatz
+iphone-16-pro-max,256 GB,Sehr gut,850,https://www.refurbed.de/p/iphone-16-pro-max/,2026-09-13,refurbished-marktplatz
+iphone-16-pro-max,512 GB,Gut,906.84,https://www.refurbed.de/p/iphone-16-pro-max/,2026-09-13,refurbished-marktplatz
+iphone-16e,128 GB,Gut,430.93,https://www.refurbed.de/p/iphone-16e/,2026-09-13,refurbished-marktplatz
+iphone-16e,256 GB,Exzellent,480.99,https://www.refurbed.de/p/iphone-16e/,2026-09-13,refurbished-marktplatz
+iphone-16e,512 GB,Premium,565.99,https://www.refurbed.de/p/iphone-16e/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-a05s,4 GB / 64 GB,Sehr gut,149,https://www.refurbed.de/p/samsung-galaxy-a05s/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-a13,64 GB,Exzellent,130.5,https://www.refurbed.de/p/samsung-galaxy-a13/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-a14,4 GB / 64 GB,Sehr gut,149,https://www.refurbed.de/p/samsung-galaxy-a14-5g/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-a34,128 GB,Sehr gut,160.9,https://www.refurbed.de/p/samsung-galaxy-a34/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-a34,128 GB,Exzellent,187.99,https://www.refurbed.de/p/samsung-galaxy-a34/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-a34,256 GB,Gut,234.99,https://www.refurbed.de/p/samsung-galaxy-a34/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-a35,128 GB,Gut,198.91,https://www.refurbed.de/p/samsung-galaxy-a35-5g/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-a53,128 GB,Gut,171.15,https://www.refurbed.de/p/samsung-galaxy-a53-5g/23452c/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-a53,128 GB,Exzellent,198.99,https://www.refurbed.de/p/samsung-galaxy-a53-5g/23452c/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-a53,256 GB,Sehr gut,301.23,https://www.refurbed.de/p/samsung-galaxy-a53-5g/23452c/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-a54,128 GB,Exzellent,208.31,https://www.refurbed.de/p/samsung-galaxy-a54-5g/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-a55,256 GB,Sehr gut,249.99,https://www.refurbed.de/p/samsung-galaxy-a55-5g/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-a55,128 GB,Zustand auf Kategorieseite nicht angezeigt (refurbished),286.38,https://www.backmarket.de/de-de/c/samsung/samsung-galaxy-a55-5g,2026-09-13,refurbished-marktplatz
+samsung-galaxy-a55,256 GB,Zustand auf Kategorieseite nicht angezeigt (refurbished),302,https://www.backmarket.de/de-de/c/samsung/samsung-galaxy-a55-5g,2026-09-13,refurbished-marktplatz
+samsung-galaxy-a56,8 GB / 128 GB,Sehr gut,305.4,https://www.refurbed.de/p/samsung-galaxy-a56-5g/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-tab-a8,"32 GB Wi-Fi, dark gray",Verschiedene Zustände (ab),116.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader/samsung/galaxy-tab-a,2026-09-13,refurbished-marktplatz
+samsung-galaxy-tab-a8,"32 GB Wi-Fi, silver",Exzellent,142.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader/samsung/galaxy-tab-a,2026-09-13,refurbished-marktplatz
+samsung-galaxy-tab-a8,"64 GB 4G/LTE, dark gray",Gut,160,https://www.refurbed.de/p/samsung-glx-tab-a8-x200-205/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-tab-s6-lite,"64 GB Wi-Fi, oxford gray",Verschiedene Zustände (ab),178.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader/samsung/galaxy-tab-s,2026-09-13,refurbished-marktplatz
+samsung-galaxy-tab-s6-lite,"64 GB Wi-Fi, angora blue",Verschiedene Zustände (ab),180.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader/samsung/galaxy-tab-s,2026-09-13,refurbished-marktplatz
+samsung-galaxy-tab-s6-lite,"64 GB Wi-Fi + 4G, oxford gray",Verschiedene Zustände (ab),190.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader/samsung/galaxy-tab-s,2026-09-13,refurbished-marktplatz
+samsung-galaxy-tab-s8,"128 GB Wi-Fi, graphite",Verschiedene Zustände (ab),372.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader-samsung-galaxy-tab-s8,2026-09-13,refurbished-marktplatz
+samsung-galaxy-tab-s8,"128 GB Wi-Fi, silver",Exzellent,435.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader-samsung-galaxy-tab-s8,2026-09-13,refurbished-marktplatz
+samsung-galaxy-tab-s8,"256 GB Wi-Fi + 5G, silver",Gut,451.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader-samsung-galaxy-tab-s8,2026-09-13,refurbished-marktplatz
+samsung-galaxy-tab-s8-ultra,"512 GB Wi-Fi, graphite",Gut,611.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader-samsung-galaxy-tab-s8,2026-09-13,refurbished-marktplatz
+samsung-galaxy-tab-s8-ultra,"128 GB Wi-Fi + 5G, graphite",Exzellent,565.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader-samsung-galaxy-tab-s8,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-a9,"64 GB 4G/LTE, grau (X115)",Exzellent,159,https://www.refurbed.de/p/samsung-galaxy-tab-a9-x115/,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-a9,"64 GB Wi-Fi, graphite",Verschiedene Zustände (ab),163.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader/samsung/galaxy-tab-a,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-a9-2,"128 GB 5G, graphite (X216)",Exzellent,264.99,https://www.refurbed.de/p/samsung-galaxy-tab-a9-plus-x216/,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-a9-2,"64 GB Wi-Fi, graphite",Verschiedene Zustände (ab),201.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader/samsung/galaxy-tab-a,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-active4-pro,"128 GB 5G, schwarz (T636B, Enterprise Edition)",Gut,380.49,https://www.refurbed.de/p/samsung-galaxy-tab-active4-pro/,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-active4-pro,"128 GB 5G, schwarz",Wie neu,389,https://asgoodasnew.de/Tablets/Samsung/Samsung-Galaxy-Tab-Active-4-Pro-128GB-5G-128GB-schwarz.html,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-active4-pro,"128 GB 5G, schwarz",Sehr gut,359,https://asgoodasnew.de/Tablets/Samsung/Samsung-Galaxy-Tab-Active-4-Pro-128GB-5G-128GB-schwarz.html,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-active5,"128 GB 5G Enterprise Edition, grün",Wie neu,309,https://asgoodasnew.de/Tablets/Samsung/Samsung-Galaxy-Tab-Active-5-Enterprise-Edition-128GB-5G-128GB-gruen.html,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-s10,"256 GB Wi-Fi, moonstone gray (X820)",Sehr gut,719,https://www.refurbed.de/p/samsung-galaxy-tab-s10p-x820/,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-s10,"256 GB Wi-Fi + 5G, moonstone gray",Sehr gut,792.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader/samsung/galaxy-tab-s/galaxy-tab-s10-plus,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-s10,"512 GB Wi-Fi, moonstone gray",Exzellent,805.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader/samsung/galaxy-tab-s/galaxy-tab-s10-plus,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-s10-ultra,"256 GB Wi-Fi, moonstone gray (X920)",Exzellent,784.08,https://www.refurbed.de/p/samsung-galaxy-tab-s10-x920/,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-s10-ultra,"256 GB Wi-Fi, moonstone gray",Exzellent,826.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader/samsung/galaxy-tab-s/galaxy-tab-s10-ultra,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-s10-ultra,"512 GB Wi-Fi + 5G, moonstone gray",Gut,797.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader/samsung/galaxy-tab-s/galaxy-tab-s10-ultra,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-s6-lite,"64 GB Wi-Fi, Edition 2024, oxford gray",Verschiedene Zustände (ab),276.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader/samsung/galaxy-tab-s,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-s9,"256 GB Wi-Fi, graphite",Exzellent,623.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader-samsung-galaxy-tab-s9,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-s9,"256 GB Wi-Fi + 5G, graphite",Exzellent,692.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader-samsung-galaxy-tab-s9,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-s9-2,"256 GB Wi-Fi, graphite",Exzellent,674.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader-samsung-galaxy-tab-s9,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-s9-2,"512 GB Wi-Fi, graphite",Verschiedene Zustände (ab),702.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader-samsung-galaxy-tab-s9,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-s9-2,"512 GB Wi-Fi, graphite (X810)",sehr gut,589,https://asgoodasnew.de/Tablets/Samsung/Galaxy-Tab-S9/,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-s9-fe,"128 GB Wi-Fi, grey",Exzellent,441.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader-samsung-galaxy-tab-s9,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-s9-fe,"128 GB Wi-Fi + 5G, grey",Exzellent,463.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader-samsung-galaxy-tab-s9,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-s9-fe,"8 GB / 256 GB 5G, gray (SM-X516)",wie neu,509,https://asgoodasnew.de/Tablets/Samsung/Galaxy-Tab-S9/,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-s9-ultra,"256 GB Wi-Fi, graphite",Verschiedene Zustände (ab),684.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader-samsung-galaxy-tab-s9,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-s9-ultra,"256 GB Wi-Fi + 5G, graphite",Sehr gut,733.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader-samsung-galaxy-tab-s9,2026-09-13,refurbished-marktplatz
+samsunggalaxy-tab-s9-ultra,"16 GB / 1 TB Wi-Fi, graphite",Sehr gut,905.49,https://www.refurbed.de/p/samsung-galaxy-tab-s9-ultra/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-s22-ultra,128 GB,Gut,294.99,"https://www.rebuy.de/i,12398369/handy/samsung-galaxy-s22-ultra-dual-sim-128gb-phantom-black",2026-09-13,refurbished-marktplatz
+samsung-galaxy-s22-ultra,256 GB,Gut,327.99,"https://www.rebuy.de/i,12398376/handy/samsung-galaxy-s22-ultra-dual-sim-256gb-phantom-black",2026-09-13,refurbished-marktplatz
+samsung-galaxy-s22-ultra,512 GB,Sehr gut,431.99,"https://www.rebuy.de/i,12398382/handy/samsung-galaxy-s22-ultra-dual-sim-512gb-burgundy",2026-09-13,refurbished-marktplatz
+samsung-galaxy-s23-fe,128 GB,Gut,258.99,"https://www.rebuy.de/i,15352860",2026-09-13,refurbished-marktplatz
+samsung-galaxy-s23-fe,256 GB,Gut,314.99,"https://www.rebuy.de/i,15352861",2026-09-13,refurbished-marktplatz
+samsung-galaxy-s23-fe,256 GB,Sehr gut,366.99,"https://rebuy.com/i,15352872",2026-09-13,refurbished-marktplatz
+samsung-galaxy-s23-plus,256 GB,Gut,346.99,"https://www.rebuy.de/i,13342989/",2026-09-13,refurbished-marktplatz
+samsung-galaxy-s23-plus,512 GB,Gut,380.99,"https://www.rebuy.de/i,13343004/",2026-09-13,refurbished-marktplatz
+samsung-galaxy-s24,128 GB,Gut,347.99,"https://www.rebuy.de/i,15362319/handy/samsung-galaxy-s24-dual-sim-128gb-onyx-black",2026-09-13,refurbished-marktplatz
+samsung-galaxy-s24,256 GB,Stark genutzt,387.99,"https://www.rebuy.de/i,15366209/",2026-09-13,refurbished-marktplatz
+samsung-galaxy-s24-fe,128 GB,Gut,337.99,"https://www.rebuy.de/i,15523072/handy/samsung-galaxy-s24-fe-dual-sim-128gb-graphite",2026-09-13,refurbished-marktplatz
+samsung-galaxy-s24-fe,128 GB,Exzellent,389.99,"https://rebuy.de/i,15523070/handy/samsung-galaxy-s24-fe-dual-sim-128gb-mint",2026-09-13,refurbished-marktplatz
+samsung-galaxy-s24-fe,256 GB,Gut,411.99,"https://rebuy.de/i,15523640/handy/samsung-galaxy-s24-fe-dual-sim-256gb-mint",2026-09-13,refurbished-marktplatz
+samsung-galaxy-s24-ultra,256 GB,Sehr gut,563.99,"https://www.rebuy.de/i,15362313",2026-09-13,refurbished-marktplatz
+samsung-galaxy-s24-ultra,256 GB,Exzellent,591.99,"https://rebuy.de/i,15362316",2026-09-13,refurbished-marktplatz
+samsung-galaxy-s24-ultra,512 GB,Gut,570.99,"https://www.rebuy.de/i,15362315",2026-09-13,refurbished-marktplatz
+samsung-galaxy-s25,128 GB,Gut,451.99,"https://www.rebuy.de/i,15586552/handy/samsung-galaxy-s25-dual-sim-128gb-navy",2026-09-13,refurbished-marktplatz
+samsung-galaxy-s25,128 GB,Sehr gut,526.99,"https://www.rebuy.de/i,15590521/handy/samsung-galaxy-s25-dual-sim-128gb-pinkgold",2026-09-13,refurbished-marktplatz
+samsung-galaxy-s25,128 GB,Exzellent,491.99,"https://www.rebuy.de/i,15586534/handy/samsung-galaxy-s25-dual-sim-128gb-icyblue",2026-09-13,refurbished-marktplatz
+samsung-galaxy-s25-plus,256 GB,Sehr gut,632.99,"https://www.rebuy.de/i,15586545/handy/samsung-galaxy-s25-plus-dual-sim-256gb-navy",2026-09-13,refurbished-marktplatz
+samsung-galaxy-s25-plus,512 GB,Gut,629.99,"https://www.rebuy.de/i,15586540/handy/samsung-galaxy-s25-plus-dual-sim-512gb-silver-shadow",2026-09-13,refurbished-marktplatz
+samsung-galaxy-s25-plus,512 GB,Exzellent,730.99,"https://rebuy.de/i,15590526/handy/samsung-galaxy-s25-plus-dual-sim-512gb-blueblack",2026-09-13,refurbished-marktplatz
+samsung-galaxy-s25-ultra,256 GB,Exzellent,738.99,"https://www.rebuy.de/i,15586569/handy/samsung-galaxy-s25-ultra-dual-sim-256gb-titanium-black",2026-09-13,refurbished-marktplatz
+samsung-galaxy-s25-ultra,512 GB,Gut,677.99,"https://www.rebuy.de/i,15586581/handy/samsung-galaxy-s25-ultra-dual-sim-512gb-titanium-black",2026-09-13,refurbished-marktplatz
+samsung-galaxy-s25-ultra,512 GB,Exzellent,791.99,"https://www.rebuy.de/i,15586542/handy/samsung-galaxy-s25-ultra-dual-sim-512gb-titanium-silverblue",2026-09-13,refurbished-marktplatz
+samsung-galaxy-xcover-6-pro,128 GB,Gut,200.99,"https://www.rebuy.de/i,12609878/handy/samsung-galaxy-xcover6-pro-dual-sim-128gb-black",2026-09-13,refurbished-marktplatz
+samsung-galaxy-xcover7,128 GB,Sehr gut,228.99,"https://www.rebuy.de/i,15360624/handy/samsung-galaxy-xcover7-dual-sim-128gb-enterprise-edition-black",2026-09-13,refurbished-marktplatz
+samsung-galaxy-z-flip5,512 GB,Sehr gut,396.99,"https://www.rebuy.de/i,15162439/handy/samsung-galaxy-z-flip5-5g-dual-sim-512gb-graphite",2026-09-13,refurbished-marktplatz
+samsung-galaxy-z-flip6,256 GB,Stark genutzt,380.99,"https://www.rebuy.de/i,15489703/handy/samsung-galaxy-z-flip6-dual-sim-256gb-silver-shadow",2026-09-13,refurbished-marktplatz
+samsung-galaxy-z-flip6,256 GB,Gut,434.99,"https://www.rebuy.de/i,15489704/handy/samsung-galaxy-z-flip6-dual-sim-256gb-yellow",2026-09-13,refurbished-marktplatz
+samsung-galaxy-z-flip6,512 GB,Gut,515.99,"https://www.rebuy.de/i,15489710/handy/samsung-galaxy-z-flip6-dual-sim-512gb-mint",2026-09-13,refurbished-marktplatz
+samsung-galaxy-z-fold5,256 GB,Gut,549.99,"https://www.rebuy.de/i,15162437/",2026-09-13,refurbished-marktplatz
+samsung-galaxy-z-fold5,512 GB,Sehr gut,635.99,"https://www.rebuy.de/i,15162435/",2026-09-13,refurbished-marktplatz
+samsung-galaxy-z-fold5,1 TB,Sehr gut,723.99,"https://www.rebuy.de/i,15163423/",2026-09-13,refurbished-marktplatz
+samsung-galaxy-z-fold6,256 GB,Gut,682.99,"https://www.rebuy.de/i,15489708/handy/samsung-galaxy-z-fold6-dual-sim-256gb-silver-shadow",2026-09-13,refurbished-marktplatz
+samsung-galaxy-z-fold6,256 GB,Sehr gut,825.99,"https://rebuy.de/i,15493917/handy/samsung-galaxy-z-fold6-dual-sim-256gb-crafted-black",2026-09-13,refurbished-marktplatz
+samsung-galaxy-z-fold6,512 GB,Ungeöffnet,969.99,"https://rebuy.de/i,15489706/handy/samsung-galaxy-z-fold6-dual-sim-512gb-pink",2026-09-13,refurbished-marktplatz
+apple-macbook-air-13-6-2022,"M2 / 8 GB / 256 GB, Silber, QWERTZ",Sehr gut,876,https://www.refurbed.de/p/apple-macbook-air-m2-2022/,2026-09-13,refurbished-marktplatz
+apple-macbook-air-13-6-2022,"13"" MacBook Air M2, 8-Core CPU / 10-Core GPU, Space Grau (RAM/SSD in der Listenansicht nicht ausgewiesen)",Zertifiziert Refurbished,919,https://www.apple.com/de/shop/refurbished/mac/macbook-air,2026-09-13,refurbished-marktplatz
+appleipad,"128 GB Wi-Fi, silber",Sehr gut,404.8,https://www.refurbed.de/p/ipad-11-10-9-2025/,2026-09-13,refurbished-marktplatz
+appleipad,"512 GB Wi-Fi, Blau",Zertifiziert Refurbished,749,https://www.apple.com/de/shop/refurbished/ipad,2026-09-13,refurbished-marktplatz
+appleipad-mini-8-3,"128 GB Wi-Fi, spacegrau",Gut,486.68,https://www.refurbed.de/p/ipad-mini-7/,2026-09-13,refurbished-marktplatz
+ipad-10,"64 GB Wi-Fi, silber (Refurbished by Apple, verkauft ueber refurbed)",Exzellent,369.9,https://www.refurbed.de/p/ipad-10-10-9-2022/,2026-09-13,refurbished-marktplatz
+ipad-9,"64 GB Wi-Fi, spacegrau",Sehr gut,205.35,https://www.refurbed.de/p/ipad-9-2021/,2026-09-13,refurbished-marktplatz
+ipad-air-10-9,"64 GB Wi-Fi, spacegrau",Sehr gut,423.13,https://www.refurbed.de/p/ipad-air-5/,2026-09-13,refurbished-marktplatz
+ipad-pro-12-9,"128 GB Wi-Fi, spacegrau",Sehr gut,660.27,https://www.refurbed.de/p/ipad-pro-6-12-9-2022/,2026-09-13,refurbished-marktplatz
+dell-latitude-3440,Core i5-1335U / 16 GB / 256 GB (DE QWERTZ),Sehr gut,417.27,https://www.refurbed.de/p/dell-latitude-3440-i5-1335u/,2026-09-13,refurbished-marktplatz
+dell-latitude-3440,"Core i5-1335U / 32 GB / 512 GB (14"" FHD, DE QWERTZ)",Hervorragend,729,https://reniu.de/product/dell-latitude-3440-i5-1335u-32gb-512gb-bl/,2026-09-13,refurbished-marktplatz
+dell-latitude-5440,Core i5-1335U / 16 GB / 256 GB (ND-Layout),Sehr gut,594.99,https://www.refurbed.de/p/dell-latitude-5440-i5-1335u/,2026-09-13,refurbished-marktplatz
+dell-latitude-5440,Core i5-1345U / 16 GB / 256 GB (UK-Layout),"Gut / Sehr gut waehlbar, angezeigter Preis ohne Zustandsaufschluesselung",409.99,https://www.refurbed.de/p/dell-latitude-5440-i5-1345u/,2026-09-13,refurbished-marktplatz
+motorola-edge-30-pro,256 GB (Cosmos Blue),Wir bieten bis zu,166.12,https://www.clevertronic.de/handy_verkaufen/16990/motorola-edge-30-pro-5g-256gb-cosmos-blue--verkaufen,2026-09-13,ankauf-trade-in
+motorola-edge-30-pro-fusion,128 GB (Cosmic Grey),Premium,453,https://www.refurbed.de/p/motorola-edge-30-fusion/,2026-09-13,refurbished-marktplatz
+motorola-edge-30-pro-fusion,128 GB (Cosmic Grey),Wir bieten bis zu,178.1,https://www.clevertronic.de/handy_verkaufen/18963/motorola-edge-30-fusion-128gb-cosmic-grey-verkaufen,2026-09-13,ankauf-trade-in
+motorola-edge-40-neo,256 GB (Schwarz),Wir bieten bis zu,105.29,https://www.clevertronic.de/handy_verkaufen/20138/motorola-edge-40-neo-256gb-schwarz-verkaufen,2026-09-13,ankauf-trade-in
+motorola-edge-40-neo,256 GB (Grün),Wir bieten bis zu,168.34,https://www.clevertronic.de/handy_verkaufen/20346/motorola-edge-40-neo-256gb-gruen-verkaufen,2026-09-13,ankauf-trade-in
+motorola-edge-50-fusion,256 GB (Forest Blue; Clevertronic-Bezeichnung '12GB RAM 256GB'),Wir bieten bis zu,93.28,https://www.clevertronic.de/handy_verkaufen/21512/motorola-edge-50-fusion-256gb-forest-blue-verkaufen,2026-09-13,ankauf-trade-in
+motorola-edge-50-neo,256 GB,Premium,462,https://www.refurbed.de/p/motorola-edge-50-neo/,2026-09-13,refurbished-marktplatz
+motorola-edge-50-neo,256 GB (Pantone Nautical Blue),Wir bieten bis zu,138.23,https://www.clevertronic.de/handy_verkaufen/24708/motorola-edge-50-neo-256gb-pantone-nautical-blue-verkaufen,2026-09-13,ankauf-trade-in
+motorola-edge-50-pro,512 GB (Black Beauty),Wir bieten bis zu,245.18,https://www.clevertronic.de/handy_verkaufen/21534/motorola-edge-50-pro-512gb-black-beauty-verkaufen,2026-09-13,ankauf-trade-in
+motorola-moto-g35,128 GB (Midnight Black),Wir bieten bis zu,47.89,https://www.clevertronic.de/handy_verkaufen/23302/motorola-moto-g35-128gb-midnight-black-verkaufen,2026-09-13,ankauf-trade-in
+motorola-moto-g54,256 GB / 8 GB RAM (Midnight Blue),Wir bieten bis zu,50.45,https://www.clevertronic.de/handy_verkaufen/21047/motorola-moto-g54-5g-8gb-ram-256gb-midnight-blue-verkaufen,2026-09-13,ankauf-trade-in
+motorola-moto-g54,256 GB / 12 GB RAM (Indigo Blue),Wir bieten bis zu,83.08,https://www.clevertronic.de/handy_verkaufen/21971/motorola-moto-g54-5g-12gb-ram-256gb-indigo-blue-verkaufen,2026-09-13,ankauf-trade-in
+motorola-moto-g55,256 GB (Forest Grey),Wir bieten bis zu,88.51,https://www.clevertronic.de/handy_verkaufen/23068/motorola-moto-g55-5g-256gb-forest-grey-verkaufen,2026-09-13,ankauf-trade-in
+motorola-moto-g75,256 GB / 8 GB RAM (Aqua Blue),Wir bieten bis zu,118.02,https://www.clevertronic.de/handy_verkaufen/22871/motorola-moto-g75-5g-8gb-ram-256gb-aqua-blue-verkaufen,2026-09-13,ankauf-trade-in
+motorola-moto-g84,256 GB / 8 GB RAM (Midnight Blue; Clevertronic-Bezeichnung),Wir bieten bis zu,79,https://www.clevertronic.de/handy_verkaufen/23361/motorola-moto-g84-5g-8gb-ram-256gb-midnight-blue-verkaufen,2026-09-13,ankauf-trade-in
+motorola-razr-40-ultra,256 GB (Viva Magenta),Gut,504,https://www.refurbed.de/p/motorola-razr-40-ultra/,2026-09-13,refurbished-marktplatz
+motorola-thinkphone,256 GB (Carbon Black),Wir bieten bis zu,154.97,https://www.clevertronic.de/handy_verkaufen/19388/motorola-thinkphone-256gb-carbon-black-verkaufen,2026-09-13,ankauf-trade-in
+motorola-thinkphone-25,256 GB (Carbon Black),Wir bieten bis zu,181.36,https://www.clevertronic.de/handy_verkaufen/23697/motorola-thinkphone25-256gb-carbon-black-verkaufen,2026-09-13,ankauf-trade-in
+microsoft-surface-go-3,Pentium Gold 6500Y / 8 GB / 128 GB SSD / Wi-Fi / platin,Exzellent,309.99,"https://www.rebuy.de/i,12283096/",2026-09-13,refurbished-marktplatz
+microsoft-surface-go-3,Core i3-10100Y / 8 GB / 128 GB SSD / Wi-Fi + 4G / platin,Gut,392.99,"https://www.rebuy.de/i,12551962/",2026-09-13,refurbished-marktplatz
+microsoft-surface-go-3,Pentium Gold / 64 GB eMMC / Wi-Fi + 4G,Gut,213.99,https://www.rebuy.de/kaufen/tablets?q=Surface%20Go%203,2026-09-13,refurbished-marktplatz
+microsoft-surface-pro-13-snapdragon-x-elite,Snapdragon X Elite X1E-80-100 / OLED / 16 GB / 512 GB / Wi-Fi / platin,Exzellent,1210.99,"https://www.rebuy.de/i,15577717/",2026-09-13,refurbished-marktplatz
+microsoft-surface-pro-13-snapdragon-x-elite,Snapdragon X Plus X1P-64-100 / 16 GB / 512 GB / Wi-Fi / platin,Exzellent,1059.99,"https://www.rebuy.de/i,15508433/",2026-09-13,refurbished-marktplatz
+microsoft-surface-pro-13-snapdragon-x-elite,Snapdragon X Elite / 16 GB / 1 TB / Wi-Fi / schwarz (Listenpreis 'ab'),"ab-Preis Suchliste, Zustand nicht einzeln geprueft",1287.99,https://www.rebuy.de/kaufen/tablets?q=Surface%20Pro%2011,2026-09-13,refurbished-marktplatz
+microsoft-surface-pro-8-i7,Core i7-1185G7 / 16 GB / 256 GB / Wi-Fi / platin,Exzellent,760.99,"https://www.rebuy.de/i,12283091/",2026-09-13,refurbished-marktplatz
+microsoft-surface-pro-8-i7,Core i7 / 16 GB / 512 GB / Wi-Fi,Sehr gut,887.99,https://www.rebuy.de/kaufen/tablets?q=Surface%20Pro%208,2026-09-13,refurbished-marktplatz
+microsoft-surface-pro-8-i7,Core i5-1135G7 / 8 GB / 128 GB / Wi-Fi / platin (Vergleich Einstieg),Gut,434.99,"https://www.rebuy.de/i,12283087/",2026-09-13,refurbished-marktplatz
+microsoft-surface-pro-9-i5,Core i5-1235U / 8 GB / 256 GB / Wi-Fi / graphit,Gut,643.99,"https://www.rebuy.de/i,13294851/",2026-09-13,refurbished-marktplatz
+microsoft-surface-pro-9-i5,Core i5 / 8 GB / 256 GB / Wi-Fi / platin,Exzellent,1038.99,https://www.rebuy.de/kaufen/tablets?q=Surface%20Pro%209,2026-09-13,refurbished-marktplatz
+microsoft-surface-pro-9-i7,Core i7-1255U / 16 GB / 256 GB / Wi-Fi / graphit,Sehr gut,1105.99,"https://www.rebuy.de/i,13295552/",2026-09-13,refurbished-marktplatz
+microsoft-surface-pro-9-i7,Core i7-1255U / 16 GB / 256 GB / Wi-Fi / graphit,Exzellent,1171.99,"https://www.rebuy.de/i,13295552/",2026-09-13,refurbished-marktplatz
+microsoft-surface-pro-9-i7,Core i7-1255U / 16 GB / 512 GB / Wi-Fi / graphit,Sehr gut,1164.99,"https://www.rebuy.de/i,13295561/",2026-09-13,refurbished-marktplatz
+microsoft-surface-pro-9-snapdragon-x-plus,Snapdragon X Plus X1P-64-100 / 16 GB / 512 GB / Wi-Fi / platin,Exzellent,1059.99,"https://www.rebuy.de/i,15508433/",2026-09-13,refurbished-marktplatz
+microsoft-surface-pro-9-snapdragon-x-plus,"Snapdragon X Plus / 16 GB / 256 GB / platin (Listen-'ab'-Preis, derzeit nicht verfuegbar)",nicht verfuegbar (Kaufalarm),748.99,https://www.rebuy.de/kaufen/tablets?q=Surface%20Pro%2011,2026-09-13,refurbished-marktplatz
+samsung-galaxy-a53,6 GB / 128 GB,Gut,171.15,https://www.refurbed.de/p/samsung-galaxy-a53-5g/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-a53,6 GB / 128 GB,Gut,152.99,"https://www.rebuy.de/i,12492156/handy/",2026-09-13,refurbished-marktplatz
+samsung-galaxy-a53,6 GB / 128 GB,Sehr gut,189,https://asgoodasnew.de/Samsung-Galaxy-A53-5G-6GB-A536B-DS-128GB-Awesome-Black.html,2026-09-13,refurbished-marktplatz
+samsung-galaxy-a53,8 GB / 256 GB,Gut,203.99,"https://www.rebuy.de/i,12492160/handy/",2026-09-13,refurbished-marktplatz
+samsung-galaxy-a33,6 GB / 128 GB,Exzellent (Premium),159.95,https://www.refurbed.de/p/samsung-galaxy-a33-5g/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-a33,6 GB / 128 GB,Exzellent,150.99,"https://www.rebuy.de/i,12492152/handy/",2026-09-13,refurbished-marktplatz
+samsung-galaxy-a33,6 GB / 128 GB,Sehr gut,129.99,"https://www.rebuy.de/i,12492154/handy/",2026-09-13,refurbished-marktplatz
+samsung-galaxy-a33,6 GB / 128 GB,Gut,127.99,"https://www.rebuy.de/i,12492151/handy/",2026-09-13,refurbished-marktplatz
+samsung-galaxy-a54,8 GB / 128 GB,Gut,192.99,"https://www.rebuy.de/i,13360331/handy/",2026-09-13,refurbished-marktplatz
+samsung-galaxy-a54,8 GB / 128 GB,Exzellent,229.99,"https://www.rebuy.de/i,13360331/handy/",2026-09-13,refurbished-marktplatz
+samsung-galaxy-a54,8 GB / 128 GB,Exzellent Premium,208.31,https://www.refurbed.de/p/samsung-galaxy-a54-5g/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-a54,8 GB / 256 GB,Sehr gut,288.99,"https://www.rebuy.de/i,13360337/handy/",2026-09-13,refurbished-marktplatz
+samsung-galaxy-a34,6 GB / 128 GB,Gut,160.99,"https://www.rebuy.de/i,13359607/handy/",2026-09-13,refurbished-marktplatz
+samsung-galaxy-a34,6 GB / 128 GB,Sehr gut,180.99,"https://www.rebuy.de/i,13359607/handy/",2026-09-13,refurbished-marktplatz
+samsung-galaxy-a34,6 GB / 128 GB,Exzellent,191.99,"https://www.rebuy.de/i,13359607/handy/",2026-09-13,refurbished-marktplatz
+samsung-galaxy-a34,8 GB / 256 GB,Gut,194.99,"https://www.rebuy.de/i,13359611/handy/",2026-09-13,refurbished-marktplatz
+google-pixel-8,8 GB / 128 GB,Sehr gut,253.9,https://www.refurbed.de/p/google-pixel-8/,2026-09-13,refurbished-marktplatz
+google-pixel-8,8 GB / 128 GB,Gut,285.99,"https://www.rebuy.de/i,15194678/handy/",2026-09-13,refurbished-marktplatz
+google-pixel-8,8 GB / 256 GB,Gut,361.99,"https://www.rebuy.de/i,15194682/handy/",2026-09-13,refurbished-marktplatz
+google-pixel-8,8 GB / 256 GB,Exzellent,411.99,https://www.refurbed.de/p/google-pixel-8/,2026-09-13,refurbished-marktplatz
+google-pixel-8-pro,12 GB / 128 GB,Gut,339.9,https://www.refurbed.de/p/google-pixel-8-pro/,2026-09-13,refurbished-marktplatz
+google-pixel-8-pro,12 GB / 128 GB,Gut,369.99,"https://www.rebuy.de/i,15194675/handy/",2026-09-13,refurbished-marktplatz
+google-pixel-8-pro,12 GB / 256 GB,Gut,436.99,"https://www.rebuy.de/i,15194684/handy/",2026-09-13,refurbished-marktplatz
+google-pixel-8-pro,12 GB / 512 GB,Sehr gut,529.99,https://www.refurbed.de/p/google-pixel-8-pro/,2026-09-13,refurbished-marktplatz
+google-pixel-fold,12 GB / 256 GB,Budget,419,https://asgoodasnew.de/Handys/Google-Pixel-Fold-256GB-Obsidian-neu.html,2026-09-13,refurbished-marktplatz
+google-pixel-fold,12 GB / 256 GB,Gut,479,https://asgoodasnew.de/Handys/Google-Pixel-Fold-256GB-Obsidian-neu.html,2026-09-13,refurbished-marktplatz
+google-pixel-fold,12 GB / 256 GB,Sehr gut,529,https://asgoodasnew.de/Handys/Google-Pixel-Fold-256GB-Obsidian-neu.html,2026-09-13,refurbished-marktplatz
+google-pixel-fold,12 GB / 256 GB,Wie neu,579,https://asgoodasnew.de/Handys/Google-Pixel-Fold-256GB-Obsidian-neu.html,2026-09-13,refurbished-marktplatz
+fairphone-4,6 GB / 128 GB,Sehr gut,389,https://www.refurbed.de/p/fairphone-4/,2026-09-13,refurbished-marktplatz
+fairphone-4,8 GB / 256 GB,Gut,332.99,"https://www.rebuy.de/i,12261901/handy/",2026-09-13,refurbished-marktplatz
+fairphone-5,8 GB / 256 GB,Premium,549,https://www.refurbed.de/p/fairphone-5/,2026-09-13,refurbished-marktplatz
+fairphone-5,8 GB / 256 GB,Gut,427.99,"https://www.rebuy.de/i,15180673/handy/",2026-09-13,refurbished-marktplatz
+fairphone-5,8 GB / 256 GB,Sehr gut,496.99,"https://www.rebuy.de/i,15180086/handy/",2026-09-13,refurbished-marktplatz
+nokia-xr20,6 GB / 128 GB,"Gut (ausverkauft, Listenpreis; guenstigster Preis der letzten 30 Tage)",199,https://asgoodasnew.de/Handys/Nokia-XR20-6GB-5G-Dual-Sim-128GB-granit-grau.html,2026-09-13,refurbished-marktplatz
+nokia-xr20,6 GB / 128 GB,"Sehr gut (ausverkauft, Listenpreis)",249,https://asgoodasnew.de/Handys/Nokia-XR20-6GB-5G-Dual-Sim-128GB-granit-grau.html,2026-09-13,refurbished-marktplatz
+motorola-edge-30-pro,12 GB / 256 GB,Gut,179,https://asgoodasnew.de/Motorola-Edge-30-Pro-Dual-Sim-12GB-5G-256GB-Cosmic-Blue.html,2026-09-13,refurbished-marktplatz
+motorola-edge-30-pro,12 GB / 256 GB,Sehr gut,209,https://asgoodasnew.de/Motorola-Edge-30-Pro-Dual-Sim-12GB-5G-256GB-Cosmic-Blue.html,2026-09-13,refurbished-marktplatz
+motorola-edge-30-pro,12 GB / 256 GB,Wie neu,249,https://asgoodasnew.de/Motorola-Edge-30-Pro-Dual-Sim-12GB-5G-256GB-Cosmic-Blue.html,2026-09-13,refurbished-marktplatz
+motorola-edge-30-pro,12 GB / 256 GB,Budget,149,https://asgoodasnew.de/Motorola-Edge-30-Pro-Dual-Sim-12GB-5G-256GB-Cosmic-Blue.html,2026-09-13,refurbished-marktplatz
+motorola-edge-40-neo,12 GB / 256 GB,Gut,199,https://asgoodasnew.de/Motorola-Edge-40-Neo-256GB-black-beatuy.html,2026-09-13,refurbished-marktplatz
+motorola-edge-40-neo,12 GB / 256 GB,Sehr gut,219,https://asgoodasnew.de/Motorola-Edge-40-Neo-256GB-black-beatuy.html,2026-09-13,refurbished-marktplatz
+motorola-edge-40-neo,12 GB / 256 GB,Budget,119,https://asgoodasnew.de/Motorola-Edge-40-Neo-256GB-black-beatuy.html,2026-09-13,refurbished-marktplatz
+motorola-razr-40-ultra,8 GB / 256 GB,Gut,504,https://www.refurbed.de/p/motorola-razr-40-ultra/,2026-09-13,refurbished-marktplatz
+motorola-razr-40-ultra,8 GB / 256 GB,Gut,289,https://asgoodasnew.de/Motorola-Razr-40-Ultra-256GB-infinite-black.html,2026-09-13,refurbished-marktplatz
+motorola-razr-40-ultra,8 GB / 256 GB,Sehr gut,319,https://asgoodasnew.de/Motorola-Razr-40-Ultra-256GB-infinite-black.html,2026-09-13,refurbished-marktplatz
+motorola-razr-40-ultra,8 GB / 256 GB,Wie neu,359,https://asgoodasnew.de/Motorola-Razr-40-Ultra-256GB-infinite-black.html,2026-09-13,refurbished-marktplatz
+motorola-thinkphone,8 GB / 256 GB,Budget,119,https://asgoodasnew.de/Motorola-ThinkPhone-256GB-carbon-black.html,2026-09-13,refurbished-marktplatz
+motorola-thinkphone,8 GB / 256 GB,Gut,159,https://asgoodasnew.de/Motorola-ThinkPhone-256GB-carbon-black.html,2026-09-13,refurbished-marktplatz
+motorola-thinkphone,8 GB / 256 GB,Sehr gut,229,https://asgoodasnew.de/Motorola-ThinkPhone-256GB-carbon-black.html,2026-09-13,refurbished-marktplatz
+motorola-thinkphone,8 GB / 256 GB,Wie neu,239,https://asgoodasnew.de/Motorola-ThinkPhone-256GB-carbon-black.html,2026-09-13,refurbished-marktplatz
+samsung-galaxy-z-flip5,8 GB / 256 GB,Gut,337.77,https://www.refurbed.de/en-de/p/samsung-galaxy-z-flip-5/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-z-flip5,8 GB / 256 GB,Exzellent,350,https://www.refurbed.de/en-de/p/samsung-galaxy-z-flip-5/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-z-flip5,8 GB / 512 GB,Gut,373.99,https://www.refurbed.de/en-de/p/samsung-galaxy-z-flip-5/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-z-flip5,8 GB / 512 GB,Sehr gut,396.99,"https://www.rebuy.de/i,15162439/handy/",2026-09-13,refurbished-marktplatz
+samsung-galaxy-z-fold5,12 GB / 256 GB,Gut,549.99,"https://www.rebuy.de/i,15162437/handy/",2026-09-13,refurbished-marktplatz
+samsung-galaxy-z-fold5,12 GB / 256 GB,Gut,548.99,"https://www.rebuy.de/i,15164663/handy/",2026-09-13,refurbished-marktplatz
+samsung-galaxy-z-fold5,12 GB / 512 GB,Sehr gut,635.99,"https://www.rebuy.de/i,15162435/handy/",2026-09-13,refurbished-marktplatz
+samsung-galaxy-z-fold5,12 GB / 512 GB,Gut,675.49,https://www.refurbed.de/en-de/p/samsung-galaxy-z-fold-5/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-z-fold6,12 GB / 256 GB,Gut,682.99,"https://www.rebuy.de/i,15489708/handy/samsung-galaxy-z-fold6-dual-sim-256gb-silver-shadow",2026-09-13,refurbished-marktplatz
+samsung-galaxy-z-fold6,12 GB / 256 GB,Gut,648.2,https://www.refurbed.de/en-de/p/samsung-galaxy-z-fold-6/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-z-fold6,12 GB / 512 GB,Gut,759.99,https://www.refurbed.de/en-de/p/samsung-galaxy-z-fold-6/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-z-fold6,12 GB / 1 TB,Sehr gut,978.99,https://www.refurbed.de/en-de/p/samsung-galaxy-z-fold-6/,2026-09-13,refurbished-marktplatz
+ipad-9,"64 GB Wi-Fi, space grau",Gut (rebuy),226.99,"https://www.rebuy.de/i,12216058/tablets-und-ebook-reader/apple-ipad-10-2-64gb-wi-fi-modell-2021-space-grau",2026-09-13,refurbished-marktplatz
+ipad-9,"64 GB Wi-Fi, space grau",Exzellent (rebuy),266.99,"https://www.rebuy.de/i,12216058/tablets-und-ebook-reader/apple-ipad-10-2-64gb-wi-fi-modell-2021-space-grau",2026-09-13,refurbished-marktplatz
+ipad-9,"256 GB Wi-Fi, space grau",Gut (rebuy),322.99,"https://www.rebuy.de/i,12216060/tablets-und-ebook-reader/apple-ipad-10-2-256gb-wi-fi-modell-2021-space-grau",2026-09-13,refurbished-marktplatz
+ipad-9,"64 GB Wi-Fi, spacegrau","Sehr gut (refurbed, Händler Foxway)",205.35,https://www.refurbed.de/p/ipad-9-2021/,2026-09-13,refurbished-marktplatz
+ipad-10,"64 GB Wi-Fi, silber","Stark genutzt (rebuy, 1 Stück)",323.99,"https://www.rebuy.de/i,13288157/tablets-und-ebook-reader/apple-ipad-10-9-64gb-wi-fi-modell-2022-silber",2026-09-13,refurbished-marktplatz
+ipad-10,"64 GB Wi-Fi, silber","Gut (rebuy, Preis angezeigt, nicht lieferbar)",353.99,"https://www.rebuy.de/i,13288157/tablets-und-ebook-reader/apple-ipad-10-9-64gb-wi-fi-modell-2022-silber",2026-09-13,refurbished-marktplatz
+ipad-10,"64 GB Wi-Fi, silber","Exzellent (rebuy, Preis angezeigt, nicht lieferbar)",399.99,"https://www.rebuy.de/i,13288157/tablets-und-ebook-reader/apple-ipad-10-9-64gb-wi-fi-modell-2022-silber",2026-09-13,refurbished-marktplatz
+ipad-10,64 GB Wi-Fi,"Exzellent (refurbed A-Grading, Händler Kontra)",369.9,https://www.refurbed.de/p/ipad-10-10-9-2022/,2026-09-13,refurbished-marktplatz
+ipad-air-10-9,"64 GB Wi-Fi, space grau","Gut (rebuy, 1 Stück)",414.99,"https://www.rebuy.de/i,12474730/tablets-und-ebook-reader/apple-ipad-air-5-10-9-64gb-wi-fi-space-grau",2026-09-13,refurbished-marktplatz
+ipad-air-10-9,"64 GB Wi-Fi + Cellular, space grau","ab-Preis (rebuy Listenseite, Zustand nicht spezifiziert)",377.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader/apple/ipad-air/generation-5,2026-09-13,refurbished-marktplatz
+ipad-air-10-9,"256 GB Wi-Fi + Cellular, space grau","ab-Preis (rebuy Listenseite, Zustand nicht spezifiziert)",407.99,https://www.rebuy.de/kaufen/tablets-und-ebook-reader/apple/ipad-air/generation-5,2026-09-13,refurbished-marktplatz
+ipad-air-10-9,256 GB Wi-Fi,"Exzellent (refurbed, Händler EnviroBest NL)",514.99,https://www.refurbed.de/p/ipad-air-5/,2026-09-13,refurbished-marktplatz
+apple-ipad-mini-6-a15,"64 GB Wi-Fi, space grau","Gut (rebuy, 2 Stück)",388.99,"https://www.rebuy.de/i,12216042/tablets-und-ebook-reader/apple-ipad-mini-6-8-3-64gb-wi-fi-space-grau",2026-09-13,refurbished-marktplatz
+apple-ipad-mini-6-a15,"64 GB Wi-Fi, space grau",Exzellent (rebuy),457.99,"https://www.rebuy.de/i,12216042/tablets-und-ebook-reader/apple-ipad-mini-6-8-3-64gb-wi-fi-space-grau",2026-09-13,refurbished-marktplatz
+apple-ipad-mini-6-a15,"256 GB Wi-Fi + Cellular, space grau","Sehr gut (rebuy, 1 Stück)",517.99,"https://www.rebuy.de/i,12216045/tablets-und-ebook-reader/apple-ipad-mini-6-8-3-256gb-wi-fi-cellular-space-grau",2026-09-13,refurbished-marktplatz
+apple-ipad-mini-6-a15,"64 GB Wi-Fi, space grau","Gut (asgoodasnew, Listenpreis vor Gutschein)",299,https://asgoodasnew.de/Apple-iPad-mini-2021-Wi-Fi-64GB-space-grau.html,2026-09-13,refurbished-marktplatz
+apple-ipad-pro-11-m2-2022,"128 GB Wi-Fi, space grau","Gut (rebuy, 4 Stück)",588.99,"https://www.rebuy.de/i,13288133/tablets-und-ebook-reader/apple-ipad-pro-11-128gb-wi-fi-modell-2022-space-grau",2026-09-13,refurbished-marktplatz
+apple-ipad-pro-11-m2-2022,"128 GB Wi-Fi + Cellular, space grau",Sehr gut (rebuy),635.99,"https://www.rebuy.de/i,13288138/tablets-und-ebook-reader/apple-ipad-pro-11-128gb-wi-fi-cellular-modell-2022-space-grau",2026-09-13,refurbished-marktplatz
+apple-ipad-pro-11-m2-2022,"256 GB Wi-Fi, space grau","Gut (rebuy, 1 Stück)",697.99,"https://www.rebuy.de/i,13288134/tablets-und-ebook-reader/apple-ipad-pro-11-256gb-wi-fi-modell-2022-space-grau",2026-09-13,refurbished-marktplatz
+apple-ipad-pro-11-m2-2022,"128 GB Wi-Fi, silber","Sehr gut (asgoodasnew, Listenpreis vor Gutschein REMADE)",589,https://asgoodasnew.de/Tablets/Apple-iPad-Pro-11-Wi-Fi-2022-128GB-silber.html,2026-09-13,refurbished-marktplatz
+ipad-pro-12-9,"128 GB Wi-Fi, space grau","Gut (rebuy, 6 Stück)",679.99,"https://www.rebuy.de/i,13288113/tablets-und-ebook-reader/apple-ipad-pro-12-9-128gb-wi-fi-modell-2022-space-grau",2026-09-13,refurbished-marktplatz
+ipad-pro-12-9,"128 GB Wi-Fi, space grau",Exzellent (rebuy),767.99,"https://www.rebuy.de/i,13288113/tablets-und-ebook-reader/apple-ipad-pro-12-9-128gb-wi-fi-modell-2022-space-grau",2026-09-13,refurbished-marktplatz
+ipad-pro-12-9,"256 GB Wi-Fi + Cellular, space grau",Sehr gut (rebuy),783.99,"https://www.rebuy.de/i,13288119/tablets-und-ebook-reader/apple-ipad-pro-12-9-256gb-wi-fi-cellular-modell-2022-space-grau",2026-09-13,refurbished-marktplatz
+ipad-pro-12-9,"128 GB Wi-Fi, space grau","Sehr gut (asgoodasnew, Listenpreis vor Gutschein REMADE)",699,https://asgoodasnew.de/Apple-iPad-Pro-12-9-Wi-Fi-2022-128GB-space-grau.html,2026-09-13,refurbished-marktplatz
+iphone-13-mini,"128 GB, Mitternacht","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",231,https://www.clevertronic.de/handy_verkaufen/16349/apple-iphone-13-mini-128gb-mitternacht-verkaufen,2026-09-13,ankauf-trade-in
+iphone-13-mini,"256 GB, Mitternacht","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",321,https://www.clevertronic.de/handy_verkaufen/16354/apple-iphone-13-mini-256gb-mitternacht-verkaufen,2026-09-13,ankauf-trade-in
+iphone-13-mini,"128 GB, Mitternacht","Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",278,https://www.handyverkauf-vergleich.de/handy/apple-iphone-13-mini-128gb-mitternacht,2026-09-13,ankauf-trade-in
+iphone-13-mini,"128 GB, Mitternacht","Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",267.38,https://www.handyverkauf-vergleich.de/handy/apple-iphone-13-mini-128gb-mitternacht,2026-09-13,ankauf-trade-in
+iphone-14,"128 GB, Mitternacht","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",282.72,https://www.clevertronic.de/handy_verkaufen/17641/apple-iphone-14-128gb-mitternacht-verkaufen,2026-09-13,ankauf-trade-in
+iphone-14,"256 GB, Mitternacht","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",331.93,https://www.clevertronic.de/handy_verkaufen/17643/apple-iphone-14-256gb-mitternacht-verkaufen,2026-09-13,ankauf-trade-in
+iphone-14,"128 GB, Blau","Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",399,https://www.handyverkauf-vergleich.de/handy/apple-iphone-14-128gb-blau,2026-09-13,ankauf-trade-in
+iphone-14,"128 GB, Blau","Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",285.93,https://www.handyverkauf-vergleich.de/handy/apple-iphone-14-128gb-blau,2026-09-13,ankauf-trade-in
+iphone-14-pro,"128 GB, Space Schwarz","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",384.29,https://www.clevertronic.de/handy_verkaufen/17689/apple-iphone-14-pro-128gb-space-schwarz-verkaufen,2026-09-13,ankauf-trade-in
+iphone-14-pro,"256 GB, Space Schwarz","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",428.48,https://www.clevertronic.de/handy_verkaufen/17690/apple-iphone-14-pro-256gb-space-schwarz-verkaufen,2026-09-13,ankauf-trade-in
+iphone-14-pro,"128 GB, Space Schwarz","Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",492.03,https://www.handyverkauf-vergleich.de/handy/apple-iphone-14-pro-128gb-space-schwarz,2026-09-13,ankauf-trade-in
+iphone-14-pro,"128 GB, Space Schwarz","Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",430.77,https://www.handyverkauf-vergleich.de/handy/apple-iphone-14-pro-128gb-space-schwarz,2026-09-13,ankauf-trade-in
+iphone-14-pro-max,"128 GB, Space Schwarz","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",432.43,https://www.clevertronic.de/handy_verkaufen/17706/apple-iphone-14-pro-max-128gb-space-schwarz-verkaufen,2026-09-13,ankauf-trade-in
+iphone-14-pro-max,"256 GB, Space Schwarz","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",465.01,https://www.clevertronic.de/handy_verkaufen/17708/apple-iphone-14-pro-max-256gb-space-schwarz-verkaufen,2026-09-13,ankauf-trade-in
+iphone-14-pro-max,"128 GB, Dunkellila","Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",543.05,https://www.handyverkauf-vergleich.de/handy/apple-iphone-14-pro-max-128gb-dunkellila,2026-09-13,ankauf-trade-in
+iphone-14-pro-max,"128 GB, Dunkellila","Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",538.88,https://www.handyverkauf-vergleich.de/handy/apple-iphone-14-pro-max-128gb-dunkellila,2026-09-13,ankauf-trade-in
+iphone-15,"128 GB, Schwarz","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",510,https://www.clevertronic.de/handy_verkaufen/19902/apple-iphone-15-128gb-schwarz-verkaufen,2026-09-13,ankauf-trade-in
+iphone-15,"256 GB, Schwarz","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",510,https://www.clevertronic.de/handy_verkaufen/19917/apple-iphone-15-256gb-schwarz-verkaufen,2026-09-13,ankauf-trade-in
+iphone-15,"128 GB, Schwarz","Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",511,https://www.handyverkauf-vergleich.de/handy/apple-iphone-15-128gb-schwarz,2026-09-13,ankauf-trade-in
+iphone-15,"128 GB, Schwarz","Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",463.93,https://www.handyverkauf-vergleich.de/handy/apple-iphone-15-128gb-schwarz,2026-09-13,ankauf-trade-in
+iphone-15-pro,"128 GB, Titan Schwarz","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",660,https://www.clevertronic.de/handy_verkaufen/19958/apple-iphone-15-pro-128gb-titan-schwarz-verkaufen,2026-09-13,ankauf-trade-in
+iphone-15-pro,"256 GB, Titan Schwarz","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",700,https://www.clevertronic.de/handy_verkaufen/19945/apple-iphone-15-pro-256gb-titan-schwarz-verkaufen,2026-09-13,ankauf-trade-in
+iphone-15-pro,"128 GB, Titan Schwarz","Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",801.22,https://www.handyverkauf-vergleich.de/handy/apple-iphone-15-pro-128gb-titan-schwarz,2026-09-13,ankauf-trade-in
+iphone-15-pro,"128 GB, Titan Schwarz","Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",660.9,https://www.handyverkauf-vergleich.de/handy/apple-iphone-15-pro-128gb-titan-schwarz,2026-09-13,ankauf-trade-in
+iphone-15-pro-max,"256 GB, Titan Schwarz","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",750,https://www.clevertronic.de/handy_verkaufen/19962/apple-iphone-15-pro-max-256gb-titan-schwarz-verkaufen,2026-09-13,ankauf-trade-in
+iphone-15-pro-max,"512 GB, Titan Schwarz","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",800,https://www.clevertronic.de/handy_verkaufen/19966/apple-iphone-15-pro-max-512gb-titan-schwarz-verkaufen,2026-09-13,ankauf-trade-in
+iphone-15-pro-max,"256 GB, Titan Schwarz","Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",969.87,https://www.handyverkauf-vergleich.de/handy/apple-iphone-15-pro-max-256gb-titan-schwarz,2026-09-13,ankauf-trade-in
+iphone-15-pro-max,"256 GB, Titan Schwarz","Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",634,https://www.handyverkauf-vergleich.de/handy/apple-iphone-15-pro-max-256gb-titan-schwarz,2026-09-13,ankauf-trade-in
+samsung-galaxy-s22-ultra,"128 GB, Phantom Black","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",250.33,https://www.clevertronic.de/handy_verkaufen/16874/samsung-galaxy-s22-ultra-5g-128gb-phantom-black-verkaufen,2026-09-13,ankauf-trade-in
+samsung-galaxy-s22-ultra,"256 GB, Phantom Black","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",279.58,https://www.clevertronic.de/handy_verkaufen/16878/samsung-galaxy-s22-ultra-5g-256gb-phantom-black-verkaufen,2026-09-13,ankauf-trade-in
+samsung-galaxy-s22-ultra,"128 GB Dual-SIM, Phantom Black","Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",311.25,https://www.handyverkauf-vergleich.de/handy/samsung-galaxy-s22-ultra-128gb-dual-sim-phantom-black,2026-09-13,ankauf-trade-in
+samsung-galaxy-s22-ultra,"128 GB Dual-SIM, Phantom Black","Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",251.17,https://www.handyverkauf-vergleich.de/handy/samsung-galaxy-s22-ultra-128gb-dual-sim-phantom-black,2026-09-13,ankauf-trade-in
+samsung-galaxy-s23-plus,"256 GB, Phantom Black","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",295,https://www.clevertronic.de/handy_verkaufen/18200/samsung-galaxy-s23%2B-256gb-phantom-black-verkaufen,2026-09-13,ankauf-trade-in
+samsung-galaxy-s23-plus,"512 GB, Phantom Black","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",311,https://www.clevertronic.de/handy_verkaufen/18208/samsung-galaxy-s23%2B-512gb-phantom-black-verkaufen,2026-09-13,ankauf-trade-in
+samsung-galaxy-s23-plus,"256 GB, Green","Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",346.35,https://www.handyverkauf-vergleich.de/handy/samsung-galaxy-s23-plus-256gb-green,2026-09-13,ankauf-trade-in
+samsung-galaxy-s23-plus,"256 GB, Green","Neu / originalverpackt, unbenutzt (Clevertronic, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",295,https://www.handyverkauf-vergleich.de/handy/samsung-galaxy-s23-plus-256gb-green,2026-09-13,ankauf-trade-in
+samsung-galaxy-s23-fe,"128 GB, Graphite","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",208.29,https://www.clevertronic.de/handy_verkaufen/20457/samsung-galaxy-s23-fe-128gb-graphite-verkaufen,2026-09-13,ankauf-trade-in
+samsung-galaxy-s23-fe,"256 GB, Graphite","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",253.64,https://www.clevertronic.de/handy_verkaufen/20465/samsung-galaxy-s23-fe-256gb-graphite-verkaufen,2026-09-13,ankauf-trade-in
+samsung-galaxy-s23-fe,"128 GB Dual-SIM, Graphite","Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",211.31,https://www.handyverkauf-vergleich.de/handy/samsung-galaxy-s23-fe-128gb-dual-sim-graphite,2026-09-13,ankauf-trade-in
+samsung-galaxy-s23-fe,"128 GB Dual-SIM, Graphite","Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",197.19,https://www.handyverkauf-vergleich.de/handy/samsung-galaxy-s23-fe-128gb-dual-sim-graphite,2026-09-13,ankauf-trade-in
+samsung-galaxy-s24,"128 GB, Onyx Black","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",350.5,https://www.clevertronic.de/handy_verkaufen/20627/samsung-galaxy-s24-128gb-onyx-black-verkaufen,2026-09-13,ankauf-trade-in
+samsung-galaxy-s24,"256 GB, Onyx Black","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",436,https://www.clevertronic.de/handy_verkaufen/20631/samsung-galaxy-s24-256gb-onyx-black-verkaufen,2026-09-13,ankauf-trade-in
+samsung-galaxy-s24,"128 GB Dual-SIM, Onyx Black","Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",351.15,https://www.handyverkauf-vergleich.de/handy/samsung-galaxy-s24-128gb-dual-sim-onyx-black,2026-09-13,ankauf-trade-in
+samsung-galaxy-s24,"128 GB Dual-SIM, Onyx Black","Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",346.35,https://www.handyverkauf-vergleich.de/handy/samsung-galaxy-s24-128gb-dual-sim-onyx-black,2026-09-13,ankauf-trade-in
+samsung-galaxy-s24-ultra,"256 GB, Titanium Black","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",651,https://www.clevertronic.de/handy_verkaufen/20644/samsung-galaxy-s24-ultra-256gb-titanium-black-verkaufen,2026-09-13,ankauf-trade-in
+samsung-galaxy-s24-ultra,"512 GB, Titanium Black","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",689,https://www.clevertronic.de/handy_verkaufen/20648/samsung-galaxy-s24-ultra-512gb-titanium-black-verkaufen,2026-09-13,ankauf-trade-in
+samsung-galaxy-s24-ultra,"256 GB Dual-SIM, Titanium Black","Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",651.85,https://www.handyverkauf-vergleich.de/handy/samsung-galaxy-s24-ultra-256gb-dual-sim-titanium-black,2026-09-13,ankauf-trade-in
+samsung-galaxy-s24-ultra,"512 GB Dual-SIM, Titanium Orange","Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",696.75,https://www.handyverkauf-vergleich.de/handy/samsung-galaxy-s24-ultra-512gb-dual-sim-titanium-orange,2026-09-13,ankauf-trade-in
+google-pixel-7a,"128 GB, Charcoal","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",140.25,https://www.clevertronic.de/handy_verkaufen/18883/google-pixel-7a-128gb-charcoal-verkaufen,2026-09-13,ankauf-trade-in
+google-pixel-7a,"128 GB Dual-SIM, Charcoal","Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",162.75,https://www.handyverkauf-vergleich.de/handy/google-pixel-7a-128gb-dual-sim-charcoal,2026-09-13,ankauf-trade-in
+google-pixel-7a,"128 GB Dual-SIM, Charcoal","Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",162.09,https://www.handyverkauf-vergleich.de/handy/google-pixel-7a-128gb-dual-sim-charcoal,2026-09-13,ankauf-trade-in
+google-pixel-8,"128 GB, Obsidian","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",267.88,https://www.clevertronic.de/handy_verkaufen/20113/google-pixel-8-128gb-obsidian-verkaufen,2026-09-13,ankauf-trade-in
+google-pixel-8,"256 GB, Obsidian","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",319.47,https://www.clevertronic.de/handy_verkaufen/20117/google-pixel-8-256gb-obsidian-verkaufen,2026-09-13,ankauf-trade-in
+google-pixel-8,"128 GB, Obsidian Black","Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",296.66,https://www.handyverkauf-vergleich.de/handy/google-pixel-8-128gb-obsidian-black,2026-09-13,ankauf-trade-in
+google-pixel-8,"128 GB, Obsidian Black","Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",267.38,https://www.handyverkauf-vergleich.de/handy/google-pixel-8-128gb-obsidian-black,2026-09-13,ankauf-trade-in
+google-pixel-8-pro,"128 GB, Obsidian","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",355.62,https://www.clevertronic.de/handy_verkaufen/20120/google-pixel-8-pro-128gb-obsidian-verkaufen,2026-09-13,ankauf-trade-in
+google-pixel-8-pro,"256 GB, Obsidian","bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand)",417.58,https://www.clevertronic.de/handy_verkaufen/20123/google-pixel-8-pro-256gb-obsidian-verkaufen,2026-09-13,ankauf-trade-in
+google-pixel-8-pro,"128 GB, Bay","Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",357,https://www.handyverkauf-vergleich.de/handy/google-pixel-8-pro-128gb-bay,2026-09-13,ankauf-trade-in
+google-pixel-8-pro,"128 GB, Bay","Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026)",355,https://www.handyverkauf-vergleich.de/handy/google-pixel-8-pro-128gb-bay,2026-09-13,ankauf-trade-in
+lenovo-thinkpad-t14-gen3,Core i5-1245U / 16 GB DDR4 / 250 GB SSD,Fair,559,https://www.afbshop.de/lenovo-thinkpad-t14-gen-3-intel/de-47.326-c,2026-09-13,refurbished-marktplatz
+lenovo-thinkpad-t14-gen3,Ryzen 5 Pro 6650U / 16 GB DDR5 / 500 GB SSD,Gut,649,https://www.afbshop.de/lenovo-thinkpad-t14-gen-3-amd/de-48.201-b/,2026-09-13,refurbished-marktplatz
+lenovo-thinkpad-t14-gen3,"Core i5-1245U / 16 GB / 256 GB, DE-Tastatur",Exzellent,569,https://www.refurbed.de/p/lenovo-thinkpad-t14-g3-i5-1245u/,2026-09-13,refurbished-marktplatz
+lenovo-thinkpad-t14-gen3,"Core i5-1235U / 16 GB DDR4 / 256 GB SSD, DE-Tastatur, IR-Kamera",refurbished - sehr gut (A-),559.99,https://www.thinkstore24.de/laptops/lenovo-t-serie-14-zoll/thinkpad-t14-gen-3/7582/lenovo-thinkpad-t14-gen-3-i5-1235u-16gb-ram-256gb-ssd-wuxga-ips-ir-de-tastatur-win11-a,2026-09-13,refurbished-marktplatz
+lenovo-thinkpad-t14-gen4,Core i7-1365U / 32 GB DDR5 / 256 GB SSD,refurbished - hervorragend,899.99,https://www.thinkstore24.de/laptops/lenovo-t-serie-14-zoll/thinkpad-t14-gen-4/7853/,2026-09-13,refurbished-marktplatz
+lenovo-thinkpad-t14-gen4,Core i7-1365U / 16 GB DDR5 / 512 GB SSD,refurbished - hervorragend,849.99,https://www.thinkstore24.de/laptops/lenovo-t-serie-14-zoll/thinkpad-t14-gen-4/8485/,2026-09-13,refurbished-marktplatz
+lenovo-thinkpad-t14-gen4,Ryzen 5 PRO 7540U / 16 GB DDR5 / 512 GB SSD,gebraucht - gut,749.99,https://www.thinkstore24.de/laptops/lenovo-thinkpad/8346/,2026-09-13,refurbished-marktplatz
+lenovo-thinkpad-t14-gen4,"Ryzen 5 PRO 7540U / 16 GB LPDDR5 / 512 GB SSD, Touch",refurbished - sehr gut,769.99,https://www.thinkstore24.de/laptops/lenovo-t-serie-14-zoll/thinkpad-t14-gen-4/8265/,2026-09-13,refurbished-marktplatz
+lenovo-thinkpad-t14-gen5,Core Ultra 7 165U vPro / 32 GB DDR5 / SSD konfigurierbar,refurbished - hervorragend,1189.99,https://www.thinkstore24.de/gebrauchte-laptops-lenovo-thinkpad-t-serie-business-notebooks-kaufen-bu-noutbuki-lenovo-v-germanii/,2026-09-13,refurbished-marktplatz
+lenovo-thinkpad-e14-gen4,Core i5-1235U / 16 GB DDR4 / 500 GB SSD,Gut,459,https://www.afbshop.de/lenovo-thinkpad-e14-gen-4-intel/de-50.398-b/,2026-09-13,refurbished-marktplatz
+lenovo-thinkpad-e14-gen4,Ryzen 5 5625U / 16 GB DDR4 / 500 GB SSD,Gut,469,https://www.afbshop.de/lenovo-thinkpad-e14-gen-4-amd/de-42.549-b,2026-09-13,refurbished-marktplatz
+lenovo-thinkpad-l14-gen3,"Core i5-1245U / 16 GB / 256 GB, DE-Tastatur",Gut,414.99,https://www.refurbed.de/p/lenovo-thinkpad-l14-g3-i5-1245u/,2026-09-13,refurbished-marktplatz
+lenovo-thinkpad-l14-gen3,"Core i5-1245U / 16 GB / 512 GB, DE-Tastatur",Sehr gut,503.99,https://www.refurbed.de/p/lenovo-thinkpad-l14-g3-i5-1245u/,2026-09-13,refurbished-marktplatz
+lenovo-thinkpad-l14-gen3,"Core i5-1245U / 16 GB / 256 GB, DE-Tastatur",Exzellent,608.99,https://www.refurbed.de/p/lenovo-thinkpad-l14-g3-i5-1245u/,2026-09-13,refurbished-marktplatz
+lenovo-thinkpad-l14-gen3,"Ryzen 7 Pro 5875U / 16 GB DDR4 / 500 GB SSD, Touch",Gut,539,https://www.afbshop.de/lenovo-thinkpad-l14-gen-3-amd/de-50.316-b/,2026-09-13,refurbished-marktplatz
+lenovo-thinkpad-l14-gen4,"Core i5-1335U / 16 GB DDR4 / 256 GB, ND- oder UK-Tastatur",Sehr gut,669,https://www.refurbed.de/p/lenovo-thinkpad-l14-g4-i5-1335u/,2026-09-13,refurbished-marktplatz
+lenovo-thinkpad-x1-carbon-gen10,Core i7-1260P / 32 GB LPDDR5 / 1 TB,Sehr gut,689,https://www.refurbed.de/p/lenovo-carbon-x1-g10-i7-1260p/,2026-09-13,refurbished-marktplatz
+lenovo-thinkpad-x1-carbon-gen10,Core i7-1260P / 16 GB LPDDR5 / 512 GB,gebraucht - gut,729.99,https://www.thinkstore24.de/laptops/lenovo-x1-serie/thinkpad-x1-carbon/gen-10/8023/lenovo-thinkpad-x1-carbon-gen-10-i7-1260p-16gb-ram-512gb-ssd-wuxga-ips-backlit-ir-cam-win11,2026-09-13,refurbished-marktplatz
+lenovo-thinkpad-x1-carbon-gen10,"Core i5-1240P / 16 GB LPDDR5 / 256 GB, DE-Tastatur",refurbished - hervorragend,699.99,https://www.thinkstore24.de/laptops/lenovo-x1-serie/thinkpad-x1-carbon/gen-10/8205/lenovo-thinkpad-x1-carbon-gen-10-i5-1240p-16gb-ram-256gb-ssd-wuxga-ips-ir-de-tastatur-a,2026-09-13,refurbished-marktplatz
+lenovo-thinkpad-x1-carbon-gen10,"Core i7-1265U / 32 GB DDR5 / 512 GB, Touch",refurbished - sehr gut,929.99,https://www.thinkstore24.de/laptops/lenovo-x1-serie/thinkpad-x1-carbon/gen-10/8341/lenovo-thinkpad-x1-carbon-gen-10-i7-1265u-32gb-ram-512gb-ssd-wuxga-touch-backlit-ir-d,2026-09-13,refurbished-marktplatz
+lenovo-thinkpad-x1-carbon-gen11,"Core i7-1365U / 32 GB DDR5 / 512 GB, Touch",sehr gut,999.99,https://www.thinkstore24.de/laptops/lenovo-x1-serie/thinkpad-x1-carbon/gen-11/8343/,2026-09-13,refurbished-marktplatz
+lenovo-thinkpad-x1-carbon-gen11,Core i5-1335U / 16 GB DDR5 / 256 GB,sehr gut,1099.99,https://www.thinkstore24.de/laptops/lenovo-x1-serie/thinkpad-x1-carbon/gen-11/8085/,2026-09-13,refurbished-marktplatz
+lenovo-thinkpad-x1-carbon-gen11,Core i7-1355U / 16 GB DDR5 / 512 GB / LTE,sehr gut,1139.99,https://www.thinkstore24.de/laptops/lenovo-x1-serie/thinkpad-x1-carbon/gen-11/8044/,2026-09-13,refurbished-marktplatz
+lenovo-thinkpad-x1-carbon-gen11,"Core i7-1355U / 16 GB DDR5 / 256 GB, Touch",wie neu,1199.99,https://www.thinkstore24.de/laptops/lenovo-x1-serie/thinkpad-x1-carbon/gen-11/8280/,2026-09-13,refurbished-marktplatz
+dell-latitude-5430,Core i5-1245U / 16 GB DDR4 / 250 GB SSD,Fair,519,https://www.afbshop.de/dell-latitude-5430/de-41.393-c,2026-09-13,refurbished-marktplatz
+dell-latitude-5430,"Core i5-1235U / 8 GB / 256 GB, DE-Tastatur",Sehr gut,290,https://www.refurbed.de/p/dell-latitude-5430-i5-1235u/,2026-09-13,refurbished-marktplatz
+dell-latitude-5430,"Core i5-1235U / 16 GB / 512 GB, DE-Tastatur",Gut,550.99,https://www.refurbed.de/p/dell-latitude-5430-i5-1235u/,2026-09-13,refurbished-marktplatz
+dell-latitude-5430,"Core i5-1235U / 32 GB / 512 GB, DE-Tastatur",Gut,657.99,https://www.refurbed.de/p/dell-latitude-5430-i5-1235u/,2026-09-13,refurbished-marktplatz
+dell-latitude-5440,"Core i5-1335U / 16 GB DDR4 / 256 GB, ND- oder SE-Tastatur",Sehr gut,584.99,https://www.refurbed.de/p/dell-latitude-5440-i5-1335u/,2026-09-13,refurbished-marktplatz
+dell-latitude-3440,"Core i5-1335U / 16 GB DDR4 / 256 GB, SE-Tastatur (DE wählbar)",Sehr gut,417.27,https://www.refurbed.de/p/dell-latitude-3440-i5-1335u/,2026-09-13,refurbished-marktplatz
+dell-latitude-7440,"Core i7-1365U / 16 GB LPDDR5 / 256 GB, NL-Tastatur",Premium,731,https://www.refurbed.de/p/dell-latitude-7440-i7-1365u/,2026-09-13,refurbished-marktplatz
+hp-elitebook-840-g9,Core i7-1265U / 32 GB DDR5 / 500 GB SSD,Gut,899,https://www.afbshop.de/hp-elitebook-840-g9/de-48.397-b/,2026-09-13,refurbished-marktplatz
+hp-elitebook-840-g9,"Core i5-1235U / 8 GB DDR4 / 256 GB, DE-Tastatur",Gut,734.99,https://www.refurbed.de/p/hp-elitebook-840-g9-i5-1235u/,2026-09-13,refurbished-marktplatz
+hp-elitebook-840-g9,"Core i5-1235U / 16 GB / 512 GB, IT-Tastatur",Sehr gut,700,https://www.refurbed.de/p/hp-elitebook-840-g9-i5-1235u/,2026-09-13,refurbished-marktplatz
+hp-elitebook-840-g9,Core i5-1245U / 16 GB DDR4 / 256 GB,Premium,615,https://www.refurbed.de/p/hp-elitebook-840-g9-i5-1245u/,2026-09-13,refurbished-marktplatz
+hp-elitebook-840-g10,"Core i5-1335U / 16 GB LPDDR5 / 512 GB, IT- oder DE-Tastatur",Gut,659,https://www.refurbed.de/p/hp-elitebook-840-g10-i5-1335u/,2026-09-13,refurbished-marktplatz
+hp-elitebook-840-g10,Core i7-1365U / 32 GB DDR5 / 500 GB SSD,Fair,799,https://www.afbshop.de/hp-elitebook-840-g10/de-36.892-c/,2026-09-13,refurbished-marktplatz
+hp-elitebook-650-g9,Core i5-1245U / 16 GB DDR4 / 250 GB SSD,"Gebraucht (AfB-Grading, Klasse in der Suchvorschau nicht genannt)",529,https://www.afbshop.de/gebrauchte-notebooks/hp-elitebooks/,2026-09-13,refurbished-marktplatz
+hp-probook-450-g9,"Core i5-1235U / 8 GB DDR4 / 256 GB, SE-Tastatur",Sehr gut,437.85,https://www.refurbed.de/p/hp-probook-450-g9-1235u-15-6/,2026-09-13,refurbished-marktplatz
+hp-probook-450-g9,"Core i5-1235U / 16 GB / 256 GB, ND-Tastatur",Sehr gut,502.16,https://www.refurbed.de/p/hp-probook-450-g9-1235u-15-6/,2026-09-13,refurbished-marktplatz
+hp-probook-450-g9,"Core i5-1235U / 16 GB / 512 GB, ND-Tastatur",Sehr gut,630.99,https://www.refurbed.de/p/hp-probook-450-g9-1235u-15-6/,2026-09-13,refurbished-marktplatz
+hp-probook-450-g9,"Core i5-1235U / 8 GB / 256 GB, NL-Tastatur",Premium,592.99,https://www.refurbed.de/p/hp-probook-450-g9-1235u-15-6/,2026-09-13,refurbished-marktplatz
+hp-probook-450-g10,"Core i5-1335U / 8 GB DDR4 / 256 GB, BE- oder DE-Tastatur",Premium,629,https://www.refurbed.de/p/hp-probook-450-g10-i5-1335u/,2026-09-13,refurbished-marktplatz
+hp-probook-450-g10,Core i5-1334U / 16 GB DDR4 / 500 GB SSD,Sehr gut,649,https://www.afbshop.de/hp-probook-450-g10/de-44.905-a/,2026-09-13,refurbished-marktplatz
+hp-zbook-firefly-14-g9,Core i7-1265U / 32 GB DDR5 / 256 GB SSD,"Etwas stärkere Gebrauchsspuren, Kratzer, Dellen oder Verformungen auf dem Displaydeckel oder dem Gehäuse",559.2,https://www.lapstore.de/a.php/shop/lapstore/lang/de/a/90666/kw/HP-ZBook-Firefly-14-G9/,2026-09-13,refurbished-marktplatz
+hp-zbook-firefly-14-g9,Core i7-1265U / 32 GB DDR5 / 256 GB SSD,Helligkeitsflecken im Display,629.1,https://www.lapstore.de/a.php/shop/lapstore/lang/de/a/90836/kw/HP-ZBook-Firefly-14-G9/,2026-09-13,refurbished-marktplatz
+apple-macbook-air-13-6-2022,"M2 / 8 GB / 256 GB (spacegrau, DE-Tastatur)",Gut,970.99,https://www.refurbed.de/p/apple-macbook-air-m2-2022/,2026-09-13,refurbished-marktplatz
+apple-macbook-air-13-6-2022,"M2 / 8 GB / 512 GB (spacegrau, DE-Tastatur)",Sehr gut,1066.99,https://www.refurbed.de/p/apple-macbook-air-m2-2022/,2026-09-13,refurbished-marktplatz
+apple-macbook-air-13-6-2022,"M2 / 16 GB / 512 GB (spacegrau, DE-Tastatur)",Sehr gut,1245.99,https://www.refurbed.de/p/apple-macbook-air-m2-2022/,2026-09-13,refurbished-marktplatz
+apple-macbook-air-13-6-2022,M2 (8-Core GPU) / 8 GB / 256 GB (space grau),Stark genutzt,750.99,"https://www.rebuy.de/i,12553324/apple/apple-macbook-air-13-6-liquid-true-tone-retina-display-m2-8-core-gpu-8-gb-ram-256-gb-ssd-mid-2022-space-grau",2026-09-13,refurbished-marktplatz
+apple-macbook-air-13-6-2022,M2 (8-Core GPU) / 8 GB / 256 GB (space grau),Gut,808.99,"https://www.rebuy.de/i,12553324/apple/apple-macbook-air-13-6-liquid-true-tone-retina-display-m2-8-core-gpu-8-gb-ram-256-gb-ssd-mid-2022-space-grau",2026-09-13,refurbished-marktplatz
+apple-macbook-air-13-6-2022,M2 (8-Core GPU) / 8 GB / 256 GB (space grau),Sehr gut,833.99,"https://www.rebuy.de/i,12553324/apple/apple-macbook-air-13-6-liquid-true-tone-retina-display-m2-8-core-gpu-8-gb-ram-256-gb-ssd-mid-2022-space-grau",2026-09-13,refurbished-marktplatz
+apple-macbook-air-13-6-2022,M2 (8-Core GPU) / 8 GB / 256 GB (space grau),Exzellent,900.99,"https://www.rebuy.de/i,12553324/apple/apple-macbook-air-13-6-liquid-true-tone-retina-display-m2-8-core-gpu-8-gb-ram-256-gb-ssd-mid-2022-space-grau",2026-09-13,refurbished-marktplatz
+apple-macbook-air-13-6-2022,M2 (8-Core GPU) / 8 GB / 256 GB (space grau),"Sehr gut (Seite zeigt 'ausverkauft', Preis dennoch angezeigt)",773,https://asgoodasnew.de/Apple-MacBook-Air-2022-13-Apple-M2-8-Core-CPU-8-Core-GPU-16-Core-Neural-Engine-256-GB-SSD-8-GB-space-grau.html,2026-09-13,refurbished-marktplatz
+apple-macbook-air-15-m2-2023,"M2 / 8 GB / 256 GB (dunkelblau, DE-Tastatur)",Sehr gut,1205,https://www.refurbed.de/p/apple-macbook-air-m2-2023-15/,2026-09-13,refurbished-marktplatz
+apple-macbook-air-15-m2-2023,"M2 / 8 GB / 512 GB (spacegrau, DE-Tastatur)",Exzellent,1396.99,https://www.refurbed.de/p/apple-macbook-air-m2-2023-15/,2026-09-13,refurbished-marktplatz
+apple-macbook-air-15-m2-2023,"M2 / 16 GB / 1 TB (dunkelblau, DE-Tastatur)",Gut,1649.99,https://www.refurbed.de/p/apple-macbook-air-m2-2023-15/,2026-09-13,refurbished-marktplatz
+apple-macbook-air-15-m2-2023,M2 (8-Core CPU / 10-Core GPU) / 8 GB / 256 GB (mitternacht),Stark genutzt,837.99,"https://www.rebuy.de/i,13413224/apple/apple-macbook-air-15-3-liquid-true-tone-retina-display-m2-8-core-cpu-10-core-gpu-8-gb-ram-256-gb-ssd-mid-2023-mitternacht",2026-09-13,refurbished-marktplatz
+apple-macbook-air-13-m3-2024,"M3 / 8 GB / 256 GB (13,6 Zoll)",Gut,1115,https://www.refurbed.de/p/apple-macbook-air-m3-2024/,2026-09-13,refurbished-marktplatz
+apple-macbook-air-13-m3-2024,"M3 / 8 GB / 256 GB (dunkelblau, DE-Tastatur)",Premium,1225,https://www.refurbed.de/p/apple-macbook-air-m3-2024/,2026-09-13,refurbished-marktplatz
+apple-macbook-air-13-m3-2024,"M3 / 8 GB / 512 GB (dunkelblau, UK-Tastatur)",Gut,1279,https://www.refurbed.de/p/apple-macbook-air-m3-2024/,2026-09-13,refurbished-marktplatz
+apple-macbook-air-13-m3-2024,"M3 / 16 GB / 256 GB (silber, UK-Tastatur)",Sehr gut,1337,https://www.refurbed.de/p/apple-macbook-air-m3-2024/,2026-09-13,refurbished-marktplatz
+apple-macbook-pro-14-m2-pro-2023,"M2 Pro / 16 GB / 512 GB (spacegrau, DE-Tastatur)",Sehr gut,1369,https://www.refurbed.de/p/apple-macbook-pro-2023-m2-14/,2026-09-13,refurbished-marktplatz
+apple-macbook-pro-14-m2-pro-2023,"M2 Pro / 16 GB / 1 TB (silber, NL-Tastatur)",Gut,1821,https://www.refurbed.de/p/apple-macbook-pro-2023-m2-14/,2026-09-13,refurbished-marktplatz
+apple-macbook-pro-14-m2-pro-2023,"M2 Pro / 32 GB / 1 TB (spacegrau, DE-Tastatur)",Sehr gut,2047.99,https://www.refurbed.de/p/apple-macbook-pro-2023-m2-14/,2026-09-13,refurbished-marktplatz
+apple-macbook-pro-14-m2-pro-2023,M2 Pro (10-Core CPU / 16-Core GPU) / 16 GB / 512 GB (space grau),Stark genutzt,1157.99,"https://www.rebuy.de/i,13342056/apple/apple-macbook-pro-14-2-liquid-retina-xdr-display-m2-pro-10-core-cpu-16-core-gpu-16-gb-ram-512-gb-ssd-early-2023-space-grau",2026-09-13,refurbished-marktplatz
+apple-macbook-pro-14-m2-pro-2023,M2 Pro (10-Core CPU / 16-Core GPU) / 16 GB / 512 GB (space grau),Gut,1247.99,"https://www.rebuy.de/i,13342056/apple/apple-macbook-pro-14-2-liquid-retina-xdr-display-m2-pro-10-core-cpu-16-core-gpu-16-gb-ram-512-gb-ssd-early-2023-space-grau",2026-09-13,refurbished-marktplatz
+apple-macbook-pro-14-m2-pro-2023,M2 Pro (10-Core CPU / 16-Core GPU) / 16 GB / 512 GB (space grau),Sehr gut,1286.99,"https://www.rebuy.de/i,13342056/apple/apple-macbook-pro-14-2-liquid-retina-xdr-display-m2-pro-10-core-cpu-16-core-gpu-16-gb-ram-512-gb-ssd-early-2023-space-grau",2026-09-13,refurbished-marktplatz
+apple-macbook-pro-14-m2-pro-2023,M2 Pro (10-Core CPU / 16-Core GPU) / 16 GB / 512 GB (space grau),Exzellent,1389.99,"https://www.rebuy.de/i,13342056/apple/apple-macbook-pro-14-2-liquid-retina-xdr-display-m2-pro-10-core-cpu-16-core-gpu-16-gb-ram-512-gb-ssd-early-2023-space-grau",2026-09-13,refurbished-marktplatz
+apple-macbook-pro-16-m2-pro-2023,"M2 Pro (12-Core) / 16 GB / 512 GB (spacegrau, US-Tastatur)",Sehr gut,1396,https://www.refurbed.de/p/apple-macbook-pro-2023-m2-16-2/,2026-09-13,refurbished-marktplatz
+apple-macbook-pro-16-m2-pro-2023,"M2 Pro / 16 GB / 1 TB (silber, US-Tastatur)",Gut,1399,https://www.refurbed.de/p/apple-macbook-pro-2023-m2-16-2/,2026-09-13,refurbished-marktplatz
+apple-macbook-pro-16-m2-pro-2023,"M2 Pro / 32 GB / 1 TB (spacegrau, FR-Tastatur)",Gut,1768.99,https://www.refurbed.de/p/apple-macbook-pro-2023-m2-16-2/,2026-09-13,refurbished-marktplatz
+apple-macbook-pro-16-m2-pro-2023,"M2 Pro / 32 GB / 1 TB (spacegrau, UK-Tastatur)",Sehr gut,1914.99,https://www.refurbed.de/p/apple-macbook-pro-2023-m2-16-2/,2026-09-13,refurbished-marktplatz
+apple-macbook-pro-14-m3-2023,"M3 (8-Core CPU / 10-Core GPU) / 8 GB / 512 GB (silber, DE-Tastatur)",Sehr gut,1090.14,https://www.refurbed.de/p/apple-macbook-pro-2023-m3-14/,2026-09-13,refurbished-marktplatz
+apple-macbook-pro-14-m3-2023,"M3 / 8 GB / 1 TB (spacegrau, DE-Tastatur)",Exzellent,1294.99,https://www.refurbed.de/p/apple-macbook-pro-2023-m3-14/,2026-09-13,refurbished-marktplatz
+apple-macbook-pro-14-m3-2023,M3 (8-Core CPU / 10-Core GPU) / 8 GB / 512 GB (space grau),Exzellent,1190.99,"https://www.rebuy.de/i,15324995/apple/apple-macbook-pro-14-liquid-retina-xdr-display-m3-8-core-cpu-10-core-gpu-8-gb-ram-512-gb-ssd-late-2023-space-grau",2026-09-13,refurbished-marktplatz
+apple-macbook-pro-14-m3-2023,M3 Pro (11-Core CPU / 14-Core GPU) / 18 GB / 512 GB (space schwarz),Gut,1466.99,"https://www.rebuy.de/i,15330611/apple/apple-macbook-pro-14-liquid-retina-xdr-display-m3-pro-11-core-cpu-14-core-gpu-18-gb-ram-512-gb-ssd-late-2023-space-schwarz",2026-09-13,refurbished-marktplatz
+microsoft-surface-laptop-5,"13,5 Zoll / Core i5-1235U / 8 GB / 256 GB (platin, FR-Tastatur, Win 11 Pro)",Gut,480.49,https://www.refurbed.de/p/microsoft-surface-5-i5-1235u/,2026-09-13,refurbished-marktplatz
+microsoft-surface-laptop-5,15 Zoll / Core i7-1265U / 8 GB / 256 GB (UK-Tastatur),Gut,599,https://www.refurbed.de/p/microsoft-surface-5-i7-1265u-15/,2026-09-13,refurbished-marktplatz
+microsoft-surface-laptop-go,"Core i5-1235U / 8 GB / 256 GB (platin, US-Tastatur, Win 11 Pro)",Sehr gut,615.49,https://www.refurbed.de/p/microsoft-surface-go-3-i5-1235u/,2026-09-13,refurbished-marktplatz
+microsoft-surface-pro-9-i5,"Core i5 / 8 GB / 256 GB (Wi-Fi, graphit)",Gut,643.99,"https://www.rebuy.de/i,13294851/tablets-und-ebook-reader/microsoft-surface-pro-9-13-intel-evo-core-i5-256gb-ssd-8gb-ram-wi-fi-graphit",2026-09-13,refurbished-marktplatz
+microsoft-surface-pro-9-i7,"Core i7 / 16 GB / 256 GB (Wi-Fi, graphit)",Sehr gut,1105.99,"https://www.rebuy.de/i,13295552/tablets-und-ebook-reader/microsoft-surface-pro-9-13-intel-evo-core-i7-256gb-ssd-16gb-ram-wi-fi-graphit",2026-09-13,refurbished-marktplatz
+microsoft-surface-pro-9-i7,"Core i7 / 16 GB / 512 GB (Wi-Fi, graphit)",Zustand in Listenansicht nicht ausgewiesen (rebuy 'Angebotspreis'),1164.99,"https://www.rebuy.de/i,13295561/tablets-und-ebook-reader/microsoft-surface-pro-9-13-intel-evo-core-i7-512gb-ssd-16gb-ram-wi-fi-graphit",2026-09-13,refurbished-marktplatz
+microsoftsurface-pro-10-u7,"Core Ultra 7 / 16 GB / 512 GB (platin, Win 11 Pro)",Wie neu,1249,https://asgoodasnew.de/Tablets/Microsoft/Surface-Pro-10/Microsoft-Surface-Pro-10-Core-Ultra-7-16GB-Win11pro-512-GB-platin.html,2026-09-13,refurbished-marktplatz
+microsoftsurface-pro-10-u7,"Core Ultra 7 / 16 GB / 512 GB (platin, Win 11 Pro)",Sehr gut,1069,https://asgoodasnew.de/Tablets/Microsoft/Surface-Pro-10/Microsoft-Surface-Pro-10-Core-Ultra-7-16GB-Win11pro-512-GB-platin.html,2026-09-13,refurbished-marktplatz
+microsoftsurface-pro-10-u7,"Core Ultra 7 / 16 GB / 512 GB (platin, Win 11 Pro)",Gut,979,https://asgoodasnew.de/Tablets/Microsoft/Surface-Pro-10/Microsoft-Surface-Pro-10-Core-Ultra-7-16GB-Win11pro-512-GB-platin.html,2026-09-13,refurbished-marktplatz
+microsoftsurface-pro-10-u7,"Core Ultra 7 / 16 GB / 256 GB (schwarz, Win 11 Pro)",Sehr gut,1059,https://asgoodasnew.de/Tablets/Microsoft/Surface-Pro-10/Microsoft-Surface-Pro-10-Core-Ultra-7-16GB-Win11pro-256-GB-schwarz.html,2026-09-13,refurbished-marktplatz
+samsung-galaxy-book4-pro,16 Zoll / Core Ultra 7 155H / 16 GB / 512 GB (FR-Tastatur),Premium,1469.99,https://www.refurbed.de/p/samsung-galaxy-book4-pro-16-155h/,2026-09-13,refurbished-marktplatz
+samsung-galaxy-book4-360,"Core 5 120U / 8 GB / 256 GB (DE-Tastatur, inkl. Stylus)",Exzellent,850,https://www.refurbed.de/p/samsung-galaxy-book4-360-5-120u/,2026-09-13,refurbished-marktplatz

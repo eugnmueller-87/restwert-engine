@@ -1,0 +1,124 @@
+# Restwert Engine: synthetic generator configuration (SPEC.md section 2.9).
+#
+# EVERY value in this file is a synthetic DESIGN PARAMETER. None of them is a market
+# figure, a customer figure or an employer figure. The "truth" blocks describe the
+# hidden ground-truth residual value curve the generator prices resale with; the
+# forecaster never reads them and has to recover the curve from realised prices.
+#
+# Plugging in real data: replace the launch calendar (first_launch, launch_cadence_months)
+# per family with your own; the other blocks are then unused because you load your own CSVs.
+#
+# Owners: this v0.1 file carries NO owners list of its own. The role that signs each design
+# parameter is named once, in config/lake.yaml under design_parameter_owners, which is the
+# leading configuration for v0.2 (generate-lake); the v0.1 generator reads this file but the
+# blocks shared with lake.yaml (families, term_mix, channel_mult, fee_pct, defects, ...) are
+# owned there. A block that exists only here and needs a decision is added to that list, not
+# to a second list in this file.
+#
+# term_mix per family = share of new rental contracts per term in months (12/24/36/48, the business
+# owner's term set); the shares are placeholders. The legacy scalar term_mix_36 is still accepted
+# and means {24: 1 - term_mix_36, 36: term_mix_36}.
+version: 1
+seed: 42
+n_devices: 4000
+history_start: 2022-01-01
+purchase_end: 2026-03-31   # six months before as_of, as before (2025-12-31 to 2026-06-30)
+as_of: 2026-09-13          # the date of the public price evidence (data/anchors), so simulation and market page share one Stichtag
+families:
+  iphone_like:
+    first_launch: 2019-09-15
+    launch_cadence_months: 12
+    launch_month: 9
+    list_price_min: 799
+    list_price_max: 1299
+    storage_options: [128, 256, 512]
+    base_storage_gb: 128
+    discount_min: 0.08
+    discount_max: 0.18
+    freight_duty_pct: 0.035
+    share_of_fleet: 0.50
+    term_mix: {12: 0.10, 24: 0.50, 36: 0.35, 48: 0.05}   # placeholder shares, no public source; same values as config/lake.yaml
+    monthly_rate_pct_of_landed: 0.042
+    damage_rate_pa: 0.10
+    repair_share: 0.70
+    repair_cost_min: 60
+    repair_cost_max: 320
+    truth: {base: 0.92, lambda: 0.028, lambda_after_24: 0.017, step: 0.88, noise: 0.10, storage_exp: 0.08, grade_A: 1.00, grade_B: 0.88, grade_C: 0.72, grade_D: 0.45}
+  android_like:
+    first_launch: 2020-02-15
+    launch_cadence_months: 12
+    launch_month: 2
+    list_price_min: 449
+    list_price_max: 899
+    storage_options: [128, 256]
+    base_storage_gb: 128
+    discount_min: 0.10
+    discount_max: 0.22
+    freight_duty_pct: 0.035
+    share_of_fleet: 0.30
+    term_mix: {12: 0.10, 24: 0.55, 36: 0.30, 48: 0.05}   # placeholder shares, no public source; same values as config/lake.yaml
+    monthly_rate_pct_of_landed: 0.045
+    damage_rate_pa: 0.11
+    repair_share: 0.65
+    repair_cost_min: 40
+    repair_cost_max: 220
+    truth: {base: 0.88, lambda: 0.036, lambda_after_24: 0.022, step: 0.85, noise: 0.12, storage_exp: 0.06, grade_A: 1.00, grade_B: 0.86, grade_C: 0.68, grade_D: 0.40}
+  laptop_like:
+    first_launch: 2020-03-15
+    launch_cadence_months: 18
+    launch_month: null
+    list_price_min: 1199
+    list_price_max: 1899
+    storage_options: [256, 512, 1024]
+    base_storage_gb: 256
+    discount_min: 0.06
+    discount_max: 0.15
+    freight_duty_pct: 0.03
+    share_of_fleet: 0.20
+    term_mix: {12: 0.05, 24: 0.25, 36: 0.50, 48: 0.20}   # placeholder shares, no public source; same values as config/lake.yaml
+    monthly_rate_pct_of_landed: 0.038
+    damage_rate_pa: 0.08
+    repair_share: 0.75
+    repair_cost_min: 90
+    repair_cost_max: 450
+    truth: {base: 0.90, lambda: 0.022, lambda_after_24: 0.015, step: 0.93, noise: 0.09, storage_exp: 0.10, grade_A: 1.00, grade_B: 0.90, grade_C: 0.75, grade_D: 0.50}
+grade_pre_return_mix: {A: 0.35, B: 0.40, C: 0.20, D: 0.05}
+grade_drift_worse: 0.20      # share of returns inspected one grade worse than declared
+grade_drift_better: 0.05
+channel_mix_by_grade:
+  A: {employee_buyout: 0.35, marketplace: 0.45, b2b_wholesale: 0.20}
+  B: {employee_buyout: 0.20, marketplace: 0.50, b2b_wholesale: 0.30}
+  C: {employee_buyout: 0.05, marketplace: 0.40, b2b_wholesale: 0.55}
+  D: {as_is: 1.0}
+channel_mult: {employee_buyout: 0.95, marketplace: 1.00, b2b_wholesale: 0.85, as_is: 0.55}
+fee_pct: {employee_buyout: 0.00, marketplace: 0.12, b2b_wholesale: 0.03, as_is: 0.05}
+fee_fixed_eur: {employee_buyout: 0.0, marketplace: 2.50, b2b_wholesale: 0.0, as_is: 0.0}
+days_to_sale: {employee_buyout: [5, 20], marketplace: [10, 60], b2b_wholesale: [20, 45], as_is: [15, 60]}
+slow_mover_share: 0.04       # share of sellable devices that linger; gives aging stock for KPIs and rule R03
+slow_mover_days: [90, 400]
+launch_slip_months_max: 1    # each generation launches 0 to 1 month early or late vs the calendar rule (seeded);
+                             # the forecaster only knows the calendar for future launches, so the backtest carries
+                             # launch-timing risk instead of a calendar that is always exactly right
+refurb_days: {A: [3, 7], B: [5, 12], C: [8, 20], D: [2, 5]}
+refurb_cost: {A: [10, 25], B: [20, 60], C: [40, 120], D: [5, 15]}
+scrap_share_of_d: 0.10
+early_termination_rate: 0.06
+# monthly rate per contract term relative to the 24-month base: a 12-month contract must recover more of the
+# landed cost per month than a 48-month one (rent covers landed cost minus residual over the term). PLACEHOLDER
+# factors, no public source; same values as config/lake.yaml
+term_rate_factor: {12: 1.5, 24: 1.0, 36: 0.85, 48: 0.75}
+replacement_share_of_damage: 0.30
+open_damage_share: 0.03
+otif_on_time_share: 0.78
+po_short_delivery_share: 0.10
+price_drop_share: 0.15
+price_drop_pct: 0.10
+suppliers_hardware: [Supplier-A, Supplier-B, Supplier-C, Supplier-D, Supplier-E, Supplier-F]
+suppliers_indirect: [Supplier-G, Supplier-H, Supplier-I, Supplier-J, Supplier-K, Supplier-L]
+indirect_categories: [logistics, repair, refurbishment, software, marketing, facilities, consulting, packaging]
+indirect_rows_per_month: 40
+indirect_has_po: 0.75
+indirect_has_contract: 0.65
+indirect_saving_share: 0.15
+indirect_confirmed_share: 0.60
+indirect_saving_type_mix: {hard_price_reduction: 0.60, cost_avoidance: 0.30, rebate: 0.10}  # only hard counts vs plan

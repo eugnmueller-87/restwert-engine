@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "restwert"
+version = "0.2.0"
+description = "Asset P&L, residual value forecast and deterministic decision rules for a Device-as-a-Service fleet. The model advises, deterministic code decides, a named human owns every threshold."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "Eugen Mueller" }]
+keywords = ["procurement", "device-as-a-service", "residual-value", "duckdb", "streamlit"]
+dependencies = [
+  "pandas>=2.2",
+  "numpy>=1.26",
+  "duckdb>=1.0",
+  "pydantic>=2.6",
+  "pyyaml>=6",
+  "streamlit>=1.35",
+  "plotly>=5.20",
+  "pyarrow>=15",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+ml = ["scikit-learn>=1.4"]
+
+[project.scripts]
+restwert = "restwert.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["restwert*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "slow: runs the default 5000-serial fleet end to end (about a minute); deselect with -m 'not slow'",
+]
+filterwarnings = [
+  "ignore::DeprecationWarning",
+  "ignore::FutureWarning",
+]
