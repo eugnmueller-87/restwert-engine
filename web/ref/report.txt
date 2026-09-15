@@ -1,0 +1,232 @@
+Restwert Engine
+Bericht
+Gerät
+Realisierung
+Prognosegüte
+TCO
+Kreislauf
+Stellschrauben
+Laufzeit
+Daten
+Lager
+Verträge
+Protokoll (0)
+Export CSV
+Datei einlesen
+Lauf starten
+Letzter Lauf Stand 16.09.2026 Dateien 282 Zeilen 165.913 ungeklärt 60 Seriennummern 5.251 Prototyp: Läufe werden protokolliert, nicht gerechnet.
+Protokoll dieser Installation
+manuell erfasste Daten, Lieferungen, Schwellen, Läufe · lokal gespeichert
+Noch keine Einträge. Preisbelege erfassen, Dateien einlesen, Schwellen ändern oder Szenarien speichern; jeder Schritt landet hier.
+Momentaufnahme für die Geschäftsführung, Stand 16.09.2026 (Stichtag der Daten 13.09.2026)
+Wo das Gerätegeschäft steht: zwölf Monate bis 13.09.2026
+Hinweise ausblenden
+Mieterlös, Restwert, EBITDA und EBIT als Näherung, die Kennzahlen, die Verträge, die in den nächsten zwölf Monaten enden, und was das Team bewegt hat; jede Zahl kommt aus dem Geräte-Hauptbuch, dem Vertragsregister oder den Konfigurationsdateien, nichts ist getippt. Simulierte Daten, echte Mechanik: QTY 5.251 Seriennummern aus dem echten Katalog, jede Buchung erfunden, kein Wert ist eine Tatsache über ein reales Unternehmen; mit den Daten eines Hauses zeigt dieselbe Seite dessen Zahlen.
+Mieterlös, zwölf Monate simuliert
+1.084.929 €
+QTY 33.539 Mietrechnungen (Monatszeilen) für QTY 3.591 Geräte
+14.09.2025 bis 13.09.2026, Rechnungsdatum
+nicht enthalten: künftige Monate der QTY 2.461 laufenden Verträge
+Restwert, zwölf Monate simuliert
+406.946 €
+QTY 1.109 verkaufte Geräte, vor Abzug der Kanalgebühren (30.259 €)
+gegen Restwertprognose bei Rückgabe 95,9 % (QTY 1.017 Verkäufe ohne Ist-Zustand)
+dazu QTY 10 verschrottete Geräte mit 0 €
+EBITDA-Näherung, zwölf Monate simuliert abgeleitet
+-243.334 €
+Gerätegeschäft 695.486 € minus indirekte Ausgaben 938.820 €; die indirekten Ausgaben sind in der Simulation ein Platzhalterband (QTY 40 Rechnungen je Monat, config/lake.yaml), keine Tatsache; Reparatur und Aufbereitung (281.524 €) zählen hier nicht, sie stehen je Gerät schon in Kosten bis Verkauf
+vor Abschreibung, Wertberichtigung, Zinsen und Steuern; Personal des Teams fehlt, es steht nicht im Geräte-Hauptbuch
+Anlage-Sicht als Näherung, Verantwortlich CFO
+EBIT-Näherung, zwölf Monate simuliert abgeleitet
+-791.921 €
+EBITDA-Näherung minus planmäßige Abschreibung 547.563 € minus Wertberichtigungen 1.025 €
+Abschreibung linear je Vertragsmonat vom Einkaufspreis auf die Restwertprognose zum Vertragsende
+ob das Gerät beim Haus Anlage oder Vorrat ist, ist eine offene Frage an das Haus; hier Anlage
+Weniger
+Begriffe ausblenden
+QTY (Quantity)
+Stückzahl; das Wort dahinter sagt, was gezählt wird: Geräte, Rechnungen, Verträge.
+Näherung
+EBITDA und EBIT sind aus dem Geräte-Hauptbuch abgeleitet, nicht aus einer Buchhaltung; die Tabelle darunter zeigt jede Zeile und ihre Herkunft.
+simuliert, abgeleitet
+simuliert: Buchung des Generators; abgeleitet: aus Buchungen gerechnet, keine eigene Buchung.
+Gewinn und Verlust, zwölf Monate bis 13.09.2026
+simuliert abgeleitet
+Begriffe ausblenden
+Zeile
+Zeile der Gewinn- und Verlustrechnung; Zwischensummen stehen fett.
+Euro zwölf Monate
+Summe der Zeile in den zwölf Monaten bis zum Stichtag, in Euro; Erlöse positiv, Aufwand negativ.
+QTY
+Rechnungszeilen, Geräte oder Rechnungen, wie die Spalte Grundlage sagt.
+Grundlage
+woher die Zahl kommt und ob sie gebucht oder abgeleitet ist.
+Mieterlös
+was die Kunden in den zwölf Monaten für die Geräte gezahlt haben, ohne Mehrwertsteuer, nach Rechnungsdatum.
+Restwert
+was verkaufte Geräte gebracht haben, vor Abzug der Kanalgebühren; die Gebühren stehen in Kosten bis Verkauf.
+Restbuchwert der Abgänge
+der Wert, mit dem die verkauften und verschrotteten Geräte noch in den Büchern standen: Einkaufspreis minus planmäßige Abschreibung bis zum Vertragsende, bei vorzeitiger Rückgabe bis zur Rückgabe, nach derselben Monatsregel wie die Zeile Planmäßige Abschreibung, minus frühere Wertberichtigungen.
+Veräußerungsergebnis
+Restwert minus Restbuchwert beim Abgang; negativ heißt unter Buchwert verkauft.
+Preisschutz-Gutschriften
+Gutschriften des Herstellers, weil er den Listenpreis kurz nach unserem Kauf gesenkt hat; hier als Ertrag der Periode, in einer Bilanz eine Minderung der Anschaffungskosten.
+Zwischensumme Gerätegeschäft
+was das Gerätegeschäft vor den indirekten Ausgaben verdient: Mieterlös plus Veräußerungsergebnis plus Preisschutz-Gutschriften minus Kosten bis Verkauf.
+Kosten bis Verkauf
+Fracht, Zoll, Einrichtung, Versand, Reparatur, Austauschversand, Rücksendung, Datenlöschung und Zustandsprüfung, Aufbereitung, Lagertage, Kanalgebühren; alles als Aufwand der Periode; Lagertage sind immer eine Schätzung (Lagerkosten je Tag, Verantwortlich CFO).
+Indirekte Ausgaben
+Rechnungen außerhalb des einzelnen Geräts; in der Simulation ein Platzhalterband (config/lake.yaml, Verantwortlich Head of Indirect Procurement), auf echten Daten die Kreditorenbuchhaltung. Reparatur und Aufbereitung stehen in der Simulation auch als Rechnungen hier, sind aber je Gerät schon in Kosten bis Verkauf gebucht; deshalb zählen sie in dieser Zeile nicht (Betrag in der Zeile). Auf echten Daten gilt dieselbe Regel: jede Kostenart genau einmal, je Gerät oder als Rechnung.
+EBITDA-Näherung
+Ergebnis vor Abschreibung, Wertberichtigung, Zinsen und Steuern; eine Näherung, weil Personal und Finanzierung fehlen und die indirekten Ausgaben in der Simulation ein Platzhalterband sind.
+Planmäßige Abschreibung
+der Teil des Einkaufspreises, der in diesen zwölf Monaten verbraucht wurde: Einkaufspreis minus Restwertprognose zum Vertragsende, gleichmäßig auf die Vertragsmonate zwischen Vertragsbeginn und vertraglichem Ende verteilt; gebucht wird jeder Vertragsmonat, der vor dem wirksamen Ende beginnt.
+Wertberichtigungen
+außerplanmäßige Abschreibung nach der Regel, die die Zeile nennt; die Regel entscheidet, eine verantwortliche Rolle setzt die Schwelle.
+EBIT-Näherung
+Ergebnis vor Zinsen und Steuern.
+Zeile | Euro zwölf Monate | QTY | Grundlage
+Mieterlös | 1.084.929 € | 33.539 | Mietrechnungen
+Restwert | 406.946 € | 1.109 | erzielter Verkaufspreis nach Verkaufsdatum, vor Kanalgebühren
+Restbuchwert der Abgänge | -445.965 € | 1.119 | Einkaufspreis minus aufgelaufene Abschreibung nach der Monatsregel der Zeile Planmäßige Abschreibung, minus frühere Wertberichtigungen; abgeleitet
+Veräußerungsergebnis abgeleitet | -39.019 € |  | Restwert minus Restbuchwert; verschrottet zählt mit 0 €
+Preisschutz-Gutschriften | 708 € | 7 | Gutschriften des Herstellers; als Ertrag der Periode gezeigt, in der Bilanz eine Minderung der Anschaffungskosten, hier vereinfacht
+Kosten bis Verkauf | -351.131 € | 76.780 | QTY 13 Kostenarten, Fracht bis Kanalgebühren; davon geschätzt 194.701 €: Lagertage 58.930 €, Umlage Nutzerbetreuung und Geräteverwaltung je Gerätemonat 132.952 €, Kanalgebühren geschätzt bis zum Zahlungseingang 2.819 €
+Zwischensumme Gerätegeschäft, vor indirekten Ausgaben | 695.486 € |  | Mieterlös plus Veräußerungsergebnis plus Preisschutz-Gutschriften minus Kosten bis Verkauf; Glieder auf Euro gerundet
+Indirekte Ausgaben | -938.820 € | 375 | QTY 6 Kategorien (Beratung, Gebäude und Betrieb, Logistik, Marketing, Verpackung, Software), Platzhalterband des Generators (QTY 40 Rechnungen je Monat, config/lake.yaml); nicht enthalten: Reparatur 143.921 € und Aufbereitung 137.603 € (QTY 128 Rechnungen), weil beides je Gerät (41.540 € und 45.704 €) schon in Kosten bis Verkauf steht
+EBITDA-Näherung | -243.334 € |  | Zwischensumme Gerätegeschäft minus indirekte Ausgaben; vor Abschreibung, Wertberichtigung, Zinsen, Steuern
+Planmäßige Abschreibung | -547.563 € | 3.521 | linear je Vertragsmonat; Restwertprognose bei Rückgabe für QTY 1.029 Geräte, zum Leasingende für QTY 2.492 Geräte, ohne Prognose QTY 0; QTY 144 Ersatzverträge mit Laufzeit bis zum Ende des ersetzten Vertrags
+Wertberichtigungen | -1.025 € | 24 | Regel R03 (Wertberichtigung bei zu langer Lagerdauer), Verantwortlich CFO
+EBIT-Näherung | -791.921 € |  | vor Zinsen und Steuern; Glieder auf Euro gerundet
+Anlage-Sicht: die Geräte gelten hier als Anlagevermögen und werden linear auf die Restwertprognose abgeschrieben; ob das Haus sie als Anlage oder als Vorrat führt, ist offen und entscheidet die Bilanzierung, Verantwortlich CFO. Nicht enthalten: Finanzierungskosten, Steuern und das Personal des Teams (steht nicht im Geräte-Hauptbuch); Fracht, Zoll und Einrichtung sind hier Periodenaufwand, in einer Bilanz wären sie Anschaffungsnebenkosten; die Einkaufspreise der QTY 695 im Fenster gekauften Geräte (612.542 €) sind aktiviert und laufen über die Abschreibung, nicht über diese Tabelle.
+Kennzahlen, Stand 13.09.2026
+simuliert QTY 10
+Begriffe ausblenden
+Kennzahl
+Name der Kennzahl; die zwölf Monate bis zum Stichtag, wo die Kennzahl ein Fenster hat (Einkauf, Kosten, Recommerce, Lifecycle-Marge, Verträge), zum Stichtag nur bei Daten; Geld, das noch liegt, ist ein Betrag je Jahr aus der Hebelrechnung (Tab Stellschrauben).
+Wert
+in Prozent, Euro oder Tagen; mittleres Gerät heißt: die Hälfte der Geräte liegt darüber, die Hälfte darunter.
+Ziel
+für keine der QTY 10 gezeigten Kennzahlen gesetzt: config/kpi_targets.yaml führt QTY 7 Ziele, davon QTY 0 für eine der QTY 14 Kennzahlen der Kennzahlentabelle (gold.kpi_values), die anderen für alte Kennungen; Verantwortlich CFO; die Spalte Ziel erscheint, sobald ein Ziel gesetzt ist.
+Status
+ok: gemessen; nicht messbar: unter der Mindeststückzahl (config/kpi_targets.yaml, Verantwortlich CFO) oder ohne Nenner; der gespeicherte Wert steht nur hier zur Orientierung: Preisschutz-Gutschriften erfasst 100,0 % bei QTY 5 Beobachtungen.
+Verantwortlich
+Rolle, die die Kennzahl und ihr Ziel verantwortet.
+TCO je Gerät
+Einkaufspreis plus alle Kosten bis Verkauf (Fracht und Zoll eingeschlossen), Mittel je Gerät über die QTY 1.119 in den zwölf Monaten abgeschlossenen Kreisläufe; der Einkaufspreis ist darin enthalten, anders als in der Zeile Kosten bis Verkauf oben; Einzelheiten auf dem Tab TCO.
+Anteil geschätzter Kostenzeilen
+bezogen auf diese Summe mit Einkaufspreis; in der Tabelle Gewinn und Verlust sind 55,4 % der Kosten bis Verkauf geschätzt, weil dort der Einkaufspreis fehlt.
+Kennzahl | Wert | Status | Verantwortlich
+Daten |  |  |
+Datumskette vollständig | 95,2 % | ok | Dateneigner
+Einkauf |  |  |
+Einkaufsrabatt gegen UVP ohne Mehrwertsteuer | 14,0 % | ok | Einkaufsleitung
+Preisschutz-Gutschriften erfasst | nicht messbar (QTY 5 von mindestens QTY 30 Beobachtungen) | nicht messbar | Einkaufsleitung
+Kosten |  |  |
+TCO je abgeschlossenem Gerät (Tab TCO) | 1.133 € | ok | CFO
+Anteil geschätzter Kostenzeilen am TCO | 12,9 % | ok | CFO
+Recommerce |  |  |
+Restwert gegen Restwertprognose bei Rückgabe | 95,9 % | ok | Leitung Recommerce
+Tage von Rückgabe bis Zahlungseingang, mittleres Gerät | 81 Tage | ok | Leitung Recommerce
+Ergebnis |  |  |
+Lifecycle-Marge je Gerät, abgeschlossene Kreisläufe | 117 € | ok | CFO
+Geld, das noch liegt, je Jahr (Tab Stellschrauben) | 19.520 € | ok | CFO
+Verträge |  |  |
+Hardware-Einkauf unter laufendem Vertrag | 96,2 % | ok | Category Manager Hardware
+Mietverträge, die bis 13.09.2027 enden
+simuliert QTY 5
+Begriffe ausblenden
+QTY 1.109 Verträge enden zwischen 14.09.2026 und 13.09.2027: Mieterlös je Monat 37.076 € fällt weg, Restwertprognose der Rückläufer zusammen 411.653 € (QTY 0 Geräte ohne Prognose); heute laufen QTY 2.461 Verträge mit 79.770 € je Monat.
+Quartal
+Kalenderquartal, in das das vertragliche Enddatum fällt.
+QTY endende Verträge
+laufende Mietverträge mit Enddatum im Quartal; vorzeitige Rückgaben stehen nicht darin.
+wegfallender Mieterlös je Monat
+Summe der Monatsmieten dieser Verträge, ohne Mehrwertsteuer; fällt ab dem Enddatum weg, wenn nicht verlängert.
+Restwertprognose der Rückläufer
+Summe der Restwertprognose zum Leasingende der Geräte hinter diesen Verträgen, Stand Stichtag; keine Buchung.
+Quartal | QTY endende Verträge | wegfallender Mieterlös je Monat | Restwertprognose der Rückläufer
+3. Quartal 2026 | 39 | 1.356 € | 15.646 €
+4. Quartal 2026 | 294 | 10.098 € | 109.673 €
+1. Quartal 2027 | 286 | 10.232 € | 109.717 €
+2. Quartal 2027 | 288 | 9.016 € | 101.524 €
+3. Quartal 2027 | 202 | 6.375 € | 75.093 €
+zwölf Monate zusammen, QTY 5 Quartale; Glieder auf Euro gerundet | 1.109 | 37.076 € | 411.653 €
+Mietverträge, die bis 13.09.2027 enden, je Kunde
+simuliert QTY 5
+Begriffe ausblenden
+Kunde
+Kundenkennung aus dem Vertrag, in der Simulation ein Platzhalter.
+QTY endende Verträge
+laufende Mietverträge mit Enddatum im Quartal; vorzeitige Rückgaben stehen nicht darin.
+Mieterlös je Monat
+Summe der Monatsmieten dieser Verträge, ohne Mehrwertsteuer; fällt ab dem Enddatum weg, wenn nicht verlängert.
+letztes Vertragsende
+Enddatum des zuletzt endenden Vertrags dieses Kunden im Fenster.
+Kunde | QTY endende Verträge | Mieterlös je Monat | letztes Vertragsende
+CUST-0001 | 140 | 4.862 € | 13.09.2027
+CUST-0002 | 72 | 2.590 € | 08.09.2027
+CUST-0003 | 49 | 1.818 € | 09.09.2027
+CUST-0007 | 39 | 1.242 € | 12.09.2027
+CUST-0004 | 37 | 1.168 € | 29.08.2027
+übrige QTY 113 Kunden | 772 | 25.396 € |
+Lieferanten- und Partnerverträge, laufend zum Stichtag
+simuliert QTY 5
+Begriffe ausblenden
+QTY 16 laufende Verträge, Jahreswert zusammen 1.284.582 €; davon enden bis 13.09.2027 QTY 5 mit Jahreswert 330.158 €, Kündigungstermin bei QTY 0 davon schon verstrichen, QTY 2 davon verlängern sich automatisch. Die Tabelle zeigt sie, nach Kündigungstermin sortiert.
+Gegenpartei
+Hersteller mit echtem Namen oder Partner nur als Rolle (nur Rolle), keine Tatsache über ein reales Unternehmen.
+Kategorie
+was der Vertrag abdeckt.
+Jahreswert
+vertraglich erwartete Ausgaben je Jahr, ohne Mehrwertsteuer; die Tabelle zeigt die Verträge, die in den nächsten zwölf Monaten enden, nach Kündigungstermin, höchstens fünf; alle anderen stehen nur als Summe.
+Vertragsende
+vertragliches Enddatum.
+Kündigungstermin
+letzter Tag, an dem gekündigt werden kann (Enddatum minus Kündigungsfrist); liegt er vor dem Stichtag, ist die Frist verstrichen, und die Spalte verlängert sich sagt, was dann gilt.
+verlängert sich
+ja: ohne Kündigung verlängert sich der Vertrag automatisch; nein: er endet am Vertragsende.
+Preisschutz
+ob der Vertrag eine Preisschutz-Gutschrift bei Preissenkung des Herstellers zusichert.
+Gegenpartei | Kategorie | Jahreswert | Vertragsende | Kündigungstermin | verlängert sich | Preisschutz
+Lenovo | Hardware | 46.666 € | 27.02.2027 | 30.10.2026 | nein | ja
+Dell | Hardware | 24.155 € | 05.01.2027 | 06.12.2026 | ja | ja
+Fairphone | Hardware | 3.160 € | 05.06.2027 | 06.04.2027 | nein | nein
+Apple | Hardware | 211.177 € | 17.08.2027 | 18.07.2027 | nein | ja
+Aufbereitungs- und Reparaturpartner (nur Rolle) | Reparatur | 45.000 € | 28.08.2027 | 29.07.2027 | ja | nein
+übrige QTY 11 laufende Verträge, Ende nach 13.09.2027 |  | 954.424 € |  |  |  |
+Wirkung des Teams, zwölf Monate bis 13.09.2026 gegen die zwölf Monate davor
+QTY 5
+Begriffe ausblenden
+Wirkung
+was das Team beeinflusst hat, in denselben Wörtern wie die Kennzahlen oben; die Zeilen nicht addieren, Zeile 2 steckt in Zeile 1 schon: die Gutschrift mindert den gezahlten Preis.
+Wert
+Anteil und Euro, oder Tage, für die zwölf Monate bis 13.09.2026.
+Vorperiode
+dieselbe Rechnung für die zwölf Monate davor, 14.09.2024 bis 13.09.2025.
+Veränderung
+Wert minus Vorperiode: Prozentpunkte bei Anteilen, Euro bei Summen, Tage bei Tagen; ein Vergleich, keine Ursache.
+Rechenweg
+ein Halbsatz, woraus die Zahl entsteht.
+Verantwortlich
+Rolle, die die Kennzahl verantwortet.
+Wirkung | Wert | Vorperiode | Veränderung | Rechenweg | Verantwortlich
+Einkaufsrabatt gegen UVP ohne Mehrwertsteuer simuliert | 14,0 %, 98.519 € | 13,6 %, 161.072 € | +0,4 Punkte, -62.553 € | UVP ohne Mehrwertsteuer minus gezahlter Preis nach Preisschutz-Gutschrift, QTY 688 im Fenster gelieferte Geräte (Vorperiode QTY 1.219) | Einkaufsleitung
+Preisschutz-Gutschriften simuliert | 708 € | 387 € | +320 € | QTY 7 Gutschriften nach Gutschriftdatum (Vorperiode QTY 3); die Kennzahl Preisschutz-Gutschriften erfasst zählt QTY 5 Geräte mit Anspruch (gutgeschrieben oder verpasst) unter den im Fenster gelieferten und ist unter der Mindeststückzahl QTY 30 nicht messbar | Einkaufsleitung
+Restwert gegen Restwertprognose bei Rückgabe simuliert, abgeleitet | 95,9 %, -17.008 € | 95,2 %, -16.707 € | +0,7 Punkte, -301 € | Restwert minus Restwertprognose bei Rückgabe, QTY 1.017 Verkäufe ohne Ist-Zustand (Vorperiode QTY 859); negativ heißt unter der Prognose | Leitung Recommerce
+Tage von Rückgabe bis Zahlungseingang, mittleres Gerät simuliert | 81 Tage | 80 Tage | +1 Tag | Rückgabe bis Zahlungseingang aus dem Verkauf, QTY 1.093 Verkäufe (Vorperiode QTY 859); die Hälfte schneller, die Hälfte langsamer | Leitung Recommerce
+Indirekte Einsparungen, vom Controlling bestätigt simuliert | 10.486 € | 8.502 € | +1.984 € | gemeldet 18.154 €, davon vom Controlling bestätigt 10.486 €, davon harte Preissenkung 6.148 €, die gegen den Plan zählt (Plan 2026: 8.000 € je Kalenderjahr, config/kpi_targets.yaml); QTY 91 Rechnungen mit Einsparung (Vorperiode QTY 75) | Leitung Indirekter Einkauf
+In der Simulation sind das die Zahlen des Generators; mit echten Daten sind es die Zahlen des Teams.
+▾ Stand der Dinge zum 13.09.2026
+Beim Kunden QTY 2.492 Geräte, davon QTY 31 mit beendetem Vertrag und ausstehender Rückgabe; im Lager nach Rückgabe QTY 164 Geräte, davon QTY 128 verkaufsfähig; Ersatzgeräte ohne Vertrag QTY 32; verkauft im Fenster QTY 1.109 Geräte, verschrottet QTY 10.
+Restbuchwert der Flotte zum Stichtag 1.524.676 € für QTY 2.688 offene Geräte, abgeleitet: Einkaufspreis minus Abschreibung bis 13.09.2026 nach der Monatsregel der Zeile Planmäßige Abschreibung, minus Wertberichtigungen. Beim Kunden QTY 2.492 mit 1.438.800 €, davon planmäßig bis zum Vertragsende noch abzuschreiben 535.942 € auf die Restwertprognose zum Leasingende 902.858 €; im Lager QTY 164 mit 57.176 € gegen Restwertprognose heute 56.439 €, Differenz -736 €, negativ heißt die Bücher stehen über der Prognose; Ersatzgeräte ohne Vertrag QTY 32 zum Einkaufspreis (ohne Vertrag keine planmäßige Abschreibung) 28.700 € gegen Restwertprognose heute 12.621 €, Differenz -16.080 €.
+Datumskette vollständig bei 95,2 % der Seriennummern (jede Station von Bestellung bis Zahlungseingang aus dem Verkauf hat ein Datum), Verantwortlich Dateneigner.
+QTY 10 Entscheidungen mit Priorität 1, 712 € im Spiel, davon QTY 0 überfällig; insgesamt warten QTY 1.921 Entscheidungen mit 274.657 € im Spiel, QTY 267 davon überfällig.
+Prognosegüte der letzten QTY 3 Monate (06.2026 bis 08.2026), je Geräteart MAPE und Bias, mit den Verkäufen je Monat gewichtet (Verkäufe ohne Ist-Zustand), abgeleitet: iPhone 11,6 %, Bias 7,2 % (QTY 70 Verkäufe); Android-Smartphone 23,4 %, Bias 8,4 % (QTY 89 Verkäufe); Tablet 13,4 %, Bias 8,0 % (QTY 53 Verkäufe); Laptop 11,4 %, Bias 1,8 % (QTY 63 Verkäufe); alle Gerätearten 15,7 %, Bias 6,5 % (QTY 275 Verkäufe).
+19.520 € je Jahr liegen an den QTY 2 addierbaren Stellschrauben Einkaufsrabatt und Preisschutz; die QTY 5 anderen stehen je Stellschraube auf dem Tab Stellschrauben und dürfen nicht addiert werden.
+▾ Begriffe zum Stand der Dinge
+Restbuchwert der Flotte: Wert, mit dem die offenen Geräte zum Stichtag in den Büchern stehen; die Differenz zur Restwertprognose ist bei Geräten beim Kunden die noch geplante Abschreibung, bei Geräten im Lager und Ersatzgeräten das Wertberichtigungsrisiko.
+MAPE: mittlerer Fehler der Restwertprognose in Prozent des erzielten Restwerts, ohne Vorzeichen.
+Bias: mittlere Abweichung mit Vorzeichen: positiv heißt Prognose zu hoch, negativ zu niedrig (restwert/forecast/backtest.py); gerechnet gegen die Restwertprognose für den Marktplatz, ein Verkauf an Mitarbeiter oder Großhändler unter Marktplatzpreis zählt hier als Prognose zu hoch (Geschäftssicht, restwert/forecast/error_series.py; die Modellsicht mit Kanalfaktor steht auf keinem Tab).
+Entscheidungen: Zeilen der Entscheidungswarteschlange: Priorität 1 handeln, 2 prüfen, 3 Hinweis; im Spiel ist die Summe der Beträge, die die Regeln je Entscheidung nennen.
+Ersatzgeräte: gekaufte Geräte ohne Mietvertrag, im Lager für Austausch.

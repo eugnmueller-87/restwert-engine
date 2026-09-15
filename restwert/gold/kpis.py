@@ -96,7 +96,7 @@ def _ledger(con: duckdb.DuckDBPyConnection, required: tuple[str, ...]) -> tuple[
         frame,
         [
             "purchase_price", "rrp_net_eur", "landed_cost", "price_protection_credit_eur", "price_protection_claimable_eur",
-            "tco_eur", "holding_cost_eur", "estimate_rv_lease_end", "anchor_rv_lease_end", "resale_gross",
+            "tco_eur", "holding_cost_eur", "support_eur", "mdm_eur", "estimate_rv_lease_end", "anchor_rv_lease_end", "resale_gross",
             "estimate_rv_of_record", "days_return_to_cash", "lifecycle_result_eur", "term_months",
         ],
     )

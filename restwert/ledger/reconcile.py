@@ -6,7 +6,7 @@ other). One row per (serial, field) records both values and the difference; ``ru
 refuses to finish when any row fails. Identity behind the last field pair::
 
     lifecycle_margin (v0.1) = result_v01_basis_eur
-    lifecycle_result_eur    = result_v01_basis_eur - (staging + outbound_shipping + wipe_grading + holding_cost)
+    lifecycle_result_eur    = result_v01_basis_eur - (staging + outbound_shipping + wipe_grading + holding_cost + support + mdm_operations)
                               + price_protection_credit
 
 On synthetic data equality holds by construction; on real data a non-empty diff is the

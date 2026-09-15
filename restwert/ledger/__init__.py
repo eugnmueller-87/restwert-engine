@@ -9,7 +9,7 @@ into one row per serial and adds the estimates for open cycles;
 ``silver.reconciliation`` proves that the ledger and the v0.1 ``device_pnl``
 agree to the cent; ``cohorts`` rolls the result up into the gold tables.
 
-- ``lines``: the 15 line types and the pure builder of ``silver.ledger_lines``.
+- ``lines``: the 17 line types and the pure builder of ``silver.ledger_lines``.
 - ``result``: pure scalar formulas (closed result, the two open numbers, the
   expected remaining cost, the public anchor).
 - ``device_ledger``: one row per serial.

@@ -1,0 +1,11 @@
+{
+  "source": "config/assumptions.yaml",
+  "version": 1,
+  "purchase_discount_pct": {
+    "value": 0.12,
+    "owner": "Head of Procurement (name)",
+    "note": "placeholder share below manufacturer RRP that a volume buyer pays; used only by restwert.market to translate public realisation (vs RRP) into realisation vs purchase price. Not a fact about any provider.",
+    "min": null,
+    "max": null
+  }
+}

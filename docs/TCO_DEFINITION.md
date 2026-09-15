@@ -18,8 +18,9 @@ customer buys as a monthly rent. The two are different cash boxes and are never 
 
 ```
 tco_eur                = purchase_price + cost_to_sale
-cost_to_sale           = freight + duty + staging + outbound_shipping + repair + replacement_logistics
-                         + return_logistics + wipe_grading + refurbishment + holding_cost + channel_fee
+cost_to_sale           = freight + duty + staging + outbound_shipping + support + mdm_operations
+                         + repair + replacement_logistics + return_logistics + wipe_grading
+                         + refurbishment + holding_cost + channel_fee
 tco_transactional_eur  = tco_eur minus every line flagged is_estimate
 lifecycle_result_eur   = rental_revenue + resale_gross + price_protection_credit - tco_eur
 ```
@@ -44,6 +45,8 @@ transaction exists.
 | wipe_grading | return | returns receipt, wipe and grading cost | returned_at | no | n/a |
 | refurbishment | recommerce | refurbishment work order, cost | finished_at | no | n/a |
 | holding_cost | capital and storage | days in stock per phase (inbound, return, sale) x holding_cost_per_day_eur | phase end, capped at as_of | **yes, always** | CFO (name), `assumptions.holding_cost_per_day_eur` |
+| support | service | one line per rental invoice of the serial: support_cost_per_device_month_eur (first-level helpdesk, incident handling, replacement coordination, allocated per billed month) | invoice date | **yes, always** (a team cost, spread by a rate) | Head of Service Operations (name), `assumptions.support_cost_per_device_month_eur` |
+| mdm_operations | service | one line per rental invoice of a serial the staging log marks mdm_enrolled: mdm_cost_per_device_month_eur (MDM enrolment, policy operations, managed service) | invoice date | **yes, always** | Head of Service Operations (name), `assumptions.mdm_cost_per_device_month_eur` |
 | channel_fee | recommerce | credit note of the resale order (fee percent plus fixed) | credited_at | until the credit note exists: assumed fee, flagged | Head of Recommerce (name), `assumptions.channel_fees` |
 
 Recycling of a scrapped device is booked through `wipe_grading` and `refurbishment` when the
@@ -59,20 +62,16 @@ partner invoices it; there is no separate recycling line in v0.2.
 | Write-downs | a management view in `main.write_down_ledger`, never a ledger line (a write-down is not cash) |
 | Cost of capital beyond the holding cost | not in v0.2; `holding_cost_per_day_eur` is a storage-plus-capital placeholder, one rate, owned by the CFO |
 
-## 5. Known gaps: provider costs that exist but are not measured yet
+## 5. Team costs that enter as allocations (added in v0.3)
 
-Two provider cost blocks are real, per device, and missing, because they are team costs, not
-transactions per serial. They can only enter as an allocation (EUR per device-month), flagged as
-estimate, with an owner:
-
-| Missing block | What it would cover | How it would enter | Owner |
-|---|---|---|---|
-| support | first-level helpdesk, incident handling, replacement coordination | EUR per device-month x months rented, `is_estimate = true` | Head of Service Operations (name) |
-| mdm_operations | MDM enrolment, policy operations, managed service | EUR per device-month x months rented, only for devices under a managed MDM service | Head of Service Operations (name) |
-
-Until they are added, the result per device is overstated by exactly these two blocks. The
-dashboard TCO page says so. Adding them is a config change plus one line builder each, not a
-model change.
+Two provider cost blocks are real, per device, but they are team costs, not transactions per
+serial. They enter as allocations, one estimate line per billed rental month, with a rate the
+Head of Service Operations owns (section 3): `support` on every rental invoice,
+`mdm_operations` only on serials the staging log marks `mdm_enrolled`. The projection of an
+open device adds the same rates for its remaining rented months, so a projected result and a
+closed result share one allocation basis. Both rates are placeholders without an external
+source; the MDM licence itself stays with the customer (section 4). What is still not measured:
+cost of capital beyond the holding rate, and the recycling of scrapped devices as its own line.
 
 ## 6. Where the definition is enforced
 

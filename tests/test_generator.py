@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from restwert import config, db, schema  # noqa: E402
+from restwert import __version__, config, db, schema  # noqa: E402
 from restwert.config import TERM_MONTHS  # noqa: E402
 from restwert.dates import months_between_float  # noqa: E402
 from restwert.generate import generate_all, run_generate, write_csvs, write_synthetic_md  # noqa: E402
@@ -453,7 +453,7 @@ def test_write_csvs_and_synthetic_md(cfg, frames, tmp_path: Path):
     assert "seed: `42`" in text
     assert "No market benchmark, no customer, no supplier and no employer is real." in text
     assert "| `devices` | 420 |" in text or f"| `devices` | {counts['devices']} |" in text
-    assert "0.2.0" in text  # the package version named in SYNTHETIC.md (bumped by v0.2)
+    assert __version__ in text  # the package version named in SYNTHETIC.md
     assert chr(0x2014) not in text  # no em dash in generated prose
 
 

@@ -55,7 +55,7 @@ FORMULAS = """
 (`projected_label` says "projected at lease end" for rented devices and "projected at sale" for devices already back)
 
 **Bridge to v0.1:**
-`lifecycle_result_eur = result_v01_basis_eur - (staging + outbound_shipping + wipe_grading + holding_cost) + price_protection_credit`,
+`lifecycle_result_eur = result_v01_basis_eur - (staging + outbound_shipping + wipe_grading + holding_cost + support + mdm_operations) + price_protection_credit`,
 and `result_v01_basis_eur` equals `device_pnl.lifecycle_margin` to the cent (silver.reconciliation).
 """
 

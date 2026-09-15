@@ -496,7 +496,7 @@ def test_records_hash_and_build_record():
 
 
 def test_package_metadata_and_data_model_render():
-    assert __version__ == "0.2.0"  # bumped by v0.2 (SPEC_v0.2 section 1)
+    assert __version__ == "0.3.0"  # bumped by v0.3 (support and MDM allocations, the page)
     assert GOVERNANCE_PRINCIPLE == "THE MODEL ADVISES, DETERMINISTIC CODE DECIDES, A NAMED HUMAN OWNS EVERY THRESHOLD."
     md = schema.render_data_model_md()
     assert GOVERNANCE_PRINCIPLE in md

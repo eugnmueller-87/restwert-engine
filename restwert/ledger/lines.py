@@ -1,12 +1,17 @@
-"""The 15 ledger line types and the pure builder of ``silver.ledger_lines`` (SPEC_v0.2 6.1).
+"""The 17 ledger line types and the pure builder of ``silver.ledger_lines`` (SPEC_v0.2 6.1).
 
 Every line is one bronze transaction with a ``source_ref`` of the form
-``<system>:<external_ref>``; the three exceptions are flagged on the row itself:
+``<system>:<external_ref>``; the exceptions are flagged on the row itself:
 
 * ``holding_cost`` is an estimate by design (``days x holding_cost_per_day_eur``), one line
   per stock phase of the serial (inbound: receipt to shipment; return: return receipt to
   sellable; sale: sellable to sold; ``HOLDING_PHASES``), ``is_estimate = true``,
   ``allocation_basis = days_x_rate``;
+* ``support`` and ``mdm_operations`` are allocations of team cost (TCO_DEFINITION section 3):
+  one estimate line per billed rental month of the serial (``support_cost_per_device_month_eur``
+  on every rental invoice, ``mdm_cost_per_device_month_eur`` only when the staging log marks
+  the serial ``mdm_enrolled``), ``allocation_basis = months_x_rate``, ``source_ref``
+  ``assumptions:<key>:<serial>:<invoice_id>`` so the line stays tied to the invoice it rides on;
 * ``purchase_price`` falls back to the PO line price while the unit invoice is
   pending (``assumption_key = po_line_price_pending_invoice``);
 * ``channel_fee`` falls back to the channel fee assumption while the credit note
@@ -49,6 +54,8 @@ LINE_TYPES: dict[str, str] = {  # line_type -> line_class, in cycle order
     "staging": "cost",
     "outbound_shipping": "cost",
     "rental_revenue": "revenue",
+    "support": "cost",
+    "mdm_operations": "cost",
     "repair": "cost",
     "replacement_logistics": "cost",
     "return_logistics": "cost",
@@ -60,12 +67,14 @@ LINE_TYPES: dict[str, str] = {  # line_type -> line_class, in cycle order
     "price_protection_credit": "revenue",
 }
 LEDGER_ORDER: tuple[str, ...] = tuple(LINE_TYPES)
-ESTIMATE_LINE_TYPES: tuple[str, ...] = ("holding_cost",)
+ESTIMATE_LINE_TYPES: tuple[str, ...] = ("holding_cost", "support", "mdm_operations")
 V01_BRIDGE_LINE_TYPES: tuple[str, ...] = (
     "staging",
     "outbound_shipping",
     "wipe_grading",
     "holding_cost",
+    "support",
+    "mdm_operations",
     "price_protection_credit",
 )
 LANDED_LINE_TYPES: tuple[str, ...] = ("purchase_price", "freight", "duty")
@@ -84,6 +93,8 @@ PENDING_INVOICE_KEY = "po_line_price_pending_invoice"
 PENDING_INVOICE_OWNER = "Head of Procurement (name)"
 CHANNEL_FEE_KEY = "channel_fees"
 HOLDING_COST_KEY = "holding_cost_per_day_eur"
+SUPPORT_COST_KEY = "support_cost_per_device_month_eur"
+MDM_COST_KEY = "mdm_cost_per_device_month_eur"
 
 BRONZE_SHORT_NAMES: tuple[str, ...] = (
     "cat_models", "cat_variants", "mkt_curves", "erp_purchase_orders", "erp_po_lines", "erp_goods_receipts",
@@ -681,6 +692,74 @@ def holding_cost_lines(timeline: pd.DataFrame, rate_per_day: float, owner: str, 
     return pd.concat(parts, ignore_index=True) if parts else _empty_lines()
 
 
+def mdm_enrolled_serials(b: BronzeFrames) -> set[str]:
+    """Serials whose staging log marks ``mdm_enrolled`` true (any staging row of the serial)."""
+    st = b.wms_staging_log
+    if st is None or len(st) == 0 or "mdm_enrolled" not in st.columns:
+        return set()
+    flag = st["mdm_enrolled"]
+    if flag.dtype != bool:
+        flag = flag.astype(str).str.strip().str.lower().isin(("true", "1", "yes", "y", "t"))
+    return set(_txt(st[flag.to_numpy()], "serial").dropna().astype(str))
+
+
+def service_allocation_lines(
+    b: BronzeFrames,
+    support_rate: float,
+    mdm_rate: float,
+    owner: str,
+    as_of: pd.Timestamp,
+) -> pd.DataFrame:
+    """Team cost allocated per billed rental month: ``support`` on every rental invoice of the
+    serial, ``mdm_operations`` on the invoices of serials the staging log marks ``mdm_enrolled``.
+
+    Both are estimates by construction (``is_estimate = true``, ``allocation_basis =
+    months_x_rate``, ``assumption_key`` the rate's key, ``assumption_owner`` its owner) and
+    exist only where a rental invoice exists: no invoice, no allocation. Dated on the invoice,
+    ``source_ref = assumptions:<key>:<serial>:<invoice_id>`` so the lines of one serial stay
+    distinct and each one names the invoice month it rides on. A rate of 0 books nothing.
+    """
+    ri = b.portal_rental_invoices
+    if ri is None or len(ri) == 0 or (support_rate <= 0 and mdm_rate <= 0):
+        return _empty_lines()
+    at = _ts(ri, "invoice_date")
+    keep = (at <= as_of) & _txt(ri, "serial").notna()
+    u = ri[keep]
+    if len(u) == 0:
+        return _empty_lines()
+    serial = _txt(u, "serial")
+    invoice = _txt(u, "invoice_id").fillna("")
+    contract = _txt(u, "contract_id")
+    when = at[keep]
+    parts: list[pd.DataFrame] = []
+
+    def block(mask: pd.Series, line_type: str, key: str, rate: float) -> None:
+        if rate <= 0 or not bool(mask.any()):
+            return
+        n = int(mask.sum())
+        parts.append(_frame(
+            serial=serial[mask].to_numpy(),
+            line_type=line_type,
+            amount_eur=_signed(pd.Series(np.full(n, float(rate))), line_type).to_numpy(),
+            event_date=when[mask].to_numpy(),
+            source_system="assumptions",
+            source_table="bronze.portal_rental_invoices",
+            source_ref=("assumptions:" + key + ":" + serial[mask] + ":" + invoice[mask]).to_numpy(),
+            delivery_id=None,
+            allocation_basis="months_x_rate",
+            is_estimate=True,
+            assumption_key=key,
+            assumption_owner=owner,
+            contract_ref=contract[mask].to_numpy(),
+        ))
+
+    all_rows = pd.Series(True, index=u.index)
+    block(all_rows, "support", SUPPORT_COST_KEY, support_rate)
+    enrolled = mdm_enrolled_serials(b)
+    block(serial.isin(enrolled), "mdm_operations", MDM_COST_KEY, mdm_rate)
+    return pd.concat(parts, ignore_index=True) if parts else _empty_lines()
+
+
 # --------------------------------------------------------------------------------------
 # assembly
 # --------------------------------------------------------------------------------------
@@ -736,8 +815,10 @@ def build_ledger_lines(
     """Pure: bronze frames and the serial timeline in, ``silver.ledger_lines`` rows out.
 
     Fourteen line types come from bronze transactions; ``holding_cost`` comes from the
-    timeline and the ``holding_cost_per_day_eur`` assumption. Lines dated after ``as_of``
-    are not booked. The frame carries every DDL column, ``amount_eur`` signed.
+    timeline and the ``holding_cost_per_day_eur`` assumption; ``support`` and
+    ``mdm_operations`` ride on the rental invoices with their per-device-month rates
+    (``service_allocation_lines``). Lines dated after ``as_of`` are not booked. The frame
+    carries every DDL column, ``amount_eur`` signed.
     """
     as_of_ts = pd.Timestamp(as_of)
     try:
@@ -745,6 +826,15 @@ def build_ledger_lines(
         owner = str(a.owner("holding_cost_per_day_eur"))
     except KeyError:
         rate, owner = 0.0, "CFO (name)"
+    try:
+        support_rate = float(a.get(SUPPORT_COST_KEY))
+        service_owner = str(a.owner(SUPPORT_COST_KEY))
+    except KeyError:
+        support_rate, service_owner = 0.0, "Head of Service Operations (name)"
+    try:
+        mdm_rate = float(a.get(MDM_COST_KEY))
+    except KeyError:
+        mdm_rate = 0.0
     parts = [
         _purchase_price_lines(b, as_of_ts),
         _allocated_lines(b, as_of_ts),
@@ -756,6 +846,7 @@ def build_ledger_lines(
         _refurbishment_lines(b, as_of_ts),
         _resale_lines(b, a, as_of_ts),
         holding_cost_lines(timeline, rate, owner, as_of) if rate > 0 else _empty_lines(),
+        service_allocation_lines(b, support_rate, mdm_rate, service_owner, as_of_ts),
     ]
     return _finalise(parts, as_of, is_synthetic)
 
@@ -785,9 +876,13 @@ __all__ = [
     "PENDING_INVOICE_KEY",
     "CHANNEL_FEE_KEY",
     "HOLDING_COST_KEY",
+    "SUPPORT_COST_KEY",
+    "MDM_COST_KEY",
     "BronzeFrames",
     "read_bronze_frames",
     "build_ledger_lines",
     "holding_cost_lines",
+    "service_allocation_lines",
+    "mdm_enrolled_serials",
     "lines_of",
 ]

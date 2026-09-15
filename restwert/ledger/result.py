@@ -138,6 +138,7 @@ def expected_remaining_cost(
     inputs: dict[str, Any],
     a: "Assumptions",
     days_since_return: int = 0,
+    mdm_enrolled: bool = False,
 ) -> tuple[float, str]:
     """Expected cost still to come for one open device, with its inputs source.
 
@@ -155,7 +156,10 @@ def expected_remaining_cost(
     and a closed result therefore share one holding basis.
 
     * rented: ``damage_rate_pa x (months_remaining / 12) x repair_share x mean_repair_cost
-      + logistics + refurb + wipe_grading_mean + holding_cost_per_day x expected_return_to_sale_days``
+      + logistics + refurb + wipe_grading_mean + holding_cost_per_day x expected_return_to_sale_days
+      + months_remaining x (support_cost_per_device_month_eur + mdm_cost_per_device_month_eur
+      if mdm_enrolled)``: the two team-cost allocations the ledger books on every future rental
+      invoice, so a projected result and a closed result share one allocation basis
     * awaiting_return: the same without the repair term
     * wip: ``refurb (unless a work order finished) + holding x max(0, expected_return_to_sale_days - days_since_return)``
     * in_stock: ``holding x max(0, expected_return_to_sale_days - days_since_return)``
@@ -208,6 +212,15 @@ def expected_remaining_cost(
             sources.append("realised")
         else:
             total += _a(a, "refurb_cost_fallback_eur", family, 40.0)
+            sources.append("assumptions")
+
+    if status == "rented":
+        months_left = max(int(months_remaining), 0)
+        allocation = _scalar(a, "support_cost_per_device_month_eur", 0.0)
+        if mdm_enrolled:
+            allocation += _scalar(a, "mdm_cost_per_device_month_eur", 0.0)
+        if months_left > 0 and allocation > 0:
+            total += months_left * allocation
             sources.append("assumptions")
 
     if status in ("rented", "awaiting_return"):

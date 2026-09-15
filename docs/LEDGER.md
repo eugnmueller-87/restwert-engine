@@ -11,7 +11,7 @@ the cent; the five gold tables roll the result up by cohort.
 
 **TCO is a sum of lines; the only rate is holding cost and every holding line says so.**
 
-## 1. The 15 line types
+## 1. The 17 line types
 
 `restwert.ledger.lines.LINE_TYPES`, in cycle order (`LEDGER_ORDER`). Sign: revenue positive,
 cost negative (decision D4). Every amount is net of VAT (decision D5).
@@ -24,6 +24,8 @@ cost negative (decision D4). Every amount is net of VAT (decision D5).
 | staging | cost | `wms_staging_log.staging_cost_eur`, `event_date = staged_at` | `wms:<staging_id>` | direct |
 | outbound_shipping | cost | `wms_shipments`, direction `outbound`, the serial itself | `wms:<shipment_id>` | direct |
 | rental_revenue | revenue | one line per `portal_rental_invoices` row with `invoice_date <= as_of`, `contract_ref = contract_id` | `portal:<invoice_id>` | direct |
+| support | cost | one estimate line per `portal_rental_invoices` row of the serial with `invoice_date <= as_of`: `support_cost_per_device_month_eur` (first-level helpdesk, incident handling, replacement coordination allocated per billed month; a team cost, not a transaction), `event_date = invoice_date`, `contract_ref = contract_id`, `is_estimate = true`, owner Head of Service Operations (name); a rate of 0 books nothing | `assumptions:support_cost_per_device_month_eur:<serial>:<invoice_id>` | months_x_rate |
+| mdm_operations | cost | the same, `mdm_cost_per_device_month_eur` (MDM enrolment, policy operations, managed service), only for serials whose `wms_staging_log.mdm_enrolled` is true; the MDM licence itself is the customer's cost and is never booked | `assumptions:mdm_cost_per_device_month_eur:<serial>:<invoice_id>` | months_x_rate |
 | repair | cost | `sd_tickets`, resolution `repair`, `closed_at <= as_of`, `repair_cost_eur` | `servicedesk:<ticket_id>` | direct |
 | replacement_logistics | cost | `wms_shipments`, direction `replacement_out` where `related_serial = serial` (booked on the damaged device, as in v0.1) | `wms:<shipment_id>` | direct |
 | return_logistics | cost | `wms_shipments`, direction `return`, the serial itself | `wms:<shipment_id>` | direct |
@@ -68,7 +70,8 @@ Closed cycle (`lifecycle_status` in sold, scrapped):
 
     lifecycle_result_eur = round(SUM(amount_eur), 2)
     result_v01_basis_eur = SUM(amount_eur) excluding staging, outbound_shipping, wipe_grading,
-                           holding_cost, price_protection_credit          (= v0.1 lifecycle_margin)
+                           holding_cost, support, mdm_operations,
+                           price_protection_credit                        (= v0.1 lifecycle_margin)
 
 Open cycle: two numbers, two columns, two tiles, never added (decision D13). There is no
 column named `result_total` anywhere, and a test asserts it.
@@ -124,12 +127,14 @@ lever. The fleet model decides, the anchor advises.
 
 v0.1 `device_pnl.lifecycle_margin = rental_revenue - (landed_cost - realised_rv) -
 (repair + replacement_logistics + return_logistics + refurbishment + channel_fees)`. The ledger
-books five more things that v0.1 never saw: staging, outbound shipping, wipe and grading,
-holding cost and price protection credits. Hence
+books seven more things that v0.1 never saw: staging, outbound shipping, wipe and grading,
+holding cost, the support and MDM allocations per billed month, and price protection credits.
+Hence
 
     lifecycle_margin (v0.1) = result_v01_basis_eur
     lifecycle_result_eur    = result_v01_basis_eur
-                              - (staging + outbound_shipping + wipe_grading + holding_cost)
+                              - (staging + outbound_shipping + wipe_grading + holding_cost
+                                 + support + mdm_operations)
                               + price_protection_credit
 
 `silver.reconciliation` compares, per serial, `landed_cost`, `purchase_price`,
@@ -163,19 +168,23 @@ marketplace. `as_of` 2026-06-30. The same numbers are the fixture of `tests/test
 | 12 | resale_gross | 2025-03-02 | +400.00 | recommerce:RO-1 | marketplace |
 | 13 | holding_cost | 2025-03-02 | -3.00 | assumptions:holding_cost_per_day_eur:S1:sale | 10 days sellable to sold x 0.30, is_estimate |
 | 14 | channel_fee | 2025-03-30 | -50.50 | recommerce:CN-1 | 48.00 percentage fee + 2.50 fixed, from the credit note, dated at the credit note |
+| 15 | support | 2024-03-10 .. 2025-02-10 | -30.00 | assumptions:support_cost_per_device_month_eur:S1:RI-RC-1-001 .. 012 | 12 billed months x 2.50, one line per rent invoice, is_estimate |
+| 16 | mdm_operations | 2024-03-10 .. 2025-02-10 | -18.00 | assumptions:mdm_cost_per_device_month_eur:S1:RI-RC-1-001 .. 012 | 12 billed months x 1.50, S1 is mdm_enrolled, is_estimate |
 
     lifecycle_result_eur = -900.00 - 5.00 - 8.50 - 7.00 + 480.00 - 120.00 - 9.50 - 4.00 - 30.00
-                           - 2.40 - 1.80 + 400.00 - 3.00 - 50.50
-                         = -261.70
+                           - 2.40 - 1.80 + 400.00 - 3.00 - 50.50 - 30.00 - 18.00
+                         = -309.70
 
-    result_v01_basis_eur = -261.70 + 8.50 + 7.00 + 4.00 + 7.20 = -235.00
+    result_v01_basis_eur = -309.70 + 8.50 + 7.00 + 4.00 + 7.20 + 30.00 + 18.00 = -235.00
     v0.1 lifecycle_margin = 480.00 - (905.00 - 400.00) - (120.00 + 9.50 + 30.00 + 50.50) = -235.00
 
-Wide row of S1: `landed_cost` 905.00, `tco_excl_landed_eur` 236.70, `tco_eur` 1141.70,
-`tco_transactional_eur` 1134.50 (every flagged estimate taken out: here the three holding
-lines), `resale_net` 349.50, `realised_rv` 400.00, `result_pct_of_landed` -0.2892,
-`n_lines` 25, `n_estimate_lines` 3. S2, still rented on the same PO line, carries the
-inbound phase too (8 days, 2.40) next to its pending-invoice purchase price.
+Wide row of S1: `landed_cost` 905.00, `tco_excl_landed_eur` 284.70, `tco_eur` 1189.70,
+`tco_transactional_eur` 1134.50 (every flagged estimate taken out: the three holding lines,
+the 12 support and the 12 MDM lines), `support_eur` 30.00, `mdm_eur` 18.00, `resale_net`
+349.50, `realised_rv` 400.00, `result_pct_of_landed` -0.3422, `n_lines` 49,
+`n_estimate_lines` 27. S2, still rented on the same PO line, carries the inbound phase too
+(8 days, 2.40) next to its pending-invoice purchase price, and 2.50 plus 1.50 on every
+billed month so far.
 
 ## 6. The gold tables of the ledger
 
@@ -205,8 +214,10 @@ inbound phase too (8 days, 2.40) next to its pending-invoice purchase price.
 ## 7. What is an estimate and what is not
 
 `is_estimate`, `assumption_key`, `assumption_owner` and `allocation_basis` sit on every line.
-Three things are estimates: holding cost (always, one line per stock phase), the channel fee
-until the credit note arrives, and the PO price until the unit invoice arrives.
+Five things are estimates: holding cost (always, one line per stock phase), the support and
+MDM allocations (always, one line per billed rental month, a team cost spread by a rate the
+Head of Service Operations owns), the channel fee until the credit note arrives, and the PO
+price until the unit invoice arrives.
 `tco_transactional_eur = tco_eur - every cost line flagged is_estimate` stands beside
 `tco_eur` so that the estimate share is visible on the TCO page and in
 `KPI_TCO_ESTIMATE_SHARE`; a closed result is therefore booked lines plus flagged estimates,

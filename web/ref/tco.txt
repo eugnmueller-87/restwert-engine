@@ -1,0 +1,302 @@
+Restwert Engine
+Bericht
+Gerät
+Realisierung
+Prognosegüte
+TCO
+Kreislauf
+Stellschrauben
+Laufzeit
+Daten
+Lager
+Verträge
+Protokoll (0)
+Export CSV
+Datei einlesen
+Lauf starten
+Letzter Lauf Stand 16.09.2026 Dateien 282 Zeilen 165.913 ungeklärt 60 Seriennummern 5.251 Prototyp: Läufe werden protokolliert, nicht gerechnet.
+Protokoll dieser Installation
+manuell erfasste Daten, Lieferungen, Schwellen, Läufe · lokal gespeichert
+Noch keine Einträge. Preisbelege erfassen, Dateien einlesen, Schwellen ändern oder Szenarien speichern; jeder Schritt landet hier.
+Geräteart
+Laptop
+Smartphone
+Tablet
+Hersteller
+Apple
+Fairphone
+Google
+HMD Global (Nokia)
+Motorola
+Samsung
+Modell
+iPhone 12
+iPhone 12 Pro
+iPhone 12 Pro Max
+iPhone 12 mini
+iPhone 13
+iPhone 13 Pro
+iPhone 13 Pro Max
+iPhone 13 mini
+iPhone 14
+iPhone 14 Plus
+iPhone 14 Pro
+iPhone 14 Pro Max
+iPhone 15
+iPhone 15 Plus
+iPhone 15 Pro
+iPhone 15 Pro Max
+iPhone 16
+iPhone 16 Plus
+iPhone 16 Pro
+iPhone 16 Pro Max
+iPhone 16e
+iPhone 17
+iPhone 17 Pro
+iPhone 17 Pro Max
+iPhone Air
+iPhone SE (3. Generation, 2022)
+Ausstattung
+alle Ausstattungen
+256 GB (QTY 17 Geräte)
+512 GB (QTY 22 Geräte)
+1 TB (QTY 22 Geräte)
+Laufzeit
+alle Laufzeiten
+12 Monate (QTY 6 Geräte)
+24 Monate (QTY 31 Geräte)
+36 Monate (QTY 16 Geräte)
+48 Monate (QTY 8 Geräte)
+TCO (Einkaufspreis plus Kosten bis Verkauf) je Gerät, Stand 16.09.2026
+Was kostet uns ein Gerät insgesamt: Einkaufspreis plus Kosten bis Verkauf
+Hinweise ausblenden
+Modell wählen, dann steht je Kostenzeile, was das Gerät bis zum Zahlungseingang aus dem Verkauf gekostet hat: bei abgeschlossenen Kreisläufen voll, bei laufenden bis heute plus Erwartung für den Rest. Simulierte Daten, echte Mechanik. Katalog (QTY 233 Modelle, davon QTY 208 mit belegter UVP und QTY 205 mit belegtem Verkaufsstart) und Preisbelege sind öffentlich; jede Buchung im Geräte-Hauptbuch ist simuliert (QTY 5.251 Seriennummern). Lagertage sind immer eine Schätzung (Lagerkosten je Tag, Verantwortlich CFO), Kanalgebühren bis zur Gutschrift des Verkaufs (Verantwortlich Head of Recommerce). Kein Wert ist eine Tatsache über ein reales Unternehmen. Der Data Lake des Hauses ersetzt später die Simulation, Spalte für Spalte, siehe Tab Daten. Auswahl: nur die QTY 194 Modelle, die die Simulation gekauft hat (von QTY 233 im Katalog); ohne Geräte gibt es keine Gesamtkosten.
+TCO je Gerät, abgeschlossene Kreisläufe simuliert
+1.585 €
+Einkaufspreis 1.338 € plus Kosten bis Verkauf 247 €, im Mittel je Gerät
+QTY 2 abgeschlossene Geräte (verkauft oder verschrottet)
+davon geschätzt 64,80 € je Gerät: Lagertage, Kanalgebühren ohne Gutschrift
+TCO je Vertragsmonat 132,12 €, bei 12,0 Monaten Laufzeit im Mittel
+unsicher: QTY 2 liegt unter QTY 30 abgeschlossenen Geräten
+TCO je Gerät, laufende Kreisläufe, bis heute plus Erwartung simuliert abgeleitet
+1.660 €
+bis heute 1.456 €: Einkaufspreis 1.336 € plus bisherige Kosten bis Verkauf 119 €
+Erwartung für den Rest 204 €, aus dem Mittel der Geräteart iPhone je Gerät bei seiner Laufzeit: 12 Monate (QTY 132 abgeschlossene Geräte, Grundlage für QTY 4 laufende), 24 Monate (QTY 450 abgeschlossene Geräte, Grundlage für QTY 31 laufende), 36 Monate (QTY 229 abgeschlossene Geräte, Grundlage für QTY 16 laufende); bei QTY 8 laufenden Geräten über alle Laufzeiten (QTY 826 abgeschlossene Geräte), weil ihre Laufzeit zu wenige abgeschlossene hat: 48 Monate (nur QTY 15 abgeschlossene, unter QTY 30)
+QTY 59 laufende Geräte, im Mittel 12,5 von 29,7 Monaten (Mittel der Laufzeiten) abgerechnet
+Erwartung, keine Buchung: was noch fehlt, steht in der Tabelle unten
+TCO je Vertragsmonat gegen Miete je Monat abgeleitet
+62,10 €
+Grundlage: laufende Kreisläufe, voraussichtlich (bis heute plus Erwartung), QTY 59 Geräte; die QTY 2 abgeschlossenen liegen unter QTY 30
+Miete je Monat 55,72 €, Mittel der Verträge dieser Auswahl (QTY 61 Verträge)
+Miete minus TCO je Vertragsmonat: -6,38 € je Monat
+ohne Restwert gerechnet: der Restwert steht auf dem Tab Gerät
+Anteil geschätzter Zeilen simuliert
+4,1 %
+des TCO der QTY 2 abgeschlossenen Geräte dieser Auswahl stammt aus geschätzten Kostenzeilen
+Lagertage: immer geschätzt, Tage mal Lagerkosten je Tag (0,30 € je Tag, Verantwortlich CFO)
+Kanalgebühren: geschätzt, bis die Gutschrift des Verkaufs da ist, bei QTY 0 Geräten (Verantwortlich Head of Recommerce)
+Einkaufspreis: geschätzt bis zur Stückrechnung, in der Simulation bei QTY 0 Geräten
+QTY 71 Kostenzeilen bei den abgeschlossenen Geräten dieser Auswahl (Einkaufspreis bis Kanalgebühren, ohne die Erlöszeilen Mieterlös und Restwert)
+Dieses Modell in der simulierten Flotte simuliert
+QTY 61 Geräte
+davon abgeschlossen 2, laufend mit Vertrag 59, ohne Vertrag 0 (Ersatzgeräte im Lager, ohne Laufzeit, ohne TCO je Vertragsmonat)
+Ausstattungen: 256 GB (QTY 17 Geräte), 512 GB (QTY 22 Geräte), 1 TB (QTY 22 Geräte)
+Laufzeiten: 12 Monate (QTY 6 Geräte), 24 Monate (QTY 31 Geräte), 36 Monate (QTY 16 Geräte), 48 Monate (QTY 8 Geräte)
+gekauft 22.09.2024 bis 26.03.2026
+Weniger
+Begriffe ausblenden
+QTY (Quantity)
+Stückzahl; das Wort dahinter sagt, was gezählt wird: Geräte, Kostenzeilen, Modelle.
+TCO
+Einkaufspreis plus Kosten bis Verkauf, je Seriennummer, hier im Mittel je Gerät; die einzige Stelle im Werkzeug, an der beide Teile zu einer Zahl addiert werden, und jede Kachel nennt die zwei Teile. Gemeint sind die Kosten des Leasinghauses, nicht die Kosten des Kunden. Nutzerbetreuung und Geräteverwaltung je Gerätemonat sind als Umlage drin (geschätzt, ein Satz je Mietrechnung), siehe Kostendefinition unten.
+Einkaufspreis
+Rechnungspreis des Lieferanten minus Preisschutz-Gutschrift des Herstellers, falls eine kam (in dieser Auswahl bei QTY 0 Geräten).
+Erwartung
+eine Zahl aus dem Mittel abgeschlossener Geräte der Geräteart iPhone, keine Buchung; jede Zeile der Tabelle laufender Kreisläufe nennt ihre Grundlage.
+Abgeschlossene Kreisläufe: TCO je Kostenzeile, Mittel je Gerät
+simuliert QTY 14
+Begriffe ausblenden
+QTY 2 abgeschlossene Geräte der Auswahl. Jede Zeile ist die Summe ihrer Buchungen geteilt durch alle abgeschlossenen Geräte, auch die ohne diese Kostenart. Unsicher: QTY 2 liegt unter QTY 30.
+Kostenzeile
+Kostenart aus dem Geräte-Hauptbuch, benannt wie auf dem Tab Kreislauf; die zwei fetten Zeilen sind Summen der Zeilen darüber.
+je Gerät im Mittel
+Summe der Zeile über die abgeschlossenen Geräte der Auswahl geteilt durch QTY aller abgeschlossenen Geräte, auch derer ohne diese Kostenart, in Euro ohne Mehrwertsteuer.
+QTY Geräte mit Zeile
+wie viele der abgeschlossenen Geräte diese Kostenart überhaupt hatten, Reparatur zum Beispiel nur die reparierten; eine gebuchte Zeile zählt auch, wenn ihr Betrag null ist, etwa die Kanalgebühr beim Mitarbeiterkauf ohne Gebühr.
+je betroffenes Gerät
+Summe der Zeile geteilt durch QTY Geräte mit Zeile.
+geschätzt
+ob die Zeile eine Buchung mit Beleg ist oder eine Schätzung mit verantwortlicher Rolle; Lagertage sind immer eine Schätzung.
+Datenkanal im Einsatz
+aus welcher Quelle des Tabs Daten die Zeile im echten Betrieb kommt, wenn der Data Lake die Simulation ersetzt.
+Kostenzeile | je Gerät im Mittel | QTY Geräte mit Zeile | je betroffenes Gerät | geschätzt | Datenkanal im Einsatz
+Einkaufspreis | 1.338 € | 2 | 1.338 € | bis Stückrechnung, QTY 0 Geräte (Head of Procurement); minus Preisschutz-Gutschrift bei QTY 0 Geräten | ERP Lieferantenrechnungen
+Fracht vom Lieferanten | 7,93 € | 2 | 7,93 € | nein | ERP Lieferantenrechnungen
+Zoll | 19,72 € | 1 | 39,43 € | nein | ERP Lieferantenrechnungen
+Einrichtung vor Versand | 10,28 € | 2 | 10,28 € | nein | Lager Einrichtungsprotokoll
+Versand zum Kunden | 8,10 € | 2 | 8,10 € | nein | Lager Versandprotokoll
+Nutzerbetreuung je Gerätemonat (Umlage, geschätzt) | 30,00 € | 2 | 30,00 € | ja, immer, Umlage (Head of Service Operations) | Schätzung: Mietrechnungen mal Satz je Gerätemonat
+Geräteverwaltung MDM je Gerätemonat (Umlage, geschätzt) | 18,00 € | 2 | 18,00 € | ja, immer, Umlage (Head of Service Operations) | Schätzung: Mietrechnungen mal Satz je Gerätemonat, Einrichtungsprotokoll (MDM-Flag)
+Reparatur | 0,00 € | 0 |  | nein | Servicedesk
+Austauschversand | 0,00 € | 0 |  | nein | Lager Versandprotokoll
+Rücksendung vom Kunden | 9,50 € | 2 | 9,50 € | nein | Lager Versandprotokoll
+Datenlöschung und Zustandsprüfung | 7,25 € | 2 | 7,25 € | nein | Rücknahme
+Aufbereitung | 34,59 € | 2 | 34,59 € | nein | Aufbereiter
+Lagertage (Lagerkosten je Tag, geschätzt) | 16,80 € | 2 | 16,80 € | ja, immer (CFO) | Schätzung: Tage mal Lagerkosten je Tag
+Kanalgebühren | 85,03 € | 2 | 85,03 € | bis Gutschrift, QTY 0 Geräte (Head of Recommerce) | Recommerce Gutschriften
+Kosten bis Verkauf, Summe | 247 € | 2 | 247 € | Summe der Zeilen außer Einkaufspreis |
+TCO = Einkaufspreis plus Kosten bis Verkauf | 1.585 € | 2 | 1.585 € | davon geschätzt 64,80 € je Gerät |
+Laufende Kreisläufe: bis heute, Erwartung, voraussichtlich
+simuliert Erwartung abgeleitet QTY 14
+Begriffe ausblenden
+QTY 59 laufende Geräte der Auswahl (beim Kunden, in Rückgabe, in Aufbereitung oder verkaufsfähig im Lager), im Mittel 12,5 von 29,7 Monaten (Mittel der Laufzeiten) abgerechnet. Erwartung = Mittel der abgeschlossenen Geräte der Geräteart iPhone je Gerät bei seiner Laufzeit: 12 Monate (QTY 132 abgeschlossene Geräte, Grundlage für QTY 4 laufende), 24 Monate (QTY 450 abgeschlossene Geräte, Grundlage für QTY 31 laufende), 36 Monate (QTY 229 abgeschlossene Geräte, Grundlage für QTY 16 laufende); bei QTY 8 laufenden Geräten über alle Laufzeiten (QTY 826 abgeschlossene Geräte), weil ihre Laufzeit zu wenige abgeschlossene hat: 48 Monate (nur QTY 15 abgeschlossene, unter QTY 30); bei „alle Laufzeiten“ je Gerät mit seiner Laufzeit gerechnet, dann gemittelt.
+Kostenzeile
+Kostenart aus dem Geräte-Hauptbuch, benannt wie auf dem Tab Kreislauf; die zwei fetten Zeilen sind Summen der Zeilen darüber.
+bis heute
+Summe der bis zum Stichtag gebuchten Zeilen dieser Kostenart geteilt durch QTY aller laufenden Geräte der Auswahl, Euro ohne Mehrwertsteuer.
+Erwartung
+was für den Rest des Kreislaufs noch erwartet wird, aus dem Mittel der abgeschlossenen Geräte derselben Geräteart und Laufzeit; eine Erwartung, keine Buchung, und nie eine Zahl aus einer Buchung.
+bis heute plus Erwartung
+die Summe der beiden Spalten links; bei einem Verkauf heute entfielen die erwarteten Mietmonate, nicht die Kosten, deshalb kein zweiter Wert.
+Grundlage der Erwartung
+welche Regel je Zeile die Erwartung liefert; fehlen der Geräteart und Laufzeit weniger als QTY 30 abgeschlossene Geräte, gilt die Geräteart über alle Laufzeiten, und die Notiz über der Tabelle sagt es.
+Kostenzeile | bis heute | Erwartung | bis heute plus Erwartung | Grundlage der Erwartung
+Einkaufspreis | 1.336 € | 0,00 € | 1.336 € | gebucht, keine Erwartung
+Fracht vom Lieferanten | 9,26 € | 0,00 € | 9,26 € | gebucht, keine Erwartung
+Zoll | 14,10 € | 0,00 € | 14,10 € | gebucht, keine Erwartung
+Einrichtung vor Versand | 10,02 € | 0,00 € | 10,02 € | gebucht, keine Erwartung
+Versand zum Kunden | 7,43 € | 0,00 € | 7,43 € | gebucht, keine Erwartung
+Nutzerbetreuung je Gerätemonat (Umlage, geschätzt) | 31,14 € | 43,09 € | 74,24 € | Satz je Gerätemonat mal noch offene Monate der Laufzeit
+Geräteverwaltung MDM je Gerätemonat (Umlage, geschätzt) | 18,28 € | 25,35 € | 43,63 € | Satz je Gerätemonat mal noch offene Monate, nur bei MDM-Registrierung
+Reparatur | 24,01 € | 18,35 € | 42,35 € | Mittel der Geräteart und Laufzeit mal Anteil der noch offenen Monate
+Austauschversand | 0,00 € | 0,92 € | 0,92 € | Mittel der Geräteart und Laufzeit mal Anteil der noch offenen Monate
+Rücksendung vom Kunden | 0,00 € | 9,50 € | 9,50 € | Mittel der Geräteart und Laufzeit, wenn noch nicht gebucht
+Datenlöschung und Zustandsprüfung | 0,00 € | 5,55 € | 5,55 € | Mittel der Geräteart und Laufzeit, wenn noch nicht gebucht
+Aufbereitung | 0,00 € | 41,91 € | 41,91 € | Mittel der Geräteart und Laufzeit, wenn noch nicht gebucht
+Lagertage (Lagerkosten je Tag, geschätzt) | 5,00 € | 24,38 € | 29,38 € | Mittel der Geräteart und Laufzeit minus bis heute gebucht, mindestens null
+Kanalgebühren | 0,00 € | 35,30 € | 35,30 € | Gebührenanteil am Restwert der Geräteart und Laufzeit mal Restwertprognose am Leasingende dieses Geräts (QTY 59 ohne Gutschrift)
+Kosten bis Verkauf, Summe | 119 € | 204 € | 324 € | Summe der Zeilen außer Einkaufspreis
+TCO = Einkaufspreis plus Kosten bis Verkauf | 1.456 € | 204 € | 1.660 € | voraussichtlich; Einkaufspreis plus bis heute plus Erwartung
+Zum Vergleich erwartet das Geräte-Hauptbuch selbst für diese Geräte im Mittel 160 € Restkosten ohne Kanalgebühren plus 67,65 € Kanalgebühren (Regel in docs/LEDGER.md, Geräteart ohne Laufzeit, Mindeststückzahl QTY 30, Kanal des Geräts oder Marktplatz); die Erwartung dieses Tabs (204 €) liegt 22,82 € darunter. Eine Abweichung ist ein Befund über zwei Regeln, kein Fehler einer Zahl.
+Je Laufzeit und Ausstattung
+simuliert QTY 12
+Begriffe ausblenden
+Alle Geräte dieses Modells, alle Ausstattungen und Laufzeiten, unabhängig von der Auswahl oben; die fette Zeile je Laufzeit rechnet über alle Ausstattungen. Die Geldspalten rechnen nur mit der Grundlage, die die letzte Spalte nennt, nie gemischt.
+Laufzeit
+vereinbarte Vertragslaufzeit in Monaten, nicht die abgerechneten Monate.
+Ausstattung
+Speicher, für den Einkaufspreis und UVP gelten.
+QTY Geräte
+alle Geräte dieser Zeile mit Vertrag, abgeschlossen und laufend.
+davon abgeschlossen
+verkauft oder verschrottet; nur diese haben einen vollen Kreislauf.
+Einkaufspreis
+Rechnungspreis minus Preisschutz-Gutschrift, Mittel je Gerät der Grundlage.
+Kosten bis Verkauf
+Fracht bis Kanalgebühren, Mittel je Gerät der Grundlage; bei laufenden Geräten bis heute plus Erwartung.
+TCO
+Einkaufspreis plus Kosten bis Verkauf, die zwei Spalten links addiert.
+TCO je Vertragsmonat
+TCO geteilt durch die Laufzeit in Monaten, je Gerät gerechnet und dann gemittelt; ein vorzeitig zurückgegebenes Gerät wird trotzdem durch die vereinbarte Laufzeit geteilt, seine abgerechneten Monate liegen darunter.
+Miete je Monat
+Mittel der Monatsmiete der Verträge dieser Zeile, zum Vergleich mit der Spalte links.
+Grundlage
+ob die Zahlen aus vollen Kreisläufen stammen oder aus bis heute plus Erwartung, und mit welcher QTY.
+Laufzeit | Ausstattung | QTY Geräte | davon abgeschlossen | Einkaufspreis | Kosten bis Verkauf | TCO | TCO je Vertragsmonat | Miete je Monat | Grundlage
+12 Monate | 256 GB | 2 | 1 | 1.099 € | 187 € | 1.286 € | 107,20 € | 71,26 € | voll, unsicher (QTY 1 abgeschlossen)
+12 Monate | 512 GB | 2 | 0 | 1.292 € | 200 € | 1.492 € | 124,35 € | 82,05 € | bis heute plus Erwartung, QTY 2 laufend
+12 Monate | 1 TB | 2 | 1 | 1.577 € | 307 € | 1.885 € | 157,04 € | 101,66 € | voll, unsicher (QTY 1 abgeschlossen)
+12 Monate | alle Ausstattungen | 6 | 2 | 1.338 € | 247 € | 1.585 € | 132,12 € | 84,99 € | voll, unsicher (QTY 2 abgeschlossen)
+24 Monate | 256 GB | 10 | 0 | 1.127 € | 281 € | 1.408 € | 58,69 € | 48,13 € | bis heute plus Erwartung, QTY 10 laufend
+24 Monate | 512 GB | 10 | 0 | 1.320 € | 335 € | 1.655 € | 68,95 € | 56,34 € | bis heute plus Erwartung, QTY 10 laufend
+24 Monate | 1 TB | 11 | 0 | 1.515 € | 285 € | 1.800 € | 75,02 € | 64,82 € | bis heute plus Erwartung, QTY 11 laufend
+24 Monate | alle Ausstattungen | 31 | 0 | 1.327 € | 300 € | 1.627 € | 67,79 € | 56,70 € | bis heute plus Erwartung, QTY 31 laufend
+36 Monate | 256 GB | 4 | 0 | 1.113 € | 331 € | 1.444 € | 40,11 € | 40,02 € | bis heute plus Erwartung, QTY 4 laufend
+36 Monate | 512 GB | 7 | 0 | 1.303 € | 415 € | 1.718 € | 47,73 € | 47,64 € | bis heute plus Erwartung, QTY 7 laufend
+36 Monate | 1 TB | 5 | 0 | 1.547 € | 353 € | 1.900 € | 52,78 € | 56,35 € | bis heute plus Erwartung, QTY 5 laufend
+36 Monate | alle Ausstattungen | 16 | 0 | 1.332 € | 375 € | 1.706 € | 47,40 € | 48,46 € | bis heute plus Erwartung, QTY 16 laufend
+48 Monate | 256 GB | 1 | 0 | 1.162 € | 351 € | 1.514 € | 31,54 € | 36,95 € | bis heute plus Erwartung, QTY 1 laufend
+48 Monate | 512 GB | 3 | 0 | 1.289 € | 362 € | 1.651 € | 34,39 € | 41,25 € | bis heute plus Erwartung, QTY 3 laufend
+48 Monate | 1 TB | 4 | 0 | 1.513 € | 388 € | 1.901 € | 39,60 € | 48,88 € | bis heute plus Erwartung, QTY 4 laufend
+48 Monate | alle Ausstattungen | 8 | 0 | 1.385 € | 374 € | 1.759 € | 36,64 € | 44,53 € | bis heute plus Erwartung, QTY 8 laufend
+Geräteart und Laufzeit: Vergleich und Grundlage der Erwartung
+simuliert QTY 20
+Begriffe ausblenden
+Geräteart iPhone des gewählten Modells fett; die anderen Gerätearten zum Vergleich. Ein Modell ohne Geräte in der Simulation hat nur diese Zeilen als Näherung, und die Kacheln sagen das.
+Geräteart
+die Gruppe, aus der die Erwartung für laufende Geräte stammt; nicht der Hersteller.
+Laufzeit
+vereinbarte Laufzeit in Monaten.
+QTY abgeschlossen
+abgeschlossene Geräte dieser Geräteart und Laufzeit; unter QTY 30 gilt die Zeile „alle Laufzeiten“ als Grundlage.
+Einkaufspreis
+Rechnungspreis minus Preisschutz-Gutschrift, Mittel je abgeschlossenem Gerät.
+Kosten bis Verkauf
+Fracht bis Kanalgebühren, Mittel je abgeschlossenem Gerät.
+TCO
+Einkaufspreis plus Kosten bis Verkauf, Mittel je abgeschlossenem Gerät.
+TCO je Vertragsmonat
+TCO geteilt durch die Laufzeit in Monaten, je Gerät gerechnet und dann gemittelt.
+Geräteart | Laufzeit | QTY abgeschlossen | Einkaufspreis | Kosten bis Verkauf | TCO | TCO je Vertragsmonat
+iPhone | 12 Monate | 132 | 944 € | 201 € | 1.145 € | 95,46 €
+iPhone | 24 Monate | 450 | 955 € | 256 € | 1.211 € | 50,46 €
+iPhone | 36 Monate | 229 | 938 € | 310 € | 1.249 € | 34,68 €
+iPhone | 48 Monate | 15 (unter 30) | 887 € | 262 € | 1.149 € | 23,94 €
+iPhone | alle Laufzeiten | 826 | 947 € | 263 € | 1.210 € | 52,79 €
+Android-Smartphone | 12 Monate | 123 | 525 € | 192 € | 717 € | 59,74 €
+Android-Smartphone | 24 Monate | 517 | 499 € | 237 € | 736 € | 30,66 €
+Android-Smartphone | 36 Monate | 187 | 462 € | 284 € | 746 € | 20,71 €
+Android-Smartphone | 48 Monate | 13 (unter 30) | 611 € | 306 € | 916 € | 19,09 €
+Android-Smartphone | alle Laufzeiten | 840 | 496 € | 242 € | 738 € | 32,53 €
+Tablet | 12 Monate | 24 (unter 30) | 803 € | 195 € | 998 € | 83,15 €
+Tablet | 24 Monate | 161 | 734 € | 247 € | 981 € | 40,89 €
+Tablet | 36 Monate | 160 | 721 € | 285 € | 1.006 € | 27,94 €
+Tablet | 48 Monate | 9 (unter 30) | 730 € | 339 € | 1.069 € | 22,27 €
+Tablet | alle Laufzeiten | 354 | 733 € | 263 € | 996 € | 37,43 €
+Laptop | 12 Monate | 50 | 1.152 € | 240 € | 1.392 € | 116,00 €
+Laptop | 24 Monate | 204 | 1.176 € | 280 € | 1.456 € | 60,67 €
+Laptop | 36 Monate | 250 | 1.170 € | 344 € | 1.514 € | 42,05 €
+Laptop | 48 Monate | 39 | 1.127 € | 355 € | 1.483 € | 30,89 €
+Laptop | alle Laufzeiten | 543 | 1.168 € | 311 € | 1.479 € | 55,05 €
+Hinterlegte Kostendefinition: was im TCO drin ist, was nicht, was noch fehlt
+simuliert QTY 14
+Zeilen ausblenden
+Begriffe ausblenden
+Gemeint sind die Gesamtkosten des Leasinghauses je Seriennummer von der Bestellung bis zum Zahlungseingang aus dem Verkauf: Einkaufspreis plus Kosten bis Verkauf. Nicht gemeint sind Kosten des Kunden. Hinterlegt in docs/TCO_DEFINITION.md und docs/LEDGER.md.
+Kostenzeile
+Kostenart des Geräte-Hauptbuchs, benannt wie auf dem Tab Kreislauf; die zwölf Zeilen sind die Kostendefinition in docs/TCO_DEFINITION.md, Abschnitt 3, in derselben Reihenfolge.
+Phase
+Abschnitt des Kreislaufs, in dem die Zeile entsteht: Anschaffung, Bereitstellung, Service, Rückgabe, Wiederverkauf oder Kapital und Lager.
+Herkunft
+aus welchem Beleg oder Quellsystem die Zeile stammt und wie ein Sammelbetrag auf die Seriennummer verteilt wird.
+Gebucht bei
+welches Ereignis die Zeile auslöst, kein Datum: Rechnung, Einrichtung, Versand, Schließen des Servicefalls, Wareneingang, Fertigstellung, Ende der Lagerphase, Gutschrift des Verkaufs.
+Geschätzt?
+ob die Zeile eine Buchung mit Beleg ist oder eine markierte Schätzung, und bis wann die Schätzung gilt; Lagertage sind immer eine Schätzung, deshalb fett.
+Verantwortlich
+die Rolle, die den Schätzwert festlegt und ändert; leer, wenn die Zeile nie geschätzt wird.
+Kostenzeile | Phase | Herkunft | Gebucht bei | Geschätzt? | Verantwortlich
+Einkaufspreis | Anschaffung | Lieferantenrechnung (ERP), Stückposition je Seriennummer | Rechnung | bis die Rechnung da ist: Bestellpreis, markiert | Head of Procurement
+Fracht vom Lieferanten | Anschaffung | Lieferantenrechnung, Positionen der Bestellzeile, centgenau auf die gelieferten Seriennummern verteilt | Rechnung | nein |
+Zoll | Anschaffung | Lieferantenrechnung, Positionen der Bestellzeile, centgenau auf die gelieferten Seriennummern verteilt | Rechnung | nein |
+Einrichtung vor Versand | Bereitstellung | Einrichtungsprotokoll (Lager) | Einrichtung | nein |
+Versand zum Kunden | Bereitstellung | Versandprotokoll (Lager), Richtung Kunde | Versand | nein |
+Nutzerbetreuung je Gerätemonat (Umlage, geschätzt) | Service | je Mietrechnung des Geräts ein Satz je Gerätemonat: First-Level-Support, Störungsbearbeitung, Austauschkoordination; Teamkosten, keine Buchung je Seriennummer | Rechnungsdatum der Mietrechnung | ja, immer | Head of Service Operations
+Geräteverwaltung MDM je Gerätemonat (Umlage, geschätzt) | Service | je Mietrechnung ein Satz je Gerätemonat, nur für Geräte, die das Einrichtungsprotokoll als MDM-registriert führt; die MDM-Lizenz selbst bleibt beim Kunden | Rechnungsdatum der Mietrechnung | ja, immer | Head of Service Operations
+Reparatur | Service | Servicefall mit Lösung Reparatur und Kosten | Schließen des Servicefalls | nein |
+Austauschversand | Service | Versandprotokoll, Richtung Austausch, gebucht auf das defekte Gerät | Versand | nein |
+Rücksendung vom Kunden | Rückgabe | Versandprotokoll, Richtung Rücksendung | Versand | nein |
+Datenlöschung und Zustandsprüfung | Rückgabe | Rückläufer-Beleg | Wareneingang der Rückgabe | nein |
+Aufbereitung | Wiederverkauf | Aufbereitungsauftrag | Fertigstellung | nein |
+Lagertage (Lagerkosten je Tag, geschätzt) | Kapital und Lager | Tage je Lagerphase (Eingang, Rückgabe, Verkauf) mal Lagerkosten je Tag | Ende der Lagerphase | ja, immer | CFO
+Kanalgebühren | Wiederverkauf | Gutschrift des Verkaufsauftrags (Prozent plus Fixbetrag) | Gutschrift des Verkaufs | bis die Gutschrift da ist: angenommener Satz, markiert | Head of Recommerce
+▾ Nicht drin, mit Absicht
+Softwarelizenzen und Sicherheitssoftware (Kunde)
+Produktivitätsausfälle und Schulung (Kunde)
+Abschreibungen (Managementsicht, kein Zahlungseingang und keine Zahlung)
+Kapitalkosten über die Lagerkosten je Tag hinaus
+Mieterlös und Restwert (Erlösseite, Tab Kreislauf und Tab Gerät)
+▾ Noch nicht drin, obwohl Kosten des Leasinghauses
+Kapitalkosten über die Lagerkosten je Tag hinaus, und die Verwertung verschrotteter Geräte als eigene Zeile. Nutzerbetreuung und Geräteverwaltung je Gerätemonat sind seit dieser Version drin: als Umlage, ein Satz je Mietrechnung (Nutzerbetreuung 2,50 €, Geräteverwaltung 1,50 € je Gerätemonat, Platzhalter ohne öffentliche Quelle, Verantwortlich Head of Service Operations), Geräteverwaltung nur für die QTY 5.111 Geräte mit MDM-Registrierung im Einrichtungsprotokoll.
+▾ Preisschutz-Gutschrift
+mindert auf diesem Tab den Einkaufspreis (Glossar); docs/TCO_DEFINITION.md Abschnitt 2 führt sie auf der Erlösseite, deshalb weicht der TCO hier bei QTY 18 von QTY 5.251 Geräten der Simulation um die Gutschrift von der Summe des Hauptbuchs (Codename tco_eur) ab.

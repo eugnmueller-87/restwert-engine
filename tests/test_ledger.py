@@ -256,7 +256,7 @@ def pipeline_db(request):
 
 def test_line_types_closed_and_signed(hand):
     _, _, lines, _ = hand
-    assert set(LINE_TYPES) == set(LEDGER_ORDER) and len(LINE_TYPES) == 15
+    assert set(LINE_TYPES) == set(LEDGER_ORDER) and len(LINE_TYPES) == 17
     assert list(lines.columns) == LEDGER_LINE_COLUMNS
     assert set(lines["line_type"]) <= set(LINE_TYPES)
     for t, cls in LINE_TYPES.items():
@@ -268,7 +268,10 @@ def test_line_types_closed_and_signed(hand):
     assert (lines["line_class"] == lines["line_type"].map(LINE_TYPES)).all()
     est = lines[lines["is_estimate"]]
     assert set(est["line_type"]) <= set(ESTIMATE_LINE_TYPES) | {"purchase_price", "channel_fee"}
-    assert set(est["assumption_key"]) <= {"holding_cost_per_day_eur", "po_line_price_pending_invoice", "channel_fees"}
+    assert set(est["assumption_key"]) <= {
+        "holding_cost_per_day_eur", "po_line_price_pending_invoice", "channel_fees",
+        "support_cost_per_device_month_eur", "mdm_cost_per_device_month_eur",
+    }
     # every non-estimate line traces to a bronze row
     real = lines[~lines["is_estimate"]]
     assert real["source_ref"].str.contains(":").all() and real["delivery_id"].notna().all()
@@ -279,12 +282,15 @@ def test_line_types_closed_and_signed(hand):
 def test_hand_serial_ten_lines(hand):
     _, _, lines, dl = hand
     s1 = lines_of(lines, "S1")
-    assert len(s1) == 12 + 10 + 3  # 12 rent lines, the ten other line types plus the fee, three holding phases
+    # 12 rent lines, the ten other line types plus the fee, three holding phases, and one support
+    # plus one MDM allocation line riding on each of the 12 rent invoices (v0.3)
+    assert len(s1) == 12 + 10 + 3 + 12 + 12
     by = s1.groupby("line_type")["amount_eur"].sum().round(2).to_dict()
     assert by == pytest.approx({
         "purchase_price": -900.00, "freight": -5.00, "staging": -8.50, "outbound_shipping": -7.00, "rental_revenue": 480.00,
         "repair": -120.00, "return_logistics": -9.50, "wipe_grading": -4.00, "refurbishment": -30.00, "resale_gross": 400.00,
         "channel_fee": -50.50, "holding_cost": -7.20,
+        "support": -30.00, "mdm_operations": -18.00,  # 12 x 2.50 and 12 x 1.50 (S1 is mdm_enrolled)
     })
     # holding per stock phase, one line each with its own source_ref: inbound 8 x 0.30, return 6 x 0.30, sale 10 x 0.30
     hold = s1[s1["line_type"] == "holding_cost"].set_index("source_ref")["amount_eur"].to_dict()
@@ -294,22 +300,31 @@ def test_hand_serial_ten_lines(hand):
         "assumptions:holding_cost_per_day_eur:S1:sale": -3.00,
     })
     assert s1[s1["line_type"] == "holding_cost"]["is_estimate"].all()
+    # the allocations are estimates, one per rent invoice, dated on the invoice and tied to it by source_ref
+    alloc = s1[s1["line_type"].isin(["support", "mdm_operations"])]
+    assert alloc["is_estimate"].all() and (alloc["allocation_basis"] == "months_x_rate").all()
+    assert alloc["source_ref"].str.startswith("assumptions:support_cost_per_device_month_eur:S1:").sum() == 12
+    assert alloc["source_ref"].str.startswith("assumptions:mdm_cost_per_device_month_eur:S1:").sum() == 12
+    assert set(alloc["assumption_owner"]) == {"Head of Service Operations (name)"}
+    rent_dates = set(pd.to_datetime(s1.loc[s1["line_type"] == "rental_revenue", "event_date"]))
+    assert set(pd.to_datetime(alloc["event_date"])) == rent_dates
     # the credit note's own date is the event date of the booked fee, not the sale date
     fee = s1[s1["line_type"] == "channel_fee"].iloc[0]
     assert pd.Timestamp(fee["event_date"]) == pd.Timestamp(date(2025, 3, 30)) and fee["source_ref"] == "recommerce:CN-1"
-    hand_sum = -900 - 5.00 - 8.50 - 7.00 + 480 - 120 - 9.50 - 4.00 - 30 + 400 - 50.50 - 7.20
-    assert R.result_closed(s1) == pytest.approx(round(hand_sum, 2)) == pytest.approx(-261.70)
+    hand_sum = -900 - 5.00 - 8.50 - 7.00 + 480 - 120 - 9.50 - 4.00 - 30 + 400 - 50.50 - 7.20 - 30.00 - 18.00
+    assert R.result_closed(s1) == pytest.approx(round(hand_sum, 2)) == pytest.approx(-309.70)
     row = dl.set_index("serial").loc["S1"]
-    assert row["lifecycle_result_eur"] == pytest.approx(-261.70)
+    assert row["lifecycle_result_eur"] == pytest.approx(-309.70)
     v01 = lifecycle_margin(480.0, 905.0, 400.0, 120.0 + 9.5 + 30.0 + 50.5)
     assert R.result_v01_basis(s1) == pytest.approx(v01) == pytest.approx(-235.00)
     assert row["result_v01_basis_eur"] == pytest.approx(v01)
-    assert row["landed_cost"] == pytest.approx(905.00) and row["tco_eur"] == pytest.approx(905.0 + 8.5 + 7 + 120 + 9.5 + 4 + 30 + 7.2 + 50.5)
-    assert row["tco_transactional_eur"] == pytest.approx(row["tco_eur"] - 7.2)
+    assert row["landed_cost"] == pytest.approx(905.00) and row["tco_eur"] == pytest.approx(905.0 + 8.5 + 7 + 120 + 9.5 + 4 + 30 + 7.2 + 50.5 + 30.0 + 18.0)
+    assert row["support_eur"] == pytest.approx(30.0) and row["mdm_eur"] == pytest.approx(18.0)
+    assert row["tco_transactional_eur"] == pytest.approx(row["tco_eur"] - 7.2 - 30.0 - 18.0)
     assert row["realised_rv"] == pytest.approx(400.0) and row["resale_net"] == pytest.approx(349.5)
     assert row["months_billed"] == 12 and row["rental_revenue"] == pytest.approx(480.0)
     assert row["is_closed"] and row["lifecycle_status"] == "sold" and pd.Timestamp(row["closed_date"]) == pd.Timestamp(date(2025, 3, 2))
-    assert row["days_in_stock_to_date"] == 10 and row["n_estimate_lines"] == 3
+    assert row["days_in_stock_to_date"] == 10 and row["n_estimate_lines"] == 3 + 12 + 12
     # the second serial of the PO line carries the remainder cent and the pending-invoice price
     s2 = lines_of(lines, "S2")
     assert s2.loc[s2["line_type"] == "freight", "amount_eur"].iloc[0] == pytest.approx(-5.01)
@@ -358,7 +373,8 @@ def test_two_open_numbers_differ_and_are_both_stored(hand):
     assert row["remaining_contracted_rent"] == pytest.approx(40.0 * row["months_remaining"])
     assert row["months_remaining"] == 36 - row["months_billed"]
     fee = load_assumptions().get("channel_fees", "marketplace")
-    sum_lines = -905.0 - 5.01 - 8.5 - 7.0 - 2.40 + row["rental_revenue"]  # the inbound holding phase (8 days) is booked on the rented S2 too
+    # the inbound holding phase (8 days) is booked on the rented S2 too; every billed month carries 2.50 support + 1.50 MDM
+    sum_lines = -905.0 - 5.01 - 8.5 - 7.0 - 2.40 + row["rental_revenue"] - (2.50 + 1.50) * row["months_billed"]
     assert liq == pytest.approx(R.result_if_liquidated_today(sum_lines, 300.0, fee["fee_pct"], fee["fee_fixed_eur"]))
     assert proj == pytest.approx(R.result_projected_at_lease_end(
         sum_lines, row["remaining_contracted_rent"], row["estimate_rv_lease_end"], fee["fee_pct"], fee["fee_fixed_eur"], row["expected_remaining_cost"]))
@@ -438,14 +454,15 @@ def test_reconciliation_identity_on_pipeline(pipeline_db):
     assert recon["serial"].nunique() == n_pnl == len(dl)
     closed = dl[dl["is_closed"].astype(bool)]
     assert len(closed) > 0
-    bridge = closed["staging_eur"].astype(float) + closed["outbound_shipping_eur"].astype(float) + closed["wipe_grading_eur"].astype(float) + closed["holding_cost_eur"].astype(float)
+    bridge = (closed["staging_eur"].astype(float) + closed["outbound_shipping_eur"].astype(float) + closed["wipe_grading_eur"].astype(float)
+              + closed["holding_cost_eur"].astype(float) + closed["support_eur"].astype(float) + closed["mdm_eur"].astype(float))
     expected = closed["result_v01_basis_eur"].astype(float) - bridge + closed["price_protection_credit_eur"].astype(float)
     assert np.allclose(closed["lifecycle_result_eur"].astype(float), expected, atol=0.011)
     lines = db.read_df(con, 'SELECT serial, sum(amount_eur) AS s FROM "silver"."ledger_lines" GROUP BY serial')
     m = closed.merge(lines, on="serial", how="left")
     assert np.allclose(m["lifecycle_result_eur"].astype(float), m["s"].astype(float), atol=0.011)
     est = db.read_df(con, 'SELECT DISTINCT line_type, assumption_key FROM "silver"."ledger_lines" WHERE is_estimate')
-    assert set(est["line_type"]) <= {"holding_cost", "purchase_price", "channel_fee"}
+    assert set(est["line_type"]) <= {"holding_cost", "purchase_price", "channel_fee", "support", "mdm_operations"}
     n_hold = con.execute('SELECT count(*) FROM "silver"."ledger_lines" WHERE line_type = \'holding_cost\'').fetchone()[0]
     assert n_hold > 0
 
@@ -462,13 +479,15 @@ def test_cohort_identity_per_row(hand):
         assert float(r["sum_result_closed"]) == pytest.approx(rhs, abs=0.011)
     oem = res[(res["cohort_kind"] == "oem") & (res["cohort_value"] == "Samsung")].iloc[0]
     assert oem["n"] == 2 and oem["n_closed"] == 1 and oem["n_open"] == 1
-    assert oem["sum_result_closed"] == pytest.approx(-261.70) and oem["sum_liquidation_today_open"] is not None
+    assert oem["sum_result_closed"] == pytest.approx(-309.70) and oem["sum_liquidation_today_open"] is not None
     tco = C.tco_by_cohort(dl, lines, "oem", AS_OF)
     assert set(tco["line_type"]) == {t for t, c in LINE_TYPES.items() if c == "cost"}
-    assert tco.loc[tco["line_type"] == "holding_cost", "is_estimate"].all() and not tco.loc[tco["line_type"] != "holding_cost", "is_estimate"].any()
+    always_est = tco["line_type"].isin(["holding_cost", "support", "mdm_operations"])
+    assert tco.loc[always_est, "is_estimate"].all() and not tco.loc[~always_est, "is_estimate"].any()
     # the estimate flag is read from the lines: S1's channel fee comes from a credit note, so it carries no estimated EUR
     est = tco.set_index("line_type")["estimate_eur"].astype(float)
     assert est["holding_cost"] == pytest.approx(7.20) and est["channel_fee"] == 0.0 and est["purchase_price"] == 0.0
+    assert est["support"] == pytest.approx(30.0) and est["mdm_operations"] == pytest.approx(18.0)
     # a fee without a credit note is an estimate and the cohort table says so
     est_lines = lines.copy()
     est_lines.loc[est_lines["line_type"] == "channel_fee", "is_estimate"] = True
@@ -522,9 +541,10 @@ def test_sums_by_line_type_magnitudes(hand):
     s = sums_by_line_type(lines)
     assert (s[list(LEDGER_ORDER)] >= 0).all().all()
     assert s.loc["S1", "purchase_price"] == pytest.approx(900.0) and s.loc["S1", "n_rent"] == 12
-    assert s.loc["S1", "sum_amount"] == pytest.approx(-261.70)
-    assert s.loc["S1", "estimate_cost"] == pytest.approx(7.20) and s.loc["S1", "n_estimate_lines"] == 3
-    assert s.loc["S2", "estimate_cost"] == pytest.approx(905.0 + 2.40)  # pending PO price plus the inbound holding phase
+    assert s.loc["S1", "sum_amount"] == pytest.approx(-309.70)
+    assert s.loc["S1", "estimate_cost"] == pytest.approx(7.20 + 30.0 + 18.0) and s.loc["S1", "n_estimate_lines"] == 3 + 24
+    # pending PO price plus the inbound holding phase plus 2.50 + 1.50 on every billed month
+    assert s.loc["S2", "estimate_cost"] == pytest.approx(905.0 + 2.40 + 4.0 * s.loc["S2", "n_rent"])
 
 
 def test_expected_remaining_cost_by_status(a):
@@ -537,6 +557,12 @@ def test_expected_remaining_cost_by_status(a):
     assert R.expected_remaining_cost("sold", "android_like", 0, True, inputs, a) == (0.0, "none")
     holding = float(a.get("holding_cost_per_day_eur"))
     rts = float(a.get("expected_return_to_sale_days", "android_like"))
+    support = float(a.get("support_cost_per_device_month_eur"))
+    mdm = float(a.get("mdm_cost_per_device_month_eur"))
+    # the allocations ride on the remaining rented months only: MDM only when the serial is enrolled
+    rented_mdm, _ = R.expected_remaining_cost("rented", "android_like", 12, False, inputs, a, mdm_enrolled=True)
+    assert rented_mdm == pytest.approx(round(rented + 12 * mdm, 2))
+    assert R.expected_remaining_cost("awaiting_return", "android_like", 12, False, inputs, a, mdm_enrolled=True)[0] == pytest.approx(awaiting)
     # the same stock phases as the ledger: in stock with no day booked yet -> the whole return-to-sale span is ahead
     assert stock == pytest.approx(round(holding * rts, 2))
     # days since return already booked as holding lines are deducted, floored at 0 (never charged twice)
@@ -548,7 +574,7 @@ def test_expected_remaining_cost_by_status(a):
                 "sum_refurb_cost": 200.0, "logistics_by_device": {"a": 10.0, "b": 14.0}, "wipe_grading_mean": 5.0, "n_wipe": 4}
     val, src2 = R.expected_remaining_cost("rented", "android_like", 12, False, realised, a)
     assert src2 == "mixed"  # holding x days is always an assumption
-    expected = (10 / 20.0) * 1.0 * 0.6 * 100.0 + 12.0 + 5.0 + 40.0 + holding * float(a.get("expected_return_to_sale_days", "android_like"))
+    expected = (10 / 20.0) * 1.0 * 0.6 * 100.0 + 12.0 + 5.0 + 40.0 + holding * float(a.get("expected_return_to_sale_days", "android_like")) + 12 * support
     assert val == pytest.approx(round(expected, 2))
 
 
@@ -574,10 +600,12 @@ def test_run_ledger_in_memory(a):
     assert summary.command == "ledger" and summary.counts["device_ledger"] == 2
     assert summary.counts["closed"] == 1 and summary.counts["open"] == 1
     assert summary.counts["reconciled_fail"] == 0 and summary.counts["reconciled_ok"] == 2 * len(RECONCILED_FIELDS)
-    assert summary.counts["estimate_lines"] == 5  # S1 three holding phases, S2 pending invoice and inbound holding
+    n_rent_s2 = int(con.execute("SELECT count(*) FROM bronze.portal_rental_invoices WHERE serial = 'S2'").fetchone()[0])
+    # S1 three holding phases, S2 pending invoice and inbound holding, plus support and MDM on every rent invoice of both
+    assert summary.counts["estimate_lines"] == 5 + 2 * 12 + 2 * n_rent_s2
     assert summary.counts["ledger_lines"] == con.execute('SELECT count(*) FROM "silver"."ledger_lines"').fetchone()[0]
     dl = db.read_df(con, 'SELECT * FROM "silver"."device_ledger"')
-    assert len(dl) == 2 and dl["lifecycle_result_eur"].dropna().iloc[0] == pytest.approx(-261.70)
+    assert len(dl) == 2 and dl["lifecycle_result_eur"].dropna().iloc[0] == pytest.approx(-309.70)
     for table in ("result_by_cohort", "tco_by_cohort", "purchase_by_oem_month", "estimate_vs_anchor"):
         assert con.execute(f'SELECT count(*) FROM "gold"."{table}"').fetchone()[0] > 0, table
     assert con.execute("SELECT count(*) FROM runs WHERE command = 'ledger' AND finished_at IS NOT NULL").fetchone()[0] == 1

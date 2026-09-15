@@ -118,7 +118,7 @@ class SavingType(StrEnum):
 
 
 class LineType(StrEnum):
-    """The 15 ledger line types of ``silver.ledger_lines`` (SPEC_v0.2.md section 6.1)."""
+    """The 17 ledger line types of ``silver.ledger_lines`` (SPEC_v0.2.md section 6.1; support and MDM added in v0.3)."""
 
     PURCHASE_PRICE = "purchase_price"
     FREIGHT = "freight"
@@ -126,6 +126,8 @@ class LineType(StrEnum):
     STAGING = "staging"
     OUTBOUND_SHIPPING = "outbound_shipping"
     RENTAL_REVENUE = "rental_revenue"
+    SUPPORT = "support"
+    MDM_OPERATIONS = "mdm_operations"
     REPAIR = "repair"
     REPLACEMENT_LOGISTICS = "replacement_logistics"
     RETURN_LOGISTICS = "return_logistics"

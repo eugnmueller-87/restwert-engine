@@ -1109,6 +1109,7 @@ CREATE TABLE IF NOT EXISTS silver.device_ledger (
   duty_eur DECIMAL(12,2), landed_cost DECIMAL(12,2), landed_vs_rrp_pct DOUBLE, price_protection_credit_eur DECIMAL(12,2),
   staging_eur DECIMAL(12,2), outbound_shipping_eur DECIMAL(12,2), repair_eur DECIMAL(12,2), replacement_logistics_eur DECIMAL(12,2),
   return_logistics_eur DECIMAL(12,2), wipe_grading_eur DECIMAL(12,2), refurb_eur DECIMAL(12,2), holding_cost_eur DECIMAL(12,2),
+  support_eur DECIMAL(12,2), mdm_eur DECIMAL(12,2),
   channel_fee_eur DECIMAL(12,2), days_in_stock_to_date INTEGER, tco_excl_landed_eur DECIMAL(12,2), tco_transactional_eur DECIMAL(12,2),
   tco_eur DECIMAL(12,2), n_lines INTEGER NOT NULL, n_estimate_lines INTEGER NOT NULL,
   first_contract_id VARCHAR, customer_id VARCHAR, term_months INTEGER, monthly_rate DECIMAL(12,2), contract_start DATE,

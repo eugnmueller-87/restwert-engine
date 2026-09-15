@@ -22,8 +22,8 @@ from restwert.dashboard import charts, data
 from restwert.dashboard.views.cycle import _common as c
 
 QUESTION = "What does one device cost us from order to cash, line by line?"
-COST_TYPES = ("purchase_price", "freight", "duty", "staging", "outbound_shipping", "repair", "replacement_logistics",
-              "return_logistics", "wipe_grading", "refurbishment", "holding_cost", "channel_fee")
+COST_TYPES = ("purchase_price", "freight", "duty", "staging", "outbound_shipping", "support", "mdm_operations", "repair",
+              "replacement_logistics", "return_logistics", "wipe_grading", "refurbishment", "holding_cost", "channel_fee")
 
 
 def _pivot(t: pd.DataFrame, kind: str, order: tuple[str, ...]) -> pd.DataFrame:
@@ -74,7 +74,7 @@ def render(con, as_of: date) -> None:  # noqa: ARG001
             st.markdown((DOCS_DIR / "TCO_DEFINITION.md").read_text(encoding="utf-8"))
         except OSError as exc:  # noqa: PERF203 - a missing doc must not break the page
             st.caption(f"docs/TCO_DEFINITION.md not readable: {exc}")
-    st.caption("Known gaps, stated: first-level support and MDM operations per device-month are provider costs that are not booked yet; the result per device is overstated by exactly these two blocks until they enter as owned allocations.")
+    st.caption("Allocations, stated: first-level support and MDM operations per billed device-month are team costs spread by a rate the Head of Service Operations owns (placeholders, flagged is_estimate on every line, MDM only where the staging log marks the serial enrolled); the MDM licence itself stays the customer's cost. Not measured: cost of capital beyond the holding rate, recycling of scrapped devices as its own line.")
     family, oem = c.filter_row(dl, "tco")
     dl_f = c.apply_filter(dl, family, oem)
     closed = dl_f[dl_f["is_closed"].astype(bool)] if not dl_f.empty and "is_closed" in dl_f.columns else pd.DataFrame()

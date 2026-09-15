@@ -1,0 +1,206 @@
+{
+ "as_of": "2026-09-13",
+ "smartphone": [
+  {
+   "quelle": "SellCell",
+   "datum": "08.09.2025",
+   "markt": "USA, Ankaufsangebote von über 40 Ankäufern, Zustand mint, gegen Listenpreis",
+   "url": "https://www.sellcell.com/blog/is-the-iphone-still-king-of-value-retention/",
+   "zahlen": "Verlust nach 12 Monaten: iPhone 11 und 12 je 43,8 %, iPhone 13 46,2 %, iPhone 14 47,7 %, iPhone 15 48,2 %; Galaxy S22 66,7 %, Galaxy S23 61,1 %"
+  },
+  {
+   "quelle": "SellCell",
+   "datum": "04.08.2025",
+   "markt": "USA, dito",
+   "url": "https://www.sellcell.com/blog/samsung-ai-phones-close-resale-gap-iphone-2026/",
+   "zahlen": "Verlust nach 5 Monaten: iPhone 16 35,4 %, Galaxy S25 46,6 % (Abstand 11,2 Punkte; 2022 waren es 27). Samsung holte 2025 auf"
+  },
+  {
+   "quelle": "SellCell, Live-Rechner",
+   "datum": "Abruf 13.09.2026",
+   "markt": "USA, Zustand good",
+   "url": "https://www.sellcell.com/smartphone-depreciation/",
+   "zahlen": "Nach 1 Jahr: iPhone 17 34,9 %, Galaxy S25 62,0 %, Pixel 10 63,1 % Verlust. Seit Verkaufsstart 2022, also nach rund 48 Monaten: iPhone 14 78,2 %, Galaxy S22 89,6 %, Pixel 7 88,3 %"
+  },
+  {
+   "quelle": "Compare and Recycle",
+   "datum": "Februar 2026",
+   "markt": "Großbritannien, Ankaufspreise, Zustand good",
+   "url": "https://www.compareandrecycle.co.uk/blog/annual-phone-depreciation-report",
+   "zahlen": "Verlust im ersten Jahr: iPhone 13 40,1 %, iPhone 14 47,8 %, iPhone 15 55,6 %, iPhone 16 45,1 %; Galaxy S22/S23 60 bis 63,4 %; Pixel 7a 66,6 %, Pixel 8a rund 70 %; jedes Foldable mindestens 57 %. Wörtlich: iPhones mit „often a 10 percentage point advantage per model“"
+  },
+  {
+   "quelle": "Compare and Recycle",
+   "datum": "17.03.2026",
+   "markt": "Großbritannien",
+   "url": "https://www.compareandrecycle.co.uk/blog/galaxy-s-lineup-depreciation",
+   "zahlen": "Verlust nach 12 Monaten: Galaxy S22 60 %, S23 59 %, S24 58 %, S25 63 % (schlechtester Galaxy S seit fünf Generationen); iPhone 16 45 %"
+  },
+  {
+   "quelle": "SellCell, Foldables",
+   "datum": "30.10.2025",
+   "markt": "USA",
+   "url": "https://www.sellcell.com/blog/foldable-phone-depreciation-vs-standard-phones/",
+   "zahlen": "Nach 18 Monaten: Foldables 71,1 % Verlust, Standard-Flaggschiffe 60,7 %; Samsung Z Fold/Flip nach 12 Monaten 65,8 %, Galaxy S 54,4 %"
+  },
+  {
+   "quelle": "Stiftung Warentest",
+   "datum": "23.07.2026",
+   "markt": "Deutschland, Neupreise online gegen UVP (Neupreis, nicht Gebrauchtwert)",
+   "url": "https://www.test.de/Preisanalyse-zu-Smartphones-Im-Sommer-sind-Handys-guenstig-10-bis-45-Prozent-Ersparnis-fuer-Geduldige-6308600-0/",
+   "zahlen": "Apple nach etwa 6 Monaten rund 90 % der UVP, danach stabil; Samsung im Juli rund 75 %; Pixel nach etwa 12 Monaten ein Drittel weniger"
+  }
+ ],
+ "laptop": [
+  {
+   "quelle": "Forrester TEI „Apple Mac at Work“",
+   "datum": "Juni 2026",
+   "markt": "im Auftrag von Apple; Interessenlage beachten",
+   "url": "https://tei.forrester.com/go/apple/TEI/",
+   "zahlen": "Mac nach 4 Jahren rund 30 % Restwert; Enterprise-PC am Lebensende 10 %. Ältere Fassung 2019: Mac 25 % nach 3 Jahren, PC 10 %"
+  },
+  {
+   "quelle": "Tech Data Schweiz in IT-Markt",
+   "datum": "26.02.2020",
+   "markt": "garantierter Leasing-Restwert, Schweiz",
+   "url": "https://www.it-markt.ch/news/2020-02-26/it-leasing-eine-win-win-situation-fuer-reseller-und-ihre-geschaeftskunden",
+   "zahlen": "MacBook Pro 16: 37 % nach 2 Jahren, 24 % nach 3 Jahren"
+  },
+  {
+   "quelle": "SellMyLaptops (US-Ankäufer)",
+   "datum": "September 2026",
+   "markt": "USA, Ankaufsangebote",
+   "url": "https://www.sellmylaptops.com/depreciation-guide",
+   "zahlen": "Verlust im ersten Jahr: MacBook 35 %, Windows-Laptop 45 %, iPad 35 %, Android-Tablet 40 %"
+  },
+  {
+   "quelle": "ProjectWizards TCO-Rechner",
+   "datum": "31.08.2026",
+   "markt": "Mac-Softwarehaus; Interessenlage beachten",
+   "url": "https://www.projectwizards.net/en/blog/2026/08/mac-vs-pc-tco-calculator",
+   "zahlen": "Restwert nach 3 Jahren: Mac 22 bis 28 %, Windows 13 bis 17 %. Kurve Jahr 1/2/3/4: MacBook Air 63/40/25/16 %, ThinkPad L14 53/28/15/8 %"
+  },
+  {
+   "quelle": "SellCell Tech Value Report",
+   "datum": "11.10.2022",
+   "markt": "USA, Tablets",
+   "url": "https://www.sellcell.com/blog/2022-tech-value-report/",
+   "zahlen": "iPad Pro 11 (3. Gen): 42,3 % Verlust in 12 Monaten; Galaxy Tab S8: 65,4 % in den ersten zwei Monaten; iPads seit 2017 im Schnitt 67,9 % Verlust, Samsung-Tablets 84,3 %"
+  }
+ ],
+ "gegenprobe": [
+  {
+   "geraet": "iPhone 15, 128 GB",
+   "uvp": 949,
+   "alter": 36,
+   "marktplatz": "429 bis 446 € (45 bis 47 %)",
+   "ankauf": "bis zu 510 €*"
+  },
+  {
+   "geraet": "Galaxy S24, 128 GB",
+   "uvp": 899,
+   "alter": 31,
+   "marktplatz": "391 bis 404 € (43 bis 45 %)",
+   "ankauf": "351 € (39 %)"
+  },
+  {
+   "geraet": "iPhone 14, 128 GB",
+   "uvp": 999,
+   "alter": 48,
+   "marktplatz": "335 bis 341 € (34 %)",
+   "ankauf": "283 bis 400 € (28 bis 40 %)"
+  },
+  {
+   "geraet": "Galaxy S23, 128 GB",
+   "uvp": 949,
+   "alter": 43,
+   "marktplatz": "318 bis 327 € (34 %)",
+   "ankauf": "246 bis 297 € (26 bis 31 %)"
+  },
+  {
+   "geraet": "MacBook Air M2 8/256 (2022)",
+   "uvp": 1499,
+   "alter": 50,
+   "marktplatz": "834 bis 997 € (56 bis 67 %)",
+   "ankauf": "695 € (46 %)"
+  },
+  {
+   "geraet": "ThinkPad T14 Gen 3 i5 16/512 (2022)",
+   "uvp": null,
+   "alter": 53,
+   "marktplatz": "679 bis 727 € (keine deutsche UVP, ab 1.400 € netto angekündigt)",
+   "ankauf": "kein Gebot"
+  },
+  {
+   "geraet": "Latitude 5430 i5 16/512 (2022)",
+   "uvp": null,
+   "alter": 53,
+   "marktplatz": "509 bis 629 € (keine deutsche UVP)",
+   "ankauf": "kein Gebot"
+  },
+  {
+   "geraet": "iPad 10, 64 GB Wi-Fi (2022)",
+   "uvp": 579,
+   "alter": 47,
+   "marktplatz": "370 bis 381 € (64 bis 66 %)",
+   "ankauf": "276 € (48 %)"
+  },
+  {
+   "geraet": "Galaxy Tab S9, 128 GB Wi-Fi (2023)",
+   "uvp": 899,
+   "alter": 37,
+   "marktplatz": "408 bis 485 € (45 bis 54 %)",
+   "ankauf": "299 € (33 %)"
+  }
+ ],
+ "iphone_jahre": [
+  {
+   "quelle": "SellCell",
+   "datum": "08.09.2025",
+   "markt": "USA, Ankauf-Gebote, gegen UVP",
+   "url": "https://www.sellcell.com/blog/is-the-iphone-still-king-of-value-retention/",
+   "monate": 12,
+   "werte": {
+    "iPhone 11": 43.8,
+    "iPhone 12": 43.8,
+    "iPhone 13": 46.2,
+    "iPhone 14": 47.7,
+    "iPhone 15": 48.2
+   }
+  },
+  {
+   "quelle": "Compare and Recycle",
+   "datum": "Februar 2026",
+   "markt": "UK, Ankauf-Gebote, Zustand good",
+   "url": "https://www.compareandrecycle.co.uk/blog/annual-phone-depreciation-report",
+   "monate": 12,
+   "werte": {
+    "iPhone 13": 40.1,
+    "iPhone 14": 47.8,
+    "iPhone 15": 55.6,
+    "iPhone 16": 45.1
+   }
+  },
+  {
+   "quelle": "SellCell, Live-Rechner",
+   "datum": "Abruf 13.09.2026",
+   "markt": "USA, Ankauf-Gebote, Zustand good",
+   "url": "https://www.sellcell.com/smartphone-depreciation/",
+   "monate": 12,
+   "werte": {
+    "iPhone 17": 34.9
+   }
+  },
+  {
+   "quelle": "SellCell, Live-Rechner",
+   "datum": "Abruf 13.09.2026",
+   "markt": "USA, Ankauf-Gebote, Zustand good",
+   "url": "https://www.sellcell.com/smartphone-depreciation/",
+   "monate": 48,
+   "werte": {
+    "iPhone 14": 78.2
+   },
+   "hinweis": "iPhone 14, Verkaufsstart 16.09.2022, am Abrufdatum 48 Monate alt"
+  }
+ ]
+}

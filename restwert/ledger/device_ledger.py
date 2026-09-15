@@ -14,11 +14,12 @@ Column formulas (L = the serial's booked lines):
   ``discount_vs_rrp_pct`` over ``rrp_net``; ``landed_vs_rrp_pct = (landed_cost -
   price_protection_credit_eur) / rrp_net``: a price protection credit is a purchase price
   reduction in every purchase metric (the ledger keeps its own line and source_ref)
-* ``tco_excl_landed_eur`` = staging + outbound_shipping + repair + replacement_logistics
-  + return_logistics + wipe_grading + refurbishment + holding_cost + channel_fee
+* ``tco_excl_landed_eur`` = staging + outbound_shipping + support + mdm_operations + repair
+  + replacement_logistics + return_logistics + wipe_grading + refurbishment + holding_cost
+  + channel_fee
 * ``tco_transactional_eur = tco_eur - (every cost line with is_estimate)``: holding cost,
-  the channel fee until the credit note arrives, the PO price until the unit invoice
-  arrives; ``tco_eur = landed_cost + tco_excl_landed_eur``
+  the support and MDM allocations, the channel fee until the credit note arrives, the PO
+  price until the unit invoice arrives; ``tco_eur = landed_cost + tco_excl_landed_eur``
 * ``months_billed`` = count of ``rental_revenue`` lines; ``rental_revenue`` = their sum
 * ``resale_net = resale_gross - channel_fee_eur``
 * ``realised_rv`` = ``resale_gross`` when sold, 0.00 when scrapped, NULL otherwise
@@ -40,7 +41,7 @@ import pandas as pd
 
 from restwert.dates import month_floor, months_between_float, quarter_label
 from restwert.lake.common import fleet_family, rrp_net
-from restwert.ledger.lines import COST_LINE_TYPES, LEDGER_ORDER, BronzeFrames
+from restwert.ledger.lines import COST_LINE_TYPES, LEDGER_ORDER, BronzeFrames, mdm_enrolled_serials
 from restwert.ledger.result import (
     PROJECTED_LABEL_LEASE_END,
     PROJECTED_LABEL_SALE,
@@ -71,6 +72,7 @@ DEVICE_LEDGER_COLUMNS: list[str] = [
     "duty_eur", "landed_cost", "landed_vs_rrp_pct", "price_protection_credit_eur",
     "staging_eur", "outbound_shipping_eur", "repair_eur", "replacement_logistics_eur",
     "return_logistics_eur", "wipe_grading_eur", "refurb_eur", "holding_cost_eur",
+    "support_eur", "mdm_eur",
     "channel_fee_eur", "days_in_stock_to_date", "tco_excl_landed_eur", "tco_transactional_eur",
     "tco_eur", "n_lines", "n_estimate_lines",
     "first_contract_id", "customer_id", "term_months", "monthly_rate", "contract_start",
@@ -113,13 +115,15 @@ TCO_COLUMN_OF: dict[str, str] = {
     "wipe_grading": "wipe_grading_eur",
     "refurbishment": "refurb_eur",
     "holding_cost": "holding_cost_eur",
+    "support": "support_eur",
+    "mdm_operations": "mdm_eur",
     "resale_gross": "resale_gross",
     "channel_fee": "channel_fee_eur",
     "price_protection_credit": "price_protection_credit_eur",
 }
 TCO_EXCL_LANDED_TYPES: tuple[str, ...] = (
-    "staging", "outbound_shipping", "repair", "replacement_logistics", "return_logistics",
-    "wipe_grading", "refurbishment", "holding_cost", "channel_fee",
+    "staging", "outbound_shipping", "support", "mdm_operations", "repair", "replacement_logistics",
+    "return_logistics", "wipe_grading", "refurbishment", "holding_cost", "channel_fee",
 )
 
 DEFAULT_GRADE_D_OFFSET = -0.60
@@ -582,6 +586,7 @@ def build_device_ledger(
             fam_of[serial] = fam
     base["model_family"] = fam_col
     inputs_by_family = _family_inputs(b, lines, fam_of, a, as_of)
+    enrolled = mdm_enrolled_serials(b)
     curve_cache: dict[tuple[str | None, str | None], pd.Series | None] = {}
 
     rows: list[dict[str, Any]] = []
@@ -713,7 +718,8 @@ def build_device_ledger(
         else:
             realised_rv = None
         lifecycle_result = sum_lines if is_closed else None
-        bridge = round(mag("staging") + mag("outbound_shipping") + mag("wipe_grading") + mag("holding_cost"), 2)
+        bridge = round(mag("staging") + mag("outbound_shipping") + mag("wipe_grading") + mag("holding_cost")
+                       + mag("support") + mag("mdm_operations"), 2)
         v01_basis = round(sum_lines + bridge - pp_credit, 2) if is_closed else None
         result_pct = (lifecycle_result / landed) if (lifecycle_result is not None and landed) else None
         liquidation: float | None = None
@@ -727,7 +733,7 @@ def build_device_ledger(
             days_since_return = (as_of - return_date).days if (return_date and return_date <= as_of) else 0
             exp_cost, exp_source = expected_remaining_cost(
                 status, family or "", months_remaining, bool(w), inputs_by_family.get(family or "", {"min_n": 30}), a,
-                days_since_return=max(days_since_return, 0),
+                days_since_return=max(days_since_return, 0), mdm_enrolled=serial in enrolled,
             )
             if est_lease_end is not None:
                 projected = result_projected_at_lease_end(sum_lines, remaining_rent, est_lease_end, fee_pct, fee_fixed, exp_cost)
@@ -778,6 +784,8 @@ def build_device_ledger(
             "wipe_grading_eur": mag("wipe_grading"),
             "refurb_eur": mag("refurbishment"),
             "holding_cost_eur": holding,
+            "support_eur": mag("support"),
+            "mdm_eur": mag("mdm_operations"),
             "channel_fee_eur": fee,
             "days_in_stock_to_date": days_in_stock,
             "tco_excl_landed_eur": tco_excl,

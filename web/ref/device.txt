@@ -1,0 +1,222 @@
+Restwert Engine
+Bericht
+Gerät
+Realisierung
+Prognosegüte
+TCO
+Kreislauf
+Stellschrauben
+Laufzeit
+Daten
+Lager
+Verträge
+Protokoll (0)
+Export CSV
+Datei einlesen
+Lauf starten
+Letzter Lauf Stand 16.09.2026 Dateien 282 Zeilen 165.913 ungeklärt 60 Seriennummern 5.251 Prototyp: Läufe werden protokolliert, nicht gerechnet.
+Protokoll dieser Installation
+manuell erfasste Daten, Lieferungen, Schwellen, Läufe · lokal gespeichert
+Noch keine Einträge. Preisbelege erfassen, Dateien einlesen, Schwellen ändern oder Szenarien speichern; jeder Schritt landet hier.
+Geräteart
+Laptop
+Smartphone
+Tablet
+Hersteller
+Apple
+Fairphone
+Google
+HMD Global (Nokia)
+Motorola
+Samsung
+Modell
+iPhone 12 Pro Max
+iPhone 12 Pro
+iPhone 12 mini
+iPhone 12
+iPhone 13 Pro Max
+iPhone 13 Pro
+iPhone 13 mini
+iPhone 13
+iPhone 14 Plus
+iPhone 14 Pro Max
+iPhone 14 Pro
+iPhone 14
+iPhone 15 Plus
+iPhone 15 Pro Max
+iPhone 15 Pro
+iPhone 15
+iPhone 16 Plus
+iPhone 16 Pro Max
+iPhone 16 Pro
+iPhone 16
+iPhone 16e
+iPhone 17 Pro Max
+iPhone 17 Pro
+iPhone 17
+iPhone Air
+iPhone SE (3. Generation, 2022)
+Ausstattung
+128 GB
+256 GB
+512 GB
+Szenario speichern
+Preisbeleg erfassen
+Laufzeit
+12 Monate
+24 Monate
+36 Monate
+48 Monate
+Kauf
+am Verkaufsstart
+heute
+Einkaufspreis ohne Mehrwertsteuer, €
+Miete je Monat ohne Mehrwertsteuer, €
+Kosten bis Verkauf, €
+Gerät nachschlagen, Stand 16.09.2026
+Ein Gerät, alle Zahlen: was es verliert, was es bringt, ab wann es sich rechnet
+Hersteller, Geräteart
+Apple, Smartphone, Reihe iPhone 15
+Verkaufsstart Deutschland
+22.09.2023 Quelle
+UVP beim Verkaufsstart
+949 € mit 19 % Mehrwertsteuer, 797 € ohne, Stand 12.09.2023 Quelle
+Nachfolger
+iPhone 16, ab 20.09.2024
+Modellalter heute
+35,8 Monate seit Verkaufsstart
+Hinweise ausblenden
+Gerät wählen (Modell und Speicher). Dann: Steckbrief mit UVP und Quelle, die öffentlichen Preisbelege für genau dieses Modell, die Restwertprognose des Werkzeugs, die Geräte dieses Modells in der simulierten Flotte, und ein Rechner je Laufzeit, der sagt, ab welchem Monat das Gerät seine Kosten eingespielt hat. QTY 543 Geräte (Modell und Speicher) mit UVP im Katalog.
+iPhone 15, 128 GB öffentlich
+949 €
+UVP beim Verkaufsstart, mit Mehrwertsteuer
+Verkaufsstart 22.09.2023
+heute 35,8 Monate alt
+Restwertprognose nach 36 Monaten simuliert
+44 %
+des Einkaufspreises, Zustandsstufe B, Marktplatz; Modellalter dann 36 Monate
+das sind 333 € beim Einkaufspreis 750 €
+Kurve Apple (Smartphone): 48 % der UVP
+Lifecycle-Marge, 24 Monate abgeleitet
+217 €
+Mieterlös 771 € plus Restwertprognose 415 €
+minus Einkaufspreis 750 € minus Kosten bis Verkauf 218 €
+Kauf am Verkaufsstart
+Kosten eingespielt ab Monat abgeleitet
+16
+ab diesem Monat ist die Lifecycle-Marge in dieser Rechnung positiv und bleibt es bis zum Ende
+davor wäre ein Verkauf ein Verlust
+Weniger
+Begriffe ausblenden
+QTY (Quantity)
+Stückzahl; das Wort dahinter sagt, was gezählt wird: Geräte, Preisbelege.
+Monat für Monat: die aufgelaufene Miete steigt, die Restwertprognose fällt, die Kosten bis Verkauf fallen einmal an. Lifecycle-Marge im Monat m = Miete mal m plus Restwertprognose im Monat m minus Einkaufspreis minus Kosten bis Verkauf. Der erste Monat, in dem sie null erreicht, ist der Punkt, ab dem das Gerät seine Kosten eingespielt hat; wer es früher zurückbekommt und verkauft, macht Verlust. Vorbelegung für 24 Monate: Einkaufspreis aus QTY 9 Geräte genau dieser Ausstattung und Laufzeit; Miete aus QTY 9 Geräte dieser Ausstattung; Kosten bis Verkauf aus QTY 5 abgeschlossene Geräte dieser Ausstattung. Alle drei Felder lassen sich überschreiben; Kauf am Verkaufsstart ist der Idealfall, die Simulation kauft später.
+Ab wann rechnet sich das Gerät
+abgeleitet Vorbelegung simuliert
+Begriffe ausblenden
+Laufzeit
+Vertragslaufzeit in Monaten; die fette Zeile ist die oben gewählte Laufzeit.
+Miete je Monat
+aus den Geräten dieser Ausstattung in der Simulation, sonst Einkaufspreis mal Monatssatz der Geräteart mal Faktor je Laufzeit (Platzhalter der Simulation); überschreibbar
+Mieterlös
+Miete je Monat mal Laufzeit, ohne Mehrwertsteuer.
+Restwertprognose am Ende
+Wert laut Restwertprognose des Werkzeugs für dieses Modell (Zustandsstufe B, Marktplatz) beim Modellalter am Vertragsende, in Euro auf den Einkaufspreis gerechnet
+Kosten bis Verkauf
+aus den abgeschlossenen Geräten dieser Ausstattung, sonst Mittelwert der Geräteart und Laufzeit (Platzhalter der Simulation); einmal je Kreislauf; überschreibbar
+Lifecycle-Marge je Gerät
+Mieterlös plus Restwertprognose am Ende minus Einkaufspreis minus Kosten bis Verkauf.
+Kosten eingespielt ab Monat
+der erste Monat, in dem Miete plus Restwertprognose Einkaufspreis und Kosten decken und die Marge danach bis zum Vertragsende nicht wieder unter null fällt; „nie“ heißt: nicht innerhalb dieser Laufzeit; „keine Prognose“ heißt: das Werkzeug hat für dieses Modell keine Restwertprognose
+Laufzeit | Miete je Monat | Mieterlös | Restwertprognose am Ende | Kosten bis Verkauf | Lifecycle-Marge je Gerät | Kosten eingespielt ab Monat
+12 Monate | 46,34 € | 556 € | 492 € | 158 € | 166 € | 8
+24 Monate | 32,11 € | 771 € | 415 € | 218 € | 217 € | 16
+36 Monate | 27,40 € | 986 € | 332 € | 203 € | 367 € | 19
+48 Monate | 23,86 € | 1.145 € | 272 € | 262 € | 397 € | 26
+Restwertprognose des Werkzeugs für dieses Modell
+simuliert
+Begriffe ausblenden
+Modellalter in Monaten seit Verkaufsstart. Die Prognose stammt aus dem Rechenmodell des Werkzeugs, gelernt aus den simulierten Verkäufen; Verlässlichkeit: aus der Geräteart, weil dieses Modell zu wenige eigene Verkäufe hat. Euro-Werte beim Einkaufspreis 750 €. Rechte Spalte: Kurve Apple (Smartphone) vom Tab Realisierung, QTY 30 Preisbelege, Belege von 18,5 bis 59,6 Monaten.
+Modellalter
+Modellalter in Monaten seit Verkaufsstart.
+Anteil des Einkaufspreises
+die Restwertprognose des Werkzeugs (Zustandsstufe B, Marktplatz) in Prozent des Einkaufspreises, aus den Verkäufen der Simulation gelernt
+Spanne
+untere und obere Grenze der Prognose
+Euro beim Einkaufspreis oben
+Anteil des Einkaufspreises mal dem Einkaufspreis aus dem Feld oben, in Euro.
+Öffentliche Kurve
+zum Vergleich die Marktplatz-Kurve vom Tab Realisierung, in Prozent der UVP: die des Herstellers in dieser Familie, wenn es eine belastbare gibt, sonst die der Familie über alle Hersteller (die Notiz darüber sagt, welche); in Klammern außerhalb der Belegspanne. Andere Basis als die Spalte links (UVP statt Einkaufspreis)
+Modellalter | Anteil des Einkaufspreises | Spanne | Euro beim Einkaufspreis oben | Öffentliche Kurve, % UVP
+6 Monate | 75 % | 66 % bis 85 % | 563 € | (81 %)
+12 Monate | 68 % | 60 % bis 77 % | 510 € | (73 %)
+18 Monate | 61 % | 54 % bis 69 % | 458 € | (66 %)
+24 Monate | 55 % | 49 % bis 63 % | 415 € | 60 %
+30 Monate | 50 % | 44 % bis 56 % | 371 € | 54 %
+36 Monate | 44 % | 39 % bis 50 % | 333 € | 48 %
+42 Monate | 40 % | 35 % bis 45 % | 299 € | 44 %
+48 Monate | 36 % | 32 % bis 41 % | 269 € | 39 %
+60 Monate | 29 % | 26 % bis 33 % | 217 € | (32 %)
+Öffentliche Preisbelege für dieses Modell
+öffentlich QTY 7
+Begriffe ausblenden
+QTY 7 Preisbelege für dieses Modell, alle Ausstattungen; Realisierung = Preis geteilt durch die UVP derselben Ausstattung.
+Ausstattung
+Speicher und Farbe des Geräts, wie die Quelle sie nennt.
+Zustandsstufe
+A wie neu, B sehr gut, C gut, D akzeptabel; Ankauf-Gebote haben keine Stufe, eine Angabe, die keiner Stufe zuzuordnen ist, heißt unbekannt.
+Zustand laut Verkäufer
+der Wortlaut der Quelle zum Zustand.
+Monate
+Modellalter in Monaten seit Verkaufsstart am Tag des Belegs.
+Preis
+Preis am Tag des Belegs, einschließlich Mehrwertsteuer.
+Realisierung
+Preis geteilt durch die UVP derselben Ausstattung, beide einschließlich Mehrwertsteuer.
+Preisart
+Marktplatz-Angebot eines Aufbereiters oder Ankauf-Gebot „bis zu“ eines Ankäufers; manuell erfasste Belege tragen die Marke manuell.
+Datum
+Tag, an dem der Preis gesehen wurde.
+Quelle
+Adresse der Seite mit dem Preis.
+Ausstattung | Zustandsstufe | Zustand laut Verkäufer | Monate | Preis | Realisierung | Preisart | Datum | Quelle
+128 GB | B sehr gut | Sehr gut | 35,7 | 395 € | 42 % | Marktplatz-Angebot | 13.09.2026 | Quelle
+128 GB | unbekannt | Exzellent | 35,7 | 430 € | 45 % | Marktplatz-Angebot | 13.09.2026 | Quelle
+128 GB, Schwarz | keine Stufe | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | 35,7 | 510 € | 54 % | Ankauf-Gebot „bis zu“ | 13.09.2026 | Quelle
+128 GB, Schwarz | unbekannt | Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | 35,7 | 511 € | 54 % | Ankauf-Gebot „bis zu“ | 13.09.2026 | Quelle
+128 GB, Schwarz | unbekannt | Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | 35,7 | 464 € | 49 % | Ankauf-Gebot „bis zu“ | 13.09.2026 | Quelle
+256 GB | C gut | Gut | 35,7 | 510 € | 47 % | Marktplatz-Angebot | 13.09.2026 | Quelle
+256 GB, Schwarz | keine Stufe | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | 35,7 | 510 € | 47 % | Ankauf-Gebot „bis zu“ | 13.09.2026 | Quelle
+Ankauf-Gebot „bis zu“ ist der Höchstwert, den ein Ankäufer vor der Zustandsprüfung nennt, kein garantierter Betrag; der tatsächliche Ankaufpreis liegt darunter.
+Dieses Modell in der simulierten Flotte
+simuliert QTY 85
+Begriffe ausblenden
+QTY 85 Geräte dieses Modells mit Mietvertrag in der Simulation, alle Ausstattungen.
+Laufzeit
+Vertragslaufzeit der Geräte in dieser Zeile, in Monaten.
+QTY Geräte
+QTY (Quantity): Stückzahl der Geräte dieses Modells mit Mietvertrag dieser Laufzeit, alle Ausstattungen.
+davon abgeschlossen
+davon Geräte, deren Kreislauf abgeschlossen ist; nur sie gehen in die Mittelwerte der Zeile ein.
+davon vorzeitig zurück
+davon Geräte, die vor dem Vertragsende zurückkamen; leer, solange kein Kreislauf abgeschlossen ist.
+Einkaufspreis
+Einkaufspreis je Gerät im Mittel der abgeschlossenen Kreisläufe.
+Miete je Monat
+Miete je Monat im Mittel der abgeschlossenen Kreisläufe.
+Mieterlös
+Mieterlös je Gerät im Mittel; ein vorzeitig zurückgegebener Vertrag hat weniger.
+Restwert
+Erlös aus dem Verkauf je Gerät im Mittel, in der Zustandsstufe und über den Kanal, die das Gerät am Ende hatte.
+Kosten bis Verkauf
+Kosten bis Verkauf je Gerät im Mittel, einmal je Kreislauf.
+Lifecycle-Marge je Gerät
+Mieterlös plus Restwert minus Einkaufspreis minus Kosten bis Verkauf, je Gerät im Mittel.
+davon mit positiver Lifecycle-Marge
+Anteil der abgeschlossenen Kreisläufe, deren Lifecycle-Marge über null liegt.
+Laufzeit | QTY Geräte | davon abgeschlossen | davon vorzeitig zurück | Einkaufspreis | Miete je Monat | Mieterlös | Restwert | Kosten bis Verkauf | Lifecycle-Marge je Gerät | davon mit positiver Lifecycle-Marge
+12 Monate | 12 | 8 | 0 | 899 € | 57,64 € | 692 € | 421 € | 271 € | -57 € | 38 %
+24 Monate | 35 | 17 | 7 | 907 € | 38,60 € | 775 € | 345 € | 254 € | -41 € | 41 %
+36 Monate | 37 | 6 | 6 | 800 € | 29,19 € | 417 € | 311 € | 197 € | -268 € | 0 %
+48 Monate | 1 | 0 |  |  |  |  |  |  |  |
+Alle Spalten außer QTY sind Mittelwerte über die abgeschlossenen Kreisläufe dieser Laufzeit, deshalb addieren sich Mieterlös plus Restwert minus Einkaufspreis minus Kosten zur Marge. Warum die Flotte unter dem Rechner oben liegen kann: die Simulation kauft nicht am Verkaufsstart, sondern später; sie verkauft in der Zustandsstufe und über den Kanal, die das Gerät am Ende hatte, der Rechner nimmt Stufe B und Marktplatz; und ein vorzeitig zurückgegebener Vertrag hat weniger Mieterlös (Spalte vorzeitig). Ein Modell ohne Zeile wurde in der Simulation nicht gekauft.

@@ -19,6 +19,14 @@ blocks:
     owner: "CFO (name)"
     value: 0.30
     note: "placeholder cost of capital plus storage per device-day"
+  support_cost_per_device_month_eur:
+    owner: "Head of Service Operations (name)"
+    value: 2.50
+    note: "placeholder, no external source: first-level helpdesk, incident handling and replacement coordination allocated per billed rental month (TCO_DEFINITION section 3); a team cost, not a transaction per serial, booked as an estimate line on every rental invoice month"
+  mdm_cost_per_device_month_eur:
+    owner: "Head of Service Operations (name)"
+    value: 1.50
+    note: "placeholder, no external source: MDM enrolment, policy operations and managed service allocated per billed rental month, only on devices the staging log marks mdm_enrolled (TCO_DEFINITION section 3); the MDM licence itself is the customer's cost and stays out"
   channel_fees:
     owner: "Head of Recommerce (name)"
     values:

@@ -38,6 +38,8 @@ DEFAULT_LEDGER_ORDER: tuple[str, ...] = (
     "staging",
     "outbound_shipping",
     "rental_revenue",
+    "support",
+    "mdm_operations",
     "repair",
     "replacement_logistics",
     "return_logistics",
