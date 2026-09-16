@@ -6,7 +6,7 @@
 'use strict';
 const fs = require('fs'), path = require('path');
 const V3 = path.join(__dirname, '..');
-const TABS = ['report', 'device', 'market', 'forecast', 'tco', 'cycle', 'levers', 'term', 'lake'];
+const TABS = ['report', 'device', 'forecast', 'tco', 'cycle', 'levers', 'term', 'market', 'series', 'studies', 'faq', 'lake'];
 const only = process.argv[2] || null;
 if (only && !TABS.includes(only)) { console.error('unbekannter Tab: ' + only); process.exit(2); }
 

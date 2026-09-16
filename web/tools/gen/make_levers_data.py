@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Stellschrauben page, uniform cards, every number from the same 12-month window, German labels only."""
 import json, sys, pathlib, math
+from _roles import de_roles  # noqa: E402
 import duckdb, pandas as pd, yaml
 sys.stdout.reconfigure(encoding="utf-8")
 REPO = pathlib.Path(sys.argv[1]); OUT = pathlib.Path(sys.argv[2]); TODAY = sys.argv[3]
@@ -60,7 +61,7 @@ TUN = {
             "Reparieren nur bis zur zulässigen Quote des Restwerts (Regel R01); darüber ohne Aufbereitung verkaufen.",
             "Schadensquote je Kunde und Geräteart zurückspielen: Schutzhüllen, Versicherung, Kaution."],
     "L05": ["Soll-Liegetage je Geräteart setzen und den Bestand darüber jede Woche sehen; Regel R03 schreibt verkaufsfähigen Bestand ab {aging_90} und ab {aging_180} Tagen ab (Schwellen aging_days_90 und aging_days_180, Verantwortlich: CFO), das Ziel ist, dass sie nie greift.",
-            "Preis nach Liegetagen staffeln und nach dem Soll den Kanal wechseln, wenn ein anderer Kanal nach Abzügen mehr bringt oder sicher abnimmt (Mengenabnahme im Großhandel); in der Simulation ist der Großhandel nicht schneller als der Marktplatz (Tabelle oben), das Argument ist die sichere Abnahme, nicht die Zeit.",
+            "Preis nach Liegetagen staffeln und nach dem Soll den Kanal wechseln, wenn ein anderer Kanal nach Abzügen mehr bringt oder sicher abnimmt (Mengenabnahme im Großhandel); in der Simulation ist der Großhandel nicht schneller als der Marktplatz (Tage je Verkaufskanal oben), das Argument ist die sichere Abnahme, nicht die Zeit.",
             "Verkauf vor der Rückgabe anbahnen: das Vertragsende ist bekannt, Mitarbeiterkauf und Großhandelsabruf lassen sich davor vereinbaren.",
             "Rückgabe bis verkaufsfähig kurz halten: Datenlöschung, Prüfung und Aufbereitung als eine Kette messen; Zustandsstufe D ohne Aufbereitung verkaufen.",
             "Verkaufsfenster vor dem Nachfolger nutzen; die Verkaufsstarttermine stehen im Katalog.",
@@ -68,7 +69,7 @@ TUN = {
     "L06": ["Herstelleranteil im Einkauf nach der erzielten Realisierung steuern, nicht nach dem Listenpreis.",
             "Hersteller mit dauerhaft schlechterer Realisierung teurer bepreisen oder kürzer vermieten.",
             "Hinweis ADV03 meldet, wenn ein Hersteller unter seiner Familie liegt; die Entscheidung bleibt beim Category Manager."],
-    "L07": ["Miete je Laufzeit aus der Wertkurve und den Kosten je Kreislauf ableiten (Tab Laufzeit), nicht flach über alle Laufzeiten.",
+    "L07": ["Miete je Laufzeit aus der Wertkurve und den Kosten je Kreislauf ableiten (Reiter Laufzeit), nicht flach über alle Laufzeiten.",
             "Laufzeit je Geräteart empfehlen: lange für Laptops und Tablets, 24 Monate für Smartphones, 12 nur mit hoher Miete oder zweitem Kreislauf.",
             "Hinweis ADV04 an den CFO, wenn eine Laufzeit je Gerät um die Schwelle besser abschließt als eine andere."],
 }
@@ -84,7 +85,7 @@ def example_rows(lev, cj, delta, fam, oem):
     if lev == "L01":
         return [("UVP ohne Mehrwertsteuer (Einkauf rechnet netto)", eur(g("rrp_net_eur"))), ("Gezahlter Preis (Rechnungspreis minus Preisschutz-Gutschrift)", eur(g("purchase_price"))),
                 ("Gezahlter Rabatt gegen UVP", pct(g("discount_vs_rrp_pct"))),
-                (f"Referenzrabatt: der Rabatt, den das beste Viertel der eigenen Einkäufe dieses Herstellers mindestens erreicht hat (Gruppe {de_group(g('group'))}, QTY {g('n')} Vergleichskäufe)", pct(g("reference_discount_pct_p75"))),
+                (f"Referenzrabatt: der Rabatt, den das beste Viertel der eigenen Einkäufe dieses Herstellers mindestens erreicht hat (Gruppe {de_group(g('group'))}, {g('n')} Vergleichskäufe)", pct(g("reference_discount_pct_p75"))),
                 ("Referenzpreis (UVP minus Referenzrabatt)", eur(g("reference_purchase_price_capped"))),
                 ("Hebel = gezahlter Preis minus Referenzpreis", eur(delta))], "Hebel = (Referenzrabatt minus gezahlter Rabatt) mal UVP ohne Mehrwertsteuer, nie unter 0"
     if lev == "L02":
@@ -120,12 +121,12 @@ def example_rows(lev, cj, delta, fam, oem):
     if lev == "L06":
         return [("Restwert (Verkaufspreis vor Abzug der Kanalgebühren)", eur(g("resale_gross"))), ("UVP ohne Mehrwertsteuer", eur(g("rrp_net_eur"))),
                 ("Realisierung dieses Geräts, bezogen auf die UVP ohne Mehrwertsteuer", pct(g("realised_ratio"))),
-                (f"Referenz: mittlere Realisierung der eigenen Verkäufe, {g('catalogue_family')}, Alter {g('age_bucket')} Monate, Zustandsstufe {g('grade_at_sale')}, QTY {g('n')} Vergleichsgeräte aus der eigenen Flotte", pct(g("median_ratio_family"))),
+                (f"Referenz: mittlere Realisierung der eigenen Verkäufe, {g('catalogue_family')}, Alter {str(g('age_bucket')).replace('-', ' bis ')} Monate, Zustandsstufe {g('grade_at_sale')}, {g('n')} Vergleichsgeräte aus der eigenen Flotte", pct(g("median_ratio_family"))),
                 ("Hebel = (Referenz minus eigene Realisierung) mal UVP ohne Mehrwertsteuer", eur(delta))], "Hebel = (mittlere Realisierung der Flotte minus eigene Realisierung) mal UVP ohne Mehrwertsteuer; negativ, wenn der Hersteller besser war"
     if lev == "L07":
         return [("Eigene Laufzeit / beste andere Laufzeit der Gruppe", f"{g('this_term')} / {g('other_term')} Monate"),
-                (f"Lifecycle-Marge je Vertragsmonat, eigene Laufzeit, mittleres Gerät der Gruppe (QTY {g('n_this_term')} Geräte)", eur(g("median_result_per_month_this_term"))),
-                (f"Lifecycle-Marge je Vertragsmonat, beste andere Laufzeit, mittleres Gerät der Gruppe (QTY {g('n_other_term')} Geräte)", eur(g("median_result_per_month_other_term"))),
+                (f"Lifecycle-Marge je Vertragsmonat, eigene Laufzeit, mittleres Gerät der Gruppe ({g('n_this_term')} Geräte)", eur(g("median_result_per_month_this_term"))),
+                (f"Lifecycle-Marge je Vertragsmonat, beste andere Laufzeit, mittleres Gerät der Gruppe ({g('n_other_term')} Geräte)", eur(g("median_result_per_month_other_term"))),
                 ("Gruppe: Geräteart / Einkaufshalbjahr", f"{FAM_DE.get(g('model_family'), g('model_family'))} / {g('purchase_half_year')}"),
                 ("Hebel = Differenz je Vertragsmonat mal eigene Vertragsmonate", eur(delta))], "Hebel = (Lifecycle-Marge je Vertragsmonat der besten anderen Laufzeit minus der eigenen) mal eigene Vertragsmonate, nie unter 0, einmal je Gruppe"
     return [(k, str(v)) for k, v in cj.items() if not isinstance(v, (dict, list))][:8], cj.get("formula", "")
@@ -211,5 +212,5 @@ data = {"today": TODAY, "as_of": str(as_of)[:10], "win_start": str(win_start)[:1
 # in web/app.js and the motor in web/engine/levers.js render this JSON)
 OUT.parent.mkdir(parents=True, exist_ok=True)
 with open(OUT, "w", encoding="utf-8", newline="\n") as fh:
-    fh.write(json.dumps(data, ensure_ascii=False, default=str, separators=(",", ":")) + "\n")
+    fh.write(de_roles(json.dumps(data, ensure_ascii=False, default=str, separators=(",", ":"))) + "\n")
 print(OUT.name + ": geschrieben")

@@ -19,6 +19,7 @@ from datetime import date
 from pathlib import Path
 
 import pandas as pd
+from decimal import Decimal, ROUND_HALF_UP
 
 from restwert.market.anchors import ANCHORS_DIR, CATALOGUE_DIR, load_anchors
 from restwert.market.curves import fit_curves
@@ -39,7 +40,10 @@ def _discount(assumptions) -> tuple[float, str]:
 
 
 def _pct(x) -> str:
-    return "n/a" if x is None or pd.isna(x) else f"{100 * float(x):.1f} %"
+    """One decimal, rounded half up like the page (E.fmt.pct1): 0.0095 -> 1.0 %, not the binary 0.9."""
+    if x is None or pd.isna(x):
+        return "n/a"
+    return f"{float(Decimal(str(100 * float(x))).quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)):.1f} %"
 
 
 def write_summary(anchors: pd.DataFrame, curves: pd.DataFrame, discount: float, owner: str, as_of: date, path: Path) -> None:
@@ -77,7 +81,7 @@ def write_summary(anchors: pd.DataFrame, curves: pd.DataFrame, discount: float, 
     lines.append("")
     tr = curves[(curves["population"] == "tradein") & (curves["group_kind"].isin(["family", "family_oem"]))]
     if not tr.empty:
-        lines.append("## The same, buy-back and trade-in bids (lower bound, what a buyer pays)")
+        lines.append("## The same, buy-back and trade-in bids (the buy-back side: 'up to' maxima before inspection, what a buyer pays at most)")
         lines.append("")
         lines.append("| Group | n | age range (months) | per month | q(24) | q(36) | q(48) | fit |")
         lines.append("|---|---|---|---|---|---|---|---|")
@@ -123,7 +127,7 @@ def write_summary(anchors: pd.DataFrame, curves: pd.DataFrame, discount: float, 
     lines.append("")
     lines.append("## Limits, stated")
     lines.append("")
-    lines.append("* Marketplace asks include the refurbisher's margin and VAT; a provider selling B2B realises less. Trade-in bids are the floor. The truth for a given provider lies between the two and is only known from its own sales.")
+    lines.append("* Marketplace asks include the refurbisher's margin and VAT; a provider selling B2B realises less. Trade-in bids are 'up to' maxima of the buy-back side before inspection, not a floor. What a provider realises lies below the marketplace ask and is only known from its own sales.")
     lines.append("* Age is model age (months since German launch), not device age; a device bought six months after launch and returned after 24 months is 30 months old on this curve.")
     lines.append("* Anchors are one day's snapshot. The fleet model in restwert.forecast learns from realised sales over time; this page is the public sanity check for its level, not a replacement.")
     lines.append("* The rental price is not public and is not used here. Lifecycle margin needs it, so the margin is shown as a function of the rental rate elsewhere, never as one number.")

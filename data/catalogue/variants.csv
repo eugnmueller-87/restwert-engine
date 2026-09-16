@@ -448,11 +448,10 @@ lenovo-thinkpad-x1-carbon-gen11,"Core i7-1355U, Standard-Handelsmodell (21HM006V
 lenovo-thinkbook-14-gen4,"Core i3 (Alder Lake) / 8 GB DDR4 (Standardkonfiguration, Lenovo-Shop-Preis 2023-01)",,8,,,
 dell-latitude-5430,Core i5-1235U / 8 GB / 256 GB (Basis),256,8,,,
 dell-latitude-5430,Core i5-1245U vPro / 16 GB / 512 GB (typische Business-Konfiguration),512,16,,,
-dell-latitude-5440,Core i5-1335U / 8 GB / 256 GB (Basis),256,8,,,
 dell-latitude-5440,Core i5-1345U vPro / 16 GB / 512 GB (typische Business-Konfiguration),512,16,,,
 dell-latitude-3440,Core i5-1345U vPro / 16 GB / 512 GB NVMe (Testgerät),512,16,1130,https://www.notebookcheck.com/Intel-Core-i5-1345U-Performance-Debakel-Dell-Latitude-3440-Laptop-im-Test.723933.0.html,2023-06-06
 dell-latitude-7440,Core i5-1345U vPro / 16 GB LPDDR5 / 512 GB / QHD+ Touch (Testgerät),512,16,,https://www.notebookcheck.com/Dell-Latitude-7440-Laptop-im-Test-Schlaegt-in-manchen-Kernbereichen-das-Latitude-9440.734497.0.html,2023-07-15
-hp-elitebook-840-g9,Core i7-1255U / 16 GB DDR5-4800 / 512 GB,512,16,1550,https://www.notebookcheck.com/HP-EliteBook-840-G9.721655.0.html,2023-04-03
+hp-elitebook-840-g9,"Core i7-1255U / 16 GB DDR5-4800 / 512 GB (Notebookcheck-Preisfeld Datenblatt, Seite datiert 29.05.2023)",512,16,1550,https://www.notebookcheck.com/HP-EliteBook-840-G9.721655.0.html,2023-05-29
 hp-elitebook-840-g10,Core i7-1355U / 16 GB DDR5-5200 / M.2 PCIe SSD (Kapazität im Datenblatt nicht genannt),,16,1300,https://www.notebookcheck.com/HP-Elitebook-840-G10.770372.0.html,2023-11-19
 hp-elitebook-840-g11,"Core Ultra 5 125U / 16 GB / 512 GB (9G0K4ET#ABD)",512,16,,,
 hp-elitebook-840-g11,Core Ultra 7 155U / 16 GB DDR5-5600 / M.2 PCIe SSD,,16,,,
@@ -603,7 +602,7 @@ lenovo-thinkpad-e14-gen3,"Ryzen 7 5700U / 16 GB / 512 GB (20Y7003XGE, notebookch
 hp-elitebook-840-g8,"Core i5-1135G7 / 8 GB / 256 GB (3C7Y9EA#ABD, Einstieg DE laut Geizhals; kein Launchpreis belegt)",256,8,,,
 hp-elitebook-840-g8,"Core i5-1135G7 / 16 GB / 512 GB (3C7Z1EA#ABD, typische Business-Konfiguration; kein Launchpreis belegt, Geizhals 2026 Restbestand 1.099,00)",512,16,,,
 hp-probook-450-g8,"Core i5-1135G7 / 8 GB / 256 GB (3C2W8ES#ABD, Einstieg DE laut Geizhals; kein Launchpreis belegt)",256,8,,,
-hp-probook-450-g8,"Core i5-1135G7 / 16 GB / 512 GB (2W1G9EA#ABD, typische Konfiguration; kein Launchpreis belegt)",512,16,,,
+hp-probook-450-g8,"Core i5-1135G7 / 16 GB / 512 GB (2W1G9EA#ABD, typische Konfiguration; kein Launchpreis belegt)",512,16,900.00,https://www.notebookcheck.com/HP-ProBook-450-G8-i5-1135G7.524558.0.html,2021-02-26
 microsoft-surface-laptop-4,"13,5 Zoll / Ryzen 5 4680U Surface Edition / 8 GB / 256 GB (Basis, Privatkunden, Windows 10 Home)",256,8,1129,https://news.microsoft.com/de-de/optimiert-fuer-digitale-meetings-microsoft-kuendigt-surface-und-zubehoer-neuheiten-an/,2021-04-27
 microsoft-surface-laptop-4,"13,5 Zoll / Ryzen 5 4680U Surface Edition / 16 GB / 256 GB (Privatkunden)",256,16,1349,https://www.computerbase.de/news/notebooks/microsoft-surface-laptop-4-mit-amd-oder-intel-laeuft-deutlich-laenger.76183/,2021-04-13
 microsoft-surface-laptop-4,"13,5 Zoll / Core i5-1135G7 / 8 GB / 512 GB (Privatkunden)",512,8,1449,https://www.computerbase.de/news/notebooks/microsoft-surface-laptop-4-mit-amd-oder-intel-laeuft-deutlich-laenger.76183/,2021-04-13
@@ -627,3 +626,5 @@ lenovo-thinkpad-l14-gen4,"Core i5-1335U / 16 GB DDR4 / 512 GB (21H1003DGE, Noteb
 lenovo-thinkpad-e14-gen4,Ryzen 5 5625U / 8 GB / 256 GB (Notebookcheck-Datenblatt; praezisiert die Katalog-Basisvariante AMD 600 Euro auf 8/256),256,8,600.00,https://www.notebookcheck.com/Lenovo-ThinkPad-E14-G4-R5-5625U.721030.0.html,2023-05-28
 lenovo-thinkpad-e14-gen4,"Ryzen 7 5825U / 16 GB / 512 GB (21EB0041GE, Notebookcheck-Testgeraet, Datenblatt-Preisfeld; Text nennt 885 Euro Strassenpreis und 869 Euro Campus)",512,16,990.00,https://www.notebookcheck.com/Lenovo-ThinkPad-E14-G4-AMD-Laptop-Test-Guenstig-ohne-grosse-Schwaechen.700039.0.html,2023-06-09
 lenovo-thinkpad-t14-gen3,"Core i7-1260P / 32 GB / 1 TB (21AH00HXGE, Notebookcheck-Datenblatt-Preisfeld; kein Gebrauchtangebot dazu gefunden)",1024,32,1950.00,https://www.notebookcheck.net/Lenovo-ThinkPad-T14-G3-21AH00HXGE.687802.0.html,2023-01-29
+hp-elitebook-840-g9,"Core i5-1235U / 8 GB / 256 GB (Notebookcheck-Preisfeld Datenblatt 26.01.2023, kein Hersteller-UVP)",256,8,1200.00,https://www.notebookcheck.com/HP-EliteBook-840-G9-i5-1235U.686266.0.html,2023-01-26
+hp-elitebook-650-g9,"Core i5-1235U / 16 GB / 512 GB (Notebookcheck-Preisfeld Datenblatt 29.01.2023, kein Hersteller-UVP; praezisiert die Katalogzeile ohne RAM und SSD)",512,16,1050.00,https://www.notebookcheck.com/HP-EliteBook-650-G9-i5-1235U.687741.0.html,2023-01-29

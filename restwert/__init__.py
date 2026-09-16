@@ -12,7 +12,7 @@ Nothing in this package sends, orders, lists or emails. All data shipped with
 v0.1 and v0.2 is synthetic and labelled as such; the catalogue and the anchor curves are public.
 """
 
-__version__ = "0.3.0"
+__version__ = "0.3.1"
 
 GOVERNANCE_PRINCIPLE = (
     "THE MODEL ADVISES, DETERMINISTIC CODE DECIDES, A NAMED HUMAN OWNS EVERY THRESHOLD."

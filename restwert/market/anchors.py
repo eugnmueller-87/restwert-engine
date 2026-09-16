@@ -37,11 +37,14 @@ USED_CSV: Path = ANCHORS_DIR / "used_prices.csv"
 # Buy-back and trade-in offers keep their own bucket because they are a bid, not an ask.
 _GRADE_PATTERNS: list[tuple[str, str]] = [
     (r"trade[- ]?in|ankauf|bis zu|buy[- ]?back|verkaufen", "TRADEIN"),
-    (r"\bgrade\s*a\b|a-ware|premium|wie neu|neuwertig|hervorragend|like new|excellent|exzellent|mint|top", "A"),
-    (r"\bgrade\s*b\b|b-ware|sehr gut|very good", "B"),
-    (r"\bgrade\s*c\b|c-ware|\bgut\b|\bgood\b|befriedigend", "C"),
-    (r"\bgrade\s*d\b|d-ware|akzeptabel|acceptable|stark (gebraucht|benutzt|genutzt)|fair|gebrauchsspuren", "D"),
+    (r"\bgrade\s*a\b|a-ware|premium|wie neu|neuwertig|hervorragend|like new|excellent|exzellent|mint|top|ovp ge(ö|oe)ffnet|open box|^a$", "A"),
+    (r"\bgrade\s*b\b|b-ware|sehr gut|very good|^b$", "B"),
+    (r"\bgrade\s*c\b|c-ware|\bgut\b|\bgood\b|befriedigend|^c$", "C"),
+    (r"\bgrade\s*d\b|d-ware|akzeptabel|acceptable|stark (gebraucht|benutzt|genutzt)|fair|gebrauchsspuren|^d$", "D"),
 ]
+# A bare letter is the grade itself (hardware-online-shop prints "C"); "OVP geöffnet" is an unused unit in an opened box
+# (AfB), asked like new. "StoreDeal" (lapstore: dents, scratches, deformation) stays UNKNOWN on purpose: it is a deal
+# label, not a condition grade, and the matcher must not guess one.
 GRADE_ORDER = ["A", "B", "C", "D", "TRADEIN"]
 
 

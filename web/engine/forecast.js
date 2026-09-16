@@ -28,7 +28,7 @@
     /* Vorzeichen fuer Verzerrung: plus heisst Prognose zu hoch */
     var sPct = function (x) { return !isNum(x) ? '' : (x >= 0 ? '+' + f.pct1(x) : f.pct1(x)); };
     var pctOr = function (x, alt) { return isNum(x) ? f.pct1(x) : alt; };
-    var thin = 'unter QTY ' + f.qty(minRows);
+    var thin = 'unter ' + f.qty(minRows);
     var monthDe = function (m) { return f.de(m); };
     var months3 = (A.months || []).map(monthDe).join(', ');
     var star = D.series.filter(function (r) { return r.fam === '*'; });
@@ -38,8 +38,8 @@
     var kicker = 'Prognosegüte, Stand ' + f.de(D.today) + ' (Stichtag der Daten ' + f.de(D.as_of) + ')';
     var subject = 'Wie gut die Restwertprognose trifft: die Prognose, die bei der Rückgabe galt, gegen den Preis, den das Gerät dann erzielt hat';
     var intro = 'Jedes verkaufte Gerät wird gegen die Restwertprognose gemessen, die am Tag seiner Rückgabe in Kraft war (der Lauf strikt vor dem Rückgabedatum, Zustandsstufe wie bei der Rückgabe geprüft, Verkaufstag wie erwartet, Kanal Marktplatz). '
-      + 'Nachträglich wird nichts verbessert: eine spätere Prognose zählt nicht. Verkäufe im Zustand As-Is bleiben außen vor, weil dort keine Prognose gilt. '
-      + 'Ein Monat bekommt erst ab QTY ' + f.qty(minRows) + ' verkauften Geräten mit Prognose Kennzahlen; darunter stehen nur die Stückzahlen. '
+      + 'Nachträglich wird nichts verbessert: eine spätere Prognose zählt nicht. Verkäufe ohne Aufbereitung (As-Is) bleiben außen vor, weil dort keine Prognose gilt. '
+      + 'Ein Monat bekommt erst ab ' + f.qty(minRows) + ' verkauften Geräten mit Prognose Kennzahlen; darunter stehen nur die Stückzahlen. '
       + 'Simulierte Daten, echte Mechanik: die Flotte ist synthetisch, die Preise folgen einer kalibrierten Kurve, also misst die Güte hier, wie gut das Modell eine bekannte Kurve zurückgewinnt, nicht den Markt. Die Rechnung ist dieselbe wie auf echten Daten.';
 
     /* ---------- Kennzahlen ---------- */
@@ -50,8 +50,8 @@
         label: 'Prognosefehler, letzter voller Monat', value: pctOr(L.mape, thin), neg: overTarget,
         tags: [{ cls: 'tag-neutral', text: 'Geschäftssicht' }, TAG_SIM],
         lines: [
-          'Monat ' + monthDe(L.month) + ': QTY ' + f.qty(L.n_fc) + ' verkaufte Geräte mit Prognose, QTY ' + f.qty(L.n_as_is) + ' As-Is-Verkäufe ausgeschlossen',
-          isNum(L.target) ? 'Ziel höchstens ' + f.pct(L.target) + ', Platzhalter, Verantwortlich ' + (L.target_owner || 'CFO') + '; kleiner ist besser' + (overTarget ? '; Ziel verfehlt' : '; Ziel gehalten') : '',
+          'Monat ' + monthDe(L.month) + ': ' + f.qty(L.n_fc) + ' verkaufte Geräte mit Prognose, ' + f.qty(L.n_as_is) + ' Verkäufe ohne Aufbereitung ausgeschlossen',
+          isNum(L.target) ? 'Ziel höchstens ' + f.pct(L.target) + ', Platzhalter, Verantwortlich ' + f.role(L.target_owner || 'CFO') + '; kleiner ist besser' + (overTarget ? '; Ziel verfehlt' : '; Ziel gehalten') : '',
           'mittlerer Fehler je Gerät ' + f.eur(L.mae) + ', gewichtet über die Summen (WAPE) ' + pctOr(L.wape, thin),
           'Summe der Prognosen ' + f.eur(L.sum_fc) + ' gegen Summe erzielt ' + f.eur(L.sum_real) + ' (' + sPct(L.real) + ' Realisierung gegen Prognose)'
         ]
@@ -62,7 +62,7 @@
         lines: [
           'plus heißt: Prognose über dem erzielten Preis, also Restwert im Kollateral überschätzt; minus heißt: darunter',
           'die Geschäftssicht misst jeden Verkaufskanal gegen die Marktplatz-Prognose; Mitarbeiterkauf und Großhandel liegen unter dem Marktplatz und zählen hier als Fehler',
-          'nur Marktplatz, QTY ' + f.qty(L.n_mkt) + ' Verkäufe: Fehler ' + pctOr(L.mape_mkt, thin) + ', Verzerrung ' + (isNum(L.bias_mkt) ? sPct(L.bias_mkt) : thin)
+          'nur Marktplatz, ' + f.qty(L.n_mkt) + ' Verkäufe: Fehler ' + pctOr(L.mape_mkt, thin) + ', Verzerrung ' + (isNum(L.bias_mkt) ? sPct(L.bias_mkt) : thin)
         ]
       });
       kpis.push({
@@ -81,12 +81,11 @@
       tags: [{ cls: fired ? 'tag-accent-2' : 'tag-accent', text: 'Hinweis ADV02' }],
       lines: [
         'Verzerrung der letzten drei vollen Monate (' + months3 + '), kanalbereinigt ' + (isNum(A.mean_bias_ch) ? sPct(A.mean_bias_ch) : thin) + ' gegen die Schwelle von plus oder minus ' + (isNum(A.threshold) ? f.pct(A.threshold) : '') ,
-        'QTY ' + f.qty(A.n_fc) + ' Verkäufe mit Prognose in den drei Monaten; Geschäftssicht derselben Monate ' + (isNum(A.mean_bias) ? sPct(A.mean_bias) : thin),
-        'Schwelle forecast_recalibration_bias_pct, Platzhalter, Verantwortlich ' + (A.owner || 'Head of Recommerce') + '; der Hinweis ändert nichts, er bittet einen Menschen um Prüfung' + (fired ? '; QTY ' + f.qty(A.fired) + ' Hinweis im Lauf' : '; kein Hinweis im Lauf')
+        f.qty(A.n_fc) + ' Verkäufe mit Prognose in den drei Monaten; Geschäftssicht derselben Monate ' + (isNum(A.mean_bias) ? sPct(A.mean_bias) : thin),
+        'Schwelle forecast_recalibration_bias_pct, Platzhalter, Verantwortlich ' + f.role(A.owner || 'Head of Recommerce') + '; der Hinweis ändert nichts, er bittet einen Menschen um Prüfung' + (fired ? '; ' + f.qty(A.fired) + ' Hinweis im Lauf' : '; kein Hinweis im Lauf')
       ]
     });
     var kpiDefs = [
-      { k: 'QTY (Quantity)', v: 'Stückzahl; das Wort dahinter sagt, was gezählt wird: Geräte, Verkäufe, Rückgaben, Läufe.' },
       { k: 'Prognosefehler', v: 'mittlerer absoluter Fehler in Prozent des erzielten Preises (MAPE), je Verkauf gerechnet und gemittelt; kleiner ist besser.' },
       { k: 'Verzerrung', v: 'mittlere Abweichung mit Vorzeichen (Prognose minus erzielt, in Prozent des erzielten Preises); plus heißt Prognose zu hoch.' },
       { k: 'Gewichtet (WAPE)', v: 'Summe der absoluten Fehler geteilt durch die Summe der erzielten Preise; teure Geräte wiegen mehr.' },
@@ -94,14 +93,14 @@
       { k: 'Modellsicht', v: 'die Prognose mal dem Kanalfaktor des genutzten Kanals; misst nur das Modell. Der Hinweis ADV02 prüft diese Sicht.' },
       { k: 'Prognose bei Rückgabe', v: 'der Prognoselauf, der strikt vor dem Rückgabedatum in Kraft war, mit der geprüften Zustandsstufe, dem erwarteten Verkaufstag und dem Kanal Marktplatz; sie wird nie nachträglich ersetzt.' }
     ];
-    var calcnote = 'Rechnung je Verkauf: Fehler = (Prognose bei Rückgabe minus erzielter Bruttopreis) geteilt durch den erzielten Preis. Der Monat ist der Verkaufsmonat. Kennzahlen erst ab QTY ' + f.qty(minRows) + ' Verkäufen mit Prognose im Monat.';
+    var calcnote = 'Rechnung je Verkauf: Fehler = (Prognose bei Rückgabe minus erzielter Bruttopreis) geteilt durch den erzielten Preis. Der Monat ist der Verkaufsmonat. Kennzahlen erst ab ' + f.qty(minRows) + ' Verkäufen mit Prognose im Monat.';
 
     /* ---------- Diagramm: Fehler und Verzerrung je Monat, alle Geraetearten ---------- */
     var xs = starMetric.map(function (r) { return r.month; });
     var traces = [
       { type: 'scatter', mode: 'lines+markers', name: 'Prognosefehler, Geschäftssicht', x: xs, y: starMetric.map(function (r) { return r.mape; }),
         line: { color: pal.ink, width: 2 }, marker: { size: 5, color: pal.ink },
-        text: starMetric.map(function (r) { return monthDe(r.month) + ': Fehler ' + f.pct1(r.mape) + ', QTY ' + f.qty(r.n_fc) + ' Verkäufe'; }), hovertemplate: '%{text}<extra></extra>' },
+        text: starMetric.map(function (r) { return monthDe(r.month) + ': Fehler ' + f.pct1(r.mape) + ', ' + f.qty(r.n_fc) + ' Verkäufe'; }), hovertemplate: '%{text}<extra></extra>' },
       { type: 'scatter', mode: 'lines', name: 'Prognosefehler, Modellsicht (kanalbereinigt)', x: xs, y: starMetric.map(function (r) { return r.mape_ch; }),
         line: { color: pal.accent, width: 2, dash: 'dot' },
         text: starMetric.map(function (r) { return monthDe(r.month) + ': Modellsicht ' + f.pct1(r.mape_ch); }), hovertemplate: '%{text}<extra></extra>' },
@@ -123,7 +122,7 @@
       hoverlabel: { font: { family: pal.font } },
       bargap: 0.5
     };
-    var chartNote = 'Alle Gerätearten zusammen, nur Monate mit mindestens QTY ' + f.qty(minRows) + ' Verkäufen mit Prognose (' + f.qty(starMetric.length) + ' Monate, ' + (D.first_metric_month ? monthDe(D.first_metric_month) : '') + ' bis ' + (D.last_metric_month ? monthDe(D.last_metric_month) : '') + '). '
+    var chartNote = 'Alle Gerätearten zusammen, nur Monate mit mindestens ' + f.qty(minRows) + ' Verkäufen mit Prognose (' + f.qty(starMetric.length) + ' Monate, ' + (D.first_metric_month ? monthDe(D.first_metric_month) : '') + ' bis ' + (D.last_metric_month ? monthDe(D.last_metric_month) : '') + '). '
       + 'Linie: Prognosefehler in der Geschäftssicht, gepunktet die Modellsicht; Balken: Verzerrung mit Vorzeichen; gestrichelt das Ziel. Liegt die gepunktete Linie unter der durchgezogenen, ist der Abstand der Kanalmix, kein Modellfehler.';
 
     /* ---------- Tabelle 1: je Monat, alle Geraetearten ---------- */
@@ -140,22 +139,22 @@
       ]);
     });
     var tMonthly = E.TABLE('f-monthly', 'Je Verkaufsmonat, alle Gerätearten', [
-      E.H('Monat'), E.H('QTY Verkäufe', 1), E.H('mit Prognose', 1), E.H('As-Is raus', 1), E.H('Fehler', 1), E.H('Verzerrung', 1), E.H('gewichtet', 1),
-      E.H('Fehler je Gerät', 1), E.H('Fehler Modellsicht', 1), E.H('Verzerrung Modellsicht', 1), E.H('QTY Marktplatz', 1), E.H('Fehler Marktplatz', 1)
+      E.H('Monat'), E.H('Verkäufe', 1), E.H('mit Prognose', 1), E.H('ohne Aufbereitung raus', 1), E.H('Fehler', 1), E.H('Verzerrung', 1), E.H('gewichtet', 1),
+      E.H('Fehler je Gerät', 1), E.H('Fehler Modellsicht', 1), E.H('Verzerrung Modellsicht', 1), E.H('Marktplatz', 1), E.H('Fehler Marktplatz', 1)
     ], mRows, {
       n: mRows.length, collapsible: mRows.length > 20,
-      note: 'Fett die Monate mit Kennzahl (ab QTY ' + f.qty(minRows) + ' Verkäufen mit Prognose). Der laufende Monat ' + (D.as_of ? monthDe(String(D.as_of).slice(0, 7)) : '') + ' ist unvollständig und zählt nicht für die Kennzahl oben.',
+      note: 'Fett die Monate mit Kennzahl (ab ' + f.qty(minRows) + ' Verkäufen mit Prognose). Der laufende Monat ' + (D.as_of ? monthDe(String(D.as_of).slice(0, 7)) : '') + ' ist unvollständig und zählt nicht für die Kennzahl oben.',
       defs: [
         { k: 'Monat', v: 'Verkaufsmonat des Geräts (Datum des Verkaufsauftrags).' },
-        { k: 'QTY Verkäufe', v: 'verkaufte Geräte des Monats ohne As-Is-Verkäufe.' },
+        { k: 'Verkäufe', v: 'verkaufte Geräte des Monats ohne Verkäufe ohne Aufbereitung (As-Is).' },
         { k: 'mit Prognose', v: 'davon Geräte, für die bei der Rückgabe ein Prognoselauf in Kraft war.' },
-        { k: 'As-Is raus', v: 'Verkäufe im Zustand As-Is, ausgeschlossen, weil dort keine Prognose gilt.' },
+        { k: 'ohne Aufbereitung raus', v: 'Verkäufe ohne Aufbereitung (As-Is), ausgeschlossen, weil dort keine Prognose gilt.' },
         { k: 'Fehler', v: 'mittlerer absoluter Fehler in Prozent des erzielten Preises (Geschäftssicht); rot, wenn über dem Ziel.' },
         { k: 'Verzerrung', v: 'mittlere Abweichung mit Vorzeichen; plus heißt Prognose zu hoch.' },
         { k: 'gewichtet', v: 'Summe der absoluten Fehler durch Summe der erzielten Preise (WAPE).' },
         { k: 'Fehler je Gerät', v: 'mittlerer absoluter Fehler in Euro je verkauftem Gerät.' },
         { k: 'Fehler Modellsicht, Verzerrung Modellsicht', v: 'dieselben Kennzahlen mit der Prognose am tatsächlich genutzten Kanal (kanalbereinigt).' },
-        { k: 'QTY Marktplatz, Fehler Marktplatz', v: 'nur Verkäufe über den Marktplatz, wo Geschäfts- und Modellsicht zusammenfallen; Kennzahl ab QTY ' + f.qty(minRows) + '.' }
+        { k: 'Marktplatz, Fehler Marktplatz', v: 'nur Verkäufe über den Marktplatz, wo Geschäfts- und Modellsicht zusammenfallen; Kennzahl ab ' + f.qty(minRows) + '.' }
       ],
       tags: [TAG_SIM]
     });
@@ -174,16 +173,16 @@
       ], { bold: s.fam === '*' });
     });
     var tFam = E.TABLE('f-fam', 'Je Geräteart, Mittel über die Monate mit Kennzahl', [
-      E.H('Geräteart'), E.H('Monate mit Kennzahl', 1), E.H('QTY mit Prognose', 1), E.H('As-Is raus', 1), E.H('Fehler', 1), E.H('Verzerrung', 1),
+      E.H('Geräteart'), E.H('Monate mit Kennzahl', 1), E.H('mit Prognose', 1), E.H('ohne Aufbereitung raus', 1), E.H('Fehler', 1), E.H('Verzerrung', 1),
       E.H('gewichtet', 1), E.H('Fehler je Gerät', 1), E.H('Fehler Modellsicht', 1), E.H('Verzerrung Modellsicht', 1), E.H('Zeitraum')
     ], fRows, {
       n: fRows.length,
-      note: 'Ein Mittel über Monatswerte, jeder Monat zählt gleich; die Zeile „alle Gerätearten" ist das Mittel der Gesamtreihe, nicht die Summe der Zeilen darunter.',
+      note: 'Ein Mittel über Monatswerte, jeder Monat zählt gleich; die Zeile „alle Gerätearten“ ist das Mittel der Gesamtreihe, nicht die Summe der Zeilen darunter.',
       defs: [
         { k: 'Geräteart', v: 'die Modellfamilie des Prognosemodells: iPhone, Android-Smartphone, Tablet, Laptop; fett die Reihe über alle.' },
-        { k: 'Monate mit Kennzahl', v: 'Monate mit mindestens QTY ' + f.qty(minRows) + ' Verkäufen mit Prognose in dieser Geräteart.' },
-        { k: 'QTY mit Prognose', v: 'verkaufte Geräte mit Prognose über alle Monate der Reihe.' },
-        { k: 'As-Is raus', v: 'As-Is-Verkäufe der Geräteart, ausgeschlossen.' },
+        { k: 'Monate mit Kennzahl', v: 'Monate mit mindestens ' + f.qty(minRows) + ' Verkäufen mit Prognose in dieser Geräteart.' },
+        { k: 'mit Prognose', v: 'verkaufte Geräte mit Prognose über alle Monate der Reihe.' },
+        { k: 'ohne Aufbereitung raus', v: 'Verkäufe ohne Aufbereitung der Geräteart, ausgeschlossen.' },
         { k: 'Fehler, Verzerrung, gewichtet, Fehler je Gerät', v: 'wie in der Monatstabelle, als Mittel der Monatswerte; rot über dem Ziel.' },
         { k: 'Fehler Modellsicht, Verzerrung Modellsicht', v: 'kanalbereinigt, Mittel der Monatswerte.' },
         { k: 'Zeitraum', v: 'erster und letzter Monat mit Kennzahl.' }
@@ -204,15 +203,15 @@
     });
     var cutoff = bt.length ? bt[0].cutoff : '';
     var tBack = E.TABLE('f-backtest', 'Rückblick-Test' + (cutoff ? ', Stichtag ' + f.de(cutoff) : ''), [
-      E.H('Geräteart'), E.H('QTY Training', 1), E.H('QTY Test', 1), E.H('Fehler', 1), E.H('Verzerrung', 1), E.H('gewichtet', 1), E.H('Fehler je Gerät', 1),
+      E.H('Geräteart'), E.H('Training', 1), E.H('Test', 1), E.H('Fehler', 1), E.H('Verzerrung', 1), E.H('gewichtet', 1), E.H('Fehler je Gerät', 1),
       E.H('Streuung log', 1), E.H('letzter Trainingsverkauf'), E.H('erster Testverkauf')
     ], bRows, {
       n: bRows.length,
       note: 'Das Modell wird nur mit Verkäufen bis zum Stichtag angepasst und dann an den Verkäufen danach gemessen, mit dem tatsächlichen Kanal, der tatsächlichen Zustandsstufe und dem tatsächlichen Verkaufstag. Deshalb fällt der Fehler hier kleiner aus als in der Monatsreihe, die die Prognose bei Rückgabe misst.',
       defs: [
         { k: 'Geräteart', v: 'Modellfamilie; fett alle zusammen.' },
-        { k: 'QTY Training', v: 'Verkäufe bis zum Stichtag, mit denen das Modell angepasst wurde.' },
-        { k: 'QTY Test', v: 'Verkäufe nach dem Stichtag, an denen gemessen wurde.' },
+        { k: 'Training', v: 'Verkäufe bis zum Stichtag, mit denen das Modell angepasst wurde.' },
+        { k: 'Test', v: 'Verkäufe nach dem Stichtag, an denen gemessen wurde.' },
         { k: 'Fehler, Verzerrung, gewichtet, Fehler je Gerät', v: 'wie oben, über die Testverkäufe.' },
         { k: 'Streuung log', v: 'Wurzel des mittleren quadratischen Fehlers im Logarithmus des Preisverhältnisses; die Streuung, die das Modell für seine Bandbreite ansetzt.' },
         { k: 'letzter Trainingsverkauf, erster Testverkauf', v: 'Datumsgrenze zwischen Anpassung und Messung.' }
@@ -227,17 +226,17 @@
     var grades = R.grades || {};
     var rRows = [
       E.ROW([E.C('Rückgaben mit Rückgabedatum', { bold: true }), E.N(f.qty(R.n_returns)), E.C(f.de(R.first_return) + ' bis ' + f.de(R.last_return))]),
-      E.ROW([E.C('davon mit Prognose bei Rückgabe'), E.N(f.qty(R.n_with)), E.C(R.n_returns ? f.pct1(R.n_with / R.n_returns) + ' der Rückgaben, QTY ' + f.qty(R.n_runs_used) + ' Läufe genutzt' : '')])
+      E.ROW([E.C('davon mit Prognose bei Rückgabe'), E.N(f.qty(R.n_with)), E.C(R.n_returns ? f.pct1(R.n_with / R.n_returns) + ' der Rückgaben, ' + f.qty(R.n_runs_used) + ' Läufe genutzt' : '')])
     ].concat(reasons.map(function (k) {
       return E.ROW([E.C('ohne Prognose: ' + (reasonDe[k] || k)), E.N(f.qty(R.reasons[k]), { neg: true }), E.C('zählt in keiner Kennzahl; die ersten Rückgaben liegen vor dem ersten Lauf vom ' + f.de(D.first_run))]);
     })).concat(Object.keys(grades).map(function (g) {
       return E.ROW([E.C('Zustandsstufe ' + g + ' bei Rückgabe', { indent: 1 }), E.N(f.qty(grades[g])), E.C(R.n_with ? f.pct1(grades[g] / R.n_with) + ' der Prognosen bei Rückgabe' : '')]);
     }));
-    var tRecord = E.TABLE('f-record', 'Welche Prognose bei Rückgabe galt', [E.H('Zeile'), E.H('QTY', 1), E.H('Erläuterung')], rRows, {
+    var tRecord = E.TABLE('f-record', 'Welche Prognose bei Rückgabe galt', [E.H('Zeile'), E.H('Geräte', 1), E.H('Erläuterung')], rRows, {
       n: R.n_returns,
       defs: [
         { k: 'Zeile', v: 'Rückgaben insgesamt, davon mit und ohne Prognose, darunter die Zustandsstufe, mit der die Prognose gerechnet wurde.' },
-        { k: 'QTY', v: 'Stückzahl Geräte.' },
+        { k: 'Geräte', v: 'Stückzahl Geräte.' },
         { k: 'Erläuterung', v: 'Anteil, Zeitraum oder Grund.' }
       ],
       tags: [TAG_SIM]
@@ -252,14 +251,15 @@
       var fits = famKeys.map(function (k) { return fit[k] ? (fitDe[fit[k]] || fit[k]) : ''; }).filter(function (x, i, a) { return x && a.indexOf(x) === i; }).join(', ');
       return E.ROW([E.C(r.id, { nowrap: true }), E.C(f.de(r.as_of), { nowrap: true }), E.N(f.qty(r.n_train))].concat(famKeys.map(function (k) { return E.N(f.qty(by[k] || 0)); })).concat([E.C(fits || '')]));
     });
-    var tRuns = E.TABLE('f-runs', 'Die Prognoseläufe', [E.H('Lauf'), E.H('Stichtag'), E.H('QTY Training', 1)].concat(famKeys.map(function (k) { return E.H(famName(k), 1); })).concat([E.H('Anpassung')]), runRows, {
+    var tRuns = E.TABLE('f-runs', 'Die Prognoseläufe', [E.H('Lauf'), E.H('Stichtag'), E.H('Training', 1)].concat(famKeys.map(function (k) { return E.H(famName(k), 1); })).concat([E.H('Anpassung')]), runRows, {
       n: runRows.length, collapsible: runRows.length > 12,
       note: 'Ein Lauf je Monatsende seit ' + f.de(D.first_run) + ', zuletzt ' + f.de(D.last_run) + '; Läufe sind unveränderlich, die Prognose bei Rückgabe wird immer aus dem Lauf vor dem Rückgabedatum gelesen. Verfahren ' + (D.method || '') + ': Logarithmus des Preisverhältnisses zur UVP, linear in Modellalter, Zahl der Nachfolger seit Verkaufsstart, Zustandsstufe, Speicher und Kanal, je Geräteart angepasst.',
       defs: [
         { k: 'Lauf, Stichtag', v: 'Kennung und Monatsende, bis zu dem Verkäufe in die Anpassung eingingen.' },
-        { k: 'QTY Training', v: 'Verkäufe, mit denen der Lauf angepasst wurde, gesamt und je Geräteart.' },
+        { k: 'Training', v: 'Verkäufe, mit denen der Lauf angepasst wurde, gesamt.' },
+      ].concat(famKeys.map(function (k) { return { k: famName(k), v: 'Verkäufe dieser Geräteart im Training des Laufs.' }; })).concat([
         { k: 'Anpassung', v: 'je Geräteart: eigene Koeffizienten; gemeinsam: eine Anpassung über alle mit Merkmalen je Geräteart, wenn eine Geräteart zu wenige Verkäufe hat; Planwert: der geplante Restwertanteil aus der Konfiguration, wenn Verkäufe fehlen.' }
-      ],
+      ]),
       tags: [TAG_SIM]
     });
 
@@ -274,13 +274,13 @@
     actions.push({ lead: 'Nachkalibrierung nach Regel, nicht nach Gefühl.',
       text: 'Der Hinweis ADV02 vergleicht die kanalbereinigte Verzerrung der letzten drei vollen Monate mit der Schwelle von plus oder minus ' + (isNum(A.threshold) ? f.pct(A.threshold) : '') + '; heute ' + (isNum(A.mean_bias_ch) ? sPct(A.mean_bias_ch) : thin) + ', also ' + (fired ? 'ein Hinweis an ' + (A.owner || '') : 'kein Hinweis') + '. Ein Mensch entscheidet, das Werkzeug erinnert.' });
     actions.push({ lead: 'Die Lücke am Anfang schließen.',
-      text: 'QTY ' + f.qty(R.n_missing) + ' Rückgaben tragen keine Prognose, weil sie vor dem ersten Lauf lagen. Im echten Einsatz beginnt die Messung mit dem ersten Monatslauf; je früher der läuft, desto früher gibt es Güte.' });
+      text: f.qty(R.n_missing) + ' Rückgaben tragen keine Prognose, weil sie vor dem ersten Lauf lagen. Im echten Einsatz beginnt die Messung mit dem ersten Monatslauf; je früher der läuft, desto früher gibt es Güte.' });
 
     /* ---------- Klappbloecke ---------- */
     var blocks = [
-      { key: 'f-method', title: 'Methode, ausgeschrieben', ordered: true, intro: 'So entsteht jede Zahl auf diesem Tab.', items: [
+      { key: 'f-method', title: 'Methode, ausgeschrieben', ordered: true, intro: 'So entsteht jede Zahl auf diesem Reiter.', items: [
         { lead: 'Prognose bei Rückgabe.', text: 'Für jedes zurückgegebene Gerät der Lauf strikt vor dem Rückgabedatum (eine Rückgabe am Ersten nimmt das Monatsende davor), Zustandsstufe wie geprüft, Verkaufstag gleich Rückgabe plus erwartete Tage bis Verkauf der Geräteart, Kanal Marktplatz. Der Lauf speichert seine Kanalfaktoren mit, damit dieselbe Prognose später am genutzten Kanal gelesen werden kann.' },
-        { lead: 'Fehlerreihe.', text: 'Erzielter Bruttopreis gegen diese Prognose, je Verkaufsmonat und Geräteart plus eine Reihe über alle. As-Is-Verkäufe ausgeschlossen und gezählt. Unter QTY ' + f.qty(minRows) + ' Verkäufen mit Prognose bleiben die Kennzahlen leer, die Stückzahlen stehen trotzdem.' },
+        { lead: 'Fehlerreihe.', text: 'Erzielter Bruttopreis gegen diese Prognose, je Verkaufsmonat und Geräteart plus eine Reihe über alle. As-Is-Verkäufe ausgeschlossen und gezählt. Unter ' + f.qty(minRows) + ' Verkäufen mit Prognose bleiben die Kennzahlen leer, die Stückzahlen stehen trotzdem.' },
         { lead: 'Zwei Sichten.', text: 'Geschäftssicht: jeder Kanal gegen die Marktplatz-Prognose, so sieht es die Geschäftsführung, und die Definition sagt es dazu. Modellsicht: Prognose mal Kanalfaktor des genutzten Kanals; das prüft der Hinweis ADV02, weil ein Kanalabschlag kein Modellfehler ist.' },
         { lead: 'Rückblick-Test.', text: 'Anpassung nur mit Verkäufen bis zum Stichtag, Messung an den Verkäufen danach mit tatsächlichem Kanal, Zustand und Verkaufstag. Deshalb kleiner als die Fehlerreihe, und deshalb steht er daneben, nicht darüber.' },
         { lead: 'Kennzahl des Monats.', text: 'KPI_TOP_RV_FORECAST_ERROR ist der Fehler der Geschäftssicht im letzten vollen Monat vor dem Stichtag, alle Gerätearten; Ziel und Richtung stehen in der Konfiguration mit Verantwortlichem.' }
@@ -288,7 +288,7 @@
       { key: 'f-limits', title: 'Grenzen, ausgesprochen', ordered: false, intro: '', items: [
         { lead: '', text: 'Simulierte Flotte: die Preise folgen einer Kurve, die an die öffentlichen Preisbelege kalibriert ist. Die Güte hier misst, wie gut das Modell diese Kurve zurückgewinnt, nicht wie gut es einen Markt trifft. Auf echten Daten wird der Fehler anders aussehen, die Rechnung bleibt.' },
         { lead: '', text: 'Der Punktwert ist der Median, nicht der Mittelwert; die Verzerrung zeigt die Lücke zwischen beiden, und niemand korrigiert sie still.' },
-        { lead: '', text: 'Zustandsstufe D: wenn jede D-Rückgabe As-Is geht, hat das Modell für D keinen Koeffizienten; ' + (D.current && isNum(D.current.unsupported_grade) ? 'QTY ' + f.qty(D.current.unsupported_grade) + ' laufende Prognosen von QTY ' + f.qty(D.n_current) + ' nehmen deshalb den As-Is-Anteil statt der Kurve.' : 'solche Prognosen nehmen den As-Is-Anteil statt der Kurve.') },
+        { lead: '', text: 'Zustandsstufe D: wenn jede D-Rückgabe As-Is geht, hat das Modell für D keinen Koeffizienten; ' + (D.current && isNum(D.current.unsupported_grade) ? f.qty(D.current.unsupported_grade) + ' laufende Prognosen von ' + f.qty(D.n_current) + ' nehmen deshalb den As-Is-Anteil statt der Kurve.' : 'solche Prognosen nehmen den As-Is-Anteil statt der Kurve.') },
         { lead: '', text: 'Ziel ' + (L && isNum(L.target) ? f.pct(L.target) : '') + ' und Schwelle ' + (isNum(A.threshold) ? f.pct(A.threshold) : '') + ' sind Platzhalter ohne externe Quelle, je mit Verantwortlichem in der Konfiguration; sie sagen, wann ein Mensch hinsehen soll, nicht, was gut ist.' },
         { lead: '', text: 'Ein Mittel über Monatswerte gewichtet jeden Monat gleich, egal wie viele Verkäufe er hatte; die gewichtete Kennzahl (WAPE) steht daneben.' }
       ] }

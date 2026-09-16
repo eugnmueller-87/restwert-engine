@@ -12,8 +12,10 @@ The ``(family_oem, "<Family> / <oem>", marketplace)`` row is used when its
 ``fit_quality`` is ``ok``, else the ``(family, "<Family>", marketplace)`` row, else the
 ``default_curve`` of ``truth_v2`` (only when the curves file is missing; the run
 summary and ``SYNTHETIC.md`` say so). Grade B is the fitted reference (offset 0),
-A and C come from the row (NaN -> 0), D takes ``grade_d_offset_default`` because the
-public rows carry no grade D fit. No successor step.
+A and C come from the row (NaN -> 0), D takes ``grade_d_offset_default``: when this was
+written the public rows carried no grade D fit; since 16.09.2026 several rows carry a
+``grade_D_offset``, and the configured value is still the one used, so the grade D discount of
+the synthetic fleet stays a named assumption rather than a fit on few grade D asks. No successor step.
 
 Calibrated to public asks; the haircut and the cap are design parameters, not
 market facts. The forecaster never reads this module.

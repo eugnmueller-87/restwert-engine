@@ -1,10 +1,12 @@
-/* Restwert Engine v3, Motor Realisierung (Tab "market"). Vertrag: v3/CONTRACT.md, Abschnitte 1 bis 6 und 7.3.
+/* Restwert Engine v3, Motor Realisierung (Reiter "market"). Vertrag: v3/CONTRACT.md, Abschnitte 1 bis 6 und 7.3.
    Reine Funktion window.RE.market(D, opts, P): baut aus v3/data/market.json das Ansichtsmodell V.
-   Texte, Zahlen, Rechenwege, Tabellen und Legenden eins zu eins aus dem heutigen Tab (v3/src/market.js,
+   Texte, Zahlen, Rechenwege, Tabellen und Legenden eins zu eins aus dem heutigen Reiter (v3/src/market.js,
    v3/src/market.body.html); jede Zahl kommt aus D oder opts und geht durch E.fmt. Kein DOM, kein Zustand ausser
    einem Index je Datenobjekt (WeakMap), kein Nachladen.
    Der Einkaufsabschlag kommt aus opts.disc (Konfiguration, im Dialog aenderbar), nie als Zahl aus diesem Skript.
-   Manuell erfasste Preisbelege (opts.extra) zaehlen in der Belegtabelle und im Detail-Diagramm mit, nie in den Kurven. */
+   Manuell erfasste Preisbelege (opts.extra) zaehlen in der Belegtabelle und im Detail-Diagramm mit, nie in den Kurven.
+   Seit 16.09.2026 (Bereich Market Intelligence): die Tabellen Serie gegen Serie, Gegenprobe und Studien stehen in den Motoren
+   series.js und studies.js; hier bleiben Kacheln, Diagramm, Kurve je Hersteller und alle Preisbelege. */
 (function (w) {
   'use strict';
   var E = w.RE, f = E.fmt, CACHE = new WeakMap();
@@ -42,7 +44,6 @@
   var YTICKS = [0, 0.2, 0.4, 0.6, 0.8, 1];
   /* Schwellen der Verlaesslichkeit, wie der Generator der Kurven sie setzt (fit_quality in D.curves) */
   var FIT_OK_N = 12, FIT_THIN_N = 6, FIT_MIN_SPAN = 6;
-  var SERIES_MIN = 3;                /* unter so vielen Stufe-B-Belegen zeigt die Serientabelle eine Reihe nicht */
   var EX_OFFSET = 6;                 /* Beispiel in den Grenzen: so viele Monate nach Verkaufsstart gekauft */
 
   /* ---------- kleine Helfer ---------- */
@@ -98,7 +99,6 @@
     var disc = isNum(opts.disc) && opts.disc >= 0 && opts.disc < 1 ? opts.disc : null;
     var famCurve = function (fam, pop) { return X.famCurve[fam + '|' + pop] || null; };
     var q24 = 'q_' + H24, q36 = 'q_' + H36;
-    var studies = D.studies || {}, asOf = studies.as_of || D.today;
     var oemColor = function (o) { return (pal.oem && pal.oem[o]) || pal.muted; };
 
     /* Preisbelege der Familie: aus den Daten, dazu die manuell erfassten */
@@ -112,7 +112,8 @@
     var subject = 'Welches Gerät hält welchen Anteil seines Preises';
     var intro = 'Realisierung = Gebrauchtpreis geteilt durch die unverbindliche Preisempfehlung (UVP) des Herstellers beim deutschen Verkaufsstart, beide einschließlich Mehrwertsteuer. '
       + 'Beispiel: ' + ex.model + ', UVP ' + f.eur(ex.rrp) + ', Marktplatz-Angebot ' + f.eur(ex.price) + ' in Zustandsstufe B (sehr gut) am ' + f.de(ex.date) + ' = ' + f.num(ex.pct, 0) + ' %. '
-      + 'Jeder Punkt ist ein öffentlicher Preisbeleg mit Adresse und Datum; keine Zahl stammt aus den Büchern eines Unternehmens.';
+      + 'Jeder Punkt ist ein öffentlicher Preisbeleg mit Adresse und Datum; keine Zahl stammt aus den Büchern eines Unternehmens. '
+      + 'Woher die Belege kommen, was fehlt und warum, steht im Reiter FAQ; der Vergleich der Modellreihen im Reiter Serie gegen Serie, die veröffentlichten Studien im Reiter Studien.';
 
     /* ---------- Kennzahlen: die drei Kacheln, alle Familien ---------- */
     var kpis = fams.map(function (fam) {
@@ -120,16 +121,15 @@
       if (c && isNum(c[q24])) {
         lines.push('nach ' + f.qty(H24) + ' Monaten ' + f.pct(c[q24]) + (isNum(c.age_min) && c.age_min > H24 ? ' (Kurve verlängert, jüngster Beleg ' + f.num(c.age_min) + ' Monate)' : ''));
         lines.push('verliert je Monat etwa ' + f.pct1(c.monthly_depreciation_pct) + ' des aktuellen Werts');
-        lines.push('Kurve durch alle QTY ' + f.qty(c.n) + ' Marktplatz-Angebote der Familie, alle Hersteller, jeder Beleg zählt gleich' + (c.fit_quality !== 'ok' ? '; Kurve unsicher' : ''));
+        lines.push('Kurve durch alle ' + f.qty(c.n) + ' Marktplatz-Angebote der Familie, alle Hersteller, jeder Beleg zählt gleich' + (c.fit_quality !== 'ok' ? '; Kurve unsicher' : ''));
         if (isNum(c.age_max) && c.age_max < H36) lines.push('nach ' + f.qty(H36) + ' Monaten: Kurve verlängert, ältester Beleg ' + f.num(c.age_max) + ' Monate');
       } else {
-        lines.push(c ? 'QTY ' + f.qty(c.n) + ' Marktplatz-Angebote, keine Kurve' : 'keine Preisbelege');
+        lines.push(c ? f.qty(c.n) + ' Marktplatz-Angebote, keine Kurve' : 'keine Preisbelege');
       }
-      if (t && isNum(t[q36])) lines.push('Ankauf-Gebote „bis zu“ nach ' + f.qty(H36) + ' Monaten: ' + f.pct(t[q36]) + ' (QTY ' + f.qty(t.n) + ' Ankauf-Gebote)');
+      if (t && isNum(t[q36])) lines.push('Ankauf-Gebote „bis zu“ nach ' + f.qty(H36) + ' Monaten: ' + f.pct(t[q36]) + ' (' + f.qty(t.n) + ' Ankauf-Gebote)');
       return { label: fam + ': Realisierung nach ' + f.qty(H36) + ' Monaten', value: c && isNum(c[q36]) ? f.pct(c[q36]) : 'keine Kurve', lines: lines, tags: [TAG_PUB] };
     });
     var kpiDefs = [
-      { k: 'QTY (Quantity)', v: 'Stückzahl; das Wort dahinter sagt, was gezählt wird: Preisbelege, Marktplatz-Angebote, Ankauf-Gebote.' },
       { k: 'Kacheln', v: 'Realisierung in Prozent der UVP, an der Kurve der Familie abgelesen. Die Kurve ist kein Mittelwert der Geräte und kein Mittel der Hersteller: sie ist die Linie durch alle Preisbelege der Familie (alle Hersteller, alle Stufen A bis D, jeder Beleg zählt gleich, deshalb wiegt ein Hersteller mit vielen Belegen mehr), abgelesen für Zustandsstufe B (sehr gut); das ist die Obergrenze, weil die Marge des Aufbereiters darin steckt. Je Hersteller steht die eigene Kurve in der Tabelle unten. Ankauf-Gebote sind Höchstwerte „bis zu“ eines Ankäufers vor der Zustandsprüfung, kein Boden; der tatsächliche Ankaufpreis liegt darunter.' }
     ];
 
@@ -164,9 +164,9 @@
       });
       if (!xs.length) return;
       traces.push({
-        type: 'scatter', mode: 'lines+markers', name: o + ', Zustandsstufe ' + GRADE_READ + ', QTY ' + f.qty(b.length) + ' Preisbelege', x: xs, y: ys,
+        type: 'scatter', mode: 'lines+markers', name: o + ', Zustandsstufe ' + GRADE_READ + ', ' + f.qty(b.length) + ' Preisbelege', x: xs, y: ys,
         marker: { color: oemColor(o), size: ns.map(function (n) { return Math.min(MARK_MAX, MARK_MIN + MARK_STEP * n); }) }, line: { color: oemColor(o), width: 2 },
-        text: xs.map(function (x, i) { return o + '<br>Monate etwa ' + f.qty(x) + '<br>mittleres Marktplatz-Angebot ' + f.pct(ys[i]) + '<br>QTY ' + f.qty(ns[i]) + ' Preisbelege im Halbjahr'; }),
+        text: xs.map(function (x, i) { return o + '<br>Monate etwa ' + f.qty(x) + '<br>mittleres Marktplatz-Angebot ' + f.pct(ys[i]) + '<br>' + f.qty(ns[i]) + ' Preisbelege im Halbjahr'; }),
         hovertemplate: '%{text}<extra></extra>'
       });
     });
@@ -177,7 +177,7 @@
       for (var m = lo; m <= hi; m++) { var v = Math.exp(c.intercept + c.slope_per_month * m); if (v <= CURVE_CAP) { xs.push(m); ys.push(Math.min(v, 1)); } }
       if (!xs.length) return;
       traces.push({
-        type: 'scatter', mode: 'lines', name: 'Kurve ' + current + ', ' + p[2] + ', QTY ' + f.qty(c.n) + ' Preisbelege' + p[3] + (c.fit_quality !== 'ok' ? ', unsicher' : ''),
+        type: 'scatter', mode: 'lines', name: 'Kurve ' + current + ', ' + p[2] + ', ' + f.qty(c.n) + ' Preisbelege' + p[3] + (c.fit_quality !== 'ok' ? ', unsicher' : ''),
         x: xs, y: ys, line: { color: pal.ink, dash: p[1], width: 2 }, hoverinfo: 'skip'
       });
     });
@@ -217,15 +217,15 @@
       ]);
     });
     var tOem = E.TABLE('m-oem', 'Kurve je Hersteller', [
-      E.H('Hersteller'), E.H('QTY', 1), E.H('Monate'), E.H('Verlust je Monat', 1), E.H('nach ' + f.qty(H24) + ' Monaten', 1), E.H('nach ' + f.qty(H36) + ' Monaten', 1),
+      E.H('Hersteller'), E.H('Belege', 1), E.H('Monate'), E.H('Verlust je Monat', 1), E.H('nach ' + f.qty(H24) + ' Monaten', 1), E.H('nach ' + f.qty(H36) + ' Monaten', 1),
       E.H('gegen Einkaufspreis', 1), E.H('Verlässlichkeit')
     ], oemRows, {
       tags: [TAG_PUB],
-      note: 'Eine Zeile je Hersteller der gewählten Familie. Grundlage sind alle Marktplatz-Angebote der Stufen A bis D, abgelesen für Zustandsstufe B (sehr gut), also die Obergrenze; Ankauf-Gebote stehen hier nicht. Ein Hersteller mischt hier Einsteiger, Flaggschiffe und Foldables; der Vergleich Serie gegen Serie steht in der nächsten Tabelle.',
+      note: 'Eine Zeile je Hersteller der gewählten Familie. Grundlage sind alle Marktplatz-Angebote der Stufen A bis D, abgelesen für Zustandsstufe B (sehr gut), also die Obergrenze; Ankauf-Gebote stehen hier nicht. Ein Hersteller mischt hier Einsteiger, Flaggschiffe und faltbare Geräte; der Vergleich Serie gegen Serie steht im Reiter gleichen Namens.',
       empty: 'Für diese Familie liegt keine Kurve je Hersteller vor.',
       defs: [
         { k: 'Hersteller', v: 'Hersteller des Modells; eine Zeile je Hersteller der gewählten Familie.' },
-        { k: 'QTY (Quantity, Stückzahl)', v: 'Marktplatz-Angebote aller Stufen A bis D, die in die Kurve eingehen; die Stufen A, C und D gehen mit einem festen Abstand zur Stufe B ein, der zusammen mit der Linie geschätzt wird, abgelesen wird die Linie für Stufe B' },
+        { k: 'Belege', v: 'Marktplatz-Angebote aller Stufen A bis D, die in die Kurve eingehen; die Stufen A, C und D gehen mit einem festen Abstand zur Stufe B ein, der zusammen mit der Linie geschätzt wird, abgelesen wird die Linie für Stufe B' },
         { k: 'Monate', v: 'Spanne des Modellalters, das diese Belege abdecken, in Monaten seit deutschem Verkaufsstart' },
         { k: 'Verlust je Monat', v: 'Prozent seines jeweils aktuellen Werts, die ein Gerät laut Kurve jeden Monat verliert; keine Prozentpunkte der UVP' },
         { k: 'nach ' + f.qty(H24) + ', nach ' + f.qty(H36) + ' Monaten', v: 'Realisierung in Prozent der UVP, an der Kurve abgelesen; steht der Wert in Klammern, liegt das Alter außerhalb der Spanne in Monate, die Linie ist dann über die Belege hinaus verlängert' },
@@ -234,76 +234,7 @@
       ]
     });
 
-    /* ---------- Tabelle 2: Serie gegen Serie ---------- */
-    var seriesRows = (Array.isArray(D.series) ? D.series : []).map(function (r) {
-      return E.ROW([
-        E.C(r.family), E.C(r.oem), E.C(r.series), E.N(f.qty(r.qty)), E.N(f.qty(r.monate)), E.N(f.pct(r.mitte)), E.N(f.pct(r.lo) + ' bis ' + f.pct(r.hi))
-      ]);
-    });
-    var tSeries = E.TABLE('m-series', 'Serie gegen Serie: was Gebrauchtgeräte gleichen Alters heute noch bringen', [
-      E.H('Familie'), E.H('Hersteller'), E.H('Modellreihe'), E.H('QTY', 1), E.H('Monate', 1), E.H('Realisierung', 1), E.H('Spanne', 1)
-    ], seriesRows, {
-      tags: [TAG_PUB],
-      note: 'Das ist der Restwert aus Sicht des Marktes: was ein gebrauchtes Gerät dieser Reihe heute auf deutschen Marktplätzen kostet, in Prozent seiner UVP beim Verkaufsstart. Nicht der Restwert des Tabs Kreislauf (der ist der Euro-Betrag, den ein eigenes Gerät beim Verkauf nach dem Leasing erzielt hat), sondern der Maßstab, an dem die Restwertprognose geeicht wird. Eine Modellreihe gegen die andere, nur Marktplatz-Angebote in Zustandsstufe B (sehr gut), also die Obergrenze; mittleres Angebot je Reihe beim mittleren Modellalter der Belege; die Spanne zeigt das günstigste und das teuerste Angebot der Reihe.',
-      empty: 'Keine Modellreihe mit genug Belegen.',
-      defs: [
-        { k: 'Familie', v: 'Geräteart der Reihe (' + fams.join(', ') + ').' },
-        { k: 'Hersteller', v: 'Hersteller der Reihe.' },
-        { k: 'Modellreihe', v: 'Modellreihe, wie der Hersteller sie nennt; mehrere Modelle und Ausstattungen je Reihe.' },
-        { k: 'QTY', v: 'Marktplatz-Angebote in Zustandsstufe B dieser Reihe; unter ' + f.qty(SERIES_MIN) + ' wird die Reihe nicht gezeigt' },
-        { k: 'Monate', v: 'mittleres Modellalter der Belege in Monaten seit deutschem Verkaufsstart' },
-        { k: 'Realisierung', v: 'mittleres Marktplatz-Angebot in Prozent der UVP (die Hälfte der Belege liegt darüber, die Hälfte darunter)' },
-        { k: 'Spanne', v: 'günstigstes bis teuerstes Marktplatz-Angebot der Reihe, in Prozent der UVP; ein Wert über ' + f.pct(1) + ' ist ein echter Beleg, bei dem ein Aufbereiter mehr verlangt als die UVP (kommt bei knapper oder sehr junger Ware vor), er bleibt drin, weil die Tabelle Belege zeigt, keine Meinung' }
-      ]
-    });
-
-    /* ---------- Tabelle 3: Was veroeffentlichte Studien sagen ---------- */
-    var studyRow = function (fam, x) {
-      return E.ROW([
-        E.C(fam, { nowrap: true }),
-        E.C('', { links: [{ href: x.url, text: x.quelle + ',', rest: x.datum }], minW: 170 }),
-        E.C(x.markt),
-        E.C(x.zahlen, { minW: 260 })
-      ]);
-    };
-    var studyRows = (studies.smartphone || []).map(function (x) { return studyRow('Smartphone', x); })
-      .concat((studies.laptop || []).map(function (x) { return studyRow('Laptop, Tablet', x); }));
-    var tStudies = E.TABLE('m-studies', 'Was veröffentlichte Studien sagen', [
-      E.H('Geräteart'), E.H('Quelle, Datum'), E.H('Markt, Methode'), E.H('Zahlen')
-    ], studyRows, {
-      n: 0, tags: [TAG_PUB],
-      note: 'Zur Einordnung der eigenen Preisbelege: Berichte, die den Wertverlust nach Hersteller messen, mit Markt, Methode und Interessenlage. Ankaufsangebote (USA, Großbritannien) sind die Ankaufsseite, also niedriger als Marktplatz-Angebote; Neupreis-Erosion (Deutschland) ist kein Gebrauchtwert. Keine deutsche Studie nach Hersteller existiert; für Dell und HP gibt es nirgends eine Zahl.',
-      empty: 'Keine Studie hinterlegt.',
-      defs: [
-        { k: 'Geräteart', v: 'Geräteart, für die die Studie Zahlen nennt.' },
-        { k: 'Quelle, Datum', v: 'Herausgeber der Studie mit Link auf die Seite, dahinter das Datum der Veröffentlichung oder des Abrufs, wie in der Quelle genannt.' },
-        { k: 'Markt, Methode', v: 'Land, Preisart und Bezugsgröße der Studie, dazu die Interessenlage des Herausgebers.' },
-        { k: 'Zahlen', v: 'die dort genannten Werte, wie die Quelle sie nennt.' }
-      ]
-    });
-
-    /* ---------- Tabelle 4: Gegenprobe deutscher Markt (Stichproben) ---------- */
-    var checkRows = (studies.gegenprobe || []).map(function (x) {
-      return E.ROW([
-        E.C(x.geraet), E.N(isNum(x.uvp) ? f.eur(x.uvp) : 'keine deutsche UVP'), E.N(f.qty(x.alter)), E.C(x.marktplatz), E.C(x.ankauf)
-      ]);
-    });
-    var tCheck = E.TABLE('m-check', 'Gegenprobe deutscher Markt, ' + f.de(asOf) + ', Zustandsstufe B (sehr gut)', [
-      E.H('Gerät'), E.H('UVP', 1), E.H('Monate', 1), E.H('Marktplatz-Angebot'), E.H('Ankauf-Gebot')
-    ], checkRows, {
-      n: 0, tags: [TAG_PUB],
-      empty: 'Keine Stichprobe hinterlegt.',
-      foot: '*„bis zu“ ist der Höchstwert vor der Zustandsabfrage, kein Gebot. Quellen je Zeile: refurbed, rebuy, AfB, Clevertronic, ZOXS, alle abgerufen am ' + f.de(asOf) + '; die vollständige Liste mit Adressen liegt im Projektordner.',
-      defs: [
-        { k: 'Gerät', v: 'Modell und Ausstattung der Stichprobe.' },
-        { k: 'UVP', v: 'unverbindliche Preisempfehlung des Herstellers beim deutschen Verkaufsstart, einschließlich Mehrwertsteuer; ohne deutsche UVP bleibt die Realisierung offen.' },
-        { k: 'Monate', v: 'Modellalter am Abrufdatum, in Monaten seit deutschem Verkaufsstart.' },
-        { k: 'Marktplatz-Angebot', v: 'günstigstes bis teuerstes Marktplatz-Angebot in Zustandsstufe B (sehr gut) am Abrufdatum, in Euro und in Klammern in Prozent der UVP.' },
-        { k: 'Ankauf-Gebot', v: 'Ankauf-Gebot am Abrufdatum, in Euro und in Klammern in Prozent der UVP; „bis zu“ mit Stern ist der Höchstwert vor der Zustandsabfrage, kein Gebot.' }
-      ]
-    });
-
-    /* ---------- Tabelle 5: alle Preisbelege der Familie, manuell erfasste zaehlen mit ---------- */
+    /* ---------- Tabelle 2: alle Preisbelege der Familie, manuell erfasste zaehlen mit ---------- */
     var sorted = allRows.slice().sort(function (a, b) { return sortKey(a).localeCompare(sortKey(b)); });
     var ancRows = sorted.map(function (r) {
       return E.ROW([
@@ -317,7 +248,7 @@
       E.H('Modell'), E.H('Ausstattung'), E.H('Zustand laut Verkäufer'), E.H('Zustandsstufe'), E.H('Monate', 1), E.H('UVP', 1), E.H('Datum'), E.H('Preis', 1), E.H('Realisierung', 1), E.H('Preisart'), E.H('Quelle')
     ], ancRows, {
       tags: [TAG_PUB], collapsible: true,
-      note: extra.length ? 'QTY ' + f.qty(extra.length) + ' manuell erfasste Preisbelege zählen hier und im Detail-Diagramm mit, nicht in den Kurven.' : '',
+      note: extra.length ? f.qty(extra.length) + ' manuell erfasste Preisbelege zählen hier und im Detail-Diagramm mit, nicht in den Kurven.' : '',
       empty: 'Für diese Familie liegt kein Preisbeleg vor.',
       defs: [
         { k: 'Modell', v: 'Modell, wie der Hersteller es nennt.' },
@@ -345,7 +276,7 @@
           { lead: 'Gegen den Einkaufspreis:', text: disc === null
             ? 'der Einkaufspreis eines Leasinghauses ist nicht öffentlich; die Hülle hat keinen Einkaufsabschlag übergeben, deshalb bleibt die Spalte gegen Einkaufspreis leer.'
             : 'der Einkaufspreis eines Leasinghauses ist nicht öffentlich; ein benannter Platzhalter (' + f.pct1(disc) + ' unter UVP) rechnet um: Realisierung gegen UVP geteilt durch ' + loose(1 - disc) + '.' },
-          { lead: 'Mietpreis:', text: 'nicht öffentlich und hier nicht verwendet; der Tab Kreislauf rechnet mit simulierten Mieten, nie mit der Miete eines Leasinghauses.' }
+          { lead: 'Mietpreis:', text: 'nicht öffentlich und hier nicht verwendet; der Reiter Kreislauf rechnet mit simulierten Mieten, nie mit der Miete eines Leasinghauses.' }
         ]
       },
       {
@@ -367,7 +298,7 @@
       kpiDefs: kpiDefs,
       chart: chart,
       chartNote: chartNote,
-      tables: [tOem, tSeries, tStudies, tCheck, tAnc],
+      tables: [tOem, tAnc],
       blocks: blocks,
       /* Sonderfelder Realisierung (Vertrag 7.3) */
       fams: fams, current: current, detail: detail

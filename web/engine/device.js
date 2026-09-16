@@ -1,6 +1,6 @@
-/* Restwert Engine v3: Motor fuer den Tab Geraet. Klassisches Skript, definiert window.RE.device.
+/* Restwert Engine v3: Motor fuer den Reiter Geraet. Klassisches Skript, definiert window.RE.device.
    Vertrag: v3/CONTRACT.md (Abschnitte 1 bis 8, Sonderfelder 7.2). Quelle aller Texte, Zahlen und Rechenwege:
-   v3/src/device.js und v3/src/device.body.html (der heutige Tab), Daten aus v3/data/device.json.
+   v3/src/device.js und v3/src/device.body.html (der heutige Reiter), Daten aus v3/data/device.json.
    Der Motor fasst kein DOM an, haelt keinen Zustand ausser einem Index je Datenobjekt (WeakMap) und schreibt
    keine Zahl als Text, die nicht aus D oder opts kommt; jede Zahl geht durch E.fmt. */
 (function (w) {
@@ -79,19 +79,19 @@
     var vf = num(d.storage) ? (D.var_fleet || {})[d.slug + '|' + Math.round(d.storage) + '|' + term] : null;
     var sf = ((D.fleet || {})[d.slug] || []).filter(function (r) { return r.term_months === term; })[0];
     var src = {}, buy, rate, cost;
-    if (vf && vf.p) { buy = vf.p; src.buy = 'QTY ' + f.qty(vf.n) + ' Geräte genau dieser Ausstattung und Laufzeit'; }
-    else if (sf && sf.p_all && sf.rrp_net) { buy = sf.p_all * (rrpNet / sf.rrp_net); src.buy = 'QTY ' + f.qty(sf.n) + ' Geräte dieses Modells (andere Speicher), auf die UVP dieser Ausstattung umgerechnet'; }
+    if (vf && vf.p) { buy = vf.p; src.buy = f.qty(vf.n) + ' Geräten genau dieser Ausstattung und Laufzeit'; }
+    else if (sf && sf.p_all && sf.rrp_net) { buy = sf.p_all * (rrpNet / sf.rrp_net); src.buy = f.qty(sf.n) + ' Geräte dieses Modells (andere Speicher), auf die UVP dieser Ausstattung umgerechnet'; }
     else if (num(ft.buy)) { buy = rrpNet * ft.buy; src.buy = 'UVP ohne Mehrwertsteuer mal ' + f.pct(ft.buy) + ' (Kaufanteil der Geräteart in der Simulation)'; }
     else { buy = rrpNet; src.buy = 'UVP ohne Mehrwertsteuer (kein Kaufanteil der Geräteart in der Simulation)'; }
-    if (vf && vf.rate) { rate = vf.rate; src.rate = 'QTY ' + f.qty(vf.n) + ' Geräte dieser Ausstattung'; }
+    if (vf && vf.rate) { rate = vf.rate; src.rate = f.qty(vf.n) + ' Geräten dieser Ausstattung'; }
     else {
       var rp = (D.rate_pct || {})[d.fam], fac = (D.factors || {})[String(term)];
       rate = buy * (num(rp) ? rp : 0) * (num(fac) ? fac : 1);
       src.rate = 'Einkaufspreis mal ' + f.pct1(rp) + ' mal Faktor ' + plain(num(fac) ? fac : 1) + ' (Platzhalter der Simulation)';
     }
-    if (vf && vf.c && vf.closed > 0) { cost = vf.c; src.cost = 'QTY ' + f.qty(vf.closed) + ' abgeschlossene Geräte dieser Ausstattung'; }
-    else if (sf && sf.c && sf.closed > 0) { cost = sf.c; src.cost = 'QTY ' + f.qty(sf.closed) + ' abgeschlossene Geräte dieses Modells'; }
-    else { cost = num(ft.c) ? ft.c : 0; src.cost = 'Mittelwert der Geräteart ' + famLabel(D, d) + ' bei ' + f.qty(term) + ' Monaten, QTY ' + f.qty(num(ft.n) ? ft.n : 0) + ' (Platzhalter der Simulation)'; }
+    if (vf && vf.c && vf.closed > 0) { cost = vf.c; src.cost = f.qty(vf.closed) + ' abgeschlossenen Geräten dieser Ausstattung'; }
+    else if (sf && sf.c && sf.closed > 0) { cost = sf.c; src.cost = f.qty(sf.closed) + ' abgeschlossenen Geräten dieses Modells'; }
+    else { cost = num(ft.c) ? ft.c : 0; src.cost = 'Mittelwert der Geräteart ' + famLabel(D, d) + ' bei ' + f.qty(term) + ' Monaten, ' + f.qty(num(ft.n) ? ft.n : 0) + ' (Platzhalter der Simulation)'; }
     return { buy: buy, rate: rate, cost: cost, rrpNet: rrpNet, src: src };
   }
   function inputsFor(D, d, term, over) {
@@ -240,7 +240,7 @@
     var prognote = (g
       ? 'Modellalter in Monaten seit Verkaufsstart. Die Prognose stammt aus dem Rechenmodell des Werkzeugs, gelernt aus den simulierten Verkäufen; Verlässlichkeit: ' + (FIT[g.fit] || g.fit) + '. Euro-Werte beim Einkaufspreis ' + f.eur(inp.buy) + '.'
       : 'Dieses Modell ist nicht in der Simulation; das Werkzeug hat keine eigene Prognose dafür.')
-      + (qn ? ' Rechte Spalte: ' + qn.name + ' vom Tab Realisierung, QTY ' + f.qty(qn.c.n) + ' Preisbelege, Belege von ' + f.num(qn.c.age_min) + ' bis ' + f.num(qn.c.age_max) + ' Monaten.' : ' Für diese Familie gibt es keine öffentliche Kurve.');
+      + (qn ? ' Rechte Spalte: ' + qn.name + ' vom Reiter Realisierung, ' + f.qty(qn.c.n) + ' Preisbelege, Belege von ' + f.num(qn.c.age_min) + ' bis ' + f.num(qn.c.age_max) + ' Monaten.' : ' Für diese Familie gibt es keine öffentliche Kurve.');
     var progRows = AGES.map(function (m) {
       var r = g ? gridRatio(D, d, m) : null, q = curveQ(D, d, m);
       return E.ROW([
@@ -257,7 +257,7 @@
         { k: 'Anteil des Einkaufspreises', v: 'die Restwertprognose des Werkzeugs (Zustandsstufe B, Marktplatz) in Prozent des Einkaufspreises, aus den Verkäufen der Simulation gelernt' },
         { k: 'Spanne', v: 'untere und obere Grenze der Prognose' },
         { k: 'Euro beim Einkaufspreis oben', v: 'Anteil des Einkaufspreises mal dem Einkaufspreis aus dem Feld oben, in Euro.' },
-        { k: 'Öffentliche Kurve', v: 'zum Vergleich die Marktplatz-Kurve vom Tab Realisierung, in Prozent der UVP: die des Herstellers in dieser Familie, wenn es eine belastbare gibt, sonst die der Familie über alle Hersteller (die Notiz darüber sagt, welche); in Klammern außerhalb der Belegspanne. Andere Basis als die Spalte links (UVP statt Einkaufspreis)' }
+        { k: 'Öffentliche Kurve', v: 'zum Vergleich die Marktplatz-Kurve vom Reiter Realisierung, in Prozent der UVP: die des Herstellers in dieser Familie, wenn es eine belastbare gibt, sonst die der Familie über alle Hersteller (die Notiz darüber sagt, welche); in Klammern außerhalb der Belegspanne. Andere Basis als die Spalte links (UVP statt Einkaufspreis)' }
       ]
     });
 
@@ -283,8 +283,8 @@
       E.H('Ausstattung'), E.H('Zustandsstufe'), E.H('Zustand laut Verkäufer'), E.H('Monate', 1), E.H('Preis', 1), E.H('Realisierung', 1), E.H('Preisart'), E.H('Datum'), E.H('Quelle')
     ], ancRows, {
       tags: [TAG_PUB], collapsible: ancRows.length > 20,
-      note: ancRows.length ? 'QTY ' + f.qty(ancRows.length) + ' Preisbelege für dieses Modell, alle Ausstattungen' + (nManual ? ', davon QTY ' + f.qty(nManual) + ' manuell erfasst' : '') + '; Realisierung = Preis geteilt durch die UVP derselben Ausstattung.' : '',
-      empty: 'Für dieses Modell liegt kein öffentlicher Preisbeleg vor; die Kurve der Familie und des Herstellers vom Tab Realisierung gilt als Näherung.',
+      note: ancRows.length ? f.qty(ancRows.length) + ' Preisbelege für dieses Modell, alle Ausstattungen' + (nManual ? ', davon ' + f.qty(nManual) + ' manuell erfasst' : '') + '; Realisierung = Preis geteilt durch die UVP derselben Ausstattung.' : '',
+      empty: 'Für dieses Modell liegt kein öffentlicher Preisbeleg vor; die Kurve der Familie und des Herstellers vom Reiter Realisierung gilt als Näherung.',
       foot: 'Ankauf-Gebot „bis zu“ ist der Höchstwert, den ein Ankäufer vor der Zustandsprüfung nennt, kein garantierter Betrag; der tatsächliche Ankaufpreis liegt darunter.',
       defs: [
         { k: 'Ausstattung', v: 'Speicher und Farbe des Geräts, wie die Quelle sie nennt.' },
@@ -309,16 +309,16 @@
       ]);
     });
     var tFleet = E.TABLE('d-fleet', 'Dieses Modell in der simulierten Flotte', [
-      E.H('Laufzeit'), E.H('QTY Geräte', 1), E.H('davon abgeschlossen', 1), E.H('davon vorzeitig zurück', 1), E.H('Einkaufspreis', 1), E.H('Miete je Monat', 1), E.H('Mieterlös', 1),
+      E.H('Laufzeit'), E.H('Geräte', 1), E.H('davon abgeschlossen', 1), E.H('davon vorzeitig zurück', 1), E.H('Einkaufspreis', 1), E.H('Miete je Monat', 1), E.H('Mieterlös', 1),
       E.H('Restwert', 1), E.H('Kosten bis Verkauf', 1), E.H('Lifecycle-Marge je Gerät', 1), E.H('davon mit positiver Lifecycle-Marge', 1)
     ], fleetRows, {
       n: nFleet, tags: [TAG_SIM],
-      note: fleetRows.length ? 'QTY ' + f.qty(nFleet) + ' Geräte dieses Modells mit Mietvertrag in der Simulation, alle Ausstattungen' + (nd ? '; dazu QTY ' + f.qty(nd) + ' ohne Vertrag (Ersatzgeräte im Lager)' : '') + '.' : '',
+      note: fleetRows.length ? f.qty(nFleet) + ' Geräte dieses Modells mit Mietvertrag in der Simulation, alle Ausstattungen' + (nd ? '; dazu ' + f.qty(nd) + ' ohne Vertrag (Ersatzgeräte im Lager)' : '') + '.' : '',
       empty: 'Dieses Modell wurde in der Simulation nicht gekauft.',
-      foot: 'Alle Spalten außer QTY sind Mittelwerte über die abgeschlossenen Kreisläufe dieser Laufzeit, deshalb addieren sich Mieterlös plus Restwert minus Einkaufspreis minus Kosten zur Marge. Warum die Flotte unter dem Rechner oben liegen kann: die Simulation kauft nicht am Verkaufsstart, sondern später; sie verkauft in der Zustandsstufe und über den Kanal, die das Gerät am Ende hatte, der Rechner nimmt Stufe B und Marktplatz; und ein vorzeitig zurückgegebener Vertrag hat weniger Mieterlös (Spalte vorzeitig). Ein Modell ohne Zeile wurde in der Simulation nicht gekauft.',
+      foot: 'Alle Spalten außer den Stückzahlen sind Mittelwerte über die abgeschlossenen Kreisläufe dieser Laufzeit, deshalb addieren sich Mieterlös plus Restwert minus Einkaufspreis minus Kosten zur Marge. Warum die Flotte unter dem Rechner oben liegen kann: die Simulation kauft nicht am Verkaufsstart, sondern später; sie verkauft in der Zustandsstufe und über den Kanal, die das Gerät am Ende hatte, der Rechner nimmt Stufe B und Marktplatz; und ein vorzeitig zurückgegebener Vertrag hat weniger Mieterlös (Spalte vorzeitig). Ein Modell ohne Zeile wurde in der Simulation nicht gekauft.',
       defs: [
         { k: 'Laufzeit', v: 'Vertragslaufzeit der Geräte in dieser Zeile, in Monaten.' },
-        { k: 'QTY Geräte', v: 'QTY (Quantity): Stückzahl der Geräte dieses Modells mit Mietvertrag dieser Laufzeit, alle Ausstattungen.' },
+        { k: 'Geräte', v: 'Stückzahl der Geräte dieses Modells mit Mietvertrag dieser Laufzeit, alle Ausstattungen.' },
         { k: 'davon abgeschlossen', v: 'davon Geräte, deren Kreislauf abgeschlossen ist; nur sie gehen in die Mittelwerte der Zeile ein.' },
         { k: 'davon vorzeitig zurück', v: 'davon Geräte, die vor dem Vertragsende zurückkamen; leer, solange kein Kreislauf abgeschlossen ist.' },
         { k: 'Einkaufspreis', v: 'Einkaufspreis je Gerät im Mittel der abgeschlossenen Kreisläufe.' },
@@ -335,10 +335,15 @@
       kicker: 'Gerät nachschlagen, Stand ' + f.de(D.today),
       subject: 'Ein Gerät, alle Zahlen: was es verliert, was es bringt, ab wann es sich rechnet',
       intro: 'Gerät wählen (Modell und Speicher). Dann: Steckbrief mit UVP und Quelle, die öffentlichen Preisbelege für genau dieses Modell, die Restwertprognose des Werkzeugs, die Geräte dieses Modells in der simulierten Flotte, und ein Rechner je Laufzeit, der sagt, ab welchem Monat das Gerät seine Kosten eingespielt hat.'
-        + ' QTY ' + f.qty(devs.length) + ' Geräte (Modell und Speicher) mit UVP im Katalog.',
+        + ' ' + f.qty(devs.length) + ' Geräte (Modell und Speicher) mit UVP im Katalog.',
       facts: facts,
       kpis: kpis,
-      kpiDefs: [{ k: 'QTY (Quantity)', v: 'Stückzahl; das Wort dahinter sagt, was gezählt wird: Geräte, Preisbelege.' }],
+      kpiDefs: [
+        { k: 'UVP', v: 'unverbindliche Preisempfehlung des Herstellers beim deutschen Verkaufsstart, mit Mehrwertsteuer, mit Quelle im Steckbrief; Alter in Monaten seit Verkaufsstart.' },
+        { k: 'Restwertprognose nach ' + f.qty(HORIZON) + ' Monaten', v: 'Prognose des Werkzeugs für dieses Modell in Prozent des Einkaufspreises, Zustandsstufe B, Verkauf über den Marktplatz; daneben die öffentliche Kurve der Familie oder des Herstellers in Prozent der UVP (Reiter Realisierung), in Klammern, wenn das Alter außerhalb der Belege liegt.' },
+        { k: 'Lifecycle-Marge', v: 'Mieterlös über die Laufzeit plus Restwertprognose am Ende minus Einkaufspreis minus Kosten bis Verkauf, je Gerät, mit den Eingaben oben.' },
+        { k: 'Kosten eingespielt ab Monat', v: 'der erste Monat, ab dem die Lifecycle-Marge in dieser Rechnung positiv ist; davor wäre ein Verkauf ein Verlust.' }
+      ],
       calcnote: calcnote,
       chart: chart,
       chartNote: '',

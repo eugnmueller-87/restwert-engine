@@ -3,6 +3,7 @@
 closed cycles in full, open cycles booked-to-date plus an expectation for the rest from the family-and-term mean.
 Usage: python make_tco_page.py <REPO> <OUT> <TODAY>  ->  <OUT>/index.html"""
 import json, sys, pathlib, math
+from _roles import de_roles  # noqa: E402
 from collections import defaultdict
 import pandas as pd, duckdb, yaml
 sys.stdout.reconfigure(encoding="utf-8")
@@ -265,5 +266,5 @@ data = {"today": TODAY, "vat": vat, "min_n": min_n, "holding_rate": holding_rate
 # in web/app.js and the motor in web/engine/tco.js render this JSON)
 OUT.parent.mkdir(parents=True, exist_ok=True)
 with open(OUT, "w", encoding="utf-8", newline="\n") as fh:
-    fh.write(json.dumps(data, ensure_ascii=False, default=clean, separators=(",", ":")) + "\n")
+    fh.write(de_roles(json.dumps(data, ensure_ascii=False, default=clean, separators=(",", ":"))) + "\n")
 print(OUT.name + ": geschrieben")

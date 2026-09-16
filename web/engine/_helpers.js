@@ -4,6 +4,8 @@
   'use strict';
   var RE = w.RE || (w.RE = {});
 
+  function str(t) { return t === null || t === undefined ? '' : String(t); }
+
   /* ---------- Zahlen, deutsch ---------- */
   var hasIntl = typeof Intl !== 'undefined' && typeof Intl.NumberFormat === 'function';
   var cache = {};
@@ -39,8 +41,18 @@
     if (p.length === 2) return p[1] + '.' + p[0];
     return String(iso);
   }
+  /* Rollen: die Konfiguration fuehrt englische Platzhalter ("Head of Recommerce (name)"), die Seite spricht deutsch;
+     eine Schreibweise je Rolle auf allen Reitern (Befund der Durchsicht vom 16.09.2026) */
+  var ROLE_DE = [['Head of Service Operations', 'Leitung Service'], ['Head of Recommerce', 'Leitung Recommerce'], ['Head of Indirect Procurement', 'Leitung Indirekter Einkauf'],
+    ['Head of Procurement', 'Einkaufsleitung'], ['Head of Customer Success', 'Leitung Customer Success'], ['Data owner', 'Dateneigner']];
+  function role(s) {
+    var t = str(s).replace(/ \(name\)/g, '');
+    ROLE_DE.forEach(function (r) { t = t.split(r[0]).join(r[1]); });
+    return t;
+  }
   var fmt = {
     de: de,
+    role: role,
     qty: function (n) { return bad(n) ? '' : num(Math.round(Number(n)), 0); },
     eur: function (x) { return bad(x) ? '' : num(Math.round(Number(x)), 0) + ' €'; },
     eur2: function (x) { return bad(x) ? '' : num(x, 2) + ' €'; },
@@ -50,7 +62,6 @@
   };
 
   /* ---------- Tabellen ---------- */
-  function str(t) { return t === null || t === undefined ? '' : String(t); }
   function cell(text, o, numeric) {
     o = o || {};
     var align = o.center ? 'center' : (o.right || numeric) ? 'right' : 'left';

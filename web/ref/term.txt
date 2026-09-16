@@ -1,12 +1,7 @@
 Restwert Engine
 Bericht
-Gerät
-Realisierung
-Prognosegüte
-TCO
-Kreislauf
-Stellschrauben
-Laufzeit
+Analytics
+Market Intelligence
 Daten
 Lager
 Verträge
@@ -14,14 +9,20 @@ Protokoll (0)
 Export CSV
 Datei einlesen
 Lauf starten
-Letzter Lauf Stand 16.09.2026 Dateien 282 Zeilen 165.913 ungeklärt 60 Seriennummern 5.251 Prototyp: Läufe werden protokolliert, nicht gerechnet.
+Gerät
+Prognosegüte
+TCO
+Kreislauf
+Stellschrauben
+Laufzeit
+Letzter Lauf Stand 16.09.2026 Dateien 283 Zeilen 166.115 ungeklärt 60 Seriennummern 5.251 Prototyp: Läufe werden protokolliert, nicht gerechnet.
 Protokoll dieser Installation
 manuell erfasste Daten, Lieferungen, Schwellen, Läufe · lokal gespeichert
 Noch keine Einträge. Preisbelege erfassen, Dateien einlesen, Schwellen ändern oder Szenarien speichern; jeder Schritt landet hier.
 Analyse, öffentliche Preisbelege und Simulation, Stand 16.09.2026
 Laufzeit gegen Restwert: was ein Jahr mehr kostet
 Hinweise ausblenden
-Die Frage: Ein längerer Vertrag bringt länger Miete, aber das Gerät kommt mit weniger Wert zurück, weil es Generationen überspringt. Wie viel weniger ist ein drei Jahre altes iPhone wert als ein ein Jahr altes, was heißt das je Vertragsmonat, und woran lässt sich drehen? Beispiel Apple Smartphone, weil dafür die meisten Preisbelege vorliegen; die Familienkurven stehen darunter. Öffentliche Preisbelege: QTY 30 Marktplatz-Angebote und QTY 14 Ankauf-Gebote für Apple Smartphones; simuliert: QTY 826 abgeschlossene iPhone-Kreisläufe.
+Die Frage: Ein längerer Vertrag bringt länger Miete, aber das Gerät kommt mit weniger Wert zurück, weil es Generationen überspringt. Wie viel weniger ist ein drei Jahre altes iPhone wert als ein ein Jahr altes, was heißt das je Vertragsmonat, und woran lässt sich drehen? Beispiel Apple Smartphone, weil dafür die meisten Preisbelege vorliegen; die Familienkurven stehen darunter. Öffentliche Preisbelege: 39 Marktplatz-Angebote und 28 Ankauf-Gebote für Apple Smartphones; simuliert: 819 abgeschlossene iPhone-Kreisläufe.
 iPhone nach 12 Monaten öffentlich
 44 % bis 65 %
 der UVP, Ankauf-Gebote laut Studien USA und Großbritannien
@@ -30,33 +31,31 @@ kein deutscher Beleg unter 18 Monaten
 iPhone nach 36 Monaten öffentlich
 48 %
 der UVP, Marktplatz-Angebot laut deutscher Kurve
-QTY 30 Preisbelege
-Ankauf-Gebot „bis zu“: 47 %
+39 Preisbelege
+Ankauf-Gebot „bis zu“: 50 %
 Wertverlust je Monat, Jahr 1 gegen Jahr 3 öffentlich
-1,2 % gegen 0,9 %
+1,3 % gegen 0,9 %
 der UVP, beide nach der deutschen Kurve
 Jahr 1 laut Studien: 1,9 % bis 3,6 %
 das erste Jahr ist das teure
 Nötige Miete, 12 gegen 24 Monate abgeleitet
-Faktor 1,30 bis 2,38
-1,30 nach der deutschen Kurve
-1,60 bis 2,38 nach den Studien
+Faktor 1,25 bis 2,31
+1,25 nach der deutschen Kurve
+1,53 bis 2,31 nach den Studien
 Platzhalter der Simulation: 1,50
 Weniger
 Begriffe ausblenden
-QTY (Quantity)
-Stückzahl; das Wort dahinter sagt, was gezählt wird: Preisbelege, Geräte, Kreisläufe.
 UVP
 Unverbindliche Preisempfehlung des Herstellers beim deutschen Verkaufsstart; die Kurve rechnet einschließlich Mehrwertsteuer, Kosten und Einkaufspreis der Simulation ohne Mehrwertsteuer.
 Faktor
 nötige Miete je Monat einer Laufzeit geteilt durch die der 24-Monats-Laufzeit; so viel teurer oder günstiger je Monat muss der Vertrag sein.
-Kacheln: Prozent der UVP. Die deutsche Kurve sind Marktplatz-Angebote (Obergrenze), unter 18 Monaten über die Belege hinaus verlängert; die Studien sind Ankauf-Gebote aus den USA und Großbritannien, eine andere Preisart. Der Faktor sagt, um wie viel teurer je Monat ein 12-Monats-Vertrag gegenüber einem 24-Monats-Vertrag sein muss, damit Wertverlust und Kosten bis Verkauf gedeckt sind; die Studienwerte setzen ein Gebot gegen ein Angebot und liegen deshalb eher zu hoch.
+Kacheln: Prozent der UVP. Die deutsche Kurve sind Marktplatz-Angebote (Obergrenze), unter 18 Monaten über die Belege hinaus verlängert; die Studien sind Ankauf-Gebote aus den USA und Großbritannien, eine andere Preisart. Der Faktor sagt, um wie viel teurer je Monat ein 12-Monats-Vertrag gegenüber einem 24-Monats-Vertrag sein muss, damit Wertverlust und Kosten bis Verkauf gedeckt sind; die Studienwerte setzen ein Gebot gegen ein Angebot und liegen deshalb zu hoch.
 Was man daraus macht
-Die Miete je Laufzeit aus der Kurve ableiten, nicht flach setzen. Ein 12-Monats-Vertrag muss je Monat den Faktor 1,30 (Kurve) bis 2,38 (Studien) der 24-Monats-Miete kosten, ein 36-Monats-Vertrag nur 0,88, ein 48-Monats-Vertrag 0,71. Wer alle Laufzeiten gleich bepreist, verschenkt bei kurzen Verträgen Geld und verliert bei langen den Kunden an den Wettbewerb. Das ist die Zahl, die die Stellschraube Laufzeit (Kennung L07 auf dem Tab Stellschrauben) misst; mit dieser Preisregel wäre ihr Hebel null.
-Das erste Jahr ist das teure, nicht das dritte. Der Wertverlust je Monat liegt in Jahr 1 bei 1,9 % bis 3,6 % der UVP (Studien; die verlängerte deutsche Kurve sagt 1,2 %), in Jahr 3 bei 0,9 %, in Jahr 4 bei 0,8 %. Dass der erste Verlust der größte ist, tragen die Studien; die deutsche Kurve zeigt unter 18 Monaten keinen Beleg. Ein Gerät, das drei Jahre läuft, überspringt zwar zwei Generationen, aber den größten Sprung macht es im ersten Jahr, den zahlt jede Laufzeit. Lange Verträge sind deshalb je Monat die günstigen. Reparatur und Lagertage stecken in den Kosten bis Verkauf und wachsen mit der Laufzeit; was nicht drin ist, sind Akkuzustand und Kundenzufriedenheit bei alten Geräten.
+Die Miete je Laufzeit aus der Kurve ableiten, nicht flach setzen. Ein 12-Monats-Vertrag muss je Monat den Faktor 1,25 (Kurve) bis 2,31 (Studien) der 24-Monats-Miete kosten, ein 36-Monats-Vertrag nur 0,87, ein 48-Monats-Vertrag 0,87. Wer alle Laufzeiten gleich bepreist, verschenkt bei kurzen Verträgen Geld und verliert bei langen den Kunden an den Wettbewerb. Das ist die Zahl, die die Stellschraube Laufzeit (Kennung L07 auf dem Reiter Stellschrauben) misst; mit dieser Preisregel wäre ihr Hebel null.
+Das erste Jahr ist das teure, nicht das dritte. Der Wertverlust je Monat liegt in Jahr 1 bei 1,9 % bis 3,6 % der UVP (Studien; die verlängerte deutsche Kurve sagt 1,3 %), in Jahr 3 bei 0,9 %, in Jahr 4 bei 0,7 %. Dass der erste Verlust der größte ist, tragen die Studien; die deutsche Kurve zeigt unter 18 Monaten keinen Beleg. Ein Gerät, das drei Jahre läuft, überspringt zwar zwei Generationen, aber den größten Sprung macht es im ersten Jahr, den zahlt jede Laufzeit. Lange Verträge sind deshalb je Monat die günstigen. Reparatur und Lagertage stecken in den Kosten bis Verkauf und wachsen mit der Laufzeit; was nicht drin ist, sind Akkuzustand und Kundenzufriedenheit bei alten Geräten.
 Zweiter Kreislauf statt Verkauf nach 12 Monaten. Ein Gerät, das nach einem Jahr mit 44 % bis 73 % der UVP zurückkommt, ist als Gebrauchtgerät noch vermietbar (die Spanne reicht vom Ankauf-Gebot der Studien bis zur verlängerten Marktplatz-Kurve); ein zweiter Vertrag über 24 Monate zu einer niedrigeren Miete spart den zweiten Einkauf und die zweite Kanalgebühr. Die Simulation verkauft heute nach jedem Vertrag; das ist der Kandidat für die nächste Ausbaustufe (v0.3).
 Laufzeit nach Geräteart wählen. Ein Laptop verliert bei 36 Monaten 0,6 % der UVP je Monat, ein Smartphone 1,2 %. Lange Laufzeiten gehören zu Laptops und Tablets, bei Smartphones ist 24 die Mitte; 12 Monate nur mit der hohen Miete aus der Kurve (erster Punkt) oder mit dem zweiten Kreislauf (dritter Punkt).
-Vorzeitige Rückgabe bepreisen. In der Simulation verliert jeder vorzeitig beendete Vertrag Geld, egal welche Laufzeit (Tabelle unten, Spalte „Lifecycle-Marge, vorzeitig zurück“), weil die Miete aufhört, das Gerät aber schon den Wertverlust der ersten Monate getragen hat und die Kosten bis Verkauf voll anfallen. Der Vertrag braucht einen Ausgleich bei vorzeitiger Rückgabe, mindestens die entgangene Miete bis zum Punkt, ab dem das Gerät seine Kosten eingespielt hat (Tab Gerät). Die Simulation kennt diesen Ausgleich noch nicht; er ist eine Zeile im Kundenvertrag und ein Kandidat für die nächste Ausbaustufe (v0.3).
+Vorzeitige Rückgabe bepreisen. In der Simulation verliert jeder vorzeitig beendete Vertrag Geld, egal welche Laufzeit (Tabelle unten, Spalte „Lifecycle-Marge, vorzeitig zurück“), weil die Miete aufhört, das Gerät aber schon den Wertverlust der ersten Monate getragen hat und die Kosten bis Verkauf voll anfallen. Der Vertrag braucht einen Ausgleich bei vorzeitiger Rückgabe, mindestens die entgangene Miete bis zum Punkt, ab dem das Gerät seine Kosten eingespielt hat (Reiter Gerät). Die Simulation kennt diesen Ausgleich noch nicht; er ist eine Zeile im Kundenvertrag und ein Kandidat für die nächste Ausbaustufe (v0.3).
 Verkaufszeitpunkt vor dem Nachfolger. Die Kurve mittelt den Sprung beim Erscheinen der nächsten Generation; ein Vertrag, der einen Monat vor dem Nachfolger endet, gibt das Gerät in den teureren Markt zurück. Das lässt sich mit den Verkaufsstartdaten des Katalogs planen, braucht aber erst einen Beleg mit Datum (offen).
 Die Kurve, mit den vier Laufzeiten markiert (öffentlich). Durchgezogen: Kurve der Marktplatz-Angebote (Apple Smartphones), gepunktet: Kurve der Ankauf-Gebote „bis zu“ (Höchstwerte vor der Zustandsprüfung, kein Boden), jeweils nur über der Altersspanne ihrer Belege. Punkte: die Preisbelege selbst (Raute Zustandsstufe B, Dreieck Ankauf-Gebot). Senkrechte Linien: 12, 24, 36, 48 Monate. Links von 18 Monaten gibt es keinen deutschen Beleg; dort helfen nur die Studien.
 Was ein iPhone nach 12, 24, 36 und 48 Monaten noch wert ist
@@ -65,13 +64,13 @@ Begriffe ausblenden
 Monate
 Modellalter seit deutschem Verkaufsstart; ein Gerät, das am Verkaufsstart gekauft und 24 Monate vermietet wird, ist bei Rückgabe 24 Monate alt.
 Marktplatz-Angebot, Kurve
-Realisierung in Prozent der UVP laut Kurve des Tabs Realisierung (Apple Smartphones, alle Stufen, abgelesen für Zustandsstufe B); Obergrenze, weil die Marge des Aufbereiters darin steckt; in Klammern, wo die Kurve über die Belege hinaus verlängert ist.
+Realisierung in Prozent der UVP laut Kurve des Reiter Realisierung (Apple Smartphones, alle Stufen, abgelesen für Zustandsstufe B); Obergrenze, weil die Marge des Aufbereiters darin steckt; in Klammern, wo die Kurve über die Belege hinaus verlängert ist.
 Preisbelege, mittleres Angebot
-das mittlere Marktplatz-Angebot der deutschen Belege in Zustandsstufe B, deren Alter in dieses Jahr fällt (Jahr 1 = 0 bis 11 Monate); QTY zählt diese Belege.
+das mittlere Marktplatz-Angebot der deutschen Belege in Zustandsstufe B, deren Alter in dieses Jahr fällt (Jahr 1 = 0 bis 11 Monate); die Spalte Belege zählt sie.
 Ankauf-Gebot, Kurve
 die Ankaufsseite laut Kurve der Apple Ankauf-Gebote; leer, wo die Kurve keine Belege hat (unter 36 Monaten). Achtung: die deutschen Ankauf-Belege sind Höchstwerte „bis zu“ vor der Zustandsprüfung (Bestzustand), also kein Boden; der tatsächliche Ankaufpreis liegt darunter.
 Ankauf-Gebote, Belege
-das mittlere Ankauf-Gebot „bis zu“ der deutschen Belege, deren Alter in dieses Jahr fällt; QTY zählt diese Belege.
+das mittlere Ankauf-Gebot „bis zu“ der deutschen Belege, deren Alter in dieses Jahr fällt; die Spalte Belege zählt sie.
 Studien USA und Großbritannien
 Realisierung nach Ankauf-Gebot laut veröffentlichten Studien in den USA und in Großbritannien (100 % minus dort genannter Verlust), mit Quelle; andere Länder, andere Preisart als die Marktplatz-Kurve, deshalb nur als Bandbreite dort, wo deutsche Belege fehlen; die Tabelle der Studien führt sie einzeln auf.
 Wertverlust seit Kauf
@@ -81,12 +80,12 @@ Wertverlust seit Kauf geteilt durch alle Monate seit Kauf.
 je Monat, dieses Jahr
 nur der Wertverlust dieses einen Jahres (Kurvenwert am Jahresanfang minus am Jahresende), geteilt durch 12; zeigt, welches Jahr das teure ist.
 Monate | Marktplatz-Angebot, Kurve | Preisbelege, mittleres Angebot | Ankauf-Gebot, Kurve | Ankauf-Gebote, Belege | Studien USA und Großbritannien | Wertverlust seit Kauf | je Monat seit Kauf | je Monat, dieses Jahr
-12 | (73 %) | kein Beleg |  | kein Beleg | SellCell 08.09.2025: iPhone 11 56 %, iPhone 12 56 %, iPhone 13 54 %, iPhone 14 52 %, iPhone 15 52 %Compare and Recycle Februar 2026: iPhone 13 60 %, iPhone 14 52 %, iPhone 15 44 %, iPhone 16 55 %SellCell, Live-Rechner Abruf 13.09.2026: iPhone 17 65 % | (15 %) | (1,2 %) | (1,2 %)
-24 | 60 % | 59 % (QTY 5 Preisbelege) |  | kein Beleg |  | 28 % | 1,2 % | (1,1 %)
-36 | 48 % | 47 % (QTY 3 Preisbelege) | 47 % | 52 % (QTY 6 Preisbelege) |  | 40 % | 1,1 % | 0,9 %
-48 | 39 % | 38 % (QTY 2 Preisbelege) | 34 % | 30 % (QTY 6 Preisbelege) | SellCell, Live-Rechner Abruf 13.09.2026: iPhone 14 22 % | 49 % | 1,0 % | 0,8 %
+12 | (73 %) | kein Beleg |  | kein Beleg | SellCell 08.09.2025: iPhone 11 56 %, iPhone 12 56 %, iPhone 13 54 %, iPhone 14 52 %, iPhone 15 52 %Compare and Recycle Februar 2026: iPhone 13 60 %, iPhone 14 52 %, iPhone 15 44 %, iPhone 16 55 %SellCell, Live-Rechner Abruf 13.09.2026: iPhone 17 65 % | (15 %) | (1,3 %) | (1,3 %)
+24 | 59 % | 59 % (5 Preisbelege) |  | kein Beleg |  | 29 % | 1,2 % | (1,1 %)
+36 | 48 % | 47 % (3 Preisbelege) | 50 % | 53 % (12 Preisbelege) |  | 40 % | 1,1 % | 0,9 %
+48 | 40 % | 38 % (2 Preisbelege) | 37 % | 30 % (12 Preisbelege) | SellCell, Live-Rechner Abruf 13.09.2026: iPhone 14 22 % | 48 % | 1,0 % | 0,7 %
 Studien USA und Großbritannien, Ankauf-Gebote
-öffentlich QTY 4
+öffentlich 4 Zeilen
 Begriffe ausblenden
 Realisierung nach Ankauf-Gebot laut veröffentlichten Studien (100 % minus dort genannter Verlust); andere Länder, andere Preisart als die Marktplatz-Kurve, deshalb nur als Bandbreite dort, wo deutsche Belege fehlen.
 Quelle
@@ -115,25 +114,25 @@ Einkaufspreis minus Marktplatz-Angebot laut Kurve am Ende der Laufzeit, in Proze
 je Monat
 Wertverlust seit Kauf geteilt durch die Monate der Laufzeit.
 Kosten bis Verkauf, monatlich
-simuliert, dieselbe Zahl wie in der Tabelle der Simulation: im Mittel 263 € je abgeschlossenem iPhone-Kreislauf bei 1.025 € UVP ohne Mehrwertsteuer, also 26 % der UVP; je Laufzeit der eigene Wert, geteilt durch die Monate.
+simuliert, dieselbe Zahl wie in der Tabelle der Simulation: im Mittel 260 € je abgeschlossenem iPhone-Kreislauf bei 1.027 € UVP ohne Mehrwertsteuer, also 25 % der UVP; je Laufzeit der eigene Wert, geteilt durch die Monate.
 Nötige Miete je Monat
 (Wertverlust seit Kauf plus Kosten bis Verkauf) geteilt durch die Monate; ohne Gewinn, ohne Finanzierung, Gemeinkosten, Steuern; Nutzerbetreuung und Geräteverwaltung stecken als Umlage in den Kosten bis Verkauf.
 Faktor gegen 24 Monate
 nötige Miete je Monat dieser Laufzeit geteilt durch die der 24-Monats-Laufzeit, abgeleitet aus Kurve und Kosten; so viel teurer oder günstiger je Monat muss der Vertrag sein.
 Faktor in der Simulation
-der Platzhalter (term_rate_factor in config/lake.yaml), mit dem die Simulation heute die Monatsrate je Laufzeit skaliert; Verantwortlich: Head of Customer Success.
+der Platzhalter (term_rate_factor in config/lake.yaml), mit dem die Simulation heute die Monatsrate je Laufzeit skaliert; Verantwortlich: Leitung Customer Success.
 Laufzeit | Wertverlust seit Kauf | je Monat | Kosten bis Verkauf, monatlich | Nötige Miete je Monat | Faktor gegen 24 Monate | Faktor in der Simulation
-12 Monate | (15 %) | (1,2 %) | 1,6 % | (2,9 %) | (1,30) | 1,50
-24 Monate | 28 % | 1,2 % | 1,0 % | 2,2 % | 1,00 | 1,00
-36 Monate | 40 % | 1,1 % | 0,8 % | 1,9 % | 0,88 | 0,85
-48 Monate | 49 % | 1,0 % | 0,6 % | 1,6 % | 0,71 | 0,75
-12 Monate nach den Studien statt nach der verlängerten Kurve: Realisierung 44 % bis 65 % (Ankauf-Gebote USA und Großbritannien), nötige Miete 3,6 % bis 5,3 % je Monat, Faktor 1,60 bis 2,38 gegen 24 Monate; die Spanne mischt ein Gebot im Zähler mit dem Angebot im Nenner und liegt deshalb eher zu hoch.
+12 Monate | (15 %) | (1,3 %) | 1,5 % | (2,8 %) | (1,25) | 1,50
+24 Monate | 29 % | 1,2 % | 1,0 % | 2,2 % | 1,00 | 1,00
+36 Monate | 40 % | 1,1 % | 0,8 % | 1,9 % | 0,87 | 0,85
+48 Monate | 48 % | 1,0 % | 0,9 % | 1,9 % | 0,87 | 0,75
+12 Monate nach den Studien statt nach der verlängerten Kurve: Realisierung 44 % bis 65 % (Ankauf-Gebote USA und Großbritannien), nötige Miete 3,4 % bis 5,1 % je Monat, Faktor 1,53 bis 2,31 gegen 24 Monate; die Spanne mischt ein Gebot im Zähler mit dem Angebot im Nenner und liegt deshalb zu hoch.
 Dasselbe je Geräteart: wer verträgt lange Laufzeiten
-öffentlich QTY 213
+öffentlich 355 Zeilen
 Begriffe ausblenden
 Geräteart
-Gerätefamilie; die Kurve des Tabs Realisierung läuft über alle Hersteller der Familie.
-QTY Preisbelege
+Gerätefamilie; die Kurve des Reiter Realisierung läuft über alle Hersteller der Familie.
+Preisbelege
 Stückzahl der Marktplatz-Angebote, aus denen die Familienkurve gerechnet ist.
 Monate
 Altersspanne dieser Belege in Monaten seit deutschem Verkaufsstart, jüngster bis ältester Beleg.
@@ -141,16 +140,16 @@ nach 24, 36, 48 Monaten
 Realisierung laut Familienkurve (Marktplatz-Angebote, abgelesen für Zustandsstufe B), in Klammern außerhalb der Belegspanne.
 je Monat bei 24, 36, 48
 Wertverlust je Monat bei dieser Laufzeit: (Einkaufspreis minus Realisierung) geteilt durch die Monate, in Prozent der UVP; je kleiner, desto besser trägt die Geräteart eine lange Laufzeit.
-Geräteart | QTY Preisbelege | Monate | nach 24 Monaten | nach 36 Monaten | nach 48 Monaten | je Monat bei 24 | je Monat bei 36 | je Monat bei 48
-Smartphone | 138 | 17,5 bis 60,9 | 50 % | 45 % | 40 % | 1,6 % | 1,2 % | 1,0 %
-Tablet | 41 | 18,0 bis 59,6 | 65 % | 60 % | 56 % | 1,0 % | 0,8 % | 0,7 %
-Laptop | 34 | 30,2 bis 55,9 | (82 %) | 66 % | 53 % | (0,2 %) | 0,6 % | 0,7 %
+Geräteart | Preisbelege | Monate | nach 24 Monaten | nach 36 Monaten | nach 48 Monaten | je Monat bei 24 | je Monat bei 36 | je Monat bei 48
+Smartphone | 168 | 17,5 bis 60,9 | 50 % | 45 % | 40 % | 1,6 % | 1,2 % | 1,0 %
+Tablet | 66 | 18,0 bis 59,6 | 64 % | 60 % | 56 % | 1,0 % | 0,8 % | 0,7 %
+Laptop | 121 | 30,2 bis 70,0 | (86 %) | 65 % | 49 % | (0,1 %) | 0,6 % | 0,8 %
 Wie es in der Simulation heute aussieht
-simuliert QTY 826
+simuliert 819 Zeilen
 Begriffe ausblenden
 Laufzeit
 geplante Vertragslaufzeit in Monaten; die Zeile mittelt alle abgeschlossenen iPhone-Kreisläufe dieser Laufzeit.
-QTY abgeschlossen
+abgeschlossen
 Stückzahl der abgeschlossenen iPhone-Kreisläufe je Laufzeit in der Simulation.
 davon vorzeitig zurück
 Verträge, die vor dem geplanten Ende endeten; das Gerät kam zurück, die Miete hörte auf, der Vertrag sah keinen Ausgleich vor (Annahme der Simulation).
@@ -172,15 +171,15 @@ Lifecycle-Marge, volle Laufzeit
 Lifecycle-Marge je Gerät nur der Verträge, die bis zum Ende liefen.
 Lifecycle-Marge, vorzeitig zurück
 Lifecycle-Marge je Gerät nur der Verträge, die vorzeitig endeten.
-Laufzeit | QTY abgeschlossen | davon vorzeitig zurück | Monate abgerechnet, im Mittel | Einkaufspreis | Miete je Monat | Mieterlös | Restwert | Kosten bis Verkauf | Lifecycle-Marge je Gerät | Lifecycle-Marge, volle Laufzeit | Lifecycle-Marge, vorzeitig zurück
-12 Monate | 132 | 10 | 11,7 | 944 € | 61,06 € | 713 € | 411 € | 201 € | -21 € | -8 € | -187 €
-24 Monate | 450 | 47 | 22,2 | 955 € | 41,13 € | 910 € | 347 € | 256 € | 46 € | 84 € | -282 €
-36 Monate | 229 | 53 | 29,9 | 938 € | 34,05 € | 1.019 € | 291 € | 310 € | 61 € | 171 € | -305 €
-48 Monate | 15 | 8 | 28,1 | 887 € | 29,13 € | 729 € | 262 € | 262 € | -159 € | 117 € | -400 €
+Laufzeit | abgeschlossen | davon vorzeitig zurück | Monate abgerechnet, im Mittel | Einkaufspreis | Miete je Monat | Mieterlös | Restwert | Kosten bis Verkauf | Lifecycle-Marge je Gerät | Lifecycle-Marge, volle Laufzeit | Lifecycle-Marge, vorzeitig zurück
+12 Monate | 121 | 10 | 11,5 | 996 € | 63,59 € | 735 € | 425 € | 195 € | -31 € | -17 € | -184 €
+24 Monate | 464 | 57 | 21,9 | 957 € | 40,86 € | 897 € | 357 € | 256 € | 41 € | 86 € | -282 €
+36 Monate | 224 | 46 | 30,6 | 914 € | 33,34 € | 1.012 € | 299 € | 300 € | 98 € | 192 € | -270 €
+48 Monate | 10 | 4 | 32,0 | 782 € | 25,18 € | 744 € | 234 € | 381 € | -186 € | 159 € | -704 €
 Was bis zum Gewinn fehlt
 Finanzierungskosten, Gemeinkosten und Steuern
 Gewinnaufschlag; Nutzerbetreuung und Geräteverwaltung (MDM) sind als Umlage schon in den Kosten bis Verkauf
-Mittelwerte je Gerät der abgeschlossenen iPhone-Kreisläufe der Simulation. Die Miete je Monat folgt aus dem Platzhalter-Faktor je Laufzeit; die Rangfolge der Laufzeiten ist deshalb eine Folge dieser Annahme, kein Marktbefund. 48 Monate sind erst wenige abgeschlossen (QTY 15, davon QTY 8 vorzeitig beendet); die Zahl ist ein Urteil über vorzeitige Rückgaben, nicht über 48 Monate. Der Einkaufspreis hier ist netto und liegt bei 92 % der UVP ohne Mehrwertsteuer (Apple-Rabatt der Simulation, 5 % bis 12 %, Platzhalter); die Marktrechnung oben nimmt einschließlich Mehrwertsteuer 88 % der UVP (Platzhalter des Einkaufs, 12,0 % Abschlag). Zwei Platzhalter für dieselbe Größe; welcher gilt, entscheidet der Head of Procurement.
+Mittelwerte je Gerät der abgeschlossenen iPhone-Kreisläufe der Simulation. Die Miete je Monat folgt aus dem Platzhalter-Faktor je Laufzeit; die Rangfolge der Laufzeiten ist deshalb eine Folge dieser Annahme, kein Marktbefund. 48 Monate sind erst wenige abgeschlossen (10, davon 4 vorzeitig beendet); die Zahl ist ein Urteil über vorzeitige Rückgaben, nicht über 48 Monate. Der Einkaufspreis hier ist netto und liegt bei 92 % der UVP ohne Mehrwertsteuer (Apple-Rabatt der Simulation, 5 % bis 12 %, Platzhalter); die Marktrechnung oben nimmt einschließlich Mehrwertsteuer 88 % der UVP (Platzhalter des Einkaufs, 12,0 % Abschlag). Zwei Platzhalter für dieselbe Größe; welcher gilt, entscheidet der Einkaufsleitung.
 Was die Miete je Laufzeit ausmacht
 simuliert abgeleitet
 Begriffe ausblenden
@@ -200,12 +199,12 @@ Miete je Monat mal abgeleiteter Faktor geteilt durch Platzhalter-Faktor.
 Lifecycle-Marge, abgeleitet
 Lifecycle-Marge je Gerät mit der abgeleiteten Miete, alles andere unverändert.
 Laufzeit | Faktor, Platzhalter | Miete je Monat | Lifecycle-Marge je Gerät | Faktor, abgeleitet | Miete je Monat, abgeleitet | Lifecycle-Marge, abgeleitet
-12 Monate | 1,5 | 61,06 € | -21 € | 1,30 bis 2,38 | 52,77 € bis 96,81 € | -121 € bis 408 €
-24 Monate | 1 | 41,13 € | 46 € | 1,00 | 41,13 € | 46 €
-36 Monate | 0,85 | 34,05 € | 61 € | 0,88 | 35,15 € | 101 €
-48 Monate | 0,75 | 29,13 € | -159 € | 0,71 | 27,62 € | -231 €
+12 Monate | 1,5 | 63,59 € | -31 € | 1,25 bis 2,31 | 53,07 € bis 97,88 € | -158 € bis 380 €
+24 Monate | 1 | 40,86 € | 41 € | 1,00 | 40,86 € | 41 €
+36 Monate | 0,85 | 33,34 € | 98 € | 0,87 | 34,26 € | 131 €
+48 Monate | 0,75 | 25,18 € | -186 € | 0,87 | 29,24 € | 9 €
 ▾ Grenzen, ausgesprochen
 Unter 18 Monaten Modellalter gibt es keinen deutschen Preisbeleg; der Wert nach 12 Monaten ist eine Verlängerung der Kurve und wird durch die Studien (USA, Großbritannien, Ankauf-Gebote) nach unten abgesichert. Deshalb steht für 12 Monate eine Spanne.
-Marktplatz-Angebote sind die Obergrenze (Marge des Aufbereiters). Die deutschen Ankauf-Belege sind Höchstwerte „bis zu“ eines Ankäufers vor der Zustandsprüfung, also kein Boden; der tatsächliche Ankaufpreis liegt darunter. Was ein Leasinghaus erzielt, hängt vom Kanal ab (Tab Stellschrauben, Kanalwahl).
+Marktplatz-Angebote sind die Obergrenze (Marge des Aufbereiters). Die deutschen Ankauf-Belege sind Höchstwerte „bis zu“ eines Ankäufers vor der Zustandsprüfung, also kein Boden; der tatsächliche Ankaufpreis liegt darunter. Was ein Leasinghaus erzielt, hängt vom Kanal ab (Reiter Stellschrauben, Kanalwahl).
 Die Kosten bis Verkauf sind simuliert; die Kurve ist öffentlich. Die abgeleiteten Faktoren mischen beides und sind deshalb eine Größenordnung, kein Preis. Die Studienwerte für Jahr 1 sind Ankauf-Gebote aus den USA und Großbritannien; wo sie gegen die deutsche Marktplatz-Kurve gerechnet werden, steht das dabei.
 Der Sprung beim Erscheinen des Nachfolgers steckt in der Kurve nur gemittelt; wer einen Monat vor dem Nachfolger verkauft, liegt darüber, wer danach verkauft, darunter. Dafür fehlt ein Beleg mit Datum.

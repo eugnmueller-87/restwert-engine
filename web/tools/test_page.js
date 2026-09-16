@@ -15,7 +15,10 @@ const { JSDOM, VirtualConsole } = require('jsdom');
 
 const V3 = path.join(__dirname, '..'), APP = path.join(V3, 'dist'), OUT = path.join(V3, 'out');
 const NM = path.join(V3, 'node_modules');
-const TABS = [['report', 'Bericht'], ['device', 'Gerät'], ['market', 'Realisierung'], ['forecast', 'Prognosegüte'], ['tco', 'TCO'], ['cycle', 'Kreislauf'], ['levers', 'Stellschrauben'], ['term', 'Laufzeit'], ['lake', 'Daten']];
+// Reiter mit ihrem Bereich (Kopfzeile seit 16.09.2026: Bericht, Analytics, Market Intelligence, Daten; die Reiter eines Bereichs stehen in der zweiten Zeile)
+const TABS = [['report', 'Bericht', 'Bericht'], ['device', 'Gerät', 'Analytics'], ['forecast', 'Prognosegüte', 'Analytics'], ['tco', 'TCO', 'Analytics'], ['cycle', 'Kreislauf', 'Analytics'], ['levers', 'Stellschrauben', 'Analytics'], ['term', 'Laufzeit', 'Analytics'],
+  ['market', 'Realisierung', 'Market Intelligence'], ['series', 'Serie gegen Serie', 'Market Intelligence'], ['studies', 'Studien', 'Market Intelligence'], ['faq', 'FAQ', 'Market Intelligence'], ['lake', 'Daten', 'Daten']];
+const groupOf = label => (TABS.find(t => t[1] === label) || [])[2] || label;
 const ARGS = process.argv.slice(2);
 const NO_UI = ARGS.includes('--no-ui');
 const only = ARGS.find(a => !a.startsWith('--')) || null;
@@ -128,7 +131,7 @@ async function uiSmoke() {
     try { await fn(); } catch (e) { err(String(e && e.stack ? e.stack.split('\n').slice(0, 2).join(' ') : e)); }
     await sleep(150);
   };
-  const tab = async label => { click(label); await sleep(250); };
+  const tab = async label => { const g = groupOf(label); if (g !== label && !btn(label)) { click(g, 'Bereich'); await sleep(200); } click(label); await sleep(250); };
   const dialog = () => $('#app [role="dialog"]');
   const dialogText = () => { const d = dialog(); return d ? d.textContent : ''; };
   const mainText = () => $('#app main').textContent;
@@ -147,7 +150,7 @@ async function uiSmoke() {
   const rowsBtnIn = root => [...root.querySelectorAll('section button')].find(x => /Zeilen (zeigen|ausblenden)$/.test(x.textContent.trim()));
 
   await step('all', 'Reiter: geplante Bereiche ausgegraut', async () => {
-    const planned = $$('#app nav button').filter(b => b.disabled);
+    const planned = $$('#app nav[aria-label="Bereiche"] button').filter(b => b.disabled);
     expect(planned.map(b => b.textContent.trim()).join(', ') === 'Lager, Verträge', 'Lager und Verträge ausgegraut (ist: ' + planned.map(b => b.textContent.trim()).join(', ') + ')');
     planned.forEach(b => expect(b.title === 'Als Nächstes geplant', 'Hinweis "Als Nächstes geplant" auf ' + b.textContent.trim()));
     const before = current(); planned.forEach(b => b.click()); await sleep(200);
@@ -203,7 +206,7 @@ async function uiSmoke() {
     if (kpiBtn('Begriffe') || !only) {
       expect(!defs(), 'Begriffe zu');
       const b2 = kpiBtn('Begriffe'); if (expect(b2, 'Knopf Begriffe unter den Kennzahlen')) { b2.click(); await sleep(150); }
-      expect(defs() && defs().textContent.includes('QTY (Quantity)'), 'Begriffe zeigen die Legende mit QTY (Quantity)');
+      expect(defs() && defs().querySelectorAll('dt').length > 0, 'Begriffe zeigen mindestens einen Eintrag (seit 16.09.2026 ohne den Eintrag QTY: Stückzahlen heißen, was sie zählen)');
       expect(kpiBtn('Begriffe ausblenden'), 'Knopf heißt jetzt Begriffe ausblenden');
       if (kpiBtn('Begriffe ausblenden')) { kpiBtn('Begriffe ausblenden').click(); await sleep(150); }
       expect(!defs(), 'Begriffe wieder zu');
@@ -488,7 +491,10 @@ async function uiSmoke() {
     if (only && key !== only) continue;
     currentTab = key;
     const before = plotly.react;
-    const btn = [...w.document.querySelectorAll('#app nav button')].find(b => b.textContent.trim() === label);
+    const group = groupOf(label);
+    const navBtn = text => [...w.document.querySelectorAll('#app nav button')].find(b => b.textContent.trim() === text);
+    if (group !== label) { const g = navBtn(group); if (!g) { err('Bereich nicht gefunden: ' + group); continue; } g.click(); await sleep(150); }
+    const btn = navBtn(label);
     if (!btn) { err('Reiter nicht gefunden: ' + label); continue; }
     btn.click();
     await waitFor(() => btn.getAttribute('aria-current') === 'page', 5000, 'Reiter aktiv');
@@ -498,6 +504,16 @@ async function uiSmoke() {
     await sleep(100);
     const alert = w.document.querySelector('#app [role="alert"]');
     if (alert) err('Hinweis auf der Seite: ' + alert.textContent.trim());
+    // Vertrag, Abnahme Punkt 3: jede Zeile so viele Zellen wie Koepfe, jede Tabelle Begriffe mit einem Satz je Spalte
+    for (const tbl of w.document.querySelectorAll('#app main table.table')) {
+      const sec = tbl.closest('section'); if (!sec || sec.getAttribute('aria-label') === 'Protokoll') continue;
+      const title = (sec.querySelector('h3') || { textContent: '?' }).textContent.trim();
+      const th = tbl.querySelectorAll('thead th').length;
+      tbl.querySelectorAll('tbody tr').forEach((tr, i) => { if (tr.children.length !== th) err('Tabelle "' + title + '": Zeile ' + (i + 1) + ' hat ' + tr.children.length + ' Zellen bei ' + th + ' Köpfen'); });
+      const dts = sec.querySelectorAll('dl.defs dt').length;
+      if (!dts) err('Tabelle "' + title + '": keine Begriffe (defs) zur Tabelle');
+      else if (dts * 2 < th) err('Tabelle "' + title + '": ' + dts + ' Begriffe bei ' + th + ' Spalten (ein Begriff darf zwei Spalten fassen, nicht mehr)');
+    }
     const text = dump();
     fs.writeFileSync(path.join(OUT, key + '.txt'), text + '\n', 'utf8');
     const tables = w.document.querySelectorAll('#app table.table').length;

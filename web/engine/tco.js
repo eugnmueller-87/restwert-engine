@@ -1,5 +1,5 @@
 /* Restwert Engine v3: Motor TCO. Klassisches Skript, definiert window.RE.tco(D, opts, P) nach v3/CONTRACT.md 7.4.
-   Quelle aller Texte, Zahlen, Rechenwege, Tabellen und Legenden: v3/src/tco.js und v3/src/tco.body.html (der heutige Tab).
+   Quelle aller Texte, Zahlen, Rechenwege, Tabellen und Legenden: v3/src/tco.js und v3/src/tco.body.html (der heutige Reiter).
    Der Motor fasst kein DOM an, haelt keinen Zustand und tippt keine Zahl: jede Zahl kommt aus D oder opts und geht durch E.fmt.
    Lokal nachgebaut, weil es sie in E.fmt bewusst nicht gibt: money (unter hundert Euro zwei Stellen, sonst ganze Euro), wie heute. */
 (function (w) {
@@ -60,7 +60,7 @@
     var num1 = function (x) { return f.num(x, 1); };
     var de = f.de;
     var owners = D.est_owner || {};
-    var ownH = owners.holding_cost || 'CFO', ownC = owners.channel_fee || 'Head of Recommerce';
+    var ownH = f.role(owners.holding_cost || 'CFO'), ownC = f.role(owners.channel_fee || 'Leitung Recommerce');
 
     /* Modell: opts.slug, sonst das heutige Standardmodell (D.quick[0]), sonst das erste in der Flotte */
     var m = null;
@@ -89,12 +89,12 @@
     var specs = m.specs.filter(function (s) { return countFor(s.gb, 'all') > 0; });
     if (storage !== 'all' && !specs.some(function (s) { return String(s.gb) === storage; })) storage = 'all';
     var storageOpts = [{ value: 'all', label: 'alle Ausstattungen', checked: storage === 'all' }].concat(specs.map(function (s) {
-      return { value: String(s.gb), label: s.label + ' (QTY ' + qty(countFor(s.gb, 'all')) + ' Geräte)', checked: storage === String(s.gb) };
+      return { value: String(s.gb), label: s.label + ' (' + qty(countFor(s.gb, 'all')) + ' Geräte)', checked: storage === String(s.gb) };
     }));
     var terms = D.terms.filter(function (t) { return countFor(storage, t) > 0; });
     if (term !== 'all' && !terms.some(function (t) { return String(t) === term; })) term = 'all';
     var termOpts = [{ value: 'all', label: 'alle Laufzeiten', checked: term === 'all' }].concat(terms.map(function (t) {
-      return { value: String(t), label: qty(t) + ' Monate (QTY ' + qty(countFor(storage, t)) + ' Geräte)', checked: term === String(t) };
+      return { value: String(t), label: qty(t) + ' Monate (' + qty(countFor(storage, t)) + ' Geräte)', checked: term === String(t) };
     }));
 
     /* Summen der Auswahl und des ganzen Modells */
@@ -102,9 +102,9 @@
     function agg(list) { var A = empty(); list.forEach(function (k) { addInto(A.closed, D.keys[k].closed); addInto(A.open, D.keys[k].open); }); return A; }
     var famRow = function (fm, t) { return (D.fam_term[fm] || {})[String(t)] || { n: 0, B: {}, F: 0 }; };
     function grundlage(cc, oo) {
-      if (cc.n >= D.min_n) return { kind: 'closed', text: 'voll, QTY ' + qty(cc.n) + ' abgeschlossen' };
-      if (cc.n > 0) return { kind: 'closed', text: 'voll, unsicher (QTY ' + qty(cc.n) + ' abgeschlossen)' };
-      if (oo.n > 0) return { kind: 'open', text: 'bis heute plus Erwartung, QTY ' + qty(oo.n) + ' laufend' };
+      if (cc.n >= D.min_n) return { kind: 'closed', text: 'voll, ' + qty(cc.n) + ' abgeschlossen' };
+      if (cc.n > 0) return { kind: 'closed', text: 'voll, unsicher (' + qty(cc.n) + ' abgeschlossen)' };
+      if (oo.n > 0) return { kind: 'open', text: 'bis heute plus Erwartung, ' + qty(oo.n) + ' laufend' };
       return { kind: 'none', text: 'keine Geräte' };
     }
 
@@ -119,14 +119,14 @@
     var basisText;
     if (term === 'all') {
       var B = o.basis || {}, FT = o.fbt || {};
-      var parts = D.terms.filter(function (t) { return B[String(t)]; }).map(function (t) { return qty(t) + ' Monate (QTY ' + qty(famRow(fam, t).n) + ' abgeschlossene Geräte, Grundlage für QTY ' + qty(B[String(t)]) + ' laufende)'; });
-      var fbTerms = D.terms.filter(function (t) { return FT[String(t)]; }).map(function (t) { return qty(t) + ' Monate (nur QTY ' + qty(famRow(fam, t).n) + ' abgeschlossene, unter QTY ' + qty(D.min_n) + ')'; });
+      var parts = D.terms.filter(function (t) { return B[String(t)]; }).map(function (t) { return qty(t) + ' Monate (' + qty(famRow(fam, t).n) + ' abgeschlossene Geräte, Grundlage für ' + qty(B[String(t)]) + ' laufende)'; });
+      var fbTerms = D.terms.filter(function (t) { return FT[String(t)]; }).map(function (t) { return qty(t) + ' Monate (nur ' + qty(famRow(fam, t).n) + ' abgeschlossene, unter ' + qty(D.min_n) + ')'; });
       basisText = 'je Gerät bei seiner Laufzeit: ' + (parts.length ? parts.join(', ') : 'keine Laufzeitgruppe')
-        + (B.all ? (parts.length ? '; ' : '') + 'bei QTY ' + qty(B.all) + ' laufenden Geräten über alle Laufzeiten (QTY ' + qty(famRow(fam, 'all').n) + ' abgeschlossene Geräte), weil ihre Laufzeit zu wenige abgeschlossene hat: ' + fbTerms.join(', ') : '');
+        + (B.all ? (parts.length ? '; ' : '') + 'bei ' + qty(B.all) + ' laufenden Geräten über alle Laufzeiten (' + qty(famRow(fam, 'all').n) + ' abgeschlossene Geräte), weil ihre Laufzeit zu wenige abgeschlossene hat: ' + fbTerms.join(', ') : '');
     } else {
       basisText = basisFallback
-        ? 'über alle Laufzeiten (unter ' + qty(famRow(fam, term).n) + ' bei ' + qty(term) + ' Monaten, unter QTY ' + qty(D.min_n) + '), QTY ' + qty(nBasis) + ' abgeschlossene Geräte'
-        : 'bei ' + qty(term) + ' Monaten, QTY ' + qty(nBasis) + ' abgeschlossene Geräte';
+        ? 'über alle Laufzeiten (unter ' + qty(famRow(fam, term).n) + ' bei ' + qty(term) + ' Monaten, unter ' + qty(D.min_n) + '), ' + qty(nBasis) + ' abgeschlossene Geräte'
+        : 'bei ' + qty(term) + ' Monaten, ' + qty(nBasis) + ' abgeschlossene Geräte';
     }
     var OT = openTotals(o);
 
@@ -137,19 +137,19 @@
       kpi('TCO je Gerät, abgeschlossene Kreisläufe', 'keine Geräte', [
         'dieses Modell wurde in der Simulation nicht gekauft',
         'die Geräteart ' + famL + ' steht als Näherung in der Tabelle Geräteart und Laufzeit unten',
-        'ohne Geräte kennt der Tab weder Einkaufspreis noch UVP dieses Modells; die UVP steht auf dem Tab Gerät'], 'sim');
+        'ohne Geräte kennt der Reiter weder Einkaufspreis noch UVP dieses Modells; die UVP steht auf dem Reiter Gerät'], 'sim');
     } else if (c.n === 0) {
       kpi('TCO je Gerät, abgeschlossene Kreisläufe', 'keine abgeschlossenen', [
         (AA.closed.n ? 'in dieser Auswahl gibt es keinen abgeschlossenen Kreislauf' : 'dieses Modell hat in der Simulation noch keinen abgeschlossenen Kreislauf') + (o.n ? '; Erwartung siehe rechts' : '; kein Gerät mit Vertrag in dieser Auswahl'),
-        'QTY 0 abgeschlossene Geräte (verkauft oder verschrottet)',
-        'QTY ' + qty(o.n) + ' laufende Geräte in dieser Auswahl'], 'sim');
+        'keine abgeschlossenen Geräte (verkauft oder verschrottet)',
+        qty(o.n) + ' laufende Geräte in dieser Auswahl'], 'sim');
     } else {
       var li = [
         'Einkaufspreis ' + money(c.p / c.n) + ' plus Kosten bis Verkauf ' + money(c.c / c.n) + ', im Mittel je Gerät',
-        'QTY ' + qty(c.n) + ' abgeschlossene Geräte (verkauft oder verschrottet)',
+        qty(c.n) + ' abgeschlossene Geräte (verkauft oder verschrottet)',
         'davon geschätzt ' + money(c.est / c.n) + ' je Gerät: Lagertage, Kanalgebühren ohne Gutschrift',
         'TCO je Vertragsmonat ' + eur2(c.tco_pm / c.n) + ', bei ' + num1(termMeanC) + ' Monaten Laufzeit im Mittel'];
-      if (c.n < D.min_n) li.push('unsicher: QTY ' + qty(c.n) + ' liegt unter QTY ' + qty(D.min_n) + ' abgeschlossenen Geräten');
+      if (c.n < D.min_n) li.push('unsicher: ' + qty(c.n) + ' liegt unter ' + qty(D.min_n) + ' abgeschlossenen Geräten');
       kpi('TCO je Gerät, abgeschlossene Kreisläufe', money((c.p + c.c) / c.n), li, 'sim');
     }
     if (o.n === 0) {
@@ -160,66 +160,65 @@
       kpi('TCO je Gerät, laufende Kreisläufe, bis heute plus Erwartung', money(OT.total / o.n), [
         'bis heute ' + money(OT.sofar / o.n) + ': Einkaufspreis ' + money(o.p / o.n) + ' plus bisherige Kosten bis Verkauf ' + money(o.c / o.n),
         'Erwartung für den Rest ' + money(OT.exp / o.n) + ', aus dem Mittel der Geräteart ' + famL + ' ' + basisText,
-        'QTY ' + qty(o.n) + ' laufende Geräte, im Mittel ' + num1(o.mb / o.n) + ' von ' + termTextO + ' abgerechnet',
+        qty(o.n) + ' laufende Geräte, im Mittel ' + num1(o.mb / o.n) + ' von ' + termTextO + ' abgerechnet',
         'Erwartung, keine Buchung: was noch fehlt, steht in der Tabelle unten'], 'both');
     }
     /* Kachel 3: TCO je Vertragsmonat gegen Miete je Monat */
     var useClosed = c.n >= D.min_n; var basePm = null, baseTxt = '', rateAll = (c.rate + o.rate) / ((c.n + o.n) || 1);
-    if (useClosed) { basePm = c.tco_pm / c.n; baseTxt = 'abgeschlossene Kreisläufe, voll, QTY ' + qty(c.n) + ' Geräte'; }
-    else if (o.n > 0) { basePm = o.tco_pm / o.n; baseTxt = 'laufende Kreisläufe, voraussichtlich (bis heute plus Erwartung), QTY ' + qty(o.n) + ' Geräte' + (c.n ? '; die QTY ' + qty(c.n) + ' abgeschlossenen liegen unter QTY ' + qty(D.min_n) : ''); }
-    else if (c.n > 0) { basePm = c.tco_pm / c.n; baseTxt = 'abgeschlossene Kreisläufe, voll, aber unsicher: QTY ' + qty(c.n) + ' unter QTY ' + qty(D.min_n); }
+    if (useClosed) { basePm = c.tco_pm / c.n; baseTxt = 'abgeschlossene Kreisläufe, voll, ' + qty(c.n) + ' Geräte'; }
+    else if (o.n > 0) { basePm = o.tco_pm / o.n; baseTxt = 'laufende Kreisläufe, voraussichtlich (bis heute plus Erwartung), ' + qty(o.n) + ' Geräte' + (c.n ? '; die ' + qty(c.n) + ' abgeschlossenen liegen unter ' + qty(D.min_n) : ''); }
+    else if (c.n > 0) { basePm = c.tco_pm / c.n; baseTxt = 'abgeschlossene Kreisläufe, voll, aber unsicher: ' + qty(c.n) + ' unter ' + qty(D.min_n); }
     if (basePm === null) {
-      kpi('TCO je Vertragsmonat gegen Miete je Monat', 'keine Geräte', ['kein Gerät mit Vertrag in dieser Auswahl', 'ohne Restwert gerechnet: der Restwert steht auf dem Tab Gerät'], 'der');
+      kpi('TCO je Vertragsmonat gegen Miete je Monat', 'keine Geräte', ['kein Gerät mit Vertrag in dieser Auswahl', 'ohne Restwert gerechnet: der Restwert steht auf dem Reiter Gerät'], 'der');
     } else {
       kpi('TCO je Vertragsmonat gegen Miete je Monat', eur2(basePm), [
         'Grundlage: ' + baseTxt,
-        'Miete je Monat ' + eur2(rateAll) + ', Mittel der Verträge dieser Auswahl (QTY ' + qty(c.n + o.n) + ' Verträge)',
+        'Miete je Monat ' + eur2(rateAll) + ', Mittel der Verträge dieser Auswahl (' + qty(c.n + o.n) + ' Verträge)',
         'Miete minus TCO je Vertragsmonat: ' + eur2(rateAll - basePm) + ' je Monat',
-        'ohne Restwert gerechnet: der Restwert steht auf dem Tab Gerät'], 'der');
+        'ohne Restwert gerechnet: der Restwert steht auf dem Reiter Gerät'], 'der');
     }
     /* Kachel 4: Anteil geschaetzter Zeilen */
     if (c.n === 0) {
       kpi('Anteil geschätzter Zeilen', nAll === 0 ? 'keine Geräte' : 'keine abgeschlossenen', [
         'ohne abgeschlossene Geräte kein Anteil; bei laufenden Geräten sind Lagertage gebucht und Belegzeilen fehlen noch',
         'Lagertage: immer geschätzt, Tage mal Lagerkosten je Tag (' + eur2(D.holding_rate) + ' je Tag, Verantwortlich ' + ownH + ')',
-        'QTY ' + qty(o.n_lines) + ' Kostenzeilen bei den laufenden Geräten dieser Auswahl (Einkaufspreis bis Kanalgebühren, ohne Mietrechnungen)'], 'sim');
+        qty(o.n_lines) + ' Kostenzeilen bei den laufenden Geräten dieser Auswahl (Einkaufspreis bis Kanalgebühren, ohne Mietrechnungen)'], 'sim');
     } else {
       var feeL = c.lines.channel_fee || [0, 0, 0, 0], ppL = c.lines.purchase_price || [0, 0, 0, 0];
       kpi('Anteil geschätzter Zeilen', f.pct1(c.est / (c.p + c.c)), [
-        'des TCO der QTY ' + qty(c.n) + ' abgeschlossenen Geräte dieser Auswahl stammt aus geschätzten Kostenzeilen',
+        'des TCO der ' + qty(c.n) + ' abgeschlossenen Geräte dieser Auswahl stammt aus geschätzten Kostenzeilen',
         'Lagertage: immer geschätzt, Tage mal Lagerkosten je Tag (' + eur2(D.holding_rate) + ' je Tag, Verantwortlich ' + ownH + ')',
-        'Kanalgebühren: geschätzt, bis die Gutschrift des Verkaufs da ist, bei QTY ' + qty(feeL[3]) + ' Geräten (Verantwortlich ' + ownC + ')',
-        'Einkaufspreis: geschätzt bis zur Stückrechnung, in der Simulation bei QTY ' + qty(ppL[3]) + ' Geräten',
-        'QTY ' + qty(c.n_lines) + ' Kostenzeilen bei den abgeschlossenen Geräten dieser Auswahl (Einkaufspreis bis Kanalgebühren, ohne die Erlöszeilen Mieterlös und Restwert)'], 'sim');
+        'Kanalgebühren: geschätzt, bis die Gutschrift des Verkaufs da ist, bei ' + qty(feeL[3]) + ' Geräten (Verantwortlich ' + ownC + ')',
+        'Einkaufspreis: geschätzt bis zur Stückrechnung, in der Simulation bei ' + qty(ppL[3]) + ' Geräten',
+        qty(c.n_lines) + ' Kostenzeilen bei den abgeschlossenen Geräten dieser Auswahl (Einkaufspreis bis Kanalgebühren, ohne die Erlöszeilen Mieterlös und Restwert)'], 'sim');
     }
     /* Kachel 5: dieses Modell in der Flotte */
     var ndSt = D.not_deployed_st[m.slug] || {};
-    var stList = m.specs.map(function (s) { var k = ndSt[String(s.gb)] || 0; return s.label + ' (QTY ' + qty(countFor(s.gb, 'all') + k) + ' Geräte' + (k ? ', davon QTY ' + qty(k) + ' ohne Vertrag' : '') + ')'; }).join(', ');
-    var tList = D.terms.map(function (t) { return qty(t) + ' Monate (QTY ' + qty(countFor('all', t)) + ' Geräte)'; }).join(', ');
+    var stList = m.specs.map(function (s) { var k = ndSt[String(s.gb)] || 0; return s.label + ' (' + qty(countFor(s.gb, 'all') + k) + ' Geräte' + (k ? ', davon ' + qty(k) + ' ohne Vertrag' : '') + ')'; }).join(', ');
+    var tList = D.terms.map(function (t) { return qty(t) + ' Monate (' + qty(countFor('all', t)) + ' Geräte)'; }).join(', ');
     var span = D.purchase_span[m.slug] || [];
-    kpi('Dieses Modell in der simulierten Flotte', 'QTY ' + qty(nAll) + ' Geräte', nAll === 0
+    kpi('Dieses Modell in der simulierten Flotte', qty(nAll) + ' Geräte', nAll === 0
       ? ['nicht in der Simulation gekauft', 'Ausstattungen im Katalog: ' + (m.specs.map(function (s) { return s.label; }).join(', ') || 'keine mit UVP')]
       : ['davon abgeschlossen ' + qty(AA.closed.n) + ', laufend mit Vertrag ' + qty(AA.open.n) + ', ohne Vertrag ' + qty(nd) + ' (Ersatzgeräte im Lager, ohne Laufzeit, ohne TCO je Vertragsmonat)',
         'Ausstattungen: ' + stList, 'Laufzeiten: ' + tList, 'gekauft ' + de(span[0]) + ' bis ' + de(span[1])], 'sim');
 
     var nppc = c.ppc_n + o.ppc_n;
     var kpiDefs = [
-      { k: 'QTY (Quantity)', v: 'Stückzahl; das Wort dahinter sagt, was gezählt wird: Geräte, Kostenzeilen, Modelle.' },
       { k: 'TCO', v: 'Einkaufspreis plus Kosten bis Verkauf, je Seriennummer, hier im Mittel je Gerät; die einzige Stelle im Werkzeug, an der beide Teile zu einer Zahl addiert werden, und jede Kachel nennt die zwei Teile. Gemeint sind die Kosten des Leasinghauses, nicht die Kosten des Kunden. Nutzerbetreuung und Geräteverwaltung je Gerätemonat sind als Umlage drin (geschätzt, ein Satz je Mietrechnung), siehe Kostendefinition unten.' },
-      { k: 'Einkaufspreis', v: 'Rechnungspreis des Lieferanten minus Preisschutz-Gutschrift des Herstellers, falls eine kam (in dieser Auswahl bei QTY ' + qty(nppc) + ' Geräten).' },
+      { k: 'Einkaufspreis', v: 'Rechnungspreis des Lieferanten minus Preisschutz-Gutschrift des Herstellers, falls eine kam (in dieser Auswahl bei ' + qty(nppc) + ' Geräten).' },
       { k: 'Erwartung', v: 'eine Zahl aus dem Mittel abgeschlossener Geräte der Geräteart ' + famL + ', keine Buchung; jede Zeile der Tabelle laufender Kreisläufe nennt ihre Grundlage.' }
     ];
 
     /* ---------- Tabelle 1: abgeschlossene Kreislaeufe je Kostenzeile ---------- */
     var closedNote = c.n
-      ? ('QTY ' + qty(c.n) + ' abgeschlossene Geräte der Auswahl. Jede Zeile ist die Summe ihrer Buchungen geteilt durch alle abgeschlossenen Geräte, auch die ohne diese Kostenart.' + (c.n < D.min_n ? ' Unsicher: QTY ' + qty(c.n) + ' liegt unter QTY ' + qty(D.min_n) + '.' : ''))
+      ? (qty(c.n) + ' abgeschlossene Geräte der Auswahl. Jede Zeile ist die Summe ihrer Buchungen geteilt durch alle abgeschlossenen Geräte, auch die ohne diese Kostenart.' + (c.n < D.min_n ? ' Unsicher: ' + qty(c.n) + ' liegt unter ' + qty(D.min_n) + '.' : ''))
       : 'keine abgeschlossenen Kreisläufe für diese Auswahl; die Geräteart steht in der Tabelle Geräteart und Laufzeit unten.';
     var estText = function (lt, L) {
       var l = L[lt] || [0, 0, 0, 0];
       if (lt === 'holding_cost') return 'ja, immer (' + ownH + ')';
-      if (lt === 'support' || lt === 'mdm_operations') return 'ja, immer, Umlage (' + (D.alloc_owner || 'Head of Service Operations') + ')';
-      if (lt === 'channel_fee') return 'bis Gutschrift, QTY ' + qty(l[3]) + ' Geräte (' + ownC + ')';
-      if (lt === 'purchase_price') return 'bis Stückrechnung, QTY ' + qty(l[3]) + ' Geräte (Head of Procurement); minus Preisschutz-Gutschrift bei QTY ' + qty(c.ppc_n) + ' Geräten';
+      if (lt === 'support' || lt === 'mdm_operations') return 'ja, immer, Umlage (' + f.role(D.alloc_owner || 'Leitung Service') + ')';
+      if (lt === 'channel_fee') return 'bis Gutschrift, ' + qty(l[3]) + ' Geräte (' + ownC + ')';
+      if (lt === 'purchase_price') return 'bis Stückrechnung, ' + qty(l[3]) + ' Geräte (Einkaufsleitung); minus Preisschutz-Gutschrift bei ' + qty(c.ppc_n) + ' Geräten';
       return 'nein';
     };
     var sumCost = 0;
@@ -230,45 +229,45 @@
     closedRows.push(E.ROW([E.C('Kosten bis Verkauf, Summe'), E.N(c.n ? money(sumCost / c.n) : ''), E.N(c.n ? qty(c.n) : ''), E.N(c.n ? money(sumCost / c.n) : ''), E.C('Summe der Zeilen außer Einkaufspreis'), E.C('')], { bold: true }));
     closedRows.push(E.ROW([E.C('TCO = Einkaufspreis plus Kosten bis Verkauf'), E.N(c.n ? money((c.p + sumCost) / c.n) : ''), E.N(c.n ? qty(c.n) : ''), E.N(c.n ? money((c.p + sumCost) / c.n) : ''), E.C(c.n ? 'davon geschätzt ' + money(c.est / c.n) + ' je Gerät' : ''), E.C('')], { bold: true }));
     var tClosed = E.TABLE('t-closed', 'Abgeschlossene Kreisläufe: TCO je Kostenzeile, Mittel je Gerät',
-      [E.H('Kostenzeile'), E.H('je Gerät im Mittel', 1), E.H('QTY Geräte mit Zeile', 1), E.H('je betroffenes Gerät', 1), E.H('geschätzt'), E.H('Datenkanal im Einsatz')], closedRows, {
-        n: X.LINES.length, note: closedNote, tags: TAGS.sim,
+      [E.H('Kostenzeile'), E.H('je Gerät im Mittel', 1), E.H('Geräte mit Zeile', 1), E.H('je betroffenes Gerät', 1), E.H('geschätzt'), E.H('Datenkanal im Einsatz')], closedRows, {
+        note: closedNote, tags: TAGS.sim,
         defs: [
-          { k: 'Kostenzeile', v: 'Kostenart aus dem Geräte-Hauptbuch, benannt wie auf dem Tab Kreislauf; die zwei fetten Zeilen sind Summen der Zeilen darüber.' },
-          { k: 'je Gerät im Mittel', v: 'Summe der Zeile über die abgeschlossenen Geräte der Auswahl geteilt durch QTY aller abgeschlossenen Geräte, auch derer ohne diese Kostenart, in Euro ohne Mehrwertsteuer.' },
-          { k: 'QTY Geräte mit Zeile', v: 'wie viele der abgeschlossenen Geräte diese Kostenart überhaupt hatten, Reparatur zum Beispiel nur die reparierten; eine gebuchte Zeile zählt auch, wenn ihr Betrag null ist, etwa die Kanalgebühr beim Mitarbeiterkauf ohne Gebühr.' },
-          { k: 'je betroffenes Gerät', v: 'Summe der Zeile geteilt durch QTY Geräte mit Zeile.' },
+          { k: 'Kostenzeile', v: 'Kostenart aus dem Geräte-Hauptbuch, benannt wie auf dem Reiter Kreislauf; die zwei fetten Zeilen sind Summen der Zeilen darüber.' },
+          { k: 'je Gerät im Mittel', v: 'Summe der Zeile über die abgeschlossenen Geräte der Auswahl geteilt durch alle abgeschlossenen Geräte, auch die ohne diese Kostenart, in Euro ohne Mehrwertsteuer.' },
+          { k: 'Geräte mit Zeile', v: 'wie viele der abgeschlossenen Geräte diese Kostenart überhaupt hatten, Reparatur zum Beispiel nur die reparierten; eine gebuchte Zeile zählt auch, wenn ihr Betrag null ist, etwa die Kanalgebühr beim Mitarbeiterkauf ohne Gebühr.' },
+          { k: 'je betroffenes Gerät', v: 'Summe der Zeile geteilt durch Geräte mit Zeile.' },
           { k: 'geschätzt', v: 'ob die Zeile eine Buchung mit Beleg ist oder eine Schätzung mit verantwortlicher Rolle; Lagertage sind immer eine Schätzung.' },
-          { k: 'Datenkanal im Einsatz', v: 'aus welcher Quelle des Tabs Daten die Zeile im echten Betrieb kommt, wenn der Data Lake die Simulation ersetzt.' }
+          { k: 'Datenkanal im Einsatz', v: 'aus welcher Quelle des Bereichs Daten die Zeile im echten Betrieb kommt, wenn der Datensee des Hauses die Simulation ersetzt.' }
         ]
       });
 
     /* ---------- Tabelle 2: laufende Kreislaeufe ---------- */
     var openNote = o.n
-      ? ('QTY ' + qty(o.n) + ' laufende Geräte der Auswahl (beim Kunden, in Rückgabe, in Aufbereitung oder verkaufsfähig im Lager), im Mittel ' + num1(o.mb / o.n) + ' von ' + termTextO + ' abgerechnet. Erwartung = Mittel der abgeschlossenen Geräte der Geräteart ' + famL + ' ' + basisText + (term === 'all' ? '; bei „alle Laufzeiten“ je Gerät mit seiner Laufzeit gerechnet, dann gemittelt' : '') + '.')
+      ? (qty(o.n) + ' laufende Geräte der Auswahl (beim Kunden, in Rückgabe, in Aufbereitung oder verkaufsfähig im Lager), im Mittel ' + num1(o.mb / o.n) + ' von ' + termTextO + ' abgerechnet. Erwartung = Mittel der abgeschlossenen Geräte der Geräteart ' + famL + ' ' + basisText + (term === 'all' ? '; bei „alle Laufzeiten“ je Gerät mit seiner Laufzeit gerechnet, dann gemittelt' : '') + '.')
       : (nAll === 0 ? 'kein Gerät dieses Modells in der Simulation.' : 'keine laufenden Kreisläufe in dieser Auswahl.');
     var sSofar = 0, sExp = 0;
     var openRows = X.LINES.map(function (lt) {
       var l = o.lines[lt] || [0, 0]; var s = lt === 'purchase_price' ? o.p : l[0]; var e = o.exp[lt] || 0; if (lt !== 'purchase_price') { sSofar += s; sExp += e; }
-      return E.ROW([E.C(X.NAME[lt]), E.N(o.n ? money(s / o.n) : ''), E.N(o.n ? money(e / o.n) : ''), E.N(o.n ? money((s + e) / o.n) : ''), E.C(GB[lt] + (lt === 'channel_fee' && o.n ? ' (QTY ' + qty(o.fee_open) + ' ohne Gutschrift)' : ''))]);
+      return E.ROW([E.C(X.NAME[lt]), E.N(o.n ? money(s / o.n) : ''), E.N(o.n ? money(e / o.n) : ''), E.N(o.n ? money((s + e) / o.n) : ''), E.C(GB[lt] + (lt === 'channel_fee' && o.n ? ' (' + qty(o.fee_open) + ' ohne Gutschrift)' : ''))]);
     });
     openRows.push(E.ROW([E.C('Kosten bis Verkauf, Summe'), E.N(o.n ? money(sSofar / o.n) : ''), E.N(o.n ? money(sExp / o.n) : ''), E.N(o.n ? money((sSofar + sExp) / o.n) : ''), E.C('Summe der Zeilen außer Einkaufspreis')], { bold: true }));
     openRows.push(E.ROW([E.C('TCO = Einkaufspreis plus Kosten bis Verkauf'), E.N(o.n ? money((o.p + sSofar) / o.n) : ''), E.N(o.n ? money(sExp / o.n) : ''), E.N(o.n ? money((o.p + sSofar + sExp) / o.n) : ''), E.C('voraussichtlich; Einkaufspreis plus bis heute plus Erwartung')], { bold: true }));
-    /* Pruefsatz: Erwartung dieses Tabs gegen die Erwartung des Geraete-Hauptbuchs. Er vergleicht die Tabelle der
+    /* Pruefsatz: Erwartung dieses Reiter gegen die Erwartung des Geraete-Hauptbuchs. Er vergleicht die Tabelle der
        laufenden Kreislaeufe und steht deshalb als foot unter ihr, nicht als calcnote unter den Kennzahlen. */
     var openFoot = '';
     if (o.n) {
       var ledger = (o.erc + o.fee_exp) / o.n, tab = sExp / o.n, diff = tab - ledger;
-      openFoot = 'Zum Vergleich erwartet das Geräte-Hauptbuch selbst für diese Geräte im Mittel ' + money(o.erc / o.n) + ' Restkosten ohne Kanalgebühren plus ' + money(o.fee_exp / o.n) + ' Kanalgebühren (Regel in docs/LEDGER.md, Geräteart ohne Laufzeit, Mindeststückzahl QTY ' + qty(D.min_n) + ', Kanal des Geräts oder Marktplatz); die Erwartung dieses Tabs (' + money(tab) + ') liegt ' + money(Math.abs(diff)) + ' ' + (diff >= 0 ? 'darüber' : 'darunter') + '. Eine Abweichung ist ein Befund über zwei Regeln, kein Fehler einer Zahl.';
+      openFoot = 'Zum Vergleich erwartet das Geräte-Hauptbuch selbst für diese Geräte im Mittel ' + money(o.erc / o.n) + ' Restkosten ohne Kanalgebühren plus ' + money(o.fee_exp / o.n) + ' Kanalgebühren (Regel in docs/LEDGER.md, Geräteart ohne Laufzeit, Mindeststückzahl ' + qty(D.min_n) + ', Kanal des Geräts oder Marktplatz); die Erwartung dieses Reiter (' + money(tab) + ') liegt ' + money(Math.abs(diff)) + ' ' + (diff >= 0 ? 'darüber' : 'darunter') + '. Eine Abweichung ist ein Befund über zwei Regeln, kein Fehler einer Zahl.';
     }
     var tOpen = E.TABLE('t-open', 'Laufende Kreisläufe: bis heute, Erwartung, voraussichtlich',
       [E.H('Kostenzeile'), E.H('bis heute', 1), E.H('Erwartung', 1), E.H('bis heute plus Erwartung', 1), E.H('Grundlage der Erwartung')], openRows, {
-        n: X.LINES.length, note: openNote, foot: openFoot, tags: [{ cls: 'tag-neutral', text: 'simuliert' }, { cls: 'tag-neutral', text: 'Erwartung abgeleitet' }],
+        note: openNote, foot: openFoot, tags: [{ cls: 'tag-neutral', text: 'simuliert' }, { cls: 'tag-neutral', text: 'Erwartung abgeleitet' }],
         defs: [
-          { k: 'Kostenzeile', v: 'Kostenart aus dem Geräte-Hauptbuch, benannt wie auf dem Tab Kreislauf; die zwei fetten Zeilen sind Summen der Zeilen darüber.' },
-          { k: 'bis heute', v: 'Summe der bis zum Stichtag gebuchten Zeilen dieser Kostenart geteilt durch QTY aller laufenden Geräte der Auswahl, Euro ohne Mehrwertsteuer.' },
+          { k: 'Kostenzeile', v: 'Kostenart aus dem Geräte-Hauptbuch, benannt wie auf dem Reiter Kreislauf; die zwei fetten Zeilen sind Summen der Zeilen darüber.' },
+          { k: 'bis heute', v: 'Summe der bis zum Stichtag gebuchten Zeilen dieser Kostenart geteilt durch alle laufenden Geräte der Auswahl, Euro ohne Mehrwertsteuer.' },
           { k: 'Erwartung', v: 'was für den Rest des Kreislaufs noch erwartet wird, aus dem Mittel der abgeschlossenen Geräte derselben Geräteart und Laufzeit; eine Erwartung, keine Buchung, und nie eine Zahl aus einer Buchung.' },
           { k: 'bis heute plus Erwartung', v: 'die Summe der beiden Spalten links; bei einem Verkauf heute entfielen die erwarteten Mietmonate, nicht die Kosten, deshalb kein zweiter Wert.' },
-          { k: 'Grundlage der Erwartung', v: 'welche Regel je Zeile die Erwartung liefert; fehlen der Geräteart und Laufzeit weniger als QTY ' + qty(D.min_n) + ' abgeschlossene Geräte, gilt die Geräteart über alle Laufzeiten, und die Notiz über der Tabelle sagt es.' }
+          { k: 'Grundlage der Erwartung', v: 'welche Regel je Zeile die Erwartung liefert; fehlen der Geräteart und Laufzeit weniger als ' + qty(D.min_n) + ' abgeschlossene Geräte, gilt die Geräteart über alle Laufzeiten, und die Notiz über der Tabelle sagt es.' }
         ]
       });
 
@@ -280,7 +279,7 @@
       if (g.kind === 'closed') { p = cc.p / cc.n; cst = cc.c / cc.n; tco = p + cst; pm = cc.tco_pm / cc.n; }
       else if (g.kind === 'open') { var t = openTotals(oo); p = oo.p / oo.n; cst = (oo.c + t.exp) / oo.n; tco = p + cst; pm = oo.tco_pm / oo.n; }
       var rate = n ? (cc.rate + oo.rate) / n : null;
-      termRows.push(E.ROW([E.C(label1, { nowrap: true }), E.C(label2), E.N(qty(n)), E.N(qty(cc.n)), E.N(money(p)), E.N(money(cst)), E.N(money(tco)), E.N(eur2(pm)), E.N(eur2(rate)), E.C(g.text)], { bold: !!bold }));
+      termRows.push(E.ROW([E.C(label1, { nowrap: true }), E.C(label2), E.N(money(p)), E.N(money(cst)), E.N(money(tco)), E.N(eur2(pm)), E.N(eur2(rate)), E.C(g.text)], { bold: !!bold }));
       rowsT++; if (!bold) detailRows++;
     };
     D.terms.forEach(function (t) {
@@ -289,24 +288,22 @@
       sts.forEach(function (st) { var lab = (m.specs.filter(function (s) { return s.gb === st; })[0] || {}).label || D.keys[g[st]].spec; pushRow(qty(t) + ' Monate', lab, agg([g[st]]), false); });
       pushRow(qty(t) + ' Monate', 'alle Ausstattungen', agg(sts.map(function (st) { return g[st]; })), true);
     });
-    if (nd) { termRows.push(E.ROW([E.C('ohne Vertrag', { nowrap: true }), E.C('alle Ausstattungen'), E.N(qty(nd)), E.N(''), E.N(''), E.N(''), E.N(''), E.N(''), E.N(''), E.C('kein Vertrag, keine Laufzeit')])); detailRows++; }
+    if (nd) { termRows.push(E.ROW([E.C('ohne Vertrag', { nowrap: true }), E.C('alle Ausstattungen'), E.N(''), E.N(''), E.N(''), E.N(''), E.N(''), E.C(qty(nd) + ' Geräte ohne Vertrag, keine Laufzeit')])); detailRows++; }
     var termsNote = rowsT
-      ? 'Alle Geräte dieses Modells, alle Ausstattungen und Laufzeiten, unabhängig von der Auswahl oben; die fette Zeile je Laufzeit rechnet über alle Ausstattungen. Die Geldspalten rechnen nur mit der Grundlage, die die letzte Spalte nennt, nie gemischt.'
+      ? 'Alle Geräte dieses Modells, alle Ausstattungen und Laufzeiten, unabhängig von der Auswahl oben; die fette Zeile je Laufzeit rechnet über alle Ausstattungen. Einkaufspreis bis TCO je Vertragsmonat rechnen nur mit der Grundlage, die die letzte Spalte nennt, nie gemischt; Miete je Monat ist das Mittel aller Verträge der Zeile, abgeschlossene und laufende.'
       : 'kein Gerät dieses Modells mit Vertrag in der Simulation.';
     var tTerms = E.TABLE('t-terms', 'Je Laufzeit und Ausstattung',
-      [E.H('Laufzeit'), E.H('Ausstattung'), E.H('QTY Geräte', 1), E.H('davon abgeschlossen', 1), E.H('Einkaufspreis', 1), E.H('Kosten bis Verkauf', 1), E.H('TCO', 1), E.H('TCO je Vertragsmonat', 1), E.H('Miete je Monat', 1), E.H('Grundlage')], termRows, {
-        n: detailRows, note: termsNote, tags: TAGS.sim,
+      [E.H('Laufzeit'), E.H('Ausstattung'), E.H('Einkaufspreis', 1), E.H('Kosten bis Verkauf', 1), E.H('TCO', 1), E.H('TCO je Vertragsmonat', 1), E.H('Miete je Monat', 1), E.H('Grundlage')], termRows, {
+        note: termsNote, tags: TAGS.sim,
         defs: [
           { k: 'Laufzeit', v: 'vereinbarte Vertragslaufzeit in Monaten, nicht die abgerechneten Monate.' },
           { k: 'Ausstattung', v: 'Speicher, für den Einkaufspreis und UVP gelten.' },
-          { k: 'QTY Geräte', v: 'alle Geräte dieser Zeile mit Vertrag, abgeschlossen und laufend.' },
-          { k: 'davon abgeschlossen', v: 'verkauft oder verschrottet; nur diese haben einen vollen Kreislauf.' },
           { k: 'Einkaufspreis', v: 'Rechnungspreis minus Preisschutz-Gutschrift, Mittel je Gerät der Grundlage.' },
           { k: 'Kosten bis Verkauf', v: 'Fracht bis Kanalgebühren, Mittel je Gerät der Grundlage; bei laufenden Geräten bis heute plus Erwartung.' },
           { k: 'TCO', v: 'Einkaufspreis plus Kosten bis Verkauf, die zwei Spalten links addiert.' },
           { k: 'TCO je Vertragsmonat', v: 'TCO geteilt durch die Laufzeit in Monaten, je Gerät gerechnet und dann gemittelt; ein vorzeitig zurückgegebenes Gerät wird trotzdem durch die vereinbarte Laufzeit geteilt, seine abgerechneten Monate liegen darunter.' },
           { k: 'Miete je Monat', v: 'Mittel der Monatsmiete der Verträge dieser Zeile, zum Vergleich mit der Spalte links.' },
-          { k: 'Grundlage', v: 'ob die Zahlen aus vollen Kreisläufen stammen oder aus bis heute plus Erwartung, und mit welcher QTY.' }
+          { k: 'Grundlage', v: 'ob die Zahlen aus vollen Kreisläufen stammen oder aus bis heute plus Erwartung, und aus wie vielen Geräten; alle Geräte dieses Modells je Laufzeit und Ausstattung zählt die Kachel „Dieses Modell in der simulierten Flotte“ und die Auswahl oben, die ganze Flotte je Laufzeit der Reiter Kreislauf.' }
         ]
       });
 
@@ -323,13 +320,13 @@
       });
     });
     var tFam = E.TABLE('t-family', 'Geräteart und Laufzeit: Vergleich und Grundlage der Erwartung',
-      [E.H('Geräteart'), E.H('Laufzeit'), E.H('QTY abgeschlossen', 1), E.H('Einkaufspreis', 1), E.H('Kosten bis Verkauf', 1), E.H('TCO', 1), E.H('TCO je Vertragsmonat', 1)], famRows, {
+      [E.H('Geräteart'), E.H('Laufzeit'), E.H('abgeschlossene Geräte', 1), E.H('Einkaufspreis', 1), E.H('Kosten bis Verkauf', 1), E.H('TCO', 1), E.H('TCO je Vertragsmonat', 1)], famRows, {
         note: 'Geräteart ' + famL + ' des gewählten Modells fett; die anderen Gerätearten zum Vergleich. Ein Modell ohne Geräte in der Simulation hat nur diese Zeilen als Näherung, und die Kacheln sagen das.',
         tags: TAGS.sim,
         defs: [
           { k: 'Geräteart', v: 'die Gruppe, aus der die Erwartung für laufende Geräte stammt; nicht der Hersteller.' },
           { k: 'Laufzeit', v: 'vereinbarte Laufzeit in Monaten.' },
-          { k: 'QTY abgeschlossen', v: 'abgeschlossene Geräte dieser Geräteart und Laufzeit; unter QTY ' + qty(D.min_n) + ' gilt die Zeile „alle Laufzeiten“ als Grundlage.' },
+          { k: 'abgeschlossene Geräte', v: 'abgeschlossene Geräte dieser Geräteart und Laufzeit, die Grundlage der Mittelwerte; unter ' + qty(D.min_n) + ' gilt die Zeile „alle Laufzeiten“ als Grundlage.' },
           { k: 'Einkaufspreis', v: 'Rechnungspreis minus Preisschutz-Gutschrift, Mittel je abgeschlossenem Gerät.' },
           { k: 'Kosten bis Verkauf', v: 'Fracht bis Kanalgebühren, Mittel je abgeschlossenem Gerät.' },
           { k: 'TCO', v: 'Einkaufspreis plus Kosten bis Verkauf, Mittel je abgeschlossenem Gerät.' },
@@ -339,14 +336,14 @@
 
     /* ---------- Tabelle 5: hinterlegte Kostendefinition (heute ein Klappelement, deshalb eingeklappt) ---------- */
     var defRows = D.defs.map(function (r) {
-      return E.ROW([E.C(r.name), E.C(r.phase, { nowrap: true }), E.C(r.src, { minW: 240 }), E.C(r.booked), E.C(r.est, { bold: r.lt === 'holding_cost' }), E.C(r.owner, { nowrap: true })]);
+      return E.ROW([E.C(r.name), E.C(r.phase, { nowrap: true }), E.C(r.src, { minW: 240 }), E.C(r.booked), E.C(r.est, { bold: r.lt === 'holding_cost' }), E.C(f.role(r.owner), { nowrap: true })]);
     });
     var tDefs = E.TABLE('t-defs', 'Hinterlegte Kostendefinition: was im TCO drin ist, was nicht, was noch fehlt',
       [E.H('Kostenzeile'), E.H('Phase'), E.H('Herkunft'), E.H('Gebucht bei'), E.H('Geschätzt?'), E.H('Verantwortlich')], defRows, {
         note: 'Gemeint sind die Gesamtkosten des Leasinghauses je Seriennummer von der Bestellung bis zum Zahlungseingang aus dem Verkauf: Einkaufspreis plus Kosten bis Verkauf. Nicht gemeint sind Kosten des Kunden. Hinterlegt in docs/TCO_DEFINITION.md und docs/LEDGER.md.',
         tags: TAGS.sim, collapsible: true,
         defs: [
-          { k: 'Kostenzeile', v: 'Kostenart des Geräte-Hauptbuchs, benannt wie auf dem Tab Kreislauf; die zwölf Zeilen sind die Kostendefinition in docs/TCO_DEFINITION.md, Abschnitt 3, in derselben Reihenfolge.' },
+          { k: 'Kostenzeile', v: 'Kostenart des Geräte-Hauptbuchs, benannt wie auf dem Reiter Kreislauf; die ' + qty(D.defs.length) + ' Zeilen sind die Kostendefinition in docs/TCO_DEFINITION.md, Abschnitt 3, in derselben Reihenfolge.' },
           { k: 'Phase', v: 'Abschnitt des Kreislaufs, in dem die Zeile entsteht: Anschaffung, Bereitstellung, Service, Rückgabe, Wiederverkauf oder Kapital und Lager.' },
           { k: 'Herkunft', v: 'aus welchem Beleg oder Quellsystem die Zeile stammt und wie ein Sammelbetrag auf die Seriennummer verteilt wird.' },
           { k: 'Gebucht bei', v: 'welches Ereignis die Zeile auslöst, kein Datum: Rechnung, Einrichtung, Versand, Schließen des Servicefalls, Wareneingang, Fertigstellung, Ende der Lagerphase, Gutschrift des Verkaufs.' },
@@ -363,17 +360,17 @@
         item('Produktivitätsausfälle und Schulung (Kunde)'),
         item('Abschreibungen (Managementsicht, kein Zahlungseingang und keine Zahlung)'),
         item('Kapitalkosten über die Lagerkosten je Tag hinaus'),
-        item('Mieterlös und Restwert (Erlösseite, Tab Kreislauf und Tab Gerät)')] },
+        item('Mieterlös und Restwert (Erlösseite, Reiter Kreislauf und Reiter Gerät)')] },
       { key: 't-missing', title: 'Noch nicht drin, obwohl Kosten des Leasinghauses', ordered: false, items: [
-        item('Kapitalkosten über die Lagerkosten je Tag hinaus, und die Verwertung verschrotteter Geräte als eigene Zeile. Nutzerbetreuung und Geräteverwaltung je Gerätemonat sind seit dieser Version drin: als Umlage, ein Satz je Mietrechnung (Nutzerbetreuung ' + f.eur2(D.support_rate) + ', Geräteverwaltung ' + f.eur2(D.mdm_rate) + ' je Gerätemonat, Platzhalter ohne öffentliche Quelle, Verantwortlich ' + (D.alloc_owner || 'Head of Service Operations') + '), Geräteverwaltung nur für die QTY ' + f.qty(D.n_mdm_enrolled) + ' Geräte mit MDM-Registrierung im Einrichtungsprotokoll.')] },
+        item('Kapitalkosten über die Lagerkosten je Tag hinaus, und die Verwertung verschrotteter Geräte als eigene Zeile. Nutzerbetreuung und Geräteverwaltung je Gerätemonat sind seit dieser Version drin: als Umlage, ein Satz je Mietrechnung (Nutzerbetreuung ' + f.eur2(D.support_rate) + ', Geräteverwaltung ' + f.eur2(D.mdm_rate) + ' je Gerätemonat, Platzhalter ohne öffentliche Quelle, Verantwortlich ' + (D.alloc_owner || 'Leitung Service') + '), Geräteverwaltung nur für die ' + f.qty(D.n_mdm_enrolled) + ' Geräte mit MDM-Registrierung im Einrichtungsprotokoll.')] },
       { key: 't-ppc', title: 'Preisschutz-Gutschrift', ordered: false, items: [
-        item('mindert auf diesem Tab den Einkaufspreis (Glossar); docs/TCO_DEFINITION.md Abschnitt 2 führt sie auf der Erlösseite, deshalb weicht der TCO hier bei QTY ' + qty(D.n_ppc_fleet) + ' von QTY ' + qty(D.n_serials) + ' Geräten der Simulation um die Gutschrift von der Summe des Hauptbuchs (Codename tco_eur) ab.')] }
+        item('mindert auf diesem Reiter den Einkaufspreis (Begriffe); docs/TCO_DEFINITION.md Abschnitt 2 führt sie auf der Erlösseite, deshalb weicht der TCO hier bei ' + qty(D.n_ppc_fleet) + ' von ' + qty(D.n_serials) + ' Geräten der Simulation um die Gutschrift von der Summe des Hauptbuchs (Codename tco_eur) ab.')] }
     ];
 
     /* ---------- Kopf und Hinweise ---------- */
     var lead = 'Modell wählen, dann steht je Kostenzeile, was das Gerät bis zum Zahlungseingang aus dem Verkauf gekostet hat: bei abgeschlossenen Kreisläufen voll, bei laufenden bis heute plus Erwartung für den Rest.';
-    var banner = 'Simulierte Daten, echte Mechanik. Katalog (QTY ' + qty(D.models_total) + ' Modelle, davon QTY ' + qty(D.n_rrp) + ' mit belegter UVP und QTY ' + qty(D.n_launch) + ' mit belegtem Verkaufsstart) und Preisbelege sind öffentlich; jede Buchung im Geräte-Hauptbuch ist simuliert (QTY ' + qty(D.n_serials) + ' Seriennummern). Lagertage sind immer eine Schätzung (Lagerkosten je Tag, Verantwortlich ' + ownH + '), Kanalgebühren bis zur Gutschrift des Verkaufs (Verantwortlich ' + ownC + '). Kein Wert ist eine Tatsache über ein reales Unternehmen. Der Data Lake des Hauses ersetzt später die Simulation, Spalte für Spalte, siehe Tab Daten.';
-    var count = 'Auswahl: nur die QTY ' + qty(D.models_in_fleet) + ' Modelle, die die Simulation gekauft hat (von QTY ' + qty(D.models_total) + ' im Katalog); ohne Geräte gibt es keine Gesamtkosten.';
+    var banner = 'Simulierte Daten, echte Mechanik. Katalog (' + qty(D.models_total) + ' Modelle, davon ' + qty(D.n_rrp) + ' mit belegter UVP und ' + qty(D.n_launch) + ' mit belegtem Verkaufsstart) und Preisbelege sind öffentlich; jede Buchung im Geräte-Hauptbuch ist simuliert (' + qty(D.n_serials) + ' Seriennummern). Lagertage sind immer eine Schätzung (Lagerkosten je Tag, Verantwortlich ' + ownH + '), Kanalgebühren bis zur Gutschrift des Verkaufs (Verantwortlich ' + ownC + '). Kein Wert ist eine Tatsache über ein reales Unternehmen. Der Datensee des Hauses ersetzt später die Simulation, Spalte für Spalte, siehe Bereich Daten.';
+    var count = 'Auswahl: nur die ' + qty(D.models_in_fleet) + ' Modelle, die die Simulation gekauft hat (von ' + qty(D.models_total) + ' im Katalog); ohne Geräte gibt es keine Gesamtkosten.';
 
     return {
       kicker: 'TCO (Einkaufspreis plus Kosten bis Verkauf) je Gerät, Stand ' + de(D.today),

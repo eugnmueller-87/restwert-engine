@@ -1,9 +1,9 @@
 """The real catalogue as the fleet's model pool (SPEC_v0.2 section 5.2).
 
 ``data/catalogue/models.csv`` (233 public models with DE launch dates) and
-``variants.csv`` (627 variants, 550 with a public launch RRP, gross EUR) are read
+``variants.csv`` (628 variants, 553 with a public launch RRP, gross EUR) are read
 through ``restwert.market.anchors.read_tables``. A slug is *usable* when it has a
-parsed launch date and at least one priced variant (209 of 233). The fleet draws
+parsed launch date and at least one priced variant (210 of 233). The fleet draws
 from the *pool*: one row per priced variant of a usable slug whose ``storage_gb`` column
 is filled (a PO line needs a storage_gb, and the ingest resolves ``slug + storage_gb``
 against the typed variants column); one pool row per (slug, storage): the cheapest priced variant

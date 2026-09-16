@@ -1,12 +1,7 @@
 Restwert Engine
 Bericht
-Gerät
-Realisierung
-Prognosegüte
-TCO
-Kreislauf
-Stellschrauben
-Laufzeit
+Analytics
+Market Intelligence
 Daten
 Lager
 Verträge
@@ -14,14 +9,20 @@ Protokoll (0)
 Export CSV
 Datei einlesen
 Lauf starten
-Letzter Lauf Stand 16.09.2026 Dateien 282 Zeilen 165.913 ungeklärt 60 Seriennummern 5.251 Prototyp: Läufe werden protokolliert, nicht gerechnet.
+Gerät
+Prognosegüte
+TCO
+Kreislauf
+Stellschrauben
+Laufzeit
+Letzter Lauf Stand 16.09.2026 Dateien 283 Zeilen 166.115 ungeklärt 60 Seriennummern 5.251 Prototyp: Läufe werden protokolliert, nicht gerechnet.
 Protokoll dieser Installation
 manuell erfasste Daten, Lieferungen, Schwellen, Läufe · lokal gespeichert
 Noch keine Einträge. Preisbelege erfassen, Dateien einlesen, Schwellen ändern oder Szenarien speichern; jeder Schritt landet hier.
 Simulation, Stand 16.09.2026
 Der Gerätekreislauf: was bleibt je Gerät?
 Hinweise ausblenden
-Jedes Gerät von der Bestellung bis zum Zahlungseingang aus dem Verkauf, an einer Seriennummer: was wir bezahlt haben, was es uns bis zum Verkauf gekostet hat, was der Kunde gezahlt hat, was es beim Verkauf noch gebracht hat, und was davon vor Finanzierung, Gemeinkosten und Steuern bleibt; Nutzerbetreuung und Geräteverwaltung sind als Umlage je Gerätemonat drin. Alle Zahlen hier sind simuliert und zeigen die Rechnung, nicht ein Haus. Simulierte Daten, echte Mechanik. QTY 5.251 Seriennummern, gezogen aus dem echten Katalog (QTY 190 Modelle mit echten Verkaufsstarts und UVPs); die Wertkurve der Simulation ist an den öffentlichen Preisbelegen des Tabs Realisierung geeicht. Rabatte, Schadensraten, Kanalmix, Gebühren und Verträge sind Annahmen mit verantwortlicher Rolle (Datei config/lake.yaml). Kein Wert ist eine Tatsache über ein reales Unternehmen.
+Jedes Gerät von der Bestellung bis zum Zahlungseingang aus dem Verkauf, an einer Seriennummer: was wir bezahlt haben, was es uns bis zum Verkauf gekostet hat, was der Kunde gezahlt hat, was es beim Verkauf noch gebracht hat, und was davon vor Finanzierung, Gemeinkosten und Steuern bleibt; Nutzerbetreuung und Geräteverwaltung sind als Umlage je Gerätemonat drin. Alle Zahlen hier sind simuliert und zeigen die Rechnung, nicht ein Haus. Simulierte Daten, echte Mechanik. 5.251 Seriennummern, gezogen aus dem echten Katalog (190 Modelle mit echten Verkaufsstarts und UVPs); die Wertkurve der Simulation ist an den öffentlichen Preisbelegen des Reiter Realisierung geeicht. Rabatte, Schadensraten, Kanalmix, Gebühren und Verträge sind Annahmen mit verantwortlicher Rolle (Datei config/lake.yaml). Kein Wert ist eine Tatsache über ein reales Unternehmen.
 0 Daten Kommt alles an?
 1 Einkaufspreis Was bezahlt, gegen welche UVP?
 2 Kosten bis Verkauf Was kostet es bis zum Verkauf?
@@ -31,162 +32,160 @@ Jedes Gerät von der Bestellung bis zum Zahlungseingang aus dem Verkauf, an eine
 6 Stellschrauben Wo ziehen wir an?
 7 Verträge Was mit wem, bis wann?
 Abgeschlossene Kreisläufe
-QTY 2.563
+2.576
 verkauft oder verschrottet
-57 % mit positiver Lifecycle-Marge
-43 % mit negativer
+53 % mit positiver Lifecycle-Marge
+47 % mit negativer
 Lifecycle-Marge je Gerät, abgeschlossen, im Mittel
-66 €
-Mieterlös 784 €
-plus Restwert 364 €
-minus Einkaufspreis 817 €
-minus Kosten bis Verkauf 266 €
+25 €
+Mieterlös 747 €
+plus Restwert 329 €
+minus Einkaufspreis 793 €
+minus Kosten bis Verkauf 258 €
 alle Werte gerundet; eine Marge, kein Gewinn
 Offene Kreisläufe
-QTY 2.688
+2.675
 noch beim Kunden oder im Lager
-Lifecycle-Marge bei Verkauf heute: -95.046 €
-am Leasingende voraussichtlich: 540.578 €
+Lifecycle-Marge bei Verkauf heute: -168.532 €
+am Leasingende voraussichtlich: 432.001 €
 zwei Fragen, nie addieren
 Datenqualität
-95,2 %
+95,4 %
 Seriennummern mit lückenloser Datumskette von Bestellung bis Zahlungseingang
-60 von 165.913 Zeilen ohne Seriennummer
+60 von 166.115 Zeilen ohne Seriennummer
 Weniger
 Begriffe ausblenden
-QTY (Quantity)
-Stückzahl; das Wort dahinter sagt, was gezählt wird: Kreisläufe, Geräte, Zeilen.
 Lifecycle-Marge je Gerät
-Mieterlös plus Restwert minus Einkaufspreis minus Kosten bis Verkauf, im Mittel je abgeschlossenem Gerät, alle Werte auf ganze Euro gerundet; dazu Preisschutz-Gutschriften des Herstellers bei QTY 8 Geräten, im Mittel 0,22 € je Gerät, die zur Marge zählen und in keiner der vier Zahlen stecken. Eine Marge, kein Gewinn: es fehlen Nutzerbetreuung, Geräteverwaltung (MDM), Finanzierungskosten, Gemeinkosten und Steuern
+Mieterlös plus Restwert minus Einkaufspreis minus Kosten bis Verkauf, im Mittel je abgeschlossenem Gerät, alle Werte auf ganze Euro gerundet; dazu Preisschutz-Gutschriften des Herstellers bei 9 Geräten, im Mittel 0,23 € je Gerät, die zur Marge zählen und in keiner der vier Zahlen stecken. Eine Marge, kein Gewinn: Nutzerbetreuung und Geräteverwaltung (MDM) stecken als Umlage je Gerätemonat in den Kosten bis Verkauf; es fehlen Finanzierungskosten, Gemeinkosten und Steuern
 bei Verkauf heute
 bisheriger Mieterlös plus Restwertprognose heute nach Kanalgebühren minus Einkaufspreis minus bisherige Kosten bis Verkauf, Summe über alle offenen Geräte
 am Leasingende voraussichtlich
 voller Mieterlös plus Restwertprognose am Leasingende nach Kanalgebühren minus Einkaufspreis minus bisherige und erwartete Kosten bis Verkauf; die zwei Zahlen beantworten zwei Fragen und werden nie addiert
 Lifecycle-Marge je Familie und Hersteller, abgeschlossene Kreisläufe, Mittelwerte je Gerät
-QTY 2.563
+2.576 Zeilen
 Begriffe ausblenden
 Diese Tabelle zeigt für die abgeschlossenen Kreisläufe der Simulation, was ein Gerät vor Finanzierung, Gemeinkosten und Steuern gebracht hat: Mieterlös plus Restwert minus Einkaufspreis minus Kosten bis Verkauf, als Mittelwert je Gerät, erst je Familie, darunter je Hersteller. Nutzerbetreuung und Geräteverwaltung (MDM) sind seit dieser Version als Umlage je Gerätemonat in den Kosten bis Verkauf enthalten; nicht drin sind Finanzierungskosten, Gemeinkosten und Steuern, deshalb ist es eine Marge und kein Gewinn.
 Familie
 die Geräteart (Laptop, Tablet, Smartphone), keine Marke; die fette Zeile rechnet über alle Geräte der Familie, die eingerückten Zeilen darunter je Hersteller
 Hersteller
 die Marke des Geräts; die fette Familienzeile (alle Hersteller) rechnet über die ganze Geräteart, die eingerückten Zeilen darunter je Hersteller
-QTY (Quantity, Stückzahl)
+Geräte
 Geräte, deren Kreislauf abgeschlossen ist, also verkauft oder verschrottet
 Einkaufspreis
 was wir dem Lieferanten für das Gerät gezahlt haben
 Kosten bis Verkauf
-alles, was das Gerät nach dem Einkauf bis zum Zahlungseingang aus dem Verkauf kostet: Fracht vom Lieferanten und Zoll, Einrichtung vor Versand, Versand zum Kunden, Reparatur, Austauschversand und Rücksendung vom Kunden, Lagertage, Datenlöschung und Zustandsprüfung, Aufbereitung, Kanalgebühren; Aufschlüsselung in der Tabelle unten, Mittelwert je Gerät
+alles, was das Gerät nach dem Einkauf bis zum Zahlungseingang aus dem Verkauf kostet: Fracht vom Lieferanten und Zoll, Einrichtung vor Versand, Versand zum Kunden, Nutzerbetreuung und Geräteverwaltung je Gerätemonat (Umlage), Reparatur, Austauschversand und Rücksendung vom Kunden, Lagertage, Datenlöschung und Zustandsprüfung, Aufbereitung, Kanalgebühren; Aufschlüsselung in der Tabelle unten, Mittelwert je Gerät
 Mieterlös
 Miete, die der Kunde über die gesamte Laufzeit für dieses Gerät gezahlt hat
 Restwert
 der Verkaufspreis, den das Gerät nach dem Leasing tatsächlich erzielt hat, vor Abzug der Kanalgebühren; verschrottet zählt 0 €. Die Vorhersage dieses Werts heißt Restwertprognose und steht in keiner Spalte dieser Tabelle
 Lifecycle-Marge je Gerät
-Mieterlös plus Restwert minus Einkaufspreis minus Kosten bis Verkauf; die oberste Kennzahl des Werkzeugs. Eine Marge, kein Gewinn: Nutzerbetreuung und Geräteverwaltung (MDM, Mobile Device Management) stecken als Umlage je Gerätemonat drin (geschätzt, Verantwortlich Head of Service Operations); Finanzierungskosten, Gemeinkosten und Steuern hängen nicht an der Seriennummer und fehlen hier
+Mieterlös plus Restwert minus Einkaufspreis minus Kosten bis Verkauf; die oberste Kennzahl des Werkzeugs. Eine Marge, kein Gewinn: Nutzerbetreuung und Geräteverwaltung (MDM, Mobile Device Management) stecken als Umlage je Gerätemonat drin (geschätzt, Verantwortlich Leitung Service); Finanzierungskosten, Gemeinkosten und Steuern hängen nicht an der Seriennummer und fehlen hier
 in % Einkaufspreis
 Lifecycle-Marge je Gerät geteilt durch Einkaufspreis, beides als Mittelwert der Zeile, über den ganzen Kreislauf von 12, 24, 36 oder 48 Monaten, nicht je Jahr
-Familie | Hersteller | QTY | Einkaufspreis | Kosten bis Verkauf | Mieterlös | Restwert | Lifecycle-Marge je Gerät | in % Einkaufspreis
-Laptop | alle Hersteller | 543 | 1.168 € | 311 € | 1.112 € | 678 € | 312 € | 26,7 %
-| Apple | 97 | 1.659 € | 361 € | 1.572 € | 931 € | 483 € | 29,1 %
-| Samsung | 7 | 1.263 € | 241 € | 991 € | 898 € | 386 € | 30,6 %
-| HP | 106 | 1.082 € | 298 € | 1.019 € | 653 € | 292 € | 27 %
-| Lenovo | 184 | 1.064 € | 310 € | 1.024 € | 632 € | 283 € | 26,6 %
-| Dell | 119 | 1.016 € | 292 € | 986 € | 578 € | 256 € | 25,2 %
-| Microsoft | 30 | 1.095 € | 298 € | 1.022 € | 576 € | 204 € | 18,6 %
-Tablet | alle Hersteller | 354 | 733 € | 263 € | 701 € | 371 € | 76 € | 10,4 %
-| Microsoft | 25 | 1.149 € | 278 € | 1.140 € | 566 € | 279 € | 24,2 %
-| Apple | 223 | 779 € | 272 € | 748 € | 406 € | 103 € | 13,2 %
-| Samsung | 106 | 538 € | 240 € | 500 € | 250 € | -27 € | -5 %
-Smartphone | alle Hersteller | 1.666 | 720 € | 252 € | 695 € | 260 € | -17 € | -2,3 %
-| Apple | 826 | 947 € | 263 € | 905 € | 340 € | 36 € | 3,8 %
-| Fairphone | 47 | 493 € | 210 € | 504 € | 164 € | -34 € | -7 %
-| Samsung | 498 | 526 € | 251 € | 514 € | 204 € | -57 € | -10,9 %
-| HMD Global (Nokia) | 13 | 299 € | 256 € | 368 € | 109 € | -77 € | -25,6 %
-| Google | 180 | 540 € | 228 € | 524 € | 160 € | -84 € | -15,6 %
-| Motorola | 102 | 307 € | 234 € | 308 € | 124 € | -108 € | -35,3 %
+Familie | Hersteller | Geräte | Einkaufspreis | Kosten bis Verkauf | Mieterlös | Restwert | Lifecycle-Marge je Gerät | in % Einkaufspreis
+Laptop | alle Hersteller | 551 | 1.068 € | 288 € | 961 € | 504 € | 111 € | 10,4 %
+| Apple | 100 | 1.579 € | 296 € | 1.347 € | 862 € | 335 € | 21,2 %
+| Samsung | 6 | 1.106 € | 279 € | 809 € | 717 € | 141 € | 12,7 %
+| Microsoft | 31 | 1.010 € | 266 € | 843 € | 551 € | 117 € | 11,6 %
+| Lenovo | 197 | 963 € | 285 € | 927 € | 428 € | 109 € | 11,4 %
+| HP | 117 | 853 € | 280 € | 727 € | 462 € | 55 € | 6,4 %
+| Dell | 100 | 1.030 € | 301 € | 961 € | 319 € | -51 € | -4,9 %
+Tablet | alle Hersteller | 354 | 729 € | 256 € | 683 € | 361 € | 59 € | 8,1 %
+| Microsoft | 26 | 1.037 € | 269 € | 941 € | 459 € | 94 € | 9,1 %
+| Apple | 232 | 789 € | 256 € | 736 € | 395 € | 87 € | 11 %
+| Samsung | 96 | 502 € | 251 € | 484 € | 252 € | -16 € | -3,2 %
+Smartphone | alle Hersteller | 1.671 | 716 € | 249 € | 690 € | 265 € | -10 € | -1,4 %
+| Apple | 819 | 949 € | 260 € | 903 € | 350 € | 43 € | 4,5 %
+| Fairphone | 45 | 502 € | 230 € | 524 € | 162 € | -45 € | -9 %
+| Samsung | 500 | 508 € | 242 € | 500 € | 199 € | -51 € | -10 %
+| Google | 184 | 553 € | 231 € | 544 € | 177 € | -63 € | -11,4 %
+| Motorola | 106 | 341 € | 241 € | 332 € | 144 € | -106 € | -31,2 %
+| HMD Global (Nokia) | 17 | 290 € | 226 € | 322 € | 86 € | -107 € | -37 %
 Nach Laufzeit
-QTY 4
+4 Zeilen
 Begriffe ausblenden
 Laufzeit
 die vereinbarte Laufzeit des Mietvertrags in Monaten; jede Zeile rechnet über die abgeschlossenen Kreisläufe mit dieser Laufzeit
-QTY (Quantity, Stückzahl)
+Geräte
 Geräte, deren Kreislauf abgeschlossen ist, also verkauft oder verschrottet
 Einkaufspreis
 was wir dem Lieferanten für das Gerät gezahlt haben
 Lifecycle-Marge je Gerät
-Mieterlös plus Restwert minus Einkaufspreis minus Kosten bis Verkauf; die oberste Kennzahl des Werkzeugs. Eine Marge, kein Gewinn: Nutzerbetreuung und Geräteverwaltung (MDM, Mobile Device Management) stecken als Umlage je Gerätemonat drin (geschätzt, Verantwortlich Head of Service Operations); Finanzierungskosten, Gemeinkosten und Steuern hängen nicht an der Seriennummer und fehlen hier
+Mieterlös plus Restwert minus Einkaufspreis minus Kosten bis Verkauf; die oberste Kennzahl des Werkzeugs. Eine Marge, kein Gewinn: Nutzerbetreuung und Geräteverwaltung (MDM, Mobile Device Management) stecken als Umlage je Gerätemonat drin (geschätzt, Verantwortlich Leitung Service); Finanzierungskosten, Gemeinkosten und Steuern hängen nicht an der Seriennummer und fehlen hier
 in % Einkaufspreis
 Lifecycle-Marge je Gerät geteilt durch Einkaufspreis, beides als Mittelwert der Zeile, über den ganzen Kreislauf von 12, 24, 36 oder 48 Monaten, nicht je Jahr
-Laufzeit | QTY | Einkaufspreis | Lifecycle-Marge je Gerät | in % Einkaufspreis
-36 Monate | 826 | 859 € | 123 € | 14,4 %
-48 Monate | 76 | 946 € | 116 € | 12,3 %
-24 Monate | 1.332 | 785 € | 45 € | 5,7 %
-12 Monate | 329 | 809 € | -6 € | -0,8 %
+Laufzeit | Geräte | Einkaufspreis | Lifecycle-Marge je Gerät | in % Einkaufspreis
+36 Monate | 803 | 825 € | 74 € | 8,9 %
+24 Monate | 1.363 | 770 € | 11 € | 1,5 %
+12 Monate | 324 | 797 € | -1 € | -0,1 %
+48 Monate | 86 | 832 € | -109 € | -13,1 %
 Nach Verkaufskanal
-QTY 4
+4 Zeilen
 Begriffe ausblenden
 Verkaufskanal
 an wen verkauft wurde: Mitarbeiterkauf, Marktplatz, Großhandel (Verkauf an Geschäftskunden), Verkauf ohne Aufbereitung; jede Zeile rechnet über die abgeschlossenen Kreisläufe dieses Kanals
-QTY (Quantity, Stückzahl)
+Geräte
 Geräte, deren Kreislauf abgeschlossen ist, also verkauft oder verschrottet
 Einkaufspreis
 was wir dem Lieferanten für das Gerät gezahlt haben
 Lifecycle-Marge je Gerät
-Mieterlös plus Restwert minus Einkaufspreis minus Kosten bis Verkauf; die oberste Kennzahl des Werkzeugs. Eine Marge, kein Gewinn: Nutzerbetreuung und Geräteverwaltung (MDM, Mobile Device Management) stecken als Umlage je Gerätemonat drin (geschätzt, Verantwortlich Head of Service Operations); Finanzierungskosten, Gemeinkosten und Steuern hängen nicht an der Seriennummer und fehlen hier
+Mieterlös plus Restwert minus Einkaufspreis minus Kosten bis Verkauf; die oberste Kennzahl des Werkzeugs. Eine Marge, kein Gewinn: Nutzerbetreuung und Geräteverwaltung (MDM, Mobile Device Management) stecken als Umlage je Gerätemonat drin (geschätzt, Verantwortlich Leitung Service); Finanzierungskosten, Gemeinkosten und Steuern hängen nicht an der Seriennummer und fehlen hier
 in % Einkaufspreis
 Lifecycle-Marge je Gerät geteilt durch Einkaufspreis, beides als Mittelwert der Zeile, über den ganzen Kreislauf von 12, 24, 36 oder 48 Monaten, nicht je Jahr
-Verkaufskanal | QTY | Einkaufspreis | Lifecycle-Marge je Gerät | in % Einkaufspreis
-Mitarbeiterkauf | 498 | 834 € | 163 € | 19,5 %
-Marktplatz | 1.000 | 803 € | 86 € | 10,7 %
-Großhandel (Verkauf an Geschäftskunden) | 808 | 832 € | 61 € | 7,3 %
-Verkauf ohne Aufbereitung | 234 | 788 € | -175 € | -22,2 %
+Verkaufskanal | Geräte | Einkaufspreis | Lifecycle-Marge je Gerät | in % Einkaufspreis
+Mitarbeiterkauf | 507 | 823 € | 153 € | 18,6 %
+Marktplatz | 995 | 790 € | 39 € | 5 %
+Großhandel (Verkauf an Geschäftskunden) | 816 | 780 € | 1 € | 0,1 %
+Verkauf ohne Aufbereitung | 226 | 769 € | -196 € | -25,4 %
 Nach Bezugsweg
-QTY 2
+2 Zeilen
 Begriffe ausblenden
 Bezugsweg
 von wem gekauft wurde: Hersteller direkt, über Zwischenhändler; jede Zeile rechnet über die abgeschlossenen Kreisläufe dieses Bezugswegs
-QTY (Quantity, Stückzahl)
+Geräte
 Geräte, deren Kreislauf abgeschlossen ist, also verkauft oder verschrottet
 Einkaufspreis
 was wir dem Lieferanten für das Gerät gezahlt haben
 Lifecycle-Marge je Gerät
-Mieterlös plus Restwert minus Einkaufspreis minus Kosten bis Verkauf; die oberste Kennzahl des Werkzeugs. Eine Marge, kein Gewinn: Nutzerbetreuung und Geräteverwaltung (MDM, Mobile Device Management) stecken als Umlage je Gerätemonat drin (geschätzt, Verantwortlich Head of Service Operations); Finanzierungskosten, Gemeinkosten und Steuern hängen nicht an der Seriennummer und fehlen hier
+Mieterlös plus Restwert minus Einkaufspreis minus Kosten bis Verkauf; die oberste Kennzahl des Werkzeugs. Eine Marge, kein Gewinn: Nutzerbetreuung und Geräteverwaltung (MDM, Mobile Device Management) stecken als Umlage je Gerätemonat drin (geschätzt, Verantwortlich Leitung Service); Finanzierungskosten, Gemeinkosten und Steuern hängen nicht an der Seriennummer und fehlen hier
 in % Einkaufspreis
 Lifecycle-Marge je Gerät geteilt durch Einkaufspreis, beides als Mittelwert der Zeile, über den ganzen Kreislauf von 12, 24, 36 oder 48 Monaten, nicht je Jahr
-Bezugsweg | QTY | Einkaufspreis | Lifecycle-Marge je Gerät | in % Einkaufspreis
-Hersteller direkt | 1.027 | 818 € | 73 € | 8,9 %
-über Zwischenhändler | 1.536 | 816 € | 61 € | 7,5 %
+Bezugsweg | Geräte | Einkaufspreis | Lifecycle-Marge je Gerät | in % Einkaufspreis
+Hersteller direkt | 1.035 | 789 € | 37 € | 4,6 %
+über Zwischenhändler | 1.541 | 796 € | 18 € | 2,2 %
 Die drei Tabellen: Mittelwerte je Gerät über die abgeschlossenen Kreisläufe der jeweiligen Gruppe. Einkaufspreis und Lifecycle-Marge je Gerät wie in der Haupttabelle; Kosten bis Verkauf, Mieterlös und Restwert sind hier weggelassen, die Rechnung dahinter ist dieselbe.
 Kosten bis Verkauf, aufgeschlüsselt, Mittelwert je abgeschlossenem Gerät
-QTY 13
+13 Zeilen
 Begriffe ausblenden
 Kostenzeile
 Kostenart aus dem Geräte-Hauptbuch; jede Buchung dort ist eine Rechnungsposition, ein Versandprotokoll, ein Servicefall oder ein Lagertag-Satz je Seriennummer
 Euro je Gerät, alle
 Summe der Zeile geteilt durch alle abgeschlossenen Geräte, auch die ohne diese Kostenart; diese Spalte addiert sich zu den Kosten bis Verkauf der Kachel oben (letzte Zeile)
-QTY Geräte mit Kostenart
+Geräte mit Kostenart
 wie viele der abgeschlossenen Geräte diese Kostenart überhaupt hatten; Reparatur zum Beispiel nur die reparierten
 Euro je betroffenes Gerät
 Summe der Zeile geteilt durch die Geräte, die sie hatten; bei Reparatur also die Kosten je repariertem Gerät
 Summe
 Euro dieser Kostenart über alle abgeschlossenen Kreisläufe
-Kostenzeile | Euro je Gerät, alle | QTY Geräte mit Kostenart | Euro je betroffenes Gerät | Summe
-Nutzerbetreuung je Gerätemonat (Umlage, geschätzt) | 60 € | 2.546 | 60 € | 152.708 €
-Aufbereitung | 41 € | 2.563 | 41 € | 105.846 €
-Geräteverwaltung MDM je Gerätemonat (Umlage, geschätzt) | 35 € | 2.499 | 36 € | 89.949 €
-Lagertage (Lagerkosten je Tag, geschätzt) | 30 € | 2.563 | 30 € | 77.412 €
-Reparatur | 27 € | 312 | 222 € | 69.182 €
-Kanalgebühren | 24 € | 2.042 | 30 € | 62.080 €
-Einrichtung vor Versand | 10 € | 2.563 | 10 € | 25.792 €
-Rücksendung vom Kunden | 10 € | 2.563 | 10 € | 24.349 €
-Fracht vom Lieferanten | 9 € | 2.540 | 9 € | 22.965 €
-Versand zum Kunden | 7 € | 2.425 | 8 € | 18.243 €
-Zoll | 6 € | 760 | 20 € | 15.557 €
-Datenlöschung und Zustandsprüfung | 5 € | 2.563 | 5 € | 14.066 €
-Austauschversand | 2 € | 215 | 18 € | 3.870 €
-Kosten bis Verkauf, Summe | 266 € | 2.563 | 266 € | 682.019 €
-Jede Zeile stammt aus Buchungen mit Herkunft im Geräte-Hauptbuch. Lagertage sind die einzige Schätzung: Tage im Lager mal Lagerkosten je Tag; für den Tagessatz ist der CFO verantwortlich.
+Kostenzeile | Euro je Gerät, alle | Geräte mit Kostenart | Euro je betroffenes Gerät | Summe
+Nutzerbetreuung je Gerätemonat (Umlage, geschätzt) | 59 € | 2.566 | 59 € | 151.000 €
+Aufbereitung | 41 € | 2.576 | 41 € | 105.436 €
+Geräteverwaltung MDM je Gerätemonat (Umlage, geschätzt) | 34 € | 2.510 | 35 € | 88.628 €
+Lagertage (Lagerkosten je Tag, geschätzt) | 31 € | 2.576 | 31 € | 80.370 €
+Reparatur | 23 € | 293 | 200 € | 58.610 €
+Kanalgebühren | 22 € | 2.037 | 28 € | 56.038 €
+Einrichtung vor Versand | 10 € | 2.576 | 10 € | 26.062 €
+Rücksendung vom Kunden | 10 € | 2.576 | 10 € | 24.472 €
+Fracht vom Lieferanten | 9 € | 2.553 | 9 € | 22.965 €
+Versand zum Kunden | 7 € | 2.421 | 8 € | 18.197 €
+Zoll | 6 € | 762 | 20 € | 15.238 €
+Datenlöschung und Zustandsprüfung | 5 € | 2.576 | 5 € | 14.154 €
+Austauschversand | 2 € | 239 | 18 € | 4.302 €
+Kosten bis Verkauf, Summe | 258 € | 2.576 | 258 € | 665.472 €
+Jede Zeile stammt aus Buchungen mit Herkunft im Geräte-Hauptbuch. Drei Zeilen sind Schätzungen: Lagertage (Tage im Lager mal Lagerkosten je Tag, Verantwortlich CFO) sowie Nutzerbetreuung und Geräteverwaltung (Satz je Gerätemonat, Verantwortlich Leitung Service).
 Hinterlegte Kostendefinition: was in Einkaufspreis und Kosten bis Verkauf drin ist, was nicht, was noch fehlt
-QTY 13
+13 Zeilen
 Zeilen ausblenden
 Begriffe ausblenden
 Gemeint sind die Gesamtkosten des Leasinghauses (Total Cost of Ownership, TCO): jeder Euro, den das Leasinghaus für eine Seriennummer von der Bestellung bis zum Zahlungseingang aus dem Wiederverkauf ausgibt; oben erscheinen sie getrennt als Einkaufspreis und Kosten bis Verkauf, nie als eine Summe. Nicht gemeint sind die Kosten des Kunden (Softwarelizenzen, Nutzerhotline, Ausfallzeiten). Lifecycle-Marge je Gerät = Mieterlös plus Restwert minus Einkaufspreis minus Kosten bis Verkauf; die Preisschutz-Gutschrift des Herstellers ist eine eigene Erlöszeile im Hauptbuch und zählt zur Marge. Hinterlegt in docs/TCO_DEFINITION.md und docs/LEDGER.md im Repo.
@@ -203,23 +202,23 @@ ob die Zeile eine Schätzung ist: nein, nur bis der Beleg da ist, oder immer
 Verantwortlich
 die Rolle, die den geschätzten Wert setzt; leer, wenn die Zeile nie geschätzt wird
 Kostenzeile | Phase | Herkunft | Gebucht bei | Geschätzt | Verantwortlich
-Einkaufspreis | Anschaffung | Lieferantenrechnung (ERP), Stückposition je Seriennummer | Rechnung | bis die Rechnung da ist: Bestellpreis, markiert | Head of Procurement
+Einkaufspreis | Anschaffung | Lieferantenrechnung (ERP), Stückposition je Seriennummer | Rechnung | bis die Rechnung da ist: Bestellpreis, markiert | Einkaufsleitung
 Fracht vom Lieferanten, Zoll | Anschaffung | Lieferantenrechnung, Positionen der Bestellzeile, centgenau auf die gelieferten Seriennummern verteilt | Rechnung | nein |
 Einrichtung vor Versand | Bereitstellung | Einrichtungsprotokoll (Lager) | Einrichtung | nein |
 Versand zum Kunden | Bereitstellung | Versandprotokoll (Lager), Richtung Kunde | Versand | nein |
-Nutzerbetreuung je Gerätemonat | Service | je Mietrechnung des Geräts ein Satz je Gerätemonat (First-Level-Support, Störungsbearbeitung, Austauschkoordination); Teamkosten, keine Buchung je Seriennummer | Rechnungsdatum der Mietrechnung | ja, immer (Umlage) | Head of Service Operations
-Geräteverwaltung MDM je Gerätemonat | Service | je Mietrechnung ein Satz je Gerätemonat, nur für Geräte, die das Einrichtungsprotokoll als MDM-registriert führt; die MDM-Lizenz selbst bleibt beim Kunden | Rechnungsdatum der Mietrechnung | ja, immer (Umlage) | Head of Service Operations
+Nutzerbetreuung je Gerätemonat | Service | je Mietrechnung des Geräts ein Satz je Gerätemonat (First-Level-Support, Störungsbearbeitung, Austauschkoordination); Teamkosten, keine Buchung je Seriennummer | Rechnungsdatum der Mietrechnung | ja, immer (Umlage) | Leitung Service
+Geräteverwaltung MDM je Gerätemonat | Service | je Mietrechnung ein Satz je Gerätemonat, nur für Geräte, die das Einrichtungsprotokoll als MDM-registriert führt; die MDM-Lizenz selbst bleibt beim Kunden | Rechnungsdatum der Mietrechnung | ja, immer (Umlage) | Leitung Service
 Reparatur | Service | Servicefall mit Lösung Reparatur und Kosten | Schließen des Servicefalls | nein |
 Austauschversand | Service | Versandprotokoll, Richtung Austausch, gebucht auf das defekte Gerät | Versand | nein |
 Rücksendung vom Kunden | Rückgabe | Versandprotokoll, Richtung Rücksendung | Versand | nein |
 Datenlöschung und Zustandsprüfung | Rückgabe | Rückläufer-Beleg | Wareneingang der Rückgabe | nein |
 Aufbereitung | Wiederverkauf | Aufbereitungsauftrag | Fertigstellung | nein |
 Lagertage | Kapital und Lager | Tage je Lagerphase (Eingang, Rückgabe, Verkauf) mal Lagerkosten je Tag | Ende der Lagerphase | ja, immer | CFO
-Kanalgebühren | Wiederverkauf | Gutschrift des Verkaufsauftrags (Prozent plus Fixbetrag) | Gutschrift des Verkaufs | bis die Gutschrift da ist: angenommener Satz, markiert | Head of Recommerce
-Nicht drin, mit Absicht: Softwarelizenzen und Sicherheitssoftware auf dem Gerät (Kosten des Kunden, auch die MDM-Lizenz), Produktivitätsausfälle und Schulung (Kunde), Abschreibungen (Managementsicht, kein Zahlungseingang und keine Zahlung), Kapitalkosten über die Lagerkosten hinaus. Drin als Umlage, weil Teamkosten und keine Buchung je Seriennummer: Nutzerbetreuung (First-Level-Support) und Geräteverwaltung (MDM-Betrieb) je Gerätemonat, ein Satz je Mietrechnung, Platzhalter ohne öffentliche Quelle, Verantwortlich Head of Service Operations; jede dieser Zeilen ist als geschätzt markiert.
+Kanalgebühren | Wiederverkauf | Gutschrift des Verkaufsauftrags (Prozent plus Fixbetrag) | Gutschrift des Verkaufs | bis die Gutschrift da ist: angenommener Satz, markiert | Leitung Recommerce
+Nicht drin, mit Absicht: Softwarelizenzen und Sicherheitssoftware auf dem Gerät (Kosten des Kunden, auch die MDM-Lizenz), Produktivitätsausfälle und Schulung (Kunde), Abschreibungen (Managementsicht, kein Zahlungseingang und keine Zahlung), Kapitalkosten über die Lagerkosten hinaus. Drin als Umlage, weil Teamkosten und keine Buchung je Seriennummer: Nutzerbetreuung (First-Level-Support) und Geräteverwaltung (MDM-Betrieb) je Gerätemonat, ein Satz je Mietrechnung, Platzhalter ohne öffentliche Quelle, Verantwortlich Leitung Service; jede dieser Zeilen ist als geschätzt markiert.
 ▾ Wo ziehen wir an
-Die sieben Stellschrauben haben einen eigenen Tab: je Stellschraube die Frage, der Rechenweg, die Herleitung der Jahreszahl, ein vorgerechnetes Gerät, die verantwortliche Rolle und die Regel.
-Größte Stellschraube in der Simulation: Kanalwahl (Verantwortlich: Head of Recommerce). Jahreszahl und Herleitung stehen auf dem Tab Stellschrauben.
+Die sieben Stellschrauben haben einen eigenen Reiter: je Stellschraube die Frage, der Rechenweg, die Herleitung der Jahreszahl, ein vorgerechnetes Gerät, die verantwortliche Rolle und die Regel.
+Größte Stellschraube in der Simulation: Kanalwahl (Verantwortlich: Leitung Recommerce). Jahreszahl und Herleitung stehen auf dem Reiter Stellschrauben.
 ▾ Wie das Werkzeug aufgebaut ist (v0.2)
 Vier Datenschichten: Rohdateien je Quelle (unverändert); geprüfte Zeilen mit Seriennummer und Quellverweis, Doppelte und Ungeklärtes gezählt; das Geräte-Hauptbuch (jede Kosten- und Erlöszeile mit Herkunft); Kennzahlen, Gruppen und Stellschrauben.
 Quellen: Bestellungen und Lieferantenrechnungen (ERP), Einrichtung vor Versand und Versand (Lager), Mietverträge und Mietrechnungen (Portal), Tickets (Service), Rückläufer mit Zustandsprüfung und Löschzertifikat, Aufbereitung, Verkaufsaufträge und Gutschriften je Kanal, Vertragsregister, indirekte Ausgaben.

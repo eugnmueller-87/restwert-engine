@@ -1,4 +1,4 @@
-/* Restwert Engine v3, Motor Stellschrauben (Tab levers). Vertrag: v3/CONTRACT.md, Abschnitt 7.6.
+/* Restwert Engine v3, Motor Stellschrauben (Reiter levers). Vertrag: v3/CONTRACT.md, Abschnitt 7.6.
    Portiert aus v3/src/levers.js und v3/src/levers.body.html: dieselben Saetze, dieselben Zahlen, dieselbe
    Formatierung ueber RE.fmt, als Ansichtsmodell statt als DOM. Klassisches Skript, kein Modul, kein Zustand.
 
@@ -47,13 +47,13 @@
     var s = 'Mittelwerte je Gerät der abgeschlossenen Kreisläufe.';
     var sn = c.stock_now, ok = overKey(sn);
     if (!sn) return s;
-    s += ' Heute im Lager: QTY ' + f.qty(sn.n) + ' verkaufsfähige Geräte, im Mittel ' + days(f, sn.d) + ' Tage';
+    s += ' Heute im Lager: ' + f.qty(sn.n) + ' verkaufsfähige Geräte, im Mittel ' + days(f, sn.d) + ' Tage';
     if (ok) s += ', davon ' + f.qty(sn[ok]) + ' über ' + ok.replace(/^over/, '') + ' Tagen (Regel ' + c.rule + ')';
     return s + '.';
   }
 
   function channelCols() {
-    return [E.H('Verkaufskanal'), E.H('QTY', 1), E.H('Rückgabe bis verkaufsfähig', 1), E.H('verkaufsfähig bis verkauft', 1), E.H('Rückgabe bis Zahlungseingang', 1)];
+    return [E.H('Verkaufskanal'), E.H('Geräte', 1), E.H('Rückgabe bis verkaufsfähig', 1), E.H('verkaufsfähig bis verkauft', 1), E.H('Rückgabe bis Zahlungseingang', 1)];
   }
 
   function channelRows(f, c) {
@@ -63,10 +63,10 @@
   }
 
   function kvSum(c) { return 'Summe der Hebel' + (c.per_cohort ? ', einmal je Gruppe' : ''); }
-  function kvDev(c) { return c.per_cohort ? 'Hebel je Gerät der Gruppe; Euro je Jahr zählt jede Gruppe nur einmal' : 'Euro je Jahr geteilt durch QTY bewertet'; }
+  function kvDev(c) { return c.per_cohort ? 'Hebel je Gerät der Gruppe; Euro je Jahr zählt jede Gruppe nur einmal' : 'Euro je Jahr geteilt durch die bewerteten Geräte'; }
 
   function eventNote(f, c) {
-    return 'Maßgebliches Ereignis für das Zwölf-Monats-Fenster: ' + c.event + '. Über alle Jahre der Simulation: QTY ' + f.qty(c.all_n) + ' bewertet, Summe ' + f.eur(c.all_sum) + '.';
+    return 'Maßgebliches Ereignis für das Zwölf-Monats-Fenster: ' + c.event + '. Über alle Jahre der Simulation: ' + f.qty(c.all_n) + ' bewertet, Summe ' + f.eur(c.all_sum) + '.';
   }
 
   function exampleHead(ex) { return 'Gerät ' + ex.serial + (ex.model ? ', ' + ex.model : ''); }
@@ -91,8 +91,8 @@
         { k: 'Regel, die reagiert', v: c.rule }
       ],
       kv: [
-        { k: 'QTY bewertet', v: f.qty(c.n_attr), s: 'Geräte mit Referenzwert' },
-        { k: 'QTY mit Hebel', v: f.qty(c.n_pos), s: 'davon Geld liegen geblieben' },
+        { k: 'bewertet', v: f.qty(c.n_attr), s: 'Geräte mit Referenzwert' },
+        { k: 'mit Hebel', v: f.qty(c.n_pos), s: 'davon Geld liegen geblieben' },
         { k: 'Euro je Jahr', v: f.eur(c.sum_win), s: kvSum(c) },
         { k: 'Euro je Gerät', v: f.eur2(c.per_device), s: kvDev(c) }
       ],
@@ -117,11 +117,11 @@
     /* Reihenfolge wie im Dossier: erst die Kanaltage, dann "Was man tun kann" (dessen Punkte auf die Tabelle oben verweisen) */
     if (Array.isArray(c.channel_days) && c.channel_days.length) {
       items.push({ lead: CHANNEL_TITLE + '.', text: c.channel_days.map(function (r) {
-        return r.kanal + ': QTY ' + f.qty(r.n) + ' Geräte, Rückgabe bis verkaufsfähig ' + days(f, r.d_sellable) + ' Tage, verkaufsfähig bis verkauft ' + days(f, r.d_sold) + ' Tage, Rückgabe bis Zahlungseingang ' + days(f, r.d_cash) + ' Tage';
+        return r.kanal + ': ' + f.qty(r.n) + ' Geräte, Rückgabe bis verkaufsfähig ' + days(f, r.d_sellable) + ' Tage, verkaufsfähig bis verkauft ' + days(f, r.d_sold) + ' Tage, Rückgabe bis Zahlungseingang ' + days(f, r.d_cash) + ' Tage';
       }).join('; ') + '. ' + channelFoot(f, c) });
     }
     items.push({ lead: 'Was man tun kann.', text: (c.tun || []).join(' ') });
-    items.push({ lead: 'Herleitung, zwölf Monate bis ' + f.de(D.as_of) + '.', text: 'QTY bewertet ' + f.qty(c.n_attr) + ' (Geräte mit Referenzwert), QTY mit Hebel ' + f.qty(c.n_pos) + ' (davon Geld liegen geblieben), Euro je Jahr ' + f.eur(c.sum_win) + ' (' + kvSum(c) + '), Euro je Gerät ' + f.eur2(c.per_device) + ' (' + kvDev(c) + '). ' + eventNote(f, c) });
+    items.push({ lead: 'Herleitung, zwölf Monate bis ' + f.de(D.as_of) + '.', text: 'bewertet ' + f.qty(c.n_attr) + ' (Geräte mit Referenzwert), mit Hebel ' + f.qty(c.n_pos) + ' (davon Geld liegen geblieben), Euro je Jahr ' + f.eur(c.sum_win) + ' (' + kvSum(c) + '), Euro je Gerät ' + f.eur2(c.per_device) + ' (' + kvDev(c) + '). ' + eventNote(f, c) });
     if (ex) {
       items.push({ lead: 'Ein Gerät, vorgerechnet.', text: exampleHead(ex) + ', ' + ex.event + ' am ' + f.de(ex.date) + '; ' + PICK_RULE + ' Hebel ' + ex.delta + '.' });
       (ex.rows || []).forEach(function (r) { items.push({ lead: '', text: r[0] + ': ' + german(f, r[1]) }); });
@@ -171,16 +171,16 @@
     });
 
     var overview = E.TABLE('l-overview', 'Übersicht, zwölf Monate bis ' + f.de(D.as_of), [
-      E.H('Stellschraube'), E.H('Prüffrage'), E.H('QTY bewertet', 1), E.H('QTY mit Hebel', 1), E.H('Euro je Jahr', 1), E.H('Euro je Gerät', 1), E.H('Verantwortlich'), E.H('Regel')
+      E.H('Stellschraube'), E.H('Prüffrage'), E.H('bewertet', 1), E.H('mit Hebel', 1), E.H('Euro je Jahr', 1), E.H('Euro je Gerät', 1), E.H('Verantwortlich'), E.H('Regel')
     ], rows, {
       note: 'Diese Tabelle zeigt sieben Stellen, an denen die Simulation Geld liegen lässt: je Stellschraube der Vergleich jedes Geräts mit einem benannten Referenzwert aus der eigenen Flotte, in Euro je Gerät und als Summe der letzten zwölf Monate, jede mit verantwortlicher Rolle und der Regel, die reagiert. Eine Zeile anklicken zeigt die Stellschraube darunter im Detail; alle Karten stehen am Ende der Seite zum Nachlesen.',
       defs: [
         { k: 'Stellschraube', v: 'Name und Griff: woran die verantwortliche Rolle drehen kann; die kleine Kennung dahinter (' + idSpan + ', L für Hebel) ist nur die Nummer im Werkzeug, in den Regeln und im Code, sonst ohne Bedeutung' },
         { k: 'Prüffrage', v: 'was das Werkzeug je Gerät misst, um zu sehen, ob an dieser Stellschraube Geld liegen blieb' },
-        { k: 'QTY (Quantity, Stückzahl) bewertet', v: 'Geräte, deren maßgebliches Ereignis in die zwölf Monate fällt und für die ein Referenzwert vorlag; welches Ereignis das ist (Kauf, Verkauf oder Abschluss des Kreislaufs), nennt jede Karte' },
-        { k: 'QTY mit Hebel', v: 'davon Geräte, bei denen Geld liegen blieb' },
+        { k: 'bewertet', v: 'Geräte, deren maßgebliches Ereignis in die zwölf Monate fällt und für die ein Referenzwert vorlag; welches Ereignis das ist (Kauf, Verkauf oder Abschluss des Kreislaufs), nennt jede Karte' },
+        { k: 'mit Hebel', v: 'davon Geräte, bei denen Geld liegen blieb' },
         { k: 'Euro je Jahr', v: 'Summe der Hebel dieser Geräte; die Herleitung steht auf der Karte darunter' },
-        { k: 'Euro je Gerät', v: 'Euro je Jahr geteilt durch QTY bewertet; bei Laufzeit der Hebel je Gerät der Gruppe, weil Euro je Jahr dort jede Gruppe nur einmal zählt' },
+        { k: 'Euro je Gerät', v: 'Euro je Jahr geteilt durch die bewerteten Geräte; bei Laufzeit der Hebel je Gerät der Gruppe, weil Euro je Jahr dort jede Gruppe nur einmal zählt' },
         { k: 'Verantwortlich', v: 'Rolle, die die Schwelle setzt und ändern darf' },
         { k: 'Regel', v: 'Nummer der Entscheidungsregel, die auf die Schwelle reagiert; ADV (advisory) heißt nur Hinweis, keine Entscheidung' }
       ],

@@ -1,4 +1,4 @@
-/* Restwert Engine v3, Motor Laufzeit (Tab "term"). Vertrag: v3/CONTRACT.md, Abschnitte 1 bis 6 und 7.7.
+/* Restwert Engine v3, Motor Laufzeit (Reiter "term"). Vertrag: v3/CONTRACT.md, Abschnitte 1 bis 6 und 7.7.
    Reine Funktion window.RE.term(D, opts, P): baut aus v3/data/term.json das Ansichtsmodell V.
    Texte, Zahlen, Rechenwege, Tabellen und Legenden eins zu eins aus dem heutigen Skript (v3/src/term.js,
    v3/src/term.body.html); jede Zahl kommt aus D und geht durch E.fmt. Kein DOM, kein Zustand, kein Nachladen.
@@ -72,8 +72,8 @@
     var intro = 'Die Frage: Ein längerer Vertrag bringt länger Miete, aber das Gerät kommt mit weniger Wert zurück, weil es Generationen überspringt. '
       + 'Wie viel weniger ist ein drei Jahre altes iPhone wert als ein ein Jahr altes, was heißt das je Vertragsmonat, und woran lässt sich drehen? '
       + 'Beispiel Apple Smartphone, weil dafür die meisten Preisbelege vorliegen; die Familienkurven stehen darunter. '
-      + 'Öffentliche Preisbelege: QTY ' + f.qty(ask.n) + ' Marktplatz-Angebote und QTY ' + f.qty(bid.n) + ' Ankauf-Gebote für Apple Smartphones; '
-      + 'simuliert: QTY ' + f.qty(D.sim_n) + ' abgeschlossene iPhone-Kreisläufe.';
+      + 'Öffentliche Preisbelege: ' + f.qty(ask.n) + ' Marktplatz-Angebote und ' + f.qty(bid.n) + ' Ankauf-Gebote für Apple Smartphones; '
+      + 'simuliert: ' + f.qty(D.sim_n) + ' abgeschlossene iPhone-Kreisläufe.';
 
     /* ---------- Kennzahlen (die vier Kacheln) ---------- */
     var kpis = [
@@ -89,7 +89,7 @@
         label: 'iPhone nach ' + T36 + ' Monaten',
         value: f.pct(r36.q),
         lines: ['der UVP, Marktplatz-Angebot laut deutscher Kurve',
-          'QTY ' + f.qty(ask.n) + ' Preisbelege',
+          f.qty(ask.n) + ' Preisbelege',
           isNum(r36.qbid) ? 'Ankauf-Gebot „bis zu“: ' + f.pct(r36.qbid) : ''],
         tags: [TAG_PUB]
       },
@@ -111,14 +111,13 @@
       }
     ];
     var kpiDefs = [
-      { k: 'QTY (Quantity)', v: 'Stückzahl; das Wort dahinter sagt, was gezählt wird: Preisbelege, Geräte, Kreisläufe.' },
       { k: 'UVP', v: 'Unverbindliche Preisempfehlung des Herstellers beim deutschen Verkaufsstart; die Kurve rechnet einschließlich Mehrwertsteuer, Kosten und Einkaufspreis der Simulation ohne Mehrwertsteuer.' },
       { k: 'Faktor', v: 'nötige Miete je Monat einer Laufzeit geteilt durch die der ' + T24 + '-Monats-Laufzeit; so viel teurer oder günstiger je Monat muss der Vertrag sein.' }
     ];
     var calcnote = 'Kacheln: Prozent der UVP. Die deutsche Kurve sind Marktplatz-Angebote (Obergrenze), unter ' + under + ' Monaten über die Belege hinaus verlängert; '
       + 'die Studien sind Ankauf-Gebote aus den USA und Großbritannien, eine andere Preisart. '
       + 'Der Faktor sagt, um wie viel teurer je Monat ein ' + T12 + '-Monats-Vertrag gegenüber einem ' + T24 + '-Monats-Vertrag sein muss, damit Wertverlust und Kosten bis Verkauf gedeckt sind; '
-      + 'die Studienwerte setzen ein Gebot gegen ein Angebot und liegen deshalb eher zu hoch.';
+      + 'die Studienwerte setzen ein Gebot gegen ein Angebot und liegen deshalb zu hoch.';
 
     /* ---------- Was man daraus macht (die sechs Handlungen) ---------- */
     var lap = findFam('Laptop'), sm = findFam('Smartphone');
@@ -127,7 +126,7 @@
         text: 'Ein ' + T12 + '-Monats-Vertrag muss je Monat den Faktor ' + n2(r12.factor_derived) + ' (Kurve) bis ' + n2(alt.factor_hi) + ' (Studien) der ' + T24 + '-Monats-Miete kosten, '
           + 'ein ' + T36 + '-Monats-Vertrag nur ' + n2(r36.factor_derived) + ', ein ' + T48 + '-Monats-Vertrag ' + n2(r48.factor_derived) + '. '
           + 'Wer alle Laufzeiten gleich bepreist, verschenkt bei kurzen Verträgen Geld und verliert bei langen den Kunden an den Wettbewerb. '
-          + 'Das ist die Zahl, die die Stellschraube Laufzeit (Kennung L07 auf dem Tab Stellschrauben) misst; mit dieser Preisregel wäre ihr Hebel null.' },
+          + 'Das ist die Zahl, die die Stellschraube Laufzeit (Kennung L07 auf dem Reiter Stellschrauben) misst; mit dieser Preisregel wäre ihr Hebel null.' },
       { lead: 'Das erste Jahr ist das teure, nicht das dritte.',
         text: 'Der Wertverlust je Monat liegt in Jahr ' + yr(r12) + ' bei ' + f.pct1(studyLo) + ' bis ' + f.pct1(studyHi) + ' der UVP (Studien; die verlängerte deutsche Kurve sagt ' + f.pct1(r12.year_pm) + '), '
           + 'in Jahr ' + yr(r36) + ' bei ' + f.pct1(r36.year_pm) + ', in Jahr ' + yr(r48) + ' bei ' + f.pct1(r48.year_pm) + '. '
@@ -145,7 +144,7 @@
       { lead: 'Vorzeitige Rückgabe bepreisen.',
         text: 'In der Simulation verliert jeder vorzeitig beendete Vertrag Geld, egal welche Laufzeit (Tabelle unten, Spalte „Lifecycle-Marge, vorzeitig zurück“), '
           + 'weil die Miete aufhört, das Gerät aber schon den Wertverlust der ersten Monate getragen hat und die Kosten bis Verkauf voll anfallen. '
-          + 'Der Vertrag braucht einen Ausgleich bei vorzeitiger Rückgabe, mindestens die entgangene Miete bis zum Punkt, ab dem das Gerät seine Kosten eingespielt hat (Tab Gerät). '
+          + 'Der Vertrag braucht einen Ausgleich bei vorzeitiger Rückgabe, mindestens die entgangene Miete bis zum Punkt, ab dem das Gerät seine Kosten eingespielt hat (Reiter Gerät). '
           + 'Die Simulation kennt diesen Ausgleich noch nicht; er ist eine Zeile im Kundenvertrag und ein Kandidat für die nächste Ausbaustufe (v0.3).' },
       { lead: 'Verkaufszeitpunkt vor dem Nachfolger.',
         text: 'Die Kurve mittelt den Sprung beim Erscheinen der nächsten Generation; ein Vertrag, der einen Monat vor dem Nachfolger endet, gibt das Gerät in den teureren Markt zurück. '
@@ -160,8 +159,8 @@
       for (var m = Math.floor(c.age_min); m <= Math.ceil(c.age_max); m++) { xs.push(m); ys.push(Math.min(1, Math.exp(c.intercept + c.slope * m))); }
       traces.push({ type: 'scatter', mode: 'lines', name: name, x: xs, y: ys, line: { color: pal.ink, dash: dash, width: 2 }, hoverinfo: 'skip' });
     };
-    curve(ask, 'Kurve Marktplatz-Angebote, QTY ' + f.qty(ask.n) + ' Preisbelege (Obergrenze)', 'solid');
-    curve(bid, 'Kurve Ankauf-Gebote „bis zu“, QTY ' + f.qty(bid.n) + ' Preisbelege (Ankaufsseite, Höchstwerte)', 'dot');
+    curve(ask, 'Kurve Marktplatz-Angebote, ' + f.qty(ask.n) + ' Preisbelege (Obergrenze)', 'solid');
+    curve(bid, 'Kurve Ankauf-Gebote „bis zu“, ' + f.qty(bid.n) + ' Preisbelege (Ankaufsseite, Höchstwerte)', 'dot');
     var askPts = points.filter(function (p) { return p.kind === 'ask'; }), bidPts = points.filter(function (p) { return p.kind === 'bid'; });
     var marks = function (pts, sym, color, name) {
       if (!pts.length) return;
@@ -173,8 +172,8 @@
         hovertemplate: '%{text}<extra></extra>'
       });
     };
-    marks(askPts, 'diamond', pal.accent, 'Marktplatz-Angebote Zustandsstufe B, QTY ' + f.qty(askPts.length) + ' Preisbelege');
-    marks(bidPts, 'triangle-down', pal.accent2, 'Ankauf-Gebote „bis zu“, QTY ' + f.qty(bidPts.length) + ' Preisbelege');
+    marks(askPts, 'diamond', pal.accent, 'Marktplatz-Angebote Zustandsstufe B, ' + f.qty(askPts.length) + ' Preisbelege');
+    marks(bidPts, 'triangle-down', pal.accent2, 'Ankauf-Gebote „bis zu“, ' + f.qty(bidPts.length) + ' Preisbelege');
     var ages = points.map(function (p) { return p.age; }).concat([ask.age_max, bid.age_max]).filter(isNum);
     var xmax = Math.ceil(Math.max.apply(null, ages.length ? ages : [r48.t])) + 2;
     var ticks = [0, 0.2, 0.4, 0.6, 0.8, 1];
@@ -199,9 +198,9 @@
       return E.ROW([
         E.C(f.qty(r.t)),
         E.N(pb(r.q, 0, r.extrap)),
-        E.N(r.raw ? f.pct(r.raw.med) + ' (QTY ' + f.qty(r.raw.qty) + ' Preisbelege)' : 'kein Beleg'),
+        E.N(r.raw ? f.pct(r.raw.med) + ' (' + f.qty(r.raw.qty) + ' Preisbelege)' : 'kein Beleg'),
         E.N(isNum(r.qbid) ? pb(r.qbid, 0, r.extrap_bid) : ''),
-        E.N(r.rawbid ? f.pct(r.rawbid.med) + ' (QTY ' + f.qty(r.rawbid.qty) + ' Preisbelege)' : 'kein Beleg'),
+        E.N(r.rawbid ? f.pct(r.rawbid.med) + ' (' + f.qty(r.rawbid.qty) + ' Preisbelege)' : 'kein Beleg'),
         E.C('', { links: studies, minW: studies.length ? 240 : 0 }),
         E.N(pb(r.loss, 0, r.extrap)),
         E.N(pb(r.loss_pm, 1, r.extrap)),
@@ -216,10 +215,10 @@
       tags: [TAG_PUB],
       defs: [
         { k: 'Monate', v: 'Modellalter seit deutschem Verkaufsstart; ein Gerät, das am Verkaufsstart gekauft und ' + T24 + ' Monate vermietet wird, ist bei Rückgabe ' + T24 + ' Monate alt.' },
-        { k: 'Marktplatz-Angebot, Kurve', v: 'Realisierung in Prozent der UVP laut Kurve des Tabs Realisierung (Apple Smartphones, alle Stufen, abgelesen für Zustandsstufe B); Obergrenze, weil die Marge des Aufbereiters darin steckt; in Klammern, wo die Kurve über die Belege hinaus verlängert ist.' },
-        { k: 'Preisbelege, mittleres Angebot', v: 'das mittlere Marktplatz-Angebot der deutschen Belege in Zustandsstufe B, deren Alter in dieses Jahr fällt (Jahr ' + yr(r12) + ' = ' + f.qty(0) + ' bis ' + f.qty(r12.t - 1) + ' Monate); QTY zählt diese Belege.' },
+        { k: 'Marktplatz-Angebot, Kurve', v: 'Realisierung in Prozent der UVP laut Kurve des Reiter Realisierung (Apple Smartphones, alle Stufen, abgelesen für Zustandsstufe B); Obergrenze, weil die Marge des Aufbereiters darin steckt; in Klammern, wo die Kurve über die Belege hinaus verlängert ist.' },
+        { k: 'Preisbelege, mittleres Angebot', v: 'das mittlere Marktplatz-Angebot der deutschen Belege in Zustandsstufe B, deren Alter in dieses Jahr fällt (Jahr ' + yr(r12) + ' = ' + f.qty(0) + ' bis ' + f.qty(r12.t - 1) + ' Monate); die Spalte Belege zählt sie.' },
         { k: 'Ankauf-Gebot, Kurve', v: 'die Ankaufsseite laut Kurve der Apple Ankauf-Gebote; leer, wo die Kurve keine Belege hat' + (bidFrom ? ' (unter ' + bidFrom + ' Monaten)' : '') + '. Achtung: die deutschen Ankauf-Belege sind Höchstwerte „bis zu“ vor der Zustandsprüfung (Bestzustand), also kein Boden; der tatsächliche Ankaufpreis liegt darunter.' },
-        { k: 'Ankauf-Gebote, Belege', v: 'das mittlere Ankauf-Gebot „bis zu“ der deutschen Belege, deren Alter in dieses Jahr fällt; QTY zählt diese Belege.' },
+        { k: 'Ankauf-Gebote, Belege', v: 'das mittlere Ankauf-Gebot „bis zu“ der deutschen Belege, deren Alter in dieses Jahr fällt; die Spalte Belege zählt sie.' },
         { k: 'Studien USA und Großbritannien', v: 'Realisierung nach Ankauf-Gebot laut veröffentlichten Studien in den USA und in Großbritannien (' + f.pct(1) + ' minus dort genannter Verlust), mit Quelle; andere Länder, andere Preisart als die Marktplatz-Kurve, deshalb nur als Bandbreite dort, wo deutsche Belege fehlen; die Tabelle der Studien führt sie einzeln auf.' },
         { k: 'Wertverlust seit Kauf', v: 'Einkaufspreis minus Marktplatz-Angebot, in Prozent der UVP; der Einkaufspreis ist als UVP minus ' + disc + ' angenommen (Platzhalter mit verantwortlicher Rolle).' },
         { k: 'je Monat seit Kauf', v: 'Wertverlust seit Kauf geteilt durch alle Monate seit Kauf.' },
@@ -276,7 +275,7 @@
         + 'Alles in Prozent der UVP; Kosten und Einkaufspreis ohne Mehrwertsteuer gegen die UVP ohne Mehrwertsteuer, die Kurve auf beiden Seiten einschließlich Mehrwertsteuer.',
       foot: T12 + ' Monate nach den Studien statt nach der verlängerten Kurve: Realisierung ' + f.pct(alt.lo_q) + ' bis ' + f.pct(alt.hi_q) + ' (Ankauf-Gebote USA und Großbritannien), '
         + 'nötige Miete ' + f.pct1(alt.need_lo) + ' bis ' + f.pct1(alt.need_hi) + ' je Monat, Faktor ' + n2(alt.factor_lo) + ' bis ' + n2(alt.factor_hi) + ' gegen ' + T24 + ' Monate; '
-        + 'die Spanne mischt ein Gebot im Zähler mit dem Angebot im Nenner und liegt deshalb eher zu hoch.',
+        + 'die Spanne mischt ein Gebot im Zähler mit dem Angebot im Nenner und liegt deshalb zu hoch.',
       defs: [
         { k: 'Laufzeit', v: 'Vertragslaufzeit in Monaten; das Gerät ist bei Rückgabe so viele Monate alt.' },
         { k: 'Wertverlust seit Kauf', v: 'Einkaufspreis minus Marktplatz-Angebot laut Kurve am Ende der Laufzeit, in Prozent der UVP; in Klammern außerhalb der Belegspanne.' },
@@ -284,7 +283,7 @@
         { k: 'Kosten bis Verkauf, monatlich', v: 'simuliert, dieselbe Zahl wie in der Tabelle der Simulation: im Mittel ' + f.eur(D.sim_cost) + ' je abgeschlossenem iPhone-Kreislauf bei ' + f.eur(D.sim_rrp_net) + ' UVP ohne Mehrwertsteuer, also ' + f.pct(D.cost_share) + ' der UVP; je Laufzeit der eigene Wert, geteilt durch die Monate.' },
         { k: 'Nötige Miete je Monat', v: '(Wertverlust seit Kauf plus Kosten bis Verkauf) geteilt durch die Monate; ohne Gewinn, ohne Finanzierung, Gemeinkosten, Steuern; Nutzerbetreuung und Geräteverwaltung stecken als Umlage in den Kosten bis Verkauf.' },
         { k: 'Faktor gegen ' + T24 + ' Monate', v: 'nötige Miete je Monat dieser Laufzeit geteilt durch die der ' + T24 + '-Monats-Laufzeit, abgeleitet aus Kurve und Kosten; so viel teurer oder günstiger je Monat muss der Vertrag sein.' },
-        { k: 'Faktor in der Simulation', v: 'der Platzhalter (term_rate_factor in config/lake.yaml), mit dem die Simulation heute die Monatsrate je Laufzeit skaliert; Verantwortlich: Head of Customer Success.' }
+        { k: 'Faktor in der Simulation', v: 'der Platzhalter (term_rate_factor in config/lake.yaml), mit dem die Simulation heute die Monatsrate je Laufzeit skaliert; Verantwortlich: Leitung Customer Success.' }
       ]
     });
 
@@ -296,7 +295,7 @@
       famTerms.forEach(function (t) { cells.push(E.N(pb(x.loss_pm[String(t)], 1, x.extrap[String(t)]))); });
       return E.ROW(cells);
     });
-    var famCols = [E.H('Geräteart'), E.H('QTY Preisbelege', 1), E.H('Monate')];
+    var famCols = [E.H('Geräteart'), E.H('Preisbelege', 1), E.H('Monate')];
     famTerms.forEach(function (t) { famCols.push(E.H('nach ' + f.qty(t) + ' Monaten', 1)); });
     famTerms.forEach(function (t) { famCols.push(E.H('je Monat bei ' + f.qty(t), 1)); });   /* hoechstens vier Woerter je Kopf (CONTRACT 4.1); Wertverlust sagt die Legende */
     var famTermList = famTerms.map(function (t) { return f.qty(t); }).join(', ');
@@ -304,8 +303,8 @@
       n: fam.reduce(function (s, x) { return s + (isNum(x.n) ? x.n : 0); }, 0),
       tags: [TAG_PUB],
       defs: [
-        { k: 'Geräteart', v: 'Gerätefamilie; die Kurve des Tabs Realisierung läuft über alle Hersteller der Familie.' },
-        { k: 'QTY Preisbelege', v: 'Stückzahl der Marktplatz-Angebote, aus denen die Familienkurve gerechnet ist.' },
+        { k: 'Geräteart', v: 'Gerätefamilie; die Kurve des Reiter Realisierung läuft über alle Hersteller der Familie.' },
+        { k: 'Preisbelege', v: 'Stückzahl der Marktplatz-Angebote, aus denen die Familienkurve gerechnet ist.' },
         { k: 'Monate', v: 'Altersspanne dieser Belege in Monaten seit deutschem Verkaufsstart, jüngster bis ältester Beleg.' },
         { k: 'nach ' + famTermList + ' Monaten', v: 'Realisierung laut Familienkurve (Marktplatz-Angebote, abgelesen für Zustandsstufe B), in Klammern außerhalb der Belegspanne.' },
         { k: 'je Monat bei ' + famTermList, v: 'Wertverlust je Monat bei dieser Laufzeit: (Einkaufspreis minus Realisierung) geteilt durch die Monate, in Prozent der UVP; je kleiner, desto besser trägt die Geräteart eine lange Laufzeit.' }
@@ -332,14 +331,14 @@
     var simN = isNum(D.sim_n) ? D.sim_n : sim.reduce(function (s, r) { return s + (isNum(r.n) ? r.n : 0); }, 0);
     var sim48 = sim.filter(function (r) { return r.term_months === r48.t; })[0];
     var tSim = E.TABLE('x-sim', 'Wie es in der Simulation heute aussieht', [
-      E.H('Laufzeit'), E.H('QTY abgeschlossen', 1), E.H('davon vorzeitig zurück', 1), E.H('Monate abgerechnet, im Mittel', 1), E.H('Einkaufspreis', 1), E.H('Miete je Monat', 1),
+      E.H('Laufzeit'), E.H('abgeschlossen', 1), E.H('davon vorzeitig zurück', 1), E.H('Monate abgerechnet, im Mittel', 1), E.H('Einkaufspreis', 1), E.H('Miete je Monat', 1),
       E.H('Mieterlös', 1), E.H('Restwert', 1), E.H('Kosten bis Verkauf', 1), E.H('Lifecycle-Marge je Gerät', 1), E.H('Lifecycle-Marge, volle Laufzeit', 1), E.H('Lifecycle-Marge, vorzeitig zurück', 1)
     ], simRows, {
       n: simN,
       tags: [TAG_SIM],
       defs: [
         { k: 'Laufzeit', v: 'geplante Vertragslaufzeit in Monaten; die Zeile mittelt alle abgeschlossenen iPhone-Kreisläufe dieser Laufzeit.' },
-        { k: 'QTY abgeschlossen', v: 'Stückzahl der abgeschlossenen iPhone-Kreisläufe je Laufzeit in der Simulation.' },
+        { k: 'abgeschlossen', v: 'Stückzahl der abgeschlossenen iPhone-Kreisläufe je Laufzeit in der Simulation.' },
         { k: 'davon vorzeitig zurück', v: 'Verträge, die vor dem geplanten Ende endeten; das Gerät kam zurück, die Miete hörte auf, der Vertrag sah keinen Ausgleich vor (Annahme der Simulation).' },
         { k: 'Monate abgerechnet', v: 'tatsächlich berechnete Vertragsmonate im Mittel, gegen die Laufzeit in der ersten Spalte.' },
         { k: 'Einkaufspreis', v: 'Rechnungspreis des Lieferanten je Gerät, ohne Mehrwertsteuer, Mittel je Gerät.' },
@@ -354,10 +353,10 @@
       footLead: 'Was bis zum Gewinn fehlt',
       footLines: ['Finanzierungskosten, Gemeinkosten und Steuern', 'Gewinnaufschlag; Nutzerbetreuung und Geräteverwaltung (MDM) sind als Umlage schon in den Kosten bis Verkauf'],
       foot: 'Mittelwerte je Gerät der abgeschlossenen iPhone-Kreisläufe der Simulation. Die Miete je Monat folgt aus dem Platzhalter-Faktor je Laufzeit; die Rangfolge der Laufzeiten ist deshalb eine Folge dieser Annahme, kein Marktbefund. '
-        + (sim48 ? T48 + ' Monate sind erst wenige abgeschlossen (QTY ' + f.qty(sim48.n) + ', davon QTY ' + f.qty(sim48.early || 0) + ' vorzeitig beendet); die Zahl ist ein Urteil über vorzeitige Rückgaben, nicht über ' + T48 + ' Monate. ' : '')
+        + (sim48 ? T48 + ' Monate sind erst wenige abgeschlossen (' + f.qty(sim48.n) + ', davon ' + f.qty(sim48.early || 0) + ' vorzeitig beendet); die Zahl ist ein Urteil über vorzeitige Rückgaben, nicht über ' + T48 + ' Monate. ' : '')
         + 'Der Einkaufspreis hier ist netto und liegt bei ' + f.pct(D.sim_buy_net) + ' der UVP ohne Mehrwertsteuer (Apple-Rabatt der Simulation, ' + simDisc + 'Platzhalter); '
         + 'die Marktrechnung oben nimmt einschließlich Mehrwertsteuer ' + f.pct(D.buy_share) + ' der UVP (Platzhalter des Einkaufs, ' + disc + ' Abschlag). '
-        + 'Zwei Platzhalter für dieselbe Größe; welcher gilt, entscheidet der Head of Procurement.'
+        + 'Zwei Platzhalter für dieselbe Größe; welcher gilt, entscheidet der Einkaufsleitung.'
     });
 
     /* ---------- Tabelle 6: Was die Miete je Laufzeit ausmacht (nur die Miete geändert) ---------- */
@@ -403,7 +402,7 @@
       key: 'x-limits', title: 'Grenzen, ausgesprochen', ordered: false, intro: '',
       items: [
         { lead: '', text: 'Unter ' + under + ' Monaten Modellalter gibt es keinen deutschen Preisbeleg; der Wert nach ' + T12 + ' Monaten ist eine Verlängerung der Kurve und wird durch die Studien (USA, Großbritannien, Ankauf-Gebote) nach unten abgesichert. Deshalb steht für ' + T12 + ' Monate eine Spanne.' },
-        { lead: '', text: 'Marktplatz-Angebote sind die Obergrenze (Marge des Aufbereiters). Die deutschen Ankauf-Belege sind Höchstwerte „bis zu“ eines Ankäufers vor der Zustandsprüfung, also kein Boden; der tatsächliche Ankaufpreis liegt darunter. Was ein Leasinghaus erzielt, hängt vom Kanal ab (Tab Stellschrauben, Kanalwahl).' },
+        { lead: '', text: 'Marktplatz-Angebote sind die Obergrenze (Marge des Aufbereiters). Die deutschen Ankauf-Belege sind Höchstwerte „bis zu“ eines Ankäufers vor der Zustandsprüfung, also kein Boden; der tatsächliche Ankaufpreis liegt darunter. Was ein Leasinghaus erzielt, hängt vom Kanal ab (Reiter Stellschrauben, Kanalwahl).' },
         { lead: '', text: 'Die Kosten bis Verkauf sind simuliert; die Kurve ist öffentlich. Die abgeleiteten Faktoren mischen beides und sind deshalb eine Größenordnung, kein Preis. Die Studienwerte für Jahr ' + yr(r12) + ' sind Ankauf-Gebote aus den USA und Großbritannien; wo sie gegen die deutsche Marktplatz-Kurve gerechnet werden, steht das dabei.' },
         { lead: '', text: 'Der Sprung beim Erscheinen des Nachfolgers steckt in der Kurve nur gemittelt; wer einen Monat vor dem Nachfolger verkauft, liegt darüber, wer danach verkauft, darunter. Dafür fehlt ein Beleg mit Datum.' }
       ]

@@ -80,6 +80,18 @@ def test_helpers() -> None:
     assert normalise_grade("Trade-in bis zu") == "TRADEIN"
     assert normalise_grade("Grade A") == "A"
     assert normalise_grade(None) == "UNKNOWN"
+    # dealer wordings seen on 16.09.2026 (refurbed, AfB, itsco, hardware-online-shop, lapstore)
+    assert normalise_grade("Exzellent") == "A"
+    assert normalise_grade("OVP geöffnet") == "A"
+    assert normalise_grade("Hervorragend ITSCO Certified Refurbished") == "A"
+    assert normalise_grade("Gebrauchtgerät - Sehr Gut") == "B"
+    assert normalise_grade("Gut ITSCO Certified Refurbished") == "C"
+    assert normalise_grade("gut, wenige Gebrauchsspuren vorhanden") == "C"
+    assert normalise_grade("Akzeptabel Gebraucht") == "D"
+    assert normalise_grade("Stark genutzt") == "D"
+    assert normalise_grade("C") == "C"
+    assert normalise_grade("StoreDeal") == "UNKNOWN"
+    assert normalise_grade("nicht erfasst") == "UNKNOWN"
     assert months_between(date(2023, 9, 22), date(2025, 9, 22)) == pytest.approx(24.0)
 
 

@@ -1,4 +1,4 @@
-"""Build the Restwert Engine page: web/dist/index.html from the shell, the motors and the data of nine tabs.
+"""Build the Restwert Engine page: web/dist/index.html from the shell, the motors and the data of the tabs.
 
     python web/build.py                # embed web/data/*.json into web/dist/ (no engine run needed)
     python web/build.py --generate     # first regenerate web/data/*.json from outputs/ and data/restwert.duckdb
@@ -35,7 +35,8 @@ TEMPLATE = WEB / "index.template.html"
 ASSUMPTIONS = REPO / "config" / "assumptions.yaml"
 LAKE = REPO / "config" / "lake.yaml"
 
-TABS = ["report", "device", "market", "forecast", "tco", "cycle", "levers", "term", "lake"]
+# one data file per tab that has its own generator; the tabs "series" and "studies" of Market Intelligence read market.json
+TABS = ["report", "device", "market", "forecast", "tco", "cycle", "levers", "term", "lake", "faq"]
 GENERATOR_INPUTS = [REPO / "outputs" / "kpi_values.csv", REPO / "outputs" / "rv_forecast_error_monthly.csv", REPO / "data" / "restwert.duckdb"]
 
 

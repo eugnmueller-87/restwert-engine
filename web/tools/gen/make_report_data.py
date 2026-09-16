@@ -3,6 +3,7 @@
 Jede Zahl kommt aus der DuckDB (read_only) oder aus config/*.yaml; gerundet wird erst im Browser.
 Usage: python make_report_page.py <REPO> <OUT> <TODAY>  ->  <OUT>/index.html"""
 import json, sys, pathlib, math, calendar
+from _roles import de_roles  # noqa: E402
 from datetime import date, timedelta
 from decimal import Decimal
 from collections import defaultdict
@@ -37,12 +38,12 @@ KPI_ROWS = [  # (group, kpi_id, German name); ten of the fourteen gold KPIs, in 
     ("Daten", "KPI_DATA_CHAIN_COMPLETE", "Datumskette vollständig"),
     ("Einkauf", "KPI_PUR_DISCOUNT_VS_RRP", "Einkaufsrabatt gegen UVP ohne Mehrwertsteuer"),
     ("Einkauf", "KPI_PUR_PRICE_PROTECTION_CAPTURE", "Preisschutz-Gutschriften erfasst"),
-    ("Kosten", "KPI_TCO_PER_CLOSED_DEVICE", "TCO je abgeschlossenem Gerät (Tab TCO)"),
+    ("Kosten", "KPI_TCO_PER_CLOSED_DEVICE", "TCO je abgeschlossenem Gerät (Reiter TCO)"),
     ("Kosten", "KPI_TCO_ESTIMATE_SHARE", "Anteil geschätzter Kostenzeilen am TCO"),
     ("Recommerce", "KPI_RSL_REALISED_VS_RECORD", "Restwert gegen Restwertprognose bei Rückgabe"),
     ("Recommerce", "KPI_RSL_DAYS_RETURN_TO_CASH", "Tage von Rückgabe bis Zahlungseingang, mittleres Gerät"),
     ("Ergebnis", "KPI_RSLT_CLOSED_PER_DEVICE", "Lifecycle-Marge je Gerät, abgeschlossene Kreisläufe"),
-    ("Ergebnis", "KPI_LEV_ADDITIVE_EUR_PA", "Geld, das noch liegt, je Jahr (Tab Stellschrauben)"),
+    ("Ergebnis", "KPI_LEV_ADDITIVE_EUR_PA", "Geld, das noch liegt, je Jahr (Reiter Stellschrauben)"),
     ("Verträge", "KPI_CTR_COVERAGE_BY_OEM", "Hardware-Einkauf unter laufendem Vertrag"),
 ]
 WARN = []
@@ -475,5 +476,5 @@ data = {"today": TODAY, "as_of": AS, "win_start1": str(WS + timedelta(days=1)), 
 # in web/app.js and the motor in web/engine/report.js render this JSON)
 OUT.parent.mkdir(parents=True, exist_ok=True)
 with open(OUT, "w", encoding="utf-8", newline="\n") as fh:
-    fh.write(json.dumps(data, ensure_ascii=False, default=clean, separators=(",", ":")) + "\n")
+    fh.write(de_roles(json.dumps(data, ensure_ascii=False, default=clean, separators=(",", ":"))) + "\n")
 print(OUT.name + ": geschrieben")

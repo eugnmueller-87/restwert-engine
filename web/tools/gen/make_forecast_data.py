@@ -10,6 +10,7 @@ wird getippt. Aufruf: python make_forecast_data.py <REPO> <OUT.json> <TODAY>
 from __future__ import annotations
 
 import json
+from _roles import de_roles  # noqa: E402
 import math
 import pathlib
 import sys
@@ -178,6 +179,6 @@ data = {
     "last_metric_month": month_str(star["month"].max()) if len(star) else None,
 }
 OUT.parent.mkdir(parents=True, exist_ok=True)
-OUT.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8", newline="\n")
+OUT.write_text(de_roles(json.dumps(data, ensure_ascii=False, separators=(",", ":"))) + "\n", encoding="utf-8", newline="\n")
 print("forecast.json:", len(series), "Zeilen Fehlerreihe,", len(backtest), "Rueckblick-Zeilen,", len(runs), "Laeufe, letzter Monat", latest and latest["month"],
       "MAPE", latest and latest["mape"], "Ziel", latest and latest["target"], "ADV02", adv02["mean_bias_ch"], "gegen", adv02["threshold"])

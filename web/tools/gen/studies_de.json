@@ -4,7 +4,7 @@
   {
    "quelle": "SellCell",
    "datum": "08.09.2025",
-   "markt": "USA, Ankaufsangebote von über 40 Ankäufern, Zustand mint, gegen Listenpreis",
+   "markt": "USA, Ankaufsangebote von über 40 Ankäufern, gegen Listenpreis; Zustand nicht genannt",
    "url": "https://www.sellcell.com/blog/is-the-iphone-still-king-of-value-retention/",
    "zahlen": "Verlust nach 12 Monaten: iPhone 11 und 12 je 43,8 %, iPhone 13 46,2 %, iPhone 14 47,7 %, iPhone 15 48,2 %; Galaxy S22 66,7 %, Galaxy S23 61,1 %"
   },
@@ -42,13 +42,6 @@
    "markt": "USA",
    "url": "https://www.sellcell.com/blog/foldable-phone-depreciation-vs-standard-phones/",
    "zahlen": "Nach 18 Monaten: Foldables 71,1 % Verlust, Standard-Flaggschiffe 60,7 %; Samsung Z Fold/Flip nach 12 Monaten 65,8 %, Galaxy S 54,4 %"
-  },
-  {
-   "quelle": "Stiftung Warentest",
-   "datum": "23.07.2026",
-   "markt": "Deutschland, Neupreise online gegen UVP (Neupreis, nicht Gebrauchtwert)",
-   "url": "https://www.test.de/Preisanalyse-zu-Smartphones-Im-Sommer-sind-Handys-guenstig-10-bis-45-Prozent-Ersparnis-fuer-Geduldige-6308600-0/",
-   "zahlen": "Apple nach etwa 6 Monaten rund 90 % der UVP, danach stabil; Samsung im Juli rund 75 %; Pixel nach etwa 12 Monaten ein Drittel weniger"
   }
  ],
  "laptop": [
@@ -60,7 +53,7 @@
    "zahlen": "Mac nach 4 Jahren rund 30 % Restwert; Enterprise-PC am Lebensende 10 %. Ältere Fassung 2019: Mac 25 % nach 3 Jahren, PC 10 %"
   },
   {
-   "quelle": "Tech Data Schweiz in IT-Markt",
+   "quelle": "ein IT-Distributor (Schweiz) in IT-Markt",
    "datum": "26.02.2020",
    "markt": "garantierter Leasing-Restwert, Schweiz",
    "url": "https://www.it-markt.ch/news/2020-02-26/it-leasing-eine-win-win-situation-fuer-reseller-und-ihre-geschaeftskunden",
@@ -69,7 +62,7 @@
   {
    "quelle": "SellMyLaptops (US-Ankäufer)",
    "datum": "September 2026",
-   "markt": "USA, Ankaufsangebote",
+   "markt": "USA und Kanada, Ankaufsangebote",
    "url": "https://www.sellmylaptops.com/depreciation-guide",
    "zahlen": "Verlust im ersten Jahr: MacBook 35 %, Windows-Laptop 45 %, iPad 35 %, Android-Tablet 40 %"
   },
@@ -202,5 +195,313 @@
    },
    "hinweis": "iPhone 14, Verkaufsstart 16.09.2022, am Abrufdatum 48 Monate alt"
   }
- ]
+ ],
+ "deutschland": [
+  {
+   "quelle": "Kleinanzeigen Magazin: Wie viel ist mein gebrauchtes iPhone wert?",
+   "datum": "24.12.2024",
+   "geraeteart": "Smartphone",
+   "art": "Punktwerte in Euro",
+   "markt": "Deutschland, Privatverkauf, Anzeigenpreise ab",
+   "methode": "Marktplatz; ab-Preise ohne Speicher, Zustand und Stichtag; Originalpreis ist die Einstiegs-UVP",
+   "interessenlage": "Marktplatzbetreiber",
+   "url": "https://themen.kleinanzeigen.de/magazin/verkaufen/wert-gebrauchtes-iphone/",
+   "zahlen": "iPhone 16 (2024) ab 949 neu, ab 780 gebraucht; iPhone 15 (2023) ab 949, ab 550; iPhone 14 (2022) ab 999, ab 400; iPhone 13 (2021) ab 899, ab 550; iPhone 12 (2020) ab 876,30, ab 400; iPhone 11 (2019) ab 799, ab 150; iPhone SE 3 (2022) ab 519, ab 250; Pro-Modelle: 16 Pro 1.199 zu 900, 15 Pro 1.199 zu 700, 14 Pro 1.299 zu 620, 13 Pro 1.149 zu 520"
+  },
+  {
+   "quelle": "eBay Deutschland: Die große eBay-Restwertliste",
+   "datum": "17.01.2022",
+   "geraeteart": "Smartphone",
+   "art": "Punktwerte in Euro",
+   "markt": "Deutschland, eBay.de, Marktplatz",
+   "methode": "Durchschnittspreise über alle Zustandsbeschreibungen, Zeitraum nicht genannt, rund 170 Modelle",
+   "interessenlage": "Marktplatzbetreiber, Verkaufsanreiz",
+   "url": "https://www.ebayinc.com/stories/press-room/de/die-grosse-ebay-schwackeliste-wie-viel-ist-das-gebrauchte-smartphone-noch-wert/",
+   "zahlen": "iPhone 11 Pro 64 GB 453; iPhone 12 Pro Max 128 GB 804; iPhone 8 145; Galaxy S20 128 GB 345; Galaxy S21+ 5G 128 GB 606; Pixel 4a 128 GB 251; Huawei P40 Pro 256 GB 342 (Euro, keine UVP, keine Prozent)"
+  },
+  {
+   "quelle": "eBay Deutschland, Auswertung Juli 2022 (PC-WELT)",
+   "datum": "04.08.2022",
+   "geraeteart": "Smartphone",
+   "art": "Punktwerte in Euro",
+   "markt": "Deutschland, eBay.de, Marktplatz",
+   "methode": "Durchschnittspreise aller verkauften gebrauchten Smartphones, Festpreis, Auktion, Preisvorschlag",
+   "interessenlage": "eBay-Daten, Fachpresse als Relais",
+   "url": "https://www.pcwelt.de/article/1206275/fuer-diese-gebraucht-handys-erhalten-sie-das-meiste-geld-auf-ebay.html",
+   "zahlen": "iPhone 13 Pro 128 GB 869; iPhone 12 Pro Max 128 GB 714; iPhone 13 128 GB 660; Pixel 6 Pro 128 GB 586; iPhone 12 128 GB 531; Galaxy S21 Ultra 5G 128 GB 465; Pixel 6 128 GB 425; Galaxy S20 FE 5G 293 (Euro)"
+  },
+  {
+   "quelle": "eBay Deutschland, Auswertung September bis Oktober 2022 (futurezone.at)",
+   "datum": "12.01.2023",
+   "geraeteart": "Smartphone",
+   "art": "Punktwerte in Euro",
+   "markt": "Deutschland, eBay.de, Marktplatz, Zustand gebraucht",
+   "methode": "Durchschnittspreise, Festpreis, Auktion, Preisvorschlag",
+   "interessenlage": "eBay-Daten, Fachpresse als Relais",
+   "url": "https://futurezone.at/produkte/alte-smartphones-ebay-wiederverkauf-apple-iphone-samsung-galaxy-xiaomi-nokia/402289094",
+   "zahlen": "iPhone 13 Pro Max 256 GB 974; iPhone 13 Pro 128 GB 833; iPhone 12 Pro Max 256 GB 709; Galaxy S22 Ultra 256 GB 861; iPhone 12 Pro 128 GB 598; iPhone 11 64 GB 306; Galaxy S20 128 GB 247 (Euro)"
+  },
+  {
+   "quelle": "eBay Kleinanzeigen, Anzeigenpreise vor der iPhone-14-Vorstellung (stadt-bremerhaven.de)",
+   "datum": "31.08.2022",
+   "geraeteart": "Smartphone",
+   "art": "Punktwerte in Euro",
+   "markt": "Deutschland, Privatverkauf",
+   "methode": "Durchschnitt der Angebotspreise je Modell, Mittelwerte gerundet, defekte Geräte ausgeschlossen",
+   "interessenlage": "Marktplatzbetreiber, Verkaufsanreiz",
+   "url": "https://stadt-bremerhaven.de/ebay-kleinanzeigen-so-viel-koennte-euer-altes-iphone-noch-wert-sein/",
+   "zahlen": "iPhone 11 375 bis 450; iPhone 12 475 bis 600; iPhone SE 3 400 bis 556; iPhone 13 665 bis 875; iPhone 13 Pro Max 1.075 bis 1.350 (Euro)"
+  },
+  {
+   "quelle": "TECHBOOK mit markt.de: Gebrauchte Handys nach Zustand",
+   "datum": "21.07.2020",
+   "geraeteart": "Smartphone",
+   "art": "Punktwerte in Euro, nach Zustand",
+   "markt": "Deutschland, Marktpreise gebraucht nach Zustand",
+   "methode": "Scan von Verkaufsplattformen (eBay, Amazon); keine UVP, kein Alter",
+   "interessenlage": "Marktplatz markt.de liefert die Daten",
+   "url": "https://www.techbook.de/mobile-lifestyle/liste-smartphones-wert",
+   "zahlen": "iPhone X 64 GB wie neu 490, sehr gut 460, gut 410, akzeptabel 330; iPhone XR 64 GB 480/430/400/320; Galaxy S10 128 GB 450/440/400/300; Galaxy S8 64 GB 280/240/210/120; Pixel 3 64 GB 410/370/330/290 (Euro)"
+  },
+  {
+   "quelle": "TECHBOOK mit markt.de und Kleinanzeigen: iPhone 11 nach 13 Monaten",
+   "datum": "18.10.2020",
+   "geraeteart": "Smartphone",
+   "art": "Prozent der UVP, ein Stichtag",
+   "markt": "Deutschland",
+   "methode": "Marktpreise nach Zustand gegen UVP, Stichtag 06.10.2020, iPhone 11 rund 13 Monate nach Verkaufsstart",
+   "interessenlage": "Marktplatz markt.de, Fachpresse als Relais",
+   "url": "https://www.techbook.de/mobile-lifestyle/aktuelles-iphone-verkaufen",
+   "zahlen": "iPhone 11 64 GB, UVP 799: wie neu 613, sehr gut 589, gut 547, akzeptabel 460 (77 bis 58 Prozent der UVP nach 13 Monaten); 128 GB, UVP 849: 673/640/608/506; 256 GB, UVP 969: 760/724/682/536; Ankauf iPhone 11 256 GB sehr gut 539 gegen Verkauf 784"
+  },
+  {
+   "quelle": "teltarif.de: So viel ist das alte iPhone noch wert",
+   "datum": "10.09.2016",
+   "geraeteart": "Smartphone",
+   "art": "Prozent, Bezug unklar",
+   "markt": "Deutschland, geizhals und eBay",
+   "methode": "gemischt, Prozentwerte im Artikel nicht eindeutig Gebraucht- oder Neupreisseite zugeordnet",
+   "interessenlage": "Fachpresse",
+   "url": "https://www.teltarif.de/apple-iphone-wert-wertverfall-wiederverkauf/news/65440.html",
+   "zahlen": "iPhone 4 bis 6S im ersten Jahr im Schnitt minus 16,43 Prozent; iPhone 6 64 GB nach zwei Jahren minus 21,09 Prozent; iPhone 4S bis 5S nach drei Jahren minus 48,11 Prozent; iPhone nach zwei Jahren 69,25 Prozent Restwert (Fünfjahresschnitt)"
+  },
+  {
+   "quelle": "Macwelt: Warum iPhones wertstabiler als Edel-Androide sind (Flip4New)",
+   "datum": "24.08.2018 (Seite datiert 07.09.2018)",
+   "geraeteart": "Smartphone",
+   "art": "Ankauf, Einzelwerte mit Prozent",
+   "markt": "Deutschland, Ankaufportal Flip4New, Zustand wie neu",
+   "methode": "Ankauf, Einzelwerte",
+   "interessenlage": "Fachpresse",
+   "url": "https://www.macwelt.de/article/975581/warum-sind-iphones-wertstabiler-als-edel-androide.html",
+   "zahlen": "iPhone X 64 GB: 1.149 neu, nach rund einem Jahr 785,94 Ankauf (68 Prozent); LG V30: 899 zu 280,48 (31 Prozent); Galaxy S9: 849 zu 435,67 nach rund sechs Monaten (51 Prozent); Pixel 2: 899 zu 332 nach rund einem Jahr (37 Prozent)"
+  },
+  {
+   "quelle": "connect: Smartphones verkaufen, fünf Reseller im Test",
+   "datum": "11.12.2019",
+   "geraeteart": "Smartphone",
+   "art": "Ankauf, Praxistest",
+   "markt": "Deutschland, Ankaufportale Flip4new, Zoxs, Rebuy, Wirkaufens, Clevertronic",
+   "methode": "Praxistest mit eingeschickten Galaxy S8 und iPhone 8; Abwertung nach Prüfung; die Zahlen stehen auf den Unterseiten des zehnteiligen Artikels",
+   "interessenlage": "Fachpresse",
+   "url": "https://www.connect.de/vergleich/smartphone-verkaufen-reseller-test-3200173.html",
+   "zahlen": "Galaxy S8 gut bei Clevertronic: Angebot 202,29 Euro, nach Prüfung 165,50 Euro (Unterseite Verkaufstipps); Abwertungen im Test bis zu 200 Euro (Fazit); rebuy wertete leichte Gebrauchsspuren mit 45 Euro ab"
+  },
+  {
+   "quelle": "wirkaufens (asgoodasnew) Pressemitteilung: Schneller Wertverlust bei gebrauchten Smartphones",
+   "datum": "17.04.2013",
+   "geraeteart": "Smartphone",
+   "art": "Prozentspanne ohne Beleg",
+   "markt": "Deutschland, Ankaufportal",
+   "methode": "eigene Ankaufpreise, keine Stichprobe, keine Stichtage",
+   "interessenlage": "Ankaufportal, PR",
+   "url": "https://www.frische-fische.com/pr/schneller-wertverlust-bei-gebrauchten-smartphones/",
+   "zahlen": "iPhone 15 bis 25 Prozent Wertverlust im Jahr, Galaxy S 20 bis 30 Prozent, Smartphones allgemein bis zu 50 Prozent; nach fünf Jahren nur noch Schrottwert"
+  },
+  {
+   "quelle": "Clevertronic Blog: Handy verkaufen 2026",
+   "datum": "18.06.2026",
+   "geraeteart": "Smartphone",
+   "art": "Prozentspanne ohne Beleg",
+   "markt": "Deutschland, Ankaufportal",
+   "methode": "keine Datengrundlage, keine Stichprobe, kein Report; Marketingtext",
+   "interessenlage": "Ankaufportal",
+   "url": "https://www.clevertronic.de/blog/handy-verkaufen-besten-preis",
+   "zahlen": "iPhone nach einem Jahr 17 bis 27 Prozent Wertverlust; Galaxy S nach einem Jahr 33 bis 44 Prozent; nach zwei Jahren bei vielen Modellen 50 bis 70 Prozent (unbelegt)"
+  },
+  {
+   "quelle": "handyverkauf.net: Handywert ermitteln",
+   "datum": "undatiert",
+   "geraeteart": "Smartphone",
+   "art": "Prozentspanne ohne Beleg",
+   "markt": "Deutschland, Ankaufpreis-Vergleich",
+   "methode": "Datenbank mit über 4.000 Handys, maximale Ankaufpreise gegen UVP; kein Datum, keine Modellliste",
+   "interessenlage": "Ankaufpreis-Vergleichsportal, Affiliate",
+   "url": "https://www.handyverkauf.net/knowledgebase/handywert-ermitteln",
+   "zahlen": "Einstiegswert bei Ankaufdiensten bis zu 75 Prozent der UVP, wenige Tage nach Marktstart bis zu 85 Prozent (die Seite nennt beides); nach einem Jahr etwa 40 Prozent; nach zwei Jahren etwa 28 Prozent; nach drei Jahren bestenfalls ein Viertel"
+  },
+  {
+   "quelle": "Back Market Deutschland Pressemitteilung: Wie aus gebrauchten Geräten bare Münze wird",
+   "datum": "04.06.2025",
+   "geraeteart": "Smartphone, Tablet, Laptop",
+   "art": "Durchschnittswerte ohne Modell",
+   "markt": "Deutschland, Ankauf über Back Market, Daten 2024",
+   "methode": "interne Durchschnitts- und Maximalwerte ohne Modell, Alter, Prozent",
+   "interessenlage": "Refurbished-Marktplatz",
+   "url": "https://www.backmarket.de/de-de/c/press/how-to-turn-old-tech-into-cash",
+   "zahlen": "gebrauchtes Smartphone im Schnitt rund 138 Euro; MacBook gut erhalten bis zu 268 Euro; Tablet etwa 165 Euro; über 12 Mio. Euro Ankaufvolumen Deutschland 2024"
+  },
+  {
+   "quelle": "Apple Trade In Deutschland, Höchstwerte (NETZWELT)",
+   "datum": "07.08.2026",
+   "geraeteart": "Smartphone, Tablet, Laptop",
+   "art": "Ankauf, Höchstwerte bis zu",
+   "markt": "Deutschland, Hersteller-Inzahlungnahme über Likewize",
+   "methode": "bis-zu-Werte, Zustand und Konfiguration variieren; Trade-In liegt typischerweise unter Marktplatzpreisen",
+   "interessenlage": "Hersteller, will Neukauf fördern",
+   "url": "https://www.netzwelt.de/news/257121-apple-erhoeht-us-eintauschwerte-nimmt-sogar-android-handys-so-viel-bekommt-deutschland-iphone.html",
+   "zahlen": "iPhone 16 Pro Max bis zu 755; iPhone 16 Pro bis zu 700; iPhone 16 bis zu 525; iPhone 15 Pro Max bis zu 545; iPhone 15 bis zu 380; iPad Pro aktuelle Generation bis zu 760; MacBook Pro bis zu 915 (Euro)"
+  },
+  {
+   "quelle": "Back Market Deutschland, Ankauf-Höchstpreise Stichtag 10.09.2026 (monrose.de, Sekundärquelle)",
+   "datum": "11.09.2026",
+   "geraeteart": "Smartphone",
+   "art": "Ankauf, Höchstwerte bis zu, Sekundärquelle",
+   "markt": "Deutschland, Ankauf",
+   "methode": "bis-zu-Höchstpreise ohne Speicher und Zustand; Back-Market-Seite selbst nicht abgerufen",
+   "interessenlage": "Ratgeberseite, Affiliate-Verdacht",
+   "url": "https://monrose.de/2026/09/11/altes-iphone-verkaufen-oder-eintauschen-so-holen-sie-das-maximum-raus/",
+   "zahlen": "iPhone 16 Pro Max bis zu 747; iPhone 16 Pro bis zu 699; iPhone 15 Pro Max bis zu 559 (Euro)"
+  },
+  {
+   "quelle": "smava mit idealo.de: Preisentwicklung Apple und Samsung (Neupreis, kein Gebrauchtwert)",
+   "datum": "Juli 2016",
+   "geraeteart": "Smartphone",
+   "art": "Neupreis-Erosion, kein Gebrauchtwert",
+   "markt": "Deutschland, Neupreise der Top-50-Händler auf idealo",
+   "methode": "Neupreis-Erosion, 15 Modelle iPhone 4 bis 6s Plus, Galaxy S4 bis S7 Edge",
+   "interessenlage": "Kreditvermittler, PR-Studie",
+   "url": "https://www.marktmeinungmensch.de/studien/die-preisentwicklung-von-apple-und-samsung-smartph/",
+   "zahlen": "Samsung im Schnitt nach 3 Monaten minus 19 Prozent, nach 6 Monaten minus 30, nach 12 Monaten minus 44; Apple nach 3 Monaten minus 10, nach 6 minus 19, nach 12 minus 27"
+  },
+  {
+   "quelle": "Statista Infografik 29099 mit idealo Preismonitor (Neupreis)",
+   "datum": "12.01.2023",
+   "geraeteart": "Smartphone",
+   "art": "Neupreis-Erosion, kein Gebrauchtwert",
+   "markt": "Deutschland, Neupreise zum Monatsersten",
+   "methode": "Neupreis-Erosion",
+   "interessenlage": "Statista, idealo",
+   "url": "https://de.statista.com/infografik/29099/preise-ausgewaehlter-handy-flaggschiffmodelle-zum-monatsersten",
+   "zahlen": "iPhone 14 Pro 1,5 Prozent unter UVP (Januar 2023); Galaxy S22 Ultra von UVP 1.249 (Februar 2022) auf rund 750 (Januar 2023); Pixel 7 Pro 120 Euro weniger wenige Wochen nach Marktstart"
+  },
+  {
+   "quelle": "Geizhals-Preisanalyse, Marktstart bis Vorstellung des Nachfolgers (onlinemarktplatz.de, Neupreis)",
+   "datum": "08.09.2024",
+   "geraeteart": "Smartphone",
+   "art": "Neupreis-Erosion, kein Gebrauchtwert",
+   "markt": "Deutschland, Geizhals-Bestpreise Neuware",
+   "methode": "Neupreis-Erosion je zwei Basis- und Premiummodelle von Apple, Samsung, Google",
+   "interessenlage": "Preisvergleich, Branchenportal als Relais",
+   "url": "https://onlinemarktplatz.de/246550/analyse-preise-smartphone/",
+   "zahlen": "iPhone 14 minus 26 Prozent; iPhone 15 minus 19; Galaxy S23 minus 29; Galaxy S24 minus 23; Pixel 7 minus 22; Pixel 8 minus 35; iPhone 15 Pro minus 16; Galaxy S24 Ultra minus 26; Pixel 8 Pro minus 38"
+  },
+  {
+   "quelle": "Geizhals-Analyse September 2024 bis September 2025 (PC-WELT, Neupreis)",
+   "datum": "11.09.2025",
+   "geraeteart": "Smartphone",
+   "art": "Neupreis-Erosion, kein Gebrauchtwert",
+   "markt": "Geizhals, Land nicht genannt, UVP gegen Tiefpreis in zwölf Monaten",
+   "methode": "Neupreis-Erosion; die futurezone.at-Fassung vom 08.09.2025 nennt für dieselben Modelle andere Zahlen (Österreich, anderer Stichtag)",
+   "interessenlage": "Preisvergleich, Fachpresse als Relais",
+   "url": "https://www.pcwelt.de/article/2904533/diese-smartphones-verlieren-am-meisten-an-wert-analyse-apple-samsung-google.html",
+   "zahlen": "iPhone 16e minus 11 Prozent; iPhone 16 minus 246 Euro; Galaxy S25 Edge minus 48 Prozent; Galaxy S25 minus 29; Galaxy S25 Ultra minus 29; Pixel 9 minus 39; Pixel 9 Pro minus 19"
+  },
+  {
+   "quelle": "Globalcirculartech (DDE Global): TCO IT-Hardware, Restwert",
+   "datum": "14.07.2026",
+   "geraeteart": "Laptop",
+   "art": "Orientierungswert ohne Quelle",
+   "markt": "Deutschland, B2B-Sekundärmarkt",
+   "methode": "ITAD-Anbieter, grobe Orientierung ohne empirische Quelle; die Seite selbst verweist auf die Einzelbewertung",
+   "interessenlage": "ITAD- und Remarketing-Dienstleister",
+   "url": "https://globalcirculartech.com/total-cost-of-ownership-it-hardware-restwert/",
+   "zahlen": "gut gewartete Business-Geräte nach rund 36 Monaten häufig noch bei etwa 10 bis 20 Prozent des Neuwerts; kein Hersteller, keine 12- oder 24-Monats-Werte"
+  },
+  {
+   "quelle": "refurbed mit Fraunhofer Austria, Presseaussendung",
+   "datum": "22.05.2025",
+   "geraeteart": "Smartphone",
+   "art": "Europa-Kurve, eine Stelle",
+   "markt": "Europa und Österreich, keine Deutschland-Zahl",
+   "methode": "Rechenmodell Fraunhofer Austria, GUTcert-verifiziert nach ISO 14040/44; Whitepaper-PDF nicht lesbar (Rendering fehlt)",
+   "interessenlage": "Refurbished-Marktplatz als Auftraggeber",
+   "url": "https://www.ots.at/presseaussendung/OTS_20250522_OTS0027/211-mio-smartphones-liegen-aktuell-in-unseren-schubladen-und-koennten-refurbished-werden-bis-zu-200-eur-pro-stueck-realistisch",
+   "zahlen": "nach ziemlich genau drei Jahren sinkt der Rückkaufwert auf unter 20 Prozent vom Neupreis"
+  },
+  {
+   "quelle": "Recommerce Group: Trade-In Index 2026",
+   "datum": "09.06.2026",
+   "geraeteart": "Smartphone",
+   "art": "Europa-Index",
+   "markt": "Europa, Länder nicht spezifiziert",
+   "methode": "Trade-in des eigenen Netzwerks, ausgezahlter Anteil am Launch-Preis",
+   "interessenlage": "Recommerce-Anbieter, PR-Index",
+   "url": "https://www.recommerce-group.com/en/articles-en/recommerce-trade-in-index-2026",
+   "zahlen": "ausgezahlt in Prozent des Launch-Preises: iPhone 15 33, iPhone 14 25, iPhone 13 20, iPhone 11 9; Galaxy S25 rund 34, S24 rund 30, S23 rund 20; nach der Anfangsabwertung im ersten Jahr sinkt der Wert um etwa 15 Prozent pro Jahr"
+  },
+  {
+   "quelle": "WERTGARANTIE Ratgeber: iPad gebraucht kaufen",
+   "datum": "undatiert",
+   "geraeteart": "Tablet",
+   "art": "Einzelbeispiele",
+   "markt": "Deutschland",
+   "methode": "zwei Einzelbeispiele, keine Erhebung",
+   "interessenlage": "Versicherer",
+   "url": "https://www.wertgarantie.de/ratgeber/elektronik/tablet/ipad-gebraucht-kaufen-darauf-sollten-sie-achten",
+   "zahlen": "iPad Pro 12,9 Zoll (2017) 512 GB: neu rund 1.400, bei rebuy gebraucht 942; iPad mini 4 128 GB: gebraucht rund 350, neu 415"
+  },
+  {
+   "quelle": "Stiftung Warentest: Preisanalyse zu Smartphones",
+   "datum": "23.07.2026",
+   "geraeteart": "Smartphone",
+   "art": "Neupreis-Erosion, kein Gebrauchtwert",
+   "markt": "Deutschland, Neupreise online gegen UVP",
+   "methode": "Preisbeobachtung im Onlinehandel; Werte je Hersteller hinter der Bezahlschranke",
+   "interessenlage": "Verbraucherorganisation",
+   "url": "https://www.test.de/Preisanalyse-zu-Smartphones-Im-Sommer-sind-Handys-guenstig-10-bis-45-Prozent-Ersparnis-fuer-Geduldige-6308600-0/",
+   "zahlen": "Apple nach etwa 6 Monaten rund 90 % der UVP, danach stabil; Samsung im Juli rund 75 %; Pixel nach etwa 12 Monaten ein Drittel weniger"
+  }
+ ],
+ "deutschland_abrufdatum": "2026-09-16",
+ "deutschland_kernbefund": "Eine deutsche Restwertkurve in Prozent des Neupreises nach 12, 24 und 36 Monaten je Hersteller existiert öffentlich nicht. Es gibt (a) Punktwerte in Euro je Modell ohne Prozent und meist ohne Alter (eBay, Kleinanzeigen, markt.de, Apple Trade In, Back Market), (b) unbelegte Prozentspannen von Ankaufportalen (Clevertronic, handyverkauf.net, wirkaufens 2013), (c) Neupreis-Erosion, kein Gebrauchtwert (idealo und smava, Geizhals, Statista), (d) europäische Kurven ohne Deutschland-Ausweis (Recommerce Group, Fraunhofer Austria für refurbed). Für Laptops und Tablets gibt es in Deutschland keine Restwertkurve nach Hersteller, nur Punktwerte.",
+ "deutschland_nicht_gefunden": [
+  "rebuy.de: keine Presseseite, kein Preisindex, keine Wertverlust-Analyse; einzige Datenspur eine Statista-Grafik von 2016 ohne lesbare Zahlen",
+  "Clevertronic: kein Wertverlust-Report, nur ein Blogtext mit Prozentspannen ohne Datengrundlage",
+  "wirkaufens / asgoodasnew: einzige Zahlen-PR von 2013",
+  "Back Market Deutschland: kein Report mit Modell und Monat, nur Durchschnittswerte 2024 und Tageshöchstpreise über Drittseiten",
+  "refurbed.de: keine deutsche Wertverlust-Studie; Fraunhofer Austria nennt eine einzige Kurvenstelle (drei Jahre, unter 20 Prozent)",
+  "Bitkom, Verivox, Finanztip, CHIP, Computerbild, Handelsblatt: nur Umfragen, Relais oder Grafiken, keine Restwerte",
+  "Stiftung Warentest: Ankaufportal-Test mit Noten, Refurbished-Shop-Test, Neupreis-Erosion; keine Restwertkurven",
+  "heise/c't: Ankaufplattform-Test 2021 hinter Paywall; Meldungen relaien US-Quellen (BankMyCell, B-Stock)",
+  "AfB: nur bis zu 40 Prozent günstiger als Neuware und Absatzzahlen, keine Restwert-Prozente",
+  "Deloitte, PwC Deutschland: keine Circular-Economy-Studie mit Restwertangaben gefunden",
+  "DAT, Schwacke, Eurotax: reine Fahrzeugbewertung; Schwacke-Liste für Smartphones ist nur ein eBay-PR-Begriff",
+  "Leasinggesellschaften und Distributoren (fünf geprüft, Namen im Rechercheprotokoll): keine veröffentlichten Restwertkurven; eine nennt nur Rabatte auf Gebrauchtware und eine Verwertungsquote, keine Kurve",
+  "Tablets und Laptops mit Monatsangabe: für Deutschland keine Restwertkurve nach Hersteller, nur Punktwerte"
+ ],
+ "deutschland_geblockt": [
+  "zoxs.de 403",
+  "ing.de Timeout",
+  "pressebox.de 403",
+  "trusted.de 403",
+  "channelpartner.de 404",
+  "telecom-handel.de 410",
+  "rebuy.de/presse 404",
+  "heise.de Ankaufplattform-Test Paywall",
+  "derstandard.de Paywall",
+  "Fraunhofer-Austria-Whitepaper und Vodafone-Institut-PDF heruntergeladen, nicht gerendert",
+  "eBay-Restwertliste 2022 Vollliste (cloud.achtung.de) nicht abgerufen"
+ ],
+ "deutschland_us_uk_relais": "BankMyCell (US), Decluttr (US), SellCell (US), MusicMagpie (UK), B-Stock (US) werden von heise, connect, Mac Life, MacTechNews, Macwelt, TECHBOOK und Notebookcheck als Studien geführt; sie stehen in der Tabelle der Studien, nicht hier."
 }

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Laufzeit gegen Restwert: every number from outputs/market_*.csv (public), studies_de.json (sourced) or the lake (simulated)."""
 import json, sys, pathlib, math
+from _roles import de_roles  # noqa: E402
 import pandas as pd, duckdb, yaml
 sys.stdout.reconfigure(encoding="utf-8")
 REPO = pathlib.Path(sys.argv[1]); OUT = pathlib.Path(sys.argv[2]); TODAY = sys.argv[3]
@@ -114,5 +115,5 @@ data = {"today": TODAY, "apple_ask": apple_ask, "apple_bid": apple_bid, "rows": 
 # in web/app.js and the motor in web/engine/term.js render this JSON)
 OUT.parent.mkdir(parents=True, exist_ok=True)
 with open(OUT, "w", encoding="utf-8", newline="\n") as fh:
-    fh.write(json.dumps(data, ensure_ascii=False, default=clean, separators=(",", ":")) + "\n")
+    fh.write(de_roles(json.dumps(data, ensure_ascii=False, default=clean, separators=(",", ":"))) + "\n")
 print(OUT.name + ": geschrieben")

@@ -36,7 +36,7 @@
     var kicker = 'Momentaufnahme für die Geschäftsführung, Stand ' + de(D.today) + ' (Stichtag der Daten ' + de(D.as_of) + ')';
     var subject = 'Wo das Gerätegeschäft steht: zwölf Monate bis ' + de(D.as_of);
     var lead = 'Mieterlös, Restwert, EBITDA und EBIT als Näherung, die Kennzahlen, die Verträge, die in den nächsten zwölf Monaten enden, und was das Team bewegt hat; jede Zahl kommt aus dem Geräte-Hauptbuch, dem Vertragsregister oder den Konfigurationsdateien, nichts ist getippt.';
-    var banner = 'Simulierte Daten, echte Mechanik: QTY ' + qty(D.n_serials) + ' Seriennummern aus dem echten Katalog, jede Buchung erfunden, kein Wert ist eine Tatsache über ein reales Unternehmen; mit den Daten eines Hauses zeigt dieselbe Seite dessen Zahlen.';
+    var banner = 'Simulierte Daten, echte Mechanik: ' + qty(D.n_serials) + ' Seriennummern aus dem echten Katalog, jede Buchung erfunden, kein Wert ist eine Tatsache über ein reales Unternehmen; mit den Daten eines Hauses zeigt dieselbe Seite dessen Zahlen.';
 
     /* ---------- Gewinn und Verlust: der Motor addiert nur; Erloese kommen positiv, Aufwand negativ aus den Daten ---------- */
     var dblZ6 = P_.z6.dbl_names[0] + ' ' + eur(P_.z6.dbl.repair) + ' und ' + P_.z6.dbl_names[1] + ' ' + eur(P_.z6.dbl.refurbishment);
@@ -47,11 +47,11 @@
       { id: 'Z3', name: 'Restbuchwert der Abgänge', val: P_.z3.sum, qty: P_.z3.n, basis: 'Einkaufspreis minus aufgelaufene Abschreibung nach der Monatsregel der Zeile Planmäßige Abschreibung, minus frühere Wertberichtigungen; abgeleitet', s0: true },
       { id: 'Z3a', name: 'Veräußerungsergebnis', tag: DER, val: Z3a, qty: null, basis: 'Restwert minus Restbuchwert; verschrottet zählt mit 0 €' + rn([P_.z2.sum, P_.z3.sum], Z3a) },
       { id: 'Z4', name: 'Preisschutz-Gutschriften', val: P_.z4.sum, qty: P_.z4.n, basis: 'Gutschriften des Herstellers; als Ertrag der Periode gezeigt, in der Bilanz eine Minderung der Anschaffungskosten, hier vereinfacht', s0: true },
-      { id: 'Z5', name: 'Kosten bis Verkauf', val: P_.z5.sum, qty: P_.z5.n, basis: 'QTY ' + qty(P_.z5.n_types) + ' Kostenarten, Fracht bis Kanalgebühren; davon geschätzt ' + eur(P_.z5.est) + ': Lagertage ' + eur(P_.z5.est_hold) + ', Umlage Nutzerbetreuung und Geräteverwaltung je Gerätemonat ' + eur(P_.z5.est_alloc || 0) + ', Kanalgebühren geschätzt bis zum Zahlungseingang ' + eur(P_.z5.est_fee), s0: true },
+      { id: 'Z5', name: 'Kosten bis Verkauf', val: P_.z5.sum, qty: P_.z5.n, basis: qty(P_.z5.n_types) + ' Kostenarten, Fracht bis Kanalgebühren; davon geschätzt ' + eur(P_.z5.est) + ': Lagertage ' + eur(P_.z5.est_hold) + ', Umlage Nutzerbetreuung und Geräteverwaltung je Gerätemonat ' + eur(P_.z5.est_alloc || 0) + ', Kanalgebühren geschätzt bis zum Zahlungseingang ' + eur(P_.z5.est_fee), s0: true },
       { id: 'S0', name: 'Zwischensumme Gerätegeschäft, vor indirekten Ausgaben', sum: 's0', basis: 'Mieterlös plus Veräußerungsergebnis plus Preisschutz-Gutschriften minus Kosten bis Verkauf' + rn([P_.z1.sum, P_.z2.sum, P_.z3.sum, P_.z4.sum, P_.z5.sum], S0) },
-      { id: 'Z6', name: 'Indirekte Ausgaben', val: P_.z6.sum, qty: P_.z6.n, basis: 'QTY ' + qty(P_.z6.n_cat) + ' Kategorien (' + P_.z6.cats.join(', ') + '), Platzhalterband des Generators (QTY ' + qty(P_.z6.rows_per_month) + ' Rechnungen je Monat, config/lake.yaml); nicht enthalten: ' + dblZ6 + ' (QTY ' + qty(P_.z6.dbl_n) + ' Rechnungen), weil beides je Gerät (' + dblZ5 + ') schon in Kosten bis Verkauf steht', s1: true },
+      { id: 'Z6', name: 'Indirekte Ausgaben', val: P_.z6.sum, qty: P_.z6.n, basis: qty(P_.z6.n_cat) + ' Kategorien (' + P_.z6.cats.join(', ') + '), Platzhalterband des Generators (' + qty(P_.z6.rows_per_month) + ' Rechnungen je Monat, config/lake.yaml); nicht enthalten: ' + dblZ6 + ' (' + qty(P_.z6.dbl_n) + ' Rechnungen), weil beides je Gerät (' + dblZ5 + ') schon in Kosten bis Verkauf steht', s1: true },
       { id: 'S1', name: 'EBITDA-Näherung', sum: 's1', basis: 'Zwischensumme Gerätegeschäft minus indirekte Ausgaben; vor Abschreibung, Wertberichtigung, Zinsen, Steuern' + rn([S0, P_.z6.sum], S1) },
-      { id: 'Z7', name: 'Planmäßige Abschreibung', val: P_.z7.sum, qty: P_.z7.n, basis: 'linear je Vertragsmonat; Restwertprognose bei Rückgabe für QTY ' + qty(P_.z7.n_rec) + ' Geräte, zum Leasingende für QTY ' + qty(P_.z7.n_lease) + ' Geräte, ohne Prognose QTY ' + qty(P_.z7.n_none) + '; QTY ' + qty(P_.z7.n_repl) + ' Ersatzverträge mit Laufzeit bis zum Ende des ersetzten Vertrags', s2: true },
+      { id: 'Z7', name: 'Planmäßige Abschreibung', val: P_.z7.sum, qty: P_.z7.n, basis: 'linear je Vertragsmonat; Restwertprognose bei Rückgabe für ' + qty(P_.z7.n_rec) + ' Geräte, zum Leasingende für ' + qty(P_.z7.n_lease) + ' Geräte, ohne Prognose ' + qty(P_.z7.n_none) + '; ' + qty(P_.z7.n_repl) + ' Ersatzverträge mit Laufzeit bis zum Ende des ersetzten Vertrags', s2: true },
       { id: 'Z8', name: 'Wertberichtigungen', val: P_.z8.sum, qty: P_.z8.n, basis: (P_.z8.rules ? 'Regel ' + P_.z8.rules : 'keine im Fenster') + ', Verantwortlich ' + P_.z8.owner, s2: true },
       { id: 'S2', name: 'EBIT-Näherung', sum: 's2', basis: 'vor Zinsen und Steuern' + rn([S1, P_.z7.sum, P_.z8.sum], S2) }
     ];
@@ -68,12 +68,12 @@
         E.C(r.basis, { minW: 260 })
       ], { bold: !!r.sum });
     });
-    var pnlFoot = 'Anlage-Sicht: die Geräte gelten hier als Anlagevermögen und werden linear auf die Restwertprognose abgeschrieben; ob das Haus sie als Anlage oder als Vorrat führt, ist offen und entscheidet die Bilanzierung, Verantwortlich CFO. Nicht enthalten: Finanzierungskosten, Steuern und das Personal des Teams (steht nicht im Geräte-Hauptbuch); Fracht, Zoll und Einrichtung sind hier Periodenaufwand, in einer Bilanz wären sie Anschaffungsnebenkosten; die Einkaufspreise der QTY ' + qty(P_.n_pp) + ' im Fenster gekauften Geräte (' + eur(P_.sum_pp) + ') sind aktiviert und laufen über die Abschreibung, nicht über diese Tabelle.';
+    var pnlFoot = 'Anlage-Sicht: die Geräte gelten hier als Anlagevermögen und werden linear auf die Restwertprognose abgeschrieben; ob das Haus sie als Anlage oder als Vorrat führt, ist offen und entscheidet die Bilanzierung, Verantwortlich CFO. Nicht enthalten: Finanzierungskosten, Steuern und das Personal des Teams (steht nicht im Geräte-Hauptbuch); Fracht, Zoll und Einrichtung sind hier Periodenaufwand, in einer Bilanz wären sie Anschaffungsnebenkosten; die Einkaufspreise der ' + qty(P_.n_pp) + ' im Fenster gekauften Geräte (' + eur(P_.sum_pp) + ') sind aktiviert und laufen über die Abschreibung, nicht über diese Tabelle.';
     var pnlDefs = [
       /* die beiden ersten Spalten haben heute keinen Legendensatz; der Vertrag verlangt einen je Spalte */
       { k: 'Zeile', v: 'Zeile der Gewinn- und Verlustrechnung; Zwischensummen stehen fett.' },
       { k: 'Euro zwölf Monate', v: 'Summe der Zeile in den zwölf Monaten bis zum Stichtag, in Euro; Erlöse positiv, Aufwand negativ.' },
-      { k: 'QTY', v: 'Rechnungszeilen, Geräte oder Rechnungen, wie die Spalte Grundlage sagt.' },
+      { k: 'Anzahl', v: 'Rechnungszeilen, Geräte oder Rechnungen, wie die Spalte Grundlage sagt.' },
       { k: 'Grundlage', v: 'woher die Zahl kommt und ob sie gebucht oder abgeleitet ist.' },
       { k: 'Mieterlös', v: 'was die Kunden in den zwölf Monaten für die Geräte gezahlt haben, ohne Mehrwertsteuer, nach Rechnungsdatum.' },
       { k: 'Restwert', v: 'was verkaufte Geräte gebracht haben, vor Abzug der Kanalgebühren; die Gebühren stehen in Kosten bis Verkauf.' },
@@ -81,30 +81,30 @@
       { k: 'Veräußerungsergebnis', v: 'Restwert minus Restbuchwert beim Abgang; negativ heißt unter Buchwert verkauft.' },
       { k: 'Preisschutz-Gutschriften', v: 'Gutschriften des Herstellers, weil er den Listenpreis kurz nach unserem Kauf gesenkt hat; hier als Ertrag der Periode, in einer Bilanz eine Minderung der Anschaffungskosten.' },
       { k: 'Zwischensumme Gerätegeschäft', v: 'was das Gerätegeschäft vor den indirekten Ausgaben verdient: Mieterlös plus Veräußerungsergebnis plus Preisschutz-Gutschriften minus Kosten bis Verkauf.' },
-      { k: 'Kosten bis Verkauf', v: 'Fracht, Zoll, Einrichtung, Versand, Reparatur, Austauschversand, Rücksendung, Datenlöschung und Zustandsprüfung, Aufbereitung, Lagertage, Kanalgebühren; alles als Aufwand der Periode; Lagertage sind immer eine Schätzung (Lagerkosten je Tag, Verantwortlich CFO).' },
-      { k: 'Indirekte Ausgaben', v: 'Rechnungen außerhalb des einzelnen Geräts; in der Simulation ein Platzhalterband (config/lake.yaml, Verantwortlich Head of Indirect Procurement), auf echten Daten die Kreditorenbuchhaltung. Reparatur und Aufbereitung stehen in der Simulation auch als Rechnungen hier, sind aber je Gerät schon in Kosten bis Verkauf gebucht; deshalb zählen sie in dieser Zeile nicht (Betrag in der Zeile). Auf echten Daten gilt dieselbe Regel: jede Kostenart genau einmal, je Gerät oder als Rechnung.' },
+      { k: 'Kosten bis Verkauf', v: 'Fracht, Zoll, Einrichtung, Versand, Nutzerbetreuung und Geräteverwaltung je Gerätemonat (Umlage), Reparatur, Austauschversand, Rücksendung, Datenlöschung und Zustandsprüfung, Aufbereitung, Lagertage, Kanalgebühren; alles als Aufwand der Periode; Lagertage und die zwei Umlagen sind Schätzungen' },
+      { k: 'Indirekte Ausgaben', v: 'Rechnungen außerhalb des einzelnen Geräts; in der Simulation ein Platzhalterband (config/lake.yaml, Verantwortlich Leitung Indirekter Einkauf), auf echten Daten die Kreditorenbuchhaltung. Reparatur und Aufbereitung stehen in der Simulation auch als Rechnungen hier, sind aber je Gerät schon in Kosten bis Verkauf gebucht; deshalb zählen sie in dieser Zeile nicht (Betrag in der Zeile). Auf echten Daten gilt dieselbe Regel: jede Kostenart genau einmal, je Gerät oder als Rechnung.' },
       { k: 'EBITDA-Näherung', v: 'Ergebnis vor Abschreibung, Wertberichtigung, Zinsen und Steuern; eine Näherung, weil Personal und Finanzierung fehlen und die indirekten Ausgaben in der Simulation ein Platzhalterband sind.' },
       { k: 'Planmäßige Abschreibung', v: 'der Teil des Einkaufspreises, der in diesen zwölf Monaten verbraucht wurde: Einkaufspreis minus Restwertprognose zum Vertragsende, gleichmäßig auf die Vertragsmonate zwischen Vertragsbeginn und vertraglichem Ende verteilt; gebucht wird jeder Vertragsmonat, der vor dem wirksamen Ende beginnt.' },
       { k: 'Wertberichtigungen', v: 'außerplanmäßige Abschreibung nach der Regel, die die Zeile nennt; die Regel entscheidet, eine verantwortliche Rolle setzt die Schwelle.' },
       { k: 'EBIT-Näherung', v: 'Ergebnis vor Zinsen und Steuern.' }
     ];
     var tPnl = E.TABLE('r-pnl', 'Gewinn und Verlust, zwölf Monate bis ' + de(D.as_of),
-      [E.H('Zeile'), E.H('Euro zwölf Monate', 1), E.H('QTY', 1), E.H('Grundlage')], pnlRows,
+      [E.H('Zeile'), E.H('Euro zwölf Monate', 1), E.H('Anzahl', 1), E.H('Grundlage')], pnlRows,
       { n: 0, foot: pnlFoot, defs: pnlDefs, tags: [SIM, DER] });
 
     /* ---------- Kacheln ---------- */
     var z7 = P_.z7.sum, z8 = P_.z8.sum;
     var kpis = [
       { label: 'Mieterlös, zwölf Monate', tags: [SIM], value: eur(P_.z1.sum), neg: P_.z1.sum < 0, lines: [
-        'QTY ' + qty(P_.z1.n) + ' Mietrechnungen (Monatszeilen) für QTY ' + qty(P_.z1.n_serials) + ' Geräte',
+        qty(P_.z1.n) + ' Mietrechnungen (Monatszeilen) für ' + qty(P_.z1.n_serials) + ' Geräte',
         de(D.win_start1) + ' bis ' + de(D.as_of) + ', Rechnungsdatum',
-        'nicht enthalten: künftige Monate der QTY ' + qty(R.n_active) + ' laufenden Verträge'] },
+        'nicht enthalten: künftige Monate der ' + qty(R.n_active) + ' laufenden Verträge'] },
       { label: 'Restwert, zwölf Monate', tags: [SIM], value: eur(P_.z2.sum), neg: P_.z2.sum < 0, lines: [
-        'QTY ' + qty(P_.z2.n) + ' verkaufte Geräte, vor Abzug der Kanalgebühren (' + eur(D.tiles.fees) + ')',
-        'gegen Restwertprognose bei Rückgabe ' + pct1(D.tiles.ratio_record) + ' (QTY ' + qty(I.w3.n) + ' Verkäufe ohne Ist-Zustand)',
-        'dazu QTY ' + qty(D.tiles.n_scrapped) + ' verschrottete Geräte mit 0 €'] },
+        qty(P_.z2.n) + ' verkaufte Geräte, vor Abzug der Kanalgebühren (' + eur(D.tiles.fees) + ')',
+        'gegen Restwertprognose bei Rückgabe ' + pct1(D.tiles.ratio_record) + ' (' + qty(I.w3.n) + ' Verkäufe ohne Ist-Zustand)',
+        'dazu ' + qty(D.tiles.n_scrapped) + ' verschrottete Geräte mit 0 €'] },
       { label: 'EBITDA-Näherung, zwölf Monate', tags: [SIM, DER], value: eur(S1), neg: S1 < 0, lines: [
-        'Gerätegeschäft ' + eur(S0) + ' minus indirekte Ausgaben ' + eur(Math.abs(P_.z6.sum)) + '; die indirekten Ausgaben sind in der Simulation ein Platzhalterband (QTY ' + qty(P_.z6.rows_per_month) + ' Rechnungen je Monat, config/lake.yaml), keine Tatsache; Reparatur und Aufbereitung (' + eur(P_.z6.dbl_sum) + ') zählen hier nicht, sie stehen je Gerät schon in Kosten bis Verkauf',
+        'Gerätegeschäft ' + eur(S0) + ' minus indirekte Ausgaben ' + eur(Math.abs(P_.z6.sum)) + '; die indirekten Ausgaben sind in der Simulation ein Platzhalterband (' + qty(P_.z6.rows_per_month) + ' Rechnungen je Monat, config/lake.yaml), keine Tatsache; Reparatur und Aufbereitung (' + eur(P_.z6.dbl_sum) + ') zählen hier nicht, sie stehen je Gerät schon in Kosten bis Verkauf',
         'vor Abschreibung, Wertberichtigung, Zinsen und Steuern; Personal des Teams fehlt, es steht nicht im Geräte-Hauptbuch',
         'Anlage-Sicht als Näherung, Verantwortlich CFO'] },
       { label: 'EBIT-Näherung, zwölf Monate', tags: [SIM, DER], value: eur(S2), neg: S2 < 0, lines: [
@@ -113,7 +113,6 @@
         'ob das Gerät beim Haus Anlage oder Vorrat ist, ist eine offene Frage an das Haus; hier Anlage'] }
     ];
     var kpiDefs = [
-      { k: 'QTY (Quantity)', v: 'Stückzahl; das Wort dahinter sagt, was gezählt wird: Geräte, Rechnungen, Verträge.' },
       { k: 'Näherung', v: 'EBITDA und EBIT sind aus dem Geräte-Hauptbuch abgeleitet, nicht aus einer Buchhaltung; die Tabelle darunter zeigt jede Zeile und ihre Herkunft.' },
       { k: 'simuliert, abgeleitet', v: 'simuliert: Buchung des Generators; abgeleitet: aus Buchungen gerechnet, keine eigene Buchung.' }
     ];
@@ -132,57 +131,57 @@
         lastG = r.group;
       }
       var nmeas = r.status === 'not_measurable', mn = K.min_n[r.id];
-      var wert = nmeas ? 'nicht messbar (QTY ' + qty(r.n) + ' von mindestens QTY ' + qty(mn) + ' Beobachtungen)' : fmtv(r.value, r.unit);
-      if (nmeas) nm.push(r.name + ' ' + fmtv(r.value, r.unit) + ' bei QTY ' + qty(r.n) + ' Beobachtungen');
+      var wert = nmeas ? 'nicht messbar (' + qty(r.n) + ' von mindestens ' + qty(mn) + ' Beobachtungen)' : fmtv(r.value, r.unit);
+      if (nmeas) nm.push(r.name + ' ' + fmtv(r.value, r.unit) + ' bei ' + qty(r.n) + (r.n === 1 ? ' Beobachtung' : ' Beobachtungen'));
       var cells = [E.C(r.name), nmeas ? E.C(wert, { right: true }) : E.N(wert)];
       if (showT) cells.push(E.N(fmtv(r.target, r.unit)));
-      cells.push(E.C(stDe(r.status)), E.C(r.owner));
+      cells.push(E.C(stDe(r.status)), E.C(f.role(r.owner)));
       kpiRows.push(E.ROW(cells));
     });
     var tcoRow = K.rows.filter(function (r) { return r.id === 'KPI_TCO_PER_CLOSED_DEVICE'; })[0];
     var zielDd = showT
-      ? 'für QTY ' + qty(K.n_targets) + ' der QTY ' + qty(K.n_shown) + ' Kennzahlen gesetzt (config/kpi_targets.yaml, Verantwortlich ' + K.targets_owner + '); leer heißt kein Ziel gesetzt.'
-      : 'für keine der QTY ' + qty(K.n_shown) + ' gezeigten Kennzahlen gesetzt: config/kpi_targets.yaml führt QTY ' + qty(K.n_cfg_targets) + ' Ziele, davon QTY ' + qty(K.n_cfg_targets_gold) + ' für eine der QTY ' + qty(K.n_gold) + ' Kennzahlen der Kennzahlentabelle (gold.kpi_values), die anderen für alte Kennungen; Verantwortlich ' + K.targets_owner + '; die Spalte Ziel erscheint, sobald ein Ziel gesetzt ist.';
+      ? 'für ' + qty(K.n_targets) + ' der ' + qty(K.n_shown) + ' Kennzahlen gesetzt (config/kpi_targets.yaml, Verantwortlich ' + f.role(K.targets_owner) + '); leer heißt kein Ziel gesetzt.'
+      : 'für keine der ' + qty(K.n_shown) + ' gezeigten Kennzahlen gesetzt: config/kpi_targets.yaml führt ' + qty(K.n_cfg_targets) + ' Ziele, davon ' + qty(K.n_cfg_targets_gold) + ' für eine der ' + qty(K.n_gold) + ' Kennzahlen der Kennzahlentabelle (gold.kpi_values), die anderen für alte Kennungen; Verantwortlich ' + f.role(K.targets_owner) + '; die Spalte Ziel erscheint, sobald ein Ziel gesetzt ist.';
     var kpiTableDefs = [
-      { k: 'Kennzahl', v: 'Name der Kennzahl; die zwölf Monate bis zum Stichtag, wo die Kennzahl ein Fenster hat (Einkauf, Kosten, Recommerce, Lifecycle-Marge, Verträge), zum Stichtag nur bei Daten; Geld, das noch liegt, ist ein Betrag je Jahr aus der Hebelrechnung (Tab Stellschrauben).' },
+      { k: 'Kennzahl', v: 'Name der Kennzahl; die zwölf Monate bis zum Stichtag, wo die Kennzahl ein Fenster hat (Einkauf, Kosten, Recommerce, Lifecycle-Marge, Verträge), zum Stichtag nur bei Daten; Geld, das noch liegt, ist ein Betrag je Jahr aus der Hebelrechnung (Reiter Stellschrauben).' },
       { k: 'Wert', v: 'in Prozent, Euro oder Tagen; mittleres Gerät heißt: die Hälfte der Geräte liegt darüber, die Hälfte darunter.' },
       { k: 'Ziel', v: zielDd },
-      { k: 'Status', v: 'ok: gemessen; nicht messbar: unter der Mindeststückzahl (config/kpi_targets.yaml, Verantwortlich ' + K.min_n_owner + ') oder ohne Nenner' + (nm.length ? '; der gespeicherte Wert steht nur hier zur Orientierung: ' + nm.join('; ') : '') + '.' },
+      { k: 'Status', v: 'ok: gemessen; nicht messbar: unter der Mindeststückzahl (config/kpi_targets.yaml, Verantwortlich ' + f.role(K.min_n_owner) + ') oder ohne Nenner' + (nm.length ? '; der gespeicherte Wert steht nur hier zur Orientierung: ' + nm.join('; ') : '') + '.' },
       { k: 'Verantwortlich', v: 'Rolle, die die Kennzahl und ihr Ziel verantwortet.' }
     ];
-    if (tcoRow) kpiTableDefs.push({ k: 'TCO je Gerät', v: 'Einkaufspreis plus alle Kosten bis Verkauf (Fracht und Zoll eingeschlossen), Mittel je Gerät über die QTY ' + qty(tcoRow.n) + ' in den zwölf Monaten abgeschlossenen Kreisläufe; der Einkaufspreis ist darin enthalten, anders als in der Zeile Kosten bis Verkauf oben; Einzelheiten auf dem Tab TCO.' });
+    if (tcoRow) kpiTableDefs.push({ k: 'TCO je Gerät', v: 'Einkaufspreis plus alle Kosten bis Verkauf (Fracht und Zoll eingeschlossen), Mittel je Gerät über die ' + qty(tcoRow.n) + ' in den zwölf Monaten abgeschlossenen Kreisläufe; der Einkaufspreis ist darin enthalten, anders als in der Zeile Kosten bis Verkauf oben; Einzelheiten auf dem Reiter TCO.' });
     kpiTableDefs.push({ k: 'Anteil geschätzter Kostenzeilen', v: 'bezogen auf diese Summe mit Einkaufspreis; in der Tabelle Gewinn und Verlust sind ' + pct1(P_.z5.est / Math.abs(P_.z5.sum)) + ' der Kosten bis Verkauf geschätzt, weil dort der Einkaufspreis fehlt.' });
     var tKpi = E.TABLE('r-kpi', 'Kennzahlen, Stand ' + de(D.as_of), kpiCols, kpiRows, { n: K.n_shown, defs: kpiTableDefs, tags: [SIM] });
 
     /* ---------- Mietvertraege, die enden ---------- */
     var rentalTitle = 'Mietverträge, die bis ' + de(D.fw_end) + ' enden';
-    var rentalHead = 'QTY ' + qty(R.n_end) + ' Verträge enden zwischen ' + de(D.fw_start1) + ' und ' + de(D.fw_end) + ': Mieterlös je Monat ' + eur(R.sum_rate) + ' fällt weg, Restwertprognose der Rückläufer zusammen ' + eur(R.sum_rv) + ' (QTY ' + qty(R.n_norv) + ' Geräte ohne Prognose); heute laufen QTY ' + qty(R.n_active) + ' Verträge mit ' + eur(R.rate_active) + ' je Monat.';
+    var rentalHead = qty(R.n_end) + ' Verträge enden zwischen ' + de(D.fw_start1) + ' und ' + de(D.fw_end) + ': Mieterlös je Monat ' + eur(R.sum_rate) + ' fällt weg, Restwertprognose der Rückläufer zusammen ' + eur(R.sum_rv) + ' (' + qty(R.n_norv) + ' Geräte ohne Prognose); heute laufen ' + qty(R.n_active) + ' Verträge mit ' + eur(R.rate_active) + ' je Monat.';
     var qn = 0, qr = 0, qv = 0;
     var qRows = R.quarters.map(function (q) {
       qn += q.n; qr += q.rate; qv += q.rv;
       return E.ROW([E.C(q.q + '. Quartal ' + q.y), E.N(qty(q.n)), E.N(eur(q.rate)), E.N(eur(q.rv))]);
     });
     qRows.push(E.ROW([
-      E.C('zwölf Monate zusammen, QTY ' + qty(R.n_quarters) + ' Quartale' + (rn(R.quarters.map(function (q) { return q.rate; }), qr) || rn(R.quarters.map(function (q) { return q.rv; }), qv))),
+      E.C('zwölf Monate zusammen, ' + qty(R.n_quarters) + ' Quartale' + (rn(R.quarters.map(function (q) { return q.rate; }), qr) || rn(R.quarters.map(function (q) { return q.rv; }), qv))),
       E.N(qty(qn)), E.N(eur(qr)), E.N(eur(qv))
     ], { bold: true }));
     var defQuartal = { k: 'Quartal', v: 'Kalenderquartal, in das das vertragliche Enddatum fällt.' };
-    var defQtyEnd = { k: 'QTY endende Verträge', v: 'laufende Mietverträge mit Enddatum im Quartal; vorzeitige Rückgaben stehen nicht darin.' };
+    var defQtyEnd = { k: 'endende Verträge', v: 'laufende Mietverträge mit Enddatum im Quartal; vorzeitige Rückgaben stehen nicht darin.' };
     var defRateText = 'Summe der Monatsmieten dieser Verträge, ohne Mehrwertsteuer; fällt ab dem Enddatum weg, wenn nicht verlängert.';
     var defRv = { k: 'Restwertprognose der Rückläufer', v: 'Summe der Restwertprognose zum Leasingende der Geräte hinter diesen Verträgen, Stand Stichtag; keine Buchung.' };
     var tRentalQ = E.TABLE('r-rental-q', rentalTitle,
-      [E.H('Quartal'), E.H('QTY endende Verträge', 1), E.H('wegfallender Mieterlös je Monat', 1), E.H('Restwertprognose der Rückläufer', 1)], qRows,
+      [E.H('Quartal'), E.H('endende Verträge', 1), E.H('wegfallender Mieterlös je Monat', 1), E.H('Restwertprognose der Rückläufer', 1)], qRows,
       { n: R.n_quarters, note: rentalHead, defs: [defQuartal, defQtyEnd, { k: 'wegfallender Mieterlös je Monat', v: defRateText }, defRv], tags: [SIM] });
 
     var cRows = R.top.map(function (c) { return E.ROW([E.C(c.customer), E.N(qty(c.n)), E.N(eur(c.rate)), E.C(de(c.last_end), { nowrap: true })]); });
     if (R.rest.n_customers > 0) {
       cRows.push(E.ROW([
-        E.C('übrige QTY ' + qty(R.rest.n_customers) + ' Kunden' + rn(R.top.map(function (c) { return c.rate; }).concat([R.rest.rate]), R.sum_rate)),
+        E.C('übrige ' + qty(R.rest.n_customers) + ' Kunden' + rn(R.top.map(function (c) { return c.rate; }).concat([R.rest.rate]), R.sum_rate)),
         E.N(qty(R.rest.n)), E.N(eur(R.rest.rate)), E.C('')
       ]));
     }
     var tRentalTop = E.TABLE('r-rental-top', rentalTitle + ', je Kunde',
-      [E.H('Kunde'), E.H('QTY endende Verträge', 1), E.H('Mieterlös je Monat', 1), E.H('letztes Vertragsende')], cRows,
+      [E.H('Kunde'), E.H('endende Verträge', 1), E.H('Mieterlös je Monat', 1), E.H('letztes Vertragsende')], cRows,
       { n: R.top.length, defs: [
         { k: 'Kunde', v: 'Kundenkennung aus dem Vertrag, in der Simulation ein Platzhalter.' },
         defQtyEnd,
@@ -192,8 +191,8 @@
 
     /* ---------- Lieferanten- und Partnervertraege: Tabelle nach Kuendigungstermin, der Kopfsatz sagt, wann die auslaufenden enden ---------- */
     var EO = S.end_out;
-    var sHead = 'QTY ' + qty(S.n_sup) + ' laufende Verträge, Jahreswert zusammen ' + eur(S.sum_av) + '; davon enden bis ' + de(D.fw_end) + ' QTY ' + qty(S.n_sup_end) + ' mit Jahreswert ' + eur(S.av_end) + ', Kündigungstermin bei QTY ' + qty(S.n_notice_past) + ' davon schon verstrichen, QTY ' + qty(S.n_auto) + ' davon verlängern sich automatisch';
-    if (S.n_sup_end > 0) sHead += '. Die Tabelle zeigt ' + (EO.n > 0 ? 'die QTY ' + qty(EO.n_in) + ' mit dem nächsten Kündigungstermin; die QTY ' + qty(EO.n) + ' anderen (Jahreswert zusammen ' + eur(EO.av) + ') enden zwischen ' + de(EO.first_end) + ' und ' + de(EO.last_end) : 'sie, nach Kündigungstermin sortiert');
+    var sHead = qty(S.n_sup) + ' laufende Verträge, Jahreswert zusammen ' + eur(S.sum_av) + '; davon enden bis ' + de(D.fw_end) + ' ' + qty(S.n_sup_end) + ' mit Jahreswert ' + eur(S.av_end) + ', Kündigungstermin bei ' + qty(S.n_notice_past) + ' davon schon verstrichen, ' + qty(S.n_auto) + ' davon verlängern sich automatisch';
+    if (S.n_sup_end > 0) sHead += '. Die Tabelle zeigt ' + (EO.n > 0 ? 'die ' + qty(EO.n_in) + ' mit dem nächsten Kündigungstermin; die ' + qty(EO.n) + ' anderen (Jahreswert zusammen ' + eur(EO.av) + ') enden zwischen ' + de(EO.first_end) + ' und ' + de(EO.last_end) : 'sie, nach Kündigungstermin sortiert');
     else sHead += '. Kein Vertrag endet in diesem Fenster';
     sHead += '.';
     var sRows = S.top.map(function (s) {
@@ -201,7 +200,7 @@
     });
     if (S.rest.n > 0) {
       sRows.push(E.ROW([
-        E.C('übrige QTY ' + qty(S.rest.n) + ' laufende Verträge, Ende nach ' + de(D.fw_end) + rn(S.top.map(function (s) { return s.av; }).concat([EO.av, S.rest.av]), S.sum_av)),
+        E.C('übrige ' + qty(S.rest.n) + ' laufende Verträge, Ende nach ' + de(D.fw_end) + rn(S.top.map(function (s) { return s.av; }).concat([EO.av, S.rest.av]), S.sum_av)),
         E.C(''), E.N(eur(S.rest.av)), E.C(''), E.C(''), E.C(''), E.C('')
       ]));
     }
@@ -218,18 +217,18 @@
       ], tags: [SIM] });
 
     /* ---------- Wirkung des Teams, Fenster gegen die zwoelf Monate davor ---------- */
-    var w2st = I.w2.status === 'not_measurable' ? 'ist unter der Mindeststückzahl QTY ' + qty(I.w2.min_n) + ' nicht messbar' : 'ist ' + stDe(I.w2.status);
+    var w2st = I.w2.status === 'not_measurable' ? 'ist unter der Mindeststückzahl ' + qty(I.w2.min_n) + ' nicht messbar' : 'ist ' + stDe(I.w2.status);
     var IR = [
       ['Einkaufsrabatt gegen UVP ohne Mehrwertsteuer', 'simuliert', I.w1.eur, pct1(I.w1.ratio) + ', ' + eur(I.w1.eur), pct1(I.w1.prev.ratio) + ', ' + eur(I.w1.prev.eur), dpp(I.w1.ratio, I.w1.prev.ratio) + ', ' + deur(I.w1.eur, I.w1.prev.eur),
-        'UVP ohne Mehrwertsteuer minus gezahlter Preis nach Preisschutz-Gutschrift, QTY ' + qty(I.w1.n) + ' im Fenster gelieferte Geräte (Vorperiode QTY ' + qty(I.w1.prev.n) + ')', I.w1.owner],
+        'UVP ohne Mehrwertsteuer minus gezahlter Preis nach Preisschutz-Gutschrift, ' + qty(I.w1.n) + ' im Fenster gelieferte Geräte (Vorperiode ' + qty(I.w1.prev.n) + ')', I.w1.owner],
       ['Preisschutz-Gutschriften', 'simuliert', I.w2.sum, eur(I.w2.sum), eur(I.w2.prev.sum), deur(I.w2.sum, I.w2.prev.sum),
-        'QTY ' + qty(I.w2.n) + ' Gutschriften nach Gutschriftdatum (Vorperiode QTY ' + qty(I.w2.prev.n) + '); die Kennzahl Preisschutz-Gutschriften erfasst zählt QTY ' + qty(I.w2.kpi_n) + ' Geräte mit Anspruch (gutgeschrieben oder verpasst) unter den im Fenster gelieferten und ' + w2st, I.w2.owner],
+        qty(I.w2.n) + (I.w2.n === 1 ? ' Gutschrift' : ' Gutschriften') + ' nach Gutschriftdatum (Vorperiode ' + qty(I.w2.prev.n) + '); die Kennzahl Preisschutz-Gutschriften erfasst zählt ' + qty(I.w2.kpi_n) + (I.w2.kpi_n === 1 ? ' Gerät' : ' Geräte') + ' mit Anspruch (gutgeschrieben oder verpasst) unter den im Fenster gelieferten und ' + w2st, I.w2.owner],
       ['Restwert gegen Restwertprognose bei Rückgabe', 'simuliert, abgeleitet', I.w3.delta, pct1(I.w3.ratio) + ', ' + eur(I.w3.delta), pct1(I.w3.prev.ratio) + ', ' + eur(I.w3.prev.delta), dpp(I.w3.ratio, I.w3.prev.ratio) + ', ' + deur(I.w3.delta, I.w3.prev.delta),
-        'Restwert minus Restwertprognose bei Rückgabe, QTY ' + qty(I.w3.n) + ' Verkäufe ohne Ist-Zustand (Vorperiode QTY ' + qty(I.w3.prev.n) + '); negativ heißt unter der Prognose', I.w3.owner],
+        'Restwert minus Restwertprognose bei Rückgabe, ' + qty(I.w3.n) + ' Verkäufe ohne Ist-Zustand (Vorperiode ' + qty(I.w3.prev.n) + '); negativ heißt unter der Prognose', I.w3.owner],
       ['Tage von Rückgabe bis Zahlungseingang, mittleres Gerät', 'simuliert', I.w4.days, qty(I.w4.days) + ' Tage', qty(I.w4.prev.days) + ' Tage', ddays(I.w4.days, I.w4.prev.days),
-        'Rückgabe bis Zahlungseingang aus dem Verkauf, QTY ' + qty(I.w4.n) + ' Verkäufe (Vorperiode QTY ' + qty(I.w4.prev.n) + '); die Hälfte schneller, die Hälfte langsamer', I.w4.owner],
+        'Rückgabe bis Zahlungseingang aus dem Verkauf, ' + qty(I.w4.n) + ' Verkäufe (Vorperiode ' + qty(I.w4.prev.n) + '); die Hälfte schneller, die Hälfte langsamer', I.w4.owner],
       ['Indirekte Einsparungen, vom Controlling bestätigt', 'simuliert', I.w5.confirmed, eur(I.w5.confirmed), eur(I.w5.prev.confirmed), deur(I.w5.confirmed, I.w5.prev.confirmed),
-        'gemeldet ' + eur(I.w5.sum) + ', davon vom Controlling bestätigt ' + eur(I.w5.confirmed) + ', davon harte Preissenkung ' + eur(I.w5.confirmed_hard) + ', die gegen den Plan zählt' + (nn(I.plan) ? '' : ' (Plan ' + I.plan_year + ': ' + eur(I.plan) + ' je Kalenderjahr, config/kpi_targets.yaml)') + '; QTY ' + qty(I.w5.n) + ' Rechnungen mit Einsparung (Vorperiode QTY ' + qty(I.w5.prev.n) + ')', I.w5.owner]
+        'gemeldet ' + eur(I.w5.sum) + ', davon vom Controlling bestätigt ' + eur(I.w5.confirmed) + ', davon harte Preissenkung ' + eur(I.w5.confirmed_hard) + ', die gegen den Plan zählt' + (nn(I.plan) ? '' : ' (Plan ' + I.plan_year + ': ' + eur(I.plan) + ' je Kalenderjahr, config/kpi_targets.yaml)') + '; ' + qty(I.w5.n) + ' Rechnungen mit Einsparung (Vorperiode ' + qty(I.w5.prev.n) + ')', I.w5.owner]
     ];
     var iRows = IR.map(function (r) {
       return E.ROW([E.C(r[0], { tag: 'tag-neutral', tagText: r[1] }), E.N(r[3], { neg: r[2] < 0 }), E.N(r[4]), E.N(r[5]), E.C(r[6], { minW: 260 }), E.C(r[7])]);
@@ -246,23 +245,23 @@
       ] });
 
     /* ---------- Stand der Dinge ---------- */
-    var qparts = ST.quality.map(function (q) { return q.fam + ' ' + pct1(q.mape) + ', Bias ' + pct1(q.bias) + ' (QTY ' + qty(q.n) + ' Verkäufe' + (q.n_months !== ST.q_months ? ', QTY ' + qty(q.n_months) + ' Monate' : '') + ')'; });
-    var fleetTxt = 'Restbuchwert der Flotte zum Stichtag ' + eur(FL.bv) + ' für QTY ' + qty(FL.n) + ' offene Geräte, abgeleitet: Einkaufspreis minus Abschreibung bis ' + de(D.as_of) + ' nach der Monatsregel der Zeile Planmäßige Abschreibung, minus Wertberichtigungen. Beim Kunden QTY ' + qty(FL.customer.n) + ' mit ' + eur(FL.customer.bv) + ', davon planmäßig bis zum Vertragsende noch abzuschreiben ' + eur(FL.customer.bv_rv - FL.customer.rv) + ' auf die Restwertprognose zum Leasingende ' + eur(FL.customer.rv) + '; im Lager QTY ' + qty(FL.stock.n) + ' mit ' + eur(FL.stock.bv) + ' gegen Restwertprognose heute ' + eur(FL.stock.rv) + ', Differenz ' + eur(FL.stock.rv - FL.stock.bv_rv) + ', negativ heißt die Bücher stehen über der Prognose; Ersatzgeräte ohne Vertrag QTY ' + qty(FL.spare.n) + ' zum Einkaufspreis (ohne Vertrag keine planmäßige Abschreibung) ' + eur(FL.spare.bv) + ' gegen Restwertprognose heute ' + eur(FL.spare.rv) + ', Differenz ' + eur(FL.spare.rv - FL.spare.bv_rv) + '.'
-      + (FL.n_none > 0 ? ' QTY ' + qty(FL.n_none) + ' Geräte ohne Prognose (Restbuchwert ' + eur(FL.bv_none) + ') stehen in keiner Differenz.' : '');
+    var qparts = ST.quality.map(function (q) { return q.fam + ' ' + pct1(q.mape) + ', Bias ' + pct1(q.bias) + ' (' + qty(q.n) + ' Verkäufe' + (q.n_months !== ST.q_months ? ', ' + qty(q.n_months) + ' Monate' : '') + ')'; });
+    var fleetTxt = 'Restbuchwert der Flotte zum Stichtag ' + eur(FL.bv) + ' für ' + qty(FL.n) + ' offene Geräte, abgeleitet: Einkaufspreis minus Abschreibung bis ' + de(D.as_of) + ' nach der Monatsregel der Zeile Planmäßige Abschreibung, minus Wertberichtigungen. Beim Kunden ' + qty(FL.customer.n) + ' mit ' + eur(FL.customer.bv) + ', davon planmäßig bis zum Vertragsende noch abzuschreiben ' + eur(FL.customer.bv_rv - FL.customer.rv) + ' auf die Restwertprognose zum Leasingende ' + eur(FL.customer.rv) + '; im Lager ' + qty(FL.stock.n) + ' mit ' + eur(FL.stock.bv) + ' gegen Restwertprognose heute ' + eur(FL.stock.rv) + ', Differenz ' + eur(FL.stock.rv - FL.stock.bv_rv) + ', negativ heißt die Bücher stehen über der Prognose; Ersatzgeräte ohne Vertrag ' + qty(FL.spare.n) + ' zum Einkaufspreis (ohne Vertrag keine planmäßige Abschreibung) ' + eur(FL.spare.bv) + ' gegen Restwertprognose heute ' + eur(FL.spare.rv) + ', Differenz ' + eur(FL.spare.rv - FL.spare.bv_rv) + '.'
+      + (FL.n_none > 0 ? ' ' + qty(FL.n_none) + ' Geräte ohne Prognose (Restbuchwert ' + eur(FL.bv_none) + ') stehen in keiner Differenz.' : '');
     var B = [
-      'Beim Kunden QTY ' + qty(ST.n_rented) + ' Geräte, davon QTY ' + qty(ST.n_await) + ' mit beendetem Vertrag und ausstehender Rückgabe; im Lager nach Rückgabe QTY ' + qty(ST.n_stock) + ' Geräte, davon QTY ' + qty(ST.n_sellable) + ' verkaufsfähig; Ersatzgeräte ohne Vertrag QTY ' + qty(ST.n_spare) + '; verkauft im Fenster QTY ' + qty(ST.n_sold) + ' Geräte, verschrottet QTY ' + qty(ST.n_scrapped) + '.',
+      'Beim Kunden ' + qty(ST.n_rented) + ' Geräte, davon ' + qty(ST.n_await) + ' mit beendetem Vertrag und ausstehender Rückgabe; im Lager nach Rückgabe ' + qty(ST.n_stock) + ' Geräte, davon ' + qty(ST.n_sellable) + ' verkaufsfähig; Ersatzgeräte ohne Vertrag ' + qty(ST.n_spare) + '; verkauft im Fenster ' + qty(ST.n_sold) + ' Geräte, verschrottet ' + qty(ST.n_scrapped) + '.',
       fleetTxt,
       'Datumskette vollständig bei ' + pct1(ST.chain) + ' der Seriennummern (jede Station von Bestellung bis Zahlungseingang aus dem Verkauf hat ein Datum), Verantwortlich ' + ST.chain_owner + '.',
-      'QTY ' + qty(ST.n_p1) + ' Entscheidungen mit Priorität 1, ' + eur(ST.stake_p1) + ' im Spiel, davon QTY ' + qty(ST.n_p1_due) + ' überfällig; insgesamt warten QTY ' + qty(ST.n_q) + ' Entscheidungen mit ' + eur(ST.stake) + ' im Spiel, QTY ' + qty(ST.n_due) + ' davon überfällig.',
-      'Prognosegüte der letzten QTY ' + qty(ST.q_months) + ' Monate (' + mj(ST.q_first) + ' bis ' + mj(ST.q_last) + '), je Geräteart MAPE und Bias, mit den Verkäufen je Monat gewichtet (Verkäufe ohne Ist-Zustand), abgeleitet: ' + qparts.join('; ') + '.',
-      eur(ST.lev) + ' je Jahr liegen an den QTY ' + qty(ST.n_add) + ' addierbaren Stellschrauben ' + ST.lev_add.join(' und ') + '; die QTY ' + qty(ST.n_non) + ' anderen stehen je Stellschraube auf dem Tab Stellschrauben und dürfen nicht addiert werden.'
+      qty(ST.n_p1) + ' Entscheidungen mit Priorität 1, ' + eur(ST.stake_p1) + ' im Spiel, davon ' + qty(ST.n_p1_due) + ' überfällig; insgesamt warten ' + qty(ST.n_q) + ' Entscheidungen mit ' + eur(ST.stake) + ' im Spiel, ' + qty(ST.n_due) + ' davon überfällig.',
+      'Prognosegüte der letzten ' + qty(ST.q_months) + ' Monate (' + mj(ST.q_first) + ' bis ' + mj(ST.q_last) + '), je Geräteart Prognosefehler (MAPE) und Verzerrung (Bias), mit den Verkäufen je Monat gewichtet (Verkäufe ohne Ist-Zustand), abgeleitet: ' + qparts.join('; ') + '.',
+      eur(ST.lev) + ' je Jahr liegen an den ' + qty(ST.n_add) + ' addierbaren Stellschrauben ' + ST.lev_add.join(' und ') + '; die ' + qty(ST.n_non) + ' anderen stehen je Stellschraube auf dem Reiter Stellschrauben und dürfen nicht addiert werden.'
     ];
     var blocks = [
       { key: 'r-status', title: 'Stand der Dinge zum ' + de(D.as_of), items: B.map(item), ordered: false },
       { key: 'r-status-defs', title: 'Begriffe zum Stand der Dinge', ordered: false, items: [
         def('Restbuchwert der Flotte', 'Wert, mit dem die offenen Geräte zum Stichtag in den Büchern stehen; die Differenz zur Restwertprognose ist bei Geräten beim Kunden die noch geplante Abschreibung, bei Geräten im Lager und Ersatzgeräten das Wertberichtigungsrisiko.'),
         def('MAPE', 'mittlerer Fehler der Restwertprognose in Prozent des erzielten Restwerts, ohne Vorzeichen.'),
-        def('Bias', 'mittlere Abweichung mit Vorzeichen: positiv heißt Prognose zu hoch, negativ zu niedrig (restwert/forecast/backtest.py); gerechnet gegen die Restwertprognose für den Marktplatz, ein Verkauf an Mitarbeiter oder Großhändler unter Marktplatzpreis zählt hier als Prognose zu hoch (Geschäftssicht, restwert/forecast/error_series.py; die Modellsicht mit Kanalfaktor steht auf keinem Tab).'),
+        def('Bias', 'mittlere Abweichung mit Vorzeichen: positiv heißt Prognose zu hoch, negativ zu niedrig (restwert/forecast/backtest.py); gerechnet gegen die Restwertprognose für den Marktplatz, ein Verkauf an Mitarbeiter oder Großhändler unter Marktplatzpreis zählt hier als Prognose zu hoch (Geschäftssicht, restwert/forecast/error_series.py; die Modellsicht mit Kanalfaktor steht auf dem Reiter Prognosegüte).'),
         def('Entscheidungen', 'Zeilen der Entscheidungswarteschlange: Priorität 1 handeln, 2 prüfen, 3 Hinweis; im Spiel ist die Summe der Beträge, die die Regeln je Entscheidung nennen.'),
         def('Ersatzgeräte', 'gekaufte Geräte ohne Mietvertrag, im Lager für Austausch.')
       ] }

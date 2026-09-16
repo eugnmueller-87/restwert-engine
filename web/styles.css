@@ -412,6 +412,10 @@ select.input { appearance: auto; }
 .nav-tab:hover { color: var(--color-accent-700); }
 .nav-tab[aria-current="page"] { color: var(--color-accent-700); border-bottom-color: var(--color-accent-700); font-weight: 600; }
 .nav-tab:disabled { color: var(--ink-45); cursor: not-allowed; }
+.nav-tab[aria-current="location"] { color: var(--color-accent-700); border-bottom-color: var(--color-accent-700); font-weight: 600; }
+/* zweite Zeile der Leiste (seit 16.09.2026): die Reiter des gewaehlten Bereichs, gleiche Reiteroptik, kleiner, Hairline darunter */
+.nav-sub { display: flex; flex-wrap: wrap; gap: 0 14px; border-bottom: 1px solid var(--color-divider); }
+.nav-sub .nav-tab { font-size: 13px; padding: 5px 0 4px; }
 .blk-toggle { background: none; border: 0; padding: 0; font: inherit; font-family: var(--font-heading); font-weight: 600; font-size: 13.5px; color: var(--color-text); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; text-align: left; }
 .blk-toggle:hover { color: var(--color-accent-700); }
 .table .cell-bar { display: inline-block; vertical-align: middle; height: 7px; margin-left: 6px; background: var(--color-accent); }

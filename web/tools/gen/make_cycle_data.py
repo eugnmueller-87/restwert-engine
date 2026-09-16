@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Build the Geraetekreislauf page (synthetic simulation) from the v0.2 gold and silver tables."""
 import json, sys, pathlib
+from _roles import de_roles  # noqa: E402
 import duckdb, pandas as pd
 sys.stdout.reconfigure(encoding="utf-8")
 REPO = pathlib.Path(sys.argv[1]); OUT = pathlib.Path(sys.argv[2]); TODAY = sys.argv[3]
@@ -43,5 +44,5 @@ data = {"today": TODAY, "closed": closed, "open": open_, "fam": fam, "fam_oem": 
 # in web/app.js and the motor in web/engine/cycle.js render this JSON)
 OUT.parent.mkdir(parents=True, exist_ok=True)
 with open(OUT, "w", encoding="utf-8", newline="\n") as fh:
-    fh.write(json.dumps(data, ensure_ascii=False, default=float, separators=(",", ":")) + "\n")
+    fh.write(de_roles(json.dumps(data, ensure_ascii=False, default=float, separators=(",", ":"))) + "\n")
 print(OUT.name + ": geschrieben")

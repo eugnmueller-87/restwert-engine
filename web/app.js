@@ -1,15 +1,23 @@
 /* Restwert Engine v3: die Huelle. Port von v3/design.dc.html (Claude Design) nach React 18 UMD, ohne Build.
    Motoren: window.RE.<tab>(D, opts, P) nach v3/CONTRACT.md. Daten inline (#data-<tab>), sonst fetch('data/<tab>.json').
    Korrekturen gegen das Design (BRIEF Punkt 2): Bericht zuerst und als eigener Tab; kein Suchfeld auf Geraet;
-   Einkaufsabschlag aus data/config.json; kein Halbgeviert- oder Geviertstrich. */
+   Einkaufsabschlag aus data/config.json; kein Halbgeviert- oder Geviertstrich.
+   Leiste seit 16.09.2026 (Eugens Ansage): vier Bereiche in der Kopfzeile (Bericht, Analytics, Market Intelligence, Daten),
+   darunter die Reiter des gewaehlten Bereichs. Ein Reiter kann die Daten eines anderen lesen (data: 'market'). */
 (function (w) {
   'use strict';
   var React = w.React, ReactDOM = w.ReactDOM, h = React.createElement;
 
+  var GROUPS = [
+    { key: 'report', label: 'Bericht' }, { key: 'analytics', label: 'Analytics' }, { key: 'intel', label: 'Market Intelligence' }, { key: 'lake', label: 'Daten' }
+  ];
   var TABS = [
-    { key: 'report', label: 'Bericht' }, { key: 'device', label: 'Gerät' }, { key: 'market', label: 'Realisierung' },
-    { key: 'forecast', label: 'Prognosegüte' }, { key: 'tco', label: 'TCO' }, { key: 'cycle', label: 'Kreislauf' }, { key: 'levers', label: 'Stellschrauben' },
-    { key: 'term', label: 'Laufzeit' }, { key: 'lake', label: 'Daten' }
+    { key: 'report', label: 'Bericht', group: 'report' },
+    { key: 'device', label: 'Gerät', group: 'analytics' }, { key: 'forecast', label: 'Prognosegüte', group: 'analytics' }, { key: 'tco', label: 'TCO', group: 'analytics' },
+    { key: 'cycle', label: 'Kreislauf', group: 'analytics' }, { key: 'levers', label: 'Stellschrauben', group: 'analytics' }, { key: 'term', label: 'Laufzeit', group: 'analytics' },
+    { key: 'market', label: 'Realisierung', group: 'intel' }, { key: 'series', label: 'Serie gegen Serie', group: 'intel', data: 'market' },
+    { key: 'studies', label: 'Studien', group: 'intel', data: 'market' }, { key: 'faq', label: 'FAQ', group: 'intel' },
+    { key: 'lake', label: 'Daten', group: 'lake' }
   ];
   var PLANNED = ['Lager', 'Verträge'];
   var OVER_LABEL = { buy: 'Einkaufspreis', rate: 'Miete', cost: 'Kosten' };
@@ -18,6 +26,8 @@
   var NOTE_STYLE = { margin: '4px 0 0', maxWidth: '110ch', fontSize: 12.5, lineHeight: 1.5, color: MUTED };
 
   function tabOf(key) { for (var i = 0; i < TABS.length; i++) if (TABS[i].key === key) return TABS[i]; return TABS[0]; }
+  function dataOf(key) { return tabOf(key).data || tabOf(key).key; }
+  function tabsIn(group) { return TABS.filter(function (t) { return t.group === group; }); }
   function readInline(id) {
     var el = document.getElementById(id); if (!el) return null;
     try { return JSON.parse(el.textContent); } catch (e) { console.error('inline', id, e); return null; }
@@ -191,8 +201,8 @@
       if (op && typeof op.focus === 'function' && document.contains(op)) op.focus();
     }
 
-    load(name) {
-      var self = this;
+    load(tabKey) {
+      var self = this, name = dataOf(tabKey);
       if (this._loaded[name]) return; this._loaded[name] = true;
       var j = readInline('data-' + name);
       if (j) { this.setState(function (s) { var data = Object.assign({}, s.data); data[name] = j; return { data: data }; }); return; }
@@ -225,7 +235,8 @@
       this._drawn = this._chartKey; el.dataset.drawn = '1';
     }
 
-    setTab(key) { this.setState({ tab: key }); this.persist('restwert-tab', key); this.load(key); try { w.scrollTo(0, 0); } catch (e) {} }
+    setTab(key) { this._lastIn = this._lastIn || {}; this._lastIn[tabOf(key).group] = key; this.setState({ tab: key }); this.persist('restwert-tab', key); this.load(key); try { w.scrollTo(0, 0); } catch (e) {} }
+    setGroup(g) { var list = tabsIn(g); if (!list.length) return; var cur = this.state.tab, last = (this._lastIn && this._lastIn[g]) || (tabOf(cur).group === g ? cur : null); this.setTab(last && list.some(function (t) { return t.key === last; }) ? last : list[0].key); }
     selectDevice(id) { if (!id) return; this.setState(function (s) { return { dev: Object.assign({}, s.dev, { id: id, over: {} }), editing: {} }; }); this.persist('restwert-device', id); }
     setDev(patch) { this.setState(function (s) { return { dev: Object.assign({}, s.dev, patch, { over: {} }), editing: {} }; }); }
     setTco(patch) { var self = this; this.setState(function (s) { var tco = Object.assign({}, s.tco, patch); self.persist('restwert-tco', JSON.stringify(tco)); return { tco: tco }; }); }
@@ -259,16 +270,23 @@
         var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'restwert-' + this.state.tab + '-' + this.isoToday() + '.csv';
         document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
       } catch (e) { console.error('export', e); }
-      this.addLog('Export', w.RE.fmt.qty(T.length) + ' Tabellen des Bereichs ' + tabOf(this.state.tab).label + ' als CSV exportiert', 'Sie', 'exportiert', 'tag-neutral');
+      this.addLog('Export', w.RE.fmt.qty(T.length) + ' Tabellen des Reiters ' + tabOf(this.state.tab).label + ' als CSV exportiert', 'Sie', 'exportiert', 'tag-neutral');
     }
 
     /* ---------- Ansichtswerte, eins zu eins aus renderVals() des Designs ---------- */
     renderVals() {
-      var self = this, S = this.state, RE = w.RE, D = S.data[S.tab], P = this.readPalette() || undefined;
+      var self = this, S = this.state, RE = w.RE, D = S.data[dataOf(S.tab)], P = this.readPalette() || undefined;
       var density = this.props.density || 'compact', defsDefault = (this.props.definitions || 'collapsed') === 'open';
       var cellPad = density === 'compact' ? '5px 8px' : '9px 10px', padLeft = density === 'compact' ? 8 : 10, tableFont = density === 'compact' ? 13 : 14;
       var fmt = RE.fmt;
-      var tabs = TABS.map(function (t) { return { key: t.key, label: t.label, current: t.key === S.tab ? 'page' : undefined, onClick: function () { self.setTab(t.key); } }; });
+      /* Kopfzeile: die Bereiche; darunter die Reiter des gewaehlten Bereichs, wenn er mehr als einen hat. Der aktive Reiter
+         traegt aria-current="page"; ein Bereich mit nur einem Reiter traegt es selbst, ein Bereich mit mehreren "location". */
+      var curGroup = tabOf(S.tab).group, subList = tabsIn(curGroup);
+      var groups = GROUPS.map(function (g) {
+        var list = tabsIn(g.key), isCur = g.key === curGroup;
+        return { key: g.key, label: g.label, current: isCur ? (list.length > 1 ? 'location' : 'page') : undefined, onClick: function () { self.setGroup(g.key); } };
+      });
+      var tabs = subList.length > 1 ? subList.map(function (t) { return { key: t.key, label: t.label, current: t.key === S.tab ? 'page' : undefined, onClick: function () { self.setTab(t.key); } }; }) : [];
       var motor = typeof RE[S.tab] === 'function' ? RE[S.tab] : null;
       var V = null, error = '';
       try {
@@ -284,11 +302,11 @@
           };
           else if (S.tab === 'levers') opts = { lever: S.lever, thresholds: S.thresholds, select: function (id) { self.setState({ lever: id }); } };
           V = motor(D, opts, P);
-          if (!V || typeof V !== 'object') { V = null; error = 'Der Motor für diesen Bereich hat kein Ansichtsmodell geliefert.'; }
+          if (!V || typeof V !== 'object') { V = null; error = 'Der Motor für diesen Reiter hat kein Ansichtsmodell geliefert.'; }
         }
-      } catch (e) { console.error('compute', e); V = null; error = 'Der Motor für diesen Bereich hat einen Fehler gemeldet: ' + (e && e.message ? e.message : String(e)); }
-      if (!motor) error = 'Motor für diesen Bereich fehlt (engine/' + S.tab + '.js).';
-      if (S.failed[S.tab]) error = 'Daten für diesen Bereich konnten nicht geladen werden.';
+      } catch (e) { console.error('compute', e); V = null; error = 'Der Motor für diesen Reiter hat einen Fehler gemeldet: ' + (e && e.message ? e.message : String(e)); }
+      if (!motor) error = 'Motor für diesen Reiter fehlt (engine/' + S.tab + '.js).';
+      if (S.failed[dataOf(S.tab)]) error = 'Daten für diesen Reiter konnten nicht geladen werden.';
 
       var L = S.data.lake, lastRun = S.runs[0];
       var status = [];
@@ -301,7 +319,7 @@
       if (pending) status.push({ k: 'offen für den nächsten Lauf', v: fmt.qty(pending) });
 
       var out = {
-        tabs: tabs, status: status, cellPad: cellPad, padLeft: padLeft, tableFont: tableFont,
+        groups: groups, tabs: tabs, hasTabs: tabs.length > 0, status: status, cellPad: cellPad, padLeft: padLeft, tableFont: tableFont,
         isDevice: S.tab === 'device', isMarket: S.tab === 'market', isTco: S.tab === 'tco',
         loading: !V && !error, ready: !!V, error: error,
         kicker: '', subject: '', intro: '', introOpen: false, introLabel: 'Hinweise', toggleIntro: function () { self.toggle('introOpen', S.tab, false); },
@@ -443,7 +461,7 @@
       var shape = function (t) {
         var dOpen = S.defs[t.key] !== undefined ? S.defs[t.key] : defsDefault; var rOpen = !t.collapsible || !!S.open[t.key];
         return Object.assign({}, t, {
-          tags: t.tags || [], count: t.n ? 'QTY ' + fmt.qty(t.n) : '', defsOpen: dOpen && t.hasDefs, defsLabel: dOpen ? 'Begriffe ausblenden' : 'Begriffe',
+          tags: t.tags || [], count: t.n ? fmt.qty(t.n) + ' Zeilen' : '', defsOpen: dOpen && t.hasDefs, defsLabel: dOpen ? 'Begriffe ausblenden' : 'Begriffe',
           toggleDefs: function () { self.toggle('defs', t.key, defsDefault); }, rowsOpen: rOpen, rowsLabel: rOpen ? 'Zeilen ausblenden' : fmt.qty(t.rows.length) + ' Zeilen zeigen',
           toggleRows: function () { self.toggle('open', t.key, false); }, showEmpty: !t.hasRows && !!t.empty
         });
@@ -543,7 +561,7 @@
         h('div', { className: 'gutter', style: { display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '6px 18px', paddingBlock: 5 } },
           h('div', { className: 'brand' }, 'Restwert Engine'),
           h('nav', { 'aria-label': 'Bereiche', style: { display: 'flex', flexWrap: 'wrap', gap: '0 16px' } },
-            o.tabs.map(function (t) { return h('button', { key: t.key, type: 'button', className: 'nav-tab', onClick: t.onClick, 'aria-current': t.current }, t.label); }),
+            o.groups.map(function (g) { return h('button', { key: g.key, type: 'button', className: 'nav-tab', onClick: g.onClick, 'aria-current': g.current }, g.label); }),
             PLANNED.map(function (l) { return h('button', { key: l, type: 'button', className: 'nav-tab', disabled: true, title: 'Als Nächstes geplant' }, l); })),
           h('div', { style: { marginLeft: 'auto', display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 4 } },
             h('button', { type: 'button', className: 'btn btn-ghost', onClick: o.toggleLog, 'aria-expanded': o.logOpen, style: { whiteSpace: 'nowrap', fontSize: 13, padding: '6px 8px' } }, o.protokollLabel),
@@ -551,6 +569,8 @@
             h('button', { type: 'button', className: 'btn btn-secondary', onClick: o.openDelivery, style: { whiteSpace: 'nowrap', fontSize: 13, padding: '6px 10px' } }, 'Datei einlesen'),
             h('button', { type: 'button', className: 'btn btn-primary', onClick: o.startRun, disabled: o.running, style: { whiteSpace: 'nowrap', fontSize: 13, padding: '6px 12px' } }, o.runLabel))),
         h('div', { style: { borderTop: '1px solid var(--color-text)' } }),
+        o.hasTabs ? h('nav', { 'aria-label': 'Reiter des Bereichs', className: 'nav-sub gutter' },
+          o.tabs.map(function (t) { return h('button', { key: t.key, type: 'button', className: 'nav-tab', onClick: t.onClick, 'aria-current': t.current }, t.label); })) : null,
         h('div', { className: 'status gutter' },
           o.status.map(function (s) { return h('span', { key: s.k, style: { whiteSpace: 'nowrap' } }, s.k + ' ', h('b', null, s.v)); }),
           h('span', { style: { marginLeft: 'auto', fontStyle: 'italic' } }, 'Prototyp: Läufe werden protokolliert, nicht gerechnet.')));
@@ -675,7 +695,7 @@
     }
     renderBlocks(o) {
       if (!o.hasBlocks) return null;
-      var list = function (b, tag) { return h(tag, { style: { margin: '6px 0 0 15px', paddingLeft: 20, maxWidth: '100ch', display: 'grid', gap: 4, fontSize: 13, lineHeight: 1.5 } }, b.items.map(function (it, i) { return h('li', { key: i }, it.lead ? h('strong', null, it.lead) : null, it.lead ? ' ' : null, it.text); })); };
+      var list = function (b, tag) { return h(tag, { style: { margin: '6px 0 0 15px', paddingLeft: 20, maxWidth: '100ch', display: 'grid', gap: 4, fontSize: 13, lineHeight: 1.5 } }, b.items.map(function (it, i) { return h('li', { key: i }, it.lead ? h('strong', null, it.lead) : null, it.lead ? ' ' : null, it.text, it.href ? h(React.Fragment, null, ' ', h('a', { href: it.href, target: '_blank', rel: 'noopener', style: { color: 'var(--color-accent-700)' } }, it.linkText || 'Quelle')) : null); })); };
       return h('section', { 'aria-label': 'Methode und Grenzen', style: { margin: '36px 0 0', display: 'grid', gap: 8 } },
         o.blocks.map(function (b) {
           return h('div', { key: b.key },

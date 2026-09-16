@@ -1,12 +1,7 @@
 Restwert Engine
 Bericht
-Gerät
-Realisierung
-Prognosegüte
-TCO
-Kreislauf
-Stellschrauben
-Laufzeit
+Analytics
+Market Intelligence
 Daten
 Lager
 Verträge
@@ -14,39 +9,36 @@ Protokoll (0)
 Export CSV
 Datei einlesen
 Lauf starten
-Letzter Lauf Stand 16.09.2026 Dateien 282 Zeilen 165.913 ungeklärt 60 Seriennummern 5.251 Prototyp: Läufe werden protokolliert, nicht gerechnet.
+Letzter Lauf Stand 16.09.2026 Dateien 283 Zeilen 166.115 ungeklärt 60 Seriennummern 5.251 Prototyp: Läufe werden protokolliert, nicht gerechnet.
 Protokoll dieser Installation
 manuell erfasste Daten, Lieferungen, Schwellen, Läufe · lokal gespeichert
 Noch keine Einträge. Preisbelege erfassen, Dateien einlesen, Schwellen ändern oder Szenarien speichern; jeder Schritt landet hier.
 Simulation, Stand 16.09.2026 (Stichtag der Daten 13.09.2026)
 Daten: welche Kanäle angeschlossen sind, was reinkommt, was das Werkzeug abweist
 Hinweise ausblenden
-Das Werkzeug liest keine Quellsysteme direkt. Jeder Kanal liefert Dateien in einen festen Ordner; jede Datei wird einmal geprüft, gezählt und übernommen. Was sich keiner Bestellung oder Seriennummer zuordnen lässt, bleibt als „ungeklärt" liegen und wird nie geraten. Alles unten kommt aus der Simulation; die Regeln gelten für echte Daten genauso.
+Das Werkzeug liest keine Quellsysteme direkt. Jeder Kanal liefert Dateien in einen festen Ordner; jede Datei wird einmal geprüft, gezählt und übernommen. Was sich keiner Bestellung oder Seriennummer zuordnen lässt, bleibt als „ungeklärt“ liegen und wird nie geraten. Alles unten kommt aus der Simulation; die Regeln gelten für echte Daten genauso.
 Datenkanäle angeschlossen
-QTY 19
+19
 aus 9 Quellsystemen, plus 3 öffentliche Kanäle (Katalog, Marktkurven)
 14 davon für den Kreislauf nötig
-282 Dateien seit 01.01.2022
+283 Dateien seit 01.01.2022
 Zeilen gelesen
-QTY 165.913
-164.826 übernommen
-819 identische Doppelte übersprungen
+166.115
+165.026 übernommen
+821 identische Doppelte übersprungen
 208 Doppelte mit anderem Inhalt gemeldet
 Ungeklärte Zeilen
-QTY 60
+60
 45 mal Rechnungsposition ohne bekannte Bestellposition
 15 mal Versandzeile ohne bekannte Seriennummer
 nichts davon wird geraten
 Datumskette vollständig
-95,2 %
-4.999 von 5.251 Seriennummern
+95,4 %
+5.011 von 5.251 Seriennummern
 jede erwartete Station von Bestellung bis Zahlungseingang hat ein Datum
 Weniger
-Begriffe ausblenden
-QTY (Quantity)
-Stückzahl; das Wort dahinter sagt, was gezählt wird: Kanäle, Zeilen, Dateien, Geräte, Seriennummern.
 Die Datenkanäle
-QTY 19
+19 Zeilen
 Begriffe ausblenden
 Kanal
 eine Dateiart aus einem Quellsystem; öffentlich heißt: kommt aus dem Katalog oder den Preisbelegen, nicht aus einem Unternehmen
@@ -57,7 +49,7 @@ was in einer Zeile der Datei steht
 Ohne diesen Kanal fehlt
 was das Werkzeug ohne diesen Kanal nicht mehr rechnen kann. Steht dort eine Station des Kreislaufs (Einkaufspreis, Versand, Mieterlös, Restwert, Zahlungseingang), ist der Kanal nötig: ohne ihn gibt es keine Lifecycle-Marge je Gerät. Steht dort „nur ...", ist der Kanal ergänzend: es fehlt eine Stellschraube oder ein Vergleich, der Kreislauf rechnet trotzdem
 Dateien
-QTY Dateien, die dieser Kanal seit 01.01.2022 geliefert hat; die Summenzeile zählt alle Kanäle zusammen
+Dateien, die dieser Kanal seit 01.01.2022 geliefert hat; die Summenzeile zählt alle Kanäle zusammen
 Letzte Lieferung
 Datum der jüngsten Datei dieses Kanals
 Zeilen gelesen, übernommen
@@ -68,25 +60,25 @@ ungeklärt
 Zeilen, die sich keinem Schlüssel zuordnen lassen (Bestellposition, Seriennummer); sie liegen in einer eigenen Tabelle und gehen an den Lieferanten der Datei zurück
 Kanal | Liefert | Inhalt | Ohne diesen Kanal fehlt | Dateien | Letzte Lieferung | Zeilen gelesen | übernommen | doppelt | ungeklärt
 Katalog: Modelle öffentlich | öffentlicher Katalog (Repo) | Modell, Hersteller, Familie, Verkaufsstart, Nachfolger, je Zeile mit Quelle | Modell, Verkaufsstart und Alter je Gerätnötig für den Kreislauf | 1 | 13.09.2026 | 233 | 233 | 0 | 0
-Katalog: Ausstattungen und UVP öffentlich | öffentlicher Katalog (Repo) | Speicherstufen und Konfigurationen mit UVP beim Verkaufsstart, je Zeile mit Quelle | UVP je Gerät, damit Rabatt und Realisierungnötig für den Kreislauf | 1 | 13.09.2026 | 622 | 622 | 0 | 0
-Marktkurven öffentlich | Tab Realisierung (öffentliche Preisbelege) | Kurven je Familie und Hersteller aus den öffentlichen Preisbelegen; nur Vergleich, keine Entscheidung | nur der Vergleich mit den öffentlichen Preisbelegenergänzend, Kreislauf rechnet auch ohne | 1 | 13.09.2026 | 24 | 24 | 0 | 0
-Vertragsregister | Vertragsverwaltung | Hersteller- und Händlerverträge: Laufzeit, Preisschutzfrist, Boni, Kündigung | nur Tab Verträge und die Preisschutzfrist je Herstellerergänzend, Kreislauf rechnet auch ohne | 1 | 13.09.2026 | 22 | 22 | 0 | 0
-Bestellungen | ERP, Einkauf | Bestellkopf je Lieferant mit Vertragsbezug | Bestelldatum und Lieferant je Gerätnötig für den Kreislauf | 17 | 31.03.2026 | 847 | 843 | 4 | 0
-Bestellpositionen | ERP, Einkauf | Modell, Ausstattung, Menge, Preis je Position | Bestellpreis je Gerät (Einkaufspreis bis zur Rechnung)nötig für den Kreislauf | 18 | 30.06.2026 | 4.480 | 4.458 | 22 | 0
+Katalog: Ausstattungen und UVP öffentlich | öffentlicher Katalog (Repo) | Speicherstufen und Konfigurationen mit UVP beim Verkaufsstart, je Zeile mit Quelle | UVP je Gerät, damit Rabatt und Realisierungnötig für den Kreislauf | 1 | 13.09.2026 | 628 | 628 | 0 | 0
+Marktkurven öffentlich | Reiter Realisierung (öffentliche Preisbelege) | Kurven je Familie und Hersteller aus den öffentlichen Preisbelegen; nur Vergleich, keine Entscheidung | nur der Vergleich mit den öffentlichen Preisbelegenergänzend, Kreislauf rechnet auch ohne | 1 | 13.09.2026 | 25 | 25 | 0 | 0
+Vertragsregister | Vertragsverwaltung | Hersteller- und Händlerverträge: Laufzeit, Preisschutzfrist, Boni, Kündigung | nur Bereich Verträge und die Preisschutzfrist je Herstellerergänzend, Kreislauf rechnet auch ohne | 1 | 13.09.2026 | 22 | 22 | 0 | 0
+Bestellungen | ERP, Einkauf | Bestellkopf je Lieferant mit Vertragsbezug | Bestelldatum und Lieferant je Gerätnötig für den Kreislauf | 17 | 31.03.2026 | 839 | 835 | 4 | 0
+Bestellpositionen | ERP, Einkauf | Modell, Ausstattung, Menge, Preis je Position | Bestellpreis je Gerät (Einkaufspreis bis zur Rechnung)nötig für den Kreislauf | 18 | 30.06.2026 | 4.505 | 4.483 | 22 | 0
 Wareneingänge | ERP und Lager | Seriennummer je gelieferter Position mit Eingangsdatum | Seriennummer und Wareneingang: ohne sie gibt es das Gerät im Werkzeug nichtnötig für den Kreislauf | 18 | 30.06.2026 | 5.277 | 5.251 | 26 | 0
-Lieferantenrechnungen | ERP, Kreditoren | Rechnungspositionen je Bestellposition: Gerätepreis, Fracht, Zoll | Einkaufspreis, Fracht und Zoll je Gerätnötig für den Kreislauf | 18 | 30.06.2026 | 11.143 | 11.043 | 55 | 45
-Preisänderungen der Hersteller | ERP, Preislisten | Listenpreisänderungen je Modell mit Datum; Grundlage des Preisschutzes | nur die Stellschraube Preisschutzergänzend, Kreislauf rechnet auch ohne | 19 | 13.09.2026 | 149 | 148 | 1 | 0
-Einrichtungsprotokoll | Lager | Einrichtung je Seriennummer vor dem Versand | Einrichtung vor Versand (Kosten und Datum)nötig für den Kreislauf | 19 | 13.09.2026 | 5.245 | 5.219 | 26 | 0
-Versandprotokoll | Lager | Jeder Versand je Seriennummer: zum Kunden, Austausch, Rücksendung | Versand zum Kunden, Austausch, Rücksendung (Kosten und Daten)nötig für den Kreislauf | 19 | 13.09.2026 | 7.986 | 7.931 | 40 | 15
-Mietverträge | Kundenportal | Vertrag je Seriennummer: Kunde, Laufzeit, Monatsmiete, Beginn, Ende | Laufzeit und Miete je Gerätnötig für den Kreislauf | 19 | 13.09.2026 | 5.245 | 5.219 | 26 | 0
-Mietrechnungen | Kundenportal, Abrechnung | Monatliche Mietrechnung je Vertrag | Mieterlös je Gerätnötig für den Kreislauf | 19 | 13.09.2026 | 111.061 | 110.301 | 760 | 0
-Servicefälle | Servicedesk | Störungen und Reparaturen je Seriennummer mit Lösung und Kosten | nur die Reparaturkosten in der Stellschraube Zustand und Reparaturergänzend, Kreislauf rechnet auch ohne | 19 | 13.09.2026 | 895 | 891 | 4 | 0
-Rückläufer | Rücknahme | Rückgabe je Seriennummer mit Zustandsprüfung und Löschzertifikat | Rückgabe, Zustandsstufe, Datenlöschung je Gerätnötig für den Kreislauf | 19 | 13.09.2026 | 2.741 | 2.727 | 14 | 0
-Aufbereitungsaufträge | Aufbereitungspartner | Auftrag je Seriennummer mit Kosten, Zustand danach und Ergebnis | Aufbereitung und Datum verkaufsfähignötig für den Kreislauf | 19 | 13.09.2026 | 2.704 | 2.691 | 13 | 0
-Verkaufsaufträge | Recommerce, je Kanal | Verkauf je Seriennummer: Kanal, Preis, Datum | Restwert (Verkaufspreis) und Verkaufskanal je Gerätnötig für den Kreislauf | 18 | 13.09.2026 | 2.553 | 2.540 | 13 | 0
-Gutschriften der Verkaufskanäle | Kanalabrechnung | Zahlungseingang und Gebühren je Verkauf | Zahlungseingang und Kanalgebühren je Gerätnötig für den Kreislauf | 18 | 13.09.2026 | 2.395 | 2.383 | 12 | 0
+Lieferantenrechnungen | ERP, Kreditoren | Rechnungspositionen je Bestellposition: Gerätepreis, Fracht, Zoll | Einkaufspreis, Fracht und Zoll je Gerätnötig für den Kreislauf | 19 | 13.09.2026 | 11.162 | 11.061 | 56 | 45
+Preisänderungen der Hersteller | ERP, Preislisten | Listenpreisänderungen je Modell mit Datum; Grundlage des Preisschutzes | nur die Stellschraube Preisschutzergänzend, Kreislauf rechnet auch ohne | 19 | 13.09.2026 | 154 | 153 | 1 | 0
+Einrichtungsprotokoll | Lager | Einrichtung je Seriennummer vor dem Versand | Einrichtung vor Versand (Kosten und Datum)nötig für den Kreislauf | 19 | 13.09.2026 | 5.271 | 5.245 | 26 | 0
+Versandprotokoll | Lager | Jeder Versand je Seriennummer: zum Kunden, Austausch, Rücksendung | Versand zum Kunden, Austausch, Rücksendung (Kosten und Daten)nötig für den Kreislauf | 19 | 13.09.2026 | 8.030 | 7.975 | 40 | 15
+Mietverträge | Kundenportal | Vertrag je Seriennummer: Kunde, Laufzeit, Monatsmiete, Beginn, Ende | Laufzeit und Miete je Gerätnötig für den Kreislauf | 19 | 13.09.2026 | 5.271 | 5.245 | 26 | 0
+Mietrechnungen | Kundenportal, Abrechnung | Monatliche Mietrechnung je Vertrag | Mieterlös je Gerätnötig für den Kreislauf | 19 | 13.09.2026 | 111.075 | 110.315 | 760 | 0
+Servicefälle | Servicedesk | Störungen und Reparaturen je Seriennummer mit Lösung und Kosten | nur die Reparaturkosten in der Stellschraube Zustand und Reparaturergänzend, Kreislauf rechnet auch ohne | 19 | 13.09.2026 | 883 | 879 | 4 | 0
+Rückläufer | Rücknahme | Rückgabe je Seriennummer mit Zustandsprüfung und Löschzertifikat | Rückgabe, Zustandsstufe, Datenlöschung je Gerätnötig für den Kreislauf | 19 | 13.09.2026 | 2.759 | 2.745 | 14 | 0
+Aufbereitungsaufträge | Aufbereitungspartner | Auftrag je Seriennummer mit Kosten, Zustand danach und Ergebnis | Aufbereitung und Datum verkaufsfähignötig für den Kreislauf | 19 | 13.09.2026 | 2.725 | 2.711 | 14 | 0
+Verkaufsaufträge | Recommerce, je Kanal | Verkauf je Seriennummer: Kanal, Preis, Datum | Restwert (Verkaufspreis) und Verkaufskanal je Gerätnötig für den Kreislauf | 18 | 13.09.2026 | 2.557 | 2.544 | 13 | 0
+Gutschriften der Verkaufskanäle | Kanalabrechnung | Zahlungseingang und Gebühren je Verkauf | Zahlungseingang und Kanalgebühren je Gerätnötig für den Kreislauf | 18 | 13.09.2026 | 2.408 | 2.396 | 12 | 0
 Indirekte Ausgaben | Kreditoren | Ausgaben ohne Seriennummer (Dienstleister, Software); nicht im Gerätekreislauf | nur die indirekten Ausgaben, die nicht im Gerätekreislauf stehenergänzend, Kreislauf rechnet auch ohne | 19 | 13.09.2026 | 2.291 | 2.280 | 11 | 0
-Summe |  |  |  | 282 |  | 165.913 | 164.826 | 1.027 | 60
+Summe |  |  |  | 283 |  | 166.115 | 165.026 | 1.029 | 60
 Eingelesene Dateien dieser Installation
 Prototyp
 Begriffe ausblenden
@@ -107,28 +99,28 @@ Freigeben, Entfernen
 Freigeben merkt die Datei für den nächsten Lauf vor; Entfernen nimmt sie aus dieser Installation
 Noch keine Datei eingelesen.
 Ungeklärte Zeilen, nach Grund
-QTY 3
+3 Zeilen
 Begriffe ausblenden
 Kanal
 der Kanal, dessen Datei die Zeilen geliefert hat
 Grund
 warum die Zeile liegen bleibt
-QTY Zeilen
+Zeilen
 Stückzahl der Zeilen mit diesem Grund, über alle Dateien des Kanals
-Kanal | Grund | QTY Zeilen
+Kanal | Grund | Zeilen
 Mietrechnungen | Doppelte Zeile mit anderem Inhalt (erste Lieferung gilt) | 208
 Lieferantenrechnungen | Rechnungsposition ohne bekannte Bestellposition | 45
 Versandprotokoll | Versandzeile ohne bekannte Seriennummer | 15
 Nichts davon wird geraten oder still ergänzt. Eine Zeile bleibt ungeklärt, bis die Quelle sie berichtigt liefert; erst dann rechnet sie mit. Doppelte mit anderem Inhalt stehen hier, weil ein Mensch entscheiden muss, welche Fassung stimmt.
 Die Datumskette je Seriennummer
-QTY 10
+10 Zeilen
 Begriffe ausblenden
 Jede Seriennummer hat zehn Stationen. Für jede Station, die ein Gerät in seinem Zustand schon erreicht haben muss, prüft das Werkzeug, ob ein Datum da ist. Vollständig heißt: jede erwartete Station hat ein Datum.
 Station
 ein Schritt des Kreislaufs, von der Bestellung bis zum Zahlungseingang, in seiner Reihenfolge
 Das Datum kommt aus
 der Datenkanal und die Zeile, aus der das Werkzeug das Datum liest; nichts wird von Hand eingetragen, jedes Datum zeigt auf die Zeile in der Rohdatei (Kanal und Belegnummer stehen je Seriennummer im Hauptbuch)
-erwartet bei QTY Geräten
+erwartet bei Geräten
 Stückzahl der Geräte, die diese Station in ihrem Zustand schon erreicht haben müssen
 mit Datum
 Stückzahl der erwarteten Geräte, bei denen ein Datum vorliegt
@@ -136,18 +128,18 @@ Anteil
 mit Datum geteilt durch erwartet, in Prozent
 ohne Datum
 Geräte, bei denen die Station erwartet wird und kein Datum vorliegt; die Liste je Station steht darunter, mit dem Grund, soweit das Werkzeug ihn kennt
-Station | Das Datum kommt aus | erwartet bei QTY Geräten | mit Datum | Anteil | ohne Datum
+Station | Das Datum kommt aus | erwartet bei Geräten | mit Datum | Anteil | ohne Datum
 Bestellung | Bestellungen (ERP): Bestelldatum des Bestellkopfs, über den Wareneingang der Seriennummer gefunden | 5.251 | 5.251 | 100,0 % |
 Wareneingang | Wareneingänge (ERP und Lager): Eingangsdatum der Zeile mit dieser Seriennummer | 5.251 | 5.251 | 100,0 % |
-Einrichtung | Einrichtungsprotokoll (Lager): Datum der ersten Einrichtung dieser Seriennummer | 5.219 | 5.219 | 100,0 % |
-Versand zum Kunden | Versandprotokoll (Lager): Datum des ersten Versands zum Kunden (oder als Austauschgerät) | 5.219 | 5.204 | 99,7 % | 15
-Rückgabe | Rückläufer (Rücknahme): Rückgabedatum des letzten Rückläufer-Belegs | 2.727 | 2.727 | 100,0 % |
-Datenlöschung | Rückläufer (Rücknahme): Datum des Löschzertifikats auf demselben Beleg | 2.691 | 2.608 | 96,9 % | 83
-Zustandsprüfung | Rückläufer (Rücknahme): Datum der Zustandsprüfung auf demselben Beleg | 2.691 | 2.691 | 100,0 % |
-verkaufsfähig | Aufbereitungsaufträge (Aufbereiter): Fertigstellung des letzten Auftrags, dessen Ergebnis nicht Verschrottung ist | 2.668 | 2.668 | 100,0 % |
-Verkauf | Verkaufsaufträge (Recommerce): Verkaufsdatum des Auftrags mit dieser Seriennummer | 2.540 | 2.540 | 100,0 % |
-Zahlungseingang | Gutschriften der Verkaufskanäle (Kanalabrechnung): Datum der Gutschrift zu diesem Verkauf | 2.540 | 2.383 | 93,8 % | 157
-Versand zum Kunden: QTY 15 Geräte ohne Datum, Kanal Versandprotokoll (Lager)
+Einrichtung | Einrichtungsprotokoll (Lager): Datum der ersten Einrichtung dieser Seriennummer | 5.245 | 5.245 | 100,0 % |
+Versand zum Kunden | Versandprotokoll (Lager): Datum des ersten Versands zum Kunden (oder als Austauschgerät) | 5.245 | 5.230 | 99,7 % | 15
+Rückgabe | Rückläufer (Rücknahme): Rückgabedatum des letzten Rückläufer-Belegs | 2.745 | 2.745 | 100,0 % |
+Datenlöschung | Rückläufer (Rücknahme): Datum des Löschzertifikats auf demselben Beleg | 2.711 | 2.632 | 97,1 % | 79
+Zustandsprüfung | Rückläufer (Rücknahme): Datum der Zustandsprüfung auf demselben Beleg | 2.711 | 2.711 | 100,0 % |
+verkaufsfähig | Aufbereitungsaufträge (Aufbereiter): Fertigstellung des letzten Auftrags, dessen Ergebnis nicht Verschrottung ist | 2.679 | 2.679 | 100,0 % |
+Verkauf | Verkaufsaufträge (Recommerce): Verkaufsdatum des Auftrags mit dieser Seriennummer | 2.544 | 2.544 | 100,0 % |
+Zahlungseingang | Gutschriften der Verkaufskanäle (Kanalabrechnung): Datum der Gutschrift zu diesem Verkauf | 2.544 | 2.396 | 94,2 % | 148
+Versand zum Kunden: 15 Geräte ohne Datum, Kanal Versandprotokoll (Lager)
 Zeilen ausblenden
 Begriffe ausblenden
 Seriennummer
@@ -163,22 +155,22 @@ Tage zwischen diesem Datum und dem 16.09.2026
 Grund, soweit bekannt
 was das Werkzeug über die fehlende Zeile weiß; der Rest steht in der Quelle
 Seriennummer | Modell | Zustand | letzte Station mit Datum | Tage seitdem | Grund, soweit bekannt
-SN-APL-51F262CC | iPhone 12 Pro | verkauft | Einrichtung am 22.10.2022 | 1.425 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer, vermutlich gehört eine davon hierher (zu prüfen)
-SN-APL-C32B4216 | iPhone 15 | beim Kunden, vermietet | Einrichtung am 10.02.2025 | 583 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer, vermutlich gehört eine davon hierher (zu prüfen)
-SN-APL-D15DA7A5 | iPhone 15 | beim Kunden, vermietet | Einrichtung am 15.01.2024 | 975 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer, vermutlich gehört eine davon hierher (zu prüfen)
-SN-APL-DE7739A5 | iPhone 12 mini | verkauft | Einrichtung am 29.10.2022 | 1.418 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer, vermutlich gehört eine davon hierher (zu prüfen)
-SN-APL-E23A5632 | iPhone 12 Pro Max | verkauft | Einrichtung am 17.01.2023 | 1.338 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer, vermutlich gehört eine davon hierher (zu prüfen)
-SN-APL-E8B1AC5D | iPhone 13 | verkauft | Einrichtung am 19.03.2022 | 1.642 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer, vermutlich gehört eine davon hierher (zu prüfen)
-SN-APL-FF6BB718 | iPad Pro 11 (4. Generation, M2, 2022) | beim Kunden, vermietet | Einrichtung am 13.12.2024 | 642 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer, vermutlich gehört eine davon hierher (zu prüfen)
-SN-GOO-B17A258C | Google Pixel 8 Pro | verkauft | Einrichtung am 24.01.2024 | 966 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer, vermutlich gehört eine davon hierher (zu prüfen)
-SN-GOO-C4D1F562 | Google Pixel 7 | verkauft | Einrichtung am 18.07.2023 | 1.156 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer, vermutlich gehört eine davon hierher (zu prüfen)
-SN-LEN-11CE19E6 | Lenovo ThinkPad L14 Gen 4 (14 Zoll, Intel Raptor Lake / AMD Ryzen 7030, 2023) | beim Kunden, vermietet | Einrichtung am 03.11.2025 | 317 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer, vermutlich gehört eine davon hierher (zu prüfen)
-SN-LEN-62B47E7F | Lenovo ThinkPad P16v Gen 1 | beim Kunden, vermietet | Einrichtung am 16.02.2026 | 212 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer, vermutlich gehört eine davon hierher (zu prüfen)
-SN-LEN-AB6CCEF7 | Lenovo ThinkPad T14 Gen 4 (14 Zoll, Intel Raptor Lake / AMD Ryzen 7000 Pro, 2023) | beim Kunden, vermietet | Einrichtung am 01.12.2025 | 289 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer, vermutlich gehört eine davon hierher (zu prüfen)
-SN-SAM-3BECFE6B | Samsung Galaxy S21 5G | verkauft | Einrichtung am 22.03.2023 | 1.274 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer, vermutlich gehört eine davon hierher (zu prüfen)
-SN-SAM-52B20E10 | Samsung Galaxy Tab S8 (11 Zoll, SM-X700/X706) | verkauft | Einrichtung am 29.05.2023 | 1.206 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer, vermutlich gehört eine davon hierher (zu prüfen)
-SN-SAM-C75733C4 | Samsung Galaxy A13 (4G, SM-A135F) | verkauft | Einrichtung am 14.08.2022 | 1.494 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer, vermutlich gehört eine davon hierher (zu prüfen)
-Datenlöschung: QTY 83 Geräte ohne Datum, Kanal Rückläufer (Rücknahme)
+SN-APL-1D3CCA56 | iPhone 16e | beim Kunden, vermietet | Einrichtung am 15.08.2025 | 397 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer; ob eine davon hierher gehört, klärt die Quelle (zu prüfen)
+SN-APL-90357E43 | iPhone SE (3. Generation, 2022) | verkauft | Einrichtung am 28.05.2023 | 1.207 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer; ob eine davon hierher gehört, klärt die Quelle (zu prüfen)
+SN-APL-9632B793 | MacBook Air 13 (M3, 2024) | beim Kunden, vermietet | Einrichtung am 31.01.2026 | 228 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer; ob eine davon hierher gehört, klärt die Quelle (zu prüfen)
+SN-FPH-92CA7DA0 | Fairphone 4 | verkauft | Einrichtung am 13.09.2023 | 1.099 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer; ob eine davon hierher gehört, klärt die Quelle (zu prüfen)
+SN-FPH-FC51AA1D | Fairphone 5 | beim Kunden, vermietet | Einrichtung am 13.01.2026 | 246 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer; ob eine davon hierher gehört, klärt die Quelle (zu prüfen)
+SN-HPI-B4AAF0B0 | HP ProBook 450 G8 (15,6 Zoll, Intel Tiger Lake, 2020/2021) | im Lager, verkaufsfähig | Einrichtung am 23.08.2023 | 1.120 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer; ob eine davon hierher gehört, klärt die Quelle (zu prüfen)
+SN-LEN-37892EFA | Lenovo ThinkPad L14 Gen 3 (14 Zoll, Intel Alder Lake / AMD Ryzen 5000 Pro, 2022) | beim Kunden, vermietet | Einrichtung am 09.09.2023 | 1.103 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer; ob eine davon hierher gehört, klärt die Quelle (zu prüfen)
+SN-MOT-9B7580B8 | Motorola Moto G04s | im Lager, verkaufsfähig | Einrichtung am 13.07.2024 | 795 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer; ob eine davon hierher gehört, klärt die Quelle (zu prüfen)
+SN-SAM-3F3D102A | Samsung Galaxy A35 5G | verkauft | Einrichtung am 08.05.2024 | 861 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer; ob eine davon hierher gehört, klärt die Quelle (zu prüfen)
+SN-SAM-44CB6B4E | Samsung Galaxy S21 Ultra 5G | beim Kunden, vermietet | Einrichtung am 26.10.2023 | 1.056 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer; ob eine davon hierher gehört, klärt die Quelle (zu prüfen)
+SN-SAM-7BFC1B3E | Samsung Galaxy A33 5G | im Lager, verkaufsfähig | Einrichtung am 23.07.2023 | 1.151 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer; ob eine davon hierher gehört, klärt die Quelle (zu prüfen)
+SN-SAM-7EFB7FD8 | Samsung Galaxy S23+ | verkauft | Einrichtung am 21.10.2023 | 1.061 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer; ob eine davon hierher gehört, klärt die Quelle (zu prüfen)
+SN-SAM-8D509C22 | Samsung Galaxy Tab S8 (11 Zoll, SM-X700/X706) | verkauft | Einrichtung am 26.11.2022 | 1.390 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer; ob eine davon hierher gehört, klärt die Quelle (zu prüfen)
+SN-SAM-CB66F829 | Samsung Galaxy A52s 5G | verkauft | Einrichtung am 18.04.2023 | 1.247 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer; ob eine davon hierher gehört, klärt die Quelle (zu prüfen)
+SN-SAM-CC6BBB38 | Samsung Galaxy S21 5G | verkauft | Einrichtung am 15.08.2022 | 1.493 | kein Versandprotokoll mit dieser Seriennummer; im Kanal Versandprotokoll liegen 15 ungeklärte Zeilen mit unbekannter Seriennummer; ob eine davon hierher gehört, klärt die Quelle (zu prüfen)
+Datenlöschung: 79 Geräte ohne Datum, Kanal Rückläufer (Rücknahme)
 Zeilen ausblenden
 Begriffe ausblenden
 Seriennummer
@@ -194,90 +186,86 @@ Tage zwischen diesem Datum und dem 16.09.2026
 Grund, soweit bekannt
 was das Werkzeug über die fehlende Zeile weiß; der Rest steht in der Quelle
 Seriennummer | Modell | Zustand | letzte Station mit Datum | Tage seitdem | Grund, soweit bekannt
-SN-APL-021AE69A | iPhone SE (3. Generation, 2022) | verschrottet | Rückgabe am 05.02.2025 | 588 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-17721034 | iPhone 14 Pro | verkauft | Rückgabe am 27.07.2025 | 416 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-21E400A0 | iPhone 14 Plus | verkauft | Rückgabe am 14.04.2025 | 520 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-22E0DE5C | MacBook Air 15 (M2, 2023) | verkauft | Rückgabe am 02.07.2025 | 441 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-24B4D4B5 | iPhone 12 | verkauft | Rückgabe am 29.07.2023 | 1.145 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-2CD25BA6 | iPhone 14 Pro Max | verkauft | Rückgabe am 16.01.2025 | 608 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-37CA0FFD | iPhone 13 mini | verkauft | Rückgabe am 16.06.2026 | 92 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-3F0C7F45 | iPhone 15 Pro | verkauft | Rückgabe am 25.02.2026 | 203 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-42D31791 | iPad Pro 11" (3. Generation, M1, 2021) | verkauft | Rückgabe am 07.01.2026 | 252 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-46F98F5A | iPhone 14 Pro | verkauft | Rückgabe am 05.01.2026 | 254 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-4A9E9056 | iPhone 14 Plus | verkauft | Rückgabe am 11.05.2025 | 493 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-524DC5C5 | iPad 10,2" (8. Generation, A12, 2020) | verkauft | Rückgabe am 12.03.2025 | 553 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-567AA988 | iPhone 12 Pro | verkauft | Rückgabe am 18.04.2023 | 1.247 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-5854DD8F | iPhone 13 Pro | verkauft | Rückgabe am 04.05.2025 | 500 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-5A42D124 | iPhone 13 | verkauft | Rückgabe am 30.04.2024 | 869 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-60C52B91 | iPhone 12 Pro | verkauft | Rückgabe am 26.02.2024 | 933 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-622605EA | iPhone 13 Pro | verkauft | Rückgabe am 03.09.2024 | 743 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-79A1798E | MacBook Pro 14 (M3 / M3 Pro / M3 Max, Late 2023) | verkauft | Rückgabe am 06.05.2025 | 498 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-7D287067 | iPhone 12 Pro Max | verkauft | Rückgabe am 27.05.2024 | 842 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-8609BA41 | iPhone SE (3. Generation, 2022) | verkauft | Rückgabe am 25.12.2023 | 996 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-907B98CB | iPhone 13 Pro | verkauft | Rückgabe am 30.09.2024 | 716 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-961BB2DC | iPhone 15 Pro Max | verkauft | Rückgabe am 04.02.2026 | 224 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-9838CAFA | iPhone 13 Pro Max | verkauft | Rückgabe am 01.06.2025 | 472 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-986A8D02 | iPhone 12 mini | verkauft | Rückgabe am 27.06.2025 | 446 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-98E23B65 | iPhone 13 Pro | verkauft | Rückgabe am 07.09.2024 | 739 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-BDB3D682 | iPad Pro 11 (4. Generation, M2, 2022) | verkauft | Rückgabe am 23.11.2025 | 297 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-C1CDE380 | iPad mini 8,3 (6. Generation, A15, 2021) | verkauft | Rückgabe am 12.11.2025 | 308 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-C7948EFA | iPhone 14 Plus | verkauft | Rückgabe am 11.01.2026 | 248 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-C79AF998 | MacBook Pro 16" (M1 Pro / M1 Max, 2021) | verkauft | Rückgabe am 30.09.2025 | 351 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-D49F135A | iPhone 15 | im Lager, verkaufsfähig | Rückgabe am 26.08.2026 | 21 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-D6349C8A | iPhone 14 Pro | verkauft | Rückgabe am 27.10.2024 | 689 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-DE89BBE5 | MacBook Pro 14" (M1 Pro / M1 Max, 2021) | verkauft | Rückgabe am 04.11.2025 | 316 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-E2181586 | iPhone 15 Pro | verkauft | Rückgabe am 07.08.2025 | 405 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-E908C4DB | iPhone 14 Pro | verkauft | Rückgabe am 03.04.2025 | 531 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-F301F5B5 | MacBook Pro 14" (M1 Pro / M1 Max, 2021) | verkauft | Rückgabe am 10.02.2025 | 583 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-APL-F914B0AD | iPhone 13 | verkauft | Rückgabe am 09.12.2023 | 1.012 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-DEL-7494CD0D | Dell Latitude 5420 (14 Zoll, Intel Tiger Lake, 2021) | verkauft | Rückgabe am 31.12.2025 | 259 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-FPH-9105EAB8 | Fairphone 4 | verkauft | Rückgabe am 14.03.2025 | 551 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-GOO-23761690 | Google Pixel 6a | verkauft | Rückgabe am 19.02.2026 | 209 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-GOO-60909240 | Google Pixel 7a | verkauft | Rückgabe am 29.07.2025 | 414 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-HPI-325060A7 | HP ProBook 450 G9 (15,6 Zoll, Intel Alder Lake, 2022) | verkauft | Rückgabe am 16.02.2024 | 943 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-HPI-473B24AB | HP EliteBook 840 G9 (14 Zoll 16:10, Intel Alder Lake, 2022) | verkauft | Rückgabe am 20.01.2025 | 604 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-HPI-B58860CA | HP ZBook Firefly 14 G9 (14 Zoll 16:10, Intel Alder Lake, NVIDIA T550 optional, 2022) | verkauft | Rückgabe am 20.01.2026 | 239 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-LEN-43B84302 | Lenovo ThinkPad P16v Gen 1 | verkauft | Rückgabe am 28.10.2025 | 323 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-LEN-4CCE1DD6 | Lenovo ThinkPad X1 Carbon Gen 11 (14 Zoll, Intel Raptor Lake, 2023) | verkauft | Rückgabe am 29.06.2025 | 444 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-LEN-5B320FCF | Lenovo ThinkPad T14 Gen 2 (14 Zoll, Intel Tiger Lake / AMD Ryzen 5000 Pro, 2021) | verkauft | Rückgabe am 13.08.2024 | 764 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-LEN-A9009D32 | Lenovo ThinkPad X1 Carbon Gen 11 (14 Zoll, Intel Raptor Lake, 2023) | verkauft | Rückgabe am 16.06.2026 | 92 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-LEN-D4900070 | Lenovo ThinkPad L14 Gen 3 (14 Zoll, Intel Alder Lake / AMD Ryzen 5000 Pro, 2022) | verkauft | Rückgabe am 30.10.2023 | 1.052 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-LEN-EA4B8966 | Lenovo ThinkPad T14 Gen 3 (14 Zoll, Intel Alder Lake / AMD Ryzen 6000 Pro, 2022) | verkauft | Rückgabe am 07.12.2024 | 648 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-LEN-F4D8CEA5 | Lenovo ThinkPad L14 Gen 2 (14 Zoll, Intel Tiger Lake / AMD Ryzen 5000 Pro, 2021) | verkauft | Rückgabe am 17.06.2026 | 91 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-LEN-FF45BDC3 | Lenovo ThinkPad X1 Carbon Gen 11 (14 Zoll, Intel Raptor Lake, 2023) | verkauft | Rückgabe am 14.07.2025 | 429 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-MOT-1A1A3ACF | Motorola Moto G54 5G | verkauft | Rückgabe am 16.01.2026 | 243 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-MOT-20A2E562 | Motorola Moto G52 | verkauft | Rückgabe am 20.11.2023 | 1.031 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-MOT-5DCDC9A8 | Motorola Moto G84 5G | verkauft | Rückgabe am 20.01.2025 | 604 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-MOT-76B6560A | Motorola Edge 30 Fusion | verkauft | Rückgabe am 28.02.2025 | 565 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-MOT-A1EC13A9 | Motorola Moto G52 | verkauft | Rückgabe am 23.10.2025 | 328 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-MOT-ADAC4DBC | Motorola Edge 30 Pro | verkauft | Rückgabe am 17.09.2025 | 364 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-MSF-F55EAE31 | Microsoft Surface Laptop Go 3 (12,4 Zoll, Core i5-1235U) | verkauft | Rückgabe am 20.02.2026 | 208 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-0D3FDC18 | Samsung Galaxy Z Fold5 | verkauft | Rückgabe am 17.02.2025 | 576 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-12496B82 | Samsung Galaxy S21+ 5G | verkauft | Rückgabe am 22.03.2024 | 908 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-39E6E307 | Samsung Galaxy S21 Ultra 5G | verkauft | Rückgabe am 19.02.2024 | 940 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-3BFF739D | Samsung Galaxy S21 Ultra 5G | verkauft | Rückgabe am 05.07.2024 | 803 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-4DE88E73 | Samsung Galaxy S22 5G | verkauft | Rückgabe am 03.08.2024 | 774 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-549065B8 | Samsung Galaxy S21+ 5G | verkauft | Rückgabe am 22.03.2024 | 908 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-5548B61C | Samsung Galaxy A53 5G | verkauft | Rückgabe am 02.06.2026 | 106 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-5DE9D8EB | Samsung Galaxy S22 Ultra 5G | verkauft | Rückgabe am 22.06.2025 | 451 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-686138F3 | Samsung Galaxy A04s | verkauft | Rückgabe am 06.12.2025 | 284 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-6C369E5F | Samsung Galaxy S21 FE 5G | verkauft | Rückgabe am 13.02.2025 | 580 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-6F657702 | Samsung Galaxy A13 (4G, SM-A135F) | im Lager, verkaufsfähig | Rückgabe am 09.04.2026 | 160 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-8FAA437E | Samsung Galaxy Tab S10+ (12,4 Zoll, SM-X820/X826) | verkauft | Rückgabe am 28.06.2026 | 80 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-9298A8D4 | Samsung Galaxy A52s 5G | verkauft | Rückgabe am 17.01.2026 | 242 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-946463B0 | Samsung Galaxy XCover6 Pro | verkauft | Rückgabe am 06.04.2026 | 163 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-99809FCB | Samsung Galaxy A13 (4G, SM-A135F) | verkauft | Rückgabe am 07.01.2026 | 252 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-9B7F3A5E | Samsung Galaxy A54 5G | verkauft | Rückgabe am 11.11.2025 | 309 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-9D429AC6 | Samsung Galaxy S22+ 5G | verkauft | Rückgabe am 12.02.2025 | 581 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-A0757737 | Samsung Galaxy Tab Active3 (8 Zoll, Enterprise Edition) | im Lager, verkaufsfähig | Rückgabe am 09.08.2026 | 38 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-A1829CCD | Samsung Galaxy Tab S9 Ultra (14,6 Zoll, SM-X910/X916) | verkauft | Rückgabe am 29.10.2025 | 322 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-B97D0C98 | Samsung Galaxy Z Fold5 | verkauft | Rückgabe am 10.10.2025 | 341 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-BEF0386E | Samsung Galaxy A04s | verkauft | Rückgabe am 16.04.2025 | 518 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-C359DB61 | Samsung Galaxy S21 Ultra 5G | verkauft | Rückgabe am 05.08.2025 | 407 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-E15EC2BF | Samsung Galaxy Z Flip6 | verkauft | Rückgabe am 19.05.2026 | 120 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-E3FD73AF | Samsung Galaxy A54 5G | verkauft | Rückgabe am 15.02.2026 | 213 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-SN-SAM-F9134903 | Samsung Galaxy Tab Active4 Pro (10,1 Zoll, SM-T630/T636) | verkauft | Rückgabe am 28.01.2025 | 596 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
-Zahlungseingang: QTY 157 Geräte ohne Datum, Kanal Gutschriften der Verkaufskanäle (Kanalabrechnung)
+SN-APL-083AEC30 | iPhone 15 Pro Max | verkauft | Rückgabe am 05.01.2025 | 619 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-1223389A | iPad Air 10,9" (4. Generation, A14, 2020) | verkauft | Rückgabe am 28.03.2024 | 902 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-1A34F123 | iPhone 14 | verkauft | Rückgabe am 14.06.2025 | 459 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-35680693 | MacBook Pro 13" (M1, 2020) | im Lager, verkaufsfähig | Rückgabe am 03.03.2026 | 197 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-3726DE41 | iPhone 13 | verkauft | Rückgabe am 14.09.2024 | 732 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-385202E5 | iPhone 13 Pro | verkauft | Rückgabe am 16.10.2024 | 700 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-3EC20716 | iPhone 13 mini | im Lager, verkaufsfähig | Rückgabe am 27.07.2026 | 51 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-43A24551 | iPhone 15 Plus | verkauft | Rückgabe am 18.01.2026 | 241 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-46DADECF | MacBook Pro 13" (M2, 2022) | verkauft | Rückgabe am 16.01.2026 | 243 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-47BD2910 | iPhone 12 Pro | verkauft | Rückgabe am 08.02.2026 | 220 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-482CE708 | iPhone 15 Pro Max | verkauft | Rückgabe am 18.06.2026 | 90 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-5198B2F3 | iPad mini 8,3 (6. Generation, A15, 2021) | verkauft | Rückgabe am 27.12.2024 | 628 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-52D19341 | iPad mini 8,3 (6. Generation, A15, 2021) | verkauft | Rückgabe am 02.08.2025 | 410 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-74399AF9 | iPad Air 10,9" (4. Generation, A14, 2020) | verkauft | Rückgabe am 07.01.2025 | 617 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-76CDE13B | iPhone 16 | verkauft | Rückgabe am 25.02.2025 | 568 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-79A0C57D | iPhone 15 Pro Max | verkauft | Rückgabe am 06.02.2026 | 222 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-79CC83E9 | iPad (9. Generation, 2021) | verkauft | Rückgabe am 14.01.2025 | 610 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-88580129 | iPhone SE (3. Generation, 2022) | verkauft | Rückgabe am 10.02.2026 | 218 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-8D27CDE5 | iPad Pro 12,9" (6. Generation, M2, 2022) | verkauft | Rückgabe am 04.10.2023 | 1.078 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-961BB2DC | iPhone 15 Pro Max | verkauft | Rückgabe am 27.04.2025 | 507 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-9A624489 | iPad Pro 11 (4. Generation, M2, 2022) | verkauft | Rückgabe am 07.04.2025 | 527 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-A76180CF | iPhone 15 Plus | verkauft | Rückgabe am 15.02.2026 | 213 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-AA5592AA | iPad (10. Generation, 2022) | verkauft | Rückgabe am 01.10.2025 | 350 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-B6CA0234 | iPad Pro 11 (4. Generation, M2, 2022) | verkauft | Rückgabe am 03.05.2026 | 136 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-BE5D96F8 | iPhone 14 Pro | verschrottet | Rückgabe am 25.05.2026 | 114 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-BED4873E | iPhone 12 | verkauft | Rückgabe am 15.03.2024 | 915 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-CFA991D0 | MacBook Pro 14" (M1 Pro / M1 Max, 2021) | verkauft | Rückgabe am 16.09.2025 | 365 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-D3747315 | iPhone 15 | verkauft | Rückgabe am 08.01.2025 | 616 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-D55818E3 | iPad Pro 11 (4. Generation, M2, 2022) | verkauft | Rückgabe am 14.06.2025 | 459 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-D74822F8 | iPhone 13 Pro | verkauft | Rückgabe am 14.09.2024 | 732 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-D9D03378 | iPhone 14 | verkauft | Rückgabe am 15.03.2025 | 550 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-DA5EBF78 | iPad mini 8,3 (6. Generation, A15, 2021) | verkauft | Rückgabe am 23.09.2025 | 358 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-DC2C670A | MacBook Air 13" (M1, 2020) | verkauft | Rückgabe am 10.03.2025 | 555 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-DDDFC4F2 | iPhone 13 | verkauft | Rückgabe am 04.04.2026 | 165 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-E09DC3C9 | iPhone 15 Pro | verkauft | Rückgabe am 27.11.2024 | 658 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-E38B6FC9 | iPhone 14 Plus | verkauft | Rückgabe am 29.06.2026 | 79 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-E49F166F | iPhone 12 Pro | verkauft | Rückgabe am 10.03.2024 | 920 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-EE20A037 | iPhone 13 Pro | verkauft | Rückgabe am 13.05.2024 | 856 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-APL-F73CBACE | iPhone 15 | verkauft | Rückgabe am 02.08.2026 | 45 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-DEL-17023800 | Dell Pro 14 Premium (PA14250) | verschrottet | Rückgabe am 06.07.2026 | 72 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-DEL-642567E6 | Dell Latitude 7430 (14 Zoll, Intel Alder Lake, 2022) | verkauft | Rückgabe am 26.08.2025 | 386 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-DEL-7375147C | Dell Latitude 5430 (14 Zoll, Intel Alder Lake, 2022) | verkauft | Rückgabe am 10.11.2025 | 310 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-GOO-2CCD200D | Google Pixel 6 | verkauft | Rückgabe am 03.11.2024 | 682 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-GOO-3F4CE543 | Google Pixel 5 | verkauft | Rückgabe am 01.09.2024 | 745 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-GOO-5C0BB139 | Google Pixel 5 | verkauft | Rückgabe am 08.06.2024 | 830 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-GOO-9E6055F5 | Google Pixel 6a | verkauft | Rückgabe am 28.08.2025 | 384 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-GOO-D309E8C5 | Google Pixel 7a | im Lager, verkaufsfähig | Rückgabe am 29.07.2026 | 49 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-HPI-42B304A7 | HP EliteBook 840 G9 (14 Zoll 16:10, Intel Alder Lake, 2022) | verkauft | Rückgabe am 06.12.2024 | 649 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-HPI-43085AD7 | HP ZBook Firefly 14 G9 (14 Zoll 16:10, Intel Alder Lake, NVIDIA T550 optional, 2022) | verkauft | Rückgabe am 04.10.2024 | 712 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-HPI-4B424C6D | HP ProBook 450 G8 (15,6 Zoll, Intel Tiger Lake, 2020/2021) | verkauft | Rückgabe am 17.09.2025 | 364 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-HPI-82A70F3C | HP ProBook 450 G8 (15,6 Zoll, Intel Tiger Lake, 2020/2021) | verkauft | Rückgabe am 10.06.2024 | 828 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-LEN-339396F1 | Lenovo ThinkPad L14 Gen 3 (14 Zoll, Intel Alder Lake / AMD Ryzen 5000 Pro, 2022) | verkauft | Rückgabe am 28.04.2026 | 141 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-LEN-4F7861D9 | Lenovo ThinkPad X1 Carbon Gen 11 (14 Zoll, Intel Raptor Lake, 2023) | verkauft | Rückgabe am 15.04.2026 | 154 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-LEN-568F5D86 | Lenovo ThinkPad T14 Gen 3 (14 Zoll, Intel Alder Lake / AMD Ryzen 6000 Pro, 2022) | verkauft | Rückgabe am 10.10.2025 | 341 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-LEN-DA6061D2 | Lenovo ThinkPad X1 Carbon Gen 9 (14 Zoll 16:10, Intel Tiger Lake, 2021) | verkauft | Rückgabe am 13.09.2025 | 368 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-LEN-EE7E462D | Lenovo ThinkPad P16v Gen 1 | verkauft | Rückgabe am 14.07.2025 | 429 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-LEN-F0AB1A18 | Lenovo ThinkPad X1 Carbon Gen 9 (14 Zoll 16:10, Intel Tiger Lake, 2021) | verkauft | Rückgabe am 21.06.2023 | 1.183 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-MOT-494B071B | Motorola Moto G52 | verkauft | Rückgabe am 23.01.2025 | 601 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-MSF-2FE8F9D4 | Microsoft Surface Laptop 4 (13,5 und 15 Zoll, 2021) | verkauft | Rückgabe am 02.08.2026 | 45 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-MSF-58B1B49D | Microsoft Surface Pro 9, Core i7-1255U (Wi-Fi) | verkauft | Rückgabe am 15.10.2024 | 701 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-SAM-06216647 | Samsung Galaxy S21+ 5G | verkauft | Rückgabe am 08.04.2024 | 891 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-SAM-176643AC | Samsung Galaxy A33 5G | verkauft | Rückgabe am 03.11.2024 | 682 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-SAM-241FB1AF | Samsung Galaxy A52s 5G | verkauft | Rückgabe am 11.01.2025 | 613 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-SAM-2ABE1C25 | Samsung Galaxy A53 5G | verkauft | Rückgabe am 05.12.2023 | 1.016 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-SAM-39080735 | Samsung Galaxy Z Flip5 | verkauft | Rückgabe am 10.02.2026 | 218 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-SAM-3FBB284C | Samsung Galaxy Tab A9+ (11 Zoll, SM-X210/X216) | verkauft | Rückgabe am 31.01.2026 | 228 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-SAM-53A5CCA3 | Samsung Galaxy A04s | verkauft | Rückgabe am 15.01.2025 | 609 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-SAM-549065B8 | Samsung Galaxy S21+ 5G | verkauft | Rückgabe am 20.04.2023 | 1.245 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-SAM-5D5D5307 | Samsung Galaxy A33 5G | verkauft | Rückgabe am 04.12.2025 | 286 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-SAM-849CC0A3 | Samsung Galaxy Tab S8 (11 Zoll, SM-X700/X706) | verkauft | Rückgabe am 08.09.2023 | 1.104 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-SAM-8AD51FAC | Samsung Galaxy S24 | verkauft | Rückgabe am 11.12.2025 | 279 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-SAM-A1DA8817 | Samsung Galaxy A53 5G | verkauft | Rückgabe am 26.07.2025 | 417 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-SAM-A8BA3B5C | Samsung Galaxy S21 Ultra 5G | verkauft | Rückgabe am 18.07.2025 | 425 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-SAM-B69BEE71 | Samsung Galaxy Tab Active4 Pro (10,1 Zoll, SM-T630/T636) | verkauft | Rückgabe am 21.12.2025 | 269 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-SAM-C0E980E8 | Samsung Galaxy S21 Ultra 5G | verkauft | Rückgabe am 25.02.2025 | 568 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-SAM-C95FE405 | Samsung Galaxy S22 5G | verkauft | Rückgabe am 08.04.2025 | 526 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-SAM-D5674AF5 | Samsung Galaxy Z Flip5 | verkauft | Rückgabe am 04.10.2025 | 347 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-SAM-DE38C867 | Samsung Galaxy S21+ 5G | verkauft | Rückgabe am 28.06.2025 | 445 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+SN-SAM-F97001B0 | Samsung Galaxy S23+ | verkauft | Rückgabe am 24.12.2024 | 631 | Rückläufer-Beleg ohne Löschzertifikat (Feld leer); die Rücknahme muss das Zertifikat nachliefern
+Zahlungseingang: 148 Geräte ohne Datum, Kanal Gutschriften der Verkaufskanäle (Kanalabrechnung)
 Zeilen ausblenden
 Begriffe ausblenden
 Seriennummer
@@ -293,190 +281,181 @@ Tage zwischen diesem Datum und dem 16.09.2026
 Grund, soweit bekannt
 was das Werkzeug über die fehlende Zeile weiß; der Rest steht in der Quelle
 Seriennummer | Modell | Zustand | letzte Station mit Datum | Tage seitdem | Grund, soweit bekannt
-SN-APL-0036031E | iPhone 14 Pro | verkauft | Verkauf am 31.08.2026 | 16 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 16 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-01B239B3 | iPhone 14 Plus | verkauft | Verkauf am 02.09.2026 | 14 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 14 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-APL-05F51298 | iPad mini 8,3" (A17 Pro, 7. Generation, 2024) | verkauft | Verkauf am 11.09.2026 | 5 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 5 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-0D882084 | iPad Air 10,9" (5. Generation, M1, 2022) | verkauft | Verkauf am 29.08.2026 | 18 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 18 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-APL-12E68212 | iPad mini 8,3 (6. Generation, A15, 2021) | verkauft | Verkauf am 21.08.2026 | 26 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 26 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-15F388D5 | iPhone SE (3. Generation, 2022) | verkauft | Verkauf am 25.08.2026 | 22 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 22 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-16853852 | iPad 10,2" (8. Generation, A12, 2020) | verkauft | Verkauf am 23.03.2025 | 542 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 542 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-1C7E3B1C | iPhone 16 Plus | verkauft | Verkauf am 05.06.2025 | 468 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 468 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-1DB63FDF | iPad Pro 12,9" (6. Generation, M2, 2022) | verkauft | Verkauf am 17.06.2026 | 91 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 91 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-1DC483CE | MacBook Air 13,6" (M2, 2022) | verkauft | Verkauf am 22.08.2026 | 25 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 25 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-1F2AC3C8 | MacBook Air 15 (M2, 2023) | verkauft | Verkauf am 13.11.2025 | 307 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 307 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-233F293C | MacBook Pro 14 (M3 / M3 Pro / M3 Max, Late 2023) | verkauft | Verkauf am 26.08.2026 | 21 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 21 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-APL-243B63EA | iPhone 12 Pro Max | verkauft | Verkauf am 13.12.2025 | 277 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 277 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-247E6215 | iPhone 14 Pro Max | verkauft | Verkauf am 22.11.2024 | 663 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 663 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-25EF29EE | iPad mini 8,3 (6. Generation, A15, 2021) | verkauft | Verkauf am 17.03.2023 | 1.279 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 1279 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-27415455 | iPhone 14 Plus | verkauft | Verkauf am 26.08.2026 | 21 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 21 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme)
-SN-APL-2D1D4260 | iPhone 15 | verkauft | Verkauf am 02.09.2026 | 14 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 14 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-2F3A5743 | iPhone 12 Pro Max | verkauft | Verkauf am 30.06.2024 | 808 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 808 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-36661CAA | iPhone 15 Pro Max | verkauft | Verkauf am 07.09.2026 | 9 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 9 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-37CA0FFD | iPhone 13 mini | verkauft | Verkauf am 03.08.2026 | 44 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 44 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-384AA1C7 | iPhone 13 mini | verkauft | Verkauf am 31.08.2026 | 16 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 16 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-39CDA1EC | iPhone 12 | verkauft | Verkauf am 01.03.2025 | 564 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 564 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-3ACA7ED9 | iPhone 13 Pro | verkauft | Verkauf am 08.09.2026 | 8 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 8 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme)
-SN-APL-4B65A45B | iPhone 14 Pro | verkauft | Verkauf am 10.09.2026 | 6 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 6 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-4B9BD8A2 | iPhone 15 | verkauft | Verkauf am 28.08.2026 | 19 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 19 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-APL-4C5518BC | iPhone 16 Pro | verkauft | Verkauf am 04.09.2026 | 12 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 12 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme)
-SN-APL-4CE483BA | iPad Air 10,9" (5. Generation, M1, 2022) | verkauft | Verkauf am 14.08.2026 | 33 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 33 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-4F0E6C59 | iPhone 15 | verkauft | Verkauf am 26.04.2025 | 508 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 508 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-4FFFECBF | iPhone 12 | verkauft | Verkauf am 08.06.2026 | 100 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 100 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-53FFDE2C | iPhone 16 Plus | verkauft | Verkauf am 05.09.2026 | 11 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 11 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-APL-540E3612 | iPad Air 10,9" (4. Generation, A14, 2020) | verkauft | Verkauf am 14.08.2026 | 33 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 33 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-54580375 | iPad Pro 12,9" (5. Generation, M1, 2021) | verkauft | Verkauf am 31.08.2026 | 16 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 16 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-563FA71D | iPhone 14 | verkauft | Verkauf am 17.08.2026 | 30 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 30 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-5EA171C7 | iPhone 12 mini | verkauft | Verkauf am 02.09.2026 | 14 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 14 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-6077AD04 | iPhone 14 Plus | verkauft | Verkauf am 19.08.2026 | 28 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 28 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-APL-6C9F3605 | iPhone 15 Plus | verkauft | Verkauf am 10.02.2026 | 218 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 218 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-6E2355E8 | MacBook Pro 16" (M1 Pro / M1 Max, 2021) | verkauft | Verkauf am 18.04.2026 | 151 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 151 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-6ECB8B38 | iPhone 13 Pro Max | verkauft | Verkauf am 09.08.2026 | 38 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 38 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-6FF0B740 | iPad (10. Generation, 2022) | verkauft | Verkauf am 23.08.2026 | 24 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 24 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-70C4E532 | iPhone 14 Plus | verkauft | Verkauf am 20.08.2026 | 27 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 27 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-79518061 | iPhone 15 Pro Max | verkauft | Verkauf am 22.04.2026 | 147 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 147 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-7B7A5A24 | iPad mini 8,3 (6. Generation, A15, 2021) | verkauft | Verkauf am 01.09.2026 | 15 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 15 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-7FDFFE88 | iPad mini 8,3" (A17 Pro, 7. Generation, 2024) | verkauft | Verkauf am 30.08.2026 | 17 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 17 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-80B35149 | iPhone 13 Pro | verkauft | Verkauf am 21.08.2026 | 26 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 26 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-APL-80E43837 | iPhone SE (3. Generation, 2022) | verkauft | Verkauf am 31.08.2026 | 16 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 16 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-87C843A3 | iPhone 14 Pro | verkauft | Verkauf am 12.09.2026 | 4 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 4 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-89572DB7 | iPhone 15 Pro Max | verkauft | Verkauf am 17.05.2026 | 122 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 122 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-896A34C6 | iPhone 15 Plus | verkauft | Verkauf am 07.09.2026 | 9 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 9 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme)
-SN-APL-8AD08BF0 | iPhone 12 Pro Max | verkauft | Verkauf am 20.10.2024 | 696 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 696 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-8B40D4CF | iPhone 12 Pro | verkauft | Verkauf am 09.09.2026 | 7 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 7 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-8EFA96AB | iPhone 14 Pro Max | verkauft | Verkauf am 06.09.2026 | 10 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 10 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-APL-901D00BF | iPhone 14 | verkauft | Verkauf am 29.08.2026 | 18 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 18 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-APL-90357E43 | iPhone SE (3. Generation, 2022) | verkauft | Verkauf am 10.08.2026 | 37 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 37 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-9170CD4B | iPhone 14 Pro Max | verkauft | Verkauf am 10.03.2026 | 190 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 190 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-9EEF8627 | MacBook Pro 16 (M2 Pro / M2 Max, 2023) | verkauft | Verkauf am 28.08.2026 | 19 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 19 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-APL-9F2153C1 | iPad Air 10,9" (5. Generation, M1, 2022) | verkauft | Verkauf am 26.05.2026 | 113 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 113 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-ABCA3BF8 | iPhone 14 | verkauft | Verkauf am 09.11.2024 | 676 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 676 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-AC009189 | iPad (10. Generation, 2022) | verkauft | Verkauf am 13.06.2024 | 825 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 825 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-AD107F27 | iPhone 14 | verkauft | Verkauf am 11.04.2024 | 888 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 888 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-B60E7ED9 | iPhone 13 | verkauft | Verkauf am 03.09.2026 | 13 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 13 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-BDC126E4 | iPhone 14 Plus | verkauft | Verkauf am 13.05.2026 | 126 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 126 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-C40E229A | iPhone 16e | verkauft | Verkauf am 20.08.2026 | 27 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 27 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-C5A370DD | iPhone 12 Pro Max | verkauft | Verkauf am 14.08.2026 | 33 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 33 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-C8DD2C14 | iPhone 16e | verkauft | Verkauf am 21.08.2026 | 26 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 26 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme)
-SN-APL-C986D3E2 | iPhone 13 mini | verkauft | Verkauf am 07.09.2026 | 9 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 9 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme)
-SN-APL-CB56CF8D | iPhone 14 Plus | verkauft | Verkauf am 13.09.2026 | 3 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 3 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-CBBDFBAC | iPad Pro 11 (4. Generation, M2, 2022) | verkauft | Verkauf am 31.07.2026 | 47 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 47 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-D1791883 | iPhone 15 | verkauft | Verkauf am 13.09.2026 | 3 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 3 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-D55818E3 | iPad Pro 11 (4. Generation, M2, 2022) | verkauft | Verkauf am 02.09.2026 | 14 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 14 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-D71A1D82 | iPhone 13 Pro Max | verkauft | Verkauf am 13.09.2026 | 3 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 3 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme)
-SN-APL-D73EFAD8 | MacBook Pro 13" (M2, 2022) | verkauft | Verkauf am 02.09.2026 | 14 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 14 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-APL-D740CD41 | iPad (9. Generation, 2021) | verkauft | Verkauf am 26.08.2026 | 21 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 21 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-APL-DB029312 | iPhone 14 | verkauft | Verkauf am 18.10.2025 | 333 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 333 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-E1CFD842 | iPhone 14 Plus | verkauft | Verkauf am 05.03.2026 | 195 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 195 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-E38B6FC9 | iPhone 14 Plus | verkauft | Verkauf am 13.08.2026 | 34 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 34 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-E8D91476 | iPhone 13 mini | verkauft | Verkauf am 29.08.2025 | 383 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 383 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
-SN-APL-EFAA1B34 | iPhone 12 | verkauft | Verkauf am 10.09.2026 | 6 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 6 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme)
-SN-APL-F78610B3 | iPad 10,2" (8. Generation, A12, 2020) | verkauft | Verkauf am 10.09.2024 | 736 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 736 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-DEL-0218B907 | Dell Latitude 7430 (14 Zoll, Intel Alder Lake, 2022) | verkauft | Verkauf am 22.09.2025 | 359 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 359 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
-SN-DEL-02D97617 | Dell Latitude 5420 (14 Zoll, Intel Tiger Lake, 2021) | verkauft | Verkauf am 01.08.2025 | 411 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 411 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-DEL-5A2924B1 | Dell Pro 14 Premium (PA14250) | verkauft | Verkauf am 06.09.2026 | 10 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 10 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-DEL-9738394D | Dell Latitude 7430 (14 Zoll, Intel Alder Lake, 2022) | verkauft | Verkauf am 31.08.2026 | 16 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 16 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-DEL-BEA3404F | Dell Latitude 7430 (14 Zoll, Intel Alder Lake, 2022) | verkauft | Verkauf am 03.08.2026 | 44 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 44 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-FPH-B53EC2E0 | Fairphone 4 | verkauft | Verkauf am 19.08.2026 | 28 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 28 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-FPH-D854D20F | Fairphone 4 | verkauft | Verkauf am 13.09.2026 | 3 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 3 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-FPH-DB109C1A | Fairphone 4 | verkauft | Verkauf am 11.08.2026 | 36 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 36 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-GOO-23761690 | Google Pixel 6a | verkauft | Verkauf am 24.04.2026 | 145 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 145 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-GOO-5B37EDEB | Google Pixel 5 | verkauft | Verkauf am 09.08.2026 | 38 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 38 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-GOO-7023505D | Google Pixel 5 | verkauft | Verkauf am 16.03.2025 | 549 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 549 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-GOO-8436AEF4 | Google Pixel 6 Pro | verkauft | Verkauf am 09.11.2024 | 676 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 676 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-GOO-8ED91FD3 | Google Pixel 7 | verkauft | Verkauf am 08.09.2026 | 8 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 8 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-GOO-A52D4728 | Google Pixel 6 | verkauft | Verkauf am 27.10.2025 | 324 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 324 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
-SN-GOO-B9DDE8CB | Google Pixel 10 Pro XL | verkauft | Verkauf am 06.09.2026 | 10 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 10 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-GOO-E4FCEE20 | Google Pixel 6 Pro | verkauft | Verkauf am 15.08.2026 | 32 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 32 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-HPI-035E4693 | HP ZBook Firefly 14 G9 (14 Zoll 16:10, Intel Alder Lake, NVIDIA T550 optional, 2022) | verkauft | Verkauf am 05.09.2026 | 11 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 11 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-HPI-11B0E666 | HP ZBook Firefly 14 G9 (14 Zoll 16:10, Intel Alder Lake, NVIDIA T550 optional, 2022) | verkauft | Verkauf am 20.08.2026 | 27 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 27 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme)
-SN-HPI-3F143673 | HP EliteBook 840 G9 (14 Zoll 16:10, Intel Alder Lake, 2022) | verkauft | Verkauf am 31.05.2025 | 473 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 473 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-HPI-3FCDDBB3 | HP ZBook Firefly 14 G9 (14 Zoll 16:10, Intel Alder Lake, NVIDIA T550 optional, 2022) | verkauft | Verkauf am 26.10.2025 | 325 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 325 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-HPI-675D1E73 | HP ZBook Firefly 14 G9 (14 Zoll 16:10, Intel Alder Lake, NVIDIA T550 optional, 2022) | verkauft | Verkauf am 28.05.2026 | 111 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 111 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
-SN-HPI-831C89FD | HP EliteBook Ultra G1q AI 14 (Snapdragon X Elite X1E-78-100) | verkauft | Verkauf am 02.09.2026 | 14 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 14 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-HPI-A00DCD34 | HP ProBook 450 G9 (15,6 Zoll, Intel Alder Lake, 2022) | verkauft | Verkauf am 04.05.2026 | 135 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 135 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-HPI-DEF3C150 | HP EliteBook 840 G9 (14 Zoll 16:10, Intel Alder Lake, 2022) | verkauft | Verkauf am 22.08.2026 | 25 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 25 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-HPI-FCE2D9FA | HP ZBook Firefly 14 G9 (14 Zoll 16:10, Intel Alder Lake, NVIDIA T550 optional, 2022) | verkauft | Verkauf am 24.08.2026 | 23 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 23 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-LEN-1414AC06 | Lenovo ThinkPad X1 Carbon Gen 11 (14 Zoll, Intel Raptor Lake, 2023) | verkauft | Verkauf am 30.08.2026 | 17 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 17 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-LEN-19B66A18 | Lenovo ThinkPad L14 Gen 4 (14 Zoll, Intel Raptor Lake / AMD Ryzen 7030, 2023) | verkauft | Verkauf am 16.08.2026 | 31 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 31 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-LEN-1B9D3019 | Lenovo ThinkPad L14 Gen 4 (14 Zoll, Intel Raptor Lake / AMD Ryzen 7030, 2023) | verkauft | Verkauf am 22.08.2026 | 25 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 25 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-LEN-280016C0 | Lenovo ThinkPad P16v Gen 1 | verkauft | Verkauf am 11.10.2024 | 705 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 705 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-LEN-44ED6A66 | Lenovo ThinkPad L14 Gen 2 (14 Zoll, Intel Tiger Lake / AMD Ryzen 5000 Pro, 2021) | verkauft | Verkauf am 12.09.2026 | 4 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 4 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme)
-SN-LEN-C3CF8E2B | Lenovo ThinkPad X1 Carbon Gen 9 (14 Zoll 16:10, Intel Tiger Lake, 2021) | verkauft | Verkauf am 11.12.2025 | 279 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 279 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
-SN-LEN-E1A5F52F | Lenovo ThinkPad L14 Gen 3 (14 Zoll, Intel Alder Lake / AMD Ryzen 5000 Pro, 2022) | verkauft | Verkauf am 13.09.2026 | 3 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 3 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-LEN-F8F4D10E | Lenovo ThinkPad L14 Gen 3 (14 Zoll, Intel Alder Lake / AMD Ryzen 5000 Pro, 2022) | verkauft | Verkauf am 23.08.2026 | 24 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 24 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-MOT-066F6F36 | Motorola Moto G72 | verkauft | Verkauf am 15.08.2026 | 32 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 32 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme), überfällig
-SN-MOT-C02BD411 | Motorola Moto G22 | verkauft | Verkauf am 23.08.2026 | 24 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 24 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme)
-SN-MOT-CB197FA0 | Motorola Edge 50 Fusion | verkauft | Verkauf am 17.08.2026 | 30 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 30 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-MOT-D1A66C19 | Motorola Moto G04s | verkauft | Verkauf am 19.08.2026 | 28 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 28 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-MOT-EE5B943E | Lenovo ThinkPhone by Motorola | verkauft | Verkauf am 11.09.2026 | 5 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 5 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme)
-SN-MOT-F78D7B3C | Motorola Moto G24 | verkauft | Verkauf am 01.08.2026 | 46 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 46 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
-SN-MSF-1AA0F956 | Microsoft Surface Laptop 5 (13,5 und 15 Zoll, 2022) | verkauft | Verkauf am 23.03.2026 | 177 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 177 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-SAM-002A1811 | Samsung Galaxy S21 5G | verkauft | Verkauf am 11.03.2024 | 919 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 919 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
-SN-SAM-01CA5733 | Samsung Galaxy Tab S10 Ultra (14,6 Zoll, SM-X920/X926) | verkauft | Verkauf am 01.09.2026 | 15 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 15 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme)
-SN-SAM-139CFD0E | Samsung Galaxy Tab A9+ (11 Zoll, SM-X210/X216) | verkauft | Verkauf am 07.09.2026 | 9 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 9 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-SAM-161F9331 | Samsung Galaxy Tab Active3 (8 Zoll, Enterprise Edition) | verkauft | Verkauf am 19.08.2026 | 28 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 28 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-SAM-250744A5 | Samsung Galaxy Tab S6 Lite (2024, SM-P620/P625) | verkauft | Verkauf am 05.09.2026 | 11 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 11 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme)
-SN-SAM-2712C45E | Samsung Galaxy S21 5G | verkauft | Verkauf am 30.08.2026 | 17 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 17 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-SAM-2CEE830B | Samsung Galaxy A54 5G | verkauft | Verkauf am 31.07.2026 | 47 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 47 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
-SN-SAM-3651AD5F | Samsung Galaxy A34 5G | verkauft | Verkauf am 30.08.2026 | 17 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 17 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme)
-SN-SAM-37D2F167 | Samsung Galaxy A53 5G | verkauft | Verkauf am 16.04.2026 | 153 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 153 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
-SN-SAM-4468EE55 | Samsung Galaxy A53 5G | verkauft | Verkauf am 02.03.2026 | 198 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 198 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
-SN-SAM-469857E7 | Samsung Galaxy A53 5G | verkauft | Verkauf am 06.08.2026 | 41 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 41 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-SAM-50FD1080 | Samsung Galaxy A53 5G | verkauft | Verkauf am 21.10.2025 | 330 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 330 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-SAM-52B635A2 | Samsung Galaxy S23+ | verkauft | Verkauf am 15.08.2026 | 32 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 32 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme), überfällig
-SN-SAM-537F6518 | Samsung Galaxy A04s | verkauft | Verkauf am 29.08.2026 | 18 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 18 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-SAM-571887CF | Samsung Galaxy A25 5G | verkauft | Verkauf am 25.08.2026 | 22 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 22 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme)
-SN-SAM-59585746 | Samsung Galaxy S21 FE 5G | verkauft | Verkauf am 25.08.2026 | 22 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 22 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-SAM-59DFE067 | Samsung Galaxy S21 5G | verkauft | Verkauf am 14.08.2026 | 33 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 33 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-SAM-5D5D5307 | Samsung Galaxy A33 5G | verkauft | Verkauf am 29.05.2024 | 840 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 840 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
-SN-SAM-66518C76 | Samsung Galaxy A52s 5G | verkauft | Verkauf am 09.08.2026 | 38 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 38 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-SAM-69345C03 | Samsung Galaxy Tab S8 (11 Zoll, SM-X700/X706) | verkauft | Verkauf am 28.01.2025 | 596 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 596 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-SAM-6AAD1EBE | Samsung Galaxy A04s | verkauft | Verkauf am 28.08.2026 | 19 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 19 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-SAM-6BA4D4E7 | Samsung Galaxy Tab A8 (2022, 10,5 Zoll, SM-X200/X205) | verkauft | Verkauf am 12.09.2026 | 4 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 4 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-SAM-79445F47 | Samsung Galaxy S21 5G | verkauft | Verkauf am 20.06.2024 | 818 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 818 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
-SN-SAM-7A7A2D31 | Samsung Galaxy Tab A8 (2022, 10,5 Zoll, SM-X200/X205) | verkauft | Verkauf am 01.08.2026 | 46 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 46 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
-SN-SAM-8361B1D8 | Samsung Galaxy Tab Active4 Pro (10,1 Zoll, SM-T630/T636) | verkauft | Verkauf am 31.07.2026 | 47 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 47 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
-SN-SAM-8FAA437E | Samsung Galaxy Tab S10+ (12,4 Zoll, SM-X820/X826) | verkauft | Verkauf am 28.08.2026 | 19 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 19 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-SAM-962EC9AF | Samsung Galaxy S22+ 5G | verkauft | Verkauf am 06.09.2024 | 740 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 740 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
-SN-SAM-9AB81289 | Samsung Galaxy Tab S9 Ultra (14,6 Zoll, SM-X910/X916) | verkauft | Verkauf am 10.08.2026 | 37 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 37 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-SAM-9DF24CE1 | Samsung Galaxy Tab S9 Ultra (14,6 Zoll, SM-X910/X916) | verkauft | Verkauf am 30.08.2026 | 17 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 17 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-SAM-A303B2F7 | Samsung Galaxy S21 FE 5G | verkauft | Verkauf am 23.01.2026 | 236 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 236 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme), überfällig
-SN-SAM-AF7C8B4E | Samsung Galaxy A53 5G | verkauft | Verkauf am 03.09.2026 | 13 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 13 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
-SN-SAM-CC6BBB38 | Samsung Galaxy S21 5G | verkauft | Verkauf am 13.09.2026 | 3 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 3 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-SAM-DF6F0B42 | Samsung Galaxy Tab Active4 Pro (10,1 Zoll, SM-T630/T636) | verkauft | Verkauf am 21.08.2026 | 26 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 26 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-SAM-E22F02E8 | Samsung Galaxy A05s | verkauft | Verkauf am 05.09.2026 | 11 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 11 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme)
-SN-SAM-E3FCE856 | Samsung Galaxy A34 5G | verkauft | Verkauf am 12.08.2026 | 35 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 35 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-SAM-E5CE9CB6 | Samsung Galaxy Tab S10 Ultra (14,6 Zoll, SM-X920/X926) | verkauft | Verkauf am 16.08.2026 | 31 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 31 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-SAM-E89BD440 | Samsung Galaxy Tab Active3 (8 Zoll, Enterprise Edition) | verkauft | Verkauf am 10.08.2026 | 37 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 37 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-SAM-EF466A4D | Samsung Galaxy A53 5G | verkauft | Verkauf am 09.09.2026 | 7 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 7 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
-SN-SAM-F41EB678 | Samsung Galaxy A33 5G | verkauft | Verkauf am 27.08.2026 | 20 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 20 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-APL-08B56C26 | iPhone 13 Pro | verkauft | Verkauf am 17.12.2023 | 1.004 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 1004 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
+SN-APL-15702100 | iPhone 15 Plus | verkauft | Verkauf am 07.09.2026 | 9 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 9 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme)
+SN-APL-1731E6A2 | MacBook Air 15 (M2, 2023) | verkauft | Verkauf am 03.09.2026 | 13 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 13 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-APL-1B145711 | iPad Pro 11" (3. Generation, M1, 2021) | verkauft | Verkauf am 06.09.2026 | 10 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 10 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-APL-1E491CF9 | iPad Air 10,9" (4. Generation, A14, 2020) | verkauft | Verkauf am 18.04.2026 | 151 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 151 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
+SN-APL-1E614210 | MacBook Air 13" (M1, 2020) | verkauft | Verkauf am 10.07.2025 | 433 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 433 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
+SN-APL-1F738826 | iPhone 13 | verkauft | Verkauf am 08.06.2024 | 830 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 830 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
+SN-APL-22C332F3 | MacBook Air 13,6" (M2, 2022) | verkauft | Verkauf am 25.06.2026 | 83 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 83 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
+SN-APL-25EF29EE | iPad mini 8,3 (6. Generation, A15, 2021) | verkauft | Verkauf am 11.03.2024 | 919 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 919 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
+SN-APL-2A446C7F | MacBook Air 13,6" (M2, 2022) | verkauft | Verkauf am 21.02.2025 | 572 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 572 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
+SN-APL-33B7CED4 | MacBook Pro 14" (M1 Pro / M1 Max, 2021) | verkauft | Verkauf am 23.05.2023 | 1.212 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 1212 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
+SN-APL-36661CAA | iPhone 15 Pro Max | verkauft | Verkauf am 13.09.2026 | 3 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 3 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme)
+SN-APL-36E5B42C | iPhone 12 mini | verkauft | Verkauf am 20.08.2026 | 27 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 27 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-APL-37BE8793 | iPad (10. Generation, 2022) | verkauft | Verkauf am 20.07.2025 | 423 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 423 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
+SN-APL-384AA1C7 | iPhone 13 mini | verkauft | Verkauf am 11.09.2026 | 5 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 5 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme)
+SN-APL-3AADBA0F | iPhone 15 Plus | verkauft | Verkauf am 07.09.2026 | 9 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 9 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-APL-40E23470 | iPhone 14 | verkauft | Verkauf am 04.08.2026 | 43 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 43 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-APL-46BC420E | iPad Pro 12,9" (5. Generation, M1, 2021) | verkauft | Verkauf am 27.01.2025 | 597 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 597 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
+SN-APL-540E3612 | iPad Air 10,9" (4. Generation, A14, 2020) | verkauft | Verkauf am 20.08.2026 | 27 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 27 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-APL-56C50571 | iPhone 15 Pro | verkauft | Verkauf am 24.06.2026 | 84 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 84 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
+SN-APL-57A7F3AF | iPhone 15 | verkauft | Verkauf am 23.08.2026 | 24 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 24 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-APL-5A8B051D | iPhone 12 | verkauft | Verkauf am 16.09.2024 | 730 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 730 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
+SN-APL-5D27ADC7 | iPhone 12 Pro Max | verkauft | Verkauf am 03.08.2024 | 774 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 774 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
+SN-APL-5DC88F5A | iPad Air 10,9" (5. Generation, M1, 2022) | verkauft | Verkauf am 06.10.2025 | 345 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 345 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
+SN-APL-6077AD04 | iPhone 14 Plus | verkauft | Verkauf am 25.08.2026 | 22 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 22 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-APL-6158E780 | iPad mini 8,3" (A17 Pro, 7. Generation, 2024) | verkauft | Verkauf am 08.08.2026 | 39 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 39 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-APL-6329EB97 | iPhone 13 mini | verkauft | Verkauf am 16.08.2023 | 1.127 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 1127 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
+SN-APL-67487705 | iPhone 15 Plus | verkauft | Verkauf am 07.09.2026 | 9 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 9 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-APL-6BE1EB6A | iPad Pro 11 (4. Generation, M2, 2022) | verkauft | Verkauf am 18.08.2026 | 29 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 29 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme)
+SN-APL-6E5A2339 | iPad Air 10,9" (5. Generation, M1, 2022) | verkauft | Verkauf am 07.09.2026 | 9 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 9 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-APL-773560D3 | iPhone 13 Pro | verkauft | Verkauf am 10.09.2026 | 6 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 6 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-APL-7C67053B | iPhone 14 Plus | verkauft | Verkauf am 05.09.2026 | 11 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 11 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-APL-7CBF6D8C | iPhone 15 Plus | verkauft | Verkauf am 31.08.2026 | 16 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 16 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-APL-84D41087 | iPhone 13 | verkauft | Verkauf am 13.09.2026 | 3 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 3 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme)
+SN-APL-8582C0B5 | iPhone 14 Plus | verkauft | Verkauf am 23.07.2025 | 420 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 420 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme), überfällig
+SN-APL-8A6F8227 | iPhone 14 | verkauft | Verkauf am 14.08.2026 | 33 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 33 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-APL-90E8D7BF | iPad (10. Generation, 2022) | verkauft | Verkauf am 13.09.2026 | 3 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 3 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-APL-952C9126 | iPhone 15 Plus | verkauft | Verkauf am 06.09.2026 | 10 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 10 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-APL-953CBEC4 | iPhone 13 Pro | verkauft | Verkauf am 18.09.2025 | 363 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 363 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
+SN-APL-96C560D7 | iPhone 12 Pro | verkauft | Verkauf am 25.10.2024 | 691 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 691 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
+SN-APL-995D34DF | iPhone 14 Plus | verkauft | Verkauf am 06.06.2026 | 102 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 102 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
+SN-APL-9CBA8419 | iPhone 14 Pro Max | verkauft | Verkauf am 28.10.2025 | 323 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 323 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
+SN-APL-A3B86433 | iPhone 15 Pro | verkauft | Verkauf am 19.08.2026 | 28 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 28 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-APL-A6A04A8A | iPhone 13 Pro Max | verkauft | Verkauf am 22.08.2026 | 25 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 25 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-APL-B1554DCD | iPhone SE (3. Generation, 2022) | verkauft | Verkauf am 19.08.2026 | 28 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 28 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme)
+SN-APL-B197BCA8 | iPhone SE (3. Generation, 2022) | verkauft | Verkauf am 15.08.2026 | 32 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 32 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-APL-C19E1525 | iPhone 12 mini | verkauft | Verkauf am 12.01.2026 | 247 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 247 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
+SN-APL-C9AF725A | iPhone 15 Plus | verkauft | Verkauf am 22.08.2026 | 25 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 25 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-APL-CF01810F | iPhone 12 | verkauft | Verkauf am 27.09.2024 | 719 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 719 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
+SN-APL-D38C35D9 | iPhone 14 | verkauft | Verkauf am 02.09.2026 | 14 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 14 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-APL-DB029312 | iPhone 14 | verkauft | Verkauf am 06.09.2026 | 10 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 10 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme)
+SN-APL-DB0B5CB1 | iPhone 14 | verkauft | Verkauf am 01.09.2026 | 15 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 15 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-APL-DC9E4298 | iPad Pro 12,9" (6. Generation, M2, 2022) | verkauft | Verkauf am 08.06.2026 | 100 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 100 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme), überfällig
+SN-APL-E2181586 | iPhone 15 Pro | verkauft | Verkauf am 20.08.2026 | 27 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 27 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-APL-E38B6FC9 | iPhone 14 Plus | verkauft | Verkauf am 27.08.2026 | 20 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 20 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-APL-F958FDCA | iPhone 16 Pro | verkauft | Verkauf am 21.08.2026 | 26 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 26 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme)
+SN-APL-FA58B21B | iPad Pro 12,9" (6. Generation, M2, 2022) | verkauft | Verkauf am 02.09.2026 | 14 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 14 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme)
+SN-APL-FBD4DFF2 | iPhone SE (3. Generation, 2022) | verkauft | Verkauf am 22.09.2024 | 724 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 724 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
+SN-APL-FF6BB718 | iPad Pro 11 (4. Generation, M2, 2022) | verkauft | Verkauf am 12.02.2026 | 216 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 216 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
+SN-DEL-0F0D7761 | Dell Latitude 7420 (14 Zoll, Intel Tiger Lake, 2021) | verkauft | Verkauf am 10.09.2026 | 6 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 6 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-DEL-203AB956 | Dell Latitude 3440 | verkauft | Verkauf am 24.08.2026 | 23 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 23 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-DEL-3F33740F | Dell Pro 14 Premium (PA14250) | verkauft | Verkauf am 22.08.2026 | 25 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 25 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme)
+SN-DEL-6C4F6903 | Dell Latitude 7430 (14 Zoll, Intel Alder Lake, 2022) | verkauft | Verkauf am 13.08.2026 | 34 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 34 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-DEL-80FCF0B7 | Dell Latitude 5430 (14 Zoll, Intel Alder Lake, 2022) | verkauft | Verkauf am 31.08.2026 | 16 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 16 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-DEL-B6A8A85C | Dell Latitude 5430 (14 Zoll, Intel Alder Lake, 2022) | verkauft | Verkauf am 18.01.2026 | 241 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 241 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme), überfällig
+SN-DEL-C3438173 | Dell Latitude 3440 | verkauft | Verkauf am 06.09.2026 | 10 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 10 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme)
+SN-DEL-C60E9CD7 | Dell Latitude 3440 | verkauft | Verkauf am 04.09.2026 | 12 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 12 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-DEL-F63F3740 | Dell Latitude 5420 (14 Zoll, Intel Tiger Lake, 2021) | verkauft | Verkauf am 05.09.2026 | 11 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 11 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme)
+SN-FPH-53B8BE00 | Fairphone 5 | verkauft | Verkauf am 06.09.2026 | 10 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 10 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-FPH-5AC9E6DC | Fairphone 5 | verkauft | Verkauf am 22.08.2026 | 25 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 25 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-FPH-D854D20F | Fairphone 4 | verkauft | Verkauf am 21.08.2026 | 26 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 26 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-GOO-1816E464 | Google Pixel 8a | verkauft | Verkauf am 11.09.2026 | 5 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 5 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme)
+SN-GOO-541EBFFB | Google Pixel Fold | verkauft | Verkauf am 05.08.2026 | 42 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 42 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-GOO-60909240 | Google Pixel 7a | verkauft | Verkauf am 31.08.2026 | 16 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 16 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-GOO-7D6874B6 | Google Pixel 7 Pro | verkauft | Verkauf am 10.09.2026 | 6 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 6 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-GOO-8B88E5FA | Google Pixel 5 | verkauft | Verkauf am 04.05.2025 | 500 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 500 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
+SN-GOO-8DF35581 | Google Pixel 7 | verkauft | Verkauf am 02.09.2026 | 14 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 14 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-GOO-A19BF431 | Google Pixel 6a | verkauft | Verkauf am 03.09.2026 | 13 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 13 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-GOO-A52D4728 | Google Pixel 6 | verkauft | Verkauf am 12.10.2024 | 704 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 704 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
+SN-GOO-A5F84E5A | Google Pixel 5 | verkauft | Verkauf am 02.06.2025 | 471 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 471 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
+SN-GOO-B0B42CF2 | Google Pixel 6 | verkauft | Verkauf am 12.08.2026 | 35 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 35 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-GOO-B1E5E1F0 | Google Pixel 6 Pro | verkauft | Verkauf am 19.08.2026 | 28 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 28 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-GOO-C1C963E4 | Google Pixel 6 Pro | verkauft | Verkauf am 10.10.2025 | 341 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 341 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme), überfällig
+SN-GOO-CD7687E4 | Google Pixel 9 Pro Fold | verkauft | Verkauf am 26.05.2026 | 113 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 113 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
+SN-GOO-D83D2CA6 | Google Pixel 9 Pro XL | verkauft | Verkauf am 28.08.2026 | 19 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 19 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-HMD-7C87FBE3 | Nokia G22 | verkauft | Verkauf am 12.09.2026 | 4 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 4 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-HMD-AFD55F86 | Nokia XR20 | verkauft | Verkauf am 09.09.2026 | 7 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 7 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-HPI-3CC7F4B9 | HP ProBook 450 G8 (15,6 Zoll, Intel Tiger Lake, 2020/2021) | verkauft | Verkauf am 13.09.2026 | 3 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 3 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-HPI-69781FC5 | HP EliteBook 650 G9 (15,6 Zoll, Intel Alder Lake, 2022) | verkauft | Verkauf am 29.01.2026 | 230 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 230 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
+SN-HPI-A806C14A | HP EliteBook 840 G9 (14 Zoll 16:10, Intel Alder Lake, 2022) | verkauft | Verkauf am 05.08.2026 | 42 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 42 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-HPI-CAE5C437 | HP ProBook 450 G8 (15,6 Zoll, Intel Tiger Lake, 2020/2021) | verkauft | Verkauf am 10.09.2026 | 6 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 6 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-HPI-CB09A3C4 | HP EliteBook 840 G9 (14 Zoll 16:10, Intel Alder Lake, 2022) | verkauft | Verkauf am 01.08.2026 | 46 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 46 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
+SN-HPI-CEE553DA | HP ProBook 450 G8 (15,6 Zoll, Intel Tiger Lake, 2020/2021) | verkauft | Verkauf am 08.05.2026 | 131 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 131 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
+SN-HPI-D7F1608D | HP ProBook 450 G9 (15,6 Zoll, Intel Alder Lake, 2022) | verkauft | Verkauf am 09.09.2026 | 7 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 7 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-HPI-E5C2A0AD | HP EliteBook 650 G9 (15,6 Zoll, Intel Alder Lake, 2022) | verkauft | Verkauf am 23.02.2025 | 570 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 570 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
+SN-LEN-214B7C78 | Lenovo ThinkPad E14 Gen 4 (14 Zoll, Intel Alder Lake / AMD Ryzen 5000, 2022) | verkauft | Verkauf am 18.08.2026 | 29 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 29 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-LEN-2FD06CF7 | Lenovo ThinkPad E14 Gen 5 (14 Zoll 16:10, Intel Raptor Lake / AMD Ryzen 7030, 2023) | verkauft | Verkauf am 11.08.2026 | 36 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 36 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-LEN-444493D5 | Lenovo ThinkPad T14 Gen 3 (14 Zoll, Intel Alder Lake / AMD Ryzen 6000 Pro, 2022) | verkauft | Verkauf am 12.09.2026 | 4 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 4 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-LEN-4A5F4ACF | Lenovo ThinkPad T14 Gen 2 (14 Zoll, Intel Tiger Lake / AMD Ryzen 5000 Pro, 2021) | verkauft | Verkauf am 05.09.2026 | 11 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 11 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-LEN-6CB92ADD | Lenovo ThinkPad L14 Gen 2 (14 Zoll, Intel Tiger Lake / AMD Ryzen 5000 Pro, 2021) | verkauft | Verkauf am 05.07.2025 | 438 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 438 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
+SN-LEN-702C4557 | Lenovo ThinkPad L14 Gen 4 (14 Zoll, Intel Raptor Lake / AMD Ryzen 7030, 2023) | verkauft | Verkauf am 29.07.2025 | 414 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 414 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
+SN-LEN-8B90B181 | Lenovo ThinkPad X1 Carbon Gen 11 (14 Zoll, Intel Raptor Lake, 2023) | verkauft | Verkauf am 09.09.2026 | 7 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 7 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-LEN-9D269A68 | Lenovo ThinkPad X1 Carbon Gen 9 (14 Zoll 16:10, Intel Tiger Lake, 2021) | verkauft | Verkauf am 09.10.2025 | 342 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 342 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
+SN-LEN-A47DEE32 | Lenovo ThinkPad T14 Gen 2 (14 Zoll, Intel Tiger Lake / AMD Ryzen 5000 Pro, 2021) | verkauft | Verkauf am 18.04.2024 | 881 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 881 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
+SN-LEN-B423FDA1 | Lenovo ThinkPad T14 Gen 3 (14 Zoll, Intel Alder Lake / AMD Ryzen 6000 Pro, 2022) | verkauft | Verkauf am 19.08.2026 | 28 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 28 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-LEN-D9368B2A | Lenovo ThinkPad T14 Gen 2 (14 Zoll, Intel Tiger Lake / AMD Ryzen 5000 Pro, 2021) | verkauft | Verkauf am 24.08.2026 | 23 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 23 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-LEN-E1050AB3 | Lenovo ThinkPad E14 Gen 5 (14 Zoll 16:10, Intel Raptor Lake / AMD Ryzen 7030, 2023) | verkauft | Verkauf am 08.08.2026 | 39 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 39 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
+SN-LEN-E28A4423 | Lenovo ThinkPad T14 Gen 5 (14 Zoll, Intel Core Ultra / AMD Ryzen 8000 Pro, 2024) | verkauft | Verkauf am 26.08.2026 | 21 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 21 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
+SN-LEN-FF5FDA3F | Lenovo ThinkPad L14 Gen 4 (14 Zoll, Intel Raptor Lake / AMD Ryzen 7030, 2023) | verkauft | Verkauf am 14.08.2026 | 33 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 33 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-MOT-07073FCD | Motorola Razr 40 Ultra | verkauft | Verkauf am 07.09.2026 | 9 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 9 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-MOT-78B680EF | Motorola Razr 40 Ultra | verkauft | Verkauf am 18.08.2026 | 29 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 29 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-MOT-8ED8DC9B | Motorola Edge 30 Pro | verkauft | Verkauf am 08.12.2023 | 1.013 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 1013 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
+SN-MOT-AC06C1CF | Motorola Moto G24 | verkauft | Verkauf am 09.09.2026 | 7 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 7 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme)
+SN-MOT-D918B94A | Motorola Moto G52 | verkauft | Verkauf am 24.08.2026 | 23 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 23 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-MSF-1556F3BC | Microsoft Surface Go 3 (10,5 Zoll, Pentium Gold 6500Y / Core i3-10100Y) | verkauft | Verkauf am 27.08.2026 | 20 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 20 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-MSF-29D6D18F | Microsoft Surface Pro 10 for Business, Intel Core Ultra 7 165U | verkauft | Verkauf am 09.09.2026 | 7 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 7 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-MSF-2FE8F9D4 | Microsoft Surface Laptop 4 (13,5 und 15 Zoll, 2021) | verkauft | Verkauf am 03.09.2026 | 13 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 13 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-MSF-3D114B68 | Microsoft Surface Go 3 (10,5 Zoll, Pentium Gold 6500Y / Core i3-10100Y) | verkauft | Verkauf am 08.08.2026 | 39 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 39 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-MSF-531E9DCA | Microsoft Surface Pro 9, Core i7-1255U (Wi-Fi) | verkauft | Verkauf am 22.08.2026 | 25 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 25 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-MSF-6E1B48A5 | Microsoft Surface Go 3 (10,5 Zoll, Pentium Gold 6500Y / Core i3-10100Y) | verkauft | Verkauf am 24.08.2026 | 23 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 23 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-MSF-EB8C35E9 | Microsoft Surface Laptop 4 (13,5 und 15 Zoll, 2021) | verkauft | Verkauf am 14.08.2026 | 33 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 33 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-SAM-042687E0 | Samsung Galaxy Tab Active3 (8 Zoll, Enterprise Edition) | verkauft | Verkauf am 06.09.2026 | 10 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 10 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-SAM-0651E20C | Samsung Galaxy Book3 Pro (14 / 16 Zoll, 2023) | verkauft | Verkauf am 09.09.2026 | 7 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 7 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-SAM-06F058DC | Samsung Galaxy Z Fold5 | verkauft | Verkauf am 09.09.2026 | 7 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 7 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-SAM-123E3364 | Samsung Galaxy S22 5G | verkauft | Verkauf am 17.10.2024 | 699 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 699 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
+SN-SAM-20D07003 | Samsung Galaxy S24 Ultra | verkauft | Verkauf am 27.08.2026 | 20 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 20 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-SAM-315D9B66 | Samsung Galaxy S22+ 5G | verkauft | Verkauf am 17.01.2025 | 607 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 607 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
+SN-SAM-33557E23 | Samsung Galaxy S22+ 5G | verkauft | Verkauf am 25.02.2025 | 568 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 568 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
+SN-SAM-42241AC0 | Samsung Galaxy S21+ 5G | verkauft | Verkauf am 29.07.2024 | 779 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 779 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
+SN-SAM-469857E7 | Samsung Galaxy A53 5G | verkauft | Verkauf am 07.08.2026 | 40 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 40 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-SAM-4A74BD24 | Samsung Galaxy Tab Active3 (8 Zoll, Enterprise Edition) | verkauft | Verkauf am 23.08.2024 | 754 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 754 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme), überfällig
+SN-SAM-52B20E10 | Samsung Galaxy Tab S8 (11 Zoll, SM-X700/X706) | verkauft | Verkauf am 11.08.2026 | 36 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 36 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-SAM-5336D5F5 | Samsung Galaxy Book4 Pro (14 / 16 Zoll) | verkauft | Verkauf am 11.09.2026 | 5 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 5 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-SAM-55C226F7 | Samsung Galaxy A52s 5G | verkauft | Verkauf am 22.08.2026 | 25 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 25 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-SAM-71C84B4B | Samsung Galaxy XCover6 Pro | verkauft | Verkauf am 15.08.2026 | 32 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 32 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-SAM-727BA1A1 | Samsung Galaxy S24 | verkauft | Verkauf am 28.08.2026 | 19 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 19 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme)
+SN-SAM-762B27A6 | Samsung Galaxy S22 5G | verkauft | Verkauf am 28.08.2025 | 384 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 384 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
+SN-SAM-7C63E965 | Samsung Galaxy S23+ | verkauft | Verkauf am 12.09.2026 | 4 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 4 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-SAM-8621942E | Samsung Galaxy A36 5G | verkauft | Verkauf am 30.08.2026 | 17 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 17 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-SAM-9E6F9E01 | Samsung Galaxy A16 5G | verkauft | Verkauf am 02.09.2026 | 14 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 14 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-SAM-A30DA90E | Samsung Galaxy S21 5G | verkauft | Verkauf am 24.08.2026 | 23 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Verkauf ohne Aufbereitung vor 23 Tagen, üblich 30 Tage bis Zahlungseingang (Annahme)
+SN-SAM-A40AC98A | Samsung Galaxy A52s 5G | verkauft | Verkauf am 21.08.2026 | 26 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 26 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-SAM-A4F696A0 | Samsung Galaxy A52s 5G | verkauft | Verkauf am 07.09.2026 | 9 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 9 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-SAM-B45CE6E7 | Samsung Galaxy S24 Ultra | verkauft | Verkauf am 18.08.2026 | 29 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 29 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
+SN-SAM-CCACDBAE | Samsung Galaxy A54 5G | verkauft | Verkauf am 09.03.2024 | 921 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 921 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme), überfällig
+SN-SAM-D8C3F8F4 | Samsung Galaxy A55 5G | verkauft | Verkauf am 11.09.2026 | 5 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Marktplatz vor 5 Tagen, üblich 28 Tage bis Zahlungseingang (Annahme)
+SN-SAM-E6E72D20 | Samsung Galaxy A52s 5G | verkauft | Verkauf am 18.03.2024 | 912 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Mitarbeiterkauf vor 912 Tagen, üblich 14 Tage bis Zahlungseingang (Annahme), überfällig
+SN-SAM-FE2B81B3 | Samsung Galaxy A34 5G | verkauft | Verkauf am 07.08.2026 | 40 | Gutschrift des Kanals noch nicht geliefert; Verkauf über Großhandel vor 40 Tagen, üblich 45 Tage bis Zahlungseingang (Annahme)
 Datumskette nach Zustand des Geräts
-QTY 7
+7 Zeilen
 Begriffe ausblenden
 Zustand des Geräts
 Zustand im Hauptbuch am Stichtag
-QTY Geräte
+Geräte
 Stückzahl der Seriennummern in diesem Zustand
 Kette vollständig
 davon mit einem Datum an jeder erwarteten Station
 Anteil
-Kette vollständig geteilt durch QTY Geräte, in Prozent
-Zustand des Geräts | QTY Geräte | Kette vollständig | Anteil
-verkauft | 2.540 | 2.298 | 90,5 %
-beim Kunden, vermietet | 2.461 | 2.455 | 99,8 %
-im Lager, verkaufsfähig | 128 | 125 | 97,7 %
-zurück, in Prüfung oder Aufbereitung | 36 | 36 | 100,0 %
-Ersatzgerät, nie vermietet | 32 | 32 | 100,0 %
-Rückgabe erwartet | 31 | 31 | 100,0 %
-verschrottet | 23 | 22 | 95,7 %
+Kette vollständig geteilt durch Geräte, in Prozent
+Zustand des Geräts | Geräte | Kette vollständig | Anteil
+verkauft | 2.544 | 2.317 | 91,1 %
+beim Kunden, vermietet | 2.473 | 2.468 | 99,8 %
+im Lager, verkaufsfähig | 135 | 129 | 95,6 %
+zurück, in Prüfung oder Aufbereitung | 34 | 34 | 100,0 %
+verschrottet | 32 | 30 | 93,8 %
+Rückgabe erwartet | 27 | 27 | 100,0 %
+Ersatzgerät, nie vermietet | 6 | 6 | 100,0 %
 ▾ So werden die Daten erfasst
 Keine Station wird im Werkzeug eingetippt. Jede Station ist eine Zeile, die ein Quellsystem in seine Datei schreibt (Bestellung im ERP, Versand im Lagersystem, Löschzertifikat auf dem Rückläufer-Beleg, Gutschrift in der Kanalabrechnung). Das Werkzeug liest die Datei, hängt die Zeile an die Seriennummer und merkt sich Kanal und Belegnummer. Fehlt ein Datum, fehlt die Zeile in der Quelle, und genau dort muss sie nachgeliefert werden.
 Jeder Kanal legt Dateien in seinen Ordner, je Lieferperiode eine (in der Simulation je Quartal, benannt nach Datum und laufender Nummer).
 Prüfsumme je Datei: dieselbe Datei ein zweites Mal ist wirkungslos, kein Doppelzählen.
 Probelauf ohne Spuren möglich: das Werkzeug meldet, was passieren würde, und schreibt nichts.
 Jede Zeile wird auf Format geprüft (Pflichtfelder, Zahlen, erlaubte Werte, keine negativen Beträge) und jeder Schlüssel gegen die Elterntabelle aufgelöst (Bestellung, Bestellposition, Seriennummer, Vertrag).
-Was passt, wird übernommen; was doppelt ist, wird gezählt; was nicht passt, landet in „ungeklärt" mit Grund und Zeilennummer.
-Vier Schichten: Rohdateien (unverändert), geprüfte Zeilen, das Geräte-Hauptbuch je Seriennummer, Kennzahlen und Stellschrauben. Jede Zahl auf den anderen Tabs lässt sich bis zur Zeile in der Rohdatei zurückverfolgen.
+Was passt, wird übernommen; was doppelt ist, wird gezählt; was nicht passt, landet in „ungeklärt“ mit Grund und Zeilennummer.
+Vier Schichten: Rohdateien (unverändert), geprüfte Zeilen, das Geräte-Hauptbuch je Seriennummer, Kennzahlen und Stellschrauben. Jede Zahl auf den anderen Reiter lässt sich bis zur Zeile in der Rohdatei zurückverfolgen.
 ▾ Für den echten Einsatz Anforderung, noch nicht gebaut
 Nur die vereinbarten Kanäle. Je Installation eine Freigabeliste; eine Datei aus einem nicht freigegebenen Kanal wird abgewiesen, nicht abgelegt.
 Automatisierte Läufe. Jeder Kanal hat einen Lieferplan (täglich, wöchentlich, monatlich); das Werkzeug holt die Dateien aus dem Ablageordner, prüft, übernimmt und schreibt je Lauf einen Bericht. Kein Klick nötig, kein Zugriff auf ein Quellsystem.

@@ -26,7 +26,7 @@
     var release = typeof opts.release === 'function' ? opts.release : function () {};
     var remove = typeof opts.remove === 'function' ? opts.remove : function () {};
     var deliveries = Array.isArray(opts.deliveries) ? opts.deliveries : [];
-    var ungeklaert = QUOTE_OPEN + 'ungeklärt"';
+    var ungeklaert = QUOTE_OPEN + 'ungeklärt“';
 
     /* ---------- Kopf ---------- */
     var kicker = 'Simulation, Stand ' + f.de(D.today) + ' (Stichtag der Daten ' + f.de(D.as_of) + ')';
@@ -41,24 +41,23 @@
       .map(function (u) { return f.qty(u.n) + ' mal ' + u.reason; })
       .concat(['nichts davon wird geraten']);
     var kpis = [
-      { label: 'Datenkanäle angeschlossen', value: 'QTY ' + f.qty(T.feeds), lines: [
+      { label: 'Datenkanäle angeschlossen', value: f.qty(T.feeds), lines: [
         'aus ' + f.qty(T.systems) + ' Quellsystemen, plus ' + f.qty(T.public) + ' öffentliche Kanäle (Katalog, Marktkurven)',
         f.qty(T.needed) + ' davon für den Kreislauf nötig',
         f.qty(T.files) + ' Dateien seit ' + f.de(D.history_start)
       ] },
-      { label: 'Zeilen gelesen', value: 'QTY ' + f.qty(T.read), lines: [
+      { label: 'Zeilen gelesen', value: f.qty(T.read), lines: [
         f.qty(T.new) + ' übernommen',
         f.qty(T.dup_same) + ' identische Doppelte übersprungen',
         f.qty(T.dup_conflict) + ' Doppelte mit anderem Inhalt gemeldet'
       ] },
-      { label: 'Ungeklärte Zeilen', value: 'QTY ' + f.qty(T.unresolved), lines: unresLines },
+      { label: 'Ungeklärte Zeilen', value: f.qty(T.unresolved), lines: unresLines },
       { label: 'Datumskette vollständig', value: D.serials ? f.pct1(D.chain_ok / D.serials) : '', lines: [
         f.qty(D.chain_ok) + ' von ' + f.qty(D.serials) + ' Seriennummern',
         'jede erwartete Station von Bestellung bis Zahlungseingang hat ein Datum'
       ] }
     ];
     var kpiDefs = [
-      { k: 'QTY (Quantity)', v: 'Stückzahl; das Wort dahinter sagt, was gezählt wird: Kanäle, Zeilen, Dateien, Geräte, Seriennummern.' }
     ];
 
     /* ---------- Die Datenkanaele ---------- */
@@ -95,7 +94,7 @@
         { k: 'Liefert', v: 'das Quellsystem, das die Dateien dieses Kanals schreibt' },
         { k: 'Inhalt', v: 'was in einer Zeile der Datei steht' },
         { k: 'Ohne diesen Kanal fehlt', v: 'was das Werkzeug ohne diesen Kanal nicht mehr rechnen kann. Steht dort eine Station des Kreislaufs (Einkaufspreis, Versand, Mieterlös, Restwert, Zahlungseingang), ist der Kanal nötig: ohne ihn gibt es keine Lifecycle-Marge je Gerät. Steht dort ' + QUOTE_OPEN + 'nur ...", ist der Kanal ergänzend: es fehlt eine Stellschraube oder ein Vergleich, der Kreislauf rechnet trotzdem' },
-        { k: 'Dateien', v: 'QTY Dateien, die dieser Kanal seit ' + f.de(D.history_start) + ' geliefert hat; die Summenzeile zählt alle Kanäle zusammen' },
+        { k: 'Dateien', v: 'Dateien, die dieser Kanal seit ' + f.de(D.history_start) + ' geliefert hat; die Summenzeile zählt alle Kanäle zusammen' },
         { k: 'Letzte Lieferung', v: 'Datum der jüngsten Datei dieses Kanals' },
         { k: 'Zeilen gelesen, übernommen', v: 'gelesen minus doppelt minus ungeklärt; doppelt sind Zeilen, die schon da waren (identisch: übersprungen; mit anderem Inhalt: gemeldet, die erste Lieferung gilt)' },
         { k: 'doppelt', v: 'identische Doppelte plus Doppelte mit anderem Inhalt; beide Zahlen stehen in den Kacheln oben' },
@@ -140,11 +139,11 @@
     var unresRows = unresolved.map(function (u) {
       return E.ROW([E.C(u.feed), E.C(u.reason), E.N(f.qty(u.n))]);
     });
-    var tUnres = E.TABLE('l-unres', 'Ungeklärte Zeilen, nach Grund', [E.H('Kanal'), E.H('Grund'), E.H('QTY Zeilen', 1)], unresRows, {
+    var tUnres = E.TABLE('l-unres', 'Ungeklärte Zeilen, nach Grund', [E.H('Kanal'), E.H('Grund'), E.H('Zeilen', 1)], unresRows, {
       defs: [
         { k: 'Kanal', v: 'der Kanal, dessen Datei die Zeilen geliefert hat' },
         { k: 'Grund', v: 'warum die Zeile liegen bleibt' },
-        { k: 'QTY Zeilen', v: 'Stückzahl der Zeilen mit diesem Grund, über alle Dateien des Kanals' }
+        { k: 'Zeilen', v: 'Stückzahl der Zeilen mit diesem Grund, über alle Dateien des Kanals' }
       ],
       foot: 'Nichts davon wird geraten oder still ergänzt. Eine Zeile bleibt ungeklärt, bis die Quelle sie berichtigt liefert; erst dann rechnet sie mit. Doppelte mit anderem Inhalt stehen hier, weil ein Mensch entscheiden muss, welche Fassung stimmt.'
     });
@@ -164,13 +163,13 @@
       ]);
     });
     var tSteps = E.TABLE('l-steps', 'Die Datumskette je Seriennummer', [
-      E.H('Station'), E.H('Das Datum kommt aus'), E.H('erwartet bei QTY Geräten', 1), E.H('mit Datum', 1), E.H('Anteil'), E.H('ohne Datum', 1)
+      E.H('Station'), E.H('Das Datum kommt aus'), E.H('erwartet bei Geräten', 1), E.H('mit Datum', 1), E.H('Anteil'), E.H('ohne Datum', 1)
     ], stepRows, {
       note: 'Jede Seriennummer hat ' + zahlwort(steps.length) + ' Stationen. Für jede Station, die ein Gerät in seinem Zustand schon erreicht haben muss, prüft das Werkzeug, ob ein Datum da ist. Vollständig heißt: jede erwartete Station hat ein Datum.',
       defs: [
         { k: 'Station', v: 'ein Schritt des Kreislaufs, von der Bestellung bis zum Zahlungseingang, in seiner Reihenfolge' },
         { k: 'Das Datum kommt aus', v: 'der Datenkanal und die Zeile, aus der das Werkzeug das Datum liest; nichts wird von Hand eingetragen, jedes Datum zeigt auf die Zeile in der Rohdatei (Kanal und Belegnummer stehen je Seriennummer im Hauptbuch)' },
-        { k: 'erwartet bei QTY Geräten', v: 'Stückzahl der Geräte, die diese Station in ihrem Zustand schon erreicht haben müssen' },
+        { k: 'erwartet bei Geräten', v: 'Stückzahl der Geräte, die diese Station in ihrem Zustand schon erreicht haben müssen' },
         { k: 'mit Datum', v: 'Stückzahl der erwarteten Geräte, bei denen ein Datum vorliegt' },
         { k: 'Anteil', v: 'mit Datum geteilt durch erwartet, in Prozent' },
         { k: 'ohne Datum', v: 'Geräte, bei denen die Station erwartet wird und kein Datum vorliegt; die Liste je Station steht darunter, mit dem Grund, soweit das Werkzeug ihn kennt' }
@@ -200,7 +199,7 @@
           E.C(r.hint)
         ]);
       });
-      missTables.push(E.TABLE('l-miss-' + i, s.step + ': QTY ' + f.qty(rows.length) + ' Geräte ohne Datum, Kanal ' + s.channel, [
+      missTables.push(E.TABLE('l-miss-' + i, s.step + ': ' + f.qty(rows.length) + ' Geräte ohne Datum, Kanal ' + s.channel, [
         E.H('Seriennummer'), E.H('Modell'), E.H('Zustand'), E.H('letzte Station mit Datum'), E.H('Tage seitdem', 1), E.H('Grund, soweit bekannt')
       ], body, { n: 0, collapsible: true, defs: missDefs }));
     });
@@ -210,13 +209,13 @@
       return E.ROW([E.C(s.status), E.N(f.qty(s.n)), E.N(f.qty(s.complete)), E.N(s.n ? f.pct1(s.complete / s.n) : '')]);
     });
     var tStatus = E.TABLE('l-status', 'Datumskette nach Zustand des Geräts', [
-      E.H('Zustand des Geräts'), E.H('QTY Geräte', 1), E.H('Kette vollständig', 1), E.H('Anteil', 1)
+      E.H('Zustand des Geräts'), E.H('Geräte', 1), E.H('Kette vollständig', 1), E.H('Anteil', 1)
     ], statusRows, {
       defs: [
         { k: 'Zustand des Geräts', v: 'Zustand im Hauptbuch am Stichtag' },
-        { k: 'QTY Geräte', v: 'Stückzahl der Seriennummern in diesem Zustand' },
+        { k: 'Geräte', v: 'Stückzahl der Seriennummern in diesem Zustand' },
         { k: 'Kette vollständig', v: 'davon mit einem Datum an jeder erwarteten Station' },
-        { k: 'Anteil', v: 'Kette vollständig geteilt durch QTY Geräte, in Prozent' }
+        { k: 'Anteil', v: 'Kette vollständig geteilt durch Geräte, in Prozent' }
       ]
     });
 
@@ -231,7 +230,7 @@
           { lead: '', text: 'Probelauf ohne Spuren möglich: das Werkzeug meldet, was passieren würde, und schreibt nichts.' },
           { lead: '', text: 'Jede Zeile wird auf Format geprüft (Pflichtfelder, Zahlen, erlaubte Werte, keine negativen Beträge) und jeder Schlüssel gegen die Elterntabelle aufgelöst (Bestellung, Bestellposition, Seriennummer, Vertrag).' },
           { lead: '', text: 'Was passt, wird übernommen; was doppelt ist, wird gezählt; was nicht passt, landet in ' + ungeklaert + ' mit Grund und Zeilennummer.' },
-          { lead: '', text: 'Vier Schichten: Rohdateien (unverändert), geprüfte Zeilen, das Geräte-Hauptbuch je Seriennummer, Kennzahlen und Stellschrauben. Jede Zahl auf den anderen Tabs lässt sich bis zur Zeile in der Rohdatei zurückverfolgen.' }
+          { lead: '', text: 'Vier Schichten: Rohdateien (unverändert), geprüfte Zeilen, das Geräte-Hauptbuch je Seriennummer, Kennzahlen und Stellschrauben. Jede Zahl auf den anderen Reiter lässt sich bis zur Zeile in der Rohdatei zurückverfolgen.' }
         ] },
       { key: 'l-real', title: 'Für den echten Einsatz', ordered: false, tag: { cls: 'tag-accent-2', text: 'Anforderung, noch nicht gebaut' },
         items: [

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "restwert"
-version = "0.3.0"
+version = "0.3.1"
 description = "Asset P&L, residual value forecast and deterministic decision rules for a Device-as-a-Service fleet. The model advises, deterministic code decides, a named human owns every threshold."
 readme = "README.md"
 requires-python = ">=3.12"

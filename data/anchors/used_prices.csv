@@ -228,7 +228,7 @@ fairphone-4,8 GB / 256 GB,Gut,332.99,"https://www.rebuy.de/i,12261901/handy/",20
 fairphone-5,8 GB / 256 GB,Premium,549,https://www.refurbed.de/p/fairphone-5/,2026-09-13,refurbished-marktplatz
 fairphone-5,8 GB / 256 GB,Gut,427.99,"https://www.rebuy.de/i,15180673/handy/",2026-09-13,refurbished-marktplatz
 fairphone-5,8 GB / 256 GB,Sehr gut,496.99,"https://www.rebuy.de/i,15180086/handy/",2026-09-13,refurbished-marktplatz
-nokia-xr20,6 GB / 128 GB,"Gut (ausverkauft, Listenpreis; guenstigster Preis der letzten 30 Tage)",199,https://asgoodasnew.de/Handys/Nokia-XR20-6GB-5G-Dual-Sim-128GB-granit-grau.html,2026-09-13,refurbished-marktplatz
+nokia-xr20,6 GB / 128 GB,"Gut (ausverkauft, Listenpreis; günstigster Preis der letzten 30 Tage)",199,https://asgoodasnew.de/Handys/Nokia-XR20-6GB-5G-Dual-Sim-128GB-granit-grau.html,2026-09-13,refurbished-marktplatz
 nokia-xr20,6 GB / 128 GB,"Sehr gut (ausverkauft, Listenpreis)",249,https://asgoodasnew.de/Handys/Nokia-XR20-6GB-5G-Dual-Sim-128GB-granit-grau.html,2026-09-13,refurbished-marktplatz
 motorola-edge-30-pro,12 GB / 256 GB,Gut,179,https://asgoodasnew.de/Motorola-Edge-30-Pro-Dual-Sim-12GB-5G-256GB-Cosmic-Blue.html,2026-09-13,refurbished-marktplatz
 motorola-edge-30-pro,12 GB / 256 GB,Sehr gut,209,https://asgoodasnew.de/Motorola-Edge-30-Pro-Dual-Sim-12GB-5G-256GB-Cosmic-Blue.html,2026-09-13,refurbished-marktplatz
@@ -571,3 +571,99 @@ microsoft-surface-laptop-go,"Core i5-1235U / 8 GB / 256 GB (12,4 Zoll, Tastatur 
 samsung-galaxy-book4-c7,"Core 7 150U / 16 GB / 512 GB (15,6 Zoll FHD, Tastatur ES, Fingerprint)",Sehr gut,587.26,https://www.refurbed.de/p/samsung-galaxy-book4-7-150u/,2026-09-16,refurbished-marktplatz
 samsung-galaxy-book4-360,"Core 5 120U / 8 GB / 256 GB (15,6 Zoll FHD OLED, Tastatur DE, mit Stylus)",Exzellent,850.00,https://www.refurbed.de/p/samsung-galaxy-book4-360-5-120u/,2026-09-16,refurbished-marktplatz
 samsung-galaxy-book4-pro,"Core Ultra 7 155H / 16 GB / 512 GB (16 Zoll, Tastatur FR)",Premium,1469.99,https://www.refurbed.de/p/samsung-galaxy-book4-pro-16-155h/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1135G7 / 16 GB / 256 GB (Haendler schreibt 250/500 GB),Sehr gut,439.00,https://www.afbshop.de/hp-elitebook-840-g8/de-38.100-b/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1135G7 / 16 GB / 256 GB (Haendler schreibt 250/500 GB),Gut,399.00,https://www.afbshop.de/hp-elitebook-840-g8/de-38.100-b/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1135G7 / 16 GB / 256 GB (Haendler schreibt 250/500 GB),Fair,349.00,https://www.afbshop.de/hp-elitebook-840-g8/de-38.100-b/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g9,Core i7-1265U / 32 GB / 512 GB (Haendler schreibt 250/500 GB),OVP geöffnet,879.00,https://www.afbshop.de/hp-elitebook-840-g9/de-48.397-b/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g9,Core i7-1265U / 32 GB / 512 GB (Haendler schreibt 250/500 GB),Gut,899.00,https://www.afbshop.de/hp-elitebook-840-g9/de-48.397-b/,2026-09-16,refurbished-marktplatz
+hp-elitebook-650-g9,Core i5-1245U / 16 GB / 256 GB (Haendler schreibt 250/500 GB),Sehr gut,589.00,https://www.afbshop.de/hp-elitebook-650-g9/de-48.282-b/,2026-09-16,refurbished-marktplatz
+hp-elitebook-650-g9,Core i5-1245U / 16 GB / 256 GB (Haendler schreibt 250/500 GB),Gut,529.00,https://www.afbshop.de/hp-elitebook-650-g9/de-48.282-b/,2026-09-16,refurbished-marktplatz
+hp-elitebook-650-g9,Core i5-1245U / 16 GB / 256 GB (Haendler schreibt 250/500 GB),Fair,479.00,https://www.afbshop.de/hp-elitebook-650-g9/de-48.282-b/,2026-09-16,refurbished-marktplatz
+hp-elitebook-6,Ryzen 5 Pro 230 / 16 GB / 256 GB (EliteBook 6 G1a 14 Zoll; Listenseite; Artikel de-50.424-o) (Haendler schreibt 250/500 GB),OVP geöffnet,949.00,https://www.afbshop.de/gebrauchte-notebooks/hp-elitebooks/?p=3,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i7-1185G7 / 16 GB / 512 GB,Gut ITSCO Certified Refurbished,429.00,https://www.itsco.de/notebook-hp-elitebook-840-g8-intel-core-i7-1185g7-4x-3ghz-40397.html,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1145G7 / 8 GB / 256 GB,Hervorragend ITSCO Certified Refurbished,399.00,https://www.itsco.de/notebook-hp-elitebook-840-g8-intel-core-i5-1145g7-4x-2-6ghz-40488.html,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1145G7 / 8 GB / 256 GB,Gut ITSCO Certified Refurbished,299.00,https://www.itsco.de/notebook-hp-elitebook-840-g8-intel-core-i5-1145g7-4x-2-6ghz-40488.html,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1145G7 / 8 GB / 256 GB,Akzeptabel Gebraucht,249.00,https://www.itsco.de/notebook-hp-elitebook-840-g8-intel-core-i5-1145g7-4x-2-6ghz-40488.html,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1135G7 / 8 GB / 256 GB,Akzeptabel Gebraucht,199.00,https://www.itsco.de/notebook-hp-elitebook-840-g8-intel-core-i5-1135g7-4x-2-4ghz-43087.html,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i7-1185G7 / 16 GB / 512 GB (Listenseite; Artikel 37285),Akzeptabel Gebraucht,329.00,https://www.itsco.de/hersteller/hp?page=1&items=96&sort=6&view=classic,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i7-1185G7 / 16 GB / 512 GB (Listenseite; Artikel 43133),Akzeptabel Gebraucht,314.00,https://www.itsco.de/hersteller/hp?page=1&items=96&sort=6&view=classic,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i7-1165G7 / 16 GB / 512 GB (Listenseite; Artikel 43192),Akzeptabel Gebraucht,314.00,https://www.itsco.de/hersteller/hp?page=1&items=96&sort=6&view=classic,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i7-1185G7 / 16 GB / 512 GB (Listenseite; Artikel 43258; US-Tastatur),Akzeptabel Gebraucht,319.00,https://www.itsco.de/hersteller/hp?page=1&items=96&sort=6&view=classic,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i7-1165G7 / 16 GB / 512 GB (Listenseite; Artikel 42373),Akzeptabel Gebraucht,349.00,https://www.itsco.de/hersteller/hp?page=1&items=96&sort=6&view=classic,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i7-1185G7 / 16 GB / 512 GB (Listenseite; Artikel 42328 und 42330),Akzeptabel Gebraucht,309.00,https://www.itsco.de/hersteller/hp?page=5&items=24&sort=6&view=classic,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g9,Core i7-1255U / 16 GB / 512 GB,Gut,589.00,https://greenpanda.de/hp-elitebook-840-g9/g210116-003a4,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i7-1165G7 / 32 GB / 1 TB,Exzellent,879.00,https://greenpanda.de/hp-elitebook-840-g8/g206469-006a1,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1135G7 / 16 GB / 512 GB,Gebrauchtgerät - Sehr Gut,399.00,https://www.lapstore.de/a.php/shop/lapstore/lang/de/a/89292/kw/HP-EliteBook-840-G8/,2026-09-16,refurbished-marktplatz
+hp-elitebook-650-g9,Core i5-1245U / 32 GB / 512 GB (LTE-A Pro),Gebrauchte B-Ware,575.00,https://www.harlander.com/hp-elitebook-650-g9-39-6cm-15-6-notebook-i5-1245u-32gb-512gb-ssd-nvme-lte-a-pro-ir-cam-w11-gebrauchte-b-ware.html,2026-09-16,refurbished-marktplatz
+hp-elitebook-650-g9,Core i5-1245U / 32 GB / 512 GB (Tastatur Englisch International),Gebrauchte A-Ware,609.99,https://www.harlander.com/hp-elitebook-650-g9-39-6cm-15-6-notebook-i5-1245u-32gb-512gb-ssd-full-hd-cam-englisch-w11-gebrauchte-a-ware.html,2026-09-16,refurbished-marktplatz
+hp-elitebook-650-g9,Core i5-1245U / 32 GB / 512 GB (Tastatur Englisch; Listenseite),Gebrauchte B-Ware,539.99,https://www.harlander.com/notebooks/modellreihen/elitebook.html?page=2,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g9,Core i5-1235U / 8 GB / 256 GB (Tastatur DE),Gut,746.92,https://www.refurbed.de/p/hp-elitebook-840-g9-i5-1235u/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g9,Core i5-1235U / 8 GB / 128 GB (Tastatur NL),Gut,739.99,https://www.refurbed.de/p/hp-elitebook-840-g9-i5-1235u/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g9,Core i5-1235U / 8 GB / 512 GB (Tastatur DE),Gut,761.08,https://www.refurbed.de/p/hp-elitebook-840-g9-i5-1235u/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g9,Core i5-1235U / 16 GB / 256 GB (Tastatur DK),Sehr gut,772.40,https://www.refurbed.de/p/hp-elitebook-840-g9-i5-1235u/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g9,Core i5-1235U / 8 GB / 512 GB (Tastatur ET/FI/UK/SI/LT/BE),Sehr gut,791.99,https://www.refurbed.de/p/hp-elitebook-840-g9-i5-1235u/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g9,Core i5-1235U / 16 GB / 256 GB (mehrere Tastaturlayouts),Sehr gut,806.99,https://www.refurbed.de/p/hp-elitebook-840-g9-i5-1235u/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g9,Core i5-1235U / 16 GB / 512 GB (Tastatur DE),Gut,839.99,https://www.refurbed.de/p/hp-elitebook-840-g9-i5-1235u/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g9,Core i7-1255U / 16 GB / 512 GB (Tastatur DE),Sehr gut,690.00,https://www.refurbed.de/p/hp-elitebook-840-g9-i7-1255u/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g9,Core i7-1255U / 16 GB / 256 GB (Tastatur NL),Premium,670.00,https://www.refurbed.de/p/hp-elitebook-840-g9-i7-1255u/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g9,Core i7-1255U / 8 GB / 1000 GB (Tastatur ES),Gut,876.99,https://www.refurbed.de/p/hp-elitebook-840-g9-i7-1255u/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g9,Core i7-1255U / 32 GB / 128 GB (Tastatur LV),Gut,915.99,https://www.refurbed.de/p/hp-elitebook-840-g9-i7-1255u/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g9,Core i7-1255U / 32 GB / 1000 GB (Tastatur ES),Gut,1009.99,https://www.refurbed.de/p/hp-elitebook-840-g9-i7-1255u/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g9,Core i7-1255U / 32 GB / 1000 GB (Tastatur HR),Gut,1062.99,https://www.refurbed.de/p/hp-elitebook-840-g9-i7-1255u/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g9,Core i7-1255U / 32 GB / 1000 GB (Tastatur DE),Gut,1073.99,https://www.refurbed.de/p/hp-elitebook-840-g9-i7-1255u/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g9,Core i7-1255U / 32 GB / 1000 GB (mehrere Tastaturlayouts),Gut,1074.99,https://www.refurbed.de/p/hp-elitebook-840-g9-i7-1255u/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g9,Core i7-1255U / 8 GB / 2000 GB (Tastatur ES),Exzellent,1081.99,https://www.refurbed.de/p/hp-elitebook-840-g9-i7-1255u/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g9,Core i5-1245U / 16 GB / 256 GB,Premium,588.00,https://www.refurbed.de/p/hp-elitebook-840-g9-i5-1245u/,2026-09-16,refurbished-marktplatz
+hp-probook-450-g8,Core i5-1135G7 / 8 GB / 256 GB (Tastatur ND),Sehr gut,322.88,https://www.refurbed.de/p/hp-probook-450-g8-i5-1135g7-15-6/,2026-09-16,refurbished-marktplatz
+hp-probook-450-g8,Core i5-1135G7 / 16 GB / 512 GB (Tastatur DE),Sehr gut,470.99,https://www.refurbed.de/p/hp-probook-450-g8-i5-1135g7-15-6/,2026-09-16,refurbished-marktplatz
+hp-probook-450-g8,Core i5-1135G7 / 16 GB / 512 GB (Tastatur DE),Exzellent,572.99,https://www.refurbed.de/p/hp-probook-450-g8-i5-1135g7-15-6/,2026-09-16,refurbished-marktplatz
+hp-probook-450-g8,Core i5-1135G7 / 16 GB / 512 GB (Tastatur IT),Gut,600.99,https://www.refurbed.de/p/hp-probook-450-g8-i5-1135g7-15-6/,2026-09-16,refurbished-marktplatz
+hp-probook-450-g8,Core i5-1135G7 / 16 GB / 512 GB (Tastatur FR oder ES),Gut,614.99,https://www.refurbed.de/p/hp-probook-450-g8-i5-1135g7-15-6/,2026-09-16,refurbished-marktplatz
+hp-probook-450-g8,Core i5-1135G7 / 16 GB / 500 GB (Tastatur DE),Exzellent,475.99,https://www.refurbed.de/p/hp-probook-450-g8-i5-1135g7-15-6/,2026-09-16,refurbished-marktplatz
+hp-probook-450-g8,Core i5-1135G7 / 8 GB / 512 GB (Tastatur DE),Exzellent,573.99,https://www.refurbed.de/p/hp-probook-450-g8-i5-1135g7-15-6/,2026-09-16,refurbished-marktplatz
+hp-probook-450-g8,Core i5-1135G7 / 8 GB / 512 GB (Tastatur IT),Exzellent,573.99,https://www.refurbed.de/p/hp-probook-450-g8-i5-1135g7-15-6/,2026-09-16,refurbished-marktplatz
+hp-probook-450-g9,Core i5-1235U / 8 GB / 256 GB (Tastatur SE),Sehr gut,437.85,https://www.refurbed.de/p/hp-probook-450-g9-1235u-15-6/,2026-09-16,refurbished-marktplatz
+hp-probook-450-g9,Core i5-1235U / 16 GB / 256 GB (Tastatur ND),Sehr gut,502.16,https://www.refurbed.de/p/hp-probook-450-g9-1235u-15-6/,2026-09-16,refurbished-marktplatz
+hp-probook-450-g9,Core i5-1235U / 8 GB / 256 GB (Tastatur NL),Premium,576.99,https://www.refurbed.de/p/hp-probook-450-g9-1235u-15-6/,2026-09-16,refurbished-marktplatz
+hp-probook-450-g9,Core i5-1235U / 16 GB / 512 GB (Tastatur ND),Sehr gut,638.99,https://www.refurbed.de/p/hp-probook-450-g9-1235u-15-6/,2026-09-16,refurbished-marktplatz
+hp-probook-450-g9,Core i5-1235U / 8 GB / 512 GB (Tastatur IT),Exzellent,735.99,https://www.refurbed.de/p/hp-probook-450-g9-1235u-15-6/,2026-09-16,refurbished-marktplatz
+hp-probook-450-g9,Core i5-1235U / 32 GB / 512 GB (Tastatur ND),Sehr gut,852.99,https://www.refurbed.de/p/hp-probook-450-g9-1235u-15-6/,2026-09-16,refurbished-marktplatz
+hp-probook-450-g9,Core i5-1235U / 32 GB / 1000 GB (Tastatur ND),Sehr gut,887.99,https://www.refurbed.de/p/hp-probook-450-g9-1235u-15-6/,2026-09-16,refurbished-marktplatz
+hp-probook-450-g10,Core i5-1335U / 8 GB / 256 GB (Tastatur BE),Premium,629.00,https://www.refurbed.de/p/hp-probook-450-g10-i5-1335u/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1135G7 / 16 GB / 256 GB,Gut,310.99,https://www.refurbed.de/p/hp-elitebook-840-g8-i5-1135g7-14/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1135G7 / 8 GB / 250 GB,Exzellent,389.00,https://www.refurbed.de/p/hp-elitebook-840-g8-i5-1135g7-14/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1135G7 / 8 GB / 512 GB,Gut,394.99,https://www.refurbed.de/p/hp-elitebook-840-g8-i5-1135g7-14/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1135G7 / 8 GB / 512 GB,Exzellent,442.99,https://www.refurbed.de/p/hp-elitebook-840-g8-i5-1135g7-14/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1135G7 / 8 GB / 512 GB,Sehr gut,443.99,https://www.refurbed.de/p/hp-elitebook-840-g8-i5-1135g7-14/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1135G7 / 16 GB / 512 GB,Sehr gut,455.99,https://www.refurbed.de/p/hp-elitebook-840-g8-i5-1135g7-14/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1135G7 / 16 GB / 512 GB,Sehr gut,462.99,https://www.refurbed.de/p/hp-elitebook-840-g8-i5-1135g7-14/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1135G7 / 32 GB / 256 GB,Sehr gut,462.99,https://www.refurbed.de/p/hp-elitebook-840-g8-i5-1135g7-14/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1135G7 / 16 GB / 512 GB,Sehr gut,467.99,https://www.refurbed.de/p/hp-elitebook-840-g8-i5-1135g7-14/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1135G7 / 8 GB / 512 GB,Exzellent,468.99,https://www.refurbed.de/p/hp-elitebook-840-g8-i5-1135g7-14/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1135G7 / 32 GB / 256 GB,Gut,474.99,https://www.refurbed.de/p/hp-elitebook-840-g8-i5-1135g7-14/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1135G7 / 16 GB / 512 GB,Exzellent,543.99,https://www.refurbed.de/p/hp-elitebook-840-g8-i5-1135g7-14/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1145G7 / 8 GB / 250 GB,Sehr gut,327.85,https://www.refurbed.de/p/hp-elitebook-840-g8-1145g7-14/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1145G7 / 8 GB / 256 GB,Sehr gut,339.99,https://www.refurbed.de/p/hp-elitebook-840-g8-1145g7-14/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1145G7 / 16 GB / 256 GB (Tastatur UK),Gut,360.99,https://www.refurbed.de/p/hp-elitebook-840-g8-1145g7-14/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1145G7 / 16 GB / 512 GB (Tastatur IT),Gut,386.99,https://www.refurbed.de/p/hp-elitebook-840-g8-1145g7-14/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1145G7 / 16 GB / 256 GB (Tastatur DE),Gut,387.99,https://www.refurbed.de/p/hp-elitebook-840-g8-1145g7-14/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1145G7 / 16 GB / 256 GB (Tastatur SK),Sehr gut,397.99,https://www.refurbed.de/p/hp-elitebook-840-g8-1145g7-14/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1145G7 / 16 GB / 512 GB (Tastatur UK),Gut,397.99,https://www.refurbed.de/p/hp-elitebook-840-g8-1145g7-14/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1145G7 / 16 GB / 512 GB (Tastatur DE),Gut,399.99,https://www.refurbed.de/p/hp-elitebook-840-g8-1145g7-14/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1145G7 / 16 GB / 256 GB (Tastatur DE),Sehr gut,404.99,https://www.refurbed.de/p/hp-elitebook-840-g8-1145g7-14/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1145G7 / 16 GB / 256 GB (Tastatur DE),Sehr gut,411.99,https://www.refurbed.de/p/hp-elitebook-840-g8-1145g7-14/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1145G7 / 16 GB / 256 GB (Tastatur US),Exzellent,431.99,https://www.refurbed.de/p/hp-elitebook-840-g8-1145g7-14/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g10,Core i5-1335U / 16 GB / 512 GB,Gut,659.00,https://www.refurbed.de/p/hp-elitebook-840-g10-i5-1335u/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g11,Core Ultra 5 135U / 16 GB / 128 GB (Tastatur DE),Very good,808.99,https://www.refurbed.de/en-de/p/hp-elitebook-840-g11-5-135u/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g11,Core Ultra 5 135U / 16 GB / 256 GB (Tastatur US),Very good,840.99,https://www.refurbed.de/en-de/p/hp-elitebook-840-g11-5-135u/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g11,Core Ultra 5 135U / 32 GB / 128 GB (Tastatur DE),Very good,1062.99,https://www.refurbed.de/en-de/p/hp-elitebook-840-g11-5-135u/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g11,Core Ultra 5 135U / 32 GB / 512 GB (Tastatur DE),Very good,1089.99,https://www.refurbed.de/en-de/p/hp-elitebook-840-g11-5-135u/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g11,Core Ultra 5 135U / 32 GB / 512 GB (Tastatur FR/BE/ES/IT/US/NL),Very good,1126.99,https://www.refurbed.de/en-de/p/hp-elitebook-840-g11-5-135u/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1135G7 / 16 GB / 256 GB,"gut, wenige Gebrauchsspuren vorhanden",379.00,https://notebook-pro.de/products/hp-elitebook-840-g8-i5-1135g7-16gb-ddr4-256gb-nvme-ssd-14-fhd-win-11-pro,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g9,Core i7-1260P / 32 GB / 1 TB,Sehr gut,699.00,https://notebook-pro.de/products/hp-elitebook-840-g9-i7-1260p-32gb-ddr5-14-wuxga-1tb-nvme-ssd-win-11-pro,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i7-1185G7 / 32 GB / 512 GB (Listenseite; mit Dellen; Artikel hp-elitebook-840-g8-i7-1185g7-32gb-ddr4-512gb-nvme-ssd-14-fhd-win-11-pro),B-Ware,333.00,https://notebook-pro.de/collections/hp-refurbished-elitebooks-probooks,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i7-1165G7 / 16 GB / 512 GB (Listenseite; Artikel hp-elitebook-840-g8-i7-1165g7-16gb-ddr4-14-fhd-512gb-nvme-ssd-win-11-pro),B-Ware,299.00,https://notebook-pro.de/collections/hp-refurbished-elitebooks-probooks,2026-09-16,refurbished-marktplatz
+hp-probook-450-g8,Core i5-1135G7 / 8 GB / 256 GB,C,249.00,https://www.hardware-online-shop.de/p/hp-probook-450-g8-15-i5-1135g7-8-gb-ram-256-gb-ssd,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i7-1185G7 / 32 GB / 512 GB (Listenseite; Artikel A204894),Refurbished - Akzeptabel,439.00,https://www.preiswerte-it.de/Notebooks/HP/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1135G7 / 16 GB / 256 GB (Listenseite; LTE),Refurbished - Gut,319.00,https://www.preiswerte-it.de/Notebooks/HP/,2026-09-16,refurbished-marktplatz
+hp-elitebook-840-g8,Core i5-1135G7 / 16 GB / 256 GB (Listenseite; LTE),Refurbished - Sehr gut,339.00,https://www.preiswerte-it.de/Notebooks/HP/,2026-09-16,refurbished-marktplatz
