@@ -860,8 +860,8 @@ def run_conform(con, as_of: date, a: Assumptions, csv_dir: Path | None = None, s
 public one join away; the fleet that references them is synthetic; this keeps
 `test_source_tables_are_synthetic` true and honest), `source_file = "bronze.<table>"`. Mapping:
 
-* `model_catalogue`: one row per slug with `launch_date` and at least one priced variant (208 of
-  233 since catalogue round 4; the excluded 25 are returned and listed in `SYNTHETIC.md`): `model = slug`,
+* `model_catalogue`: one row per slug with `launch_date` and at least one priced variant (209 of
+  233 since the laptop research of 2026-09-16, 208 after catalogue round 4; the excluded 24 are returned and listed in `SYNTHETIC.md`): `model = slug`,
   `model_family = fleet_family(family, oem)`, `generation` = dense rank of `launch_date` within
   (oem, series), `launch_date`, `list_price = rrp_net(min priced variant RRP, vat_rate)`,
   `base_storage_gb` = storage of that variant.

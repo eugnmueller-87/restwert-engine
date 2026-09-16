@@ -37,10 +37,10 @@ USED_CSV: Path = ANCHORS_DIR / "used_prices.csv"
 # Buy-back and trade-in offers keep their own bucket because they are a bid, not an ask.
 _GRADE_PATTERNS: list[tuple[str, str]] = [
     (r"trade[- ]?in|ankauf|bis zu|buy[- ]?back|verkaufen", "TRADEIN"),
-    (r"\bgrade\s*a\b|a-ware|premium|wie neu|neuwertig|hervorragend|like new|excellent|mint|top", "A"),
+    (r"\bgrade\s*a\b|a-ware|premium|wie neu|neuwertig|hervorragend|like new|excellent|exzellent|mint|top", "A"),
     (r"\bgrade\s*b\b|b-ware|sehr gut|very good", "B"),
     (r"\bgrade\s*c\b|c-ware|\bgut\b|\bgood\b|befriedigend", "C"),
-    (r"\bgrade\s*d\b|d-ware|akzeptabel|acceptable|stark (gebraucht|benutzt)|fair|gebrauchsspuren", "D"),
+    (r"\bgrade\s*d\b|d-ware|akzeptabel|acceptable|stark (gebraucht|benutzt|genutzt)|fair|gebrauchsspuren", "D"),
 ]
 GRADE_ORDER = ["A", "B", "C", "D", "TRADEIN"]
 
@@ -140,6 +140,21 @@ def read_tables(catalogue_dir: Path = CATALOGUE_DIR, anchors_dir: Path = ANCHORS
     return AnchorTables(models=models, variants=variants, used=used)
 
 
+_CPU_TOKEN_RE = re.compile(r"[a-z]*\d[a-z0-9]{2,}")
+
+
+def _cpu_tokens(spec: str | None) -> set[str]:
+    """Processor-like tokens of the first segment of a spec ('Core i5-1335U / 16 GB / 512 GB' -> {'1335u'})."""
+    if not spec:
+        return set()
+    head = str(spec).split("/")[0].lower()
+    return {t for t in _CPU_TOKEN_RE.findall(head) if not t.endswith(("gb", "tb"))}
+
+
+def _shares_cpu_token(offer_spec: str | None, variant_spec: str | None) -> bool:
+    return bool(_cpu_tokens(offer_spec) & _cpu_tokens(variant_spec))
+
+
 def _match_variant(
     variants: pd.DataFrame, slug: str, storage_gb: int | None, ram_gb: int | None, spec: str | None
 ) -> tuple[pd.Series | None, str]:
@@ -164,6 +179,12 @@ def _match_variant(
         return None, "no_variant_with_this_storage"
     if ram_gb is not None:
         both = same_storage[same_storage["ram_gb_parsed"] == ram_gb]
+        if len(both) > 1:
+            # several priced variants share storage and RAM (an Intel and an AMD build of the same model):
+            # prefer the one whose processor token appears in the offer, never guess between them by price
+            cpu_hit = both[[_shares_cpu_token(spec, vs) for vs in both["spec"]]]
+            if not cpu_hit.empty:
+                return cpu_hit.iloc[0], "storage_ram_cpu"
         if not both.empty:
             return both.iloc[0], "storage_ram"
         unknown = same_storage[same_storage["ram_gb_parsed"].isna()]
@@ -236,7 +257,8 @@ def load_anchors(
                 "spec_used": u["spec"],
                 "storage_gb": storage if storage is not None else matched_storage,
                 "condition": u["condition"],
-                "grade": normalise_grade(u["condition"]),
+                # a buy-back bid is TRADEIN by its source, whatever the portal calls the condition
+                "grade": "TRADEIN" if str(u["source_kind"]).strip() == "ankauf-trade-in" else normalise_grade(u["condition"]),
                 "price_eur": float(price),
                 "rrp_eur_launch_de": rrp,
                 "spec_rrp": var["spec"],

@@ -492,8 +492,8 @@ samsung-galaxy-book3-pro,14 Zoll / Core i5-1340P / 8 GB / 512 GB (Basis),512,8,1
 samsung-galaxy-book3-pro,14 Zoll / Core i7-1360P / 16 GB / 512 GB (typische Business-Konfiguration),512,16,1899,https://www.computerbase.de/2023-02/samsung-galaxy-book3-pro-360-ultra-hands-on/,2023-02-01
 samsung-galaxy-book3-pro,16 Zoll / Core i5 / 8 GB / 512 GB,512,8,1799,https://www.computerbase.de/2023-02/samsung-galaxy-book3-pro-360-ultra-hands-on/,2023-02-01
 samsung-galaxy-book3-pro,16 Zoll / Core i7-1360P / 16 GB / 512 GB,512,16,1999,https://www.computerbase.de/2023-02/samsung-galaxy-book3-pro-360-ultra-hands-on/,2023-02-01
-samsung-galaxy-book4-360,"Core 5 120U / 8 GB / 256 GB / 15,6 Zoll FHD OLED (Basiskonfiguration)",256,8,,,
-samsung-galaxy-book4-360,"Core 7 150U / 16 GB / 512 GB / 15,6 Zoll",512,16,,,
+samsung-galaxy-book4-360,"Core 5 120U / 8 GB / 256 GB / 15,6 Zoll FHD OLED (Basiskonfiguration)",256,8,1399.00,https://news.samsung.com/de/anpassungsfahig-intelligent-und-vernetzt-die-samsung-galaxy-book4-serie-mit-ai-funktionen,2024-02-22
+samsung-galaxy-book4-360,"Core 7 150U / 16 GB / 512 GB / 15,6 Zoll",512,16,1700.00,https://www.notebookcheck.com/Samsung-Galaxy-Book4-360.823415.0.html,2024-04-05
 iphone-12,64 GB,64,,876.30,https://www.apple.com/de/newsroom/2020/10/apple-announces-iphone-12-and-iphone-12-mini-a-new-era-for-iphone-with-5g/,2020-10-13
 iphone-12,128 GB,128,,925.05,https://www.teltarif.de/iphone-12-preise-verfuegbarkeit/news/82250.html,2020-10-13
 iphone-12,256 GB,256,,1042.05,https://www.teltarif.de/iphone-12-preise-verfuegbarkeit/news/82250.html,2020-10-13
@@ -622,3 +622,8 @@ microsoft-surface-pro-7-plus,"Core i7-1165G7 / 32 GB / 1 TB / Wi-Fi (Spitzenmode
 microsoft-surface-pro-7-plus,"Core i5-1135G7 / 8 GB / 128 GB / LTE Advanced (Einstieg LTE, Windows 10 Pro)",128,8,1329,https://news.microsoft.com/de-de/microsoft-kuendigt-surface-neuheiten-fuer-unternehmenskunden-an/,2021-01-11
 microsoft-surface-pro-7-plus,Core i5-1135G7 / 8 GB / 256 GB / LTE Advanced (Windows 10 Pro),256,8,1629,https://www.computerbase.de/news/notebooks/surface-pro-7-plus.75034/,2021-01-12
 microsoft-surface-pro-7-plus,"Core i5-1135G7 / 16 GB / 256 GB / LTE Advanced (Windows 10 Pro; notebookcheck-Test 21.03.2021 nennt fuer dieses Testgeraet 2.140 Euro, Widerspruch)",256,16,1849,https://www.computerbase.de/news/notebooks/surface-pro-7-plus.75034/,2021-01-12
+dell-latitude-5430,"Core i7-1265U / 16 GB / 512 GB (Notebookcheck Deal-Artikel 08.01.2023: Regulaerpreis fuer diese Ausstattung 1.515 Euro, Quelle des Regulaerpreises im Artikel nicht genannt, 9 Monate nach Verkaufsstart; kein Hersteller-UVP)",512,16,1515.00,https://www.notebookcheck.com/Deal-Dell-Latitude-5430-Business-Laptop-mit-Core-i7-1265U-und-zwei-RAM-Slots-mit-satten-42-Rabatt.679979.0.html,2023-01-08
+lenovo-thinkpad-l14-gen4,"Core i5-1335U / 16 GB DDR4 / 512 GB (21H1003DGE, Notebookcheck-Testgeraet, Datenblatt-Preisfeld; kein Hersteller-UVP)",512,16,1129.00,https://www.notebookcheck.net/Lenovo-ThinkPad-L14-Gen-4-Intel-Review-Not-up-to-par-anymore.851923.0.html,2024-06-24
+lenovo-thinkpad-e14-gen4,Ryzen 5 5625U / 8 GB / 256 GB (Notebookcheck-Datenblatt; praezisiert die Katalog-Basisvariante AMD 600 Euro auf 8/256),256,8,600.00,https://www.notebookcheck.com/Lenovo-ThinkPad-E14-G4-R5-5625U.721030.0.html,2023-05-28
+lenovo-thinkpad-e14-gen4,"Ryzen 7 5825U / 16 GB / 512 GB (21EB0041GE, Notebookcheck-Testgeraet, Datenblatt-Preisfeld; Text nennt 885 Euro Strassenpreis und 869 Euro Campus)",512,16,990.00,https://www.notebookcheck.com/Lenovo-ThinkPad-E14-G4-AMD-Laptop-Test-Guenstig-ohne-grosse-Schwaechen.700039.0.html,2023-06-09
+lenovo-thinkpad-t14-gen3,"Core i7-1260P / 32 GB / 1 TB (21AH00HXGE, Notebookcheck-Datenblatt-Preisfeld; kein Gebrauchtangebot dazu gefunden)",1024,32,1950.00,https://www.notebookcheck.net/Lenovo-ThinkPad-T14-G3-21AH00HXGE.687802.0.html,2023-01-29

@@ -145,16 +145,17 @@ def test_lake_config_rejects_bad_mixes(lake_cfg):
         LakeConfig.model_validate(raw)
 
 
-def test_fleet_catalogue_uses_208_usable_slugs_and_lists_excluded():
+def test_fleet_catalogue_uses_209_usable_slugs_and_lists_excluded():
     # catalogue round 4 (2026-09-14) appended 42 models of 2020 to 2022 (data/catalogue/README.md):
-    # 191 -> 233 rows, 167 -> 208 usable (the two HP 2021 generations have no priced variant)
+    # 191 -> 233 rows, 167 -> 208 usable (the two HP 2021 generations have no priced variant).
+    # Laptop research 2026-09-16 priced the Dell Latitude 5430 (i7 configuration): 208 -> 209 usable
     cat = load_fleet_catalogue(vat_rate=0.19)
     assert len(cat.models) == 233
-    assert cat.n_usable == 208
+    assert cat.n_usable == 209
     reasons = set(cat.excluded["reason"])
     assert reasons <= {"no_launch_date", "no_priced_variant", "no_storage_on_priced_variant"}
     n_hard = int((cat.excluded["reason"] != "no_storage_on_priced_variant").sum())
-    assert n_hard == 233 - 208
+    assert n_hard == 233 - 209
     assert set(cat.pool["slug"]) <= set(cat.models.loc[cat.models["usable"], "slug"])
     assert cat.pool["storage_gb"].notna().all()
     assert (cat.pool["rrp_net"] < cat.pool["rrp_gross"]).all()
@@ -400,7 +401,7 @@ def test_reference_files_are_public_false(session_lake):
     models = _all_rows(session_lake.files, "catalogue/models")
     assert len(models) == 233     # catalogue round 4: 191 + 42 models
     variants = _all_rows(session_lake.files, "catalogue/variants")
-    assert len(variants) == 622   # catalogue round 4: 494 + 128 variants
+    assert len(variants) == 627   # catalogue round 4: 494 + 128 variants; laptop research 2026-09-16: + 5
     assert (variants["storage_gb"].str.contains(r"\.", regex=True) == False).all()   # copied as text, not re-typed
     curves = _all_rows(session_lake.files, "market/curves")
     assert set(curves["fit_quality"]) <= {"ok", "thin", "no_fit"}
