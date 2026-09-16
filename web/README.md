@@ -1,4 +1,4 @@
-# The page: twelve tabs in four areas on one static file
+# The page: twelve tabs in four areas on one static file, in two looks
 
 Live: https://claude.ai/artifact/35YqfY2paPWtkn6yD32U7m (the same files, published as a multi-file artifact).
 
@@ -15,29 +15,33 @@ JSON file is written by a generator under `web/tools/gen/` from the tables and f
 | path | what | edited by |
 |---|---|---|
 | `index.template.html` | the skeleton: title, fonts, the three cdnjs scripts (React 18 UMD, ReactDOM, Plotly basic), the `<!--DATA-->` marker | hand |
-| `styles.css` | the design system "Broadsheet" (tokens, components) plus the structural classes of the port; the design file is the owner's and is taken over unchanged | design owner |
-| `app.js` | the shell: the four areas of the header row (Bericht, Analytics, Market Intelligence, Daten) with the tabs of the chosen area in a second row, status line, protocol, dialogs, export, everything that is operated; renders the view model a motor returns. A tab may read another tab's data (`data: 'market'`) | hand |
+| `styles.css` | the design system "Broadsheet" (tokens, components) plus the structural classes of the port; the design file is the owner's and is taken over unchanged. Look one, `web/dist/` | design owner |
+| `cockpit.css`, `skin-cockpit.js`, `index.cockpit.template.html` | look two, "Cockpit" (since 16.09.2026, the owner's request: away from the newspaper look, towards a tool): dark sidebar with the four areas and their tabs, white cards, status as dot and pill, big numbers, sparklines; own tokens, light only. The skin draws, `app.js` computes: `window.RE_SKIN` supplies the render methods, `app.js` calls them with the same view values the Broadsheet shell gets. Built to `web/dist-cockpit/`, the published look | hand, from the owner's two reference screenshots |
+| `app.js` | the shell: state, loading, the four areas (Bericht, Analytics, Market Intelligence, Daten) and their tabs, status line, protocol, dialogs, export, everything that is operated; renders the view model a motor returns (Broadsheet look) or hands the drawing to a skin. A tab may read another tab's data (`data: 'market'`); `#tab=<key>` in the URL opens that tab | hand |
 | `engine/<tab>.js` | one pure motor per tab: `window.RE.<tab>(D, opts, P)` turns `data/<tab>.json` into a view model (kicker, subject, KPIs, chart, tables, blocks); no DOM, no state, no typed number | hand |
-| `engine/_helpers.js`, `engine/_index.js` | formatters (`E.fmt`), table builders (`E.TABLE`, `E.ROW`, `E.C`, `E.N`), the registry check | hand |
+| `engine/_helpers.js`, `engine/_index.js` | formatters (`E.fmt`, incl. `role`), table builders (`E.TABLE` with `cards`, `E.ROW`, `E.C`/`E.N` with `spark`), the registry check | hand |
 | `data/<tab>.json` | the data load of each tab, generated; tracked so the page builds from a clone without DuckDB. `series` and `studies` read `market.json` | `build.py --generate` |
 | `data/config.json` | the purchase discount (value and owner) from `config/assumptions.yaml` | `build.py` |
 | `tools/gen/make_<tab>_data.py` | the generators, one per data file, reading `outputs/*.csv`, `data/restwert.duckdb`, `config/*.yaml`, `data/catalogue/*.csv` | hand |
 | `tools/gen/studies_de.json`, `tools/gen/faq.json` | curated knowledge with URLs: the published studies (international, 13.09.2026; German sources, 16.09.2026) and the FAQ entries. FAQ answers carry no number of the tool as text, only placeholders `{fact, fmt}` that `make_faq_data.py` fills from the run | hand, from read-only research agents |
-| `tools/test_page.js` | jsdom run: builds `dist/index.html` offline, clicks every tab and control, unfolds every button, writes the visible text to `out/<tab>.txt`, fails on console errors, dashes, hedge words, external addresses, missing theme tokens, phone width | hand |
+| `tools/test_page.js` | jsdom run: builds `dist/index.html` (or `--dist=dist-cockpit`) offline, clicks every tab and control, unfolds every button, checks cells per row and definitions per table, writes the visible text to `out/<tab>.txt` (`out-dist-cockpit/` for the second look), fails on console errors, dashes, hedge words, external addresses, missing theme tokens, phone width | hand |
 | `tools/parity.js` | every number in `ref/<tab>.txt` (the accepted version) must appear in `out/<tab>.txt` | hand |
 | `ref/<tab>.txt` | the visible text of the accepted version, one file per tab | `test_page.js` (copied by hand when a version is accepted) |
-| `dist/` | the build output (ignored by git): `index.html` with the data inline, `styles.css`, `app.js`, `engine/` | `build.py` |
+| `dist/`, `dist-cockpit/` | the build outputs (ignored by git): `index.html` with the data inline, stylesheet, shell, skin, `engine/` | `build.py` |
 
 ## Build and test
 
 ```bash
 python -m restwert all                       # the engine writes outputs/ and data/restwert.duckdb (about 35 s)
 python web/build.py --generate               # web/data/*.json from the engine outputs, then web/dist/index.html
-python web/build.py                          # embed only: rebuild dist/ from the tracked web/data/*.json
-cd web && npm install && npm test            # jsdom render of every tab plus number parity against web/ref
+python web/build.py                          # embed only: rebuild dist/ and dist-cockpit/ from the tracked web/data/*.json
+python web/build.py --skin cockpit           # one look only
+cd web && npm install && npm test            # jsdom render and number parity against web/ref, for both looks
 ```
 
-`build.py` refuses en and em dashes in the page and needs the `<!--DATA-->` marker in the template. The
+`build.py` refuses en and em dashes in the page and needs the `<!--DATA-->` marker in the templates. Headless Edge renders
+either build for a look (`msedge --headless=new --screenshot=... file:///.../dist-cockpit/index.html#tab=levers`); the
+jsdom run does not render layout. The
 generators take three arguments (`<repo root> <out.json> <today>`); `--today` is the date shown as "Stand"
 on the page, the data keep their own `as_of` (the valuation date of the engine run).
 
@@ -71,7 +75,9 @@ Two grey tabs, "Lager" and "Verträge", are planned and not built.
   "Prototyp: Läufe werden protokolliert, nicht gerechnet". Nothing on the page writes to the engine.
 * The page shows the synthetic fleet of the shipped run; the "Stand" date is the build date, the
   "Stichtag" is the engine's valuation date. Both are printed on every tab.
-* The design system stylesheet is the owner's file and is taken over unchanged; the build does not lint it.
+* The design system stylesheet (Broadsheet) is the owner's file and is taken over unchanged; the build does not lint it. The
+  Cockpit look is drawn from the principle of two reference screenshots the owner supplied on 16.09.2026, not from a design
+  file; its tokens live in `cockpit.css` and are the tool's own.
 * Column and tile captions name what they count ("Geräte", "Belege", "Verkäufe"); the abbreviation
   "QTY" of the first versions is gone since 16.09.2026 because it read as a quantity of devices where it
   counted evidence. The TCO tab shows costs only; device counts per term live in Kreislauf.

@@ -1,0 +1,90 @@
+Restwert Engine
+Schließen
+Bericht
+Analytics
+Gerät
+Prognosegüte
+TCO
+Kreislauf
+Stellschrauben
+Laufzeit
+Market Intelligence
+Realisierung
+Serie gegen Serie
+Studien
+FAQ
+Daten
+Geplant
+Lager
+Verträge
+Market Intelligence
+Serie gegen Serie
+Protokoll (0)
+Export CSV
+Datei einlesen
+Lauf starten
+Letzter Lauf Stand 16.09.2026 Dateien 283 Zeilen 166.115 ungeklärt 60 Seriennummern 5.251 Prototyp: Läufe werden protokolliert, nicht gerechnet.
+Protokoll dieser Installation
+manuell erfasste Daten, Lieferungen, Schwellen, Läufe · lokal gespeichert
+Noch keine Einträge. Preisbelege erfassen, Dateien einlesen, Schwellen ändern oder Szenarien speichern; jeder Schritt landet hier.
+Market Intelligence, Stand 16.09.2026
+Serie gegen Serie: was Gebrauchtgeräte einer Modellreihe heute noch bringen, beim mittleren Alter ihrer Belege
+Hinweise ausblenden
+Eine Modellreihe gegen die andere, nur Marktplatz-Angebote in Zustandsstufe B (sehr gut), also die Obergrenze. Das ist der Restwert aus Sicht des Marktes: was ein gebrauchtes Gerät dieser Reihe heute auf deutschen Marktplätzen kostet, in Prozent seiner UVP beim Verkaufsstart. Nicht der Restwert des Reiter Kreislauf (der ist der Euro-Betrag, den ein eigenes Gerät beim Verkauf nach dem Leasing erzielt hat), sondern der Maßstab, an dem die Restwertprognose geeicht wird. Die Kurven je Hersteller und alle Preisbelege stehen im Reiter Realisierung.
+Laptop: Reihen mit genug Belegen öffentlich
+6
+am meisten hält Apple MacBook Air mit 58 % bei 50 Monaten
+am wenigsten Dell Latitude 7000 mit 23 % bei 60 Monaten
+das Alter der Belege unterscheidet sich je Reihe; die Spalte Monate sagt, bei welchem Alter der Wert gilt
+Smartphone: Reihen mit genug Belegen öffentlich
+7
+am meisten hält Fairphone mit 67 % bei 59 Monaten
+am wenigsten Samsung Galaxy Z Fold mit 32 % bei 37 Monaten
+das Alter der Belege unterscheidet sich je Reihe; die Spalte Monate sagt, bei welchem Alter der Wert gilt
+Tablet: Reihen mit genug Belegen öffentlich
+4
+am meisten hält Microsoft Surface Pro mit 59 % bei 46 Monaten
+am wenigsten Apple iPad Pro mit 50 % bei 47 Monaten
+das Alter der Belege unterscheidet sich je Reihe; die Spalte Monate sagt, bei welchem Alter der Wert gilt
+Weniger
+Begriffe ausblenden
+Reihen mit genug Belegen
+Modellreihen der Familie mit mindestens 3 Marktplatz-Angeboten in Zustandsstufe B; darunter zeigt die Tabelle die Reihe nicht.
+am meisten, am wenigsten
+die Reihe mit dem höchsten und dem niedrigsten mittleren Angebot in Prozent der UVP; kein Vergleich bei gleichem Alter, deshalb steht das mittlere Modellalter der Belege dabei.
+Serie gegen Serie
+öffentlich 17 Zeilen
+Begriffe ausblenden
+Mittleres Angebot je Reihe beim mittleren Modellalter der Belege; die Spanne zeigt das günstigste und das teuerste Angebot der Reihe. Sortiert nach Familie und Alter.
+Familie
+Geräteart der Reihe (Laptop, Smartphone, Tablet).
+Hersteller
+Hersteller der Reihe.
+Modellreihe
+Modellreihe, wie der Hersteller sie nennt; mehrere Modelle und Ausstattungen je Reihe.
+Belege
+Marktplatz-Angebote in Zustandsstufe B dieser Reihe; unter 3 wird die Reihe nicht gezeigt. Wenige Belege heißen: der Wert hängt an wenigen Angeboten.
+Monate
+mittleres Modellalter der Belege in Monaten seit deutschem Verkaufsstart
+Realisierung
+mittleres Marktplatz-Angebot in Prozent der UVP (die Hälfte der Belege liegt darüber, die Hälfte darunter)
+Spanne
+günstigstes bis teuerstes Marktplatz-Angebot der Reihe, in Prozent der UVP; ein Wert über 100 % ist ein echter Beleg, bei dem ein Aufbereiter mehr verlangt als die UVP (kommt bei knapper oder sehr junger Ware vor), er bleibt drin, weil die Tabelle Belege zeigt, keine Meinung
+Familie | Hersteller | Modellreihe | Belege | Monate | Realisierung | Spanne
+Laptop | Apple | MacBook Pro | 5 | 44 | 54 % | 47 % bis 57 %
+Laptop | Apple | MacBook Air | 7 | 50 | 58 % | 52 % bis 87 %
+Laptop | HP | ProBook 450 | 5 | 53 | 52 % | 46 % bis 54 %
+Laptop | Dell | Latitude 7000 | 4 | 60 | 23 % | 23 % bis 30 %
+Laptop | Microsoft | Surface Laptop | 6 | 65 | 38 % | 31 % bis 56 %
+Laptop | Dell | Latitude 5000 | 4 | 68 | 28 % | 26 % bis 31 %
+Smartphone | Apple | iPhone 16 | 5 | 24 | 59 % | 58 % bis 67 %
+Smartphone | Samsung | Galaxy S | 4 | 25 | 47 % | 30 % bis 59 %
+Smartphone | Google | Pixel 8 | 6 | 35 | 36 % | 31 % bis 47 %
+Smartphone | Apple | iPhone 15 | 3 | 36 | 47 % | 42 % bis 49 %
+Smartphone | Samsung | Galaxy Z Fold | 5 | 37 | 32 % | 32 % bis 42 %
+Smartphone | Samsung | Galaxy A | 10 | 42 | 50 % | 35 % bis 94 %
+Smartphone | Fairphone | Fairphone | 3 | 59 | 67 % | 67 % bis 71 %
+Tablet | Samsung | Galaxy Tab S | 5 | 37 | 55 % | 48 % bis 71 %
+Tablet | Microsoft | Surface Pro | 3 | 46 | 59 % | 53 % bis 59 %
+Tablet | Apple | iPad Pro | 5 | 47 | 50 % | 46 % bis 61 %
+Tablet | Apple | iPad | 3 | 60 | 54 % | 54 % bis 101 %

@@ -46,8 +46,10 @@
     var kpis = [];
     if (L) {
       var overTarget = isNum(L.mape) && isNum(L.target) && L.mape > L.target;
+      /* Verlaufslinie (Cockpit-Optik): der Fehler der Gesamtreihe je Monat, nur Monate mit Kennzahl, in Zeitfolge */
+      var sparkMape = star.filter(function (r) { return isNum(r.mape); }).map(function (r) { return r.mape; });
       kpis.push({
-        label: 'Prognosefehler, letzter voller Monat', value: pctOr(L.mape, thin), neg: overTarget,
+        label: 'Prognosefehler, letzter voller Monat', value: pctOr(L.mape, thin), neg: overTarget, spark: sparkMape,
         tags: [{ cls: 'tag-neutral', text: 'Geschäftssicht' }, TAG_SIM],
         lines: [
           'Monat ' + monthDe(L.month) + ': ' + f.qty(L.n_fc) + ' verkaufte Geräte mit Prognose, ' + f.qty(L.n_as_is) + ' Verkäufe ohne Aufbereitung ausgeschlossen',

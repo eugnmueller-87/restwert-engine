@@ -7,6 +7,12 @@
 (function (w) {
   'use strict';
   var React = w.React, ReactDOM = w.ReactDOM, h = React.createElement;
+  /* Eine zweite Optik ("Skin") darf das Zeichnen uebernehmen, nie das Rechnen: window.RE_SKIN (geladen vor app.js) liefert
+     render(o) und zeichnet damit die ganze Seite aus den Ansichtswerten o (renderVals); die einzelnen Haken renderLog,
+     renderSectionBar, renderDeviceSettings, renderKpis, renderTables, renderDossier, renderBlocks, renderDialog greifen nur
+     fuer einen Skin OHNE eigenes render(). init() reicht die Bausteine (Tag, Cell, Table, ...) an den Skin.
+     Seit 16.09.2026 (Eugen: weg von der Zeitungsoptik, hin zum Werkzeug). */
+  var SKIN = w.RE_SKIN || null;
 
   var GROUPS = [
     { key: 'report', label: 'Bericht' }, { key: 'analytics', label: 'Analytics' }, { key: 'intel', label: 'Market Intelligence' }, { key: 'lake', label: 'Daten' }
@@ -39,20 +45,6 @@
   function focusables(root) {
     return Array.prototype.slice.call(root.querySelectorAll('button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'));
   }
-  /* Zeilen, die die waagerechte Legende ueber der Zeichnung braucht: aus Breite und Namenslaengen geschaetzt
-     (etwa 7 px je Zeichen plus Symbol und Abstand). Ohne messbare Breite (0) keine Schaetzung: eine Zeile. */
-  function legendRows(traces, width) {
-    if (!(width > 0)) return 1;
-    var avail = Math.max(200, width - 64), rows = 1, x = 0;
-    (traces || []).forEach(function (t) {
-      if (t.showlegend === false || !t.name) return;
-      var wi = String(t.name).length * 7 + 40;
-      if (x > 0 && x + wi > avail) { rows++; x = 0; }
-      x += wi;
-    });
-    return rows;
-  }
-
   /* ---------- Bausteine ---------- */
   function Tag(g, extra) { return h('span', { className: 'tag ' + g.cls, style: Object.assign({ fontSize: 10, padding: '1px 7px' }, extra || {}) }, g.text); }
   function Ghost(label, onClick, expanded, extra) {
@@ -152,12 +144,29 @@
       if (this.remember()) {
         try {
           var t = localStorage.getItem('restwert-tab'); if (t && TABS.some(function (x) { return x.key === t; })) { tab = t; patch.tab = t; }
+          /* ein Link darf einen Reiter nennen (#tab=levers); er schlaegt den gemerkten Reiter, aendert aber nichts am Merken */
+          var hs = /[#&]tab=([a-z]+)/.exec(String(w.location && w.location.hash || ''));
+          if (hs && TABS.some(function (x) { return x.key === hs[1]; })) { tab = hs[1]; patch.tab = hs[1]; }
           var d = localStorage.getItem('restwert-device'); if (d) patch.dev = Object.assign({}, this.state.dev, { id: d });
           var tc = JSON.parse(localStorage.getItem('restwert-tco') || 'null'); if (tc && tc.slug) patch.tco = { slug: tc.slug, storage: tc.storage || 'all', term: tc.term || 'all' };
         } catch (e) {}
       }
       this.setState(patch);
       this.load(tab); this.load('lake'); this.load('device');
+      /* Plotly misst Text beim Zeichnen; kommt die Schrift aus dem Netz erst danach, sind Legende und Achsentitel zu eng
+         geschnitten. Deshalb ein zweites Zeichnen, sobald die Schriften da sind. */
+      /* Plotly misst Text beim ersten Zeichnen und merkt sich die Masse; misst es mit der Ersatzschrift, bevor die Schrift aus
+         dem Netz da ist, bleiben Legende und Achsentitel fuer immer zu eng geschnitten. Deshalb wird das Diagramm erst
+         gezeichnet, wenn die Schrift geladen ist, spaetestens nach zwei Sekunden. */
+      this._fontsReady = !(document.fonts && document.fonts.load);
+      if (!this._fontsReady) {
+        var famRaw = '', fam = '';
+        try { famRaw = getComputedStyle(document.documentElement).getPropertyValue('--font-chart').trim(); } catch (e) {}
+        fam = (famRaw || '"Source Serif 4", serif').split(',')[0].replace(/"/g, '').trim();
+        var go = function () { if (self._fontsReady) return; self._fontsReady = true; self.draw(); };
+        try { document.fonts.load('13px ' + fam).then(go, go); } catch (e) { go(); }
+        this._ft = setTimeout(go, 2000);
+      }
       var tries = 0;
       var tick = function () { if (self.readPalette()) self.forceUpdate(); else if (tries++ < 50) self._pt = setTimeout(tick, 120); };
       tick();
@@ -167,7 +176,7 @@
       try { if (typeof w.MutationObserver === 'function') { this._mo = new w.MutationObserver(this._onTheme); this._mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] }); } } catch (e) { this._mo = null; }
     }
     componentWillUnmount() {
-      clearTimeout(this._pt); clearTimeout(this._dt); clearTimeout(this._rt);
+      clearTimeout(this._pt); clearTimeout(this._dt); clearTimeout(this._rt); clearTimeout(this._ft);
       try { if (this._mq && this._mq.removeEventListener) this._mq.removeEventListener('change', this._onTheme); } catch (e) {}
       try { if (this._mo) this._mo.disconnect(); } catch (e) {}
       if (this._onDocKey) { document.removeEventListener('keydown', this._onDocKey); this._onDocKey = null; }
@@ -216,21 +225,25 @@
       var cs = getComputedStyle(document.documentElement); var v = function (n) { return cs.getPropertyValue(n).trim(); };
       if (!v('--color-accent')) return null;
       return {
-        font: '"Source Serif 4", serif', ink: v('--color-text'), muted: v('--color-neutral-600'), grid: v('--color-neutral-300'), line: v('--color-neutral-400'),
+        font: v('--font-chart') || '"Source Serif 4", serif', ink: v('--color-text'), muted: v('--color-neutral-600'), grid: v('--color-neutral-300'), line: v('--color-neutral-400'),
         accent: v('--color-accent'), accent700: v('--color-accent-700'), accent2: v('--color-accent-2'),
         oem: { Apple: v('--color-accent-700'), Samsung: v('--color-accent-2-600'), Google: v('--color-neutral-800'), Motorola: v('--color-accent-400'), Fairphone: v('--color-accent-2-400'), 'HMD Global (Nokia)': v('--color-neutral-500'), Nokia: v('--color-neutral-500'), Lenovo: v('--color-accent-2-800'), Dell: v('--color-neutral-600'), HP: v('--color-accent-900'), Microsoft: v('--color-accent-2-900') }
       };
     }
     draw() {
       var self = this, el = this.chartRef.current, spec = this._chart; if (!el || !spec) return;
+      if (!this._fontsReady) return;   /* die Schrift des Diagramms ist noch nicht da; componentDidMount zeichnet nach */
       if (!w.Plotly) { clearTimeout(this._dt); this._dt = setTimeout(function () { self.draw(); }, 250); return; }
       if (this._drawn === this._chartKey && el.dataset.drawn) return;
-      /* Die Legende liegt ueber der Zeichnung; braucht sie mehr als eine Zeile, wachsen oberer Rand und Hoehe mit,
-         sonst laufen die Zeilen ueber das Papier hinaus (Motor: Namen, Huelle: Hoehe und Raender, CONTRACT 2) */
-      var extra = legendRows(spec.traces, el.clientWidth) - 1, H = 360 + extra * 20;
+      /* Die Legende steht unter der Zeichnung, ein Eintrag je Zeile: lange Namen werden nicht abgeschnitten (seit 16.09.2026,
+         Befund der Durchsicht; vorher lag sie waagerecht oben und Plotly schnitt Namen ab). Der untere Rand waechst mit der
+         Zahl der Eintraege; die Farbe der Legende bleibt die des Motors (CONTRACT 2). */
+      var nLeg = (spec.traces || []).filter(function (t) { return t.showlegend !== false && t.name; }).length;
+      var PLOT = 320, TOP = 24, XAXIS = 44, ROW = 20, B = XAXIS + (nLeg ? 8 + nLeg * ROW : 0) + 8, H = TOP + PLOT + B;
       el.style.height = H + 'px';
+      var legend = Object.assign({}, spec.layout && spec.layout.legend, { orientation: 'v', x: 0, xanchor: 'left', y: -(XAXIS + 8) / PLOT, yanchor: 'top', traceorder: 'normal' });
       try {
-        w.Plotly.react(el, spec.traces, Object.assign({}, spec.layout, { height: H, margin: { l: 52, r: 12, t: 48 + extra * 20, b: 48 } }), { displayModeBar: false, responsive: true });
+        w.Plotly.react(el, spec.traces, Object.assign({}, spec.layout, { height: H, margin: { l: 52, r: 12, t: TOP, b: B }, legend: legend }), { displayModeBar: false, responsive: true });
       } catch (e) { console.error('chart', e); }
       this._drawn = this._chartKey; el.dataset.drawn = '1';
     }
@@ -284,7 +297,9 @@
       var curGroup = tabOf(S.tab).group, subList = tabsIn(curGroup);
       var groups = GROUPS.map(function (g) {
         var list = tabsIn(g.key), isCur = g.key === curGroup;
-        return { key: g.key, label: g.label, current: isCur ? (list.length > 1 ? 'location' : 'page') : undefined, onClick: function () { self.setGroup(g.key); } };
+        return { key: g.key, label: g.label, current: isCur ? (list.length > 1 ? 'location' : 'page') : undefined, onClick: function () { self.setGroup(g.key); },
+          /* alle Reiter des Bereichs, fuer eine Seitenleiste (Cockpit); die zweite Kopfzeile der Broadsheet-Optik nimmt nur out.tabs */
+          tabs: list.map(function (t) { return { key: t.key, label: t.label, current: t.key === S.tab ? 'page' : undefined, onClick: function () { self.setTab(t.key); } }; }) };
       });
       var tabs = subList.length > 1 ? subList.map(function (t) { return { key: t.key, label: t.label, current: t.key === S.tab ? 'page' : undefined, onClick: function () { self.setTab(t.key); } }; }) : [];
       var motor = typeof RE[S.tab] === 'function' ? RE[S.tab] : null;
@@ -317,9 +332,10 @@
       }
       var pending = S.manual.length + S.deliveries.filter(function (x) { return x.status === 'freigegeben'; }).length + Object.keys(S.thresholds).length;
       if (pending) status.push({ k: 'offen für den nächsten Lauf', v: fmt.qty(pending) });
+      var planned = PLANNED.map(function (l) { return { label: l, title: 'Als Nächstes geplant' }; });
 
       var out = {
-        groups: groups, tabs: tabs, hasTabs: tabs.length > 0, status: status, cellPad: cellPad, padLeft: padLeft, tableFont: tableFont,
+        groups: groups, tabs: tabs, hasTabs: tabs.length > 0, planned: planned, pending: pending, status: status, cellPad: cellPad, padLeft: padLeft, tableFont: tableFont,
         isDevice: S.tab === 'device', isMarket: S.tab === 'market', isTco: S.tab === 'tco',
         loading: !V && !error, ready: !!V, error: error,
         kicker: '', subject: '', intro: '', introOpen: false, introLabel: 'Hinweise', toggleIntro: function () { self.toggle('introOpen', S.tab, false); },
@@ -449,6 +465,7 @@
       out.introOpen = !!S.introOpen[S.tab]; out.introLabel = out.introOpen ? 'Hinweise ausblenden' : 'Hinweise';
       if (Array.isArray(V.facts) && V.facts.length) { out.facts = V.facts; out.hasFacts = true; }
       out.calcnote = V.calcnote || '';
+      out.tablesLast = !!V.tablesLast;   /* Tabellen hinter den Klappbloecken (FAQ: erst die Fragen, dann die Herkunft der Zahlen) */
       var detail = !!S.kpiDetails[S.tab];
       out.kpis = (V.kpis || []).map(function (k) { var lines = (k.lines || []).filter(Boolean); return Object.assign({}, k, { tags: k.tags || [], color: k.neg ? 'var(--color-accent-2-700)' : 'var(--color-text)', lines: (detail ? lines : lines.slice(0, 1)).map(function (v) { return { v: v }; }) }); });
       out.hasKpis = out.kpis.length > 0;
@@ -556,6 +573,7 @@
 
     /* ---------- Zeichnen ---------- */
     renderHeader(o) {
+      if (SKIN && SKIN.renderHeader) return SKIN.renderHeader.call(this, o);
       return h('header', { className: 'app-header' },
         h('div', { className: 'rule-top' }),
         h('div', { className: 'gutter', style: { display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '6px 18px', paddingBlock: 5 } },
@@ -576,6 +594,7 @@
           h('span', { style: { marginLeft: 'auto', fontStyle: 'italic' } }, 'Prototyp: Läufe werden protokolliert, nicht gerechnet.')));
     }
     renderLog(o) {
+      if (SKIN && SKIN.renderLog) return SKIN.renderLog.call(this, o);
       if (!o.logOpen) return null;
       return h('section', { 'aria-label': 'Protokoll', style: { margin: '14px 0 0' } },
         h('div', { style: { display: 'flex', alignItems: 'baseline', gap: 12, flexWrap: 'wrap' } }, h('h3', { style: { fontSize: 15, margin: 0 } }, 'Protokoll dieser Installation'), h('span', { style: { fontSize: 12, color: MUTED } }, 'manuell erfasste Daten, Lieferungen, Schwellen, Läufe · lokal gespeichert')),
@@ -587,6 +606,7 @@
         o.noLog ? h('p', { style: { margin: '8px 0 0', fontSize: 13, fontStyle: 'italic', color: MUTED } }, 'Noch keine Einträge. Preisbelege erfassen, Dateien einlesen, Schwellen ändern oder Szenarien speichern; jeder Schritt landet hier.') : null);
     }
     renderSectionBar(o) {
+      if (SKIN && SKIN.renderSectionBar) return SKIN.renderSectionBar.call(this, o);
       var parts = [];
       if (o.isDevice) {
         parts.push(Field('Geräteart', 'rw-fam', Select('rw-fam', o.devFams, o.onDevFamily), { flex: '0 1 130px' }));
@@ -612,6 +632,7 @@
         parts.map(function (p, i) { return h(React.Fragment, { key: i }, p); }), actions);
     }
     renderDeviceSettings(o) {
+      if (SKIN && SKIN.renderDeviceSettings) return SKIN.renderDeviceSettings.call(this, o);
       if (!o.isDevice || !o.ready) return null;
       var numField = function (label, id, step, value, onFocus, onChange, onBlur, border) {
         return Field(label, id, h('input', { className: 'input', id: id, type: 'number', step: step, value: value, onFocus: onFocus, onChange: onChange, onBlur: onBlur, onKeyDown: o.onKeyCommit, style: { minHeight: 32, fontSize: 13, textAlign: 'right', borderColor: border } }), { width: 140 });
@@ -625,6 +646,7 @@
         o.hasOverride ? h('button', { type: 'button', className: 'btn btn-ghost', onClick: o.resetOverrides, style: { whiteSpace: 'nowrap', fontSize: 13, padding: '6px 8px', alignSelf: 'flex-end' } }, 'Vorbelegung wiederherstellen') : null);
     }
     renderKpis(o) {
+      if (SKIN && SKIN.renderKpis) return SKIN.renderKpis.call(this, o);
       if (!o.hasKpis) return null;
       return h(React.Fragment, null,
         h('section', { 'aria-label': 'Ergebnis', style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(190px, 100%), 1fr))', gap: '18px 28px', margin: '22px 0 0', minWidth: 0 } },
@@ -640,6 +662,7 @@
         o.hasKpiDefs && o.kpiDefsOpen ? Defs(o.kpiDefs) : null);
     }
     renderTables(o) {
+      if (SKIN && SKIN.renderTables) return SKIN.renderTables.call(this, o);
       var self = this;
       return o.tables.map(function (t) {
         return h('section', { key: t.key, style: { margin: '30px 0 0' } },
@@ -662,6 +685,7 @@
       });
     }
     renderDossier(o) {
+      if (SKIN && SKIN.renderDossier) return SKIN.renderDossier.call(this, o);
       if (!o.hasDossier) return null;
       var d = o.dossier, H4 = function (t) { return h('h4', { style: { fontSize: 13, margin: '0 0 4px' } }, t); };
       var kvLabel = { fontSize: 10.5, letterSpacing: '0.08em', textTransform: 'uppercase', color: MUTED };
@@ -694,6 +718,7 @@
           d.noExample ? h('p', { style: { margin: 0, fontStyle: 'italic', fontSize: 13, color: MUTED } }, 'Im Fenster kein Gerät mit einem Hebel größer null.') : null));
     }
     renderBlocks(o) {
+      if (SKIN && SKIN.renderBlocks) return SKIN.renderBlocks.call(this, o);
       if (!o.hasBlocks) return null;
       var list = function (b, tag) { return h(tag, { style: { margin: '6px 0 0 15px', paddingLeft: 20, maxWidth: '100ch', display: 'grid', gap: 4, fontSize: 13, lineHeight: 1.5 } }, b.items.map(function (it, i) { return h('li', { key: i }, it.lead ? h('strong', null, it.lead) : null, it.lead ? ' ' : null, it.text, it.href ? h(React.Fragment, null, ' ', h('a', { href: it.href, target: '_blank', rel: 'noopener', style: { color: 'var(--color-accent-700)' } }, it.linkText || 'Quelle')) : null); })); };
       return h('section', { 'aria-label': 'Methode und Grenzen', style: { margin: '36px 0 0', display: 'grid', gap: 8 } },
@@ -708,6 +733,7 @@
         }));
     }
     renderDialog(o) {
+      if (SKIN && SKIN.renderDialog) return SKIN.renderDialog.call(this, o);
       if (!o.dlgOpen) return null;
       var f = o.form, body = null;
       var input = function (id, props) { return h('input', Object.assign({ className: 'input', id: id }, props)); };
@@ -766,6 +792,7 @@
     }
     render() {
       var o = this.renderVals();
+      if (SKIN && SKIN.render) return SKIN.render.call(this, o);
       var record = null;
       if (o.ready) {
         record = h(React.Fragment, null,
@@ -781,9 +808,10 @@
           o.hasActions ? h('section', { style: { margin: '28px 0 0' } }, h('h3', { style: { fontSize: 15, margin: '0 0 8px' } }, 'Was man daraus macht'),
             h('ol', { style: { margin: 0, paddingLeft: 20, maxWidth: '100ch', display: 'grid', gap: 6, fontSize: 13, lineHeight: 1.5 } }, o.actions.map(function (a, i) { return h('li', { key: i }, h('strong', null, a.lead), ' ', a.text); }))) : null,
           o.hasChart ? h('figure', null, h('div', { ref: this.chartRef, className: 'chart' }), o.chartNote ? h('figcaption', { style: { fontSize: 12, lineHeight: 1.5, maxWidth: '110ch', color: MUTED, marginTop: 2 } }, o.chartNote) : null) : null,
-          this.renderTables(o),
+          o.tablesLast ? null : this.renderTables(o),
           this.renderDossier(o),
-          this.renderBlocks(o));
+          this.renderBlocks(o),
+          o.tablesLast ? this.renderTables(o) : null);
       }
       return h('div', { className: 'app' },
         this.renderHeader(o),
@@ -800,5 +828,6 @@
 
   var root = document.getElementById('app');
   if (!root) { console.error('app: <div id="app"> fehlt'); return; }
+  if (SKIN && typeof SKIN.init === 'function') SKIN.init({ React: React, h: h, Tag: Tag, Ghost: Ghost, Defs: Defs, Field: Field, Select: Select, Seg: Seg, Cell: Cell, Table: Table, MUTED: MUTED, NOTE_STYLE: NOTE_STYLE, PLANNED: PLANNED, GROUPS: GROUPS, TABS: TABS, tabOf: tabOf, tabsIn: tabsIn, dataOf: dataOf });
   ReactDOM.createRoot(root).render(h(App, { density: 'compact', definitions: 'collapsed', rememberSelection: true }));
 })(window);

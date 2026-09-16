@@ -7,7 +7,9 @@
 const fs = require('fs'), path = require('path');
 const V3 = path.join(__dirname, '..');
 const TABS = ['report', 'device', 'forecast', 'tco', 'cycle', 'levers', 'term', 'market', 'series', 'studies', 'faq', 'lake'];
-const only = process.argv[2] || null;
+const distArg = process.argv.find(a => a.startsWith('--dist='));   // --dist=dist-cockpit: die Ausgabe der zweiten Optik (out-dist-cockpit/)
+const OUT_DIR = distArg ? 'out-' + distArg.slice(7) : 'out';
+const only = process.argv.slice(2).find(a => !a.startsWith('--')) || null;
 if (only && !TABS.includes(only)) { console.error('unbekannter Tab: ' + only); process.exit(2); }
 
 const NUM = /\d[\d.,]*(?:\s?[%€])?/g;
@@ -29,7 +31,7 @@ let failed = false;
 const lines = [];
 for (const tab of TABS) {
   if (only && tab !== only) continue;
-  const refPath = path.join(V3, 'ref', tab + '.txt'), outPath = path.join(V3, 'out', tab + '.txt');
+  const refPath = path.join(V3, 'ref', tab + '.txt'), outPath = path.join(V3, OUT_DIR, tab + '.txt');
   if (!fs.existsSync(refPath)) { lines.push(tab + ': Referenz fehlt (' + path.relative(V3, refPath) + ')'); failed = true; continue; }
   if (!fs.existsSync(outPath)) { lines.push(tab + ': Ausgabe fehlt (' + path.relative(V3, outPath) + '); erst node v3/test_v3.js ' + tab); failed = true; continue; }
   const ref = norm(fs.readFileSync(refPath, 'utf8')), out = norm(fs.readFileSync(outPath, 'utf8'));
@@ -62,6 +64,6 @@ console.log(lines.join('\n'));
 if (!only) {
   const d = new Date(), p2 = n => String(n).padStart(2, '0');
   const head = 'Paritaet, Stand ' + p2(d.getDate()) + '.' + p2(d.getMonth() + 1) + '.' + d.getFullYear() + ' ' + p2(d.getHours()) + ':' + p2(d.getMinutes()) + (failed ? ' (mit Fehlbetraegen)' : ' (ohne Fehlbetrag)');
-  fs.writeFileSync(path.join(V3, 'out', '_parity.log'), head + '\n' + lines.join('\n') + '\n', 'utf8');
+  fs.writeFileSync(path.join(V3, OUT_DIR, '_parity.log'), head + '\n' + lines.join('\n') + '\n', 'utf8');
 }
 process.exit(failed ? 1 : 0);

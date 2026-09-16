@@ -96,7 +96,7 @@
     return {
       kicker: kicker, subject: subject, intro: intro,
       kpis: kpis, kpiDefs: kpiDefs, calcnote: calcnote,
-      tables: tables,
+      tables: tables, tablesLast: true,
       blocks: blocks
     };
   };

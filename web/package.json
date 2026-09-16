@@ -3,7 +3,7 @@
   "private": true,
   "description": "jsdom test harness for the Restwert Engine page (web/): renders every tab, clicks the controls, checks number parity against web/ref",
   "scripts": {
-    "test": "node tools/test_page.js && node tools/parity.js"
+    "test": "node tools/test_page.js && node tools/parity.js && node tools/test_page.js --dist=dist-cockpit && node tools/parity.js --dist=dist-cockpit"
   },
   "devDependencies": {
     "jsdom": "^24.1.3",

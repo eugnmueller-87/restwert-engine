@@ -1,0 +1,333 @@
+Restwert Engine
+Schließen
+Bericht
+Analytics
+Gerät
+Prognosegüte
+TCO
+Kreislauf
+Stellschrauben
+Laufzeit
+Market Intelligence
+Realisierung
+Serie gegen Serie
+Studien
+FAQ
+Daten
+Geplant
+Lager
+Verträge
+Market Intelligence
+FAQ
+Protokoll (0)
+Export CSV
+Datei einlesen
+Lauf starten
+Letzter Lauf Stand 16.09.2026 Dateien 283 Zeilen 166.115 ungeklärt 60 Seriennummern 5.251 Prototyp: Läufe werden protokolliert, nicht gerechnet.
+Protokoll dieser Installation
+manuell erfasste Daten, Lieferungen, Schwellen, Läufe · lokal gespeichert
+Noch keine Einträge. Preisbelege erfassen, Dateien einlesen, Schwellen ändern oder Szenarien speichern; jeder Schritt landet hier.
+Market Intelligence, Stand 16.09.2026
+Fragen und Antworten zu Preisbelegen, Studien und Methode
+Hinweise ausblenden
+Was die Recherchen zu Marktdaten ergeben haben, als Fragen, wie sie beim Lesen der Kurven entstehen. Jede Antwort nennt ihre Quellen; jede Zahl aus den Daten des Werkzeugs kommt aus dem aktuellen Lauf und nicht aus dem Text. Die Reiter Realisierung, Serie gegen Serie und Studien zeigen die Daten, dieser Reiter erklärt sie.
+Fragen
+41
+Grundlagen: 2
+Preisbelege: 7
+Studien: 13
+Methode: 7
+Grenzen: 10
+Roadmap: 2
+Quellen mit Adresse öffentlich
+101
+jede Adresse steht unter der Antwort, die sie trägt
+Zahlen ohne Adresse kommen aus dem aktuellen Lauf des Werkzeugs
+Stand der Recherchen
+16.09.2026
+Preisbelege der Laptops am 13.09. (MacBooks, erste HP- und Surface-Belege) und 16.09.2026 (Dell, HP, Lenovo, Microsoft, Samsung); HP-UVPs und deutsche Studien am 16.09.2026; Smartphones, Tablets und internationale Studien am 13.09.2026
+Weniger
+Begriffe ausblenden
+Fragen
+Anzahl der Einträge, nach Gruppe: Grundlagen (Begriffe), Preisbelege (woher die Daten kommen), Studien (was andere messen), Methode (wie gerechnet wird), Grenzen (was die Daten nicht können), Roadmap (was noch nicht gebaut ist).
+Quellen mit Adresse
+verschiedene Adressen, die in den Antworten zitiert werden; eine Adresse kann mehrere Antworten tragen.
+▾ Was heißt „Realisierung“, und was unterscheidet sie vom „Restwert“ im Reiter Kreislauf? Grundlagen
+Realisierung ist ein Prozentwert aus öffentlichen Belegen: Gebrauchtpreis heute geteilt durch die UVP des Herstellers beim deutschen Verkaufsstart, beide einschließlich Mehrwertsteuer. Jeder Punkt ist ein Preisbeleg mit Adresse und Datum: ein Marktplatz-Angebot (Preis, den ein Aufbereiter verlangt, mit seiner Marge, also die Obergrenze) oder ein Ankauf-Gebot (Höchstwert „bis zu“ vor der Zustandsprüfung; der gezahlte Preis liegt darunter). Abgelesen wird für Zustandsstufe B (sehr gut). Restwert im Reiter Kreislauf ist ein Euro-Betrag: was ein eigenes Gerät nach dem Leasing beim Verkauf erzielt hat; in diesem Prototyp simuliert, nie die Zahl eines realen Hauses. Die Realisierung ist der Maßstab, an dem die Simulation geeicht wird und an dem die Prognose ihr Niveau prüft.
+▾ Was unterscheidet ein Marktplatz-Angebot von einem Ankauf-Gebot, und warum ist das Angebot die Obergrenze? Grundlagen
+Ein Marktplatz-Angebot ist der Preis, den ein Aufbereiter für ein geprüftes Gerät verlangt: mit seiner Marge, seiner Gewährleistung und der Mehrwertsteuer. Ein Ankauf-Gebot ist der Betrag, den ein Ankäufer zahlt, auf den Portalen als „bis zu“ vor der Zustandsprüfung ausgewiesen; der tatsächliche Ankaufpreis liegt darunter. Beide Preisarten werden getrennt gerechnet, nie gemittelt. Das Angebot ist die Obergrenze, weil Marge und Mehrwertsteuer des Aufbereiters darin stecken; ein Haus, das seine Rückläufer im B2B verkauft, erlöst weniger. Ankauf-Gebote sind kein Boden, sondern Höchstwerte des Ankaufs. Was ein Haus erzielt, liegt unter dem Marktplatz-Angebot; wo genau, steht nur in seinen eigenen Verkäufen. In den Kurvendaten liegen heute 0 Ankauf-Gebote für Laptops und 69 für Smartphones.
+▾ Woher kommen die Preisbelege für Laptops, und welche deutschen Aufbereiter tragen Bestand? Preisbelege
+Jeder Preisbeleg ist ein Marktplatz-Angebot eines deutschen Aufbereiters: Preis brutto in Euro ohne Versand, Zustand wie auf der Seite gedruckt, mit Adresse und Abrufdatum. Laptops kamen am 16.09.2026 von afbshop.de (Dell, HP, Lenovo, Surface), itsco.de (Dell, HP, Lenovo), lapstore.de (Dell, Lenovo, HP; ergiebigste Quelle), greenpanda.de (Dell, HP, Lenovo), luxnote-hannover.de (Lenovo, durchgehend „Premium A Ware“), thinkstore24.de (ThinkPad X1 Carbon und T14), harlander.com (HP EliteBook 650 G9 als A- und B-Ware), refurbed.de (Surface, Galaxy Book, HP; am 13.09. auch Dell und Lenovo; Preis je Tastaturlayout und Zustand, zwei Abrufe derselben Seite zeigten verschiedene Werte) sowie für HP notebook-pro.de, hardware-online-shop.de und preiswerte-it.de. Heute sind 442 Preisbelege zu 112 Modellen einer UVP-Variante zugeordnet; in die Kurven gehen nur die mit Stufe A bis D oder Ankauf ein, heute 424.
+Quelle: afbshop.de, Dell Latitude 7430 (Produktseite mit Zustandsstaffel), 2026-09-16 öffnen
+Quelle: itsco.de, Dell Latitude 7420, 2026-09-16 öffnen
+Quelle: lapstore.de, Dell Latitude 5420, 2026-09-16 öffnen
+Quelle: greenpanda.de, HP EliteBook 840 G9, 2026-09-16 öffnen
+Quelle: luxnote-hannover.de, ThinkPad X1 Carbon Gen 9, 2026-09-16 öffnen
+Quelle: thinkstore24.de, ThinkPad X1 Carbon Gen 10, 2026-09-16 öffnen
+Quelle: harlander.com, HP EliteBook 650 G9 (gebrauchte B-Ware), 2026-09-16 öffnen
+Quelle: refurbed.de, Surface Laptop 4 i5-1145G7, 2026-09-16 öffnen
+Quelle: notebook-pro.de, HP EliteBook 840 G9, 2026-09-16 öffnen
+▾ Woher kommen die Preisbelege für Smartphones und Tablets, und woher die Ankauf-Gebote? Preisbelege
+Abruf am 13.09.2026. Marktplatz-Angebote stammen von refurbed.de, rebuy.de, asgoodasnew.de, der Verkaufsseite von clevertronic.de und einer Kategorieseite von backmarket.de. Der Apple Refurbished Store wurde für MacBooks abgefragt; seine Zeilen scheiterten am RAM/SSD-Abgleich und stehen nicht in der Belegliste. Ankauf-Gebote stammen von Clevertronic („Wir bieten bis zu“) sowie von ZOXS und wirkaufens über das Vergleichsportal handyverkauf-vergleich.de. Sie bilden eine eigene Kurve und werden nie mit Marktplatz-Angeboten gemischt; „bis zu“ ist ein Höchstwert vor der Zustandsprüfung. Heute zählen 69 Ankauf-Gebote für Smartphones. Für Laptops und Tablets gibt es keine Ankauf-Kurve: in market_curves.csv steht dafür keine Ankauf-Zeile. Die Gegenprobe vom 13.09. auf der Seite nennt zwar einzelne Ankauf-Gebote für MacBook Air, iPad und Galaxy Tab; sie stehen nicht in der Belegliste.
+Quelle: refurbed.de, Google Pixel 8, 2026-09-13 öffnen
+Quelle: rebuy.de, MacBook Air M2 2022, 2026-09-13 öffnen
+Quelle: asgoodasnew.de, Google Pixel Fold, 2026-09-13 öffnen
+Quelle: backmarket.de, Kategorieseite Galaxy A55 5G, 2026-09-13 öffnen
+Quelle: clevertronic.de, Verkaufsseite iPhone 16 Pro, 2026-09-13 öffnen
+Quelle: clevertronic.de, Ankauf Motorola Edge 30 Pro („Wir bieten bis zu“), 2026-09-13 öffnen
+Quelle: Apple Refurbished Store, MacBook Air, 2026-09-13 öffnen
+▾ Welche Portale wurden abgefragt und blocken oder führen keinen Bestand? Preisbelege
+Mit 403 geblockt am 16.09.2026: backmarket.de (am 13.09. blockten die Produktseiten, eine Kategorieseite lieferte Galaxy-A55-Belege), notebooksbilliger.de Refurbished, ebay.de, zoxs.de, coolblue.de, lenovo.com/de. Fehler oder Zeitüberschreitung: wirkaufens (500), galaxus und der Microsoft Certified Refurbished Store (Timeout). Protokolliert ist nur der Statuscode, nicht der Mechanismus dahinter. Ohne Bestand für die Zielmodelle: rebuy.de (keine Notebooks), asgoodasnew.de (Surface nur ausverkauft, keine Dell Latitude, Samsung null Artikel), clevertronic.de (Suche 404), harlander.com (Dell nur Vorführware ohne Preis, Samsung nur Neuware, Lenovo Angebote ohne Zielmodell; HP dagegen mit Bestand), refurbed.de für Dell (Suche ohne JavaScript leer) und Lenovo (Produktseiten 404). web.archive.org und archive.ph sind für das Werkzeug gesperrt; ein Shop-Archiv zum Verkaufsstart ist deshalb nicht prüfbar. Heilen würde das ein Mensch mit Browser, der die gesperrten Seiten öffnet und Preise mit Datum abschreibt.
+Quelle: Back Market Deutschland, Presseseite (erreichbar, während der Shop 403 liefert), 2025-06-04 öffnen
+Quelle: backmarket.de, Kategorieseite Galaxy A55 5G (am 13.09. erreichbar), 2026-09-13 öffnen
+Quelle: Clevertronic Blog (erreichbar, während die Shop-Suche 404 liefert), 2026-06-18 öffnen
+▾ Welche Hersteller haben heute eine Laptop-Kurve? Preisbelege
+Stand nach dem Einlesen der Recherchen vom 16.09.2026 (Angebote, dann HP-UVPs), Marktplatz-Angebote der Stufen A bis D: Apple 28 Belege, belastbar; Dell 30, belastbar; Lenovo 21, belastbar; Microsoft 22, belastbar; HP 16, unsicher; Samsung 4, keine Kurve. Eine Kurve braucht mindestens 6 Belege über mindestens 6 Monate Altersspanne; belastbar heißt mindestens 12 Belege und ein Wert, der mit dem Alter fällt; unsicher heißt 6 bis 11 Belege oder ein steigender Wert. Die Monatsspanne je Hersteller steht in der Tabelle „Kurve je Hersteller“. Alle Belege sind eine Momentaufnahme: die Kurve sagt, was Aufbereiter heute für verschieden alte Modelle verlangen, nicht, wie ein Gerät über die Jahre an Wert verliert.
+Quelle: lapstore.de, Dell Latitude 7420 (Beispiel eines zählenden Dell-Belegs), 2026-09-16 öffnen
+Quelle: itsco.de, ThinkPad L14 Gen 4 (Beispiel eines zählenden Lenovo-Belegs), 2026-09-16 öffnen
+Quelle: refurbed.de, Surface Laptop 4 Ryzen 5 (Beispiel eines zählenden Microsoft-Belegs), 2026-09-16 öffnen
+Quelle: refurbed.de, HP EliteBook 840 G9 i7-1255U (Beispiel eines zählenden HP-Belegs), 2026-09-16 öffnen
+▾ Woher kommen die UVPs beim Verkaufsstart? Preisbelege
+Die UVP ist der Preis beim deutschen Verkaufsstart, brutto. Drei Ränge, der beste gewinnt. Rang 1: deutsche Pressemitteilung des Herstellers mit Euro-Preis, zum Beispiel Apple Newsroom für MacBooks, Microsoft für Surface Laptop 4 und 5 (Basiskonfigurationen), Samsung für die Galaxy-Book4-Serie („ab 1.399,00 EUR“ für das Book4 360, 22.02.2024). Rang 2: Fachpresse zum Launch mit Euro-Preis je Ausstattung, zum Beispiel ComputerBase zu Surface Laptop 4 und Galaxy Book3/Book4, sir-apfelot zu allen MacBook-Ausstattungen. Rang 3: Shop-Archiv zum Launchmonat, heute nicht prüfbar, weil web.archive.org für das Werkzeug gesperrt ist. Straßenpreise von Geizhals oder idealo sind keine UVP und werden nicht übernommen. Im Katalog (variants.csv) trägt die Spalte spec die Herkunft in Klammern, rrp_source_url die Seite, rrp_source_date das Datum.
+Quelle: Microsoft News Deutschland, Surface Laptop 5 startet auf dem deutschen Markt, 2022-10-25 öffnen
+Quelle: Microsoft News Deutschland, Surface Laptop 4 Ankündigung, 2021-04-27 öffnen
+Quelle: Samsung Newsroom Deutschland, Galaxy Book4-Serie, 2024-02-22 öffnen
+Quelle: Apple Newsroom, MacBook Pro M2 Pro (deutsche UVP), 2023-01-17 öffnen
+Quelle: ComputerBase, Surface Laptop 4 Preise je Ausstattung, 2021-04-13 öffnen
+Quelle: ComputerBase, Galaxy Book4 angeschaut (UVPs), 2024-02-21 öffnen
+Quelle: sir-apfelot.de, MacBook Pro 14 2023, Preise je Ausstattung, 2023-01-17 öffnen
+▾ Wo stammt die UVP aus einem Notebookcheck-Datenblatt statt vom Hersteller? Preisbelege
+Für Dell, Lenovo und HP gibt es fast nie eine deutsche Hersteller-UVP je Ausstattung. Dann steht im Katalog ersatzweise das Preisfeld aus dem Notebookcheck-Datenblatt: der Preis des Testgeräts zum Testzeitpunkt, bei Lenovo mehrfach von einem Campus-Händler, keine Hersteller-UVP. Beispiele, Feldwert in Euro: Latitude 5420 i7 16/512 (1.400), 7420 i7 16/512 (1.900), 7430 i5 16/256 (1.450), ThinkPad L14 Gen 4 i5 16/512 (1.129), E14 Gen 4 Ryzen 7 16/512 (990; Testtext nennt 885 Euro Straßenpreis), EliteBook 840 G9 i7 16/512 (1.550), ProBook 450 G9 (958 und 1.188). Die Klammer in der Spalte spec sagt es jeweils. Feld unter der echten UVP: Realisierung zu hoch; darüber: zu niedrig. Eine Hersteller-UVP ersetzt das Feld, sobald sie gefunden ist.
+Quelle: Notebookcheck, Dell Latitude 5420 i7-1165G7 (Datenblatt), 2021-08-30 öffnen
+Quelle: Notebookcheck, Dell Latitude 7420 i7-1185G7 (Datenblatt), 2021-06-11 öffnen
+Quelle: Notebookcheck, Dell Latitude 7430 i5-1235U (Datenblatt), 2023-01-25 öffnen
+Quelle: Notebookcheck, ThinkPad L14 Gen 4 Intel Review (Datenblatt-Preisfeld), 2024-06-24 öffnen
+Quelle: Notebookcheck, ThinkPad E14 G4 AMD Test (Preisfeld 990, Text 885 Euro), 2023-06-09 öffnen
+Quelle: Notebookcheck, HP EliteBook 840 G9 (Datenblatt; Seite datiert 29.05.2023), 2023-05-29 öffnen
+Quelle: Notebookcheck, HP ProBook 450 G9 Test, 2022-08-23 öffnen
+Quelle: Notebookcheck, ThinkPad T14 Gen 2 Test (Campuspoint-Testgerät, Preisfeld), 2021-05-02 öffnen
+▾ Wo stammt die UVP aus einem Deal-Artikel oder einem Vorbestellpreis, und welche Varianten haben gar keine? Preisbelege
+Zwei Sonderfälle, beide in der Spalte spec benannt. Dell Latitude 5430 i7-1265U 16/512: die UVP von 1.515 Euro ist der Regulärpreis aus einem Notebookcheck-Deal-Artikel vom 08.01.2023, neun Monate nach Verkaufsstart; woher der Regulärpreis stammt, sagt der Artikel nicht. Lenovo ThinkPad X1 Carbon Gen 9 i5 8/256: die UVP von 1.799 Euro ist der Lenovo.de-Vorbestellpreis mit Windows 10 laut Notebookcheck (1.739 Euro ohne Betriebssystem); das Notebookcheck-Datenblatt nennt 1.700 Euro. Von 628 Katalogvarianten tragen 553 eine Launch-UVP; ohne UVP stehen unter anderem die i5-Ausstattungen des Latitude 5430, Latitude 5440 und 7440, ThinkPad T14 Gen 2 16/512, EliteBook 840 G8, ProBook 450 G8, Galaxy Book4 C5 und C7; Angebote dazu zählen nicht. Heilen würde das: web.archive.org für die Dell-SKU-Seiten zu März und April 2022 (5430) und Mai 2023 (7440), von Hand geöffnet.
+Quelle: Notebookcheck Deal-Artikel, Dell Latitude 5430 (Regulärpreis 1.515 Euro, Quelle im Artikel nicht genannt), 2023-01-08 öffnen
+Quelle: Notebookcheck, ThinkPad X1 Carbon Gen 9 ab 1.739 Euro vorbestellbar, 2021-03-29 öffnen
+Quelle: Notebookcheck, ThinkPad X1 Carbon G9-20XW0026GE (Datenblatt-Preisfeld 1700 Euro, i5-1135G7 8/256), 2021-10-08 öffnen
+▾ Gibt es deutsche Studien, die den Restwert von Firmengeräten nach Hersteller und Alter messen? Studien
+Nein. Eine deutsche Restwertkurve in Prozent des Neupreises nach 12, 24 und 36 Monaten je Hersteller ist öffentlich nicht vorhanden; gesucht wurde am 16.09.2026. Was es stattdessen gibt, zerfällt in vier Arten: Euro-Punktwerte je Modell ohne Prozent und meist ohne Alter (eBay, Kleinanzeigen, markt.de, Apple Trade In, Back Market); unbelegte Prozentspannen von Ankaufportalen; Neupreis-Erosion, also der Preis neuer Ware gegen die UVP, kein Gebrauchtwert; europäische Kurven ohne Deutschland-Ausweis. Prozentspannen, Neupreis-Erosion und Europa-Kurven messen nur Smartphones; Punktwerte gibt es auch für Laptops und Tablets, aber keine Kurve nach Hersteller. Die vier Arten stehen in den nächsten Einträgen mit Beispiel und Adresse. Deshalb rechnet diese Seite ihre Kurven aus eigenen Preisbelegen; die Studien dienen der Einordnung.
+Quelle: TECHBOOK mit markt.de und Kleinanzeigen: iPhone 11, Stichtag 06.10.2020, 2020-10-18 öffnen
+Quelle: Recommerce Group: Trade-In Index 2026, 2026-06-09 öffnen
+▾ Welche deutschen Quellen nennen Euro-Werte für Gebrauchtgeräte, und was fehlt ihnen? Studien
+Marktplätze und Ankäufer veröffentlichen Preise in Euro je Modell, ohne Prozent der UVP und meist ohne Modellalter. Die eBay-Restwertliste vom 17.01.2022 nennt Durchschnittspreise über alle Zustände, zum Beispiel iPhone 12 Pro Max 128 GB 804 Euro und Galaxy S21+ 5G 128 GB 606 Euro; Zeitraum und UVP fehlen. Das Kleinanzeigen-Magazin vom 24.12.2024 nennt ab-Preise ohne Speicher, Zustand und Stichtag. Back Market Deutschland (04.06.2025) nennt Durchschnittswerte ohne Modell (Smartphone 138 Euro, Tablet 165 Euro) und für Laptops nur einen Höchstwert: für ein gut erhaltenes MacBook bis zu 268 Euro. Apple Trade In (über NETZWELT, 07.08.2026) nennt „bis zu“-Werte, zum Beispiel MacBook Pro bis zu 915 Euro. Alles Punktwerte: ein Preis je Modell, kein Verlauf über das Alter.
+Quelle: eBay Deutschland: Die große eBay-Restwertliste, 2022-01-17 öffnen
+Quelle: Kleinanzeigen Magazin: Wie viel ist mein gebrauchtes iPhone wert?, 2024-12-24 öffnen
+Quelle: Back Market Deutschland Pressemitteilung: Wie aus gebrauchten Geräten bare Münze wird, 2025-06-04 öffnen
+Quelle: NETZWELT: Apple Trade In Deutschland, Höchstwerte, 2026-08-07 öffnen
+▾ Welche deutsche Quelle nennt UVP und Alter zugleich? Studien
+Auf der Marktplatzseite nur eine: ein TECHBOOK-Artikel vom 18.10.2020 mit Preisen von markt.de und Kleinanzeigen, Stichtag 06.10.2020, rund 13 Monate nach Verkaufsstart des iPhone 11: 64 GB, UVP 799 Euro, 613 Euro wie neu bis 460 Euro akzeptabel. Auf die UVP gerechnet sind das 76,7 bis 57,6 Prozent; das ist eigene Rechnung, der Artikel nennt keine Prozente. Ein Modell, ein Stichtag, keine Kurve. Auf der Ankaufseite eine: Macwelt (24.08.2018) mit Ankaufwerten von Flip4New, zum Beispiel iPhone X 64 GB, 1.149 Euro neu, nach rund einem Jahr 786 Euro Ankauf, 68 Prozent. Beides sind Momentaufnahmen eines Jahrgangs, keine Kurve nach 12, 24 und 36 Monaten.
+Quelle: TECHBOOK mit markt.de und Kleinanzeigen: iPhone 11, Stichtag 06.10.2020, 2020-10-18 öffnen
+Quelle: Macwelt: Warum sind iPhones wertstabiler als Edel-Androide (Flip4New-Ankaufwerte), 2018-08-24 öffnen
+▾ Was ist von den Prozentangaben der Ankaufportale zu halten? Studien
+Wenig, weil keine Datengrundlage dabei steht. Clevertronic schreibt in einem Blogtext vom 18.06.2026: iPhone nach einem Jahr 17 bis 27 Prozent Wertverlust, Galaxy S 33 bis 44 Prozent, nach zwei Jahren bei vielen Modellen 50 bis 70 Prozent; kein Report, keine Stichprobe, kein Stichtag. handyverkauf.net nennt wenige Tage nach Marktstart bis zu 85 Prozent der UVP, als üblichen Einstiegswert bis zu 75 Prozent, nach einem Jahr rund 40, nach zwei Jahren rund 28, nach drei Jahren bestenfalls ein Viertel; ohne Datum, ohne Modellliste, Ankaufpreis-Vergleich mit Provisionsmodell. Die älteste Zahlen-PR eines Ankaufportals stammt vom 17.04.2013: iPhone 15 bis 25 Prozent Verlust im Jahr, Galaxy S 20 bis 30 Prozent, nach fünf Jahren Schrottwert. Alle drei kommen aus dem Ankaufgeschäft, keine ist eine Messung. Sie stehen hier zur Einordnung, nicht als Maßstab.
+Quelle: Clevertronic Blog: Handy verkaufen 2026, 2026-06-18 öffnen
+Quelle: handyverkauf.net: Handywert ermitteln, undatiert, Abruf 2026-09-16 öffnen
+Quelle: wirkaufens (asgoodasnew) Pressemitteilung: Schneller Wertverlust bei gebrauchten Smartphones, 2013-04-17 öffnen
+▾ Warum zählt der Preisverfall neuer Geräte nicht als Restwert? Studien
+Weil er den Preis neuer Ware gegen die UVP misst, nicht den Preis eines gebrauchten Geräts. Stiftung Warentest (23.07.2026) nennt frei lesbar 10 bis 45 Prozent Ersparnis je nach Marke; die Werte je Hersteller liegen hinter der Bezahlschranke, eine freie Wiedergabe (homburg1.de, 28.07.2026) zitiert daraus: Apple gibt erst 90 Tage nach dem Verkaufsstart nach und steht nach weiteren 90 Tagen bei 90 Prozent des Ausgangspreises, Samsung bis Juli bei rund 75 Prozent. Geizhals über PC-WELT (11.09.2025, Land nicht genannt) nennt für September 2024 bis September 2025 iPhone 16e minus 11 Prozent (erst seit Februar 2025 im Handel), Galaxy S25 minus 29, Pixel 9 minus 39. smava mit idealo (Juli 2016): Samsung nach zwölf Monaten minus 44, Apple minus 27. Für ein Leasinghaus ist das der Einkaufspreis eines Nachzüglers, nicht der Erlös eines Rückläufers. Diese Seite nimmt deshalb die Launch-UVP als Nenner.
+Quelle: Stiftung Warentest: Preisanalyse zu Smartphones (Volltext hinter Bezahlschranke, frei nur 10 bis 45 Prozent), 2026-07-23 öffnen
+Quelle: homburg1.de: Stiftung Warentest: So stark fallen Smartphone-Preise nach dem Marktstart (Wiedergabe der Herstellerwerte), 2026-07-28 öffnen
+Quelle: PC-WELT: Diese Smartphones verlieren am meisten an Wert (Geizhals-Analyse), 2025-09-11 öffnen
+Quelle: smava mit idealo.de: Die Preisentwicklung von Apple und Samsung Smartphones, Juli 2016 öffnen
+▾ Was sagen die europäischen Indizes, und warum tragen sie keine Deutschland-Zahl? Studien
+Zwei Quellen rechnen über Europa, ohne Deutschland auszuweisen. Der Recommerce Trade-In Index 2026 (09.06.2026) nennt den ausgezahlten Anteil am Launch-Preis im eigenen Ankaufnetz: iPhone 15 33 Prozent, iPhone 14 25, iPhone 13 20, iPhone 11 9; Galaxy S25 rund 34, S24 rund 30, S23 rund 20; nach dem ersten Jahr sinkt der Wert um rund 15 Prozent je Jahr. Länder nicht spezifiziert, Ankaufsseite, Index eines Recommerce-Anbieters. refurbed mit Fraunhofer Austria (22.05.2025) nennt eine einzige Kurvenstelle: nach drei Jahren sinkt der Rückkaufwert auf unter 20 Prozent vom Neupreis; Rechenmodell für Europa und Österreich, das Whitepaper ließ sich nicht lesen. Beide messen Smartphones auf der Ankaufsseite, nicht Marktplatz-Angebote in Deutschland.
+Quelle: Recommerce Group: Trade-In Index 2026, 2026-06-09 öffnen
+Quelle: refurbed mit Fraunhofer Austria, Presseaussendung (OTS), 2025-05-22 öffnen
+▾ Und für Laptops und Tablets: was gibt es in Deutschland? Studien
+Punktwerte und eine Faustzahl, keine Kurve. Ein ITAD-Dienstleister schreibt am 14.07.2026, gut gewartete Business-Geräte lägen nach rund 36 Monaten häufig bei rund 10 bis 20 Prozent des Neuwerts; ohne Hersteller, ohne 12- oder 24-Monats-Werte, ohne empirische Quelle, die Seite verweist auf die Einzelbewertung. Apple Trade In (über NETZWELT, 07.08.2026) nennt Höchstwerte: MacBook Pro bis zu 915 Euro, iPad Pro aktuelle Generation bis zu 760 Euro; wovon der Betrag im Einzelfall abhängt, sagt der Artikel nicht; der Hersteller will den Neukauf fördern. Ein Versicherer-Ratgeber nennt zwei iPad-Einzelbeispiele, zum Beispiel iPad Pro 12,9 Zoll (2017) 512 GB, neu laut Ratgeber rund 1.400 Euro, gebraucht bei rebuy 942 Euro. Für Laptops und Tablets mit Monatsangabe nach Hersteller: in Deutschland nichts gefunden.
+Quelle: Globalcirculartech (DDE Global): TCO IT-Hardware, Restwert, 2026-07-14 öffnen
+Quelle: NETZWELT: Apple Trade In Deutschland, Höchstwerte, 2026-08-07 öffnen
+Quelle: WERTGARANTIE Ratgeber: iPad gebraucht kaufen, undatiert, Abruf 2026-09-16 öffnen
+▾ Was sagen die internationalen Studien zum Wertverlust nach Hersteller? Studien
+Smartphones: SellCell (USA, 08.09.2025, Ankaufsangebote von über 40 Ankäufern, Zustand nicht genannt) misst nach zwölf Monaten iPhone 15 48,2 Prozent Verlust, Galaxy S23 61,1 Prozent. Compare and Recycle (Großbritannien, Februar 2026, Zustand good) sieht im ersten Jahr iPhone 16 45,07 Prozent, Galaxy S22 und S23 60 bis 63,4 Prozent, jedes Foldable mindestens 57 Prozent. Laptops: Forrester (Juni 2026, im Auftrag von Apple) nennt Mac nach vier Jahren rund 30 Prozent Restwert, Enterprise-PC am Lebensende 10 Prozent. ProjectWizards (31.08.2026, Mac-Softwarehaus) rechnet MacBook Air 13 Jahr 1 bis 4 mit 63/39,7/25/15,7 Prozent, ThinkPad L14 Gen 7 mit 53,1/28,2/15/8. SellMyLaptops (USA und Kanada, September 2026) nennt im ersten Jahr MacBook 35 Prozent Verlust, Windows-Laptop 45. Alle nennen Apple vorn; keine nennt eine Restwertzahl für Dell oder HP.
+Quelle: SellCell: Is the iPhone still king of value retention?, 2025-09-08 öffnen
+Quelle: Compare and Recycle: Annual Phone Depreciation Report, Februar 2026 öffnen
+Quelle: Forrester TEI: Apple Mac at Work, Juni 2026 öffnen
+Quelle: ProjectWizards: Mac vs PC TCO Calculator, 2026-08-31 öffnen
+Quelle: SellMyLaptops: Depreciation Guide, September 2026 öffnen
+▾ Warum passen diese Zahlen nicht eins zu eins auf ein deutsches Leasinghaus? Studien
+Vier Gründe. Erstens die Preisseite: SellCell, Compare and Recycle und SellMyLaptops messen Ankaufsangebote, also was ein Ankäufer zahlt; diese Seite misst Marktplatz-Angebote deutscher Aufbereiter, also was ein Käufer zahlt, mit Marge und Mehrwertsteuer darin. Die Gegenprobe vom 13.09.2026 auf dieser Seite zeigt den Abstand je Gerät. Zweitens der Nenner: US-Listenpreise in Dollar und britische in Pfund gegen deutsche UVP in Euro einschließlich Mehrwertsteuer. Drittens der Zustand: SellCell nennt keinen, Compare and Recycle „good“; das sind Portalbegriffe, keine Zustandsstufen A bis D. Viertens die Ware: für ThinkPad T14 Gen 3 und Latitude 5430 fand die Gegenprobe kein Ankauf-Gebot; die US-Portale fassen Windows-Laptops zu einer Zahl zusammen. Was ein Leasinghaus erzielt, steht nur in seinen eigenen Verkäufen.
+Quelle: SellCell: Is the iPhone still king of value retention?, 2025-09-08 öffnen
+Quelle: Compare and Recycle: Annual Phone Depreciation Report, Februar 2026 öffnen
+Quelle: SellMyLaptops: Depreciation Guide, September 2026 öffnen
+▾ Wer hat die Studien bezahlt, und was heißt das für die Zahlen? Studien
+Jede Quelle hat ein Interesse, und es steht in der Tabelle neben ihr. Forrester TEI „Apple Mac at Work“ (Juni 2026) entstand im Auftrag von Apple und stellt Mac (rund 30 Prozent nach vier Jahren) gegen Enterprise-PC (10 Prozent am Lebensende); der Auftraggeber verkauft die Geräte, die besser abschneiden. ProjectWizards ist ein Mac-Softwarehaus mit demselben Befund. SellCell und Compare and Recycle vermitteln Ankäufe, SellMyLaptops kauft selbst an. Die deutschen Punktwerte kommen von Marktplatzbetreibern (eBay, Kleinanzeigen) und von einem Hersteller (Apple Trade In), der den Neukauf fördern will. Nichts davon macht eine Zahl falsch; es macht sie einseitig. Deshalb laufen die Kurven dieser Seite über Preisbelege mit Adresse und Datum, und die Studien stehen daneben, nicht darunter.
+Quelle: Forrester TEI: Apple Mac at Work, Juni 2026 öffnen
+Quelle: ProjectWizards: Mac vs PC TCO Calculator, 2026-08-31 öffnen
+Quelle: SellMyLaptops: Depreciation Guide (kauft selbst an), September 2026 öffnen
+Quelle: NETZWELT: Apple Trade In Deutschland, Höchstwerte, 2026-08-07 öffnen
+▾ Warum gibt es für Dell und HP in keiner Studie eine Zahl? Studien
+Weil keine Studie Dell oder HP misst. Die Ankaufindizes aus den USA und Großbritannien messen Smartphones; SellMyLaptops fasst alle Windows-Laptops zu einer Zahl zusammen (45 Prozent Verlust im ersten Jahr). Forrester rechnet mit „Enterprise-PC“ ohne Marke; die einzige Windows-Kurve nach Hersteller ist die ThinkPad-L14-Rechnung von ProjectWizards, Dell- und HP-Geräte stehen im Rechner ohne eigene Restwertzahl. Die deutschen Quellen nennen für Windows-Laptops keinen Hersteller; der ITAD-Text vom 14.07.2026 spricht von „Business-Geräten“. Wer Dell und HP verwertet, veröffentlicht keine Kurven (Suche vom 16.09.2026). Deshalb entsteht die Zahl hier aus eigenen Preisbelegen: Dell hat heute 30 Marktplatz-Angebote in der Kurve, Verlässlichkeit belastbar; HP 16, Verlässlichkeit unsicher.
+Quelle: SellMyLaptops: Depreciation Guide, September 2026 öffnen
+Quelle: Forrester TEI: Apple Mac at Work, Juni 2026 öffnen
+Quelle: ProjectWizards: Mac vs PC TCO Calculator, 2026-08-31 öffnen
+Quelle: Globalcirculartech (DDE Global): TCO IT-Hardware, Restwert, 2026-07-14 öffnen
+▾ Welche deutschen Quellen wurden gesucht und lieferten keine Restwertkurve? Studien
+Gesucht am 16.09.2026, ohne Kurve: rebuy (keine Presseseite, kein Preisindex); Clevertronic (nur Blogtext ohne Datengrundlage); wirkaufens/asgoodasnew (einzige Zahlen-PR von 2013); Back Market Deutschland (nur Durchschnitts- und Höchstwerte 2024 ohne Modell und Tageshöchstpreise über Drittseiten); refurbed (nur die Fraunhofer-Kurvenstelle für Europa); Bitkom, Verivox, Finanztip, CHIP, Computerbild, Handelsblatt (Umfragen, Weiterleitungen, Grafiken); Stiftung Warentest (Ankaufportal-Test mit Noten, Neupreis-Erosion); heise/c't (Ankaufplattform-Test 2021 hinter Paywall, Meldungen geben US-Quellen wieder); AfB (nur Preisabschlag gegen Neuware, keine Restwert-Prozente); Deloitte und PwC Deutschland (keine Studie mit Restwerten); DAT, Schwacke, Eurotax (Fahrzeugbewertung; die „Schwacke-Liste“ für Smartphones ist ein eBay-PR-Begriff); fünf Leasinggesellschaften und Distributoren (keine veröffentlichten Kurven; eine nennt nur Preisabschläge und eine Verwertungsquote, ohne Modell und Alter). Tablets und Laptops mit Monatsangabe: nichts.
+Quelle: Clevertronic Blog: Handy verkaufen 2026 (einziger Fund bei Clevertronic), 2026-06-18 öffnen
+Quelle: Back Market Deutschland Pressemitteilung (einziger Fund bei Back Market), 2025-06-04 öffnen
+Quelle: refurbed mit Fraunhofer Austria, Presseaussendung (OTS; einziger Fund bei refurbed), 2025-05-22 öffnen
+▾ Welche Quellen waren technisch nicht erreichbar? Studien
+Blockiert oder nicht lesbar am 16.09.2026: zoxs.de (403), pressebox.de (403), trusted.de (403), channelpartner.de (404), telecom-handel.de (410), rebuy.de/presse (404), ing.de (Timeout); der heise-Ankaufplattform-Test und derstandard liegen hinter einer Paywall; das Fraunhofer-Austria-Whitepaper (Fundort im Protokoll nicht genannt) und ein PDF des Vodafone-Instituts wurden heruntergeladen, aber nicht gerendert; die Vollliste der eBay-Restwertliste 2022 (cloud.achtung.de) wurde nicht abgerufen. Ein Block heißt nicht, dass dort eine Kurve liegt; es heißt, dass die Frage offen bleibt. Was es heilen würde: die zwei PDFs von Hand öffnen und die eBay-Vollliste nachladen. Das sind die drei Stellen, die sich ohne Kauf öffnen lassen und hier noch nicht gelesen wurden.
+Quelle: refurbed mit Fraunhofer Austria, Presseaussendung (OTS); verlinkt einen Dropbox-Ordner mit Grafiken, kein Whitepaper, 2025-05-22 öffnen
+Quelle: eBay Deutschland: Die große eBay-Restwertliste (Vollliste verlinkt), 2022-01-17 öffnen
+▾ Wie entsteht eine Kurve aus den Preisbelegen? Methode
+Jeder Preisbeleg wird ein Punkt: Modellalter in Monaten seit deutschem Verkaufsstart auf der einen Achse, Realisierung (Gebrauchtpreis geteilt durch Launch-UVP) auf der anderen. Durch diese Punkte legt das Werkzeug eine Gerade im Logarithmus der Realisierung, nach der Methode der kleinsten Quadrate; das ergibt einen festen Verlust je Monat in Prozent des jeweils aktuellen Werts. Die Zustandsstufen A, C und D gehen mit einem festen Abstand zur Stufe B ein, der zusammen mit der Linie geschätzt wird; abgelesen wird die Linie für Stufe B. Marktplatz-Angebote und Ankauf-Gebote werden getrennt gerechnet, nie gemischt. Die Kurve ist kein Mittelwert der Modelle: jeder Beleg zählt gleich, ein Modell mit vielen Belegen wiegt mehr; in der Familienkurve gilt dasselbe für Hersteller.
+▾ Was heißt belastbar, unsicher und keine Kurve? Methode
+Drei Stufen der Verlässlichkeit je Kurve. Keine Kurve: unter 6 Marktplatz-Angeboten oder unter 6 Monaten Altersspanne; die Spalten bleiben leer, die Stückzahl steht trotzdem da. Unsicher: 6 bis 11 Belege, oder die Linie steigt mit dem Alter, was unplausibel ist. Belastbar: mindestens 12 Belege über mindestens 6 Monate, und der Wert fällt. Die Schwellen sind Vorgabewerte des Werkzeugs (curves.py), keine Messwerte; ändern sie sich, folgt dieser Text. Steht ein Wert in Klammern, liegt das Alter außerhalb der Belegspanne; die Linie ist dann verlängert (eigener Eintrag unter Grenzen).
+▾ Wie werden die Zustandsangaben der Händler auf die Stufen A bis D übersetzt? Methode
+Der Zuordner (anchors.py, normalise_grade) sucht im Zustandstext des Händlers nach Schlüsselwörtern, in fester Reihenfolge. Ankauf-Wörter (Ankauf, bis zu, Trade-in, verkaufen) ergeben Ankauf-Gebot mit eigener Kurve. Dann A wie neu: wie neu, neuwertig, hervorragend, exzellent, excellent, premium, A-Ware, Grade A, mint, top, OVP geöffnet, open box. B sehr gut: sehr gut, B-Ware. C gut: gut, good, befriedigend, C-Ware. D akzeptabel: akzeptabel, fair, stark genutzt, stark gebraucht, Gebrauchsspuren, D-Ware. Ein einzelner Buchstabe A bis D ist die Stufe selbst. Zusätze wie „ITSCO Certified Refurbished“, „Gebrauchtgerät“ oder „refurbished“ ändern nichts: „Premium A Ware“ wird A, „Hervorragend ITSCO Certified Refurbished“ A, „Akzeptabel“ mit Zusatz „Gebraucht“ D, „StoreDeal: Etwas stärkere Gebrauchsspuren“ D. Weil A vor B vor C geprüft wird, landet „Gut / Sehr gut wählbar“ auf B. Ein Ankauf-Gebot (source_kind ankauf-trade-in) bleibt Ankauf, egal welches Wort daneben steht.
+Quelle: itsco.de, Dell Latitude 7420 (Zustände Hervorragend, Gut, Akzeptabel mit Zusatz), 2026-09-16 öffnen
+Quelle: luxnote-hannover.de, ThinkPad T14 Gen 3 („Premium A Ware“), 2026-09-16 öffnen
+Quelle: lapstore.de, Dell Latitude 5430 („StoreDeal: Etwas stärkere Gebrauchsspuren“), 2026-09-16 öffnen
+Quelle: afbshop.de, Dell Latitude 7430 (Fair, Gut, Sehr gut, Wie neu), 2026-09-16 öffnen
+▾ Was passiert mit Belegen, deren Zustand sich keiner Stufe zuordnen lässt? Methode
+Findet der Zuordner kein Schlüsselwort, bekommt der Beleg die Stufe UNKNOWN. Er bleibt in der Belegliste und erscheint im Diagramm als offener Kreis („Zustand vom Verkäufer nicht eindeutig“), geht aber nicht in die Kurve ein: curves.py lässt nur A, B, C, D und Ankauf zu. Beispiele aus der Belegliste: „Verschiedene Zustände (ab)“ (rebuy-Listenseite, Galaxy Tab), „Zustand auf Kategorieseite nicht angezeigt“ (backmarket, Galaxy A55), „Budget“ (asgoodasnew, Pixel Fold und Motorola), „Ungeöffnet“ (rebuy, Galaxy Z Fold6). Zustandstexte wie „Zertifiziert Refurbished“ (Apple Refurbished Store) oder „Helligkeitsflecken im Display“ (lapstore) wären ebenfalls UNKNOWN; diese Zeilen scheiterten schon am RAM/SSD-Abgleich und stehen nicht in der Belegliste. Heute betrifft das 18 Belege. Ein Preis ohne Zustand ist kein Beleg für eine Stufe, sondern ein Preis für irgendein Gerät.
+Quelle: rebuy.de, Listenseite Galaxy Tab A („Verschiedene Zustände (ab)“), 2026-09-13 öffnen
+Quelle: backmarket.de, Kategorieseite Galaxy A55 5G (Zustand nicht angezeigt), 2026-09-13 öffnen
+Quelle: asgoodasnew.de, Google Pixel Fold („Budget“), 2026-09-13 öffnen
+Quelle: rebuy.de, Galaxy Z Fold6 („Ungeöffnet“), 2026-09-13 öffnen
+Quelle: Apple Refurbished Store, MacBook Air (Zustandstext „Zertifiziert Refurbished“; Zeile vom Zuordner verworfen), 2026-09-13 öffnen
+Quelle: lapstore.de, HP ZBook Firefly 14 G9 (Zustandstext „Helligkeitsflecken im Display“; Zeile vom Zuordner verworfen), 2026-09-13 öffnen
+▾ Wann zählt ein Gebrauchtpreis als Beleg, und wie viele fallen heraus? Methode
+Der Zuordner (anchors.py) verwirft, statt zu raten. Ein Beleg zählt, wenn die SSD des Angebots zu einer Katalogvariante mit Launch-UVP passt und der RAM entweder übereinstimmt (Marke storage_ram) oder auf einer Seite nicht genannt ist (Marke storage); nennt das Angebot keinen RAM, nimmt der Zuordner die günstigste Variante mit dieser SSD. Teilen sich Intel- und AMD-Variante SSD und RAM, entscheidet das Prozessorkürzel im Angebotstext (storage_ram_cpu); ohne Treffer die erste Variante. Die Marke steht je Beleg in der Spalte match_kind. Heraus fallen no_rrp (Modell ohne Variante mit UVP), heute 63 Belege, und spec_mismatch (SSD passt zu keiner Variante, beide Seiten nennen anderen RAM, Angebot ohne SSD-Größe), heute 161; dazu Zeilen ohne Modell, Verkaufsstart, Preis oder Datum. Gesamt verworfen: 225. Ein 32-GB-Angebot durch die UVP der 16-GB-Variante geteilt ergäbe eine zu hohe Realisierung.
+Quelle: thinkstore24.de, ThinkPad X1 Carbon Gen 11 i7 16/512 LTE (keine Variante mit dieser Ausstattung, spec_mismatch), 2026-09-16 öffnen
+Quelle: lapstore.de, Dell Latitude 5440 i5 8/256 (Modell ohne UVP, no_rrp), 2026-09-16 öffnen
+▾ Welche Angebote aus der Recherche vom 16.09.2026 wurden schon beim Einlesen verworfen? Methode
+Vier Gründe. Ausverkauft oder nicht verfügbar bei noch gelistetem Preis: alle Surface-Zeilen von asgoodasnew.de, ein Surface Laptop 5 bei lapstore, ein Surface Laptop 4 bei AfB („nicht mehr für den Versand verfügbar“), ThinkPads bei thinkstore24 („derzeit nicht verfügbar“); ein Preis ohne Ware ist kein Angebot. Deal-Ware mit Schaden oder ohne Zustandswort: lapstore „StoreDeal“ mit Displaymängeln, HDMI ohne Funktion oder nur „StoreDeal“. CPU unbekannt: asgoodasnew nennt nur „Core i7 3,00 GHz“, damit ist keine Variante zuordenbar. Doppelt: eine zweite Zeile derselben Seite (StoreDeal-Variante des Latitude 7430). Nicht einheitlich: Angebote mit „Gehäuseboden gerissen“ (itsco) oder „ein USB-C-Port defekt“ (thinkstore24) blieben drin, weil sie ein Zustandswort tragen. Bei HP kamen am 16.09.2026 zwei Gründe dazu: Zeilen, bei denen der Abruf keinen Zustand geliefert hat („nicht erfasst“), und Angebote „zurzeit nicht verfügbar“. Wie viele Zeilen verworfen wurden, protokolliert der Einlese-Schritt nicht; die Zahl steht in keiner Ausgabedatei.
+Quelle: asgoodasnew.de, Surface Laptop 4 (ausverkauft, Preis gelistet, CPU nur als Takt), 2026-09-16 öffnen
+Quelle: lapstore.de, Dell Latitude 5440 („StoreDeal: Displaymängel“, verworfen), 2026-09-16 öffnen
+Quelle: lapstore.de, Dell Latitude 7430 (Seite mit regulärer und StoreDeal-Variante), 2026-09-16 öffnen
+Quelle: afbshop.de, Surface Laptop 4 („nicht mehr für den Versand verfügbar“), 2026-09-16 öffnen
+Quelle: itsco.de, ThinkPad L14 Gen 4 („Gehäuseboden gerissen“, Akzeptabel, behalten), 2026-09-16 öffnen
+▾ Wie wird die Simulation an den Kurven geeicht, und was heißt das für die Zahlen der anderen Tabs? Methode
+Der Datensee hinter den anderen Tabs ist synthetisch und als solcher gekennzeichnet. Der Verkaufspreis je Gerät wird aus den öffentlichen Kurven abgeleitet: zuerst die Kurve der Familie und des Herstellers, wenn sie belastbar ist, sonst die Kurve der Familie; eine eingebaute Ersatzkurve nur, wenn die Kurvendatei fehlt. Auf die abgelesene Realisierung wirken: eine Kappung für junge Geräte bei 90 % der UVP, ein Abschlag von Angebot zu Erlös auf 85 % des Angebots, ein Kanalfaktor, ein zufälliges Rauschen. Kappung und Abschlag sind Entwurfsgrößen mit verantwortlicher Rolle, keine Marktfakten. Folge: der Bericht und alle Reiter des Bereichs Analytics zeigen das Niveau der öffentlichen Kurven, nicht die Bücher eines Hauses. Die Prognose liest die Kurven nie direkt; sie lernt aus den synthetischen Verkäufen. Prognosegüte misst deshalb die Maschine, nicht den Markt.
+▾ Was heißt „Kurve verlängert“, und was bedeutet ein Wert in Klammern? Grenzen
+Eine Kurve gilt nur dort, wo Belege liegen; die Spalte Monate zeigt diese Spanne. Liegt ein Ablesepunkt (auf der Seite 24 und 36 Monate) außerhalb, rechnet das Werkzeug die Gerade trotzdem bis dorthin weiter und setzt den Wert in Klammern. Ein Wert in Klammern ist keine Messung, sondern die Fortsetzung einer Linie in einen Bereich ohne einen einzigen Beleg. Beispiel Laptop gesamt: der jüngste Beleg ist 30,2 Monate alt; der Wert nach 24 Monaten (86 %) steht in der Kachel Laptop mit dem Vermerk „Kurve verlängert“; in der Tabelle „Kurve je Hersteller“ stehen solche Werte in Klammern, weil 24 Monate vor dem jüngsten Beleg liegen. Je weiter der Ablesepunkt von den Belegen entfernt liegt, desto mehr hängt der Wert an der Steigung und desto weniger am Markt. Ein Wert in Klammern taugt als Richtung, nicht als Zahl für einen Vertrag.
+▾ Warum steht die Microsoft-Laptop-Kurve nach 24 Monaten in Klammern, und warum so hoch? Grenzen
+Die 22 Microsoft-Belege decken 35,3 bis 64,6 Monate ab: Surface Laptop Go 3 (Verkaufsstart Deutschland 03.10.2023) als jüngstes, Surface Laptop 4 (27.04.2021) als ältestes Modell. Darunter gibt es keinen Beleg. Die Linie verliert 2,4 % je Monat; rückwärts bis 24 Monate verlängert landet sie bei 95 %, in Klammern. Diese Höhe ist eine Eigenschaft der Steigung, kein beobachteter Preis. Was das heilt: ein Gebrauchtangebot für ein Surface Laptop 6 oder 7 mit Katalogvariante und Launch-UVP. Beide stehen heute nicht im Katalog; er führt Surface Laptop 4, 5, Go 3, Studio 2 und den Surface Laptop 13,8 und 15 Zoll mit Snapdragon X2, von Microsoft als 8. Edition geführt (Verkaufsstart 16.06.2026), zu dem am 16.09.2026 kein Gebrauchtangebot gesucht wurde.
+Quelle: Microsoft Deutschland: Surface Laptop 4 angekündigt (ab dem 27. April 2021 verfügbar), 2021-04-27 öffnen
+Quelle: ComputerBase: Surface Laptop Studio 2 und Laptop Go 3 (Verkaufsstart DE laut Artikel 03.10.2023), 2023-09-22 öffnen
+Quelle: Microsoft EMEA: neue Surface-Geräte, Surface Laptop 13,8 und 15 Zoll (ab sofort auf dem deutschen Markt), 2026-06-16 öffnen
+Quelle: Microsoft Store: Produktname Surface Laptop 8th Edition, Abruf 2026-09-16 öffnen
+▾ Warum ist die Dell-Kurve so flach und die Lenovo-Kurve so steil? Grenzen
+Beide Linien sind Geraden durch die vorhandenen Belege, und die Belege liegen verschieden. Dell: 30 Belege, Altersspanne 52,0 bis 68,1 Monate, Verlust 0,8 % je Monat; alle Geräte sind Latitude 5420, 7420, 5430 und 7430 mit Verkaufsstart 2021 und 2022, kein Beleg zu einem jüngeren Modell. Die Nenner der Dell-Belege sind Preisfelder aus Notebookcheck-Datenblättern (5420, 7420, 7430) und ein Regulärpreis aus einem Notebookcheck-Deal-Artikel (5430); eine deutsche Hersteller-UVP wurde nicht gefunden. Lenovo: 21 Belege, 37,9 bis 66,0 Monate, Verlust 2,5 % je Monat; ThinkPad L14, T14 und X1 Carbon der Jahrgänge 2021 bis 2023. Eine flache Linie durch ein enges, altes Fenster und eine steile Linie durch ein breites Fenster sind zunächst Eigenschaften der Belege. Ob Dell-Geräte langsamer verlieren, sagen die Daten nicht: dafür fehlen Dell-Belege zu jüngeren Modellen.
+Quelle: Notebookcheck Datenblatt Dell Latitude 5420 i7-1165G7 (Preisfeld, kein Hersteller-UVP; Nenner im Katalog), 2021-08-30 öffnen
+Quelle: Notebookcheck Datenblatt Dell Latitude 7420 i7-1185G7 (Preisfeld, kein Hersteller-UVP; Nenner im Katalog), 2021-06-11 öffnen
+Quelle: Notebookcheck Datenblatt Dell Latitude 7430 i5-1235U (Preisfeld, kein Hersteller-UVP), 2023-01-25 öffnen
+Quelle: Notebookcheck Deal-Artikel Dell Latitude 5430 i7-1265U 16/512 (Regulärpreis 1.515 Euro, kein Hersteller-UVP), 2023-01-08 öffnen
+Quelle: Dell Newsroom (Österreich): Latitude 5420 angekündigt (Verkaufsstart 2021), 2021-01-11 öffnen
+Quelle: Notebookcheck: ThinkPad X1 Carbon Gen 9 vorbestellbar (Jahrgang 2021), 2021-03-29 öffnen
+Quelle: Notebookcheck Test ThinkPad T14 G4 Intel (Jahrgang 2023), 2023-09-09 öffnen
+▾ Warum passen Apple-Angebote leichter zu einer UVP-Variante als Windows-Angebote? Grenzen
+Ein Beleg zählt nur mit einer Katalogvariante, die eine Launch-UVP trägt und deren SSD und RAM zum Angebot passen. Apple nennt im deutschen Newsroom die UVP der Basisausstattung, sir-apfelot listet alle Ausstattungen mit Preis, und refurbed und rebuy führen MacBooks mit RAM und SSD: dort passte fast jedes Angebot. Bei den Windows-Herstellern scheiterte es doppelt. Erstens fehlen UVPs: für Latitude 5430, 7430, 5440 und 7440 wurde keine deutsche Dell-Pressemitteilung mit Euro-Preis gefunden (Dell-Newsroom de-de 404), nur US-Meldungen in Dollar; zum ThinkPad T14 Gen 2 nennt die Fachpresse zum Launch nur Einstiegspreise ohne Ausstattung, Notebookcheck ausdrücklich netto; lenovo.com/de blockt mit 403. Zweitens nannten viele Angebote Ausstattungen, die im Katalog nicht standen (32 GB, 1 TB, 16/256). Was heilt: je Modell eine UVP mit Ausstattung, vom Hersteller, sonst aus der Fachpresse zum Launch.
+Quelle: Apple Newsroom, MacBook Air M2 (deutsche UVP der Basis), 2022-06-07 öffnen
+Quelle: sir-apfelot.de, MacBook Air M2 2022, alle Ausstattungen mit Preis, 2022-06-13 öffnen
+Quelle: refurbed.de, MacBook Air M2 2022 (Angebote mit RAM und SSD), 2026-09-13 öffnen
+Quelle: Notebookcheck, Dell Latitude 7440 Test (Preis nur in USD, keine deutsche UVP), 2023-07-15 öffnen
+▾ Warum ist die HP-Kurve unsicher, und was steckt dahinter? Grenzen
+HP hat heute 16 zählende Laptop-Belege über 52,9 bis 70,0 Monate, Verlässlichkeit unsicher. Die Belege kommen aus drei Modellen: ProBook 450 G8 (Verkaufsstart 2021) als ältestes, EliteBook 840 G9 und ProBook 450 G9 (2022). Die Nenner sind Preisfelder aus Notebookcheck-Datenblättern, keine Hersteller-UVPs: 900 Euro für das 450 G8 mit 16 GB und 512 GB, 1.200 Euro für das 840 G9 mit 8 GB und 256 GB, 1.550 Euro für das 840 G9 i7, 958 und 1.188 Euro für das 450 G9. Gegen das niedrige Preisfeld des 450 G8 halten dessen Marktplatz-Angebote (refurbed, 471 bis 615 Euro) einen höheren Anteil als die jüngeren Modelle; die Linie steigt deshalb mit dem Alter, und das Werkzeug stuft sie als unsicher ein. Was heilt: Belege eines vierten Modelljahrgangs, vor allem ein 840 G8 (2021) und ein 840 G10 oder G11 (2023, 2024) mit UVP.
+Quelle: refurbed.de, HP ProBook 450 G8 i5-1135G7 (Angebote 16 GB / 512 GB, 16.09.2026), 2026-09-16 öffnen
+Quelle: Notebookcheck, HP ProBook 450 G8 i5-1135G7 (Datenblatt-Preisfeld 900 Euro, 16 GB / 512 GB), 2021-02-26 öffnen
+Quelle: Notebookcheck, HP EliteBook 840 G9 i5-1235U (Datenblatt-Preisfeld 1.200 Euro, 8 GB / 256 GB), 2023-01-26 öffnen
+Quelle: Notebookcheck, HP EliteBook 840 G9 (Datenblatt-Preisfeld 1.550 Euro, i7 16 GB / 512 GB), 2023-05-29 öffnen
+Quelle: Notebookcheck, HP ProBook 450 G9 Test (Preise 958 und 1.188 Euro), 2022-08-23 öffnen
+Quelle: refurbed.de, HP EliteBook 840 G9 i5-1235U (Angebote 8 GB / 256 GB), 2026-09-16 öffnen
+▾ Was fehlt HP im Katalog, damit die vielen HP-Angebote zählen? Grenzen
+Launch-UVPs mit RAM und SSD. Die Recherche vom 16.09.2026 brachte HP-Angebote von neun Aufbereitern für acht Modelle; die meisten fallen als no_rrp heraus. Eine zweite Recherche nur nach UVPs fand drei Preisfelder mit Ausstattung (450 G8, 840 G9 mit 8 GB, 650 G9; das 650-G9-Feld mit 16 GB und 512 GB trifft heute kein Angebot, AfB bietet 16 GB mit 256 GB, harlander 32 GB mit 512 GB) und sonst nichts: die deutschen HP-Pressemitteilungen nennen keinen Euro-Preis („Preise folgen in Kürze“); Notebookcheck führt zum 840 G8 nur die Aero-Variante mit widersprüchlichem Euro- und Dollarpreis, zum 840 G10 (1.300 Euro) und 450 G10 (810 Euro) ein Preisfeld ohne SSD-Größe, zum 840 G11 keines; das Shop-Archiv (web.archive.org) ist für das Werkzeug gesperrt. Was heilt: ein Mensch mit Browser, der die archivierte HP-Shop-Seite zum Launchmonat öffnet und den Preis mit Ausstattung abschreibt.
+Quelle: hartware.de: HP EliteBook 800 G8 Serie vorgestellt („Preise folgen in Kürze“), 2020-12-10 öffnen
+Quelle: Notebookcheck, HP EliteBook 840 G10 (Datenblatt-Preisfeld 1.300 Euro, SSD-Kapazität nicht genannt), 2023-11-19 öffnen
+Quelle: Notebookcheck, HP ProBook 450 G10 (Datenblatt-Preisfeld 810 Euro, 16 GB, SSD ohne Größe), 2023-09-13 öffnen
+Quelle: Notebookcheck, HP EliteBook 840 G11 Core Ultra 7 155U (kein Preisfeld), 2024-11-13 öffnen
+Quelle: Notebookcheck, HP EliteBook 650 G9 i5-1235U (Datenblatt-Preisfeld 1.050 Euro, 16 GB / 512 GB), 2023-01-29 öffnen
+Quelle: refurbed.de, HP EliteBook 840 G8 (Angebote ohne UVP im Katalog), 2026-09-16 öffnen
+Quelle: afbshop.de, HP EliteBook 840 G8 (Angebote ohne UVP im Katalog), 2026-09-16 öffnen
+▾ Warum hat Samsung (Galaxy Book) keine Laptop-Kurve, und was fehlt? Grenzen
+Samsung hat heute 4 Laptop-Belege: Galaxy Book4 Pro 16 Zoll und Galaxy Book4 360 bei refurbed.de, beide Verkaufsstart 26.02.2024; Altersspanne 30,6 bis 30,7 Monate, verlangt sind 6. Auch zwölf Book4-Belege geben keine Kurve, weil die Spanne fehlt. Samsung-Notebooks führt kein deutscher Business-Aufbereiter (afbshop, itsco, greenpanda, luxnote, harlander: keine). Consumer-Portale waren am 16.09.2026 fast ausverkauft: asgoodasnew.de null Artikel, refurbed.de einzelne Book4 (Pro 16 Zoll, 360, C7). Portale mit Bestand laut Websuche blocken mit 403: backmarket.de, ebay.de, zoxs.de, notebooksbilliger.de. Für das Book4 C7 liegt ein Angebot vor, aber keine UVP; für C5 fehlt beides. Heilen würde das: Gebrauchtangebote für Galaxy Book3 Pro (2023, Katalogvarianten mit UVP vorhanden), denn erst ein zweiter Jahrgang gibt die Spanne.
+Quelle: refurbed.de, Galaxy Book4 Pro 16 Zoll 155H (Belege vom 13.09. und 16.09.2026), 2026-09-16 öffnen
+Quelle: refurbed.de, Galaxy Book4 360 Core 5 120U (Belege vom 13.09. und 16.09.2026), 2026-09-16 öffnen
+Quelle: refurbed.de, Galaxy Book4 C7 (ohne UVP im Katalog), 2026-09-16 öffnen
+Quelle: Samsung Newsroom Deutschland, Galaxy Book4-Serie (UVPs „ab“, Verfügbarkeit 26.02.2024), 2024-02-22 öffnen
+Quelle: ComputerBase, Galaxy Book3 Pro, 360 und Ultra Hands-on (UVP und Verkaufsstart 2023), 2023-02-01 öffnen
+▾ Warum fehlen junge Modelle, und was heilt das? Grenzen
+Der jüngste Laptop-Beleg ist 30,2 Monate alt. Modelle mit Verkaufsstart 2025 und 2026 wurden nach Katalogregel nicht auf Gebrauchtpreise recherchiert (Ausnahmen: Dell Pro Plus und Pro Premium am 13.09.2026, Portale 403 oder 404; ein HP EliteBook 6 G1a am 16.09.2026 ohne UVP im Katalog); die 8. Edition bei Microsoft ebenfalls nicht; HP wurde am 16.09.2026 gesucht, ohne Angebot zu den Modellen von 2025 und 2026. Angebote entstehen aus Rückläufern, und die kommen erst nach Vertragsende. Deshalb ist jede Laptop-Realisierung unter 30,2 Monaten heute eine verlängerte Linie und steht in Klammern. Was heilt: erstens Zeit, weil die Belege mit den Rückläufern kommen; zweitens Ankauf-Gebote, die bei Smartphones bis 22,4 Monate hinunterreichen (0 für Laptops); drittens der geplante Taktlauf (Ansage 16.09.2026, nicht umgesetzt), der jedes neue Angebot am Tag seines Erscheinens erfassen wird.
+Quelle: afbshop.de, Listenseite HP EliteBooks (EliteBook 6 G1a, Angebot ohne UVP im Katalog), 2026-09-16 öffnen
+▾ Was vergleicht der Zuordner nicht, und wo führt das heute zu einem falschen Nenner? Grenzen
+Der Zuordner vergleicht SSD, RAM und bei Gleichstand das Prozessorkürzel. Nicht verglichen werden Bildschirmgröße, Display, Touch, LTE und Tastaturlayout. Folge heute: das 16-Zoll-Angebot des Galaxy Book4 Pro bei refurbed.de wird gegen die 14-Zoll-UVP von 1.899 Euro gerechnet statt gegen die 16-Zoll-UVP von 1.999 Euro (ComputerBase, 21.02.2024); die Realisierung fällt dadurch zu hoch aus. Ebenso landen Business-CPUs (i5-1145G7, i5-1245U) auf der UVP der Consumer-Schwester (i5-1135G7, i5-1235U), wenn nur eine Variante mit dieser SSD und diesem RAM existiert; die Zeile in used_prices.csv sagt das in Klammern. AfB druckt 250 und 500 GB; die Zeilen vom 16.09.2026 wurden vor dem Abgleich als 256- und 512-GB-Klasse gelesen, mit Vermerk; die AfB-Zeilen vom 13.09. tragen noch „500 GB“ und blieben ohne Variante. Heilen würde das: Bildschirmgröße als eigenes Feld im Katalog und im Beleg.
+Quelle: refurbed.de, Galaxy Book4 Pro 16 Zoll (heute gegen 14-Zoll-UVP gerechnet), 2026-09-16 öffnen
+Quelle: ComputerBase, Galaxy Book4 (UVP Pro 14 Zoll 1.899, 16 Zoll 1.999 Euro), 2024-02-21 öffnen
+Quelle: refurbed.de, Surface Laptop 4 i5-1145G7 (Business-CPU statt i5-1135G7), 2026-09-16 öffnen
+Quelle: afbshop.de, Dell Latitude 7420 (druckt 500 GB, 512-GB-Klasse), 2026-09-16 öffnen
+▾ Zählt ein Angebot doppelt, wenn es an zwei Tagen gesehen wird? Grenzen
+Ja. Der Einleser hängt neue Belege mit Datum an und ersetzt keine alten; die Roadmap vom 16.09.2026 sieht dieselbe Beobachtung im Takt vor. Ein Angebot, das am 13.09. und am 16.09. auf derselben Seite zum selben Preis stand, steht deshalb zweimal in der Belegliste, drei Tage auseinander. Bei Samsung betrifft das alle Belege: Galaxy Book4 Pro 16 Zoll und Book4 360 bei refurbed.de. Bei Lenovo, Microsoft und HP einzelne Zeilen (thinkstore24 X1 Carbon Gen 10, refurbed Surface Laptop 5 und Laptop Go, refurbed ProBook 450 G9). AfB T14 Gen 3 AMD und E14 Gen 4 AMD zählen nur einmal: ihre Zeile vom 13.09. nennt „500 GB“ ohne Umlesung und wurde keiner Variante zugeordnet. Für die Preisbeobachtung im Takt ist das gewollt; für die heutige Stückzahl je Hersteller ist es eine Aufblähung. Eine Marke „gleiches Angebot, neuer Tag“ fehlt noch.
+Quelle: refurbed.de, Galaxy Book4 360 (13.09. und 16.09. erfasst), 2026-09-16 öffnen
+Quelle: thinkstore24.de, ThinkPad X1 Carbon Gen 10 (13.09. und 16.09. erfasst), 2026-09-16 öffnen
+Quelle: refurbed.de, HP ProBook 450 G9 (13.09. und 16.09. erfasst), 2026-09-16 öffnen
+Quelle: afbshop.de, ThinkPad T14 Gen 3 AMD (an beiden Tagen erfasst, nur 16.09. zugeordnet), 2026-09-16 öffnen
+▾ Wie oft werden die Marktplätze abgefragt? Roadmap
+Heute gar nicht automatisch. Jeder Preisbeleg ist ein Schnappschuss eines Recherchetags: 13.09.2026 für Smartphones, Tablets und die ersten Laptops, 16.09.2026 für die Laptop-Recherche zu Dell, HP, Lenovo, Microsoft und Samsung. Zwischen den Tagen bewegt sich nichts; ausverkaufte Angebote wurden in der Laptop-Recherche vom 16.09.2026 nicht übernommen, ausverkaufte Listenpreise vom 13.09.2026 (Nokia XR20) stehen noch in den Kurven. Geplant (Ansage vom 16.09.2026, nicht umgesetzt): ein Nachtjob läuft in festem Rhythmus gegen dieselben Quellen wie die Recherche, schreibt neue Belege mit Datum an, ersetzt nie alte und meldet Preisbewegungen je Modell gegen den letzten Lauf. Erscheint ein neues Gerät oder eine neue Generation, wird das geflaggt und der Nachfolger im Katalog eingetragen. Bis dahin gilt: das Datum am Beleg ist das Datum der Wahrheit.
+Quelle: asgoodasnew.de, Nokia XR20 (ausverkauft, Listenpreis; steht in den Kurven), 2026-09-13 öffnen
+▾ Werden die Marktplatzpreise gegen die eigenen Verkaufspreise geprüft? Roadmap
+Nein, heute nicht. Das Werkzeug kennt keine eigenen Verkaufspreise: es liest nur öffentliche Angebote, und die Flottenzahlen der anderen Tabs sind synthetisch. Ein Abgleich „wo liegen wir“ braucht die realisierten Erlöse eines Hauses, Gerät für Gerät, mit Datum, Zustandsstufe und Kanal. Die liegen in dessen Büchern, nicht im Netz. Geplant (Ansage vom 16.09.2026, nicht umgesetzt): die Marktplatzpreise werden im Takt verifiziert, gegen die eigenen Verkaufspreise gestellt und die Restwertrate laufend nachgeführt. Was dafür fehlt: erstens der Taktlauf, zweitens eine Verkaufsdatei des Hauses mit Seriennummer, Erlös, Datum, Zustandsstufe und Kanal. Ohne die zweite ist die erste nur Marktbeobachtung.
+Zahlen in den Antworten und ihre Herkunft
+aus dem Lauf 43 Zeilen
+Zeilen ausblenden
+Begriffe ausblenden
+Jede Zahl, die in einer Antwort steht und aus dem Werkzeug stammt, mit dem Wert dieses Laufs und der Datei, aus der der Generator sie liest. Ändert sich der Lauf, ändern sich die Antworten mit.
+Platzhalter
+Schlüssel, unter dem die Antwort die Zahl anfordert ({fact: ...} in web/tools/gen/faq.json).
+Wert im aktuellen Lauf
+der Wert, den make_faq_data.py aus outputs/ und config/ gelesen hat; so viele Nachkommastellen, wie die Datei nennt, Anteile als Anteile.
+Herkunft (Datei und Spalte)
+Datei unter outputs/, data/ oder config/ und die Zeile und Spalte, aus der der Wert stammt.
+Platzhalter | Wert im aktuellen Lauf | Herkunft (Datei und Spalte)
+anchors_dropped_no_rrp | 63 | restwert.market.anchors.load_anchors, attrs dropped no_rrp
+anchors_dropped_spec_mismatch | 161 | restwert.market.anchors.load_anchors, attrs dropped spec_mismatch
+anchors_dropped_total | 225 | restwert.market.anchors.load_anchors, attrs dropped, Summe
+anchors_grade_unknown | 18 | outputs/market_anchors.csv, Zeilen mit grade = UNKNOWN
+anchors_in_curves | 424 | outputs/market_curves.csv, Summe der Spalte n der Zeilen group_kind = all (marketplace und tradein)
+anchors_total | 442 | outputs/market_anchors.csv, Anzahl Zeilen
+laptop_age_min | 30,2 | outputs/market_curves.csv, Zeile group = Laptop, population = marketplace, Spalte age_min
+laptop_apple_fit | belastbar | outputs/market_curves.csv, Zeile group = Laptop / Apple, population = marketplace, Spalte fit_quality
+laptop_apple_n | 28 | outputs/market_curves.csv, Zeile group = Laptop / Apple, population = marketplace, Spalte n
+laptop_dell_age_max | 68,1 | outputs/market_curves.csv, Zeile group = Laptop / Dell, population = marketplace, Spalte age_max
+laptop_dell_age_min | 52 | outputs/market_curves.csv, Zeile group = Laptop / Dell, population = marketplace, Spalte age_min
+laptop_dell_fit | belastbar | outputs/market_curves.csv, Zeile group = Laptop / Dell, population = marketplace, Spalte fit_quality
+laptop_dell_monthly | 0,0081 | outputs/market_curves.csv, Zeile group = Laptop / Dell, population = marketplace, Spalte monthly_depreciation_pct
+laptop_dell_n | 30 | outputs/market_curves.csv, Zeile group = Laptop / Dell, population = marketplace, Spalte n
+laptop_hp_age_max | 70 | outputs/market_curves.csv, Zeile group = Laptop / HP, population = marketplace, Spalte age_max
+laptop_hp_age_min | 52,9 | outputs/market_curves.csv, Zeile group = Laptop / HP, population = marketplace, Spalte age_min
+laptop_hp_fit | unsicher | outputs/market_curves.csv, Zeile group = Laptop / HP, population = marketplace, Spalte fit_quality
+laptop_hp_n | 16 | outputs/market_curves.csv, Zeile group = Laptop / HP, population = marketplace, Spalte n
+laptop_lenovo_age_max | 66 | outputs/market_curves.csv, Zeile group = Laptop / Lenovo, population = marketplace, Spalte age_max
+laptop_lenovo_age_min | 37,9 | outputs/market_curves.csv, Zeile group = Laptop / Lenovo, population = marketplace, Spalte age_min
+laptop_lenovo_fit | belastbar | outputs/market_curves.csv, Zeile group = Laptop / Lenovo, population = marketplace, Spalte fit_quality
+laptop_lenovo_monthly | 0,025 | outputs/market_curves.csv, Zeile group = Laptop / Lenovo, population = marketplace, Spalte monthly_depreciation_pct
+laptop_lenovo_n | 21 | outputs/market_curves.csv, Zeile group = Laptop / Lenovo, population = marketplace, Spalte n
+laptop_microsoft_age_max | 64,6 | outputs/market_curves.csv, Zeile group = Laptop / Microsoft, population = marketplace, Spalte age_max
+laptop_microsoft_age_min | 35,3 | outputs/market_curves.csv, Zeile group = Laptop / Microsoft, population = marketplace, Spalte age_min
+laptop_microsoft_fit | belastbar | outputs/market_curves.csv, Zeile group = Laptop / Microsoft, population = marketplace, Spalte fit_quality
+laptop_microsoft_monthly | 0,0243 | outputs/market_curves.csv, Zeile group = Laptop / Microsoft, population = marketplace, Spalte monthly_depreciation_pct
+laptop_microsoft_n | 22 | outputs/market_curves.csv, Zeile group = Laptop / Microsoft, population = marketplace, Spalte n
+laptop_microsoft_q24 | 0,9509 | outputs/market_curves.csv, Zeile group = Laptop / Microsoft, population = marketplace, Spalte q_24
+laptop_q24 | 0,86 | outputs/market_curves.csv, Zeile group = Laptop, population = marketplace, Spalte q_24
+laptop_q24_klammer | in Klammern, weil 24 Monate vor dem jüngsten Beleg liegen | make_faq_data.py aus outputs/market_curves.csv, Zeile group = Laptop, population = marketplace, Spalte age_min gegen 24
+laptop_samsung_age_max | 30,7 | outputs/market_curves.csv, Zeile group = Laptop / Samsung, population = marketplace, Spalte age_max
+laptop_samsung_age_min | 30,6 | outputs/market_curves.csv, Zeile group = Laptop / Samsung, population = marketplace, Spalte age_min
+laptop_samsung_fit | keine Kurve | outputs/market_curves.csv, Zeile group = Laptop / Samsung, population = marketplace, Spalte fit_quality
+laptop_samsung_n | 4 | outputs/market_curves.csv, Zeile group = Laptop / Samsung, population = marketplace, Spalte n
+laptop_tradein_n | 0 | outputs/market_curves.csv, Zeile group = Laptop, population = tradein, Spalte n (0, wenn die Zeile fehlt)
+models_with_anchors | 112 | outputs/market_anchors.csv, verschiedene slug
+smartphone_tradein_age_min | 22,4 | outputs/market_curves.csv, Zeile group = Smartphone, population = tradein, Spalte age_min
+smartphone_tradein_n | 69 | outputs/market_curves.csv, Zeile group = Smartphone, population = tradein, Spalte n (0, wenn die Zeile fehlt)
+truth_ask_to_realised | 0,85 | config/lake.yaml, Block truth_v2, Schlüssel ask_to_realised
+truth_q_young_cap | 0,9 | config/lake.yaml, Block truth_v2, Schlüssel q_young_cap
+variants_priced | 553 | data/catalogue/variants.csv, Zeilen mit rrp_eur_launch_de
+variants_total | 628 | data/catalogue/variants.csv, Anzahl Zeilen

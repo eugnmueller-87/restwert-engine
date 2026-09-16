@@ -72,6 +72,7 @@
       text: str(text),
       align: align,
       color: o.color ? String(o.color) : (o.neg ? 'var(--color-accent-2-700)' : 'inherit'),
+      neg: !!o.neg,
       weight: o.bold ? 600 : 400,
       wrap: (o.nowrap || numeric) ? 'nowrap' : 'normal',
       minW: o.minW ? Math.round(Number(o.minW)) + 'px' : '0',
@@ -86,7 +87,10 @@
       links: links,
       hasActions: actions.length > 0,
       actions: actions,
-      indent: o.indent ? Math.max(0, Math.round(Number(o.indent))) : 0
+      indent: o.indent ? Math.max(0, Math.round(Number(o.indent))) : 0,
+      /* seit 16.09.2026 (Cockpit-Optik): eine kleine Verlaufslinie neben dem Wert, Zahlen in Reihenfolge der Zeit */
+      spark: Array.isArray(o.spark) ? o.spark.map(Number).filter(function (x) { return !isNaN(x); }) : [],
+      hasSpark: Array.isArray(o.spark) && o.spark.length > 1
     };
   }
   function C(text, o) { return cell(text, o, false); }
@@ -125,7 +129,11 @@
       foot: str(o.foot),
       footLead: str(o.footLead),
       footLines: (Array.isArray(o.footLines) ? o.footLines : []).map(function (v) { return { v: str(v) }; }),
-      tags: tags
+      tags: tags,
+      /* seit 16.09.2026 (Cockpit-Optik): cards = eine Karte je Zeile statt Tabellenzeilen (erste Zelle Titel, zweite Text,
+         Zahlenzellen rechts als Kennwerte, Markenzelle als Pille); die Broadsheet-Huelle ignoriert das Feld */
+      cards: !!o.cards,
+      cardHero: typeof o.cardHero === 'number' ? o.cardHero : null   /* Spaltenindex des Werts, der auf der Karte gross steht */
     };
   }
 

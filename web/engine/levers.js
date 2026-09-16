@@ -173,6 +173,7 @@
     var overview = E.TABLE('l-overview', 'Übersicht, zwölf Monate bis ' + f.de(D.as_of), [
       E.H('Stellschraube'), E.H('Prüffrage'), E.H('bewertet', 1), E.H('mit Hebel', 1), E.H('Euro je Jahr', 1), E.H('Euro je Gerät', 1), E.H('Verantwortlich'), E.H('Regel')
     ], rows, {
+      cards: true, cardHero: 4,
       note: 'Diese Tabelle zeigt sieben Stellen, an denen die Simulation Geld liegen lässt: je Stellschraube der Vergleich jedes Geräts mit einem benannten Referenzwert aus der eigenen Flotte, in Euro je Gerät und als Summe der letzten zwölf Monate, jede mit verantwortlicher Rolle und der Regel, die reagiert. Eine Zeile anklicken zeigt die Stellschraube darunter im Detail; alle Karten stehen am Ende der Seite zum Nachlesen.',
       defs: [
         { k: 'Stellschraube', v: 'Name und Griff: woran die verantwortliche Rolle drehen kann; die kleine Kennung dahinter (' + idSpan + ', L für Hebel) ist nur die Nummer im Werkzeug, in den Regeln und im Code, sonst ohne Bedeutung' },

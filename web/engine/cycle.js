@@ -99,25 +99,25 @@
     /* ---------- Kacheln ---------- */
     var share = num(c.n) > 0 ? num(c.profit) / num(c.n) : null;
     var kpis = [
-      { label: 'Abgeschlossene Kreisläufe', value: f.qty(c.n), lines: [
+      { label: 'Abgeschlossene Kreisläufe', value: f.qty(c.n), tags: [{ cls: 'tag-neutral', text: 'simuliert' }], lines: [
         'verkauft oder verschrottet',
         share === null ? '' : f.pct(share) + ' mit positiver Lifecycle-Marge',
         share === null ? '' : f.pct(1 - share) + ' mit negativer'
       ] },
-      { label: 'Lifecycle-Marge je Gerät, abgeschlossen, im Mittel', value: f.eur(c.mean_eur), neg: num(c.mean_eur) < 0, lines: [
+      { label: 'Lifecycle-Marge je Gerät, abgeschlossen, im Mittel', value: f.eur(c.mean_eur), neg: num(c.mean_eur) < 0, tags: [{ cls: 'tag-neutral', text: 'simuliert' }], lines: [
         'Mieterlös ' + f.eur(c.rent),
         'plus Restwert ' + f.eur(c.rv),
         'minus Einkaufspreis ' + f.eur(c.purchase),
         'minus Kosten bis Verkauf ' + f.eur(c.cost_to_sale),
         'alle Werte gerundet; eine Marge, kein Gewinn'
       ] },
-      { label: 'Offene Kreisläufe', value: f.qty(o.n), lines: [
+      { label: 'Offene Kreisläufe', value: f.qty(o.n), tags: [{ cls: 'tag-neutral', text: 'simuliert' }], lines: [
         'noch beim Kunden oder im Lager',
         'Lifecycle-Marge bei Verkauf heute: ' + f.eur(o.liq),
         'am Leasingende voraussichtlich: ' + f.eur(o.proj),
         'zwei Fragen, nie addieren'
       ] },
-      { label: 'Datenqualität', value: pctRaw(D.chain_pct), lines: [
+      { label: 'Datenqualität', value: pctRaw(D.chain_pct), tags: [{ cls: 'tag-neutral', text: 'simuliert' }], lines: [
         'Seriennummern mit lückenloser Datumskette von Bestellung bis Zahlungseingang',
         f.qty(ing.unresolved || 0) + ' von ' + f.qty(ing.rows_read || 0) + ' Zeilen ohne Seriennummer'
       ] }

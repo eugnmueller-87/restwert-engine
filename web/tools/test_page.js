@@ -13,7 +13,9 @@
 const fs = require('fs'), path = require('path');
 const { JSDOM, VirtualConsole } = require('jsdom');
 
-const V3 = path.join(__dirname, '..'), APP = path.join(V3, 'dist'), OUT = path.join(V3, 'out');
+const V3 = path.join(__dirname, '..');
+const distArg = process.argv.find(a => a.startsWith('--dist='));   // --dist=dist-cockpit prueft die zweite Optik
+const APP = path.join(V3, distArg ? distArg.slice(7) : 'dist'), OUT = path.join(V3, distArg ? 'out-' + distArg.slice(7) : 'out');
 const NM = path.join(V3, 'node_modules');
 // Reiter mit ihrem Bereich (Kopfzeile seit 16.09.2026: Bericht, Analytics, Market Intelligence, Daten; die Reiter eines Bereichs stehen in der zweiten Zeile)
 const TABS = [['report', 'Bericht', 'Bericht'], ['device', 'Gerät', 'Analytics'], ['forecast', 'Prognosegüte', 'Analytics'], ['tco', 'TCO', 'Analytics'], ['cycle', 'Kreislauf', 'Analytics'], ['levers', 'Stellschrauben', 'Analytics'], ['term', 'Laufzeit', 'Analytics'],
@@ -22,6 +24,7 @@ const groupOf = label => (TABS.find(t => t[1] === label) || [])[2] || label;
 const ARGS = process.argv.slice(2);
 const NO_UI = ARGS.includes('--no-ui');
 const only = ARGS.find(a => !a.startsWith('--')) || null;
+const STYLESHEET = (() => { try { const tpl = fs.readdirSync(APP).find(f => /template\.html$/.test(f)); const m = tpl && /<link rel="stylesheet" href="([a-z.-]+\.css)">/.exec(fs.readFileSync(path.join(APP, tpl), 'utf8')); return m ? m[1] : 'styles.css'; } catch (e) { return 'styles.css'; } })();
 if (only && !TABS.some(t => t[0] === only)) { console.error('unbekannter Tab: ' + only + ' (erlaubt: ' + TABS.map(t => t[0]).join(', ') + ')'); process.exit(2); }
 const labelOf = key => (TABS.find(t => t[0] === key) || [])[1] || '';
 const on = key => !only || only === key;
@@ -38,7 +41,7 @@ let html = fs.readFileSync(indexPath, 'utf8');
 html = html.replace(/<link[^>]*>\s*/g, '');
 const localScripts = [];
 html = html.replace(/<script src="([^"]+)"><\/script>\s*/g, (m, src) => { if (!/^https?:/i.test(src)) localScripts.push(src); return ''; });
-const cssText = fs.existsSync(path.join(APP, 'styles.css')) ? fs.readFileSync(path.join(APP, 'styles.css'), 'utf8') : '';
+const cssText = fs.existsSync(path.join(APP, STYLESHEET)) ? fs.readFileSync(path.join(APP, STYLESHEET), 'utf8') : '';
 
 // ---- 2. Fenster: die Seite mit allen Skripten, Plotly-Stub, Blob-Pfad ohne Navigation ----
 let w = null, plotly = null, blobs = null;
@@ -270,8 +273,10 @@ async function uiSmoke() {
       const c = plotly.last;
       expect(Array.isArray(c.traces) && c.traces.length > 0, 'Traces auf ' + label + ' (' + (c.traces || []).length + ')');
       expect(c.traces.every(t => Array.isArray(t.y) && t.y.length > 0), 'jede Trace mit y-Werten auf ' + label);
-      expect(c.layout.height === 360 && c.layout.margin && c.layout.margin.t === 48, 'Höhe und Ränder kommen von der Hülle auf ' + label);
-      expect(c.layout.legend && c.layout.legend.orientation === 'h', 'Legende oberhalb der Zeichnung auf ' + label);
+      // seit 16.09.2026: Legende unter der Zeichnung, ein Eintrag je Zeile; der untere Rand waechst mit den Eintraegen, die Hoehe mit dem Rand
+      const nLeg = (c.traces || []).filter(x => x.showlegend !== false && x.name).length;
+      expect(c.layout.margin && c.layout.margin.t === 24 && c.layout.margin.b === 44 + (nLeg ? 8 + nLeg * 20 : 0) + 8 && c.layout.height === 24 + 320 + c.layout.margin.b, 'Höhe und Ränder kommen von der Hülle auf ' + label + ' (' + nLeg + ' Legendeneinträge)');
+      expect(c.layout.legend && c.layout.legend.orientation === 'v' && c.layout.legend.yanchor === 'top' && c.layout.legend.y < 0, 'Legende unterhalb der Zeichnung auf ' + label);
       expect(c.layout.paper_bgcolor === 'rgba(0,0,0,0)' && c.layout.plot_bgcolor === 'rgba(0,0,0,0)', 'durchsichtiger Hintergrund auf ' + label);
       expect(!/[\u2013\u2014]/.test(JSON.stringify([c.traces, c.layout])), 'kein Strich im Diagramm auf ' + label);
       expect(c.config && c.config.displayModeBar === false && c.config.responsive === true, 'ohne Werkzeugleiste, mitwachsend auf ' + label);
@@ -395,7 +400,7 @@ async function uiSmoke() {
 
   await step('levers', 'Stellschrauben: Zeile wählen, Schwelle ändern', async () => {
     await tab('Stellschrauben');
-    const rows = $$('#app main section:not([aria-label="Protokoll"]) table.table tbody tr'); expect(rows.length > 1, 'Übersicht mit Zeilen'); if (rows[1]) rows[1].click(); await sleep(300);
+    const rows = $$('#app main section:not([aria-label="Protokoll"]) table.table tbody tr, #app main .row-card[role="button"]'); expect(rows.length > 1, 'Übersicht mit Zeilen'); if (rows[1]) rows[1].click(); await sleep(300);
     expect(btn('Schwelle ändern: L01'), 'Dossier wechselt auf die zweite Zeile (L01)');
     const before = logRows();
     click('Schwelle ändern:'); await sleep(200); expect(dialog() && dialogText().includes('Schwelle ändern'), 'Dialog Schwelle offen');
@@ -473,7 +478,7 @@ async function uiSmoke() {
     if (asm && on('market')) { await tab('Realisierung'); expect(btn('Annahme: Einkaufsabschlag ' + pctLabel(asm.disc)), 'Annahme wiederhergestellt'); }
     if (manual.length && on('device')) { await tab('Gerät'); expect(mainText().includes('manuell'), 'manuelle Preisbelege wiederhergestellt'); }
     if (Object.keys(thresholds).length && on('levers')) {
-      await tab('Stellschrauben'); const rows = $$('#app main section:not([aria-label="Protokoll"]) table.table tbody tr'); if (rows[1]) rows[1].click(); await sleep(300);
+      await tab('Stellschrauben'); const rows = $$('#app main section:not([aria-label="Protokoll"]) table.table tbody tr, #app main .row-card[role="button"]'); if (rows[1]) rows[1].click(); await sleep(300);
       expect(mainText().includes('geändert') && mainText().includes('Probe-Schwelle'), 'geänderte Schwelle wiederhergestellt');
     }
     click('Protokoll ('); await sleep(200); expect(logRows() === log.length, 'Protokolleinträge wiederhergestellt (' + logRows() + ' von ' + log.length + ')');
@@ -528,7 +533,8 @@ async function uiSmoke() {
   // ---- 5. Striche und Hedge-Woerter im Code (Daten ausgenommen) ----
   currentTab = 'code';
   const HEDGE = /(^|[^\wäöüÄÖÜß])(vielleicht|eventuell|evtl\.?|möglicherweise|wahrscheinlich|vermutlich|womöglich|gegebenenfalls|ggf\.?|hoffentlich|könnten?|sollten?|versuchen|unter Umständen)(?![\wäöüÄÖÜß])/gi;
-  const files = [path.join(APP, 'app.js'), path.join(APP, 'styles.css'), path.join(APP, 'index.template.html')];
+  const TPL_NAME = fs.readdirSync(APP).find(f => /template\.html$/.test(f)) || 'index.template.html';
+  const files = [path.join(APP, 'app.js'), path.join(APP, STYLESHEET), path.join(APP, TPL_NAME), path.join(APP, 'skin-cockpit.js')];
   const engDir = path.join(APP, 'engine');
   if (fs.existsSync(engDir)) for (const f of fs.readdirSync(engDir)) if (f.endsWith('.js')) files.push(path.join(engDir, f));
   const stripped = fs.readFileSync(indexPath, 'utf8').replace(/<script type="application\/json"[^>]*>[\s\S]*?<\/script>/g, '');
@@ -547,7 +553,7 @@ async function uiSmoke() {
 
   // ---- 6. Vorlage, Skelett, Themen, Phone-Breite ----
   currentTab = 'vorlage';
-  const tpl = fs.existsSync(path.join(APP, 'index.template.html')) ? fs.readFileSync(path.join(APP, 'index.template.html'), 'utf8') : '';
+  const tpl = fs.existsSync(path.join(APP, TPL_NAME)) ? fs.readFileSync(path.join(APP, TPL_NAME), 'utf8') : '';
   (tpl.match(/https?:\/\/[^"'\s>]+/g) || []).forEach(u => {
     if (!/^https:\/\/(cdnjs\.cloudflare\.com|fonts\.googleapis\.com)(\/|$)/.test(u)) err('externe Adresse außerhalb von cdnjs und fonts.googleapis.com: ' + u);
   });

@@ -1,0 +1,282 @@
+Restwert Engine
+Schließen
+Bericht
+Analytics
+Gerät
+Prognosegüte
+TCO
+Kreislauf
+Stellschrauben
+Laufzeit
+Market Intelligence
+Realisierung
+Serie gegen Serie
+Studien
+FAQ
+Daten
+Geplant
+Lager
+Verträge
+Analytics
+Prognosegüte
+Protokoll (0)
+Export CSV
+Datei einlesen
+Lauf starten
+Letzter Lauf Stand 16.09.2026 Dateien 283 Zeilen 166.115 ungeklärt 60 Seriennummern 5.251 Prototyp: Läufe werden protokolliert, nicht gerechnet.
+Protokoll dieser Installation
+manuell erfasste Daten, Lieferungen, Schwellen, Läufe · lokal gespeichert
+Noch keine Einträge. Preisbelege erfassen, Dateien einlesen, Schwellen ändern oder Szenarien speichern; jeder Schritt landet hier.
+Prognosegüte, Stand 16.09.2026 (Stichtag der Daten 13.09.2026)
+Wie gut die Restwertprognose trifft: die Prognose, die bei der Rückgabe galt, gegen den Preis, den das Gerät dann erzielt hat
+Hinweise ausblenden
+Jedes verkaufte Gerät wird gegen die Restwertprognose gemessen, die am Tag seiner Rückgabe in Kraft war (der Lauf strikt vor dem Rückgabedatum, Zustandsstufe wie bei der Rückgabe geprüft, Verkaufstag wie erwartet, Kanal Marktplatz). Nachträglich wird nichts verbessert: eine spätere Prognose zählt nicht. Verkäufe ohne Aufbereitung (As-Is) bleiben außen vor, weil dort keine Prognose gilt. Ein Monat bekommt erst ab 10 verkauften Geräten mit Prognose Kennzahlen; darunter stehen nur die Stückzahlen. Simulierte Daten, echte Mechanik: die Flotte ist synthetisch, die Preise folgen einer kalibrierten Kurve, also misst die Güte hier, wie gut das Modell eine bekannte Kurve zurückgewinnt, nicht den Markt. Die Rechnung ist dieselbe wie auf echten Daten.
+Prognosefehler, letzter voller Monat Geschäftssicht simuliert
+19,0 %
+Monat 08.2026: 86 verkaufte Geräte mit Prognose, 11 Verkäufe ohne Aufbereitung ausgeschlossen
+Ziel höchstens 12 %, Platzhalter, Verantwortlich CFO; kleiner ist besser; Ziel verfehlt
+mittlerer Fehler je Gerät 48 €, gewichtet über die Summen (WAPE) 15,9 %
+Summe der Prognosen 26.965 € gegen Summe erzielt 25.831 € (-4,2 % Realisierung gegen Prognose)
+Verzerrung, letzter voller Monat Geschäftssicht simuliert
++9,0 %
+plus heißt: Prognose über dem erzielten Preis, also Restwert im Kollateral überschätzt; minus heißt: darunter
+die Geschäftssicht misst jeden Verkaufskanal gegen die Marktplatz-Prognose; Mitarbeiterkauf und Großhandel liegen unter dem Marktplatz und zählen hier als Fehler
+nur Marktplatz, 37 Verkäufe: Fehler 15,7 %, Verzerrung +6,9 %
+Modellsicht, kanalbereinigt Modellsicht abgeleitet
+15,3 %
+dieselbe Prognose mal dem Kanalfaktor des tatsächlich genutzten Kanals; ein Kanalabschlag ist kein Modellfehler
+Verzerrung kanalbereinigt +1,7 % gegen +9,0 % in der Geschäftssicht: die Differenz ist der Kanalmix
+das ist die Zahl, die der Hinweis zur Nachkalibrierung prüft
+Nachkalibrierung Hinweis ADV02
+nicht nötig
+Verzerrung der letzten drei vollen Monate (06.2026, 07.2026, 08.2026), kanalbereinigt +1,2 % gegen die Schwelle von plus oder minus 8 %
+264 Verkäufe mit Prognose in den drei Monaten; Geschäftssicht derselben Monate +8,3 %
+Schwelle forecast_recalibration_bias_pct, Platzhalter, Verantwortlich Leitung Recommerce; der Hinweis ändert nichts, er bittet einen Menschen um Prüfung; kein Hinweis im Lauf
+Weniger
+Begriffe ausblenden
+Prognosefehler
+mittlerer absoluter Fehler in Prozent des erzielten Preises (MAPE), je Verkauf gerechnet und gemittelt; kleiner ist besser.
+Verzerrung
+mittlere Abweichung mit Vorzeichen (Prognose minus erzielt, in Prozent des erzielten Preises); plus heißt Prognose zu hoch.
+Gewichtet (WAPE)
+Summe der absoluten Fehler geteilt durch die Summe der erzielten Preise; teure Geräte wiegen mehr.
+Geschäftssicht
+jeder Verkaufskanal gegen die Marktplatz-Prognose; enthält den Kanalmix und ist die Zahl, die die Geschäftsführung sieht.
+Modellsicht
+die Prognose mal dem Kanalfaktor des genutzten Kanals; misst nur das Modell. Der Hinweis ADV02 prüft diese Sicht.
+Prognose bei Rückgabe
+der Prognoselauf, der strikt vor dem Rückgabedatum in Kraft war, mit der geprüften Zustandsstufe, dem erwarteten Verkaufstag und dem Kanal Marktplatz; sie wird nie nachträglich ersetzt.
+Rechnung je Verkauf: Fehler = (Prognose bei Rückgabe minus erzielter Bruttopreis) geteilt durch den erzielten Preis. Der Monat ist der Verkaufsmonat. Kennzahlen erst ab 10 Verkäufen mit Prognose im Monat.
+Was man daraus macht
+Ziel und Sicht auseinanderhalten. Der Fehler der Geschäftssicht (19,0 %) enthält den Kanalmix; die Modellsicht (15,3 %) misst das Modell. Ein Ziel von 12 % braucht die Angabe, welche Sicht gemeint ist; heute steht es auf der Geschäftssicht.
+Die Verzerrung ist der Kanal, nicht das Modell. Geschäftssicht +9,0 %, kanalbereinigt +1,7 %. Der Abstand ist der Abschlag von Mitarbeiterkauf und Großhandel gegen den Marktplatz; das ist die Stellschraube Kanalwahl, nicht die Prognose.
+Nachkalibrierung nach Regel, nicht nach Gefühl. Der Hinweis ADV02 vergleicht die kanalbereinigte Verzerrung der letzten drei vollen Monate mit der Schwelle von plus oder minus 8 %; heute +1,2 %, also kein Hinweis. Ein Mensch entscheidet, das Werkzeug erinnert.
+Die Lücke am Anfang schließen. 152 Rückgaben tragen keine Prognose, weil sie vor dem ersten Lauf lagen. Im echten Einsatz beginnt die Messung mit dem ersten Monatslauf; je früher der läuft, desto früher gibt es Güte.
+Alle Gerätearten zusammen, nur Monate mit mindestens 10 Verkäufen mit Prognose (33 Monate, 01.2024 bis 09.2026). Linie: Prognosefehler in der Geschäftssicht, gepunktet die Modellsicht; Balken: Verzerrung mit Vorzeichen; gestrichelt das Ziel. Liegt die gepunktete Linie unter der durchgezogenen, ist der Abstand der Kanalmix, kein Modellfehler.
+Je Verkaufsmonat, alle Gerätearten
+simuliert 49 Zeilen
+Zeilen ausblenden
+Begriffe ausblenden
+Fett die Monate mit Kennzahl (ab 10 Verkäufen mit Prognose). Der laufende Monat 09.2026 ist unvollständig und zählt nicht für die Kennzahl oben.
+Monat
+Verkaufsmonat des Geräts (Datum des Verkaufsauftrags).
+Verkäufe
+verkaufte Geräte des Monats ohne Verkäufe ohne Aufbereitung (As-Is).
+mit Prognose
+davon Geräte, für die bei der Rückgabe ein Prognoselauf in Kraft war.
+ohne Aufbereitung raus
+Verkäufe ohne Aufbereitung (As-Is), ausgeschlossen, weil dort keine Prognose gilt.
+Fehler
+mittlerer absoluter Fehler in Prozent des erzielten Preises (Geschäftssicht); rot, wenn über dem Ziel.
+Verzerrung
+mittlere Abweichung mit Vorzeichen; plus heißt Prognose zu hoch.
+gewichtet
+Summe der absoluten Fehler durch Summe der erzielten Preise (WAPE).
+Fehler je Gerät
+mittlerer absoluter Fehler in Euro je verkauftem Gerät.
+Fehler Modellsicht, Verzerrung Modellsicht
+dieselben Kennzahlen mit der Prognose am tatsächlich genutzten Kanal (kanalbereinigt).
+Marktplatz, Fehler Marktplatz
+nur Verkäufe über den Marktplatz, wo Geschäfts- und Modellsicht zusammenfallen; Kennzahl ab 10.
+Monat | Verkäufe | mit Prognose | ohne Aufbereitung raus | Fehler | Verzerrung | gewichtet | Fehler je Gerät | Fehler Modellsicht | Verzerrung Modellsicht | Marktplatz | Fehler Marktplatz
+05.2022 | 1 | 0 | 2 | unter 10 |  |  |  |  |  | 0 |
+06.2022 | 1 | 0 | 0 | unter 10 |  |  |  |  |  | 0 |
+09.2022 | 1 | 0 | 0 | unter 10 |  |  |  |  |  | 0 |
+10.2022 | 2 | 0 | 0 | unter 10 |  |  |  |  |  | 0 |
+12.2022 | 2 | 0 | 0 | unter 10 |  |  |  |  |  | 0 |
+02.2023 | 1 | 0 | 0 | unter 10 |  |  |  |  |  | 0 |
+03.2023 | 7 | 0 | 0 | unter 10 |  |  |  |  |  | 0 |
+04.2023 | 13 | 0 | 2 | unter 10 |  |  |  |  |  | 0 |
+05.2023 | 10 | 0 | 3 | unter 10 |  |  |  |  |  | 0 |
+06.2023 | 11 | 0 | 2 | unter 10 |  |  |  |  |  | 0 |
+07.2023 | 13 | 0 | 1 | unter 10 |  |  |  |  |  | 0 |
+08.2023 | 12 | 0 | 0 | unter 10 |  |  |  |  |  | 0 |
+09.2023 | 14 | 0 | 1 | unter 10 |  |  |  |  |  | 0 |
+10.2023 | 14 | 0 | 6 | unter 10 |  |  |  |  |  | 0 |
+11.2023 | 12 | 2 | 5 | unter 10 |  |  |  |  |  | 1 | unter 10
+12.2023 | 19 | 9 | 3 | unter 10 |  |  |  |  |  | 2 | unter 10
+01.2024 | 13 | 11 | 2 | 20,6 % | +17,0 % | 17,2 % | 45 € | 12,2 % | +7,7 % | 5 | unter 10
+02.2024 | 14 | 13 | 0 | 13,7 % | +4,4 % | 13,0 % | 55 € | 10,9 % | -2,4 % | 5 | unter 10
+03.2024 | 30 | 30 | 5 | 21,0 % | +6,1 % | 19,7 % | 78 € | 18,1 % | -1,6 % | 14 | 13,7 %
+04.2024 | 48 | 46 | 4 | 21,0 % | +15,0 % | 19,6 % | 80 € | 14,8 % | +4,7 % | 17 | 16,8 %
+05.2024 | 49 | 49 | 6 | 18,9 % | +6,7 % | 17,0 % | 70 € | 14,0 % | -1,2 % | 24 | 10,7 %
+06.2024 | 43 | 43 | 8 | 15,5 % | +6,9 % | 13,5 % | 45 € | 11,1 % | -0,6 % | 17 | 10,9 %
+07.2024 | 37 | 36 | 6 | 21,1 % | +12,9 % | 17,1 % | 69 € | 17,6 % | +2,5 % | 14 | 22,2 %
+08.2024 | 53 | 53 | 1 | 19,9 % | +12,9 % | 16,7 % | 46 € | 17,8 % | +2,7 % | 21 | 17,0 %
+09.2024 | 55 | 55 | 4 | 16,4 % | +5,5 % | 14,0 % | 52 € | 15,3 % | -3,0 % | 19 | 16,9 %
+10.2024 | 57 | 57 | 6 | 21,3 % | +6,3 % | 18,9 % | 61 € | 18,3 % | +0,3 % | 29 | 19,0 %
+11.2024 | 62 | 62 | 9 | 15,0 % | +8,8 % | 13,2 % | 50 € | 12,2 % | +2,9 % | 32 | 12,0 %
+12.2024 | 57 | 57 | 3 | 17,5 % | +11,4 % | 16,8 % | 55 € | 14,6 % | +4,3 % | 25 | 17,1 %
+01.2025 | 49 | 49 | 6 | 20,7 % | +11,1 % | 18,1 % | 72 € | 15,5 % | +2,8 % | 25 | 15,9 %
+02.2025 | 56 | 56 | 6 | 17,2 % | +9,8 % | 13,8 % | 48 € | 13,5 % | +3,2 % | 27 | 14,6 %
+03.2025 | 70 | 70 | 9 | 21,9 % | +12,1 % | 20,7 % | 78 € | 16,9 % | +4,7 % | 32 | 18,9 %
+04.2025 | 90 | 90 | 9 | 18,7 % | +9,9 % | 17,5 % | 56 € | 14,1 % | +0,8 % | 35 | 16,1 %
+05.2025 | 102 | 102 | 5 | 20,4 % | +11,3 % | 16,5 % | 58 € | 16,0 % | +3,1 % | 46 | 13,3 %
+06.2025 | 95 | 95 | 6 | 16,1 % | +8,1 % | 13,6 % | 52 € | 13,5 % | +0,8 % | 40 | 12,4 %
+07.2025 | 99 | 99 | 10 | 15,2 % | +6,1 % | 14,8 % | 54 € | 12,5 % | -2,2 % | 37 | 11,6 %
+08.2025 | 81 | 81 | 7 | 15,3 % | +6,4 % | 13,1 % | 50 € | 12,5 % | -1,4 % | 33 | 12,4 %
+09.2025 | 105 | 105 | 7 | 18,7 % | +11,7 % | 16,6 % | 53 € | 15,5 % | +3,2 % | 43 | 13,4 %
+10.2025 | 79 | 79 | 10 | 15,1 % | +6,4 % | 14,5 % | 51 € | 11,4 % | -1,3 % | 33 | 11,9 %
+11.2025 | 74 | 74 | 12 | 16,3 % | +5,8 % | 17,4 % | 53 € | 13,0 % | -1,5 % | 35 | 13,9 %
+12.2025 | 68 | 68 | 3 | 16,2 % | +9,6 % | 13,6 % | 47 € | 13,6 % | +1,0 % | 24 | 15,1 %
+01.2026 | 86 | 86 | 7 | 15,6 % | +7,2 % | 13,9 % | 46 € | 13,0 % | -0,3 % | 39 | 11,9 %
+02.2026 | 77 | 77 | 2 | 15,9 % | +6,4 % | 15,4 % | 59 € | 13,4 % | -1,0 % | 29 | 16,0 %
+03.2026 | 69 | 69 | 3 | 18,0 % | +9,5 % | 14,3 % | 53 € | 14,7 % | +0,9 % | 27 | 18,3 %
+04.2026 | 72 | 72 | 6 | 18,8 % | +9,7 % | 13,8 % | 50 € | 14,6 % | +2,1 % | 36 | 13,5 %
+05.2026 | 87 | 87 | 10 | 16,5 % | +7,3 % | 13,3 % | 46 € | 13,6 % | -0,1 % | 37 | 16,0 %
+06.2026 | 89 | 89 | 9 | 15,1 % | +6,3 % | 12,9 % | 41 € | 12,9 % | -0,4 % | 42 | 14,1 %
+07.2026 | 89 | 89 | 7 | 18,3 % | +9,5 % | 14,5 % | 47 € | 15,3 % | +2,2 % | 40 | 14,9 %
+08.2026 | 86 | 86 | 11 | 19,0 % | +9,0 % | 15,9 % | 48 € | 15,3 % | +1,7 % | 37 | 15,7 %
+09.2026 | 44 | 44 | 2 | 16,6 % | +6,2 % | 14,8 % | 47 € | 15,0 % | -0,5 % | 21 | 17,7 %
+Je Geräteart, Mittel über die Monate mit Kennzahl
+simuliert abgeleitet 5 Zeilen
+Begriffe ausblenden
+Ein Mittel über Monatswerte, jeder Monat zählt gleich; die Zeile „alle Gerätearten“ ist das Mittel der Gesamtreihe, nicht die Summe der Zeilen darunter.
+Geräteart
+die Modellfamilie des Prognosemodells: iPhone, Android-Smartphone, Tablet, Laptop; fett die Reihe über alle.
+Monate mit Kennzahl
+Monate mit mindestens 10 Verkäufen mit Prognose in dieser Geräteart.
+mit Prognose
+verkaufte Geräte mit Prognose über alle Monate der Reihe.
+ohne Aufbereitung raus
+Verkäufe ohne Aufbereitung der Geräteart, ausgeschlossen.
+Fehler, Verzerrung, gewichtet, Fehler je Gerät
+wie in der Monatstabelle, als Mittel der Monatswerte; rot über dem Ziel.
+Fehler Modellsicht, Verzerrung Modellsicht
+kanalbereinigt, Mittel der Monatswerte.
+Zeitraum
+erster und letzter Monat mit Kennzahl.
+Geräteart | Monate mit Kennzahl | mit Prognose | ohne Aufbereitung raus | Fehler | Verzerrung | gewichtet | Fehler je Gerät | Fehler Modellsicht | Verzerrung Modellsicht | Zeitraum
+alle Gerätearten | 33 | 2.190 | 226 | 17,8 % | +8,9 % | 15,6 % | 55 € | 14,3 % | +1,0 % | 01.2024 bis 09.2026
+iPhone | 30 | 700 | 71 | 13,0 % | +7,5 % | 12,1 % | 45 € | 9,2 % | +0,9 % | 04.2024 bis 09.2026
+Android-Smartphone | 31 | 726 | 72 | 20,7 % | +8,9 % | 18,1 % | 35 € | 17,5 % | +0,6 % | 03.2024 bis 09.2026
+Tablet | 15 | 292 | 41 | 13,1 % | +7,9 % | 11,4 % | 45 € | 9,9 % | -0,4 % | 01.2025 bis 08.2026
+Laptop | 22 | 472 | 42 | 21,9 % | +10,8 % | 18,8 % | 99 € | 18,9 % | +1,8 % | 04.2024 bis 09.2026
+Rückblick-Test, Stichtag 31.03.2026
+simuliert 5 Zeilen
+Begriffe ausblenden
+Das Modell wird nur mit Verkäufen bis zum Stichtag angepasst und dann an den Verkäufen danach gemessen, mit dem tatsächlichen Kanal, der tatsächlichen Zustandsstufe und dem tatsächlichen Verkaufstag. Deshalb fällt der Fehler hier kleiner aus als in der Monatsreihe, die die Prognose bei Rückgabe misst.
+Geräteart
+Modellfamilie; fett alle zusammen.
+Training
+Verkäufe bis zum Stichtag, mit denen das Modell angepasst wurde.
+Test
+Verkäufe nach dem Stichtag, an denen gemessen wurde.
+Fehler, Verzerrung, gewichtet, Fehler je Gerät
+wie oben, über die Testverkäufe.
+Streuung log
+Wurzel des mittleren quadratischen Fehlers im Logarithmus des Preisverhältnisses; die Streuung, die das Modell für seine Bandbreite ansetzt.
+letzter Trainingsverkauf, erster Testverkauf
+Datumsgrenze zwischen Anpassung und Messung.
+Geräteart | Training | Test | Fehler | Verzerrung | gewichtet | Fehler je Gerät | Streuung log | letzter Trainingsverkauf | erster Testverkauf
+alle Gerätearten | 1.851 | 467 | 13,7 % | +0,8 % | 11,6 % | 38 € | 0,180 | 31.03.2026 | 01.04.2026
+iPhone | 607 | 130 | 7,4 % | -0,1 % | 7,4 % | 27 € | 0,094 | 31.03.2026 | 01.04.2026
+Android-Smartphone | 624 | 147 | 20,4 % | +0,3 % | 17,3 % | 32 € | 0,247 | 26.03.2026 | 03.04.2026
+Tablet | 237 | 70 | 9,2 % | +2,8 % | 8,4 % | 31 € | 0,115 | 29.03.2026 | 08.04.2026
+Laptop | 383 | 120 | 15,0 % | +1,1 % | 14,1 % | 62 € | 0,183 | 31.03.2026 | 02.04.2026
+Welche Prognose bei Rückgabe galt
+simuliert 2.745 Zeilen
+Begriffe ausblenden
+Zeile
+Rückgaben insgesamt, davon mit und ohne Prognose, darunter die Zustandsstufe, mit der die Prognose gerechnet wurde.
+Geräte
+Stückzahl Geräte.
+Erläuterung
+Anteil, Zeitraum oder Grund.
+Zeile | Geräte | Erläuterung
+Rückgaben mit Rückgabedatum | 2.745 | 02.03.2022 bis 13.09.2026
+davon mit Prognose bei Rückgabe | 2.593 | 94,5 % der Rückgaben, 35 Läufe genutzt
+ohne Prognose: kein Prognoselauf vor dem Rückgabedatum | 152 | zählt in keiner Kennzahl; die ersten Rückgaben liegen vor dem ersten Lauf vom 31.10.2023
+Zustandsstufe A bei Rückgabe | 724 | 27,9 % der Prognosen bei Rückgabe
+Zustandsstufe B bei Rückgabe | 907 | 35,0 % der Prognosen bei Rückgabe
+Zustandsstufe C bei Rückgabe | 681 | 26,3 % der Prognosen bei Rückgabe
+Zustandsstufe D bei Rückgabe | 281 | 10,8 % der Prognosen bei Rückgabe
+Die Prognoseläufe
+simuliert 36 Zeilen
+Zeilen ausblenden
+Begriffe ausblenden
+Ein Lauf je Monatsende seit 31.10.2023, zuletzt 13.09.2026; Läufe sind unveränderlich, die Prognose bei Rückgabe wird immer aus dem Lauf vor dem Rückgabedatum gelesen. Verfahren loglinear_step_v1: Logarithmus des Preisverhältnisses zur UVP, linear in Modellalter, Zahl der Nachfolger seit Verkaufsstart, Zustandsstufe, Speicher und Kanal, je Geräteart angepasst.
+Lauf, Stichtag
+Kennung und Monatsende, bis zu dem Verkäufe in die Anpassung eingingen.
+Training
+Verkäufe, mit denen der Lauf angepasst wurde, gesamt.
+iPhone
+Verkäufe dieser Geräteart im Training des Laufs.
+Android-Smartphone
+Verkäufe dieser Geräteart im Training des Laufs.
+Tablet
+Verkäufe dieser Geräteart im Training des Laufs.
+Laptop
+Verkäufe dieser Geräteart im Training des Laufs.
+Anpassung
+je Geräteart: eigene Koeffizienten; gemeinsam: eine Anpassung über alle mit Merkmalen je Geräteart, wenn eine Geräteart zu wenige Verkäufe hat; Planwert: der geplante Restwertanteil aus der Konfiguration, wenn Verkäufe fehlen.
+Lauf | Stichtag | Training | iPhone | Android-Smartphone | Tablet | Laptop | Anpassung
+rv-2023-10-31 | 31.10.2023 | 102 | 29 | 35 | 11 | 27 | gemeinsam
+rv-2023-11-30 | 30.11.2023 | 114 | 32 | 38 | 14 | 30 | gemeinsam
+rv-2023-12-31 | 31.12.2023 | 133 | 39 | 47 | 15 | 32 | gemeinsam
+rv-2024-01-31 | 31.01.2024 | 146 | 43 | 55 | 16 | 32 | gemeinsam, je Geräteart
+rv-2024-02-29 | 29.02.2024 | 160 | 51 | 59 | 17 | 33 | je Geräteart, gemeinsam
+rv-2024-03-31 | 31.03.2024 | 190 | 60 | 70 | 23 | 37 | je Geräteart, gemeinsam
+rv-2024-04-30 | 30.04.2024 | 238 | 76 | 83 | 30 | 49 | je Geräteart, gemeinsam
+rv-2024-05-31 | 31.05.2024 | 287 | 91 | 104 | 34 | 58 | je Geräteart, gemeinsam
+rv-2024-06-30 | 30.06.2024 | 330 | 107 | 118 | 42 | 63 | je Geräteart, gemeinsam
+rv-2024-07-31 | 31.07.2024 | 367 | 119 | 132 | 45 | 71 | je Geräteart, gemeinsam
+rv-2024-08-31 | 31.08.2024 | 420 | 137 | 157 | 49 | 77 | je Geräteart, gemeinsam
+rv-2024-09-30 | 30.09.2024 | 475 | 159 | 172 | 57 | 87 | je Geräteart
+rv-2024-10-31 | 31.10.2024 | 532 | 180 | 194 | 64 | 94 | je Geräteart
+rv-2024-11-30 | 30.11.2024 | 594 | 198 | 217 | 69 | 110 | je Geräteart
+rv-2024-12-31 | 31.12.2024 | 651 | 219 | 237 | 78 | 117 | je Geräteart
+rv-2025-01-31 | 31.01.2025 | 700 | 240 | 251 | 88 | 121 | je Geräteart
+rv-2025-02-28 | 28.02.2025 | 756 | 257 | 279 | 93 | 127 | je Geräteart
+rv-2025-03-31 | 31.03.2025 | 826 | 280 | 303 | 97 | 146 | je Geräteart
+rv-2025-04-30 | 30.04.2025 | 916 | 303 | 340 | 104 | 169 | je Geräteart
+rv-2025-05-31 | 31.05.2025 | 1.018 | 339 | 371 | 120 | 188 | je Geräteart
+rv-2025-06-30 | 30.06.2025 | 1.113 | 372 | 396 | 129 | 216 | je Geräteart
+rv-2025-07-31 | 31.07.2025 | 1.212 | 397 | 428 | 141 | 246 | je Geräteart
+rv-2025-08-31 | 31.08.2025 | 1.293 | 424 | 453 | 152 | 264 | je Geräteart
+rv-2025-09-30 | 30.09.2025 | 1.398 | 456 | 488 | 169 | 285 | je Geräteart
+rv-2025-10-31 | 31.10.2025 | 1.477 | 487 | 506 | 179 | 305 | je Geräteart
+rv-2025-11-30 | 30.11.2025 | 1.551 | 508 | 535 | 192 | 316 | je Geräteart
+rv-2025-12-31 | 31.12.2025 | 1.619 | 534 | 555 | 202 | 328 | je Geräteart
+rv-2026-01-31 | 31.01.2026 | 1.705 | 560 | 583 | 213 | 349 | je Geräteart
+rv-2026-02-28 | 28.02.2026 | 1.782 | 586 | 607 | 227 | 362 | je Geräteart
+rv-2026-03-31 | 31.03.2026 | 1.851 | 607 | 624 | 237 | 383 | je Geräteart
+rv-2026-04-30 | 30.04.2026 | 1.923 | 628 | 644 | 251 | 400 | je Geräteart
+rv-2026-05-31 | 31.05.2026 | 2.010 | 657 | 671 | 259 | 423 | je Geräteart
+rv-2026-06-30 | 30.06.2026 | 2.099 | 684 | 693 | 277 | 445 | je Geräteart
+rv-2026-07-31 | 31.07.2026 | 2.188 | 703 | 730 | 288 | 467 | je Geräteart
+rv-2026-08-31 | 31.08.2026 | 2.274 | 727 | 757 | 301 | 489 | je Geräteart
+rv-2026-09-13 | 13.09.2026 | 2.318 | 737 | 771 | 307 | 503 | je Geräteart
+▾ Methode, ausgeschrieben
+So entsteht jede Zahl auf diesem Reiter.
+Prognose bei Rückgabe. Für jedes zurückgegebene Gerät der Lauf strikt vor dem Rückgabedatum (eine Rückgabe am Ersten nimmt das Monatsende davor), Zustandsstufe wie geprüft, Verkaufstag gleich Rückgabe plus erwartete Tage bis Verkauf der Geräteart, Kanal Marktplatz. Der Lauf speichert seine Kanalfaktoren mit, damit dieselbe Prognose später am genutzten Kanal gelesen werden kann.
+Fehlerreihe. Erzielter Bruttopreis gegen diese Prognose, je Verkaufsmonat und Geräteart plus eine Reihe über alle. As-Is-Verkäufe ausgeschlossen und gezählt. Unter 10 Verkäufen mit Prognose bleiben die Kennzahlen leer, die Stückzahlen stehen trotzdem.
+Zwei Sichten. Geschäftssicht: jeder Kanal gegen die Marktplatz-Prognose, so sieht es die Geschäftsführung, und die Definition sagt es dazu. Modellsicht: Prognose mal Kanalfaktor des genutzten Kanals; das prüft der Hinweis ADV02, weil ein Kanalabschlag kein Modellfehler ist.
+Rückblick-Test. Anpassung nur mit Verkäufen bis zum Stichtag, Messung an den Verkäufen danach mit tatsächlichem Kanal, Zustand und Verkaufstag. Deshalb kleiner als die Fehlerreihe, und deshalb steht er daneben, nicht darüber.
+Kennzahl des Monats. KPI_TOP_RV_FORECAST_ERROR ist der Fehler der Geschäftssicht im letzten vollen Monat vor dem Stichtag, alle Gerätearten; Ziel und Richtung stehen in der Konfiguration mit Verantwortlichem.
+▾ Grenzen, ausgesprochen
+Simulierte Flotte: die Preise folgen einer Kurve, die an die öffentlichen Preisbelege kalibriert ist. Die Güte hier misst, wie gut das Modell diese Kurve zurückgewinnt, nicht wie gut es einen Markt trifft. Auf echten Daten wird der Fehler anders aussehen, die Rechnung bleibt.
+Der Punktwert ist der Median, nicht der Mittelwert; die Verzerrung zeigt die Lücke zwischen beiden, und niemand korrigiert sie still.
+Zustandsstufe D: wenn jede D-Rückgabe As-Is geht, hat das Modell für D keinen Koeffizienten; 51 laufende Prognosen von 2.707 nehmen deshalb den As-Is-Anteil statt der Kurve.
+Ziel 12 % und Schwelle 8 % sind Platzhalter ohne externe Quelle, je mit Verantwortlichem in der Konfiguration; sie sagen, wann ein Mensch hinsehen soll, nicht, was gut ist.
+Ein Mittel über Monatswerte gewichtet jeden Monat gleich, egal wie viele Verkäufe er hatte; die gewichtete Kennzahl (WAPE) steht daneben.

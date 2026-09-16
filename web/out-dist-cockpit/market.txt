@@ -1,0 +1,369 @@
+Restwert Engine
+Schließen
+Bericht
+Analytics
+Gerät
+Prognosegüte
+TCO
+Kreislauf
+Stellschrauben
+Laufzeit
+Market Intelligence
+Realisierung
+Serie gegen Serie
+Studien
+FAQ
+Daten
+Geplant
+Lager
+Verträge
+Market Intelligence
+Realisierung
+Protokoll (0)
+Export CSV
+Datei einlesen
+Lauf starten
+Letzter Lauf Stand 16.09.2026 Dateien 283 Zeilen 166.115 ungeklärt 60 Seriennummern 5.251 Prototyp: Läufe werden protokolliert, nicht gerechnet.
+Protokoll dieser Installation
+manuell erfasste Daten, Lieferungen, Schwellen, Läufe · lokal gespeichert
+Noch keine Einträge. Preisbelege erfassen, Dateien einlesen, Schwellen ändern oder Szenarien speichern; jeder Schritt landet hier.
+Gerätefamilie
+Laptop
+Smartphone
+Tablet
+Diagramm
+Kurven je Hersteller
+Einzelne Preisbelege
+Preisbeleg erfassen
+Annahme: Einkaufsabschlag 12,0 %
+Öffentliche Preisbelege, Stand 16.09.2026
+Welches Gerät hält welchen Anteil seines Preises
+Hinweise ausblenden
+Realisierung = Gebrauchtpreis geteilt durch die unverbindliche Preisempfehlung (UVP) des Herstellers beim deutschen Verkaufsstart, beide einschließlich Mehrwertsteuer. Beispiel: iPhone 15 mit 128 GB, UVP 949 €, Marktplatz-Angebot 395 € in Zustandsstufe B (sehr gut) am 13.09.2026 = 42 %. Jeder Punkt ist ein öffentlicher Preisbeleg mit Adresse und Datum; keine Zahl stammt aus den Büchern eines Unternehmens. Woher die Belege kommen, was fehlt und warum, steht im Reiter FAQ; der Vergleich der Modellreihen im Reiter Serie gegen Serie, die veröffentlichten Studien im Reiter Studien.
+Laptop: Realisierung nach 36 Monaten öffentlich
+65 %
+nach 24 Monaten 86 % (Kurve verlängert, jüngster Beleg 30,2 Monate)
+verliert je Monat etwa 2,3 % des aktuellen Werts
+Kurve durch alle 121 Marktplatz-Angebote der Familie, alle Hersteller, jeder Beleg zählt gleich
+Smartphone: Realisierung nach 36 Monaten öffentlich
+45 %
+nach 24 Monaten 50 %
+verliert je Monat etwa 1,0 % des aktuellen Werts
+Kurve durch alle 168 Marktplatz-Angebote der Familie, alle Hersteller, jeder Beleg zählt gleich
+Ankauf-Gebote „bis zu“ nach 36 Monaten: 36 % (69 Ankauf-Gebote)
+Tablet: Realisierung nach 36 Monaten öffentlich
+60 %
+nach 24 Monaten 64 %
+verliert je Monat etwa 0,6 % des aktuellen Werts
+Kurve durch alle 66 Marktplatz-Angebote der Familie, alle Hersteller, jeder Beleg zählt gleich
+Weniger
+Begriffe ausblenden
+Kacheln
+Realisierung in Prozent der UVP, an der Kurve der Familie abgelesen. Die Kurve ist kein Mittelwert der Geräte und kein Mittel der Hersteller: sie ist die Linie durch alle Preisbelege der Familie (alle Hersteller, alle Stufen A bis D, jeder Beleg zählt gleich, deshalb wiegt ein Hersteller mit vielen Belegen mehr), abgelesen für Zustandsstufe B (sehr gut); das ist die Obergrenze, weil die Marge des Aufbereiters darin steckt. Je Hersteller steht die eigene Kurve in der Tabelle unten. Ankauf-Gebote sind Höchstwerte „bis zu“ eines Ankäufers vor der Zustandsprüfung, kein Boden; der tatsächliche Ankaufpreis liegt darunter.
+Realisierung nach Modellalter, Smartphone. Farbige Linien: je Hersteller das mittlere Marktplatz-Angebot in Zustandsstufe B je Halbjahr Modellalter (die Hälfte der Belege liegt darüber, die Hälfte darunter; je größer der Punkt, desto mehr Belege). Schwarz durchgezogen: die Kurve der Familie durch alle Marktplatz-Angebote der Stufen A bis D, abgelesen für Stufe B; die Obergrenze für den Erlös, weil die Marge des Aufbereiters darin steckt; sie endet, wo die Belege enden. Schwarz gepunktet: die Kurve der Ankauf-Gebote „bis zu“, also Höchstwerte vor der Zustandsprüfung, kein Boden. „Einzelne Preisbelege“ blendet jeden Preisbeleg ein: Kreis A wie neu, Raute B sehr gut, Quadrat C gut, Kreuz D akzeptabel, offener Kreis Zustand vom Verkäufer nicht eindeutig, Dreieck Ankauf-Gebot.
+Kurve je Hersteller
+öffentlich 6 Zeilen
+Begriffe ausblenden
+Eine Zeile je Hersteller der gewählten Familie. Grundlage sind alle Marktplatz-Angebote der Stufen A bis D, abgelesen für Zustandsstufe B (sehr gut), also die Obergrenze; Ankauf-Gebote stehen hier nicht. Ein Hersteller mischt hier Einsteiger, Flaggschiffe und faltbare Geräte; der Vergleich Serie gegen Serie steht im Reiter gleichen Namens.
+Hersteller
+Hersteller des Modells; eine Zeile je Hersteller der gewählten Familie.
+Belege
+Marktplatz-Angebote aller Stufen A bis D, die in die Kurve eingehen; die Stufen A, C und D gehen mit einem festen Abstand zur Stufe B ein, der zusammen mit der Linie geschätzt wird, abgelesen wird die Linie für Stufe B
+Monate
+Spanne des Modellalters, das diese Belege abdecken, in Monaten seit deutschem Verkaufsstart
+Verlust je Monat
+Prozent seines jeweils aktuellen Werts, die ein Gerät laut Kurve jeden Monat verliert; keine Prozentpunkte der UVP
+nach 24, nach 36 Monaten
+Realisierung in Prozent der UVP, an der Kurve abgelesen; steht der Wert in Klammern, liegt das Alter außerhalb der Spanne in Monate, die Linie ist dann über die Belege hinaus verlängert
+gegen Einkaufspreis
+Realisierung nach 36 Monaten, bezogen auf einen angenommenen Einkaufspreis von UVP minus 12,0 % statt auf die UVP, also geteilt durch 0,88; der Abschlag ist ein Platzhalter mit verantwortlicher Rolle (Datei config/assumptions.yaml), keine Tatsache über ein reales Unternehmen
+Verlässlichkeit
+belastbar = mindestens 12 Belege über mindestens 6 Monate Altersspanne und der Wert fällt; unsicher = 6 bis 11 Belege, oder der Wert steigt mit dem Alter, was unplausibel ist; keine Kurve = unter 6 Belege oder unter 6 Monate Spanne, dann bleiben die Spalten leer
+Hersteller | Belege | Monate | Verlust je Monat | nach 24 Monaten | nach 36 Monaten | gegen Einkaufspreis | Verlässlichkeit
+Apple | 39 | 18,5 bis 59,6 | 1,7 % | 59 % | 48 % | 55 % | belastbar
+Fairphone | 7 | 36,0 bis 58,6 | 0,5 % | (78 %) | 74 % | 84 % | unsicher
+Google | 29 | 24,3 bis 40,1 | 2,9 % | (48 %) | 34 % | 39 % | belastbar
+HMD Global (Nokia) | 2 | 60,9 bis 60,9 |  |  |  |  | keine Kurve
+Motorola | 14 | 35,7 bis 53,9 | 2,3 % | (48 %) | 36 % | 41 % | belastbar
+Samsung | 77 | 17,5 bis 54,6 | 0,7 % | 49 % | 45 % | 51 % | belastbar
+Alle Preisbelege Smartphone (eine Zeile je öffentlichem Preis, mit Quelle)
+öffentlich 244 Zeilen
+Zeilen ausblenden
+Begriffe ausblenden
+Modell
+Modell, wie der Hersteller es nennt.
+Ausstattung
+Speicher und Farbe, wie die Quelle sie nennt.
+Zustand laut Verkäufer
+die Zustandsangabe, wie sie auf der Seite des Verkäufers oder Ankäufers steht
+Zustandsstufe
+diese Angabe übersetzt auf A wie neu, B sehr gut, C gut, D akzeptabel; Ankauf-Gebote haben keine Stufe
+Monate
+Modellalter am Datum des Belegs, in Monaten seit deutschem Verkaufsstart
+UVP
+unverbindliche Preisempfehlung des Herstellers beim deutschen Verkaufsstart, einschließlich Mehrwertsteuer
+Datum, Preis
+Preis am Datum des Belegs, einschließlich Mehrwertsteuer
+Realisierung
+Preis geteilt durch UVP
+Preisart
+Marktplatz-Angebot (Preis, den ein Aufbereiter verlangt) oder Ankauf-Gebot (Höchstwert „bis zu“, den ein Ankäufer vor der Zustandsprüfung nennt); manuell erfasste Belege tragen die Marke manuell
+Quelle
+Adresse der Seite, von der der Beleg stammt
+Modell | Ausstattung | Zustand laut Verkäufer | Zustandsstufe | Monate | UVP | Datum | Preis | Realisierung | Preisart | Quelle
+iPhone 13 mini | 128 GB | Gut | C gut | 59,6 | 799 € | 13.09.2026 | 262 € | 33 % | Marktplatz-Angebot | Quelle
+iPhone 13 mini | 256 GB | Sehr gut | B sehr gut | 59,6 | 919 € | 13.09.2026 | 344 € | 37 % | Marktplatz-Angebot | Quelle
+iPhone 13 mini | 256 GB | Exzellent | A wie neu | 59,6 | 919 € | 13.09.2026 | 349 € | 38 % | Marktplatz-Angebot | Quelle
+iPhone 13 mini | 128 GB, Mitternacht | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 59,6 | 799 € | 13.09.2026 | 231 € | 29 % | Ankauf-Gebot | Quelle
+iPhone 13 mini | 256 GB, Mitternacht | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 59,6 | 919 € | 13.09.2026 | 321 € | 35 % | Ankauf-Gebot | Quelle
+iPhone 13 mini | 128 GB, Mitternacht | Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 59,6 | 799 € | 13.09.2026 | 278 € | 35 % | Ankauf-Gebot | Quelle
+iPhone 13 mini | 128 GB, Mitternacht | Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 59,6 | 799 € | 13.09.2026 | 267 € | 33 % | Ankauf-Gebot | Quelle
+iPhone 14 Plus | 128 GB | Exzellent | A wie neu | 47,2 | 1.149 € | 13.09.2026 | 364 € | 32 % | Marktplatz-Angebot | Quelle
+iPhone 14 Plus | 256 GB | Gut | C gut | 47,2 | 1.279 € | 13.09.2026 | 419 € | 33 % | Marktplatz-Angebot | Quelle
+iPhone 14 Plus | 256 GB | Premium | A wie neu | 47,2 | 1.279 € | 13.09.2026 | 486 € | 38 % | Marktplatz-Angebot | Quelle
+iPhone 14 Pro Max | 128 GB | Gut | C gut | 47,9 | 1.449 € | 13.09.2026 | 503 € | 35 % | Marktplatz-Angebot | Quelle
+iPhone 14 Pro Max | 256 GB | Gut | C gut | 47,9 | 1.579 € | 13.09.2026 | 548 € | 35 % | Marktplatz-Angebot | Quelle
+iPhone 14 Pro Max | 256 GB | Sehr gut | B sehr gut | 47,9 | 1.579 € | 13.09.2026 | 656 € | 42 % | Marktplatz-Angebot | Quelle
+iPhone 14 Pro Max | 128 GB, Space Schwarz | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 47,9 | 1.449 € | 13.09.2026 | 432 € | 30 % | Ankauf-Gebot | Quelle
+iPhone 14 Pro Max | 256 GB, Space Schwarz | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 47,9 | 1.579 € | 13.09.2026 | 465 € | 29 % | Ankauf-Gebot | Quelle
+iPhone 14 Pro Max | 128 GB, Dunkellila | Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 47,9 | 1.449 € | 13.09.2026 | 543 € | 37 % | Ankauf-Gebot | Quelle
+iPhone 14 Pro Max | 128 GB, Dunkellila | Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 47,9 | 1.449 € | 13.09.2026 | 539 € | 37 % | Ankauf-Gebot | Quelle
+iPhone 14 Pro | 128 GB | Gut | C gut | 47,9 | 1.299 € | 13.09.2026 | 465 € | 36 % | Marktplatz-Angebot | Quelle
+iPhone 14 Pro | 256 GB | Gut | C gut | 47,9 | 1.429 € | 13.09.2026 | 480 € | 34 % | Marktplatz-Angebot | Quelle
+iPhone 14 Pro | 256 GB | Sehr gut | B sehr gut | 47,9 | 1.429 € | 13.09.2026 | 504 € | 35 % | Marktplatz-Angebot | Quelle
+iPhone 14 Pro | 128 GB, Space Schwarz | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 47,9 | 1.299 € | 13.09.2026 | 384 € | 30 % | Ankauf-Gebot | Quelle
+iPhone 14 Pro | 256 GB, Space Schwarz | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 47,9 | 1.429 € | 13.09.2026 | 428 € | 30 % | Ankauf-Gebot | Quelle
+iPhone 14 Pro | 128 GB, Space Schwarz | Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 47,9 | 1.299 € | 13.09.2026 | 492 € | 38 % | Ankauf-Gebot | Quelle
+iPhone 14 Pro | 128 GB, Space Schwarz | Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 47,9 | 1.299 € | 13.09.2026 | 431 € | 33 % | Ankauf-Gebot | Quelle
+iPhone 14 | 128 GB, Mitternacht | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 47,9 | 999 € | 13.09.2026 | 283 € | 28 % | Ankauf-Gebot | Quelle
+iPhone 14 | 256 GB, Mitternacht | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 47,9 | 1.129 € | 13.09.2026 | 332 € | 29 % | Ankauf-Gebot | Quelle
+iPhone 14 | 128 GB, Blau | Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 47,9 | 999 € | 13.09.2026 | 399 € | 40 % | Ankauf-Gebot | Quelle
+iPhone 14 | 128 GB, Blau | Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 47,9 | 999 € | 13.09.2026 | 286 € | 29 % | Ankauf-Gebot | Quelle
+iPhone 15 Plus | 128 GB | Gut | C gut | 35,7 | 1.099 € | 13.09.2026 | 443 € | 40 % | Marktplatz-Angebot | Quelle
+iPhone 15 Plus | 128 GB | Exzellent | A wie neu | 35,7 | 1.099 € | 13.09.2026 | 465 € | 42 % | Marktplatz-Angebot | Quelle
+iPhone 15 Plus | 512 GB | Premium | A wie neu | 35,7 | 1.479 € | 13.09.2026 | 677 € | 46 % | Marktplatz-Angebot | Quelle
+iPhone 15 Pro Max | 256 GB | Sehr gut | B sehr gut | 35,7 | 1.449 € | 13.09.2026 | 685 € | 47 % | Marktplatz-Angebot | Quelle
+iPhone 15 Pro Max | 512 GB | Gut | C gut | 35,7 | 1.699 € | 13.09.2026 | 749 € | 44 % | Marktplatz-Angebot | Quelle
+iPhone 15 Pro Max | 1 TB | Premium | A wie neu | 35,7 | 1.949 € | 13.09.2026 | 831 € | 43 % | Marktplatz-Angebot | Quelle
+iPhone 15 Pro Max | 256 GB, Titan Schwarz | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 35,7 | 1.449 € | 13.09.2026 | 750 € | 52 % | Ankauf-Gebot | Quelle
+iPhone 15 Pro Max | 512 GB, Titan Schwarz | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 35,7 | 1.699 € | 13.09.2026 | 800 € | 47 % | Ankauf-Gebot | Quelle
+iPhone 15 Pro Max | 256 GB, Titan Schwarz | Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 35,7 | 1.449 € | 13.09.2026 | 970 € | 67 % | Ankauf-Gebot | Quelle
+iPhone 15 Pro Max | 256 GB, Titan Schwarz | Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 35,7 | 1.449 € | 13.09.2026 | 634 € | 44 % | Ankauf-Gebot | Quelle
+iPhone 15 Pro | 128 GB | Sehr gut | B sehr gut | 35,7 | 1.199 € | 13.09.2026 | 590 € | 49 % | Marktplatz-Angebot | Quelle
+iPhone 15 Pro | 256 GB | Gut | C gut | 35,7 | 1.329 € | 13.09.2026 | 620 € | 47 % | Marktplatz-Angebot | Quelle
+iPhone 15 Pro | 256 GB | Exzellent | A wie neu | 35,7 | 1.329 € | 13.09.2026 | 674 € | 51 % | Marktplatz-Angebot | Quelle
+iPhone 15 Pro | 128 GB, Titan Schwarz | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 35,7 | 1.199 € | 13.09.2026 | 660 € | 55 % | Ankauf-Gebot | Quelle
+iPhone 15 Pro | 256 GB, Titan Schwarz | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 35,7 | 1.329 € | 13.09.2026 | 700 € | 53 % | Ankauf-Gebot | Quelle
+iPhone 15 Pro | 128 GB, Titan Schwarz | Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 35,7 | 1.199 € | 13.09.2026 | 801 € | 67 % | Ankauf-Gebot | Quelle
+iPhone 15 Pro | 128 GB, Titan Schwarz | Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 35,7 | 1.199 € | 13.09.2026 | 661 € | 55 % | Ankauf-Gebot | Quelle
+iPhone 15 | 128 GB | Sehr gut | B sehr gut | 35,7 | 949 € | 13.09.2026 | 395 € | 42 % | Marktplatz-Angebot | Quelle
+iPhone 15 | 128 GB | Exzellent | A wie neu | 35,7 | 949 € | 13.09.2026 | 430 € | 45 % | Marktplatz-Angebot | Quelle
+iPhone 15 | 256 GB | Gut | C gut | 35,7 | 1.079 € | 13.09.2026 | 510 € | 47 % | Marktplatz-Angebot | Quelle
+iPhone 15 | 128 GB, Schwarz | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 35,7 | 949 € | 13.09.2026 | 510 € | 54 % | Ankauf-Gebot | Quelle
+iPhone 15 | 256 GB, Schwarz | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 35,7 | 1.079 € | 13.09.2026 | 510 € | 47 % | Ankauf-Gebot | Quelle
+iPhone 15 | 128 GB, Schwarz | Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 35,7 | 949 € | 13.09.2026 | 511 € | 54 % | Ankauf-Gebot | Quelle
+iPhone 15 | 128 GB, Schwarz | Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 35,7 | 949 € | 13.09.2026 | 464 € | 49 % | Ankauf-Gebot | Quelle
+iPhone 16 Plus | 128 GB | Sehr gut | B sehr gut | 23,8 | 1.099 € | 13.09.2026 | 632 € | 58 % | Marktplatz-Angebot | Quelle
+iPhone 16 Plus | 128 GB | Exzellent | A wie neu | 23,8 | 1.099 € | 13.09.2026 | 644 € | 59 % | Marktplatz-Angebot | Quelle
+iPhone 16 Plus | 256 GB | Sehr gut | B sehr gut | 23,8 | 1.229 € | 13.09.2026 | 712 € | 58 % | Marktplatz-Angebot | Quelle
+iPhone 16 Pro Max | 256 GB | Gut | C gut | 23,8 | 1.449 € | 13.09.2026 | 832 € | 57 % | Marktplatz-Angebot | Quelle
+iPhone 16 Pro Max | 256 GB | Sehr gut | B sehr gut | 23,8 | 1.449 € | 13.09.2026 | 850 € | 59 % | Marktplatz-Angebot | Quelle
+iPhone 16 Pro Max | 512 GB | Gut | C gut | 23,8 | 1.699 € | 13.09.2026 | 907 € | 53 % | Marktplatz-Angebot | Quelle
+iPhone 16 Pro | 128 GB | Exzellent | A wie neu | 23,8 | 1.199 € | 13.09.2026 | 710 € | 59 % | Marktplatz-Angebot | Quelle
+iPhone 16 Pro | 128 GB | Gut | C gut | 23,8 | 1.199 € | 13.09.2026 | 730 € | 61 % | Marktplatz-Angebot | Quelle
+iPhone 16 Pro | 128 GB | Sehr gut | B sehr gut | 23,8 | 1.199 € | 13.09.2026 | 760 € | 63 % | Marktplatz-Angebot | Quelle
+iPhone 16 | 128 GB | Gut | C gut | 23,8 | 949 € | 13.09.2026 | 600 € | 63 % | Marktplatz-Angebot | Quelle
+iPhone 16 | 128 GB | Sehr gut | B sehr gut | 23,8 | 949 € | 13.09.2026 | 633 € | 67 % | Marktplatz-Angebot | Quelle
+iPhone 16 | 256 GB | Exzellent | A wie neu | 23,8 | 1.079 € | 13.09.2026 | 702 € | 65 % | Marktplatz-Angebot | Quelle
+iPhone 16e | 128 GB | Gut | C gut | 18,5 | 699 € | 13.09.2026 | 431 € | 62 % | Marktplatz-Angebot | Quelle
+iPhone 16e | 256 GB | Exzellent | A wie neu | 18,5 | 829 € | 13.09.2026 | 481 € | 58 % | Marktplatz-Angebot | Quelle
+iPhone 16e | 512 GB | Premium | A wie neu | 18,5 | 1.079 € | 13.09.2026 | 566 € | 52 % | Marktplatz-Angebot | Quelle
+Fairphone 4 | 128 GB | Sehr gut | B sehr gut | 58,6 | 579 € | 13.09.2026 | 389 € | 67 % | Marktplatz-Angebot | Quelle
+Fairphone 4 | 6 GB / 128 GB | Sehr gut | B sehr gut | 58,6 | 579 € | 13.09.2026 | 389 € | 67 % | Marktplatz-Angebot | Quelle
+Fairphone 4 | 8 GB / 256 GB | Gut | C gut | 58,6 | 649 € | 13.09.2026 | 333 € | 51 % | Marktplatz-Angebot | Quelle
+Fairphone 5 | 256 GB | Premium | A wie neu | 36,0 | 699 € | 13.09.2026 | 549 € | 79 % | Marktplatz-Angebot | Quelle
+Fairphone 5 | 8 GB / 256 GB | Premium | A wie neu | 36,0 | 699 € | 13.09.2026 | 549 € | 79 % | Marktplatz-Angebot | Quelle
+Fairphone 5 | 8 GB / 256 GB | Gut | C gut | 36,0 | 699 € | 13.09.2026 | 428 € | 61 % | Marktplatz-Angebot | Quelle
+Fairphone 5 | 8 GB / 256 GB | Sehr gut | B sehr gut | 36,0 | 699 € | 13.09.2026 | 497 € | 71 % | Marktplatz-Angebot | Quelle
+Google Pixel 7a | 128 GB | Exzellent | A wie neu | 40,1 | 509 € | 13.09.2026 | 199 € | 39 % | Marktplatz-Angebot | Quelle
+Google Pixel 7a | 128 GB, Charcoal | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 40,1 | 509 € | 13.09.2026 | 140 € | 28 % | Ankauf-Gebot | Quelle
+Google Pixel 7a | 128 GB Dual-SIM, Charcoal | Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 40,1 | 509 € | 13.09.2026 | 163 € | 32 % | Ankauf-Gebot | Quelle
+Google Pixel 7a | 128 GB Dual-SIM, Charcoal | Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 40,1 | 509 € | 13.09.2026 | 162 € | 32 % | Ankauf-Gebot | Quelle
+Google Pixel 8 Pro | 128 GB | Gut | C gut | 35,0 | 1.099 € | 13.09.2026 | 340 € | 31 % | Marktplatz-Angebot | Quelle
+Google Pixel 8 Pro | 128 GB | Sehr gut | B sehr gut | 35,0 | 1.099 € | 13.09.2026 | 355 € | 32 % | Marktplatz-Angebot | Quelle
+Google Pixel 8 Pro | 256 GB | Gut | C gut | 35,0 | 1.159 € | 13.09.2026 | 405 € | 35 % | Marktplatz-Angebot | Quelle
+Google Pixel 8 Pro | 12 GB / 128 GB | Gut | C gut | 35,0 | 1.099 € | 13.09.2026 | 340 € | 31 % | Marktplatz-Angebot | Quelle
+Google Pixel 8 Pro | 12 GB / 128 GB | Gut | C gut | 35,0 | 1.099 € | 13.09.2026 | 370 € | 34 % | Marktplatz-Angebot | Quelle
+Google Pixel 8 Pro | 12 GB / 256 GB | Gut | C gut | 35,0 | 1.159 € | 13.09.2026 | 437 € | 38 % | Marktplatz-Angebot | Quelle
+Google Pixel 8 Pro | 12 GB / 512 GB | Sehr gut | B sehr gut | 35,0 | 1.299 € | 13.09.2026 | 530 € | 41 % | Marktplatz-Angebot | Quelle
+Google Pixel 8 Pro | 128 GB, Obsidian | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 35,0 | 1.099 € | 13.09.2026 | 356 € | 32 % | Ankauf-Gebot | Quelle
+Google Pixel 8 Pro | 256 GB, Obsidian | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 35,0 | 1.159 € | 13.09.2026 | 418 € | 36 % | Ankauf-Gebot | Quelle
+Google Pixel 8 Pro | 128 GB, Bay | Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 35,0 | 1.099 € | 13.09.2026 | 357 € | 32 % | Ankauf-Gebot | Quelle
+Google Pixel 8 Pro | 128 GB, Bay | Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 35,0 | 1.099 € | 13.09.2026 | 355 € | 32 % | Ankauf-Gebot | Quelle
+Google Pixel 8 | 128 GB | Sehr gut | B sehr gut | 35,0 | 799 € | 13.09.2026 | 249 € | 31 % | Marktplatz-Angebot | Quelle
+Google Pixel 8 | 128 GB | Exzellent | A wie neu | 35,0 | 799 € | 13.09.2026 | 254 € | 32 % | Marktplatz-Angebot | Quelle
+Google Pixel 8 | 256 GB | Sehr gut | B sehr gut | 35,0 | 859 € | 13.09.2026 | 405 € | 47 % | Marktplatz-Angebot | Quelle
+Google Pixel 8 | 8 GB / 128 GB | Sehr gut | B sehr gut | 35,0 | 799 € | 13.09.2026 | 254 € | 32 % | Marktplatz-Angebot | Quelle
+Google Pixel 8 | 8 GB / 128 GB | Gut | C gut | 35,0 | 799 € | 13.09.2026 | 286 € | 36 % | Marktplatz-Angebot | Quelle
+Google Pixel 8 | 8 GB / 256 GB | Gut | C gut | 35,0 | 859 € | 13.09.2026 | 362 € | 42 % | Marktplatz-Angebot | Quelle
+Google Pixel 8 | 8 GB / 256 GB | Exzellent | A wie neu | 35,0 | 859 € | 13.09.2026 | 412 € | 48 % | Marktplatz-Angebot | Quelle
+Google Pixel 8 | 128 GB, Obsidian | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 35,0 | 799 € | 13.09.2026 | 268 € | 34 % | Ankauf-Gebot | Quelle
+Google Pixel 8 | 256 GB, Obsidian | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 35,0 | 859 € | 13.09.2026 | 319 € | 37 % | Ankauf-Gebot | Quelle
+Google Pixel 8 | 128 GB, Obsidian Black | Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 35,0 | 799 € | 13.09.2026 | 297 € | 37 % | Ankauf-Gebot | Quelle
+Google Pixel 8 | 128 GB, Obsidian Black | Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 35,0 | 799 € | 13.09.2026 | 267 € | 33 % | Ankauf-Gebot | Quelle
+Google Pixel 8a | 128 GB | Sehr gut | B sehr gut | 28,0 | 549 € | 13.09.2026 | 220 € | 40 % | Marktplatz-Angebot | Quelle
+Google Pixel 9 Pro Fold | 512 GB | Exzellent | A wie neu | 24,3 | 2.029 € | 13.09.2026 | 957 € | 47 % | Marktplatz-Angebot | Quelle
+Google Pixel 9 Pro XL | 128 GB | Gut | C gut | 24,7 | 1.199 € | 13.09.2026 | 525 € | 44 % | Marktplatz-Angebot | Quelle
+Google Pixel 9 Pro XL | 256 GB | Gut | C gut | 24,7 | 1.299 € | 13.09.2026 | 534 € | 41 % | Marktplatz-Angebot | Quelle
+Google Pixel 9 Pro XL | 512 GB | Exzellent | A wie neu | 24,7 | 1.429 € | 13.09.2026 | 823 € | 58 % | Marktplatz-Angebot | Quelle
+Google Pixel 9 Pro | 128 GB | Gut | C gut | 24,3 | 1.099 € | 13.09.2026 | 478 € | 43 % | Marktplatz-Angebot | Quelle
+Google Pixel 9 Pro | 128 GB | Sehr gut | B sehr gut | 24,3 | 1.099 € | 13.09.2026 | 545 € | 50 % | Marktplatz-Angebot | Quelle
+Google Pixel 9 Pro | 256 GB | Gut | C gut | 24,3 | 1.199 € | 13.09.2026 | 604 € | 50 % | Marktplatz-Angebot | Quelle
+Google Pixel 9 | 128 GB | Gut | C gut | 24,7 | 899 € | 13.09.2026 | 399 € | 44 % | Marktplatz-Angebot | Quelle
+Google Pixel 9 | 128 GB | Sehr gut | B sehr gut | 24,7 | 899 € | 13.09.2026 | 427 € | 48 % | Marktplatz-Angebot | Quelle
+Google Pixel 9 | 256 GB | Gut | C gut | 24,7 | 999 € | 13.09.2026 | 503 € | 50 % | Marktplatz-Angebot | Quelle
+Google Pixel Fold | 12 GB / 256 GB | Budget | unbekannt | 38,5 | 1.899 € | 13.09.2026 | 419 € | 22 % | Marktplatz-Angebot | Quelle
+Google Pixel Fold | 12 GB / 256 GB | Gut | C gut | 38,5 | 1.899 € | 13.09.2026 | 479 € | 25 % | Marktplatz-Angebot | Quelle
+Google Pixel Fold | 12 GB / 256 GB | Sehr gut | B sehr gut | 38,5 | 1.899 € | 13.09.2026 | 529 € | 28 % | Marktplatz-Angebot | Quelle
+Google Pixel Fold | 12 GB / 256 GB | Wie neu | A wie neu | 38,5 | 1.899 € | 13.09.2026 | 579 € | 30 % | Marktplatz-Angebot | Quelle
+Nokia XR20 | 6 GB / 128 GB | Gut (ausverkauft, Listenpreis; günstigster Preis der letzten 30 Tage) | C gut | 60,9 | 579 € | 13.09.2026 | 199 € | 34 % | Marktplatz-Angebot | Quelle
+Nokia XR20 | 6 GB / 128 GB | Sehr gut (ausverkauft, Listenpreis) | B sehr gut | 60,9 | 579 € | 13.09.2026 | 249 € | 43 % | Marktplatz-Angebot | Quelle
+Lenovo ThinkPhone by Motorola | 256 GB (Carbon Black) | Wir bieten bis zu | keine Stufe | 43,3 | 999 € | 13.09.2026 | 155 € | 16 % | Ankauf-Gebot | Quelle
+Lenovo ThinkPhone by Motorola | 8 GB / 256 GB | Budget | unbekannt | 43,3 | 999 € | 13.09.2026 | 119 € | 12 % | Marktplatz-Angebot | Quelle
+Lenovo ThinkPhone by Motorola | 8 GB / 256 GB | Gut | C gut | 43,3 | 999 € | 13.09.2026 | 159 € | 16 % | Marktplatz-Angebot | Quelle
+Lenovo ThinkPhone by Motorola | 8 GB / 256 GB | Sehr gut | B sehr gut | 43,3 | 999 € | 13.09.2026 | 229 € | 23 % | Marktplatz-Angebot | Quelle
+Lenovo ThinkPhone by Motorola | 8 GB / 256 GB | Wie neu | A wie neu | 43,3 | 999 € | 13.09.2026 | 239 € | 24 % | Marktplatz-Angebot | Quelle
+Motorola Edge 30 Fusion | 128 GB (Cosmic Grey) | Premium | A wie neu | 47,6 | 600 € | 13.09.2026 | 453 € | 76 % | Marktplatz-Angebot | Quelle
+Motorola Edge 30 Fusion | 128 GB (Cosmic Grey) | Wir bieten bis zu | keine Stufe | 47,6 | 600 € | 13.09.2026 | 178 € | 30 % | Ankauf-Gebot | Quelle
+Motorola Edge 30 Pro | 256 GB (Cosmos Blue) | Wir bieten bis zu | keine Stufe | 53,9 | 800 € | 13.09.2026 | 166 € | 21 % | Ankauf-Gebot | Quelle
+Motorola Edge 30 Pro | 12 GB / 256 GB | Gut | C gut | 53,9 | 800 € | 13.09.2026 | 179 € | 22 % | Marktplatz-Angebot | Quelle
+Motorola Edge 30 Pro | 12 GB / 256 GB | Sehr gut | B sehr gut | 53,9 | 800 € | 13.09.2026 | 209 € | 26 % | Marktplatz-Angebot | Quelle
+Motorola Edge 30 Pro | 12 GB / 256 GB | Wie neu | A wie neu | 53,9 | 800 € | 13.09.2026 | 249 € | 31 % | Marktplatz-Angebot | Quelle
+Motorola Edge 30 Pro | 12 GB / 256 GB | Budget | unbekannt | 53,9 | 800 € | 13.09.2026 | 149 € | 19 % | Marktplatz-Angebot | Quelle
+Motorola Edge 40 Neo | 256 GB (Schwarz) | Wir bieten bis zu | keine Stufe | 35,7 | 399 € | 13.09.2026 | 105 € | 26 % | Ankauf-Gebot | Quelle
+Motorola Edge 40 Neo | 256 GB (Grün) | Wir bieten bis zu | keine Stufe | 35,7 | 399 € | 13.09.2026 | 168 € | 42 % | Ankauf-Gebot | Quelle
+Motorola Edge 40 Neo | 12 GB / 256 GB | Gut | C gut | 35,7 | 399 € | 13.09.2026 | 199 € | 50 % | Marktplatz-Angebot | Quelle
+Motorola Edge 40 Neo | 12 GB / 256 GB | Sehr gut | B sehr gut | 35,7 | 399 € | 13.09.2026 | 219 € | 55 % | Marktplatz-Angebot | Quelle
+Motorola Edge 40 Neo | 12 GB / 256 GB | Budget | unbekannt | 35,7 | 399 € | 13.09.2026 | 119 € | 30 % | Marktplatz-Angebot | Quelle
+Motorola Edge 50 Fusion | 256 GB (Forest Blue; Clevertronic-Bezeichnung '12GB RAM 256GB') | Wir bieten bis zu | keine Stufe | 27,9 | 350 € | 13.09.2026 | 93 € | 27 % | Ankauf-Gebot | Quelle
+Motorola Edge 50 Pro | 512 GB (Black Beauty) | Wir bieten bis zu | keine Stufe | 28,9 | 700 € | 13.09.2026 | 245 € | 35 % | Ankauf-Gebot | Quelle
+Motorola Moto G35 5G | 128 GB (Midnight Black) | Wir bieten bis zu | keine Stufe | 22,4 | 180 € | 13.09.2026 | 48 € | 27 % | Ankauf-Gebot | Quelle
+Motorola Moto G55 5G | 256 GB (Forest Grey) | Wir bieten bis zu | keine Stufe | 22,4 | 250 € | 13.09.2026 | 89 € | 35 % | Ankauf-Gebot | Quelle
+Motorola Razr 40 Ultra | 256 GB (Viva Magenta) | Gut | C gut | 39,4 | 1.200 € | 13.09.2026 | 504 € | 42 % | Marktplatz-Angebot | Quelle
+Motorola Razr 40 Ultra | 8 GB / 256 GB | Gut | C gut | 39,4 | 1.200 € | 13.09.2026 | 504 € | 42 % | Marktplatz-Angebot | Quelle
+Motorola Razr 40 Ultra | 8 GB / 256 GB | Gut | C gut | 39,4 | 1.200 € | 13.09.2026 | 289 € | 24 % | Marktplatz-Angebot | Quelle
+Motorola Razr 40 Ultra | 8 GB / 256 GB | Sehr gut | B sehr gut | 39,4 | 1.200 € | 13.09.2026 | 319 € | 27 % | Marktplatz-Angebot | Quelle
+Motorola Razr 40 Ultra | 8 GB / 256 GB | Wie neu | A wie neu | 39,4 | 1.200 € | 13.09.2026 | 359 € | 30 % | Marktplatz-Angebot | Quelle
+ThinkPhone 25 by Motorola | 256 GB (Carbon Black) | Wir bieten bis zu | keine Stufe | 23,1 | 500 € | 13.09.2026 | 181 € | 36 % | Ankauf-Gebot | Quelle
+Samsung Galaxy A05s | 4 GB / 64 GB | Sehr gut | B sehr gut | 32,3 | 159 € | 13.09.2026 | 149 € | 94 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A13 (4G, SM-A135F) | 64 GB | Exzellent | A wie neu | 53,6 | 189 € | 13.09.2026 | 131 € | 69 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A14 5G | 4 GB / 64 GB | Sehr gut | B sehr gut | 41,9 | 229 € | 13.09.2026 | 149 € | 65 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A33 5G | 6 GB / 128 GB | Exzellent (Premium) | A wie neu | 52,7 | 369 € | 13.09.2026 | 160 € | 43 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A33 5G | 6 GB / 128 GB | Exzellent | A wie neu | 52,7 | 369 € | 13.09.2026 | 151 € | 41 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A33 5G | 6 GB / 128 GB | Sehr gut | B sehr gut | 52,7 | 369 € | 13.09.2026 | 130 € | 35 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A33 5G | 6 GB / 128 GB | Gut | C gut | 52,7 | 369 € | 13.09.2026 | 128 € | 35 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A34 5G | 128 GB | Sehr gut | B sehr gut | 41,6 | 389 € | 13.09.2026 | 161 € | 41 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A34 5G | 128 GB | Exzellent | A wie neu | 41,6 | 389 € | 13.09.2026 | 188 € | 48 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A34 5G | 256 GB | Gut | C gut | 41,6 | 459 € | 13.09.2026 | 235 € | 51 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A34 5G | 6 GB / 128 GB | Gut | C gut | 41,6 | 389 € | 13.09.2026 | 161 € | 41 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A34 5G | 6 GB / 128 GB | Sehr gut | B sehr gut | 41,6 | 389 € | 13.09.2026 | 181 € | 47 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A34 5G | 6 GB / 128 GB | Exzellent | A wie neu | 41,6 | 389 € | 13.09.2026 | 192 € | 49 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A34 5G | 8 GB / 256 GB | Gut | C gut | 41,6 | 459 € | 13.09.2026 | 195 € | 42 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A35 5G | 128 GB | Gut | C gut | 30,1 | 379 € | 13.09.2026 | 199 € | 52 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A53 5G | 128 GB | Gut | C gut | 53,4 | 449 € | 13.09.2026 | 171 € | 38 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A53 5G | 128 GB | Exzellent | A wie neu | 53,4 | 449 € | 13.09.2026 | 199 € | 44 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A53 5G | 256 GB | Sehr gut | B sehr gut | 53,4 | 509 € | 13.09.2026 | 301 € | 59 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A53 5G | 6 GB / 128 GB | Gut | C gut | 53,4 | 449 € | 13.09.2026 | 171 € | 38 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A53 5G | 6 GB / 128 GB | Gut | C gut | 53,4 | 449 € | 13.09.2026 | 153 € | 34 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A53 5G | 6 GB / 128 GB | Sehr gut | B sehr gut | 53,4 | 449 € | 13.09.2026 | 189 € | 42 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A53 5G | 8 GB / 256 GB | Gut | C gut | 53,4 | 509 € | 13.09.2026 | 204 € | 40 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A54 5G | 128 GB | Exzellent | A wie neu | 41,6 | 489 € | 13.09.2026 | 208 € | 43 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A54 5G | 8 GB / 128 GB | Gut | C gut | 41,6 | 489 € | 13.09.2026 | 193 € | 39 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A54 5G | 8 GB / 128 GB | Exzellent | A wie neu | 41,6 | 489 € | 13.09.2026 | 230 € | 47 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A54 5G | 8 GB / 128 GB | Exzellent Premium | A wie neu | 41,6 | 489 € | 13.09.2026 | 208 € | 43 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A54 5G | 8 GB / 256 GB | Sehr gut | B sehr gut | 41,6 | 539 € | 13.09.2026 | 289 € | 54 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A55 5G | 256 GB | Sehr gut | B sehr gut | 30,1 | 529 € | 13.09.2026 | 250 € | 47 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A55 5G | 128 GB | Zustand auf Kategorieseite nicht angezeigt (refurbished) | unbekannt | 30,1 | 479 € | 13.09.2026 | 286 € | 60 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A55 5G | 256 GB | Zustand auf Kategorieseite nicht angezeigt (refurbished) | unbekannt | 30,1 | 529 € | 13.09.2026 | 302 € | 57 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy A56 5G | 8 GB / 128 GB | Sehr gut | B sehr gut | 17,5 | 479 € | 13.09.2026 | 305 € | 64 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S22 Ultra 5G | 128 GB | Gut | C gut | 54,6 | 1.249 € | 13.09.2026 | 295 € | 24 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S22 Ultra 5G | 256 GB | Gut | C gut | 54,6 | 1.349 € | 13.09.2026 | 328 € | 24 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S22 Ultra 5G | 512 GB | Sehr gut | B sehr gut | 54,6 | 1.449 € | 13.09.2026 | 432 € | 30 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S22 Ultra 5G | 128 GB, Phantom Black | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 54,6 | 1.249 € | 13.09.2026 | 250 € | 20 % | Ankauf-Gebot | Quelle
+Samsung Galaxy S22 Ultra 5G | 256 GB, Phantom Black | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 54,6 | 1.349 € | 13.09.2026 | 280 € | 21 % | Ankauf-Gebot | Quelle
+Samsung Galaxy S22 Ultra 5G | 128 GB Dual-SIM, Phantom Black | Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 54,6 | 1.249 € | 13.09.2026 | 311 € | 25 % | Ankauf-Gebot | Quelle
+Samsung Galaxy S22 Ultra 5G | 128 GB Dual-SIM, Phantom Black | Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 54,6 | 1.249 € | 13.09.2026 | 251 € | 20 % | Ankauf-Gebot | Quelle
+Samsung Galaxy S23 FE | 128 GB | Gut | C gut | 32,9 | 699 € | 13.09.2026 | 259 € | 37 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S23 FE | 256 GB | Gut | C gut | 32,9 | 759 € | 13.09.2026 | 315 € | 42 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S23 FE | 256 GB | Sehr gut | B sehr gut | 32,9 | 759 € | 13.09.2026 | 367 € | 48 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S23 FE | 128 GB, Graphite | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 32,9 | 699 € | 13.09.2026 | 208 € | 30 % | Ankauf-Gebot | Quelle
+Samsung Galaxy S23 FE | 256 GB, Graphite | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 32,9 | 759 € | 13.09.2026 | 254 € | 33 % | Ankauf-Gebot | Quelle
+Samsung Galaxy S23 FE | 128 GB Dual-SIM, Graphite | Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 32,9 | 699 € | 13.09.2026 | 211 € | 30 % | Ankauf-Gebot | Quelle
+Samsung Galaxy S23 FE | 128 GB Dual-SIM, Graphite | Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 32,9 | 699 € | 13.09.2026 | 197 € | 28 % | Ankauf-Gebot | Quelle
+Samsung Galaxy S23+ | 256 GB | Gut | C gut | 42,9 | 1.199 € | 13.09.2026 | 347 € | 29 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S23+ | 512 GB | Gut | C gut | 42,9 | 1.319 € | 13.09.2026 | 381 € | 29 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S23+ | 256 GB, Phantom Black | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 42,9 | 1.199 € | 13.09.2026 | 295 € | 25 % | Ankauf-Gebot | Quelle
+Samsung Galaxy S23+ | 512 GB, Phantom Black | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 42,9 | 1.319 € | 13.09.2026 | 311 € | 24 % | Ankauf-Gebot | Quelle
+Samsung Galaxy S23+ | 256 GB, Green | Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 42,9 | 1.199 € | 13.09.2026 | 346 € | 29 % | Ankauf-Gebot | Quelle
+Samsung Galaxy S23+ | 256 GB, Green | Neu / originalverpackt, unbenutzt (Clevertronic, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 42,9 | 1.199 € | 13.09.2026 | 295 € | 25 % | Ankauf-Gebot | Quelle
+Samsung Galaxy S24 FE | 128 GB | Gut | C gut | 23,3 | 749 € | 13.09.2026 | 338 € | 45 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S24 FE | 128 GB | Exzellent | A wie neu | 23,3 | 749 € | 13.09.2026 | 390 € | 52 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S24 FE | 256 GB | Gut | C gut | 23,3 | 809 € | 13.09.2026 | 412 € | 51 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S24 Ultra | 256 GB | Sehr gut | B sehr gut | 31,4 | 1.449 € | 13.09.2026 | 564 € | 39 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S24 Ultra | 256 GB | Exzellent | A wie neu | 31,4 | 1.449 € | 13.09.2026 | 592 € | 41 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S24 Ultra | 512 GB | Gut | C gut | 31,4 | 1.569 € | 13.09.2026 | 571 € | 36 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S24 Ultra | 256 GB, Titanium Black | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 31,4 | 1.449 € | 13.09.2026 | 651 € | 45 % | Ankauf-Gebot | Quelle
+Samsung Galaxy S24 Ultra | 512 GB, Titanium Black | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 31,4 | 1.569 € | 13.09.2026 | 689 € | 44 % | Ankauf-Gebot | Quelle
+Samsung Galaxy S24 Ultra | 256 GB Dual-SIM, Titanium Black | Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 31,4 | 1.449 € | 13.09.2026 | 652 € | 45 % | Ankauf-Gebot | Quelle
+Samsung Galaxy S24 Ultra | 512 GB Dual-SIM, Titanium Orange | Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 31,4 | 1.569 € | 13.09.2026 | 697 € | 44 % | Ankauf-Gebot | Quelle
+Samsung Galaxy S24 | 128 GB | Gut | C gut | 31,4 | 899 € | 13.09.2026 | 348 € | 39 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S24 | 256 GB | Stark genutzt | D akzeptabel | 31,4 | 959 € | 13.09.2026 | 388 € | 40 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S24 | 128 GB, Onyx Black | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 31,4 | 899 € | 13.09.2026 | 351 € | 39 % | Ankauf-Gebot | Quelle
+Samsung Galaxy S24 | 256 GB, Onyx Black | bis zu (Clevertronic Festpreis vor Zustandsabfrage, Bestzustand) | keine Stufe | 31,4 | 959 € | 13.09.2026 | 436 € | 45 % | Ankauf-Gebot | Quelle
+Samsung Galaxy S24 | 128 GB Dual-SIM, Onyx Black | Neu / originalverpackt, unbenutzt (ZOXS, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 31,4 | 899 € | 13.09.2026 | 351 € | 39 % | Ankauf-Gebot | Quelle
+Samsung Galaxy S24 | 128 GB Dual-SIM, Onyx Black | Neu / originalverpackt, unbenutzt (wirkaufens, Wert laut Vergleichsportal handyverkauf-vergleich.de, Preisstand 13.09.2026) | keine Stufe | 31,4 | 899 € | 13.09.2026 | 346 € | 39 % | Ankauf-Gebot | Quelle
+Samsung Galaxy S25 Ultra | 256 GB | Exzellent | A wie neu | 19,2 | 1.449 € | 13.09.2026 | 739 € | 51 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S25 Ultra | 512 GB | Gut | C gut | 19,2 | 1.569 € | 13.09.2026 | 678 € | 43 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S25 Ultra | 512 GB | Exzellent | A wie neu | 19,2 | 1.569 € | 13.09.2026 | 792 € | 50 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S25+ | 256 GB | Sehr gut | B sehr gut | 19,2 | 1.149 € | 13.09.2026 | 633 € | 55 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S25+ | 512 GB | Gut | C gut | 19,2 | 1.269 € | 13.09.2026 | 630 € | 50 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S25+ | 512 GB | Exzellent | A wie neu | 19,2 | 1.269 € | 13.09.2026 | 731 € | 58 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S25 | 128 GB | Gut | C gut | 19,2 | 899 € | 13.09.2026 | 452 € | 50 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S25 | 128 GB | Sehr gut | B sehr gut | 19,2 | 899 € | 13.09.2026 | 527 € | 59 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy S25 | 128 GB | Exzellent | A wie neu | 19,2 | 899 € | 13.09.2026 | 492 € | 55 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy XCover6 Pro | 128 GB | Gut | C gut | 49,9 | 609 € | 13.09.2026 | 201 € | 33 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy XCover7 (Enterprise Edition) | 128 GB | Sehr gut | B sehr gut | 31,9 | 359 € | 13.09.2026 | 229 € | 64 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy Z Flip5 | 512 GB | Sehr gut | B sehr gut | 37,1 | 1.319 € | 13.09.2026 | 397 € | 30 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy Z Flip5 | 8 GB / 256 GB | Gut | C gut | 37,1 | 1.199 € | 13.09.2026 | 338 € | 28 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy Z Flip5 | 8 GB / 256 GB | Exzellent | A wie neu | 37,1 | 1.199 € | 13.09.2026 | 350 € | 29 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy Z Flip5 | 8 GB / 512 GB | Gut | C gut | 37,1 | 1.319 € | 13.09.2026 | 374 € | 28 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy Z Flip5 | 8 GB / 512 GB | Sehr gut | B sehr gut | 37,1 | 1.319 € | 13.09.2026 | 397 € | 30 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy Z Flip6 | 256 GB | Stark genutzt | D akzeptabel | 25,6 | 1.199 € | 13.09.2026 | 381 € | 32 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy Z Flip6 | 256 GB | Gut | C gut | 25,6 | 1.199 € | 13.09.2026 | 435 € | 36 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy Z Flip6 | 512 GB | Gut | C gut | 25,6 | 1.319 € | 13.09.2026 | 516 € | 39 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy Z Fold5 | 256 GB | Gut | C gut | 37,1 | 1.899 € | 13.09.2026 | 550 € | 29 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy Z Fold5 | 512 GB | Sehr gut | B sehr gut | 37,1 | 2.019 € | 13.09.2026 | 636 € | 32 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy Z Fold5 | 1 TB | Sehr gut | B sehr gut | 37,1 | 2.259 € | 13.09.2026 | 724 € | 32 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy Z Fold5 | 12 GB / 256 GB | Gut | C gut | 37,1 | 1.899 € | 13.09.2026 | 550 € | 29 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy Z Fold5 | 12 GB / 256 GB | Gut | C gut | 37,1 | 1.899 € | 13.09.2026 | 549 € | 29 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy Z Fold5 | 12 GB / 512 GB | Sehr gut | B sehr gut | 37,1 | 2.019 € | 13.09.2026 | 636 € | 32 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy Z Fold5 | 12 GB / 512 GB | Gut | C gut | 37,1 | 2.019 € | 13.09.2026 | 675 € | 33 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy Z Fold6 | 256 GB | Gut | C gut | 25,6 | 1.999 € | 13.09.2026 | 683 € | 34 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy Z Fold6 | 256 GB | Sehr gut | B sehr gut | 25,6 | 1.999 € | 13.09.2026 | 826 € | 41 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy Z Fold6 | 512 GB | Ungeöffnet | unbekannt | 25,6 | 2.119 € | 13.09.2026 | 970 € | 46 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy Z Fold6 | 12 GB / 256 GB | Gut | C gut | 25,6 | 1.999 € | 13.09.2026 | 683 € | 34 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy Z Fold6 | 12 GB / 256 GB | Gut | C gut | 25,6 | 1.999 € | 13.09.2026 | 648 € | 32 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy Z Fold6 | 12 GB / 512 GB | Gut | C gut | 25,6 | 2.119 € | 13.09.2026 | 760 € | 36 % | Marktplatz-Angebot | Quelle
+Samsung Galaxy Z Fold6 | 12 GB / 1 TB | Sehr gut | B sehr gut | 25,6 | 2.359 € | 13.09.2026 | 979 € | 42 % | Marktplatz-Angebot | Quelle
+▾ Wie gerechnet wird
+UVP beim Verkaufsstart je Modell und Ausstattung aus der deutschen Pressemitteilung des Herstellers oder der Fachpresse, mit Adresse und Datum je Zeile.
+Gebrauchtpreis heute je Modell, Ausstattung und Zustand von öffentlichen Gebrauchtmarktplätzen (Marktplatz-Angebote) und Ankaufseiten (Ankauf-Gebote als Höchstwert „bis zu“ vor der Zustandsprüfung), eine Zeile je Preisbeleg.
+Realisierung = Gebrauchtpreis / UVP derselben Speicherstufe; beide einschließlich Mehrwertsteuer, Deutschland. Die Zustandsangaben der Verkäufer werden auf die Zustandsstufen A bis D übersetzt; Ankauf-Gebote bilden eine eigene Gruppe.
+Kurve je Familie und je Hersteller: durch die Preisbelege wird eine Linie gelegt, bei der das Gerät jeden Monat denselben Prozentsatz seines aktuellen Werts verliert; alle Marktplatz-Angebote gehen ein; die Stufen A, C und D bekommen einen festen Abstand zur Stufe B, der zusammen mit der Linie geschätzt wird, und abgelesen wird die Linie für Stufe B. Unter 6 Belegen oder unter 6 Monaten Altersspanne gibt es keine Kurve; bei 6 bis 11 Belegen oder wenn die Linie steigt, gilt sie als unsicher.
+Gegen den Einkaufspreis: der Einkaufspreis eines Leasinghauses ist nicht öffentlich; ein benannter Platzhalter (12,0 % unter UVP) rechnet um: Realisierung gegen UVP geteilt durch 0,88.
+Mietpreis: nicht öffentlich und hier nicht verwendet; der Reiter Kreislauf rechnet mit simulierten Mieten, nie mit der Miete eines Leasinghauses.
+▾ Grenzen, ausgesprochen
+Marktplatz-Angebote enthalten die Marge des Aufbereiters; wer an Großhändler verkauft, erzielt weniger. Ankauf-Gebote sind hier Höchstwerte „bis zu“ vor der Zustandsprüfung, kein Boden; der tatsächliche Ankaufpreis liegt darunter. Was ein Leasinghaus erzielt, kennt es nur aus seinen eigenen Verkäufen.
+Monate zählen das Modellalter seit deutschem Verkaufsstart, nicht das Alter des einzelnen Geräts: ein sechs Monate nach Verkaufsstart gekauftes Gerät ist nach 24 Monaten Miete 30 Monate alt auf dieser Kurve.
+Ein Tag, ein Schnappschuss. Das Rechenmodell des Werkzeugs lernt aus realisierten Verkäufen über die Zeit; diese Seite ist die öffentliche Plausibilitätsprüfung für sein Niveau, kein Ersatz.
+Erstellt mit KI-Unterstützung (Recherche durch nur-lesende Web-Agenten, Stichproben adversarisch geprüft); jede Zahl trägt ihre Quelle, geprüft wurde eine Stichprobe, nicht jede Zeile.

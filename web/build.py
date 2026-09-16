@@ -10,8 +10,10 @@ Steps:
      data/catalogue/*.csv) and writes web/data/<tab>.json. No number is typed anywhere in the page.
   2. web/data/config.json from config/assumptions.yaml (purchase discount: value and owner), plus two derived
      fields the motors read (cycle.json n_models, term.json sim_discount_min/max).
-  3. web/dist/index.html from web/index.template.html: the data of every tab inline as
-     <script type="application/json" id="data-<tab>">; styles.css, app.js and engine/*.js copied next to it.
+  3. web/dist/index.html from web/index.template.html (look "Broadsheet", Eugen's design system) and
+     web/dist-cockpit/index.html from web/index.cockpit.template.html (look "Cockpit", since 16.09.2026: sidebar, cards,
+     pills; skin-cockpit.js draws, app.js computes): the data of every tab inline as
+     <script type="application/json" id="data-<tab>">; stylesheet, shell, skin and engine/*.js copied next to it.
 
 The page is the multi-file artifact published on claude.ai; the same files serve from any static host.
 Encoding: UTF-8 without BOM, LF. The build refuses en and em dashes in the page (project rule).
@@ -29,6 +31,10 @@ from pathlib import Path
 WEB = Path(__file__).resolve().parent
 REPO = WEB.parent
 DIST = WEB / "dist"
+SKINS = {
+    "broadsheet": {"dist": WEB / "dist", "template": WEB / "index.template.html", "files": ("styles.css", "app.js")},
+    "cockpit": {"dist": WEB / "dist-cockpit", "template": WEB / "index.cockpit.template.html", "files": ("cockpit.css", "skin-cockpit.js", "app.js")},
+}
 DATA = WEB / "data"
 ENGINE = WEB / "engine"
 TEMPLATE = WEB / "index.template.html"
@@ -100,17 +106,19 @@ def json_for_script(text: str) -> str:
     return text.replace("</", "<\\/")
 
 
-def embed() -> Path:
+def embed(skin: str = "broadsheet") -> Path:
+    sk = SKINS[skin]
+    dist, template = sk["dist"], sk["template"]
     cfg = build_config()
     cfg_text = json.dumps(cfg, ensure_ascii=False, indent=2)
     write_utf8(DATA / "config.json", cfg_text + "\n")
     augment_data()
-    DIST.mkdir(parents=True, exist_ok=True)
-    (DIST / "engine").mkdir(exist_ok=True)
+    dist.mkdir(parents=True, exist_ok=True)
+    (dist / "engine").mkdir(exist_ok=True)
     for src in sorted(ENGINE.glob("*.js")):
-        shutil.copyfile(src, DIST / "engine" / src.name)
-    for name in ("styles.css", "app.js", "index.template.html"):
-        shutil.copyfile(WEB / name, DIST / name)
+        shutil.copyfile(src, dist / "engine" / src.name)
+    for name in sk["files"] + (template.name,):
+        shutil.copyfile(WEB / name, dist / name)
     blocks = []
     total = 0
     for tab in TABS:
@@ -122,13 +130,13 @@ def embed() -> Path:
         total += len(raw)
         blocks.append(f'<script type="application/json" id="data-{tab}">{json_for_script(raw)}</script>')
     blocks.append(f'<script type="application/json" id="data-config">{json_for_script(cfg_text)}</script>')
-    tpl = TEMPLATE.read_text(encoding="utf-8")
+    tpl = template.read_text(encoding="utf-8")
     if "<!--DATA-->" not in tpl:
-        raise SystemExit("index.template.html without the <!--DATA--> marker")
+        raise SystemExit(template.name + " without the <!--DATA--> marker")
     html = tpl.replace("<!--DATA-->", "\n".join(blocks))
     if "–" in html or "—" in html:
         raise SystemExit("en or em dash in index.html; the page must not carry one")
-    out = DIST / "index.html"
+    out = dist / "index.html"
     write_utf8(out, html)
     print(f"{out}: {len(html):,} characters, {total:,} of them data")
     return out
@@ -138,10 +146,12 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--generate", action="store_true", help="regenerate web/data/*.json from the engine outputs first")
     ap.add_argument("--today", default=dt.date.today().isoformat(), help="date shown as 'Stand' on the page (YYYY-MM-DD)")
+    ap.add_argument("--skin", default="all", choices=["all"] + list(SKINS), help="which look to build: broadsheet (web/dist), cockpit (web/dist-cockpit) or all")
     args = ap.parse_args()
     if args.generate:
         generate(args.today)
-    embed()
+    for skin in (list(SKINS) if args.skin == "all" else [args.skin]):
+        embed(skin)
     return 0
 
 

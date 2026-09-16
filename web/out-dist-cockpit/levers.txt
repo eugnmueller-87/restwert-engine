@@ -1,0 +1,252 @@
+Restwert Engine
+Schließen
+Bericht
+Analytics
+Gerät
+Prognosegüte
+TCO
+Kreislauf
+Stellschrauben
+Laufzeit
+Market Intelligence
+Realisierung
+Serie gegen Serie
+Studien
+FAQ
+Daten
+Geplant
+Lager
+Verträge
+Analytics
+Stellschrauben
+Protokoll (0)
+Export CSV
+Datei einlesen
+Lauf starten
+Letzter Lauf Stand 16.09.2026 Dateien 283 Zeilen 166.115 ungeklärt 60 Seriennummern 5.251 Prototyp: Läufe werden protokolliert, nicht gerechnet.
+Protokoll dieser Installation
+manuell erfasste Daten, Lieferungen, Schwellen, Läufe · lokal gespeichert
+Noch keine Einträge. Preisbelege erfassen, Dateien einlesen, Schwellen ändern oder Szenarien speichern; jeder Schritt landet hier.
+Schwelle ändern: L03
+Simulation, Stand 16.09.2026 (Stichtag der Daten 13.09.2026)
+Stellschrauben: woran eine Rolle drehen kann, und was das Werkzeug dazu misst
+Hinweise ausblenden
+Eine Stellschraube ist ein Griff, an dem eine benannte Rolle drehen kann. Die Prüffrage daneben sagt, wie das Werkzeug misst, ob dort Geld liegen blieb; unter jeder Karte steht, was man tun kann. Die Messung ist immer dieselbe Rechnung: für jedes Gerät der Ist-Wert minus ein benannter Referenzwert, in Euro, auf einer oder zwei benannten Buchungszeilen; das Ergebnis dieser Rechnung heißt Hebel. Größer null heißt liegengelassenes Geld, kleiner null heißt besser als die Referenz. Der Referenzwert ist nie ein Vergleich mit anderen Unternehmen, sondern die eigene Flotte, die Restwertprognose bei Rückgabe oder die Wertkurve der Simulation. Alle Zahlen auf dieser Seite beziehen sich auf dieselben zwölf Monate vor dem Stichtag. Simulierte Daten. Die Rangfolge der Stellschrauben folgt aus den Annahmen der Simulation (Datei config/lake.yaml), nicht aus einem Markt. Die Rechnung bleibt dieselbe; mit echten Daten eines Hauses liefert sie dessen Rangfolge.
+Übersicht, zwölf Monate bis 13.09.2026
+simuliert 7 Zeilen
+Begriffe ausblenden
+Diese Tabelle zeigt sieben Stellen, an denen die Simulation Geld liegen lässt: je Stellschraube der Vergleich jedes Geräts mit einem benannten Referenzwert aus der eigenen Flotte, in Euro je Gerät und als Summe der letzten zwölf Monate, jede mit verantwortlicher Rolle und der Regel, die reagiert. Eine Zeile anklicken zeigt die Stellschraube darunter im Detail; alle Karten stehen am Ende der Seite zum Nachlesen.
+Stellschraube
+Name und Griff: woran die verantwortliche Rolle drehen kann; die kleine Kennung dahinter (L01 bis L07, L für Hebel) ist nur die Nummer im Werkzeug, in den Regeln und im Code, sonst ohne Bedeutung
+Prüffrage
+was das Werkzeug je Gerät misst, um zu sehen, ob an dieser Stellschraube Geld liegen blieb
+bewertet
+Geräte, deren maßgebliches Ereignis in die zwölf Monate fällt und für die ein Referenzwert vorlag; welches Ereignis das ist (Kauf, Verkauf oder Abschluss des Kreislaufs), nennt jede Karte
+mit Hebel
+davon Geräte, bei denen Geld liegen blieb
+Euro je Jahr
+Summe der Hebel dieser Geräte; die Herleitung steht auf der Karte darunter
+Euro je Gerät
+Euro je Jahr geteilt durch die bewerteten Geräte; bei Laufzeit der Hebel je Gerät der Gruppe, weil Euro je Jahr dort jede Gruppe nur einmal zählt
+Verantwortlich
+Rolle, die die Schwelle setzt und ändern darf
+Regel
+Nummer der Entscheidungsregel, die auf die Schwelle reagiert; ADV (advisory) heißt nur Hinweis, keine Entscheidung
+1
+Kanalwahl
+L03 · Verkaufskanal je Gerät nach dem Erlös nach Abzügen wählen
+Haben wir jedes Gerät über den Kanal verkauft, der nach Abzügen am meisten bringt?
+Verantwortlich: Leitung Recommerce · Regel: R02
+bewertet 1.061
+mit Hebel 595
+Euro je Jahr 21.207 €
+Euro je Gerät 19,99 €
+2
+Einkaufsrabatt
+L01 · Rabattboden je Hersteller bei jeder Bestellung durchsetzen
+Haben wir jedes Gerät so günstig eingekauft wie die besten 25 % unserer eigenen Einkäufe desselben Herstellers?
+Verantwortlich: Einkaufsleitung · Regel: R07
+bewertet 695
+mit Hebel 503
+Euro je Jahr 18.414 €
+Euro je Gerät 26,49 €
+3
+Zustand und Reparatur
+L04 · Rückgabezustand prüfen und nur reparieren, wenn es sich rechnet
+Stimmte der vom Kunden gemeldete Zustand, und hat sich die Reparatur gelohnt?
+Verantwortlich: Leitung Service · Regel: R01
+bewertet 969
+mit Hebel 189
+Euro je Jahr 11.692 €
+Euro je Gerät 12,07 €
+4
+Liegetage
+L05 · Bestand nach Liegetagen steuern: Soll je Geräteart, Preisstaffel, Kanalwechsel
+Wie lange liegen zurückgegebene Geräte, bis sie verkauft sind, und was kostet jeder Tag über dem Soll?
+Verantwortlich: CFO · Regel: R03
+bewertet 1.196
+mit Hebel 499
+Euro je Jahr 7.959 €
+Euro je Gerät 6,65 €
+5
+Laufzeit
+L07 · Miete je Laufzeit aus der Wertkurve bepreisen, nicht flach
+Welche Vertragslaufzeit bringt je Vertragsmonat die meiste Lifecycle-Marge, und was kosten uns die Verträge mit einer schlechteren Laufzeit?
+Verantwortlich: CFO · Regel: ADV04
+bewertet 825
+mit Hebel 256
+Euro je Jahr 3.350 €
+Euro je Gerät 83,29 €
+6
+Preisschutz
+L02 · Jede Preissenkung des Herstellers im Schutzfenster als Gutschrift beantragen
+Hat der Hersteller kurz nach unserem Kauf den Listenpreis gesenkt, und haben wir die Gutschrift dafür beantragt, die uns der Vertrag zusichert?
+Verantwortlich: Category Manager Hardware · Regel: R05
+bewertet 695
+mit Hebel 0
+Euro je Jahr 0 €
+Euro je Gerät 0,00 €
+7
+Herstellermix
+L06 · Herstelleranteil im Einkauf nach erzielter Realisierung steuern
+Erzielt ein Hersteller beim Wiederverkauf weniger als die eigene Flotte bei gleicher Familie, gleichem Alter und Zustand?
+Verantwortlich: Category Manager Hardware · Regel: ADV03
+bewertet 764
+mit Hebel 378
+Euro je Jahr -4.375 €
+Euro je Gerät -5,73 €
+Die Zeilen dürfen nicht addiert werden: Einkaufsrabatt und Preisschutz betreffen den Einkauf, die fünf anderen bewerten denselben Verkauf aus verschiedenen Richtungen; wer sie addiert, zählt dasselbe Gerät mehrfach. Nur Einkaufsrabatt und Preisschutz lassen sich gegen das Hauptbuch nachrechnen; das Werkzeug tut das bei jedem Lauf, ohne Abweichung. Die Stellschraube Laufzeit ist ein Vergleich von Vertragspolitiken und zählt je Gruppe (Geräteart und Einkaufshalbjahr), nicht je Gerät.
+Stellschraube L03 · gewählt
+Kanalwahl: Verkaufskanal je Gerät nach dem Erlös nach Abzügen wählen
+21.207 € je Jahr
+Prüffrage
+Haben wir jedes Gerät über den Kanal verkauft, der nach Abzügen am meisten bringt?
+Für jedes verkaufte Gerät wird jeder zulässige Kanal mit der Restwertprognose bewertet, die bei Rückgabe galt: mal Kanalfaktor, minus Gebühren, minus Lagerkosten bis das Geld da ist. Der Hebel ist der Erlös des besten Kanals minus der des gewählten; 0, wenn der beste gewählt wurde. Ob der Kanal am Ende mehr oder weniger als die Restwertprognose brachte, ist Prognosegenauigkeit und zählt hier nicht.
+Was man tun kann
+Vor jedem Verkauf jeden zulässigen Kanal mit der Restwertprognose bewerten und den mit dem höchsten Erlös nach Abzügen nehmen; Regel R02 lässt einen langsameren Kanal nur zu, wenn er den schnellsten um die Schwelle schlägt.
+Mitarbeiterkauf vor der Rückgabe anbieten: keine Kanalgebühr, kürzeste Zeit bis zum Zahlungseingang.
+Großhandel für Mengen und ältere Generationen, Marktplatz für junge Geräte in Zustandsstufe A und B.
+Kanalfaktoren und Gebühren je Quartal aus den eigenen Verkäufen nachziehen, nicht aus Annahmen.
+Wer dreht daran
+Verantwortlich
+Leitung Recommerce
+Schwelle
+Ein langsamerer Kanal muss den schnellsten nach Abzügen um mindestens 15 € schlagen (Regel R02)
+Regel, die reagiert
+R02
+Herleitung, zwölf Monate
+bewertet
+1.061
+Geräte mit Referenzwert
+mit Hebel
+595
+davon Geld liegen geblieben
+Euro je Jahr
+21.207 €
+Summe der Hebel
+Euro je Gerät
+19,99 €
+Euro je Jahr geteilt durch die bewerteten Geräte
+Maßgebliches Ereignis für das Zwölf-Monats-Fenster: Verkauf. Über alle Jahre der Simulation: 2.394 bewertet, Summe 51.916 €.
+Ein Gerät, vorgerechnet
+Gerät SN-SAM-9E6F9E01, Samsung Galaxy A16 5G · Verkauf am 02.09.2026, Hebel 24,80 €
+Restwertprognose bei Rückgabe (Zustandsstufe B)
+112,22 €
+Erlös nach Abzügen über Mitarbeiterkauf (bester): Kanalfaktor 0,95 (Annahme, Datei config/lake.yaml), 14 Tage bis Zahlungseingang
+102,43 €
+Erlös nach Abzügen über Marktplatz: Kanalfaktor 1,0 (Annahme, Datei config/lake.yaml), 28 Tage bis Zahlungseingang
+87,85 €
+Erlös nach Abzügen über Großhandel (Verkauf an Geschäftskunden) (gewählt): Kanalfaktor 0,84 (Annahme, Datei config/lake.yaml), 45 Tage bis Zahlungseingang
+77,64 €
+Tatsächlich erzielter Restwert (vor Abzug der Kanalgebühren; die Differenz zur Restwertprognose ist Prognosegenauigkeit, nicht Kanalwahl)
+104,51 €
+Hebel = Erlös des besten Kanals minus Erlös des gewählten Kanals
+24,80 €
+Erlös nach Abzügen je Kanal = Restwertprognose mal Kanalfaktor minus Gebühren minus Lagerkosten je Tag mal Tage bis Zahlungseingang
+Auswahl: aus der jüngsten Modellgeneration mit Hebel im Fenster (mindestens drei Geräte) das Gerät, dessen Hebel dem mittleren Hebel aller Geräte mit Hebel größer null am nächsten liegt.
+▾ Karte L03 Kanalwahl: 21.207 € je Jahr gewählt
+Prüffrage: Haben wir jedes Gerät über den Kanal verkauft, der nach Abzügen am meisten bringt? Für jedes verkaufte Gerät wird jeder zulässige Kanal mit der Restwertprognose bewertet, die bei Rückgabe galt: mal Kanalfaktor, minus Gebühren, minus Lagerkosten bis das Geld da ist. Der Hebel ist der Erlös des besten Kanals minus der des gewählten; 0, wenn der beste gewählt wurde. Ob der Kanal am Ende mehr oder weniger als die Restwertprognose brachte, ist Prognosegenauigkeit und zählt hier nicht.
+Was man tun kann. Vor jedem Verkauf jeden zulässigen Kanal mit der Restwertprognose bewerten und den mit dem höchsten Erlös nach Abzügen nehmen; Regel R02 lässt einen langsameren Kanal nur zu, wenn er den schnellsten um die Schwelle schlägt. Mitarbeiterkauf vor der Rückgabe anbieten: keine Kanalgebühr, kürzeste Zeit bis zum Zahlungseingang. Großhandel für Mengen und ältere Generationen, Marktplatz für junge Geräte in Zustandsstufe A und B. Kanalfaktoren und Gebühren je Quartal aus den eigenen Verkäufen nachziehen, nicht aus Annahmen.
+Herleitung, zwölf Monate bis 13.09.2026. bewertet 1.061 (Geräte mit Referenzwert), mit Hebel 595 (davon Geld liegen geblieben), Euro je Jahr 21.207 € (Summe der Hebel), Euro je Gerät 19,99 € (Euro je Jahr geteilt durch die bewerteten Geräte). Maßgebliches Ereignis für das Zwölf-Monats-Fenster: Verkauf. Über alle Jahre der Simulation: 2.394 bewertet, Summe 51.916 €.
+Ein Gerät, vorgerechnet. Gerät SN-SAM-9E6F9E01, Samsung Galaxy A16 5G, Verkauf am 02.09.2026; aus der jüngsten Modellgeneration mit Hebel im Fenster (mindestens drei Geräte) das Gerät, dessen Hebel dem mittleren Hebel aller Geräte mit Hebel größer null am nächsten liegt. Hebel 24,80 €.
+Restwertprognose bei Rückgabe (Zustandsstufe B): 112,22 €
+Erlös nach Abzügen über Mitarbeiterkauf (bester): Kanalfaktor 0,95 (Annahme, Datei config/lake.yaml), 14 Tage bis Zahlungseingang: 102,43 €
+Erlös nach Abzügen über Marktplatz: Kanalfaktor 1,0 (Annahme, Datei config/lake.yaml), 28 Tage bis Zahlungseingang: 87,85 €
+Erlös nach Abzügen über Großhandel (Verkauf an Geschäftskunden) (gewählt): Kanalfaktor 0,84 (Annahme, Datei config/lake.yaml), 45 Tage bis Zahlungseingang: 77,64 €
+Tatsächlich erzielter Restwert (vor Abzug der Kanalgebühren; die Differenz zur Restwertprognose ist Prognosegenauigkeit, nicht Kanalwahl): 104,51 €
+Hebel = Erlös des besten Kanals minus Erlös des gewählten Kanals: 24,80 €
+Erlös nach Abzügen je Kanal = Restwertprognose mal Kanalfaktor minus Gebühren minus Lagerkosten je Tag mal Tage bis Zahlungseingang
+Wer dreht daran. Schwelle: Ein langsamerer Kanal muss den schnellsten nach Abzügen um mindestens 15 € schlagen (Regel R02). Verantwortlich: Leitung Recommerce. Regel, die reagiert: R02.
+▾ Karte L01 Einkaufsrabatt: 18.414 € je Jahr
+Prüffrage: Haben wir jedes Gerät so günstig eingekauft wie die besten 25 % unserer eigenen Einkäufe desselben Herstellers? Für jedes Gerät wird der gezahlte Preis mit dem Preis verglichen, den die besten 25 % der eigenen Einkäufe desselben Herstellers, Bezugswegs und Halbjahres erreicht haben. Die Differenz ist der Hebel; wer besser eingekauft hat, zählt 0.
+Was man tun kann. Rabattboden je Hersteller aus den besten 25 % der eigenen Einkäufe setzen und bei jeder Bestellung prüfen (Regel R07 schlägt an, wenn ein Bestellpreis darunter liegt). Bestellungen bündeln, wo der Boden verfehlt wurde; die Referenz gilt je Hersteller, Bezugsweg und Halbjahr, sie zeigt also, welche Bestellungen zu teuer waren. Hersteller direkt gegen Zwischenhändler je Modell vergleichen; ein Zwischenhändler mit Aufschlag muss ihn durch Lieferzeit oder Service verdienen.
+Herleitung, zwölf Monate bis 13.09.2026. bewertet 695 (Geräte mit Referenzwert), mit Hebel 503 (davon Geld liegen geblieben), Euro je Jahr 18.414 € (Summe der Hebel), Euro je Gerät 26,49 € (Euro je Jahr geteilt durch die bewerteten Geräte). Maßgebliches Ereignis für das Zwölf-Monats-Fenster: Kauf. Über alle Jahre der Simulation: 5.251 bewertet, Summe 130.207 €.
+Ein Gerät, vorgerechnet. Gerät SN-APL-53E75373, MacBook Pro 14" (M5, 2025), Kauf am 13.01.2026; aus der jüngsten Modellgeneration mit Hebel im Fenster (mindestens drei Geräte) das Gerät, dessen Hebel dem mittleren Hebel aller Geräte mit Hebel größer null am nächsten liegt. Hebel 23,64 €.
+UVP ohne Mehrwertsteuer (Einkauf rechnet netto): 1.511,76 €
+Gezahlter Preis (Rechnungspreis minus Preisschutz-Gutschrift): 1.382,46 €
+Gezahlter Rabatt gegen UVP: 8,6 %
+Referenzrabatt: der Rabatt, den das beste Viertel der eigenen Einkäufe dieses Herstellers mindestens erreicht hat (Gruppe Apple / Hersteller direkt / 2026-H1, 62 Vergleichskäufe): 10,1 %
+Referenzpreis (UVP minus Referenzrabatt): 1.358,82 €
+Hebel = gezahlter Preis minus Referenzpreis: 23,64 €
+Hebel = (Referenzrabatt minus gezahlter Rabatt) mal UVP ohne Mehrwertsteuer, nie unter 0
+Wer dreht daran. Schwelle: Rabattboden je Hersteller (Regel R07 schlägt an, wenn ein Bestellpreis darunter liegt): Apple 6 %; alle: Apple 6 %, Samsung 15 %, Google 12 %, Motorola 18 %, Fairphone 4 %, HMD Global (Nokia) 18 %, Lenovo 18 %, Dell 18 %, HP 18 %, Microsoft 10 %. Verantwortlich: Einkaufsleitung. Regel, die reagiert: R07.
+▾ Karte L04 Zustand und Reparatur: 11.692 € je Jahr
+Prüffrage: Stimmte der vom Kunden gemeldete Zustand, und hat sich die Reparatur gelohnt? Zwei Teile: der Wert laut Wertkurve der Simulation bei der gemeldeten Zustandsstufe minus dem bei der geprüften, beides in Prozent des Einkaufspreises, mal Einkaufspreis; und jede Reparatur oberhalb der zulässigen Quote des Restwerts mit dem Betrag darüber.
+Was man tun kann. Gemeldeten und geprüften Zustand je Rückgabe vergleichen und Abweichungen dem Kunden nach Vertrag berechnen. Reparieren nur bis zur zulässigen Quote des Restwerts (Regel R01); darüber ohne Aufbereitung verkaufen. Schadensquote je Kunde und Geräteart zurückspielen: Schutzhüllen, Versicherung, Kaution.
+Herleitung, zwölf Monate bis 13.09.2026. bewertet 969 (Geräte mit Referenzwert), mit Hebel 189 (davon Geld liegen geblieben), Euro je Jahr 11.692 € (Summe der Hebel), Euro je Gerät 12,07 € (Euro je Jahr geteilt durch die bewerteten Geräte). Maßgebliches Ereignis für das Zwölf-Monats-Fenster: Abschluss des Kreislaufs (Verkauf oder Verschrottung). Über alle Jahre der Simulation: 2.327 bewertet, Summe 20.984 €.
+Ein Gerät, vorgerechnet. Gerät SN-SAM-4FF8A5CD, Samsung Galaxy A55 5G, Abschluss des Kreislaufs (Verkauf oder Verschrottung) am 15.07.2026; aus der jüngsten Modellgeneration mit Hebel im Fenster (mindestens drei Geräte) das Gerät, dessen Hebel dem mittleren Hebel aller Geräte mit Hebel größer null am nächsten liegt. Hebel 51,03 €.
+Gemeldete Zustandsstufe / geprüfte Zustandsstufe: C / C
+Wert laut Wertkurve der Simulation bei gemeldeter Zustandsstufe, in Prozent des Einkaufspreises: 41,7 %
+Wert laut Wertkurve der Simulation bei geprüfter Zustandsstufe, in Prozent des Einkaufspreises: 41,7 %
+Einkaufspreis: 343,41 €
+Alter bei Rückgabe: 26 Monate
+Teil Zustand = Einkaufspreis mal Differenz der beiden Anteile: 0,00 €
+Teil Reparatur = Reparaturkosten über der zulässigen Quote (35 % des Restwerts): 51,03 €
+Hebel = Teil Zustand plus Teil Reparatur: 51,03 €
+Hebel = Einkaufspreis mal (Anteil gemeldet minus Anteil geprüft) plus Reparaturkosten über der Quote
+Wer dreht daran. Schwelle: Zulässige Reparaturquote am Restwert (Regel R01): Android-Smartphone 35 %; alle: iPhone 40 %, Android-Smartphone 35 %, Laptop 45 %, Tablet 38 %. Verantwortlich: Leitung Service. Regel, die reagiert: R01.
+▾ Karte L05 Liegetage: 7.959 € je Jahr
+Prüffrage: Wie lange liegen zurückgegebene Geräte, bis sie verkauft sind, und was kostet jeder Tag über dem Soll? Gemessen wird je Seriennummer die Kette Rückgabe, Datenlöschung und Zustandsprüfung, Aufbereitung fertig (ab da verkaufsfähig), Verkauf, Zahlungseingang, jede Station mit Datum aus dem Geräte-Hauptbuch. Liegetage sind die Tage von verkaufsfähig bis verkauft; das Soll je Geräteart ist eine Annahme (Leitung Recommerce). Tage über dem Soll mal Lagerkosten je Tag, plus der Wertverlust laut Wertkurve der Simulation zwischen erwartetem und tatsächlichem Verkaufsmonat. Geräte im Lager werden zum Stichtag gemessen. Die Lagerkosten je Tag sind ein Platzhalter, der Hebel also eine Schätzung.
+Tage je Verkaufskanal in der Simulation. Mitarbeiterkauf: 507 Geräte, Rückgabe bis verkaufsfähig 10 Tage, verkaufsfähig bis verkauft 23 Tage, Rückgabe bis Zahlungseingang 48 Tage; Marktplatz: 995 Geräte, Rückgabe bis verkaufsfähig 12 Tage, verkaufsfähig bis verkauft 40 Tage, Rückgabe bis Zahlungseingang 80 Tage; Großhandel (Verkauf an Geschäftskunden): 816 Geräte, Rückgabe bis verkaufsfähig 13 Tage, verkaufsfähig bis verkauft 40 Tage, Rückgabe bis Zahlungseingang 99 Tage; Verkauf ohne Aufbereitung: 226 Geräte, Rückgabe bis verkaufsfähig 6 Tage, verkaufsfähig bis verkauft 42 Tage, Rückgabe bis Zahlungseingang 79 Tage. Mittelwerte je Gerät der abgeschlossenen Kreisläufe. Heute im Lager: 135 verkaufsfähige Geräte, im Mittel 52 Tage, davon 27 über 90 Tagen (Regel R03).
+Was man tun kann. Soll-Liegetage je Geräteart setzen und den Bestand darüber jede Woche sehen; Regel R03 schreibt verkaufsfähigen Bestand ab 90 und ab 180 Tagen ab (Schwellen aging_days_90 und aging_days_180, Verantwortlich: CFO), das Ziel ist, dass sie nie greift. Preis nach Liegetagen staffeln und nach dem Soll den Kanal wechseln, wenn ein anderer Kanal nach Abzügen mehr bringt oder sicher abnimmt (Mengenabnahme im Großhandel); in der Simulation ist der Großhandel nicht schneller als der Marktplatz (Tage je Verkaufskanal oben), das Argument ist die sichere Abnahme, nicht die Zeit. Verkauf vor der Rückgabe anbahnen: das Vertragsende ist bekannt, Mitarbeiterkauf und Großhandelsabruf lassen sich davor vereinbaren. Rückgabe bis verkaufsfähig kurz halten: Datenlöschung, Prüfung und Aufbereitung als eine Kette messen; Zustandsstufe D ohne Aufbereitung verkaufen. Verkaufsfenster vor dem Nachfolger nutzen; die Verkaufsstarttermine stehen im Katalog. Tage bis Zahlungseingang je Kanal mitzählen: verkauft ist nicht bezahlt.
+Herleitung, zwölf Monate bis 13.09.2026. bewertet 1.196 (Geräte mit Referenzwert), mit Hebel 499 (davon Geld liegen geblieben), Euro je Jahr 7.959 € (Summe der Hebel), Euro je Gerät 6,65 € (Euro je Jahr geteilt durch die bewerteten Geräte). Maßgebliches Ereignis für das Zwölf-Monats-Fenster: Verkauf; für Geräte, die am Stichtag noch im Lager liegen, der Stichtag. Über alle Jahre der Simulation: 2.679 bewertet, Summe 14.632 €.
+Ein Gerät, vorgerechnet. Gerät SN-SAM-01AF2205, Samsung Galaxy A36 5G, Verkauf am 03.06.2026; aus der jüngsten Modellgeneration mit Hebel im Fenster (mindestens drei Geräte) das Gerät, dessen Hebel dem mittleren Hebel aller Geräte mit Hebel größer null am nächsten liegt. Hebel 1,80 €.
+Liegetage: Tage von verkaufsfähig bis verkauft: 41
+Erwartete Liegetage (Annahme, Verantwortlich: Leitung Recommerce): 35,0
+Tage darüber: 6
+Lagerkosten je Tag (Platzhalter, Verantwortlich: CFO): 0,30 €
+Teil Lagerkosten = Tage darüber mal Lagerkosten je Tag: 1,80 €
+Teil Wertverlust laut Wertkurve der Simulation (Wert im erwarteten Verkaufsmonat 49 % gegen tatsächlichen 49 %, in Prozent des Einkaufspreises): 0,00 €
+Hebel = Teil Lagerkosten plus Teil Wertverlust: 1,80 €
+Hebel = Tage darüber mal Lagerkosten je Tag plus Einkaufspreis mal Wertverlust laut Wertkurve der Simulation
+Wer dreht daran. Schwelle: Erste Alterungsstufe (Regel R03): 90 Liegetage; die erwarteten Liegetage je Familie setzt die Leitung Recommerce. Verantwortlich: CFO. Regel, die reagiert: R03.
+▾ Karte L07 Laufzeit: 3.350 € je Jahr
+Prüffrage: Welche Vertragslaufzeit bringt je Vertragsmonat die meiste Lifecycle-Marge, und was kosten uns die Verträge mit einer schlechteren Laufzeit? Für jedes abgeschlossene Gerät wird die Lifecycle-Marge durch die Vertragsmonate geteilt; das ist die Marge je Vertragsmonat. Innerhalb derselben Geräteart und desselben Einkaufshalbjahres wird je Laufzeit (12, 24, 36, 48 Monate) der mittlere Wert gebildet. Der Hebel eines Geräts ist die Marge je Monat der besten anderen Laufzeit minus die eigene, mal die eigenen Vertragsmonate; 0, wenn die eigene Laufzeit die beste ist. Das ist ein Vergleich von Vertragspolitiken, kein Fehler am einzelnen Gerät; deshalb zählt der Hebel einmal je Gruppe, nicht je Gerät. In der Simulation folgt die Rangfolge der Laufzeiten aus den Monatssätzen je Laufzeit in config/lake.yaml, die Platzhalter sind.
+Was man tun kann. Miete je Laufzeit aus der Wertkurve und den Kosten je Kreislauf ableiten (Reiter Laufzeit), nicht flach über alle Laufzeiten. Laufzeit je Geräteart empfehlen: lange für Laptops und Tablets, 24 Monate für Smartphones, 12 nur mit hoher Miete oder zweitem Kreislauf. Hinweis ADV04 an den CFO, wenn eine Laufzeit je Gerät um die Schwelle besser abschließt als eine andere.
+Herleitung, zwölf Monate bis 13.09.2026. bewertet 825 (Geräte mit Referenzwert), mit Hebel 256 (davon Geld liegen geblieben), Euro je Jahr 3.350 € (Summe der Hebel, einmal je Gruppe), Euro je Gerät 83,29 € (Hebel je Gerät der Gruppe; Euro je Jahr zählt jede Gruppe nur einmal). Maßgebliches Ereignis für das Zwölf-Monats-Fenster: Abschluss des Kreislaufs (Verkauf oder Verschrottung). Über alle Jahre der Simulation: 2.209 bewertet, Summe 183.979 €.
+Ein Gerät, vorgerechnet. Gerät SN-APL-836291AF, iPhone 15 Pro Max, Abschluss des Kreislaufs (Verkauf oder Verschrottung) am 12.12.2025; aus der jüngsten Modellgeneration mit Hebel im Fenster (mindestens drei Geräte) das Gerät, dessen Hebel dem mittleren Hebel aller Geräte mit Hebel größer null am nächsten liegt. Hebel 67,23 €.
+Eigene Laufzeit / beste andere Laufzeit der Gruppe: 12 / 24 Monate
+Lifecycle-Marge je Vertragsmonat, eigene Laufzeit, mittleres Gerät der Gruppe (23 Geräte): -0,25 €
+Lifecycle-Marge je Vertragsmonat, beste andere Laufzeit, mittleres Gerät der Gruppe (81 Geräte): 5,35 €
+Gruppe: Geräteart / Einkaufshalbjahr: iPhone / 2023-H2
+Hebel = Differenz je Vertragsmonat mal eigene Vertragsmonate: 67,23 €
+Hebel = (Lifecycle-Marge je Vertragsmonat der besten anderen Laufzeit minus der eigenen) mal eigene Vertragsmonate, nie unter 0, einmal je Gruppe
+Wer dreht daran. Schwelle: Hinweis ADV04 meldet, wenn eine Laufzeit je Gerät mindestens 50 € besser abschließt als eine andere Laufzeit derselben Gruppe. Verantwortlich: CFO. Regel, die reagiert: ADV04.
+▾ Karte L02 Preisschutz: 0 € je Jahr
+Prüffrage: Hat der Hersteller kurz nach unserem Kauf den Listenpreis gesenkt, und haben wir die Gutschrift dafür beantragt, die uns der Vertrag zusichert? Preisschutz ist die Gutschrift des Herstellers, wenn er den Listenpreis innerhalb einer vertraglichen Frist nach unserem Kauf senkt. Senkt ein Hersteller den Preis innerhalb des Preisschutzfensters, steht für den Bestand eine Gutschrift zu. Der Hebel ist die Gutschrift, die nicht beantragt wurde. Offene Fenster zählen noch nicht.
+Was man tun kann. Preissenkungen der Hersteller im Schutzfenster automatisch erkennen: Katalog-UVP gegen Bestellpreis, Frist aus dem Vertrag, Gutschrift beantragen (Regel R05). Erinnerung 14 Tage bevor ein Preisschutzfenster schließt (Schwelle price_protection_reminder_days, Verantwortlich: Category Manager Hardware); Anträge unter 500 € lohnen den Aufwand nicht (Schwelle price_protection_min_claim_eur). Preisschutzfrist und Mindestbetrag in jedem Herstellervertrag verhandeln; ohne Klausel gibt es nichts zu holen.
+Herleitung, zwölf Monate bis 13.09.2026. bewertet 695 (Geräte mit Referenzwert), mit Hebel 0 (davon Geld liegen geblieben), Euro je Jahr 0 € (Summe der Hebel), Euro je Gerät 0,00 € (Euro je Jahr geteilt durch die bewerteten Geräte). Maßgebliches Ereignis für das Zwölf-Monats-Fenster: Kauf. Über alle Jahre der Simulation: 5.251 bewertet, Summe 503 €.
+Ein Gerät, vorgerechnet. Im Fenster kein Gerät mit einem Hebel größer null.
+Wer dreht daran. Schwelle: Mindestbetrag für einen Preisschutz-Antrag (Regel R05): 500 €. Verantwortlich: Category Manager Hardware. Regel, die reagiert: R05.
+▾ Karte L06 Herstellermix: -4.375 € je Jahr
+Prüffrage: Erzielt ein Hersteller beim Wiederverkauf weniger als die eigene Flotte bei gleicher Familie, gleichem Alter und Zustand? Die Realisierung dieses Geräts beim Verkauf, bezogen auf die UVP ohne Mehrwertsteuer, gegen die mittlere Realisierung der eigenen Verkäufe derselben Familie im selben Altersfenster und Zustand (die Hälfte der Geräte liegt darüber, die Hälfte darunter). Negativ, wenn der Hersteller besser war als die Flotte.
+Was man tun kann. Herstelleranteil im Einkauf nach der erzielten Realisierung steuern, nicht nach dem Listenpreis. Hersteller mit dauerhaft schlechterer Realisierung teurer bepreisen oder kürzer vermieten. Hinweis ADV03 meldet, wenn ein Hersteller unter seiner Familie liegt; die Entscheidung bleibt beim Category Manager.
+Herleitung, zwölf Monate bis 13.09.2026. bewertet 764 (Geräte mit Referenzwert), mit Hebel 378 (davon Geld liegen geblieben), Euro je Jahr -4.375 € (Summe der Hebel), Euro je Gerät -5,73 € (Euro je Jahr geteilt durch die bewerteten Geräte). Maßgebliches Ereignis für das Zwölf-Monats-Fenster: Verkauf. Über alle Jahre der Simulation: 1.896 bewertet, Summe -13.726 €.
+Ein Gerät, vorgerechnet. Gerät SN-SAM-3FF8F10A, Samsung Galaxy A16 5G, Verkauf am 22.03.2026; aus der jüngsten Modellgeneration mit Hebel im Fenster (mindestens drei Geräte) das Gerät, dessen Hebel dem mittleren Hebel aller Geräte mit Hebel größer null am nächsten liegt. Hebel 34,95 €.
+Restwert (Verkaufspreis vor Abzug der Kanalgebühren): 48,62 €
+UVP ohne Mehrwertsteuer: 192,44 €
+Realisierung dieses Geräts, bezogen auf die UVP ohne Mehrwertsteuer: 25,3 %
+Referenz: mittlere Realisierung der eigenen Verkäufe, Smartphone, Alter 12 bis 18 Monate, Zustandsstufe C, 23 Vergleichsgeräte aus der eigenen Flotte: 43,4 %
+Hebel = (Referenz minus eigene Realisierung) mal UVP ohne Mehrwertsteuer: 34,95 €
+Hebel = (mittlere Realisierung der Flotte minus eigene Realisierung) mal UVP ohne Mehrwertsteuer; negativ, wenn der Hersteller besser war
+Wer dreht daran. Schwelle: Hinweis ADV03 meldet, wenn ein Hersteller im Mittel mehr als 5 Prozentpunkte unter der mittleren Realisierung seiner Familie liegt. Verantwortlich: Category Manager Hardware. Regel, die reagiert: ADV03.

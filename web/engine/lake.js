@@ -41,18 +41,18 @@
       .map(function (u) { return f.qty(u.n) + ' mal ' + u.reason; })
       .concat(['nichts davon wird geraten']);
     var kpis = [
-      { label: 'Datenkanäle angeschlossen', value: f.qty(T.feeds), lines: [
+      { label: 'Datenkanäle angeschlossen', value: f.qty(T.feeds), tags: [{ cls: 'tag-neutral', text: 'simuliert' }], lines: [
         'aus ' + f.qty(T.systems) + ' Quellsystemen, plus ' + f.qty(T.public) + ' öffentliche Kanäle (Katalog, Marktkurven)',
         f.qty(T.needed) + ' davon für den Kreislauf nötig',
         f.qty(T.files) + ' Dateien seit ' + f.de(D.history_start)
       ] },
-      { label: 'Zeilen gelesen', value: f.qty(T.read), lines: [
+      { label: 'Zeilen gelesen', value: f.qty(T.read), tags: [{ cls: 'tag-neutral', text: 'simuliert' }], lines: [
         f.qty(T.new) + ' übernommen',
         f.qty(T.dup_same) + ' identische Doppelte übersprungen',
         f.qty(T.dup_conflict) + ' Doppelte mit anderem Inhalt gemeldet'
       ] },
       { label: 'Ungeklärte Zeilen', value: f.qty(T.unresolved), lines: unresLines },
-      { label: 'Datumskette vollständig', value: D.serials ? f.pct1(D.chain_ok / D.serials) : '', lines: [
+      { label: 'Datumskette vollständig', value: D.serials ? f.pct1(D.chain_ok / D.serials) : '', tags: [{ cls: 'tag-neutral', text: 'simuliert' }], lines: [
         f.qty(D.chain_ok) + ' von ' + f.qty(D.serials) + ' Seriennummern',
         'jede erwartete Station von Bestellung bis Zahlungseingang hat ein Datum'
       ] }
