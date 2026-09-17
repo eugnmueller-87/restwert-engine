@@ -132,6 +132,7 @@
         tab: 'report', data: {}, loading: {}, failed: {}, open: {}, defs: {}, blocks: {}, kpiDefs: {}, kpiDetails: {}, introOpen: {},
         market: { family: 'Smartphone', detail: false }, dev: { id: null, term: 24, when: 'launch', over: {} }, editing: {}, draft: {},
         tco: { slug: null, storage: 'all', term: 'all' }, lever: null,
+        kpi: { period: null, open: null },   /* Reiter KPIs: Zyklus (null heisst Standard aus den Daten) und die aufgeklappte Kennzahl */
         scenarios: [], manual: [], deliveries: [], thresholds: {}, assumptions: { disc: this.cfg.value }, log: [], runs: [], running: false,
         logOpen: false, dlg: null, form: {}
       };
@@ -328,6 +329,11 @@
             remove: function (id) { var x = S.deliveries.find(function (y) { return y.id === id; }); self.put('deliveries', S.deliveries.filter(function (y) { return y.id !== id; })); if (x) self.addLog('Lieferung', x.feed + ': ' + x.fileName + ' entfernt', 'Sie', 'entfernt', 'tag-neutral'); }
           };
           else if (S.tab === 'levers') opts = { lever: S.lever, thresholds: S.thresholds, select: function (id) { self.setState({ lever: id }); } };
+          else if (S.tab === 'kpis') opts = {
+            period: S.kpi.period, open: S.kpi.open,
+            setPeriod: function (p) { self.setState(function (s) { return { kpi: Object.assign({}, s.kpi, { period: p }) }; }); },
+            toggle: function (nr) { self.setState(function (s) { return { kpi: Object.assign({}, s.kpi, { open: s.kpi.open === nr ? null : nr }) }; }); }
+          };
           V = motor(D, opts, P);
           if (!V || typeof V !== 'object') { V = null; error = 'Der Motor für diesen Reiter hat kein Ansichtsmodell geliefert.'; }
         }
@@ -348,7 +354,7 @@
 
       var out = {
         groups: groups, tabs: tabs, hasTabs: tabs.length > 0, planned: planned, pending: pending, status: status, cellPad: cellPad, padLeft: padLeft, tableFont: tableFont,
-        isDevice: S.tab === 'device', isMarket: S.tab === 'market', isTco: S.tab === 'tco',
+        isDevice: S.tab === 'device', isMarket: S.tab === 'market', isTco: S.tab === 'tco', isKpis: S.tab === 'kpis', periodOpts: [],
         loading: !V && !error, ready: !!V, error: error,
         kicker: '', subject: '', intro: '', introOpen: false, introLabel: 'Hinweise', toggleIntro: function () { self.toggle('introOpen', S.tab, false); },
         facts: [], hasFacts: false, hasKpis: false, kpis: [], hasMoreKpi: false, kpiDetailsLabel: 'Herleitung', kpiDetailsOpen: false, toggleKpiDetails: function () {},
@@ -579,6 +585,8 @@
           out.sectionActions = [{ label: 'Schwelle ändern: ' + ds.id, onClick: function () { self.openDlg('threshold', { leverId: ds.id, lever: ds.id + ' ' + ds.name, current: ds.threshold, rule: ds.meta && ds.meta[2] ? ds.meta[2].v : '', text: '', note: '', by: ds.owner }); } }];
         }
       }
+      /* KPIs: der Zyklus als Pillen-Umschalter, die Optionen kommen aus dem Motor (Beschriftung, gewaehlt, Wechsel) */
+      if (S.tab === 'kpis') out.periodOpts = V.periodOpts || [];
       out.tables = tables.map(shape); this._tables = out.tables; out.hasSectionActions = out.sectionActions.length > 0;
       return out;
     }
@@ -637,6 +645,7 @@
         parts.push(Seg('rw-tst-l', 'Ausstattung', 'rw-tst', o.storageOpts));
         parts.push(Seg('rw-tterm-l', 'Laufzeit', 'rw-tterm', o.tcoTermOpts));
       }
+      if (o.isKpis && o.periodOpts.length) parts.push(Seg('rw-kpi-period-l', 'Zyklus', 'rw-kpi-period', o.periodOpts));
       var actions = o.hasSectionActions ? h('div', { style: { marginLeft: 'auto', display: 'flex', flexWrap: 'wrap', gap: 4, alignSelf: 'flex-end' } },
         o.sectionActions.map(function (a, i) { return h('button', { key: i, type: 'button', className: 'btn btn-secondary', onClick: a.onClick, style: { whiteSpace: 'nowrap', fontSize: 13, padding: '6px 10px' } }, a.label); })) : null;
       if (!parts.length && !actions) return null;

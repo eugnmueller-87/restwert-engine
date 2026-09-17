@@ -108,6 +108,7 @@
       parts.push(S.Seg('rw-tst-l', 'Ausstattung', 'rw-tst', o.storageOpts));
       parts.push(S.Seg('rw-tterm-l', 'Laufzeit', 'rw-tterm', o.tcoTermOpts));
     }
+    if (o.isKpis && o.periodOpts.length) parts.push(S.Seg('rw-kpi-period-l', 'Zyklus', 'rw-kpi-period', o.periodOpts));
     var actions = o.hasSectionActions ? h('div', { className: 'actions' },
       o.sectionActions.map(function (a, i) { return h('button', { key: i, type: 'button', className: 'btn btn-secondary', onClick: a.onClick }, a.label); })) : null;
     if (!parts.length && !actions) return null;

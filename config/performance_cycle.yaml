@@ -1,0 +1,12 @@
+# Performance cycle of the house, read by the KPI tracker (web tab KPIs, web/tools/gen/make_kpis_data.py).
+# THE MODEL ADVISES, DETERMINISTIC CODE DECIDES, A NAMED HUMAN OWNS EVERY THRESHOLD.
+#
+# cycle       the cycle the tab opens with: q (Quartal), h (Halbjahr), j (Jahr); the tab can switch
+# start_date  day one of the cycle. "bis Monat 12" in the KPI frame means start_date plus twelve months,
+#             "ab Monat 6" means from start_date plus six months on; the tracker rounds that date to the end
+#             of the cycle segment it falls in (Q4 2027, H2 2027, 2027) and calls it "Bis".
+# owner       who sets the cycle; a role, replaced by a real name before use on real data.
+version: 1
+cycle: q
+start_date: 2026-10-01
+owner: "Leitung"

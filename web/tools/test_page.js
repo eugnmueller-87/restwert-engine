@@ -398,6 +398,27 @@ async function uiSmoke() {
     st = store('tco', null); expect(st && st.term === termVal && st.storage !== 'all', 'Ausstattung und Laufzeit gemerkt (' + JSON.stringify(st) + ')');
   });
 
+  await step('kpis', 'KPIs: Zyklus wechseln, Zeile aufklappen', async () => {
+    await tab('KPIs');
+    const K = data('kpis');
+    const def = K.cycle.periods.find(p => p.key === K.cycle.default).label;
+    expect(segOn('rw-kpi-period-l') === def, 'Zyklus startet auf ' + def + ' (ist ' + segOn('rw-kpi-period-l') + ')');
+    const rowsOf = () => $$('#app main table.table tbody tr[role="button"]');
+    expect(rowsOf().length === K.rows.length, 'eine klickbare Zeile je Kennzahl (' + rowsOf().length + ' bei ' + K.rows.length + ')');
+    const j = segOpts('rw-kpi-period-l').find(x => x.textContent.trim() === 'Jahr'); expect(j, 'Segment Jahr'); if (j) j.querySelector('input').click(); await sleep(250);
+    expect(segOn('rw-kpi-period-l') === 'Jahr', 'Zyklus Jahr wirksam');
+    const r0 = K.rows.find(r => r.horizont.bis.j.ende);
+    expect(r0 && mainText().includes(r0.horizont.bis.j.label) && !mainText().includes(r0.horizont.bis.q.label), 'Bis zeigt ' + (r0 && r0.horizont.bis.j.label) + ' statt ' + (r0 && r0.horizont.bis.q.label));
+    const withBook = K.rows.find(r => r.beitraege.liste.length), idx = K.rows.indexOf(withBook);
+    const links = () => $$('#app main table.table a').filter(a => a.textContent.trim() === 'Definition');
+    expect(links().length === 0, 'zu: kein Link Definition');
+    rowsOf()[idx].click(); await sleep(250);
+    expect(links().length === 1 && links()[0].getAttribute('href') === withBook.definition_url, 'offen: ein Link Definition auf ' + withBook.definition_url);
+    expect(mainText().includes(withBook.beitraege.liste[0].beleg) && mainText().includes(withBook.beitraege.liste[0].stufe), 'Beitragszeile mit Beleg-ID und Stufe');
+    rowsOf()[idx].click(); await sleep(250);
+    expect(links().length === 0 && !mainText().includes(withBook.beitraege.liste[0].beleg), 'Zeile wieder zu');
+  });
+
   await step('levers', 'Stellschrauben: Zeile wählen, Schwelle ändern', async () => {
     await tab('Stellschrauben');
     const rows = $$('#app main section:not([aria-label="Protokoll"]) table.table tbody tr, #app main .row-card[role="button"]'); expect(rows.length > 1, 'Übersicht mit Zeilen'); if (rows[1]) rows[1].click(); await sleep(300);

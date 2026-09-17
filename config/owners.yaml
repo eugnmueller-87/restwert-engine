@@ -1,0 +1,48 @@
+# The six category manager roles of the KPI frame, for the KPI tracker (web tab KPIs).
+# THE MODEL ADVISES, DETERMINISTIC CODE DECIDES, A NAMED HUMAN OWNS EVERY THRESHOLD.
+#
+# Role codes only, never names: the page shows "Indirekt 3" and "Resale 1", nothing per person.
+# The tracker books every event that carries an actor to one role through this file:
+#   indirect spend and supplier contracts by their engine category (categories),
+#   device events (decision log, price protection credits) by the device family (families),
+#   hardware contracts by the OEMs they cover, through the catalogue families of those OEMs; an OEM that
+#   sells to more than one role (Apple: Smartphone, Tablet, Laptop) books to Team.
+# A category or family that is not listed here books to Team, never to a guessed role.
+# The engine keeps two spellings of a family: the decision log writes iphone_like, android_like,
+# tablet_like, laptop_like; the ledger and the catalogue write Smartphone, Tablet, Laptop. Both are listed.
+version: 1
+owner: "Leitung"
+roles:
+  I1:
+    label: "Indirekt 1"
+    scope: "Software und IT-Dienste, MDM, Telekommunikation, Cloud"
+    categories: [software, security_software, connectivity]
+  I2:
+    label: "Indirekt 2"
+    scope: "Beratung, Marketing, Personaldienste, Versicherungen, Finanzdienste"
+    categories: [consulting, marketing, financing]
+  I3:
+    label: "Indirekt 3"
+    scope: "Logistik, Verpackung, Facilities, Fuhrpark, Büro"
+    categories: [logistics, packaging, facilities]
+  I4:
+    label: "Indirekt 4"
+    scope: "Reparatur, Aufbereitung, Ersatzteile, Werkstätten, Carrier, Löschung"
+    categories: [repair, refurbishment]
+  R1:
+    label: "Resale 1"
+    scope: "Smartphones und Tablets"
+    families: [iphone_like, android_like, tablet_like, Smartphone, Tablet]
+  R2:
+    label: "Resale 2"
+    scope: "Laptops"
+    families: [laptop_like, Laptop]
+team:
+  label: "Team"
+  # engine categories that no single role owns: hardware is device purchasing (booked by OEM, see above),
+  # rental and resale_channel are costs of the fleet as a whole
+  categories: [hardware, rental, resale_channel]
+# the owner placeholders of config/kpi_targets.yaml, mapped to the roles above (a list means: all of them)
+placeholders:
+  "Head of Indirect Procurement (name)": [I1, I2, I3, I4]
+  "CFO (name)": "Leitung"

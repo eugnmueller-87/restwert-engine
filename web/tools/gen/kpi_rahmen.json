@@ -1,5 +1,6 @@
 {
  "quelle": "KPI-Rahmen für sechs Category Manager, Fassung 3, Stand 17.09.2026, claude.ai/artifact/AKznpKknsPjrL1SXUtFUDr",
+ "url": "https://claude.ai/artifact/AKznpKknsPjrL1SXUtFUDr",
  "fassung": "Fassung 3",
  "stand": "2026-09-17",
  "tausch_hinweis": "Ziele mit dem Kennzeichen Beispiel werden in Monat 6 gegen die Baseline getauscht.",
@@ -10,6 +11,10 @@
    "ziel": "+10 Punkte gegen die Baseline aus Monat 3, bis Monat 12",
    "takt": "Quartal",
    "echt_ab": "Monat 3",
+   "horizont": {
+    "monate": 12,
+    "quelle": "Ziel"
+   },
    "rollen": "alle",
    "formel": "Spend gegen gültigen Vertrag mit Einkaufsbeteiligung / adressierbarer Spend",
    "quelle": "Kreditorenbuch (ERP) mit Vertragsregister über die Lieferantennummer",
@@ -35,6 +40,10 @@
    "ziel": "100 % der Verträge über der Wertschwelle mit allen acht Pflichtfeldern, ab Monat 2",
    "takt": "Monat",
    "echt_ab": "Woche 4",
+   "horizont": {
+    "monate": 2,
+    "quelle": "Ziel"
+   },
    "rollen": "alle",
    "formel": "Verträge mit acht gefüllten Feldern / alle Verträge über der Wertschwelle",
    "quelle": "Vertragsregister (CLM oder eine gepflegte Tabelle; ein Ort, keine Kopien)",
@@ -60,6 +69,10 @@
    "ziel": "100 % der Pflichtgruppe mit Prüfung jünger als zwölf Monate, ab Monat 6",
    "takt": "Halbjahr",
    "echt_ab": "Monat 6",
+   "horizont": {
+    "monate": 6,
+    "quelle": "Ziel"
+   },
    "rollen": "alle",
    "formel": "Spend bei Lieferanten mit Prüfung ≤ 12 Monate / Spend der Pflichtgruppe (oberste 80 % des Spends plus alle kritischen)",
    "quelle": "Prüfprotokoll je Lieferant mit Datum; Kreditorenbuch für den Nenner",
@@ -85,6 +98,10 @@
    "ziel": "1 je Rolle und Quartal, im Quartalsgespräch abgenommen",
    "takt": "Quartal",
    "echt_ab": "Quartal 1",
+   "horizont": {
+    "monate": 3,
+    "quelle": "Ziel"
+   },
    "rollen": "alle",
    "formel": "Anzahl abgenommener Verbesserungen je Rolle im Quartal",
    "quelle": "Gemeinsamer Speicher des Teams (Wiki, Verzeichnis) mit Datum und Verweis",
@@ -96,7 +113,8 @@
     "art": "absolut",
     "wert": 1,
     "richtung": "up",
-    "einheit": "count"
+    "einheit": "count",
+    "einheit_wort": "je Rolle und Quartal"
    },
    "engine": {
     "computable": "nein",
@@ -110,6 +128,10 @@
    "ziel": "3 % des adressierbaren Spends der Kategorie in Jahr 1, realisiert und von Controlling abgenommen",
    "takt": "Quartal (Pipeline monatlich)",
    "echt_ab": "Monat 3",
+   "horizont": {
+    "monate": 12,
+    "quelle": "Ziel"
+   },
    "rollen": "Indirekt",
    "formel": "Σ realisierte Einsparung gegen die schriftliche Baseline / adressierbarer Spend der Kategorie",
    "quelle": "Savings-Register mit Beleg je Fall; Kreditorenbuch für die Realisierung",
@@ -135,6 +157,10 @@
    "ziel": "100 % der Verlängerungen mit Verhandlungsbeginn ≥ 90 Tage vor dem Kündigungstermin, ab Quartal 3; über 100.000 € Jahreswert 120 Tage",
    "takt": "Monat",
    "echt_ab": "Quartal 2",
+   "horizont": {
+    "monate": 6,
+    "quelle": "Ziel"
+   },
    "rollen": "Indirekt",
    "formel": "Verlängerungen mit Vorlauf ≥ 90 Tage / alle Verlängerungen mit Kündigungstermin im Quartal",
    "quelle": "Vertragsregister (Kündigungstermin) und Verhandlungsakte",
@@ -160,6 +186,10 @@
    "ziel": "≤ VPI Median der Preisänderung bei gleicher Leistung höchstens die amtliche Inflation; keine Verlängerung über 5 % ohne Begründung im Register",
    "takt": "Quartal",
    "echt_ab": "Monat 3",
+   "horizont": {
+    "monate": 3,
+    "quelle": "Echt ab"
+   },
    "rollen": "Indirekt",
    "formel": "(neuer Jahrespreis − alter Jahrespreis) / alter Jahrespreis, Median über alle Verlängerungen des Quartals",
    "quelle": "Vertragsregister (alter und neuer Vertrag); Statistisches Bundesamt für den VPI",
@@ -172,7 +202,8 @@
     "wert": null,
     "richtung": "down",
     "einheit": "ratio",
-    "referenz": "VPI des Statistischen Bundesamts"
+    "referenz": "VPI des Statistischen Bundesamts",
+    "referenz_kurz": "VPI"
    },
    "engine": {
     "computable": "nein",
@@ -186,6 +217,10 @@
    "ziel": "0 Verträge, die sich ohne protokollierte Entscheidung vor dem Kündigungstermin verlängert haben, ab Quartal 2",
    "takt": "Monat",
    "echt_ab": "Monat 2",
+   "horizont": {
+    "monate": 3,
+    "quelle": "Ziel"
+   },
    "rollen": "Indirekt",
    "formel": "Anzahl und Jahreswert der Verträge: verlängert sich automatisch UND keine Entscheidung (verlängern, kündigen, neu verhandeln) mit Eigner und Datum vor dem Kündigungstermin",
    "quelle": "Vertragsregister, Feld Entscheidung mit Datum aus der versionierten Änderungshistorie",
@@ -197,7 +232,8 @@
     "art": "absolut",
     "wert": 0,
     "richtung": "down",
-    "einheit": "count"
+    "einheit": "count",
+    "einheit_wort": "Verträge"
    },
    "engine": {
     "computable": "teilweise",
@@ -211,6 +247,10 @@
    "ziel": "halbiert gegen die Baseline aus Monat 3, bis Monat 12",
    "takt": "Quartal",
    "echt_ab": "Monat 3",
+   "horizont": {
+    "monate": 12,
+    "quelle": "Ziel"
+   },
    "rollen": "Indirekt",
    "formel": "Spend über der Wertschwelle ohne Vertrag oder ohne Bestellnummer / adressierbarer Spend über der Wertschwelle",
    "quelle": "Kreditorenbuch gegen Bestellungen und Vertragsregister",
@@ -236,6 +276,10 @@
    "ziel": "100 % der strategischen Lieferanten mit gepflegter Scorecard und Quartalsgespräch mit Protokoll, ab Monat 12",
    "takt": "Quartal",
    "echt_ab": "Monat 9",
+   "horizont": {
+    "monate": 12,
+    "quelle": "Ziel"
+   },
    "rollen": "Indirekt",
    "formel": "strategische Lieferanten mit Scorecard und Quartalsgespräch / alle strategischen Lieferanten (oberste 80 % des Kategoriespends plus kritische)",
    "quelle": "Scorecard je Lieferant; Gesprächsprotokoll mit Datum; Wareneingang oder Ticketsystem für Lieferleistung",
@@ -261,6 +305,10 @@
    "ziel": "+15 Tage gegen die Baseline aus Monat 3, ohne Skontoverlust; Cash, nicht Ergebnis",
    "takt": "Quartal",
    "echt_ab": "Monat 3",
+   "horizont": {
+    "monate": 3,
+    "quelle": "Echt ab"
+   },
    "rollen": "Indirekt",
    "formel": "Σ (Tage je Lieferant × Spend je Lieferant) / Σ Spend",
    "quelle": "Vertragsregister (Zahlungsbedingung) und Kreditorenbuch (tatsächliche Zahlung)",
@@ -286,6 +334,10 @@
    "ziel": "−2 Punkte Landed Cost in Prozent der UVP gegen die Baseline aus Monat 3, je Marke, bis Monat 12",
    "takt": "Monat",
    "echt_ab": "Monat 3",
+   "horizont": {
+    "monate": 12,
+    "quelle": "Ziel"
+   },
    "rollen": "Resale",
    "formel": "(Rechnungspreis + Fracht + Zoll + Einbuchung) / UVP Deutschland beim Verkaufsstart, je Modell",
    "quelle": "Lieferantenrechnung je Seriennummer (ERP); UVP-Katalog mit Quelle und Datum je Modell",
@@ -311,6 +363,10 @@
    "ziel": "100 % der entstandenen Ansprüche fristgerecht angemeldet, ab Monat 4",
    "takt": "Monat",
    "echt_ab": "Monat 4",
+   "horizont": {
+    "monate": 4,
+    "quelle": "Ziel"
+   },
    "rollen": "Resale",
    "formel": "Σ fristgerecht angemeldete Gutschriften / Σ entstandene Ansprüche (Bestand am Tag der Preissenkung × Preissenkung, nur Bestand mit Klausel)",
    "quelle": "Vertragsregister (Klausel und Frist je Lieferant), Bestandsliste je Seriennummer, Gutschriften im Kreditorenbuch",
@@ -336,6 +392,10 @@
    "ziel": "90 % geliefert gegen bestellt in den ersten 30 Tagen nach Verkaufsstart, je Variante",
    "takt": "je Launch",
    "echt_ab": "nächster Launch",
+   "horizont": {
+    "monate": null,
+    "quelle": "Echt ab"
+   },
    "rollen": "Resale",
    "formel": "gelieferte Stück in 30 Tagen / bestellte Stück zum Vorbestellfenster, je Modell, Speicher, Farbe",
    "quelle": "Bestellungen und Wareneingänge (ERP)",
@@ -361,6 +421,10 @@
    "ziel": "> 0 je Modell und Laufzeit, nur abgeschlossene Zyklen; ein Modell kommt nur auf die Liste, wenn Einkaufspreis und Restwertkurve zusammenpassen",
    "takt": "Monat",
    "echt_ab": "Monat 3",
+   "horizont": {
+    "monate": 3,
+    "quelle": "Echt ab"
+   },
    "rollen": "Resale",
    "formel": "Mieterlös + Restwert (wie C6) − Einkaufspreis − Kosten bis Verkauf; daneben TCO je Vertragsmonat = (Einkaufspreis + Kosten bis Verkauf) / Vertragsmonate gegen die Miete",
    "quelle": "Geräte-Hauptbuch je Seriennummer: Rechnung, Einrichtung, Versand, Tickets, Rücksendung, Lagertage, Verkauf",
@@ -387,6 +451,10 @@
    "ziel": "≤ 12 % / ±8 % Fehler (MAPE) höchstens 12 %, Verzerrung (Bias) innerhalb plus oder minus 8 % über drei Monate, kanalbereinigt; darüber Nachkalibrierung",
    "takt": "Monat",
    "echt_ab": "Monat 3",
+   "horizont": {
+    "monate": 3,
+    "quelle": "Echt ab"
+   },
    "rollen": "Resale",
    "formel": "Fehler = Mittel |Prognose − Erlös| / Erlös; Verzerrung = Mittel (Prognose − Erlös) / Erlös, je Familie",
    "quelle": "Prognose je Seriennummer zum Rückgabedatum (Restwertkurve, Verbriefungsannahme); Erlös aus Verkauf oder Transferpreis je Grade",
@@ -404,7 +472,8 @@
      "art": "absolut",
      "wert": 0.08,
      "richtung": "down",
-     "einheit": "ratio"
+     "einheit": "ratio",
+     "label_kurz": "Verzerrung"
     }
    },
    "engine": {
@@ -419,6 +488,10 @@
    "ziel": "≥ 0 / ≤ 5 % Veräußerungsergebnis (Erlös minus Restbuchwert) nicht unter null; Abweichung zur Annahme aus Rate und Verbriefung innerhalb 5 %",
    "takt": "Monat",
    "echt_ab": "Monat 3",
+   "horizont": {
+    "monate": 3,
+    "quelle": "Echt ab"
+   },
    "rollen": "Resale",
    "formel": "Σ Erlös nach Kanalgebühr − Σ Restbuchwert der Abgänge; Abweichung = (Annahme − Erlös) / Annahme je Modell, Speicher, Grade",
    "quelle": "Verkaufsbelege und Kanalabrechnungen; Anlagenbuchhaltung für den Restbuchwert; Transferpreisliste je Grade",
@@ -436,7 +509,8 @@
      "art": "absolut",
      "wert": 0,
      "richtung": "up",
-     "einheit": "eur"
+     "einheit": "eur",
+     "label_kurz": "Veräußerungsergebnis"
     }
    },
    "engine": {
@@ -451,6 +525,10 @@
    "ziel": "≤ Kanalgebühr Lücke zwischen eigener Realisierung (Erlös in Prozent der UVP) und der Marktplatzkurve derselben Modellreihe höchstens die Kanalgebühr in Punkten",
    "takt": "Monat",
    "echt_ab": "Monat 3",
+   "horizont": {
+    "monate": 3,
+    "quelle": "Echt ab"
+   },
    "rollen": "Resale",
    "formel": "Realisierung eigen (netto) − (Realisierung Marktplatz Grade B bei gleichem Modellalter − Kanalgebühr in Punkten der UVP), nach 24 und 36 Monaten",
    "quelle": "Verkaufsbelege; öffentliche Preisbelege je Modellreihe mit URL und Abrufdatum (Restwert Engine, 669 Belege)",
@@ -463,7 +541,8 @@
     "wert": null,
     "richtung": "down",
     "einheit": "ratio",
-    "referenz": "Kanalgebühr in Punkten der UVP"
+    "referenz": "Kanalgebühr in Punkten der UVP",
+    "referenz_kurz": "Kanalgebühr"
    },
    "engine": {
     "computable": "teilweise",
@@ -477,6 +556,10 @@
    "ziel": "≤ 30 Tage / 0 Median von Rückgabe bis Zahlungseingang höchstens 30 Tage; Buchwert mit Lagerdauer über 180 Tagen null",
    "takt": "Monat",
    "echt_ab": "Monat 3",
+   "horizont": {
+    "monate": 3,
+    "quelle": "Echt ab"
+   },
    "rollen": "Resale",
    "formel": "Tage bis Erlös = Zahlungseingang − Rückgabedatum, Median je Familie; Aging 180 = Buchwert über 180 Tage / Buchwert im Lager",
    "quelle": "Versand- und Rücksendeprotokoll je Seriennummer, Lagerbestand mit Eingangsdatum, Anlagenbuchhaltung",
@@ -494,7 +577,8 @@
      "art": "absolut",
      "wert": 0,
      "richtung": "down",
-     "einheit": "eur"
+     "einheit": "eur",
+     "label_kurz": "Buchwert über 180 Tage"
     }
    },
    "engine": {
@@ -509,6 +593,10 @@
    "ziel": "≥ 95 % der Rückläufer mit Grade bei Eingang gleich Grade bei Abgang",
    "takt": "Monat",
    "echt_ab": "Monat 3",
+   "horizont": {
+    "monate": 3,
+    "quelle": "Echt ab"
+   },
    "rollen": "Resale",
    "formel": "Rückläufer mit Grade Eingang = Grade Abgang / alle Rückläufer mit Abgang",
    "quelle": "Rücksendeprotokoll mit Zustandsprüfung; Verkaufsbeleg oder Vermietung mit Grade",
@@ -534,6 +622,10 @@
    "ziel": "≤ 3 % des Nettoerlösses je Quartal: was der gewählte Kanal gegen den besten Kanal für dasselbe Modell und Grade im selben Monat gekostet hat",
    "takt": "Monat",
    "echt_ab": "Monat 3",
+   "horizont": {
+    "monate": 3,
+    "quelle": "Ziel"
+   },
    "rollen": "Resale",
    "formel": "Σ (Netto bester Kanal − Netto gewählter Kanal) / Σ Nettoerlös; Netto = Erlös − Kanalgebühr − Versand je Gerät",
    "quelle": "Kanalabrechnungen; Verkaufsbelege mit Kanal, Modell, Grade, Datum",
