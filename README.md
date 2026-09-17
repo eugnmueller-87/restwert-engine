@@ -2,6 +2,8 @@
 
 Live page (twelve tabs in four areas, German): https://claude.ai/artifact/35YqfY2paPWtkn6yD32U7m. Source of the page: [web/](web/README.md).
 
+Architecture, in German and without code (sources, landing, bronze, silver, gold, how a KPI is updated, what is planned): [docs/ARCHITEKTUR.md](docs/ARCHITEKTUR.md).
+
 ## 1. What it is: the closed device cycle in seven questions
 
 Asset P&L and residual value tool for a Device-as-a-Service provider: the company rents smartphones, tablets and laptops to business customers for 12, 24, 36 or 48 months, replaces broken devices, takes them back, refurbishes and resells them. v0.2 puts the whole cycle of every serial on a layered data lake and answers one question per page:
