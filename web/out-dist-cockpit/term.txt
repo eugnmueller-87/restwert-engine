@@ -28,119 +28,161 @@ Letzter Lauf Stand 16.09.2026 Dateien 283 Zeilen 166.115 ungeklärt 60 Seriennum
 Protokoll dieser Installation
 manuell erfasste Daten, Lieferungen, Schwellen, Läufe · lokal gespeichert
 Noch keine Einträge. Preisbelege erfassen, Dateien einlesen, Schwellen ändern oder Szenarien speichern; jeder Schritt landet hier.
+Geräteart
+Laptop
+Smartphone
+Tablet
+Hersteller
+Apple
+Fairphone
+Google
+HMD Global (Nokia)
+Motorola
+Samsung
+Modell
+Samsung Galaxy S21 5G
+Samsung Galaxy S21+ 5G
+Samsung Galaxy S21 Ultra 5G
+Samsung Galaxy XCover 5 (Enterprise Edition)
+Samsung Galaxy A52s 5G
+Samsung Galaxy S21 FE 5G
+Samsung Galaxy S22 5G
+Samsung Galaxy S22+ 5G
+Samsung Galaxy S22 Ultra 5G
+Samsung Galaxy A13 (4G, SM-A135F)
+Samsung Galaxy A53 5G
+Samsung Galaxy A33 5G
+Samsung Galaxy XCover6 Pro
+Samsung Galaxy A04s
+Samsung Galaxy S23+
+Samsung Galaxy A14 5G
+Samsung Galaxy A34 5G
+Samsung Galaxy A54 5G
+Samsung Galaxy Z Flip5
+Samsung Galaxy Z Fold5
+Samsung Galaxy S23 FE
+Samsung Galaxy A05s
+Samsung Galaxy A25 5G
+Samsung Galaxy XCover7 (Enterprise Edition)
+Samsung Galaxy S24
+Samsung Galaxy S24 Ultra
+Samsung Galaxy A35 5G
+Samsung Galaxy A55 5G
+Samsung Galaxy Z Flip6
+Samsung Galaxy Z Fold6
+Samsung Galaxy S24 FE
+Samsung Galaxy A16 5G
+Samsung Galaxy S25
+Samsung Galaxy S25+
+Samsung Galaxy S25 Ultra
+Samsung Galaxy A26 5G
+Samsung Galaxy A36 5G
+Samsung Galaxy A56 5G
+Samsung Galaxy S25 FE
+Samsung Galaxy S26 (aktuelle Generation der Galaxy-S-Basisreihe)
+Laufzeit
+12 Monate
+24 Monate
+36 Monate
+48 Monate
+Vergleichslaufzeit
+12 Monate
+36 Monate
+48 Monate
 Analyse, öffentliche Preisbelege und Simulation, Stand 16.09.2026
-Laufzeit gegen Restwert: was ein Jahr mehr kostet
+Laufzeit gegen Restwert: Samsung Galaxy S26 (aktuelle Generation der Galaxy-S-Basisreihe), 24 gegen 36 Monate
 Hinweise ausblenden
-Die Frage: Ein längerer Vertrag bringt länger Miete, aber das Gerät kommt mit weniger Wert zurück, weil es Generationen überspringt. Wie viel weniger ist ein drei Jahre altes iPhone wert als ein ein Jahr altes, was heißt das je Vertragsmonat, und woran lässt sich drehen? Beispiel Apple Smartphone, weil dafür die meisten Preisbelege vorliegen; die Familienkurven stehen darunter. Öffentliche Preisbelege: 39 Marktplatz-Angebote und 28 Ankauf-Gebote für Apple Smartphones; simuliert: 819 abgeschlossene iPhone-Kreisläufe.
-iPhone nach 12 Monaten öffentlich
-44 % bis 65 %
-der UVP, Ankauf-Gebote laut Studien USA und Großbritannien
-deutsche Marktplatz-Kurve, verlängert: 73 %
-kein deutscher Beleg unter 18 Monaten
-iPhone nach 36 Monaten öffentlich
-48 %
-der UVP, Marktplatz-Angebot laut deutscher Kurve
-39 Preisbelege
-Ankauf-Gebot „bis zu“: 50 %
-Wertverlust je Monat, Jahr 1 gegen Jahr 3 öffentlich
-1,3 % gegen 0,9 %
-der UVP, beide nach der deutschen Kurve
-Jahr 1 laut Studien: 1,9 % bis 3,6 %
-das erste Jahr ist das teure
-Nötige Miete, 12 gegen 24 Monate abgeleitet
-Faktor 1,25 bis 2,31
-1,25 nach der deutschen Kurve
-1,53 bis 2,31 nach den Studien
-Platzhalter der Simulation: 1,50
+Gerät und Laufzeit oben wählen, daneben die Vergleichslaufzeit; Kacheln, Kurve und „Was man daraus macht" rechnen mit der Auswahl. Die Kurve ist die der Serie (Geräteart und Hersteller, hier Smartphone / Samsung), weil nur auf dieser Ebene eine Alterskurve mit Belegen vorliegt; das Modell wählt die Beschriftung und hebt seine eigenen Belege im Diagramm hervor. Vorbelegt ist die Serie mit den meisten Preisbelegen und ihre jüngste Generation (spätester Verkaufsstart ohne Nachfolger im Katalog). Öffentliche Preisbelege: 77 Marktplatz-Angebote und 20 Ankauf-Gebote für Smartphone / Samsung; simuliert: 852 abgeschlossene Kreisläufe der Geräteart Android-Smartphone der Simulation.
+Samsung Galaxy S26 (aktuelle Generation der Galaxy-S-Basisreihe) nach 24 Monaten öffentlich
+49 %
+der UVP, Marktplatz-Angebote laut Kurve Smartphone / Samsung (77 Preisbelege, Alter 17,5 bis 54,6 Monate)
+kein eigener Preisbeleg für Samsung Galaxy S26 (aktuelle Generation der Galaxy-S-Basisreihe); die Kurve gilt für die Serie Smartphone / Samsung
+Ankauf-Kurve ohne Beleg bei 24 Monaten
+Samsung Galaxy S26 (aktuelle Generation der Galaxy-S-Basisreihe) nach 36 Monaten öffentlich
+45 %
+der UVP, Marktplatz-Angebote laut Kurve Smartphone / Samsung (77 Preisbelege, Alter 17,5 bis 54,6 Monate)
+kein eigener Preisbeleg für Samsung Galaxy S26 (aktuelle Generation der Galaxy-S-Basisreihe); die Kurve gilt für die Serie Smartphone / Samsung
+Ankauf-Gebot „bis zu“ laut Kurve: 34 % der UVP (20 Preisbelege)
+Wertverlust je Monat, Jahr 2 gegen Jahr 3 öffentlich
+(0,4 %) gegen 0,3 %
+der UVP, nur der Verlust des jeweiligen Jahres, beide nach der Kurve Smartphone / Samsung
+in Klammern: das Jahr beginnt oder endet außerhalb der Belege (17,5 bis 54,6 Monate)
+das teuerste Jahr laut Kurve ist Jahr 1 mit (2,9 %) der UVP je Monat
+Nötige Miete, 24 gegen 36 Monate abgeleitet
+Faktor 1,25
+1,25 nach der Kurve Smartphone / Samsung und den Kosten bis Verkauf der Geräteart Android-Smartphone der Simulation
+Platzhalter der Simulation: 1,18 (term_rate_factor 1 gegen 0,85)
 Weniger
 Begriffe ausblenden
 UVP
 Unverbindliche Preisempfehlung des Herstellers beim deutschen Verkaufsstart; die Kurve rechnet einschließlich Mehrwertsteuer, Kosten und Einkaufspreis der Simulation ohne Mehrwertsteuer.
 Faktor
-nötige Miete je Monat einer Laufzeit geteilt durch die der 24-Monats-Laufzeit; so viel teurer oder günstiger je Monat muss der Vertrag sein.
-Kacheln: Prozent der UVP. Die deutsche Kurve sind Marktplatz-Angebote (Obergrenze), unter 18 Monaten über die Belege hinaus verlängert; die Studien sind Ankauf-Gebote aus den USA und Großbritannien, eine andere Preisart. Der Faktor sagt, um wie viel teurer je Monat ein 12-Monats-Vertrag gegenüber einem 24-Monats-Vertrag sein muss, damit Wertverlust und Kosten bis Verkauf gedeckt sind; die Studienwerte setzen ein Gebot gegen ein Angebot und liegen deshalb zu hoch.
+nötige Miete je Monat der gewählten Laufzeit (24 Monate) geteilt durch die der Vergleichslaufzeit (36 Monate); so viel teurer oder günstiger je Monat muss der Vertrag sein.
+in Klammern
+die Kurve ist an dieser Stelle über ihre Belege hinaus verlängert (Belege der Kurve Smartphone / Samsung: 17,5 bis 54,6 Monate); eine Größenordnung, kein Beleg.
+nicht belegt
+für die Serie gibt es keine Kurve, oder eine unsichere Kurve (wenige Belege) müsste verlängert werden; dann steht keine Zahl.
+Kacheln: Prozent der UVP nach der Kurve Smartphone / Samsung (Marktplatz-Angebote, Obergrenze, abgelesen für Zustandsstufe B), Kosten bis Verkauf aus der Geräteart Android-Smartphone der Simulation. Die Belege reichen von 17,5 bis 54,6 Monaten; außerhalb steht die Zahl in Klammern (verlängert), unsichere Kurven werden nicht verlängert. Der Faktor sagt, um wie viel teurer je Monat ein 24-Monats-Vertrag gegenüber einem 36-Monats-Vertrag sein muss, damit Wertverlust und Kosten bis Verkauf gedeckt sind.
 Was man daraus macht
-Die Miete je Laufzeit aus der Kurve ableiten, nicht flach setzen. Ein 12-Monats-Vertrag muss je Monat den Faktor 1,25 (Kurve) bis 2,31 (Studien) der 24-Monats-Miete kosten, ein 36-Monats-Vertrag nur 0,87, ein 48-Monats-Vertrag 0,87. Wer alle Laufzeiten gleich bepreist, verschenkt bei kurzen Verträgen Geld und verliert bei langen den Kunden an den Wettbewerb. Das ist die Zahl, die die Stellschraube Laufzeit (Kennung L07 auf dem Reiter Stellschrauben) misst; mit dieser Preisregel wäre ihr Hebel null.
-Das erste Jahr ist das teure, nicht das dritte. Der Wertverlust je Monat liegt in Jahr 1 bei 1,9 % bis 3,6 % der UVP (Studien; die verlängerte deutsche Kurve sagt 1,3 %), in Jahr 3 bei 0,9 %, in Jahr 4 bei 0,7 %. Dass der erste Verlust der größte ist, tragen die Studien; die deutsche Kurve zeigt unter 18 Monaten keinen Beleg. Ein Gerät, das drei Jahre läuft, überspringt zwar zwei Generationen, aber den größten Sprung macht es im ersten Jahr, den zahlt jede Laufzeit. Lange Verträge sind deshalb je Monat die günstigen. Reparatur und Lagertage stecken in den Kosten bis Verkauf und wachsen mit der Laufzeit; was nicht drin ist, sind Akkuzustand und Kundenzufriedenheit bei alten Geräten.
-Zweiter Kreislauf statt Verkauf nach 12 Monaten. Ein Gerät, das nach einem Jahr mit 44 % bis 73 % der UVP zurückkommt, ist als Gebrauchtgerät noch vermietbar (die Spanne reicht vom Ankauf-Gebot der Studien bis zur verlängerten Marktplatz-Kurve); ein zweiter Vertrag über 24 Monate zu einer niedrigeren Miete spart den zweiten Einkauf und die zweite Kanalgebühr. Die Simulation verkauft heute nach jedem Vertrag; das ist der Kandidat für die nächste Ausbaustufe (v0.3).
-Laufzeit nach Geräteart wählen. Ein Laptop verliert bei 36 Monaten 0,6 % der UVP je Monat, ein Smartphone 1,2 %. Lange Laufzeiten gehören zu Laptops und Tablets, bei Smartphones ist 24 die Mitte; 12 Monate nur mit der hohen Miete aus der Kurve (erster Punkt) oder mit dem zweiten Kreislauf (dritter Punkt).
+Die Miete je Laufzeit aus der Kurve ableiten, nicht flach setzen. Ein 24-Monats-Vertrag mit Samsung Galaxy S26 (aktuelle Generation der Galaxy-S-Basisreihe) muss je Monat den Faktor 1,25 der 36-Monats-Miete kosten; alle Laufzeiten gegen 36 Monate: 12: (2,11), 24: 1,25, 36: 1,00, 48: 0,81. Wer alle Laufzeiten gleich bepreist, verschenkt bei kurzen Verträgen Geld und verliert bei langen den Kunden an den Wettbewerb. Das ist die Zahl, die die Stellschraube Laufzeit (Kennung L07 auf dem Reiter Stellschrauben) misst; mit dieser Preisregel wäre ihr Hebel null.
+Das teure Jahr ist Jahr 1. Der Wertverlust je Monat liegt bei Smartphone / Samsung in Jahr 2 bei (0,4 %) der UVP, in Jahr 3 bei 0,3 %. Unter 17 Monaten zeigt die deutsche Kurve keinen Beleg; was dort steht, ist verlängert. Ein Gerät, das 36 Monate läuft, überspringt mehr Generationen als eines mit 24 Monaten, aber den größten Sprung zahlt jede Laufzeit. Reparatur und Lagertage stecken in den Kosten bis Verkauf und wachsen mit der Laufzeit; was nicht drin ist, sind Akkuzustand und Kundenzufriedenheit bei alten Geräten.
+Zweiter Kreislauf statt Verkauf nach 24 Monaten. Ein Samsung Galaxy S26 (aktuelle Generation der Galaxy-S-Basisreihe), das nach 24 Monaten mit 49 % der UVP zurückkommt, ist als Gebrauchtgerät noch vermietbar; ein zweiter Vertrag über 36 Monate zu einer niedrigeren Miete spart den zweiten Einkauf und die zweite Kanalgebühr. Die Simulation verkauft heute nach jedem Vertrag; das ist der Kandidat für die nächste Ausbaustufe (v0.3).
+Laufzeit nach Geräteart wählen. Ein Laptop verliert bei 48 Monaten 0,8 % der UVP je Monat, ein Smartphone 1,0 % (Familienkurven über alle Hersteller). Lange Laufzeiten gehören zu Laptops und Tablets, bei Smartphones ist die Laufzeit mit den meisten Kreisläufen die Mitte; die kurze nur mit der hohen Miete aus der Kurve (erster Punkt) oder mit dem zweiten Kreislauf (dritter Punkt).
 Vorzeitige Rückgabe bepreisen. In der Simulation verliert jeder vorzeitig beendete Vertrag Geld, egal welche Laufzeit (Tabelle unten, Spalte „Lifecycle-Marge, vorzeitig zurück“), weil die Miete aufhört, das Gerät aber schon den Wertverlust der ersten Monate getragen hat und die Kosten bis Verkauf voll anfallen. Der Vertrag braucht einen Ausgleich bei vorzeitiger Rückgabe, mindestens die entgangene Miete bis zum Punkt, ab dem das Gerät seine Kosten eingespielt hat (Reiter Gerät). Die Simulation kennt diesen Ausgleich noch nicht; er ist eine Zeile im Kundenvertrag und ein Kandidat für die nächste Ausbaustufe (v0.3).
-Verkaufszeitpunkt vor dem Nachfolger. Die Kurve mittelt den Sprung beim Erscheinen der nächsten Generation; ein Vertrag, der einen Monat vor dem Nachfolger endet, gibt das Gerät in den teureren Markt zurück. Das lässt sich mit den Verkaufsstartdaten des Katalogs planen, braucht aber erst einen Beleg mit Datum (offen).
-Die Kurve, mit den vier Laufzeiten markiert (öffentlich). Durchgezogen: Kurve der Marktplatz-Angebote (Apple Smartphones), gepunktet: Kurve der Ankauf-Gebote „bis zu“ (Höchstwerte vor der Zustandsprüfung, kein Boden), jeweils nur über der Altersspanne ihrer Belege. Punkte: die Preisbelege selbst (Raute Zustandsstufe B, Dreieck Ankauf-Gebot). Senkrechte Linien: 12, 24, 36, 48 Monate. Links von 18 Monaten gibt es keinen deutschen Beleg; dort helfen nur die Studien.
-Was ein iPhone nach 12, 24, 36 und 48 Monaten noch wert ist
+Verkaufszeitpunkt vor dem Nachfolger. Die Kurve mittelt den Sprung beim Erscheinen der nächsten Generation; ein Vertrag, der einen Monat vor dem Nachfolger endet, gibt das Gerät in den teureren Markt zurück. Für Samsung Galaxy S26 (aktuelle Generation der Galaxy-S-Basisreihe) ist im Katalog kein Nachfolger eingetragen (Verkaufsstart 11.03.2026, heute 6,2 Monate alt). Das lässt sich mit den Verkaufsstartdaten des Katalogs planen, braucht aber erst einen Beleg mit Datum (offen).
+Die Kurve Smartphone / Samsung mit den Belegen als Punkten und den beiden Laufzeiten als Linien (öffentlich). Durchgezogen: Marktplatz-Angebote, gepunktet: Ankauf-Gebote „bis zu“ (Höchstwerte vor der Zustandsprüfung, kein Boden), jeweils nur über der Altersspanne ihrer Belege; grau gestrichelt: die Familienkurve Smartphone über alle Hersteller. Punkte: die Preisbelege der Serie (Raute Zustandsstufe B, Dreieck Ankauf-Gebot), große Raute: die Belege für Samsung Galaxy S26 (aktuelle Generation der Galaxy-S-Basisreihe) selbst. Senkrecht: 24 Monate (gewählt) und 36 Monate (Vergleich). Links von 17 Monaten gibt es keinen deutschen Beleg für Smartphone / Samsung.
+Was Smartphone / Samsung nach 12, 24, 36 und 48 Monaten noch wert ist
 öffentlich
 Begriffe ausblenden
 Monate
-Modellalter seit deutschem Verkaufsstart; ein Gerät, das am Verkaufsstart gekauft und 24 Monate vermietet wird, ist bei Rückgabe 24 Monate alt.
+Modellalter seit deutschem Verkaufsstart; ein Gerät, das am Verkaufsstart gekauft und 24 Monate vermietet wird, ist bei Rückgabe 24 Monate alt; fett die gewählte Laufzeit und die Vergleichslaufzeit.
 Marktplatz-Angebot, Kurve
-Realisierung in Prozent der UVP laut Kurve des Reiter Realisierung (Apple Smartphones, alle Stufen, abgelesen für Zustandsstufe B); Obergrenze, weil die Marge des Aufbereiters darin steckt; in Klammern, wo die Kurve über die Belege hinaus verlängert ist.
+Realisierung in Prozent der UVP laut Kurve Smartphone / Samsung vom Reiter Realisierung (alle Stufen, abgelesen für Zustandsstufe B); Obergrenze, weil die Marge des Aufbereiters darin steckt; in Klammern, wo die Kurve über die Belege hinaus verlängert ist; Verlässlichkeit der Kurve: belastbar.
 Preisbelege, mittleres Angebot
-das mittlere Marktplatz-Angebot der deutschen Belege in Zustandsstufe B, deren Alter in dieses Jahr fällt (Jahr 1 = 0 bis 11 Monate); die Spalte Belege zählt sie.
+das mittlere Marktplatz-Angebot der deutschen Belege der Serie in Zustandsstufe B, deren Alter in dieses Jahr fällt (Jahr 1 = 0 bis 11 Monate); die Spalte zählt sie.
 Ankauf-Gebot, Kurve
-die Ankaufsseite laut Kurve der Apple Ankauf-Gebote; leer, wo die Kurve keine Belege hat (unter 36 Monaten). Achtung: die deutschen Ankauf-Belege sind Höchstwerte „bis zu“ vor der Zustandsprüfung (Bestzustand), also kein Boden; der tatsächliche Ankaufpreis liegt darunter.
+die Ankaufsseite laut Kurve der Ankauf-Gebote der Serie; leer, wo die Kurve keine Belege hat. Achtung: die deutschen Ankauf-Belege sind Höchstwerte „bis zu“ vor der Zustandsprüfung (Bestzustand), also kein Boden; der tatsächliche Ankaufpreis liegt darunter.
 Ankauf-Gebote, Belege
-das mittlere Ankauf-Gebot „bis zu“ der deutschen Belege, deren Alter in dieses Jahr fällt; die Spalte Belege zählt sie.
-Studien USA und Großbritannien
-Realisierung nach Ankauf-Gebot laut veröffentlichten Studien in den USA und in Großbritannien (100 % minus dort genannter Verlust), mit Quelle; andere Länder, andere Preisart als die Marktplatz-Kurve, deshalb nur als Bandbreite dort, wo deutsche Belege fehlen; die Tabelle der Studien führt sie einzeln auf.
+das mittlere Ankauf-Gebot „bis zu“ der deutschen Belege, deren Alter in dieses Jahr fällt; die Spalte zählt sie.
 Wertverlust seit Kauf
 Einkaufspreis minus Marktplatz-Angebot, in Prozent der UVP; der Einkaufspreis ist als UVP minus 12,0 % angenommen (Platzhalter mit verantwortlicher Rolle).
 je Monat seit Kauf
 Wertverlust seit Kauf geteilt durch alle Monate seit Kauf.
 je Monat, dieses Jahr
-nur der Wertverlust dieses einen Jahres (Kurvenwert am Jahresanfang minus am Jahresende), geteilt durch 12; zeigt, welches Jahr das teure ist.
-Monate | Marktplatz-Angebot, Kurve | Preisbelege, mittleres Angebot | Ankauf-Gebot, Kurve | Ankauf-Gebote, Belege | Studien USA und Großbritannien | Wertverlust seit Kauf | je Monat seit Kauf | je Monat, dieses Jahr
-12 | (73 %) | kein Beleg |  | kein Beleg | SellCell 08.09.2025: iPhone 11 56 %, iPhone 12 56 %, iPhone 13 54 %, iPhone 14 52 %, iPhone 15 52 %Compare and Recycle Februar 2026: iPhone 13 60 %, iPhone 14 52 %, iPhone 15 44 %, iPhone 16 55 %SellCell, Live-Rechner Abruf 13.09.2026: iPhone 17 65 % | (15 %) | (1,3 %) | (1,3 %)
-24 | 59 % | 59 % (5 Preisbelege) |  | kein Beleg |  | 29 % | 1,2 % | (1,1 %)
-36 | 48 % | 47 % (3 Preisbelege) | 50 % | 53 % (12 Preisbelege) |  | 40 % | 1,1 % | 0,9 %
-48 | 40 % | 38 % (2 Preisbelege) | 37 % | 30 % (12 Preisbelege) | SellCell, Live-Rechner Abruf 13.09.2026: iPhone 14 22 % | 48 % | 1,0 % | 0,7 %
-Studien USA und Großbritannien, Ankauf-Gebote
-öffentlich 4 Zeilen
-Begriffe ausblenden
-Realisierung nach Ankauf-Gebot laut veröffentlichten Studien (100 % minus dort genannter Verlust); andere Länder, andere Preisart als die Marktplatz-Kurve, deshalb nur als Bandbreite dort, wo deutsche Belege fehlen.
-Quelle
-Herausgeber der Studie, mit Link auf die Seite.
-Datum
-Datum der Veröffentlichung oder des Abrufs, wie in der Quelle genannt.
-Markt
-Land, Preisart und Bezugsgröße der Studie.
-Monate
-Modellalter in Monaten, für das die Studie den Wert nennt; die Zeile der Tabelle darüber mit derselben Zahl.
-Modelle
-die dort genannten Modelle mit ihrer Realisierung in Prozent der UVP.
-Quelle | Datum | Markt | Monate | Modelle
-SellCell | 08.09.2025 | USA, Ankauf-Gebote, gegen UVP | 12 | iPhone 11 56 %, iPhone 12 56 %, iPhone 13 54 %, iPhone 14 52 %, iPhone 15 52 %
-Compare and Recycle | Februar 2026 | UK, Ankauf-Gebote, Zustand good | 12 | iPhone 13 60 %, iPhone 14 52 %, iPhone 15 44 %, iPhone 16 55 %
-SellCell, Live-Rechner | Abruf 13.09.2026 | USA, Ankauf-Gebote, Zustand good | 12 | iPhone 17 65 %
-SellCell, Live-Rechner | Abruf 13.09.2026 | USA, Ankauf-Gebote, Zustand good | 48 | iPhone 14 22 %
+nur der Wertverlust dieses einen Jahres (Kurvenwert am Jahresanfang minus am Jahresende), geteilt durch 12; zeigt, welches Jahr das teure ist; in Klammern, wenn Anfang oder Ende außerhalb der Belege liegt.
+Monate | Marktplatz-Angebot, Kurve | Preisbelege, mittleres Angebot | Ankauf-Gebot, Kurve | Ankauf-Gebote, Belege | Wertverlust seit Kauf | je Monat seit Kauf | je Monat, dieses Jahr
+12 | (53 %) | kein Beleg |  | kein Beleg | (35 %) | (2,9 %) | (2,9 %)
+24 | 49 % | 59 % (3 Preisbelege) |  | kein Beleg | 39 % | 1,6 % | (0,4 %)
+36 | 45 % | 47 % (7 Preisbelege) | 34 % | 39 % (12 Preisbelege) | 43 % | 1,2 % | 0,3 %
+48 | 41 % | 32 % (9 Preisbelege) | 24 % | 25 % (4 Preisbelege) | 47 % | 1,0 % | 0,3 %
 Was jeder Vertragsmonat kosten muss, damit nichts fehlt
 öffentlich simuliert abgeleitet
 Begriffe ausblenden
-Die Miete eines Vertrags muss zwei Dinge decken: den Wertverlust des Geräts über die Laufzeit (öffentliche Kurve) und die Kosten bis Verkauf (simuliert, je Laufzeit aus den abgeschlossenen iPhone-Kreisläufen). Ein Teil davon fällt je Gerät an, egal wie lang der Vertrag war (Einrichtung, Versand, Rücksendung, Datenlöschung, Aufbereitung, Kanalgebühren), ein Teil wächst mit der Laufzeit (Reparatur, Lagertage). Beides geteilt durch die Monate ergibt die Miete je Monat, bei der die Lifecycle-Marge null ist. Alles in Prozent der UVP; Kosten und Einkaufspreis ohne Mehrwertsteuer gegen die UVP ohne Mehrwertsteuer, die Kurve auf beiden Seiten einschließlich Mehrwertsteuer.
+Die Miete eines Vertrags muss zwei Dinge decken: den Wertverlust des Geräts über die Laufzeit (Kurve Smartphone / Samsung, öffentlich) und die Kosten bis Verkauf (simuliert, je Laufzeit aus den abgeschlossenen Kreisläufen der Geräteart Android-Smartphone der Simulation). Ein Teil davon fällt je Gerät an, egal wie lang der Vertrag war (Einrichtung, Versand, Rücksendung, Datenlöschung, Aufbereitung, Kanalgebühren), ein Teil wächst mit der Laufzeit (Reparatur, Lagertage). Beides geteilt durch die Monate ergibt die Miete je Monat, bei der die Lifecycle-Marge null ist. Alles in Prozent der UVP; Kosten und Einkaufspreis ohne Mehrwertsteuer gegen die UVP ohne Mehrwertsteuer, die Kurve auf beiden Seiten einschließlich Mehrwertsteuer.
 Laufzeit
-Vertragslaufzeit in Monaten; das Gerät ist bei Rückgabe so viele Monate alt.
+Vertragslaufzeit in Monaten; das Gerät ist bei Rückgabe so viele Monate alt; fett die gewählte Laufzeit und die Vergleichslaufzeit.
 Wertverlust seit Kauf
 Einkaufspreis minus Marktplatz-Angebot laut Kurve am Ende der Laufzeit, in Prozent der UVP; in Klammern außerhalb der Belegspanne.
 je Monat
 Wertverlust seit Kauf geteilt durch die Monate der Laufzeit.
 Kosten bis Verkauf, monatlich
-simuliert, dieselbe Zahl wie in der Tabelle der Simulation: im Mittel 260 € je abgeschlossenem iPhone-Kreislauf bei 1.027 € UVP ohne Mehrwertsteuer, also 25 % der UVP; je Laufzeit der eigene Wert, geteilt durch die Monate.
+simuliert, dieselbe Zahl wie in der Tabelle der Simulation: im Mittel 238 € je abgeschlossenem Kreislauf der Geräteart Android-Smartphone der Simulation bei 592 € UVP ohne Mehrwertsteuer, also 40 % der UVP; je Laufzeit der eigene Wert, geteilt durch die Monate.
 Nötige Miete je Monat
 (Wertverlust seit Kauf plus Kosten bis Verkauf) geteilt durch die Monate; ohne Gewinn, ohne Finanzierung, Gemeinkosten, Steuern; Nutzerbetreuung und Geräteverwaltung stecken als Umlage in den Kosten bis Verkauf.
-Faktor gegen 24 Monate
-nötige Miete je Monat dieser Laufzeit geteilt durch die der 24-Monats-Laufzeit, abgeleitet aus Kurve und Kosten; so viel teurer oder günstiger je Monat muss der Vertrag sein.
+Faktor gegen 36 Monate
+nötige Miete je Monat dieser Laufzeit geteilt durch die der Vergleichslaufzeit (36 Monate), abgeleitet aus Kurve und Kosten; in Klammern, wenn eine der beiden Laufzeiten außerhalb der Belege liegt; nicht belegt bei unsicherer oder fehlender Kurve.
 Faktor in der Simulation
-der Platzhalter (term_rate_factor in config/lake.yaml), mit dem die Simulation heute die Monatsrate je Laufzeit skaliert; Verantwortlich: Leitung Customer Success.
-Laufzeit | Wertverlust seit Kauf | je Monat | Kosten bis Verkauf, monatlich | Nötige Miete je Monat | Faktor gegen 24 Monate | Faktor in der Simulation
-12 Monate | (15 %) | (1,3 %) | 1,5 % | (2,8 %) | (1,25) | 1,50
-24 Monate | 29 % | 1,2 % | 1,0 % | 2,2 % | 1,00 | 1,00
-36 Monate | 40 % | 1,1 % | 0,8 % | 1,9 % | 0,87 | 0,85
-48 Monate | 48 % | 1,0 % | 0,9 % | 1,9 % | 0,87 | 0,75
-12 Monate nach den Studien statt nach der verlängerten Kurve: Realisierung 44 % bis 65 % (Ankauf-Gebote USA und Großbritannien), nötige Miete 3,4 % bis 5,1 % je Monat, Faktor 1,53 bis 2,31 gegen 24 Monate; die Spanne mischt ein Gebot im Zähler mit dem Angebot im Nenner und liegt deshalb zu hoch.
+der Platzhalter (term_rate_factor in config/lake.yaml, bezogen auf die Laufzeit mit Faktor 1), mit dem die Simulation heute die Monatsrate je Laufzeit skaliert; Verantwortlich: Leitung Customer Success.
+Laufzeit | Wertverlust seit Kauf | je Monat | Kosten bis Verkauf, monatlich | Nötige Miete je Monat | Faktor gegen 36 Monate | Faktor in der Simulation
+12 Monate | (35 %) | (2,9 %) | 2,6 % | (5,5 %) | (2,11) | 1,50
+24 Monate | 39 % | 1,6 % | 1,6 % | 3,2 % | 1,25 | 1,00
+36 Monate | 43 % | 1,2 % | 1,4 % | 2,6 % | 1,00 | 0,85
+48 Monate | 47 % | 1,0 % | 1,1 % | 2,1 % | 0,81 | 0,75
 Dasselbe je Geräteart: wer verträgt lange Laufzeiten
 öffentlich 355 Zeilen
 Begriffe ausblenden
 Geräteart
-Gerätefamilie; die Kurve des Reiter Realisierung läuft über alle Hersteller der Familie.
+Gerätefamilie; die Kurve des Reiter Realisierung läuft über alle Hersteller der Familie; fett die Geräteart der gewählten Serie.
 Preisbelege
 Stückzahl der Marktplatz-Angebote, aus denen die Familienkurve gerechnet ist.
 Monate
@@ -150,16 +192,16 @@ Realisierung laut Familienkurve (Marktplatz-Angebote, abgelesen für Zustandsstu
 je Monat bei 24, 36, 48
 Wertverlust je Monat bei dieser Laufzeit: (Einkaufspreis minus Realisierung) geteilt durch die Monate, in Prozent der UVP; je kleiner, desto besser trägt die Geräteart eine lange Laufzeit.
 Geräteart | Preisbelege | Monate | nach 24 Monaten | nach 36 Monaten | nach 48 Monaten | je Monat bei 24 | je Monat bei 36 | je Monat bei 48
-Smartphone | 168 | 17,5 bis 60,9 | 50 % | 45 % | 40 % | 1,6 % | 1,2 % | 1,0 %
+Smartphone (gewählt) | 168 | 17,5 bis 60,9 | 50 % | 45 % | 40 % | 1,6 % | 1,2 % | 1,0 %
 Tablet | 66 | 18,0 bis 59,6 | 64 % | 60 % | 56 % | 1,0 % | 0,8 % | 0,7 %
 Laptop | 121 | 30,2 bis 70,0 | (86 %) | 65 % | 49 % | (0,1 %) | 0,6 % | 0,8 %
-Wie es in der Simulation heute aussieht
-simuliert 819 Zeilen
+Wie es in der Simulation heute aussieht: Geräteart Android-Smartphone der Simulation
+simuliert 852 Zeilen
 Begriffe ausblenden
 Laufzeit
-geplante Vertragslaufzeit in Monaten; die Zeile mittelt alle abgeschlossenen iPhone-Kreisläufe dieser Laufzeit.
+geplante Vertragslaufzeit in Monaten; die Zeile mittelt alle abgeschlossenen Kreisläufe dieser Laufzeit in der Geräteart Android-Smartphone der Simulation (die Simulation kennt vier Gerätearten: iPhone, Android-Smartphone, Tablet, Laptop; feiner nicht).
 abgeschlossen
-Stückzahl der abgeschlossenen iPhone-Kreisläufe je Laufzeit in der Simulation.
+Stückzahl der abgeschlossenen Kreisläufe je Laufzeit in der Simulation.
 davon vorzeitig zurück
 Verträge, die vor dem geplanten Ende endeten; das Gerät kam zurück, die Miete hörte auf, der Vertrag sah keinen Ausgleich vor (Annahme der Simulation).
 Monate abgerechnet
@@ -181,39 +223,40 @@ Lifecycle-Marge je Gerät nur der Verträge, die bis zum Ende liefen.
 Lifecycle-Marge, vorzeitig zurück
 Lifecycle-Marge je Gerät nur der Verträge, die vorzeitig endeten.
 Laufzeit | abgeschlossen | davon vorzeitig zurück | Monate abgerechnet, im Mittel | Einkaufspreis | Miete je Monat | Mieterlös | Restwert | Kosten bis Verkauf | Lifecycle-Marge je Gerät | Lifecycle-Marge, volle Laufzeit | Lifecycle-Marge, vorzeitig zurück
-12 Monate | 121 | 10 | 11,5 | 996 € | 63,59 € | 735 € | 425 € | 195 € | -31 € | -17 € | -184 €
-24 Monate | 464 | 57 | 21,9 | 957 € | 40,86 € | 897 € | 357 € | 256 € | 41 € | 86 € | -282 €
-36 Monate | 224 | 46 | 30,6 | 914 € | 33,34 € | 1.012 € | 299 € | 300 € | 98 € | 192 € | -270 €
-48 Monate | 10 | 4 | 32,0 | 782 € | 25,18 € | 744 € | 234 € | 381 € | -186 € | 159 € | -704 €
+12 Monate | 126 | 11 | 11,5 | 493 € | 34,43 € | 395 € | 216 € | 181 € | -64 € | -53 € | -176 €
+24 Monate | 524 | 81 | 21,3 | 496 € | 22,53 € | 479 € | 185 € | 232 € | -63 € | -29 € | -250 €
+36 Monate | 186 | 38 | 30,6 | 485 € | 19,42 € | 578 € | 156 € | 292 € | -43 € | 5 € | -229 €
+48 Monate | 16 | 10 | 26,2 | 430 € | 13,61 € | 366 € | 158 € | 280 € | -185 € | -144 € | -210 €
 Was bis zum Gewinn fehlt
 Finanzierungskosten, Gemeinkosten und Steuern
 Gewinnaufschlag; Nutzerbetreuung und Geräteverwaltung (MDM) sind als Umlage schon in den Kosten bis Verkauf
-Mittelwerte je Gerät der abgeschlossenen iPhone-Kreisläufe der Simulation. Die Miete je Monat folgt aus dem Platzhalter-Faktor je Laufzeit; die Rangfolge der Laufzeiten ist deshalb eine Folge dieser Annahme, kein Marktbefund. 48 Monate sind erst wenige abgeschlossen (10, davon 4 vorzeitig beendet); die Zahl ist ein Urteil über vorzeitige Rückgaben, nicht über 48 Monate. Der Einkaufspreis hier ist netto und liegt bei 92 % der UVP ohne Mehrwertsteuer (Apple-Rabatt der Simulation, 5 % bis 12 %, Platzhalter); die Marktrechnung oben nimmt einschließlich Mehrwertsteuer 88 % der UVP (Platzhalter des Einkaufs, 12,0 % Abschlag). Zwei Platzhalter für dieselbe Größe; welcher gilt, entscheidet der Einkaufsleitung.
+Mittelwerte je Gerät der abgeschlossenen Kreisläufe der Geräteart Android-Smartphone der Simulation. Die Miete je Monat folgt aus dem Platzhalter-Faktor je Laufzeit; die Rangfolge der Laufzeiten ist deshalb eine Folge dieser Annahme, kein Marktbefund. 48 Monate sind erst wenige abgeschlossen (16, davon 10 vorzeitig beendet); die Zahl ist ein Urteil über vorzeitige Rückgaben, nicht über 48 Monate. Der Einkaufspreis hier ist netto und liegt bei 83 % der UVP ohne Mehrwertsteuer (Rabatt der Simulation, Platzhalter); die Marktrechnung oben nimmt einschließlich Mehrwertsteuer 88 % der UVP (Platzhalter des Einkaufs, 12,0 % Abschlag). Zwei Platzhalter für dieselbe Größe; welcher gilt, entscheidet die Einkaufsleitung.
 Was die Miete je Laufzeit ausmacht
 simuliert abgeleitet
 Begriffe ausblenden
-Nur die Miete geändert, alles andere wie in der Simulation; die Lifecycle-Marge je Gerät verschiebt sich um die Mietänderung mal die Monate der Laufzeit.
+Nur die Miete geändert, alles andere wie in der Simulation der Geräteart Android-Smartphone der Simulation; die Lifecycle-Marge je Gerät verschiebt sich um die Mietänderung mal die Monate der Laufzeit. Beide Faktoren gegen 36 Monate; Laufzeiten ohne belegte Kurve fehlen.
 Laufzeit
-Vertragslaufzeit in Monaten der Simulation.
+Vertragslaufzeit in Monaten der Simulation; fett die gewählte Laufzeit.
 Faktor, Platzhalter
-der Platzhalter (term_rate_factor in config/lake.yaml), mit dem die Simulation heute die Monatsrate je Laufzeit skaliert.
+der Platzhalter (term_rate_factor in config/lake.yaml), mit dem die Simulation heute die Monatsrate je Laufzeit skaliert, hier geteilt durch den Platzhalter der Vergleichslaufzeit (36 Monate).
 Miete je Monat
 Monatsrate der Simulation mit dem Platzhalter-Faktor, Mittel je Gerät.
 Lifecycle-Marge je Gerät
 Lifecycle-Marge je Gerät der Simulation mit dieser Miete, Mittel.
 Faktor, abgeleitet
-Faktor gegen 24 Monate aus Kurve und Kosten (Tabelle oben); bei 12 Monaten die Spanne von der Kurve bis zu den Studien.
+Faktor gegen 36 Monate aus Kurve und Kosten (Tabelle oben); wo Studien vorliegen, die Spanne von der Kurve bis zu den Studien; in Klammern außerhalb der Belegspanne.
 Miete je Monat, abgeleitet
 Miete je Monat mal abgeleiteter Faktor geteilt durch Platzhalter-Faktor.
 Lifecycle-Marge, abgeleitet
 Lifecycle-Marge je Gerät mit der abgeleiteten Miete, alles andere unverändert.
 Laufzeit | Faktor, Platzhalter | Miete je Monat | Lifecycle-Marge je Gerät | Faktor, abgeleitet | Miete je Monat, abgeleitet | Lifecycle-Marge, abgeleitet
-12 Monate | 1,5 | 63,59 € | -31 € | 1,25 bis 2,31 | 53,07 € bis 97,88 € | -158 € bis 380 €
-24 Monate | 1 | 40,86 € | 41 € | 1,00 | 40,86 € | 41 €
-36 Monate | 0,85 | 33,34 € | 98 € | 0,87 | 34,26 € | 131 €
-48 Monate | 0,75 | 25,18 € | -186 € | 0,87 | 29,24 € | 9 €
+12 Monate | 1,76 | 34,43 € | -64 € | (2,11) | (41,15 €) | (17 €)
+24 Monate | 1,18 | 22,53 € | -63 € | 1,25 | 24,03 € | -27 €
+36 Monate | 1,00 | 19,42 € | -43 € | 1,00 | 19,42 € | -43 €
+48 Monate | 0,88 | 13,61 € | -185 € | 0,81 | 12,51 € | -238 €
 ▾ Grenzen, ausgesprochen
-Unter 18 Monaten Modellalter gibt es keinen deutschen Preisbeleg; der Wert nach 12 Monaten ist eine Verlängerung der Kurve und wird durch die Studien (USA, Großbritannien, Ankauf-Gebote) nach unten abgesichert. Deshalb steht für 12 Monate eine Spanne.
+Die Kurve gilt für die Serie (Smartphone / Samsung), nicht für das einzelne Modell: eine Alterskurve mit Belegen gibt es nur je Geräteart und Hersteller. Das Modell (Samsung Galaxy S26 (aktuelle Generation der Galaxy-S-Basisreihe)) wählt die Beschriftung und hebt seine eigenen Belege hervor; kein eigener Preisbeleg für Samsung Galaxy S26 (aktuelle Generation der Galaxy-S-Basisreihe); die Kurve gilt für die Serie Smartphone / Samsung.
+Die Belege der Kurve Smartphone / Samsung reichen von 17,5 bis 54,6 Monaten; außerhalb ist die Kurve verlängert und steht in Klammern, eine unsichere Kurve (wenige Belege) wird nicht verlängert, dort steht „nicht belegt“. Studien mit Jahreswerten liegen nur für Apple Smartphones vor; für diese Serie gibt es keine.
 Marktplatz-Angebote sind die Obergrenze (Marge des Aufbereiters). Die deutschen Ankauf-Belege sind Höchstwerte „bis zu“ eines Ankäufers vor der Zustandsprüfung, also kein Boden; der tatsächliche Ankaufpreis liegt darunter. Was ein Leasinghaus erzielt, hängt vom Kanal ab (Reiter Stellschrauben, Kanalwahl).
-Die Kosten bis Verkauf sind simuliert; die Kurve ist öffentlich. Die abgeleiteten Faktoren mischen beides und sind deshalb eine Größenordnung, kein Preis. Die Studienwerte für Jahr 1 sind Ankauf-Gebote aus den USA und Großbritannien; wo sie gegen die deutsche Marktplatz-Kurve gerechnet werden, steht das dabei.
+Die Kosten bis Verkauf sind simuliert und kennen nur vier Gerätearten (iPhone, Android-Smartphone, Tablet, Laptop); eine Serie wie Smartphone / Samsung teilt sich den Eimer Android-Smartphone mit anderen Herstellern. Die Kurve ist öffentlich und seriengenau. Die abgeleiteten Faktoren mischen beides und sind deshalb eine Größenordnung, kein Preis.
 Der Sprung beim Erscheinen des Nachfolgers steckt in der Kurve nur gemittelt; wer einen Monat vor dem Nachfolger verkauft, liegt darüber, wer danach verkauft, darunter. Dafür fehlt ein Beleg mit Datum.
