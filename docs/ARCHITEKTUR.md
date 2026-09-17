@@ -86,7 +86,7 @@ Neunzehn Feeds sind als Quellverträge in `restwert/lake/feeds.py` definiert und
 
 **Kennzeichnungszeile.** Zeile 1 einer generierten Datei lautet `# SYNTHETIC DATA - restwert generate-lake seed=42 feed=<feed> delivery=<datum>`, die einer Katalogkopie `# PUBLIC DATA - ...`. Ein echter Export hat keine `#`-Zeile. An dieser Zeile erkennt `all`, welche Dateien es vor einem Neulauf löschen darf: nur generierte. Eine echte Datei blockiert den Lauf und wird beim Namen genannt; nur `--wipe-raw` hebt das auf.
 
-**SHA-256 als Identität.** `ingest` bildet den SHA-256 jeder Datei und schreibt ihn nach `bronze.deliveries.sha256` (UNIQUE). Dieselbe Datei ein zweites Mal ist ein No-Op und wird mit den gespeicherten Zählern gemeldet; `ingest --all` darf beliebig oft laufen. `data/lake/raw/_manifest.json` listet die Dateien mit Hash, ist aber reine Dokumentation; der Import hasht selbst.
+**Jede Datei zählt nur einmal, auch wenn sie zweimal hochgeladen wird.** Der Import erkennt eine Datei an ihrem Inhalt, nicht an ihrem Namen: `ingest` bildet den SHA-256 jeder Datei (einen Fingerabdruck des Inhalts) und schreibt ihn nach `bronze.deliveries.sha256` (UNIQUE). Dieselbe Datei ein zweites Mal ist ein No-Op und wird mit den gespeicherten Zählern gemeldet; `ingest --all` darf beliebig oft laufen. `data/lake/raw/_manifest.json` listet die Dateien mit Hash, ist aber reine Dokumentation; der Import hasht selbst.
 
 **Der Ablauf je Datei**, eine DuckDB-Transaktion (`restwert/lake/ingest.py`):
 
@@ -114,11 +114,7 @@ Alles liegt in einer Datei, `data/restwert.duckdb`, mit den Schemas `bronze`, `s
 
 ### Bronze: getypte Kopie der Landung
 
-| Tabelle | Schlüssel | Wichtige Spalten | Woher | Wohin |
-|---|---|---|---|---|
-| `bronze.deliveries` | `delivery_id`, `sha256` UNIQUE | `feed`, `delivered_on`, `rows_read`, `rows_new`, `duplicates_conflict`, `n_unresolved` | `ingest` | `gold.ingest_summary`, `KPI_DATA_UNRESOLVED_SHARE` |
-| `bronze.unresolved` | `unresolved_id` | `delivery_id`, `row_number`, `reason_code`, `reason_text`, `row_json` | `ingest` | Reiter Daten, `KPI_DATA_UNRESOLVED_SHARE` |
-| 19 Feedtabellen `bronze.<kurz>_<feed>`: `cat_models`, `cat_variants`, `mkt_curves`, `ctr_register`, `erp_purchase_orders`, `erp_po_lines`, `erp_goods_receipts`, `erp_supplier_invoices`, `erp_price_changes`, `wms_staging_log`, `wms_shipments`, `portal_rental_contracts`, `portal_rental_invoices`, `sd_tickets`, `ret_receipts`, `rf_work_orders`, `rc_orders`, `rc_credit_notes`, `fin_indirect_spend` | der Geschäftsschlüssel des Feeds | die Spalten des Feeds plus Schwanzspalte | `ingest` | `conform`, `timeline`, `ledger` |
+Bronze ist die Landung, nur getypt und registriert: eine Tabelle je Feed (19 Feedtabellen, `bronze.cat_models` bis `bronze.fin_indirect_spend`) mit den Spalten des Feeds, dazu zwei Registertabellen. `bronze.deliveries` hält eine Zeile je gelandeter Datei mit ihrem Fingerabdruck und den Zählern des Imports; `bronze.unresolved` hält jede Zeile, die nicht getypt oder nicht zugeordnet werden konnte, mit ihrem Grund. Beide speisen den Reiter Daten und `KPI_DATA_UNRESOLVED_SHARE`. Von Bronze lesen `conform`, `timeline` und `ledger`. Tabellen und Spalten: Anhang A.
 
 ### Main: die v0.1-Engine, unverändert
 
@@ -126,13 +122,7 @@ Alles liegt in einer Datei, `data/restwert.duckdb`, mit den Schemas `bronze`, `s
 
 ### Silber: das Geräte-Hauptbuch
 
-| Tabelle | Schlüssel | Wichtige Spalten | Woher | Wohin |
-|---|---|---|---|---|
-| `silver.ledger_lines` | `line_id`; UNIQUE (`serial`, `line_type`, `source_system`, `source_ref`) | `line_type`, `line_class`, `amount_eur`, `event_date`, `source_ref`, `is_estimate`, `assumption_key`, `assumption_owner` | `ledger` aus allen Fleet-Bronze-Tabellen | `silver.device_ledger`, `silver.reconciliation`, Hebel L01 und L02 |
-| `silver.serial_timeline` | `serial` | `ordered_at`, `received_at`, `staged_at`, `shipped_at`, `returned_at`, `wiped_at`, `graded_at`, `sellable_at`, `sold_at`, `credited_at`, `chain_complete`, `missing_steps` | `timeline` aus Bronze und `device_pnl.lifecycle_status` | `gold.chain_quality`, `KPI_DATA_CHAIN_COMPLETE` |
-| `silver.device_ledger` | `serial` | rund 120 Spalten, darunter `rrp_net_eur`, `purchase_price`, `landed_cost`, `tco_eur`, `tco_transactional_eur`, `rental_revenue`, `resale_gross`, `estimate_rv_lease_end`, `anchor_rv_lease_end`, `estimate_rv_of_record`, `lifecycle_result_eur`, `result_if_liquidated_today`, `result_projected_at_lease_end`, `lifecycle_status`, `is_closed`, `closed_date` | `ledger` aus `ledger_lines`, `serial_timeline`, `device_pnl`, Katalog, Kurven, Prognose | neun der 14 Gold-Kennzahlen; die Reiter TCO, Kreislauf, Laufzeit, Bericht, KPIs |
-| `silver.reconciliation` | (`serial`, `field`) | `device_pnl_value`, `ledger_value`, `diff`, `ok` | `ledger` | `KPI_DATA_RECONCILED`; der Lauf bricht bei einer Abweichung ab |
-| `silver.contracts` | `contract_id` | `counterparty_role`, `category`, `end_date`, `notice_deadline`, `price_protection_days`, `claim_window_days`, `spend_under_contract_eur`, `spend_actual_12m_eur`, `covers_oems`, `status`, `action_required` | `contracts` v2 aus `bronze.ctr_register` | `gold.contract_coverage_by_oem`, `gold.renewal_calendar_v2`, `gold.rebate_progress`; Beiträge A2 |
+Silber ordnet jeden Euro und jeden Zeitstempel einer Seriennummer zu, in fünf Tabellen. `silver.ledger_lines`: jeder Euro als eine Zeile mit Art, Datum, Beleg und Kennzeichen, ob er gemessen oder geschätzt ist. `silver.serial_timeline`: jeder Zeitstempel des Kreislaufs je Seriennummer, von der Bestellung bis zur Gutschrift, mit der Angabe, welche Schritte fehlen. `silver.device_ledger`: das Hauptbuch, eine breite Zeile je Seriennummer mit 107 Feldern vom Katalogpreis bis zum Ergebnis; neun der 14 Gold-Kennzahlen und die Reiter TCO, Kreislauf, Laufzeit, Bericht und KPIs lesen daraus. `silver.reconciliation`: der Abgleich des Hauptbuchs gegen die v0.1-Sicht `device_pnl`, Feld für Feld; der Lauf bricht bei einer Abweichung ab. `silver.contracts`: das Vertragsregister mit Fristen, Preisschutzfenstern und Abdeckung je Hersteller. Tabellen und Spalten: Anhang A.
 
 **Das Herzstück: `silver.device_ledger`, eine Zeile je Seriennummer.** Jeder Euro eines Geräts ist zuerst eine Zeile in `silver.ledger_lines` mit einer von 17 Zeilenarten in Kreislaufreihenfolge: `purchase_price`, `freight`, `duty`, `staging`, `outbound_shipping`, `rental_revenue`, `support`, `mdm_operations`, `repair`, `replacement_logistics`, `return_logistics`, `wipe_grading`, `refurbishment`, `holding_cost`, `resale_gross`, `channel_fee`, `price_protection_credit`. Umsatz positiv, Kosten negativ, alles netto. Drei Zeilenarten sind Schätzungen mit `is_estimate = true` und benanntem Owner: `holding_cost` (Tage mal `holding_cost_per_day_eur`, CFO), `support` und `mdm_operations` (je abgerechnetem Mietmonat, Head of Service Operations). Fracht, Zoll und Preisschutzgutschrift werden cent-genau auf die Geräte einer Bestellzeile verteilt.
 
@@ -148,15 +138,7 @@ Offene Zyklen tragen zwei Zahlen, die nie addiert werden: `result_if_liquidated_
 
 ### Gold: eine Tabelle je Frage
 
-| Tabelle | Schlüssel | Woher | Wohin |
-|---|---|---|---|
-| `gold.ingest_summary` | `feed` | `ingest` | Reiter Daten |
-| `gold.chain_quality` | (`lifecycle_status`, `step`) | `timeline` | Reiter Daten |
-| `gold.purchase_by_oem_month`, `gold.tco_by_cohort`, `gold.estimate_vs_anchor`, `gold.resale_by_channel_grade`, `gold.result_by_cohort` | (`oem`, `purchase_month`, `supplier_role`); (`cohort_kind`, `cohort_value`, `line_type`); (`catalogue_family`, `oem`); (`channel`, `grade_at_sale`); (`cohort_kind`, `cohort_value`) | `ledger` | die Seiten 1 bis 5 des Dashboards, Reiter Kreislauf |
-| `gold.levers_per_device`, `gold.levers_by_cohort`, `gold.levers_summary` | (`serial`, `lever_id`); (`cohort_kind`, `cohort_value`, `lever_id`); `lever_id` | `levers` | Reiter Stellschrauben, `KPI_LEV_ADDITIVE_EUR_PA` |
-| `gold.contract_coverage_by_oem`, `gold.renewal_calendar_v2`, `gold.rebate_progress` | `oem`; `contract_id`; `contract_id` | `contracts` v2 | Seite 7 Contracts, `KPI_CTR_COVERAGE_BY_OEM` |
-| `gold.kpi_values` | (`kpi_id`, `as_of`) | `kpis` | Reiter KPIs, jede Kachel der Seiten 0 bis 7 |
-| `gold.kpi_breakdown` | (`kpi_id`, `as_of`, `dimension`, `dimension_value`) | `kpis` | die Aufteilungen je Kachel |
+Gold beantwortet je Tabelle eine Frage: Wie sauber war der Import (`gold.ingest_summary`, `gold.chain_quality`, Reiter Daten)? Was hat der Einkauf je Hersteller und Monat bezahlt, was kostet eine Kohorte, wie liegt die Schätzung gegen die öffentlichen Preisbelege, was bringt welcher Kanal je Grade, wie schließt eine Kohorte ab (fünf Kohortentabellen aus `ledger`, Reiter Kreislauf)? Welche Hebel liegen je Gerät, je Kohorte und in Summe (`gold.levers_per_device`, `gold.levers_by_cohort`, `gold.levers_summary`, Reiter Stellschrauben)? Welche Verträge decken welchen Hersteller, welche laufen aus, wo steht der Bonus (drei Vertragstabellen aus `contracts` v2)? Und die Kennzahlen selbst: `gold.kpi_values` hält je Kennzahl und Stichtag eine Zeile, `gold.kpi_breakdown` die Aufteilungen je Kachel; beide speisen den Reiter KPIs. Tabellen und Schlüssel: Anhang A.
 
 ## 4. Ein Lauf, Schritt für Schritt
 
@@ -205,9 +187,9 @@ Textfassung: Eugen ruft einen Befehl; die CLI erzeugt die Landung, füllt Bronze
 
 Das ist der Abschnitt, der die Frage vom 17.09.2026 beantwortet. Kurz: **eine Kennzahl ändert sich nur, wenn ein Lauf sie zu einem neuen Stichtag rechnet und die Seite danach neu gebaut und veröffentlicht wird.** Auf der Seite selbst gibt es keinen Knopf, der eine Zahl ändert.
 
-### (a) Eine Kennzahl ist eine Funktion
+### (a) Eine Kennzahl ist eine Rechenvorschrift
 
-Jede der 14 Gold-Kennzahlen ist eine registrierte Funktion in `restwert/gold/kpis.py` (`@register_gold`), die zum Stichtag `as_of` ausschließlich Bronze-, Silber- und Gold-Tabellen liest und ein `KpiValue` zurückgibt: `value`, `numerator`, `denominator`, `n`, `status`, `note`. Beispiel `KPI_PUR_DISCOUNT_VS_RRP`: `1 - sum(device_ledger.purchase_price - price_protection_credit_eur) / sum(device_ledger.rrp_net_eur)` über Geräte mit `received_at` in den zwölf Monaten vor dem Stichtag. Fehlt der Nenner, fehlt eine Tabelle, oder liegt `n` unter der Mindeststichprobe `min_n` aus `config/kpi_targets.yaml`, ist `status = not_measurable` und `value = None`, nie 0. Die 20 v0.1-Kennzahlen (`restwert/kpi/compute.py`) folgen derselben Regel. Die vollständige Liste mit Formel, Quelltabellen, Richtung und Owner steht in `docs/GOLD_KPIS.md`, erzeugt aus dem Code.
+Jede der 14 Gold-Kennzahlen ist eine Rechenvorschrift in `restwert/gold/kpis.py`, die zum Stichtag `as_of` ausschließlich Tabellen aus Bronze, Silber und Gold liest und je Stichtag einen Wert liefert, zusammen mit Zähler, Nenner, Stichprobe und Status. Beispiel `KPI_PUR_DISCOUNT_VS_RRP`: `1 - sum(device_ledger.purchase_price - price_protection_credit_eur) / sum(device_ledger.rrp_net_eur)` über Geräte mit `received_at` in den zwölf Monaten vor dem Stichtag. Fehlt der Nenner, fehlt eine Tabelle, oder liegt `n` unter der Mindeststichprobe `min_n` aus `config/kpi_targets.yaml`, ist `status = not_measurable` und `value = None`, nie 0. Die 20 v0.1-Kennzahlen (`restwert/kpi/compute.py`) folgen derselben Regel. Die vollständige Liste mit Formel, Quelltabellen, Richtung und Owner steht in `docs/GOLD_KPIS.md`, erzeugt aus dem Code. Wie die Registrierung und das Ergebnis im Code heißen: Anhang C.
 
 ### (b) Der Lauf schreibt eine Zeile je Kennzahl und Stichtag
 
@@ -304,15 +286,15 @@ Ein Motor ist eine reine Funktion `window.RE.<tab>(D, opts, P)`, die eine JSON-D
 
 | Datei | Zweck | Wer ändert Werte |
 |---|---|---|
-| `config/lake.yaml` | Design-Parameter des Generators: `seed`, `n_devices`, `history_start`, `purchase_end`, `as_of`, `delivery_cadence`, je Familie `launch_cadence_months`, `term_mix`, `monthly_rate_pct_of_landed`, der Truth-Block; je Block ein Owner in `design_parameter_owners` | der Bauer; auf echten Daten bleibt der Launchkalender je Familie in Gebrauch |
+| `config/lake.yaml` | wie die synthetische Flotte gebaut wird: Größe, Zeitraum, Stichtag, Liefertakt, Launchkalender je Familie, Laufzeitmix, Mietsatz | der Bauer; auf echten Daten bleibt der Launchkalender je Familie in Gebrauch |
 | `config/generator.yaml` | dieselbe Rolle für die alte v0.1-Kette (`all --v01`) | der Bauer |
-| `config/thresholds.yaml` | jede Schwelle der Regeln R01 bis R07 und der Advisories mit `owner`, `valid_from`, `rationale`, `placeholder_default` | der Owner der Schwelle (Head of Service Operations, Head of Recommerce, CFO, Head of Procurement, Category Manager Hardware, Head of Customer Success) |
-| `config/assumptions.yaml` | Annahmen je Block mit Owner: `planned_rv_ratio`, `depreciation_months`, `holding_cost_per_day_eur` (CFO), `support_cost_per_device_month_eur`, `mdm_cost_per_device_month_eur` (Head of Service Operations), `channel_fees`, `expected_grade_at_return`, `expected_return_to_sale_days` (Head of Recommerce), `vat_rate` | der Owner des Blocks |
-| `config/kpi_targets.yaml` | `targets` (CFO), `min_n` je Gold-Kennzahl (CFO), `savings_plan_eur` (Head of Indirect Procurement) | der genannte Owner |
-| `config/owners.yaml` | die sechs Rollen des KPI-Rahmens mit `categories` und `families`, `team`, die Abbildung der Platzhalter | `Leitung` |
-| `config/performance_cycle.yaml` | `cycle`, `start_date`, für „Bis" und „Soll heute" | `Leitung` |
+| `config/thresholds.yaml` | jede Schwelle der Regeln R01 bis R07 und der Advisories, je mit Owner, Gültigkeitsbeginn und Begründung | der Owner der Schwelle (Head of Service Operations, Head of Recommerce, CFO, Head of Procurement, Category Manager Hardware, Head of Customer Success) |
+| `config/assumptions.yaml` | die Annahmen der Rechnung: geplanter Restwert, Abschreibungsdauer, Lagerkosten je Tag, Support und MDM je Gerätemonat, Kanalgebühren, erwartete Rückgabequalität und Verkaufsdauer, Mehrwertsteuersatz | der Owner des Blocks (CFO, Head of Service Operations, Head of Recommerce) |
+| `config/kpi_targets.yaml` | Ziele der v0.1-Kennzahlen, Mindeststichprobe je Gold-Kennzahl, Sparplan je Jahr | der genannte Owner (CFO, Head of Indirect Procurement) |
+| `config/owners.yaml` | die sechs Rollen des KPI-Rahmens und welche Kategorien und Gerätefamilien sie verantworten | `Leitung` |
+| `config/performance_cycle.yaml` | Zyklus und Startdatum, für „Bis" und „Soll heute" | `Leitung` |
 
-Der Loader `restwert/config.py` hält vier Pydantic-Modelle (`GeneratorConfig`, `Thresholds`, `Assumptions`, `KpiTargets`) und bricht ab, wenn ein Owner fehlt. Eine Konfigurationsänderung wirkt beim nächsten Lauf; auf der Seite erst nach Build und Veröffentlichung.
+Der Loader `restwert/config.py` bricht ab, wenn ein Owner fehlt. Eine Konfigurationsänderung wirkt beim nächsten Lauf; auf der Seite erst nach Build und Veröffentlichung. Die Schlüssel je Datei: Anhang B.
 
 ## 9. Was noch fehlt, und wo es im Bild sitzt
 
@@ -342,3 +324,53 @@ Alles hier ist **geplant** und nicht gebaut. Quellen: der Bauplan v0 vom 13.09.2
 - **Hebel**: Ist minus benannte Referenz auf einer Zeilenart des Hauptbuchs, mit Schwelle, Owner und der Regel, die reagiert.
 - **Regel**: eine reine Funktion über Zahlen und Schwellen, deren Ergebnis im `decision_log` steht.
 - **Owner**: die Rolle, die eine Schwelle, eine Annahme oder ein Ziel verantwortet und ändert; heute Platzhalter mit `(name)`.
+
+## 11. Anhang: Tabellen, Schlüssel und Namen im Code
+
+Für den, der die Datenbankdatei öffnet oder den Code liest. Der Haupttext kommt ohne diesen Anhang aus.
+
+### Anhang A: die Tabellen der drei Schichten
+
+Bronze:
+
+| Tabelle | Schlüssel | Wichtige Spalten | Woher | Wohin |
+|---|---|---|---|---|
+| `bronze.deliveries` | `delivery_id`, `sha256` UNIQUE | `feed`, `delivered_on`, `rows_read`, `rows_new`, `duplicates_conflict`, `n_unresolved` | `ingest` | `gold.ingest_summary`, `KPI_DATA_UNRESOLVED_SHARE` |
+| `bronze.unresolved` | `unresolved_id` | `delivery_id`, `row_number`, `reason_code`, `reason_text`, `row_json` | `ingest` | Reiter Daten, `KPI_DATA_UNRESOLVED_SHARE` |
+| 19 Feedtabellen `bronze.<kurz>_<feed>`: `cat_models`, `cat_variants`, `mkt_curves`, `ctr_register`, `erp_purchase_orders`, `erp_po_lines`, `erp_goods_receipts`, `erp_supplier_invoices`, `erp_price_changes`, `wms_staging_log`, `wms_shipments`, `portal_rental_contracts`, `portal_rental_invoices`, `sd_tickets`, `ret_receipts`, `rf_work_orders`, `rc_orders`, `rc_credit_notes`, `fin_indirect_spend` | der Geschäftsschlüssel des Feeds | die Spalten des Feeds plus Schwanzspalte | `ingest` | `conform`, `timeline`, `ledger` |
+
+Silber:
+
+| Tabelle | Schlüssel | Wichtige Spalten | Woher | Wohin |
+|---|---|---|---|---|
+| `silver.ledger_lines` | `line_id`; UNIQUE (`serial`, `line_type`, `source_system`, `source_ref`) | `line_type`, `line_class`, `amount_eur`, `event_date`, `source_ref`, `is_estimate`, `assumption_key`, `assumption_owner` | `ledger` aus allen Fleet-Bronze-Tabellen | `silver.device_ledger`, `silver.reconciliation`, Hebel L01 und L02 |
+| `silver.serial_timeline` | `serial` | `ordered_at`, `received_at`, `staged_at`, `shipped_at`, `returned_at`, `wiped_at`, `graded_at`, `sellable_at`, `sold_at`, `credited_at`, `chain_complete`, `missing_steps` | `timeline` aus Bronze und `device_pnl.lifecycle_status` | `gold.chain_quality`, `KPI_DATA_CHAIN_COMPLETE` |
+| `silver.device_ledger` | `serial` | 107 Spalten (`DEVICE_LEDGER_COLUMNS` in `restwert/ledger/device_ledger.py`, gleich der DDL in `restwert/lake/schema_lake.py`), darunter `rrp_net_eur`, `purchase_price`, `landed_cost`, `tco_eur`, `tco_transactional_eur`, `rental_revenue`, `resale_gross`, `estimate_rv_lease_end`, `anchor_rv_lease_end`, `estimate_rv_of_record`, `lifecycle_result_eur`, `result_if_liquidated_today`, `result_projected_at_lease_end`, `lifecycle_status`, `is_closed`, `closed_date` | `ledger` aus `ledger_lines`, `serial_timeline`, `device_pnl`, Katalog, Kurven, Prognose | neun der 14 Gold-Kennzahlen; die Reiter TCO, Kreislauf, Laufzeit, Bericht, KPIs |
+| `silver.reconciliation` | (`serial`, `field`) | `device_pnl_value`, `ledger_value`, `diff`, `ok` | `ledger` | `KPI_DATA_RECONCILED`; der Lauf bricht bei einer Abweichung ab |
+| `silver.contracts` | `contract_id` | `counterparty_role`, `category`, `end_date`, `notice_deadline`, `price_protection_days`, `claim_window_days`, `spend_under_contract_eur`, `spend_actual_12m_eur`, `covers_oems`, `status`, `action_required` | `contracts` v2 aus `bronze.ctr_register` | `gold.contract_coverage_by_oem`, `gold.renewal_calendar_v2`, `gold.rebate_progress`; Beiträge A2 |
+
+Gold:
+
+| Tabelle | Schlüssel | Woher | Wohin |
+|---|---|---|---|
+| `gold.ingest_summary` | `feed` | `ingest` | Reiter Daten |
+| `gold.chain_quality` | (`lifecycle_status`, `step`) | `timeline` | Reiter Daten |
+| `gold.purchase_by_oem_month`, `gold.tco_by_cohort`, `gold.estimate_vs_anchor`, `gold.resale_by_channel_grade`, `gold.result_by_cohort` | (`oem`, `purchase_month`, `supplier_role`); (`cohort_kind`, `cohort_value`, `line_type`); (`catalogue_family`, `oem`); (`channel`, `grade_at_sale`); (`cohort_kind`, `cohort_value`) | `ledger` | die Seiten 1 bis 5 des Dashboards, Reiter Kreislauf |
+| `gold.levers_per_device`, `gold.levers_by_cohort`, `gold.levers_summary` | (`serial`, `lever_id`); (`cohort_kind`, `cohort_value`, `lever_id`); `lever_id` | `levers` | Reiter Stellschrauben, `KPI_LEV_ADDITIVE_EUR_PA` |
+| `gold.contract_coverage_by_oem`, `gold.renewal_calendar_v2`, `gold.rebate_progress` | `oem`; `contract_id`; `contract_id` | `contracts` v2 | Seite 7 Contracts, `KPI_CTR_COVERAGE_BY_OEM` |
+| `gold.kpi_values` | (`kpi_id`, `as_of`) | `kpis` | Reiter KPIs, jede Kachel der Seiten 0 bis 7 |
+| `gold.kpi_breakdown` | (`kpi_id`, `as_of`, `dimension`, `dimension_value`) | `kpis` | die Aufteilungen je Kachel |
+
+### Anhang B: die Schlüssel der Konfigurationsdateien
+
+- `config/lake.yaml`: `seed`, `n_devices`, `history_start`, `purchase_end`, `as_of`, `delivery_cadence`; je Familie `launch_cadence_months`, `term_mix`, `monthly_rate_pct_of_landed`; der Truth-Block; je Block ein Owner in `design_parameter_owners`.
+- `config/thresholds.yaml`: je Schwelle `value` oder `values`, `unit`, `owner`, `rationale`, `valid_from`, `placeholder_default`, `rule_ids`.
+- `config/assumptions.yaml`: `planned_rv_ratio`, `depreciation_months`, `holding_cost_per_day_eur` (CFO); `support_cost_per_device_month_eur`, `mdm_cost_per_device_month_eur` (Head of Service Operations); `channel_fees`, `expected_grade_at_return`, `expected_return_to_sale_days` (Head of Recommerce); `vat_rate`.
+- `config/kpi_targets.yaml`: `targets` mit `targets_owner`, `min_n` mit `min_n_owner`, `savings_plan_eur` mit `savings_plan_owner`.
+- `config/owners.yaml`: je Rolle `categories` und `families`, dazu `team`.
+- `config/performance_cycle.yaml`: `cycle`, `start_date`.
+- Der Loader `restwert/config.py` hält vier Pydantic-Modelle: `GeneratorConfig`, `Thresholds`, `Assumptions`, `KpiTargets`.
+
+### Anhang C: die Kennzahlen im Code
+
+Eine Gold-Kennzahl ist eine Funktion in `restwert/gold/kpis.py`, registriert mit dem Dekorator `@register_gold`. Ihr Ergebnis ist ein `KpiValue` aus `restwert/records.py` mit den Feldern `value`, `numerator`, `denominator`, `n`, `status` (`ok` oder `not_measurable`) und `note`. Der Lauf `run_gold_kpis` in `restwert/gold/run.py` ruft jede registrierte Funktion zum Stichtag und schreibt die Zeilen nach `gold.kpi_values` und `gold.kpi_breakdown`.
