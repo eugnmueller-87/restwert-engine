@@ -4,7 +4,8 @@
    aus dem KPI-Rahmen kpi_rahmen.json, den gold-KPIs, der v0.1-Registry, kpi_targets.yaml, performance_cycle.yaml,
    owners.yaml und den Monatsreihen aus data/restwert.duckdb).
    Je Kennzahl eine Zeile: Nr, Kennzahl, Ziel, Ist, Fortschritt (Balken plus Prozent, darunter Soll heute), Bis,
-   Beiträge je Rolle, Status. Eine Zeile klappt auf Klick ihre Beitragszeilen auf und trägt den Link Definition auf den
+   Beiträge je Rolle, Status. Keine Formel, keine Zählregel, kein Erklärabsatz im Reiter (Eugen, 17.09.2026): das steht
+   im Rahmen, den jede Zeile über den Link Definition mit Anker erreicht. Eine Zeile klappt auf Klick ihre Beitragszeilen auf und trägt den Link Definition auf den
    Rahmen. Der Zyklus (Quartal, Halbjahr, Jahr) kommt über opts.period, der Wechsel über opts.setPeriod, die offene
    Zeile über opts.open und opts.toggle.
    Kein DOM, kein Zustand, keine getippte Zahl: jede Zahl kommt aus D und geht durch E.fmt. Der Status je Kennzahl steht
@@ -47,16 +48,15 @@
       if (unit === 'eur') return money(v);
       return f.qty(v);
     };
-    var points = function (v) { return f.num(Math.abs(v) * 100, 0) + ' Punkte'; };
     var count = function (n, one, many) { return f.qty(n) + ' ' + (n === 1 ? one : many); };
-    /* Ziel: eine Zahl mit Einheit; bei Zielen gegen die Baseline die gerechnete Zahl, darunter die Regel des Rahmens */
+    /* Ziel: eine Zahl mit Einheit; bei Zielen gegen die Baseline nur die gerechnete Zahl. Die Regel dahinter (Baseline plus,
+       mal, minus) steht im Rahmen hinter dem Link Definition, nie hier (Eugens Ansage 17.09.2026: keine Formel im Reiter). */
     var zielCell = function (r) {
       var z = r.ziel_wert || {}, u = z.einheit, t = z.berechnet, text = '', sub = '';
       var word = z.richtung === 'up' ? (z.strikt ? 'über ' : 'mindestens ') : 'höchstens ';
       if (z.art === 'absolut') text = word + valShort(z.wert, u) + (u === 'count' && has(z.einheit_wort) ? ' ' + z.einheit_wort : '');
       else if (z.art === 'baseline_delta' || z.art === 'baseline_faktor') {
-        var rule = z.art === 'baseline_faktor' ? 'Baseline mal ' + f.num(z.wert, 1) : 'Baseline ' + (z.wert >= 0 ? 'plus ' : 'minus ') + (u === 'ratio' ? points(z.wert) : valShort(Math.abs(z.wert), u));
-        if (isNum(t)) { text = word + valShort(t, u); sub = rule; } else { text = rule; sub = 'Baseline fehlt'; }
+        if (isNum(t)) text = word + valShort(t, u); else { text = 'n/a'; sub = 'Baseline fehlt'; }
       } else if (z.art === 'referenz') text = word + (z.referenz_kurz || z.referenz || '');
       if (z.zweite && has(z.zweite.label_kurz)) sub = (sub ? sub + '; ' : '') + z.zweite.label_kurz + ' ' + (z.zweite.richtung === 'up' ? 'mindestens ' : 'höchstens ') + valShort(z.zweite.wert, z.zweite.einheit);
       return E.C(text, { minW: 120, tag: r.beispiel ? 'tag-outline' : '', tagText: r.beispiel ? 'Beispiel' : '', sub: sub });
@@ -84,7 +84,7 @@
       var B = r.beitraege || {}, S = Array.isArray(B.summen) ? B.summen : [];
       if (!S.length) return E.C('keine gebucht', { color: 'var(--ink-65)', minW: 120 });
       var text = S.map(function (s) { return s.label + ': ' + count(s.n, 'Maßnahme', 'Maßnahmen') + (isNum(s.eur) ? ', ' + f.eur(s.eur) : ''); }).join('; ');
-      return E.C(text, { minW: 150 });
+      return E.C(text, { minW: 200 });
     };
     var statusCell = function (r) {
       var st = STATUS[r.status] || STATUS.nicht_messbar;
@@ -126,16 +126,16 @@
       { label: 'nicht messbar · nicht im Werkzeug', value: f.qty(C.nicht_messbar) + ' · ' + f.qty(C.nicht_im_werkzeug), neg: false, tags: [],
         lines: [f.qty(C.nicht_messbar + C.nicht_im_werkzeug) + ' Kennzahlen ohne Ist; was fehlt, steht in der Spalte Fortschritt'] }
     ];
-    var calcnote = 'Fortschritt ist der Anteil des Wegs von der Baseline (Mittel der ersten ' + f.qty(D.baseline_months) + ' Monate mit Daten) zum Ziel, 0 bis 100 %; bei Zielen von 100 % oder 0 der Anteil am Ziel; Soll heute ist die lineare Erwartung zwischen Zyklusstart ' + f.de(cyc.start) + ' und Bis. '
-      + 'Beiträge sind aus Ereignissen mit Akteur abgeleitet (Entscheidungslog, Savings-Register, Preisschutz, Vertragsregister), je Rolle nach config/owners.yaml, im Fenster ' + D.window + '; Handeinträge folgen.';
+    /* kein calcnote: die Rechenregeln (Fortschritt, Soll heute, Herkunft der Beiträge) stehen im Rahmen hinter dem Link
+       Definition jeder Zeile; ein fest gerenderter Absatz unter den Kacheln wäre genau der Erklärtext, den der Reiter nicht trägt */
 
     /* ---------- Tabellen: eine je Satz ---------- */
     var cols = [E.H('Nr'), E.H('Kennzahl'), E.H('Ziel'), E.H('Ist', 1), E.H('Fortschritt'), E.H('Bis'), E.H('Beiträge'), E.H('Status')];
     var defs = [
       { k: 'Nr, Kennzahl', v: 'Nummer und Name laut Rahmen; die Zeile klappt auf Klick ihre Beiträge und den Link Definition auf.' },
-      { k: 'Ziel', v: 'eine Zahl mit Einheit; bei Zielen gegen die Baseline die gerechnete Zahl, darunter die Regel; Beispiel markiert Zielwerte ohne Baseline des Hauses.' },
+      { k: 'Ziel', v: 'eine Zahl mit Einheit; bei Zielen gegen die Baseline die gerechnete Zahl; Beispiel markiert Zielwerte ohne Baseline des Hauses; die Regel dahinter steht in der Definition.' },
       { k: 'Ist', v: 'der Wert der Engine im Lauf, rollierend zwölf Monate; n/a, wenn nicht messbar oder nicht im Werkzeug; darunter die zweite Teilzahl eines Doppelziels.' },
-      { k: 'Fortschritt', v: 'Balken und Prozent nach der Regel unter den Kacheln, darunter Soll heute; bei nicht messbar das fehlende Feld, bei nicht im Werkzeug die fehlende Quelle.' },
+      { k: 'Fortschritt', v: 'Balken und Prozent als Anteil des Wegs von der Baseline zum Ziel, darunter Soll heute; bei nicht messbar das fehlende Feld, bei nicht im Werkzeug die fehlende Quelle.' },
       { k: 'Bis', v: 'Zyklusstart plus Horizont des Rahmens, gerundet auf das Ende des Zyklusabschnitts (' + periodLabel + '), in dem das Datum liegt.' },
       { k: 'Beiträge', v: 'je Rolle die gebuchten Maßnahmen und ihre Wirkung in Euro; leer heißt keine gebucht. Stufe realisiert bei Bestätigung oder Gutschrift, verhandelt bei unbestätigter Preisreduktion, sonst identifiziert.' },
       { k: 'Beleg-ID', v: 'die Kennung in der Quelle; bei Entscheidungen die ersten Zeichen der decision_id.' },
@@ -165,10 +165,10 @@
 
     return {
       kicker: kicker, subject: subject, intro: '', facts: cycleFacts,
-      kpis: kpis, calcnote: calcnote,
+      kpis: kpis, calcnote: '',
       tables: tables, blocks: [],
       periodOpts: periodOpts, period: period
     };
   };
-  w.RE.kpis.version = 4;
+  w.RE.kpis.version = 5;
 })(window);

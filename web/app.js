@@ -96,7 +96,8 @@
       c.tag ? h(React.Fragment, null, ' ', h('span', { className: 'tag ' + c.tag, style: { fontSize: 10, padding: '1px 7px' } }, c.tagText)) : null,
       c.hasBar ? h('span', { className: 'cell-bar', style: { width: c.bar } }) : null,
       c.hasSpark ? CellSpark(c.spark) : null,
-      c.sub ? h('div', { style: { fontSize: 11.5, fontWeight: 400, lineHeight: 1.4, color: 'var(--ink-65)' } }, c.sub) : null,
+      /* Leerzeichen vor der Unterzeile: im Textfluss (Screenreader, Kopieren) sonst "99,7 % BeispielBaseline" in einem Wort */
+      c.sub ? h(React.Fragment, null, ' ', h('div', { style: { fontSize: 11.5, fontWeight: 400, lineHeight: 1.4, color: 'var(--ink-65)' } }, c.sub)) : null,
       c.hasLinks ? c.links.map(function (l, j) {
         return h('div', { key: j, style: { fontSize: 12, lineHeight: 1.4 } }, h('a', { href: l.href, target: '_blank', rel: 'noopener', style: { color: 'var(--color-accent-700)' } }, l.text), ' ', l.rest);
       }) : null,

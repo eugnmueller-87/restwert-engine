@@ -39,7 +39,6 @@ erfüllt · im Korridor · verfehlt
 nicht messbar · nicht im Werkzeug
 8 · 3
 11 Kennzahlen ohne Ist; was fehlt, steht in der Spalte Fortschritt
-Fortschritt ist der Anteil des Wegs von der Baseline (Mittel der ersten 3 Monate mit Daten) zum Ziel, 0 bis 100 %; bei Zielen von 100 % oder 0 der Anteil am Ziel; Soll heute ist die lineare Erwartung zwischen Zyklusstart 01.10.2026 und Bis. Beiträge sind aus Ereignissen mit Akteur abgeleitet (Entscheidungslog, Savings-Register, Preisschutz, Vertragsregister), je Rolle nach config/owners.yaml, im Fenster 14.09.2025 bis 13.09.2026; Handeinträge folgen.
 Satz A, alle Rollen
 4 Zeilen
 Begriffe ausblenden
@@ -47,11 +46,11 @@ Begriffe ausblenden
 Nr, Kennzahl
 Nummer und Name laut Rahmen; die Zeile klappt auf Klick ihre Beiträge und den Link Definition auf.
 Ziel
-eine Zahl mit Einheit; bei Zielen gegen die Baseline die gerechnete Zahl, darunter die Regel; Beispiel markiert Zielwerte ohne Baseline des Hauses.
+eine Zahl mit Einheit; bei Zielen gegen die Baseline die gerechnete Zahl; Beispiel markiert Zielwerte ohne Baseline des Hauses; die Regel dahinter steht in der Definition.
 Ist
 der Wert der Engine im Lauf, rollierend zwölf Monate; n/a, wenn nicht messbar oder nicht im Werkzeug; darunter die zweite Teilzahl eines Doppelziels.
 Fortschritt
-Balken und Prozent nach der Regel unter den Kacheln, darunter Soll heute; bei nicht messbar das fehlende Feld, bei nicht im Werkzeug die fehlende Quelle.
+Balken und Prozent als Anteil des Wegs von der Baseline zum Ziel, darunter Soll heute; bei nicht messbar das fehlende Feld, bei nicht im Werkzeug die fehlende Quelle.
 Bis
 Zyklusstart plus Horizont des Rahmens, gerundet auf das Ende des Zyklusabschnitts (Quartal), in dem das Datum liegt.
 Beiträge
@@ -61,7 +60,7 @@ die Kennung in der Quelle; bei Entscheidungen die ersten Zeichen der decision_id
 Status
 erfüllt, im Korridor (innerhalb 20 % des Ziels auf der schlechteren Seite), verfehlt, nicht messbar, nicht im Werkzeug; bei zwei Teilzahlen zählt die schlechtere.
 Nr | Kennzahl | Ziel | Ist | Fortschritt | Bis | Beiträge | Status
-A1 | Spend unter Management | mindestens 99,7 % BeispielBaseline plus 10 Punkte | 93,1 % | 35 %Soll heute 0 % | Q4 2027 | keine gebucht | verfehlt
+A1 | Spend unter Management | mindestens 99,7 % Beispiel | 93,1 % | 35 % Soll heute 0 % | Q4 2027 | keine gebucht | verfehlt
 A2 | Vertragsregister vollständig | mindestens 100,0 % | n/a | Feld Eigner im Team und Wertschwelle | Q4 2026 | Indirekt 1: 2 Maßnahmen; Indirekt 2: 2 Maßnahmen; Indirekt 3: 1 Maßnahme; Indirekt 4: 2 Maßnahmen; Resale 1: 4 Maßnahmen; Resale 2: 3 Maßnahmen; Team: 8 Maßnahmen | nicht messbar
 A3 | Risikoabdeckung der Lieferanten | mindestens 100,0 % | n/a | Quelle fehlt: Prüfprotokoll je Lieferant mit Datum | Q2 2027 | keine gebucht | nicht im Werkzeug
 A4 | Wiederverwendbare Verbesserung | mindestens 1 je Rolle und Quartal | n/a | Quelle fehlt: Speicher des Teams mit Abnahme | Q1 2027 | keine gebucht | nicht im Werkzeug
@@ -72,11 +71,11 @@ Begriffe ausblenden
 Nr, Kennzahl
 Nummer und Name laut Rahmen; die Zeile klappt auf Klick ihre Beiträge und den Link Definition auf.
 Ziel
-eine Zahl mit Einheit; bei Zielen gegen die Baseline die gerechnete Zahl, darunter die Regel; Beispiel markiert Zielwerte ohne Baseline des Hauses.
+eine Zahl mit Einheit; bei Zielen gegen die Baseline die gerechnete Zahl; Beispiel markiert Zielwerte ohne Baseline des Hauses; die Regel dahinter steht in der Definition.
 Ist
 der Wert der Engine im Lauf, rollierend zwölf Monate; n/a, wenn nicht messbar oder nicht im Werkzeug; darunter die zweite Teilzahl eines Doppelziels.
 Fortschritt
-Balken und Prozent nach der Regel unter den Kacheln, darunter Soll heute; bei nicht messbar das fehlende Feld, bei nicht im Werkzeug die fehlende Quelle.
+Balken und Prozent als Anteil des Wegs von der Baseline zum Ziel, darunter Soll heute; bei nicht messbar das fehlende Feld, bei nicht im Werkzeug die fehlende Quelle.
 Bis
 Zyklusstart plus Horizont des Rahmens, gerundet auf das Ende des Zyklusabschnitts (Quartal), in dem das Datum liegt.
 Beiträge
@@ -86,13 +85,13 @@ die Kennung in der Quelle; bei Entscheidungen die ersten Zeichen der decision_id
 Status
 erfüllt, im Korridor (innerhalb 20 % des Ziels auf der schlechteren Seite), verfehlt, nicht messbar, nicht im Werkzeug; bei zwei Teilzahlen zählt die schlechtere.
 Nr | Kennzahl | Ziel | Ist | Fortschritt | Bis | Beiträge | Status
-B1 | Hard Savings, validiert | mindestens 3,0 % Beispiel | 0,5 % | 4 %Soll heute 0 % | Q4 2027 | Indirekt 1: 11 Maßnahmen, 1.996 €; Indirekt 2: 10 Maßnahmen, 1.345 €; Indirekt 3: 23 Maßnahmen, 3.882 €; Indirekt 4: 10 Maßnahmen, 2.254 € | verfehlt
+B1 | Hard Savings, validiert | mindestens 3,0 % Beispiel | 0,5 % | 4 % Soll heute 0 % | Q4 2027 | Indirekt 1: 11 Maßnahmen, 1.996 €; Indirekt 2: 10 Maßnahmen, 1.345 €; Indirekt 3: 23 Maßnahmen, 3.882 €; Indirekt 4: 10 Maßnahmen, 2.254 € | verfehlt
 B3 | Verlängerungen mit Vorlauf | mindestens 100,0 % Beispiel | n/a | Datum der ersten Verhandlungshandlung | Q2 2027 | keine gebucht | nicht messbar
 B4 | Preisänderung bei Verlängerung | höchstens VPI Beispiel | n/a | Quelle fehlt: Vertragsversionen je Lieferant und VPI | Q1 2027 | keine gebucht | nicht im Werkzeug
 B5 | Stille Verlängerungen | höchstens 0 Verträge | n/a | Feld Entscheidung mit Datum und Eigner | Q1 2027 | keine gebucht | nicht messbar
-B6 | Maverick-Quote | höchstens 5,2 % BeispielBaseline mal 0,5 | 6,9 % | 67 %Soll heute 0 % | Q4 2027 | keine gebucht | verfehlt
+B6 | Maverick-Quote | höchstens 5,2 % Beispiel | 6,9 % | 67 % Soll heute 0 % | Q4 2027 | keine gebucht | verfehlt
 B7 | Scorecard und Quartalsgespräch | mindestens 100,0 % | n/a | Scorecard und Gesprächsprotokoll je Lieferant | Q4 2027 | keine gebucht | nicht messbar
-B8 | Gewichtetes Zahlungsziel | mindestens 45,0 Tage BeispielBaseline plus 15,0 Tage | 31,7 Tage | 12 %Soll heute 0 % | Q1 2027 | keine gebucht | verfehlt
+B8 | Gewichtetes Zahlungsziel | mindestens 45,0 Tage Beispiel | 31,7 Tage | 12 % Soll heute 0 % | Q1 2027 | keine gebucht | verfehlt
 Satz C, Resale
 10 Zeilen
 Begriffe ausblenden
@@ -100,11 +99,11 @@ Begriffe ausblenden
 Nr, Kennzahl
 Nummer und Name laut Rahmen; die Zeile klappt auf Klick ihre Beiträge und den Link Definition auf.
 Ziel
-eine Zahl mit Einheit; bei Zielen gegen die Baseline die gerechnete Zahl, darunter die Regel; Beispiel markiert Zielwerte ohne Baseline des Hauses.
+eine Zahl mit Einheit; bei Zielen gegen die Baseline die gerechnete Zahl; Beispiel markiert Zielwerte ohne Baseline des Hauses; die Regel dahinter steht in der Definition.
 Ist
 der Wert der Engine im Lauf, rollierend zwölf Monate; n/a, wenn nicht messbar oder nicht im Werkzeug; darunter die zweite Teilzahl eines Doppelziels.
 Fortschritt
-Balken und Prozent nach der Regel unter den Kacheln, darunter Soll heute; bei nicht messbar das fehlende Feld, bei nicht im Werkzeug die fehlende Quelle.
+Balken und Prozent als Anteil des Wegs von der Baseline zum Ziel, darunter Soll heute; bei nicht messbar das fehlende Feld, bei nicht im Werkzeug die fehlende Quelle.
 Bis
 Zyklusstart plus Horizont des Rahmens, gerundet auf das Ende des Zyklusabschnitts (Quartal), in dem das Datum liegt.
 Beiträge
@@ -114,13 +113,13 @@ die Kennung in der Quelle; bei Entscheidungen die ersten Zeichen der decision_id
 Status
 erfüllt, im Korridor (innerhalb 20 % des Ziels auf der schlechteren Seite), verfehlt, nicht messbar, nicht im Werkzeug; bei zwei Teilzahlen zählt die schlechtere.
 Nr | Kennzahl | Ziel | Ist | Fortschritt | Bis | Beiträge | Status
-C1 | Einstandspreis gegen UVP | höchstens 85,9 % BeispielBaseline minus 2 Punkte | 87,6 % | 14 %Soll heute 0 % | Q4 2027 | keine gebucht | verfehlt
+C1 | Einstandspreis gegen UVP | höchstens 85,9 % Beispiel | 87,6 % | 14 % Soll heute 0 % | Q4 2027 | keine gebucht | verfehlt
 C2 | Preisschutz geltend gemacht | mindestens 100,0 % | n/a | Mindeststichprobe: 1 von 30 Seriennummern | Q1 2027 | Resale 1: 1 Maßnahme, 79 € | nicht messbar
 C3 | Zuteilung beim Launch | mindestens 90,0 % Beispiel | n/a | Vorbestellfenster, geliefert gegen bestellt | nächster Launch | keine gebucht | nicht messbar
-C4 | Lifecycle-Marge je Modell | über 0,00 € | 63,69 € | 100 %Soll heute 0 % | Q1 2027 | Resale 1: 17 Maßnahmen, 548 €; Resale 2: 4 Maßnahmen, 648 € | erfüllt
-C5 | Restwertprognose: Fehler und Verzerrung | höchstens 12,0 % BeispielVerzerrung höchstens 8,0 % | 19,0 %Verzerrung 1,2 % | 0 %Soll heute 0 % | Q1 2027 | keine gebucht | verfehlt
-C6 | Restwert realisiert gegen Annahme | höchstens 5,0 % BeispielVeräußerungsergebnis mindestens 0,00 € | 4,2 %Veräußerungsergebnis -38.249 € | 0 %Soll heute 0 % | Q1 2027 | keine gebucht | verfehlt
+C4 | Lifecycle-Marge je Modell | über 0,00 € | 63,69 € | 100 % Soll heute 0 % | Q1 2027 | Resale 1: 17 Maßnahmen, 548 €; Resale 2: 4 Maßnahmen, 648 € | erfüllt
+C5 | Restwertprognose: Fehler und Verzerrung | höchstens 12,0 % Beispiel Verzerrung höchstens 8,0 % | 19,0 % Verzerrung 1,2 % | 0 % Soll heute 0 % | Q1 2027 | keine gebucht | verfehlt
+C6 | Restwert realisiert gegen Annahme | höchstens 5,0 % Beispiel Veräußerungsergebnis mindestens 0,00 € | 4,2 % Veräußerungsergebnis -38.249 € | 0 % Soll heute 0 % | Q1 2027 | keine gebucht | verfehlt
 C7 | Erlös gegen die Marktkurve | höchstens Kanalgebühr | n/a | Rechnung eigener Erlös gegen Marktkurve | Q1 2027 | keine gebucht | nicht messbar
-C8 | Tage bis Erlös und Lagerdauer | höchstens 30,0 Tage BeispielBuchwert über 180 Tage höchstens 0,00 € | 81,0 TageBuchwert über 180 Tage 4.124 € | 0 %Soll heute 0 % | Q1 2027 | keine gebucht | verfehlt
-C9 | Genauigkeit der Zustandsprüfung | mindestens 95,0 % Beispiel | 92,5 % | 97 %Soll heute 0 % | Q1 2027 | keine gebucht | im Korridor
+C8 | Tage bis Erlös und Lagerdauer | höchstens 30,0 Tage Beispiel Buchwert über 180 Tage höchstens 0,00 € | 81,0 Tage Buchwert über 180 Tage 4.124 € | 0 % Soll heute 0 % | Q1 2027 | keine gebucht | verfehlt
+C9 | Genauigkeit der Zustandsprüfung | mindestens 95,0 % Beispiel | 92,5 % | 97 % Soll heute 0 % | Q1 2027 | keine gebucht | im Korridor
 C10 | Kanalverlust | höchstens 3,0 % Beispiel | n/a | Regel bester Kanal je Monat und Grade | Q1 2027 | Resale 1: 92 Maßnahmen, 1.956 €; Resale 2: 43 Maßnahmen, 1.365 € | nicht messbar
