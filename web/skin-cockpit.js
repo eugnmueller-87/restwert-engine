@@ -109,6 +109,13 @@
       parts.push(S.Seg('rw-tterm-l', 'Laufzeit', 'rw-tterm', o.tcoTermOpts));
     }
     if (o.isKpis && o.periodOpts.length) parts.push(S.Seg('rw-kpi-period-l', 'Zyklus', 'rw-kpi-period', o.periodOpts));
+    if (o.isTerm && o.lzTermOpts.length) {
+      parts.push(S.Field('Geräteart', 'rw-lz-fam', S.Select('rw-lz-fam', o.lzFams, o.onLzFamily), { flex: '0 1 150px' }));
+      parts.push(S.Field('Hersteller', 'rw-lz-oem', S.Select('rw-lz-oem', o.lzOems, o.onLzOem), { flex: '0 1 160px' }));
+      parts.push(S.Field('Modell', 'rw-lz-model', S.Select('rw-lz-model', o.lzModels, o.onLzModel), { flex: '1 1 240px', maxWidth: 360 }));
+      parts.push(S.Seg('rw-lz-term-l', 'Laufzeit', 'rw-lz-term', o.lzTermOpts));
+      parts.push(S.Seg('rw-lz-term2-l', 'Vergleichslaufzeit', 'rw-lz-term2', o.lzTerm2Opts));
+    }
     var actions = o.hasSectionActions ? h('div', { className: 'actions' },
       o.sectionActions.map(function (a, i) { return h('button', { key: i, type: 'button', className: 'btn btn-secondary', onClick: a.onClick }, a.label); })) : null;
     if (!parts.length && !actions) return null;

@@ -134,6 +134,7 @@
         market: { family: 'Smartphone', detail: false }, dev: { id: null, term: 24, when: 'launch', over: {} }, editing: {}, draft: {},
         tco: { slug: null, storage: 'all', term: 'all' }, lever: null,
         kpi: { period: null, open: null },   /* Reiter KPIs: Zyklus (null heisst Standard aus den Daten) und die aufgeklappte Kennzahl */
+        term: { slug: null, t1: null, t2: null },   /* Reiter Laufzeit (seit 17.09.2026): Geraet, Laufzeit, Vergleichslaufzeit; null heisst Standard aus den Daten */
         scenarios: [], manual: [], deliveries: [], thresholds: {}, assumptions: { disc: this.cfg.value }, log: [], runs: [], running: false,
         logOpen: false, dlg: null, form: {}
       };
@@ -163,6 +164,7 @@
           if (hs && TABS.some(function (x) { return x.key === hs[1]; })) { tab = hs[1]; patch.tab = hs[1]; }
           var d = localStorage.getItem('restwert-device'); if (d) patch.dev = Object.assign({}, this.state.dev, { id: d });
           var tc = JSON.parse(localStorage.getItem('restwert-tco') || 'null'); if (tc && tc.slug) patch.tco = { slug: tc.slug, storage: tc.storage || 'all', term: tc.term || 'all' };
+          var tm = JSON.parse(localStorage.getItem('restwert-term') || 'null'); if (tm && typeof tm === 'object') patch.term = { slug: tm.slug || null, t1: tm.t1 || null, t2: tm.t2 || null };
         } catch (e) {}
       }
       this.setState(patch);
@@ -267,6 +269,7 @@
     selectDevice(id) { if (!id) return; this.setState(function (s) { return { dev: Object.assign({}, s.dev, { id: id, over: {} }), editing: {} }; }); this.persist('restwert-device', id); }
     setDev(patch) { this.setState(function (s) { return { dev: Object.assign({}, s.dev, patch, { over: {} }), editing: {} }; }); }
     setTco(patch) { var self = this; this.setState(function (s) { var tco = Object.assign({}, s.tco, patch); self.persist('restwert-tco', JSON.stringify(tco)); return { tco: tco }; }); }
+    setTerm(patch) { var self = this; this.setState(function (s) { var term = Object.assign({}, s.term, patch); self.persist('restwert-term', JSON.stringify(term)); return { term: term }; }); }
     toggle(bucket, key, def) { this.setState(function (s) { var b = Object.assign({}, s[bucket]); b[key] = !(b[key] !== undefined ? b[key] : def); var o = {}; o[bucket] = b; return o; }); }
     addLog(kind, text, who, status, cls) { var self = this; this.setState(function (s) { var log = [{ at: self.stamp(), kind: kind, text: text, who: who || 'Sie', status: status, cls: cls || 'tag-neutral' }].concat(s.log).slice(0, 200); self.saveStore('log', log); return { log: log }; }); }
     put(k, v) { var self = this; this.setState(function () { var st = {}; st[k] = v; self.saveStore(k === 'manual' ? 'manual-anchors' : k, v); return st; }); }
@@ -324,6 +327,7 @@
           if (S.tab === 'market') opts = Object.assign({}, S.market, { extra: S.manual, disc: S.assumptions.disc });
           else if (S.tab === 'device') opts = Object.assign({}, S.dev, { extra: S.manual });
           else if (S.tab === 'tco') opts = Object.assign({}, S.tco);
+          else if (S.tab === 'term') opts = Object.assign({}, S.term, { select: function (patch) { self.setTerm(patch); } });
           else if (S.tab === 'lake') opts = {
             deliveries: S.deliveries,
             release: function (id) { var del = S.deliveries.map(function (x) { return x.id === id ? Object.assign({}, x, { status: 'freigegeben' }) : x; }); self.put('deliveries', del); var x = S.deliveries.find(function (y) { return y.id === id; }); if (x) self.addLog('Lieferung', x.feed + ': ' + x.fileName + ' freigegeben für den nächsten Lauf (' + fmt.qty(x.rows) + ' Zeilen)', 'Sie', 'freigegeben', 'tag-accent'); },
@@ -355,7 +359,8 @@
 
       var out = {
         groups: groups, tabs: tabs, hasTabs: tabs.length > 0, planned: planned, pending: pending, status: status, cellPad: cellPad, padLeft: padLeft, tableFont: tableFont,
-        isDevice: S.tab === 'device', isMarket: S.tab === 'market', isTco: S.tab === 'tco', isKpis: S.tab === 'kpis', periodOpts: [],
+        isDevice: S.tab === 'device', isMarket: S.tab === 'market', isTco: S.tab === 'tco', isKpis: S.tab === 'kpis', isTerm: S.tab === 'term', periodOpts: [],
+        lzFams: [], lzOems: [], lzModels: [], lzTermOpts: [], lzTerm2Opts: [],
         loading: !V && !error, ready: !!V, error: error,
         kicker: '', subject: '', intro: '', introOpen: false, introLabel: 'Hinweise', toggleIntro: function () { self.toggle('introOpen', S.tab, false); },
         facts: [], hasFacts: false, hasKpis: false, kpis: [], hasMoreKpi: false, kpiDetailsLabel: 'Herleitung', kpiDetailsOpen: false, toggleKpiDetails: function () {},
@@ -505,7 +510,7 @@
       var tables = (V.tables || []);
       out.blocks = (V.blocks || []).map(function (b) { var open = !!S.blocks[b.key]; return Object.assign({}, b, { open: open, caret: open ? '▾' : '▸', toggle: function () { self.toggle('blocks', b.key, false); }, intro: b.intro || '', items: b.items || [], ordered: !!b.ordered, unordered: !b.ordered, hasTag: !!b.tag, tagCls: b.tag ? b.tag.cls : '', tagText: b.tag ? b.tag.text : '' }); });
       out.hasBlocks = out.blocks.length > 0;
-      if (V.chart) { out.hasChart = true; out.chartNote = V.chartNote || ''; this._chart = V.chart; this._chartKey = S.tab + '|' + JSON.stringify([S.market, S.dev, S.tco, S.lever, S.manual.length, S.assumptions.disc, P ? P.accent + P.ink : '']); } else this._chart = null;
+      if (V.chart) { out.hasChart = true; out.chartNote = V.chartNote || ''; this._chart = V.chart; this._chartKey = S.tab + '|' + JSON.stringify([S.market, S.dev, S.tco, S.term, S.lever, S.manual.length, S.assumptions.disc, P ? P.accent + P.ink : '']); } else this._chart = null;
       if (V.steps && V.steps.length) { out.steps = V.steps; out.hasSteps = true; }
       if (V.actions && V.actions.length) { out.actions = V.actions; out.hasActions = true; }
 
@@ -588,6 +593,16 @@
       }
       /* KPIs: der Zyklus als Pillen-Umschalter, die Optionen kommen aus dem Motor (Beschriftung, gewaehlt, Wechsel) */
       if (S.tab === 'kpis') out.periodOpts = V.periodOpts || [];
+      /* Laufzeit (seit 17.09.2026): Geraet wie auf Geraet (Geraeteart, Hersteller, Modell), Laufzeit und Vergleichslaufzeit als
+         Pillen-Umschalter; Optionen und Wechsel kommen aus dem Motor, die Huelle zeichnet nur */
+      if (S.tab === 'term') {
+        var sel = V.sel, markL = function (list, cur) { return (list || []).map(function (o) { return Object.assign({}, o, { selected: String(o.value) === String(cur) }); }); };
+        out.lzFams = markL(V.pickers.fams, sel.family); out.lzOems = markL(V.pickers.oems, sel.oem); out.lzModels = markL(V.pickers.models, sel.slug);
+        out.onLzFamily = function (e) { var x = V.firstOf(e.target.value, null); if (x) self.setTerm({ slug: x }); };
+        out.onLzOem = function (e) { var x = V.firstOf(sel.family, e.target.value); if (x) self.setTerm({ slug: x }); };
+        out.onLzModel = function (e) { if (e.target.value) self.setTerm({ slug: e.target.value }); };
+        out.lzTermOpts = V.termOpts || []; out.lzTerm2Opts = V.term2Opts || [];
+      }
       out.tables = tables.map(shape); this._tables = out.tables; out.hasSectionActions = out.sectionActions.length > 0;
       return out;
     }
@@ -647,6 +662,13 @@
         parts.push(Seg('rw-tterm-l', 'Laufzeit', 'rw-tterm', o.tcoTermOpts));
       }
       if (o.isKpis && o.periodOpts.length) parts.push(Seg('rw-kpi-period-l', 'Zyklus', 'rw-kpi-period', o.periodOpts));
+      if (o.isTerm && o.lzTermOpts.length) {
+        parts.push(Field('Geräteart', 'rw-lz-fam', Select('rw-lz-fam', o.lzFams, o.onLzFamily), { flex: '0 1 130px' }));
+        parts.push(Field('Hersteller', 'rw-lz-oem', Select('rw-lz-oem', o.lzOems, o.onLzOem), { flex: '0 1 150px' }));
+        parts.push(Field('Modell', 'rw-lz-model', Select('rw-lz-model', o.lzModels, o.onLzModel), { flex: '1 1 220px', maxWidth: 340 }));
+        parts.push(Seg('rw-lz-term-l', 'Laufzeit', 'rw-lz-term', o.lzTermOpts));
+        parts.push(Seg('rw-lz-term2-l', 'Vergleichslaufzeit', 'rw-lz-term2', o.lzTerm2Opts));
+      }
       var actions = o.hasSectionActions ? h('div', { style: { marginLeft: 'auto', display: 'flex', flexWrap: 'wrap', gap: 4, alignSelf: 'flex-end' } },
         o.sectionActions.map(function (a, i) { return h('button', { key: i, type: 'button', className: 'btn btn-secondary', onClick: a.onClick, style: { whiteSpace: 'nowrap', fontSize: 13, padding: '6px 10px' } }, a.label); })) : null;
       if (!parts.length && !actions) return null;

@@ -419,6 +419,51 @@ async function uiSmoke() {
     expect(links().length === 0 && !mainText().includes(withBook.beitraege.liste[0].beleg), 'Zeile wieder zu');
   });
 
+  await step('term', 'Laufzeit: Gerät und Laufzeit wechseln', async () => {
+    await tab('Laufzeit');
+    const T = data('term');
+    const tiles = () => $$('#app .kpi-value').map(x => x.textContent.trim()).join(' | ');
+    const labels = () => $$('#app .kpi-label').map(x => x.textContent.trim()).join(' | ');
+    const def = T.series.find(s => s.key === T.default.series);
+    // Vorbelegung aus den Daten: die Serie mit den meisten Belegen, ihre juengste Generation, die Laufzeit mit den meisten Kreislaeufen, als Vergleich die naechste laengere
+    expect($('#rw-lz-fam').value === def.family && $('#rw-lz-oem').value === def.oem, 'Serie startet auf ' + def.key + ' (ist ' + $('#rw-lz-fam').value + ' / ' + $('#rw-lz-oem').value + ')');
+    expect($('#rw-lz-model').value === def.default_slug, 'Standardgerät ist die jüngste Generation der Serie (' + def.default_slug + ', ist ' + $('#rw-lz-model').value + ')');
+    expect(segOn('rw-lz-term-l') === fmt.qty(T.default.term) + ' Monate', 'Laufzeit startet auf ' + T.default.term + ' Monate (ist ' + segOn('rw-lz-term-l') + ')');
+    const i0 = T.terms.indexOf(T.default.term), next = i0 < T.terms.length - 1 ? T.terms[i0 + 1] : T.terms[i0 - 1];
+    expect(segOn('rw-lz-term2-l') === fmt.qty(next) + ' Monate', 'Vergleichslaufzeit ist die nächste längere (' + next + ', ist ' + segOn('rw-lz-term2-l') + ')');
+    expect(segOpts('rw-lz-term2-l').every(x => x.textContent.trim() !== segOn('rw-lz-term-l')), 'die gewählte Laufzeit steht nicht als Vergleich zur Wahl');
+    expect(labels().includes('nach ' + fmt.qty(T.default.term) + ' Monaten') && labels().includes('nach ' + fmt.qty(next) + ' Monaten'), 'Kacheln nennen beide Laufzeiten');
+    const before = tiles(); let drawn = plotly.react;
+    // Geraet: Geraeteart Laptop, dann der letzte Hersteller, dann das letzte Modell
+    setValue($('#rw-lz-fam'), 'Laptop'); await sleep(300);
+    expect($('#rw-lz-fam').value === 'Laptop', 'Geräteart Laptop übernommen');
+    expect(tiles() !== before, 'Kacheln ändern sich mit dem Gerät');
+    expect(plotly.react > drawn, 'Kurve mit dem Gerät neu gezeichnet');
+    const oem = $('#rw-lz-oem'); setValue(oem, 'Lenovo'); await sleep(300);
+    expect($('#rw-lz-oem').value === 'Lenovo', 'Hersteller Lenovo übernommen');
+    const model = $('#rw-lz-model'); const m2 = model.options[model.options.length - 1]; setValue(model, m2.value); await sleep(300);
+    expect($('#rw-lz-model').value === m2.value && mainText().includes(m2.textContent.trim()), 'Modell übernommen und im Betreff: ' + m2.textContent.trim());
+    const lenovo = T.series.find(s => s.key === 'Laptop / Lenovo');
+    expect(lenovo && mainText().includes(fmt.qty(lenovo.ask.n) + ' Preisbelege'), 'Kachel nennt die Belegzahl der Serie (' + (lenovo && lenovo.ask.n) + ')');
+    // Laufzeit 48: der Vergleich springt auf die naechste kuerzere
+    const mid = tiles(); drawn = plotly.react;
+    const l48 = segOpts('rw-lz-term-l').find(x => x.textContent.trim() === '48 Monate'); expect(l48, 'Segment 48 Monate'); if (l48) l48.querySelector('input').click(); await sleep(300);
+    expect(segOn('rw-lz-term-l') === '48 Monate', 'Laufzeit 48 Monate wirksam');
+    expect(segOn('rw-lz-term2-l') === '36 Monate', 'bei 48 ist der Vergleich die nächste kürzere (36, ist ' + segOn('rw-lz-term2-l') + ')');
+    expect(tiles() !== mid && labels().includes('nach 48 Monaten'), 'Kacheln rechnen mit 48 Monaten');
+    expect(plotly.react > drawn, 'Kurve mit der Laufzeit neu gezeichnet');
+    // Vergleich 12: die Kacheln folgen
+    const v12 = segOpts('rw-lz-term2-l').find(x => x.textContent.trim() === '12 Monate'); expect(v12, 'Segment 12 Monate als Vergleich'); if (v12) v12.querySelector('input').click(); await sleep(300);
+    expect(segOn('rw-lz-term2-l') === '12 Monate' && labels().includes('48 gegen 12 Monate'), 'Vergleichslaufzeit 12 Monate wirksam');
+    // nicht belegt statt Zahl: eine Serie ohne Kurve
+    const none = T.series.find(s => s.ask.fit === 'no_fit');
+    if (none) {
+      setValue($('#rw-lz-fam'), none.family); await sleep(250); setValue($('#rw-lz-oem'), none.oem); await sleep(300);
+      expect($('#rw-lz-oem').value === none.oem && tiles().includes('nicht belegt'), 'ohne Kurve steht „nicht belegt“ (' + none.key + ')');
+    }
+    const st = store('term', null); expect(st && st.t1 === 48 && st.t2 === 12 && st.slug, 'Auswahl gemerkt (' + JSON.stringify(st) + ')');
+  });
+
   await step('levers', 'Stellschrauben: Zeile wählen, Schwelle ändern', async () => {
     await tab('Stellschrauben');
     const rows = $$('#app main section:not([aria-label="Protokoll"]) table.table tbody tr, #app main .row-card[role="button"]'); expect(rows.length > 1, 'Übersicht mit Zeilen'); if (rows[1]) rows[1].click(); await sleep(300);
@@ -479,7 +524,7 @@ async function uiSmoke() {
   await step('all', 'Wiederherstellung aus localStorage', async () => {
     await tab(only ? labelOf(only) : 'TCO');
     const seed = {}; for (let i = 0; i < w.localStorage.length; i++) { const k = w.localStorage.key(i); seed[k] = w.localStorage.getItem(k); }
-    const tabKey = seed['restwert-tab'], devId = seed['restwert-device'], tco = store('tco', null), log = store('log', []), runs = store('runs', []);
+    const tabKey = seed['restwert-tab'], devId = seed['restwert-device'], tco = store('tco', null), term = store('term', null), log = store('log', []), runs = store('runs', []);
     const manual = store('manual-anchors', []), thresholds = store('thresholds', {}), asm = store('assumptions', null), deliveries = store('deliveries', []);
     const first = { w: w, plotly: plotly, blobs: blobs };
     activate(makeWindow(seed));
@@ -496,6 +541,7 @@ async function uiSmoke() {
       expect(segOn('rw-tst-l') !== 'alle Ausstattungen', 'TCO-Ausstattung wiederhergestellt');
     }
     if (devId && on('device')) { await tab('Gerät'); expect($('#rw-spec').value === devId, 'Gerät wiederhergestellt (' + devId + ')'); }
+    if (term && on('term')) { await tab('Laufzeit'); expect($('#rw-lz-model').value === term.slug && segOn('rw-lz-term-l') === fmt.qty(term.t1) + ' Monate' && segOn('rw-lz-term2-l') === fmt.qty(term.t2) + ' Monate', 'Laufzeit-Auswahl wiederhergestellt (' + JSON.stringify(term) + ')'); }
     if (asm && on('market')) { await tab('Realisierung'); expect(btn('Annahme: Einkaufsabschlag ' + pctLabel(asm.disc)), 'Annahme wiederhergestellt'); }
     if (manual.length && on('device')) { await tab('Gerät'); expect(mainText().includes('manuell'), 'manuelle Preisbelege wiederhergestellt'); }
     if (Object.keys(thresholds).length && on('levers')) {
