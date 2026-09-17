@@ -8,6 +8,7 @@ TCO
 Kreislauf
 Stellschrauben
 Laufzeit
+KPIs
 Market Intelligence
 Realisierung
 Serie gegen Serie

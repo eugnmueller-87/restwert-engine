@@ -42,7 +42,7 @@ ASSUMPTIONS = REPO / "config" / "assumptions.yaml"
 LAKE = REPO / "config" / "lake.yaml"
 
 # one data file per tab that has its own generator; the tabs "series" and "studies" of Market Intelligence read market.json
-TABS = ["report", "device", "market", "forecast", "tco", "cycle", "levers", "term", "lake", "faq"]
+TABS = ["report", "device", "market", "forecast", "tco", "cycle", "levers", "term", "kpis", "lake", "faq"]
 GENERATOR_INPUTS = [REPO / "outputs" / "kpi_values.csv", REPO / "outputs" / "rv_forecast_error_monthly.csv", REPO / "data" / "restwert.duckdb"]
 
 

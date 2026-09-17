@@ -1,0 +1,557 @@
+{
+ "quelle": "KPI-Rahmen für sechs Category Manager, Fassung 3, Stand 17.09.2026, claude.ai/artifact/AKznpKknsPjrL1SXUtFUDr",
+ "fassung": "Fassung 3",
+ "stand": "2026-09-17",
+ "tausch_hinweis": "Ziele mit dem Kennzeichen Beispiel werden in Monat 6 gegen die Baseline getauscht.",
+ "kpis": [
+  {
+   "nr": "A1",
+   "name": "Spend unter Management",
+   "ziel": "+10 Punkte gegen die Baseline aus Monat 3, bis Monat 12",
+   "takt": "Quartal",
+   "echt_ab": "Monat 3",
+   "rollen": "alle",
+   "formel": "Spend gegen gültigen Vertrag mit Einkaufsbeteiligung / adressierbarer Spend",
+   "quelle": "Kreditorenbuch (ERP) mit Vertragsregister über die Lieferantennummer",
+   "eigner": "jede Rolle für ihre Kategorien",
+   "pruefer": "Controlling",
+   "zaehlregel": "Adressierbar heißt: alle Kreditorenrechnungen ohne Löhne, Steuern, Zinsen, konzerninterne Verrechnung; Kreditkarten und Spesen zählen zum Nenner. Ein Vertrag gilt, wenn er im Register steht, nicht abgelaufen ist und der Einkauf vor der Unterschrift beteiligt war (dokumentierte Verhandlungshandlung oder Freigabe im Workflow); Gegenzeichnung nach Abschluss zählt nicht. Was der Markt sagt: Schnitt 70,8 %, beste Gruppe 91,7 % (Ardent, 326 Befragte, gesponsert) [4]; jeder zusätzliche Euro unter Management bringt 6 bis 12 % Ersparnis in der ersten Vertragsperiode [5]. Der Marktwert ist ein Maßstab für Monat 6, kein Ziel.",
+   "beispiel": true,
+   "ziel_wert": {
+    "art": "baseline_delta",
+    "wert": 0.1,
+    "richtung": "up",
+    "einheit": "ratio"
+   },
+   "engine": {
+    "computable": "teilweise",
+    "source": "restwert/kpi/indirect.py:172-186 KPI_IND_SPEND_UNDER_MGMT (sum(amount where has_po or has_contract) / sum(amount), Tabelle indirect_spend, restwert/schema.py:126-131 bzw. bronze.fin_indirect_spend restwert/lake/schema_lake.py:119-122); nahe verwandt restwert/kpi/procurement.py:120-146 KPI_PROC_SPEND_UNDER_CONTRACT",
+    "note": "Formen sind ähnlich (has_po, has_contract als Filter im Zähler), aber A1 verlangt zusätzlich die dokumentierte Einkaufsbeteiligung vor der Unterschrift und einen bereinigten Nenner ohne Löhne, Steuern, Zinsen, Konzernverrechnung; das Schema kennt nur has_po und has_contract als Booleans, keine Beteiligungsprüfung und keine Ausschlusskategorie."
+   }
+  },
+  {
+   "nr": "A2",
+   "name": "Vertragsregister vollständig",
+   "ziel": "100 % der Verträge über der Wertschwelle mit allen acht Pflichtfeldern, ab Monat 2",
+   "takt": "Monat",
+   "echt_ab": "Woche 4",
+   "rollen": "alle",
+   "formel": "Verträge mit acht gefüllten Feldern / alle Verträge über der Wertschwelle",
+   "quelle": "Vertragsregister (CLM oder eine gepflegte Tabelle; ein Ort, keine Kopien)",
+   "eigner": "jede Rolle für ihre Verträge",
+   "pruefer": "Legal oder Controlling, Stichprobe zehn Verträge je Quartal",
+   "zaehlregel": "Die acht Felder: Gegenpartei, Kategorie, Jahreswert, Vertragsende, Kündigungstermin, verlängert sich (ja, nein), Preisklausel, Eigner im Team. Ein Platzhalter (unbekannt, offen, Strich) gilt als leer; ein Vertrag ohne Kündigungstermin ist unvollständig. Die Wertschwelle setzt Controlling einheitlich und ändert sie nur nach Regel 10. Warum zuerst: ohne A2 sind B3 und B5 nicht messbar. Nur 27 % der Häuser legen alle Verträge in einem System ab [19]; wer Verträge als Steuerungsquelle nutzt, liegt 5,4 % des Vertragswerts vorn [12].",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 1.0,
+    "richtung": "up",
+    "einheit": "ratio"
+   },
+   "engine": {
+    "computable": "teilweise",
+    "source": "restwert/lake/schema_lake.py:111-117 bronze.ctr_register und :173-180 silver.contracts (counterparty_name, category, start_date, end_date, notice_days, notice_deadline, auto_renewal, price_protection, payment_terms_days, spend_under_contract_eur)",
+    "note": "Sieben der acht Pflichtfelder haben eine Entsprechung (Gegenpartei, Kategorie, Jahreswert als spend_under_contract_eur, Vertragsende, Kündigungstermin, verlängert sich, Preisklausel als Boolean statt Text). Das Feld Eigner im Team (verantwortliche Rolle je Vertrag) ist in keiner der beiden Tabellen vorhanden."
+   }
+  },
+  {
+   "nr": "A3",
+   "name": "Risikoabdeckung der Lieferanten",
+   "ziel": "100 % der Pflichtgruppe mit Prüfung jünger als zwölf Monate, ab Monat 6",
+   "takt": "Halbjahr",
+   "echt_ab": "Monat 6",
+   "rollen": "alle",
+   "formel": "Spend bei Lieferanten mit Prüfung ≤ 12 Monate / Spend der Pflichtgruppe (oberste 80 % des Spends plus alle kritischen)",
+   "quelle": "Prüfprotokoll je Lieferant mit Datum; Kreditorenbuch für den Nenner",
+   "eigner": "jede Rolle für ihre Lieferanten",
+   "pruefer": "Compliance",
+   "zaehlregel": "Prüfung heißt Sanktionslisten, Eigentümer, Sorgfaltspflichten. Spend je Lieferant auf Ebene der Muttergesellschaft; kritisch nach der Liste von Compliance. Zwölf Monate, weil das Lieferkettengesetz die Risikoanalyse jährlich und anlassbezogen verlangt [25]; die Berichtspflicht ist seit 01.10.2025 ausgesetzt, die Sorgfaltspflichten bleiben [26]. Ob das Haus unter das Gesetz fällt (1.000 Beschäftigte im Inland), ist eine Frage. Die obersten 80 % des Spends sind meist rund 20 % der Lieferanten [23].",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 1.0,
+    "richtung": "up",
+    "einheit": "ratio"
+   },
+   "engine": {
+    "computable": "nein",
+    "source": "",
+    "note": "Keine Sanktionslisten-, Eigentümer- oder Sorgfaltspflicht-Prüfung im Repo (kein Treffer für OFAC, UN, LkSG, CSDDD in restwert/ oder web/). Diese Prüfung liegt in einem anderen Werkzeug, nicht in der Restwert Engine."
+   }
+  },
+  {
+   "nr": "A4",
+   "name": "Wiederverwendbare Verbesserung",
+   "ziel": "1 je Rolle und Quartal, im Quartalsgespräch abgenommen",
+   "takt": "Quartal",
+   "echt_ab": "Quartal 1",
+   "rollen": "alle",
+   "formel": "Anzahl abgenommener Verbesserungen je Rolle im Quartal",
+   "quelle": "Gemeinsamer Speicher des Teams (Wiki, Verzeichnis) mit Datum und Verweis",
+   "eigner": "die Rolle",
+   "pruefer": "die Leitung im Quartalsgespräch",
+   "zaehlregel": "Zählt nur, was ein anderer ohne Rückfrage nutzen kann: eine Vorlage, eine Regel, ein Preisvergleich, ein abgeschaffter Schritt. Ein Bericht über Arbeit zählt nicht. Bestätigt ist die Verbesserung, wenn eine zweite Rolle sie innerhalb von zwei Quartalen genutzt hat. Die einzige Kennzahl, die ein Arbeitsergebnis der Rolle misst, keine Aktivität.",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 1,
+    "richtung": "up",
+    "einheit": "count"
+   },
+   "engine": {
+    "computable": "nein",
+    "source": "",
+    "note": "Qualitative Prozesskennzahl (abgenommene Verbesserungen im Team-Wiki); dafür gibt es in der Restwert Engine keine Datenquelle und keinen Zähler."
+   }
+  },
+  {
+   "nr": "B1",
+   "name": "Hard Savings, validiert",
+   "ziel": "3 % des adressierbaren Spends der Kategorie in Jahr 1, realisiert und von Controlling abgenommen",
+   "takt": "Quartal (Pipeline monatlich)",
+   "echt_ab": "Monat 3",
+   "rollen": "Indirekt",
+   "formel": "Σ realisierte Einsparung gegen die schriftliche Baseline / adressierbarer Spend der Kategorie",
+   "quelle": "Savings-Register mit Beleg je Fall; Kreditorenbuch für die Realisierung",
+   "eigner": "die Rolle je Fall",
+   "pruefer": "Controlling, Abnahme quartalsweise",
+   "zaehlregel": "Rechenwege: Preis (Baseline − neuer Preis) × Menge; Volumen (alte − neue Menge) × neuer Preis, nur bei gleicher Leistung; Spezifikation (Preis alt − Preis neu) × Menge. Vier Stufen: identifiziert, verhandelt, validiert, realisiert; nur realisiert zählt. Pipeline wird mit Faktor 1,7 auf das Ziel geplant, weil typischerweise 40 % zwischen identifiziert und realisiert verloren gehen [7]. Eine abgewehrte Erhöhung ist kein Hard Saving, sondern Cost Avoidance (Regel 2). Warum 3 %: zwischen dem APQC-Median für Cost Takeout von 2,0 % [2] und der Savings-Rate von 6,6 % im Schnitt, 8,0 % in der besten Gruppe [4].",
+   "beispiel": true,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 0.03,
+    "richtung": "up",
+    "einheit": "ratio"
+   },
+   "engine": {
+    "computable": "teilweise",
+    "source": "restwert/kpi/indirect.py:88-169 KPI_IND_SAVINGS_CONFIRMED (nur saving_type hard_price_reduction mit saving_confirmed_by_controlling, Nenner der Jahresplan aus config/kpi_targets.yaml)",
+    "note": "Der Zähler (bestätigte Hard Savings mit Beleg-Flag) ist vorhanden; der Nenner der Engine ist ein fester Jahresplan, nicht der adressierbare Spend der Kategorie. Die vier Reifegrade identifiziert, verhandelt, validiert, realisiert gibt es im Schema nicht, nur bestätigt oder unbestätigt."
+   }
+  },
+  {
+   "nr": "B3",
+   "name": "Verlängerungen mit Vorlauf",
+   "ziel": "100 % der Verlängerungen mit Verhandlungsbeginn ≥ 90 Tage vor dem Kündigungstermin, ab Quartal 3; über 100.000 € Jahreswert 120 Tage",
+   "takt": "Monat",
+   "echt_ab": "Quartal 2",
+   "rollen": "Indirekt",
+   "formel": "Verlängerungen mit Vorlauf ≥ 90 Tage / alle Verlängerungen mit Kündigungstermin im Quartal",
+   "quelle": "Vertragsregister (Kündigungstermin) und Verhandlungsakte",
+   "eigner": "die Rolle",
+   "pruefer": "die Leitung, monatlich aus dem Register",
+   "zaehlregel": "Vorlauf = Kündigungstermin minus Datum der ersten dokumentierten Verhandlungshandlung (Schreiben mit Ziel oder Angebot an den Lieferanten; keine Terminerinnerung, keine interne Notiz). Gemessen gegen den Kündigungstermin, nie gegen das Vertragsende; ein verstrichener Kündigungstermin zählt mit Vorlauf null. Warum 90 Tage: wer mehr als 90 Tage vor dem Stichtag beginnt, spart im Schnitt 49 % mehr als bei Start unter 30 Tagen (Vertice, Anbieterzahl) [15].",
+   "beispiel": true,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 1.0,
+    "richtung": "up",
+    "einheit": "ratio"
+   },
+   "engine": {
+    "computable": "teilweise",
+    "source": "restwert/lake/schema_lake.py:235-239 gold.renewal_calendar_v2 (end_date, notice_days, notice_deadline, days_to_notice_deadline, days_to_end, auto_renewal)",
+    "note": "Welche Verträge in welchem Fenster zur Kündigung anstehen, ist berechnet. Der Zähler von B3 (Vorlauf gleich Kündigungstermin minus Datum der ersten dokumentierten Verhandlungshandlung) fehlt: keine Verhandlungsakte und kein Aktivitätslog im Schema."
+   }
+  },
+  {
+   "nr": "B4",
+   "name": "Preisänderung bei Verlängerung",
+   "ziel": "≤ VPI Median der Preisänderung bei gleicher Leistung höchstens die amtliche Inflation; keine Verlängerung über 5 % ohne Begründung im Register",
+   "takt": "Quartal",
+   "echt_ab": "Monat 3",
+   "rollen": "Indirekt",
+   "formel": "(neuer Jahrespreis − alter Jahrespreis) / alter Jahrespreis, Median über alle Verlängerungen des Quartals",
+   "quelle": "Vertragsregister (alter und neuer Vertrag); Statistisches Bundesamt für den VPI",
+   "eigner": "die Rolle",
+   "pruefer": "Controlling",
+   "zaehlregel": "Ändert sich der Leistungsumfang, wird auf Preis je Einheit (Lizenz, Nutzer, Gigabyte) normiert. Die Differenz zwischen Erstforderung und Abschluss ist Cost Avoidance, die Differenz zum alten Preis ist B4, eine Verlängerung unter dem alten Preis ist B1. Was der Markt sagt: typischer Aufschlag 3 bis 9 %, Erstforderungen mit KI-Funktionen 20 bis 37 % [17]; SaaS-Index Juni 2026 16,4 % [14]; beides Anbieterzahlen. Die Zahl, die ein COO ohne Savings-Methodik versteht: was kostet dieselbe Leistung heute gegen vor zwölf Monaten.",
+   "beispiel": true,
+   "ziel_wert": {
+    "art": "referenz",
+    "wert": null,
+    "richtung": "down",
+    "einheit": "ratio",
+    "referenz": "VPI des Statistischen Bundesamts"
+   },
+   "engine": {
+    "computable": "nein",
+    "source": "",
+    "note": "Weder ein Feld, das alte und neue Vertragsversion desselben Lieferanten verknüpft, noch ein VPI-Referenzwert im Repo. silver.contracts führt je Vertrag einen Zeitraum, keine Historie von Preiserhöhungen bei Verlängerung."
+   }
+  },
+  {
+   "nr": "B5",
+   "name": "Stille Verlängerungen",
+   "ziel": "0 Verträge, die sich ohne protokollierte Entscheidung vor dem Kündigungstermin verlängert haben, ab Quartal 2",
+   "takt": "Monat",
+   "echt_ab": "Monat 2",
+   "rollen": "Indirekt",
+   "formel": "Anzahl und Jahreswert der Verträge: verlängert sich automatisch UND keine Entscheidung (verlängern, kündigen, neu verhandeln) mit Eigner und Datum vor dem Kündigungstermin",
+   "quelle": "Vertragsregister, Feld Entscheidung mit Datum aus der versionierten Änderungshistorie",
+   "eigner": "die Rolle",
+   "pruefer": "die Leitung",
+   "zaehlregel": "Still heißt: keine dokumentierte Entscheidung, nicht: keine Verhandlung. Eine bewusste Verlängerung ohne Verhandlung ist keine stille, wenn die Entscheidung mit Begründung im Register steht. Warum: 89 % der SaaS-Verträge enthalten eine Klausel zur automatischen Verlängerung [15], 33 % der Anbieter dürfen bei Verlängerung erhöhen [43]; nach Unterschrift gehen im Schnitt 11 % des Vertragswerts verloren [13].",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 0,
+    "richtung": "down",
+    "einheit": "count"
+   },
+   "engine": {
+    "computable": "teilweise",
+    "source": "restwert/lake/schema_lake.py:173-180 silver.contracts (auto_renewal, notice_deadline)",
+    "note": "Kandidaten (auto_renewal wahr, Kündigungstermin überschritten) sind zählbar. Es gibt kein Feld Entscheidung mit Datum und Eigner in einer versionierten Änderungshistorie; ohne das lässt sich ohne protokollierte Entscheidung nicht von mit Entscheidung, aber nicht erfasst unterscheiden."
+   }
+  },
+  {
+   "nr": "B6",
+   "name": "Maverick-Quote",
+   "ziel": "halbiert gegen die Baseline aus Monat 3, bis Monat 12",
+   "takt": "Quartal",
+   "echt_ab": "Monat 3",
+   "rollen": "Indirekt",
+   "formel": "Spend über der Wertschwelle ohne Vertrag oder ohne Bestellnummer / adressierbarer Spend über der Wertschwelle",
+   "quelle": "Kreditorenbuch gegen Bestellungen und Vertragsregister",
+   "eigner": "die Rolle je Kategorie",
+   "pruefer": "Controlling",
+   "zaehlregel": "Ein Abruf aus einem Rahmenvertrag ohne Einzelbestellung ist kein Maverick, sofern der Rahmen im Register steht; ein Kauf per Kreditkarte über der Schwelle ist einer. Käufe desselben Lieferanten werden über 90 Tage rollierend addiert, damit Stückelung die Schwelle nicht umgeht. Die Wertschwelle setzt Controlling in Woche 2 aus der Freigabematrix (Frage an das Haus). Warum: nicht konformer Spend kostet je Euro 12 bis 18 % mehr [6].",
+   "beispiel": true,
+   "ziel_wert": {
+    "art": "baseline_faktor",
+    "wert": 0.5,
+    "richtung": "down",
+    "einheit": "ratio"
+   },
+   "engine": {
+    "computable": "teilweise",
+    "source": "restwert/kpi/indirect.py:206-220 KPI_IND_MAVERICK_SHARE (sum(amount where not has_po and not has_contract) / sum(amount), Tabelle indirect_spend)",
+    "note": "Kernformel existiert nahezu eins zu eins. Es fehlen die rollierende 90-Tage-Bündelung je Lieferant gegen Stückelung, die Wertschwelle und die Ausnahme für Abrufe aus einem registrierten Rahmenvertrag ohne Einzelbestellung."
+   }
+  },
+  {
+   "nr": "B7",
+   "name": "Scorecard und Quartalsgespräch",
+   "ziel": "100 % der strategischen Lieferanten mit gepflegter Scorecard und Quartalsgespräch mit Protokoll, ab Monat 12",
+   "takt": "Quartal",
+   "echt_ab": "Monat 9",
+   "rollen": "Indirekt",
+   "formel": "strategische Lieferanten mit Scorecard und Quartalsgespräch / alle strategischen Lieferanten (oberste 80 % des Kategoriespends plus kritische)",
+   "quelle": "Scorecard je Lieferant; Gesprächsprotokoll mit Datum; Wareneingang oder Ticketsystem für Lieferleistung",
+   "eigner": "die Rolle",
+   "pruefer": "die Leitung; der Lieferant sieht seine Scorecard",
+   "zaehlregel": "Scorecard je Lieferant: Lieferleistung (OTIF oder SLA erfüllt, in %), Qualität (Reklamationen je 100 Aufträge), Preisverhalten (B4), Risiko (A3). OTIF zählt einen Auftrag nur, wenn Termin und Menge gleichzeitig stimmen; die Zählbasis legt Controlling je Warengruppe fest. Ein Quartalsgespräch zählt nur mit Protokoll über alle vier Dimensionen. Für Hardware zusätzlich die Ausfallrate beim ersten Gebrauch (DOA) nach TL 9000 [22]. Was der Markt sagt: fehlerfreie Lieferung Median rund 90 %, bestes Viertel 95 % [21]; Lieferantenmanagement bringt 3,2 % [24].",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 1.0,
+    "richtung": "up",
+    "einheit": "ratio"
+   },
+   "engine": {
+    "computable": "teilweise",
+    "source": "restwert/kpi/procurement.py:149-193 KPI_PROC_SUPPLIER_OTIF (count(delivered_date <= promised_date and qty_delivered >= qty_ordered) / count(delivered), Tabelle purchase_orders, v0.1)",
+    "note": "Nur die Dimension Lieferleistung (OTIF) ist gerechnet, und nur für den Hardware-Einkauf (v0.1, laut docs/GOLD_KPIS.md eingefroren). Reklamationsquote, Preisverhalten (B4) und Risiko (A3) fehlen; kein Feld für Scorecard oder Gesprächsprotokoll."
+   }
+  },
+  {
+   "nr": "B8",
+   "name": "Gewichtetes Zahlungsziel",
+   "ziel": "+15 Tage gegen die Baseline aus Monat 3, ohne Skontoverlust; Cash, nicht Ergebnis",
+   "takt": "Quartal",
+   "echt_ab": "Monat 3",
+   "rollen": "Indirekt",
+   "formel": "Σ (Tage je Lieferant × Spend je Lieferant) / Σ Spend",
+   "quelle": "Vertragsregister (Zahlungsbedingung) und Kreditorenbuch (tatsächliche Zahlung)",
+   "eigner": "die Rolle",
+   "pruefer": "Treasury",
+   "zaehlregel": "Gezählt wird das vereinbarte Ziel, nicht die verspätete Zahlung; Treasury prüft einmal im Jahr gegen das Zahlverhalten. Ein Tag lohnt nur, wenn der Kapitalkostensatz über dem Skontosatz aufs Jahr liegt; der Kapitalkostensatz kommt von Treasury (Frage an das Haus). Cash-Effekt = Jahresspend / 365 × Δ Tage; der Zinseffekt wird nur informativ gezeigt, nie als Hard Saving. Formel nach Wall Street Prep [27]; Hackett misst bei den 1.000 größten US-Unternehmen 59 Tage, Referenz, kein Ziel [28].",
+   "beispiel": true,
+   "ziel_wert": {
+    "art": "baseline_delta",
+    "wert": 15,
+    "richtung": "up",
+    "einheit": "days"
+   },
+   "engine": {
+    "computable": "ja",
+    "source": "restwert/lake/schema_lake.py:173-180 silver.contracts (payment_terms_days NOT NULL, spend_under_contract_eur, spend_actual_12m_eur)",
+    "note": "Summe(payment_terms_days mal Spend) durch Summe(Spend) ist aus einer Tabelle rechenbar, für jeden Vertrag im Register. Einschränkung: nur Spend mit registriertem Vertrag; indirekter Spend ohne Vertrag trägt kein Zahlungsziel-Feld."
+   }
+  },
+  {
+   "nr": "C1",
+   "name": "Einstandspreis gegen UVP",
+   "ziel": "−2 Punkte Landed Cost in Prozent der UVP gegen die Baseline aus Monat 3, je Marke, bis Monat 12",
+   "takt": "Monat",
+   "echt_ab": "Monat 3",
+   "rollen": "Resale",
+   "formel": "(Rechnungspreis + Fracht + Zoll + Einbuchung) / UVP Deutschland beim Verkaufsstart, je Modell",
+   "quelle": "Lieferantenrechnung je Seriennummer (ERP); UVP-Katalog mit Quelle und Datum je Modell",
+   "eigner": "Resale je Familie",
+   "pruefer": "Controlling",
+   "zaehlregel": "Rückvergütungen werden dem Gerät zugerechnet, sobald sie gutgeschrieben sind. Graumarktware zählt nicht als Vergleich, nur EU-Ware. Ein Rabattboden je Hersteller ist die Regel; jede Bestellung darunter braucht die schriftliche Freigabe von Controlling. Wert eines Punkts = Jahreseinkaufsvolumen × 1 %. Bewegt zwei Zeilen der Brücke: Restbuchwert der Abgänge (EBITDA) und Abschreibung (EBIT); Beispiel 1 rechnet einen Punkt vor.",
+   "beispiel": true,
+   "ziel_wert": {
+    "art": "baseline_delta",
+    "wert": -0.02,
+    "richtung": "down",
+    "einheit": "ratio"
+   },
+   "engine": {
+    "computable": "ja",
+    "source": "restwert/gold/kpis.py:267-298 KPI_PUR_LANDED_VS_RRP (sum(landed_cost minus price_protection_credit_eur) / sum(rrp_net_eur)), Wert in outputs/gold__kpi_values.csv; Ergänzung restwert/gold/kpis.py:232-264 KPI_PUR_DISCOUNT_VS_RRP",
+    "note": "Fast identische Formel und Fenster (rollierend zwölf Monate statt Monatsscheibe; die Monatsreihe rechnet der Generator aus derselben Tabelle). Kleine Lücke: landed_cost gleich Einkaufspreis plus Fracht plus Zoll (restwert/ledger/device_ledger.py:17-19) enthält keine Einbuchung (staging), die C1 mitzählt."
+   }
+  },
+  {
+   "nr": "C2",
+   "name": "Preisschutz geltend gemacht",
+   "ziel": "100 % der entstandenen Ansprüche fristgerecht angemeldet, ab Monat 4",
+   "takt": "Monat",
+   "echt_ab": "Monat 4",
+   "rollen": "Resale",
+   "formel": "Σ fristgerecht angemeldete Gutschriften / Σ entstandene Ansprüche (Bestand am Tag der Preissenkung × Preissenkung, nur Bestand mit Klausel)",
+   "quelle": "Vertragsregister (Klausel und Frist je Lieferant), Bestandsliste je Seriennummer, Gutschriften im Kreditorenbuch",
+   "eigner": "Resale je Familie",
+   "pruefer": "Controlling",
+   "zaehlregel": "Preisschutz: der Hersteller schreibt dem Händler die Differenz gut, wenn er den Preis senkt, während Ware im Lager liegt; Stock Rotation: das Recht, einen Teil der Ware zurückzugeben. Ein Anspruch verfällt, wenn er nicht innerhalb der vertraglichen Frist angemeldet wird [39]; deshalb ein Fristenwächter mit Datum je Klausel. Zweite Zahl, ohne Ziel: Anteil des Lagerwerts mit Klausel. Zum Vergleich: ein Elektronik-Distributor hatte Ende 2024 56 % seiner Vorräte unter Preisschutz [40]; das sagt, wie üblich die Klausel ist, nicht, was wir erreichen sollen. In der Simulation stand in zwölf Monaten eine Gutschrift über 79 €: niemand hat gezählt.",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 1.0,
+    "richtung": "up",
+    "einheit": "ratio"
+   },
+   "engine": {
+    "computable": "ja",
+    "source": "restwert/gold/kpis.py:301-347 KPI_PUR_PRICE_PROTECTION_CAPTURE, Wert in outputs/gold__kpi_values.csv (status not_measurable, n gleich 1 unter min_n gleich 30)",
+    "note": "Formel deckungsgleich (gutgeschrieben durch gutgeschrieben plus verpasst); die zweite Zahl aus C2 (Anteil Lagerwert mit Klausel) ist nicht separat vorhanden, nur der Status claimed, missed, open je Seriennummer."
+   }
+  },
+  {
+   "nr": "C3",
+   "name": "Zuteilung beim Launch",
+   "ziel": "90 % geliefert gegen bestellt in den ersten 30 Tagen nach Verkaufsstart, je Variante",
+   "takt": "je Launch",
+   "echt_ab": "nächster Launch",
+   "rollen": "Resale",
+   "formel": "gelieferte Stück in 30 Tagen / bestellte Stück zum Vorbestellfenster, je Modell, Speicher, Farbe",
+   "quelle": "Bestellungen und Wareneingänge (ERP)",
+   "eigner": "Resale je Familie",
+   "pruefer": "Vertrieb, weil der Schaden dort entsteht",
+   "zaehlregel": "Kein Saving, sondern Umsatzschutz: jeder Tag Lieferverzug verschiebt den Vertragsstart und die erste Rate. Gezählt je Variante, weil Zuteilungen je Farbe und Speicher unterschiedlich ausfallen. Keine Simulationszahl; die Baseline entsteht beim nächsten Launch. Frage an das Haus: bestellt gegen geliefert in 30 Tagen beim letzten Launch.",
+   "beispiel": true,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 0.9,
+    "richtung": "up",
+    "einheit": "ratio"
+   },
+   "engine": {
+    "computable": "teilweise",
+    "source": "restwert/lake/schema_lake.py:58-64 bronze.erp_po_lines (qty_ordered) und bronze.erp_goods_receipts (je Seriennummer mit Empfangsdatum); Katalog models.csv mit launch_date_de",
+    "note": "Die Rohbausteine (bestellte Stückzahl je PO-Zeile, Wareneingang je Seriennummer mit Datum, Verkaufsstart je Modell) sind vorhanden, aber keine Kennzahl rechnet geliefert durch bestellt in 30 Tagen nach Launch; ein Vorbestellfenster kennt das Modell nicht. Die Baseline entsteht erst beim nächsten echten Launch."
+   }
+  },
+  {
+   "nr": "C4",
+   "name": "Lifecycle-Marge je Modell",
+   "ziel": "> 0 je Modell und Laufzeit, nur abgeschlossene Zyklen; ein Modell kommt nur auf die Liste, wenn Einkaufspreis und Restwertkurve zusammenpassen",
+   "takt": "Monat",
+   "echt_ab": "Monat 3",
+   "rollen": "Resale",
+   "formel": "Mieterlös + Restwert (wie C6) − Einkaufspreis − Kosten bis Verkauf; daneben TCO je Vertragsmonat = (Einkaufspreis + Kosten bis Verkauf) / Vertragsmonate gegen die Miete",
+   "quelle": "Geräte-Hauptbuch je Seriennummer: Rechnung, Einrichtung, Versand, Tickets, Rücksendung, Lagertage, Verkauf",
+   "eigner": "Resale je Familie",
+   "pruefer": "Controlling gegen das Hauptbuch",
+   "zaehlregel": "Nur direkte Kosten je Seriennummer; Umlagen (Support, Geräteverwaltung) als Schätzung mit Eigner. Abschreibung zählt nicht, sie ist die Verteilung des Einkaufspreises. Der Restwert wird genau einmal genommen, identisch mit C6, nie addiert. TCO nach Gartner: Summe direkter und indirekter Kosten über die Zeit [38]. Simulation: ein Modell mit 61 Verträgen, 61,60 € TCO gegen 55,33 € Miete je Vertragsmonat; über die Flotte Lifecycle-Marge im Mittel 25 € je Gerät, 47 % der Geräte negativ.",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 0,
+    "richtung": "up",
+    "einheit": "eur",
+    "strikt": true
+   },
+   "engine": {
+    "computable": "ja",
+    "source": "restwert/gold/kpis.py:540-573 KPI_RSLT_CLOSED_PER_DEVICE (Breakdown je oem, catalogue_family, term_months); web/engine/tco.js Tabelle t-terms (TCO je Vertragsmonat gegen Miete je Monat); Werte in outputs/gold__kpi_breakdown.csv",
+    "note": "lifecycle_result_eur in silver.device_ledger ist bereits Mieterlös plus Restwert minus Einkaufspreis minus Kosten, identisch zur C4-Formel; TCO je Vertragsmonat existiert als eigene Spalte tco_pm in web/tools/gen/make_tco_data.py."
+   }
+  },
+  {
+   "nr": "C5",
+   "name": "Restwertprognose: Fehler und Verzerrung",
+   "ziel": "≤ 12 % / ±8 % Fehler (MAPE) höchstens 12 %, Verzerrung (Bias) innerhalb plus oder minus 8 % über drei Monate, kanalbereinigt; darüber Nachkalibrierung",
+   "takt": "Monat",
+   "echt_ab": "Monat 3",
+   "rollen": "Resale",
+   "formel": "Fehler = Mittel |Prognose − Erlös| / Erlös; Verzerrung = Mittel (Prognose − Erlös) / Erlös, je Familie",
+   "quelle": "Prognose je Seriennummer zum Rückgabedatum (Restwertkurve, Verbriefungsannahme); Erlös aus Verkauf oder Transferpreis je Grade",
+   "eigner": "Resale je Familie als Eigner der Kurve",
+   "pruefer": "Controlling, weil die Prognose im Kollateral und in der Rate steckt",
+   "zaehlregel": "Kanalbereinigt: je Kanal gerechnet und mit dem Referenz-Kanalmix gewichtet, damit der Kanalmix nicht als Modellfehler erscheint. Überschätzung und Unterschätzung getrennt, weil ungleich teuer: zu hohe Prognose ist ein Verlust beim Verkauf, zu niedrige nur eine zu hohe Rate [34]. Nicht garantierte Restwerte sind regelmäßig zu überprüfen [35]. Simulation: Fehler 19,0 % gegen Ziel 12 %, Laptop 21,9 % und plus 10,8 %, Beispiel 4. Warum monatlich: bei einem US-Verwerter fielen Laptop-Erlöse Ende 2022 um 44 % und stiegen 2024 um 37 % [32].",
+   "beispiel": true,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 0.12,
+    "richtung": "down",
+    "einheit": "ratio",
+    "zweite": {
+     "label": "Verzerrung, drei Monate, kanalbereinigt, Betrag",
+     "art": "absolut",
+     "wert": 0.08,
+     "richtung": "down",
+     "einheit": "ratio"
+    }
+   },
+   "engine": {
+    "computable": "ja",
+    "source": "restwert/kpi/top.py:95 KPI_TOP_RV_FORECAST_ERROR (v0.1); web/engine/forecast.js (MAPE Geschäfts- und Modellsicht, Verzerrung, ADV02-Schwelle aus config/thresholds.yaml); Wert in outputs/kpi_values.csv",
+    "note": "Deckt sich praktisch eins zu eins mit C5 (Fehler und Verzerrung je Familie, Zielwert und Schwelle mit Eigner aus der Konfiguration)."
+   }
+  },
+  {
+   "nr": "C6",
+   "name": "Restwert realisiert gegen Annahme",
+   "ziel": "≥ 0 / ≤ 5 % Veräußerungsergebnis (Erlös minus Restbuchwert) nicht unter null; Abweichung zur Annahme aus Rate und Verbriefung innerhalb 5 %",
+   "takt": "Monat",
+   "echt_ab": "Monat 3",
+   "rollen": "Resale",
+   "formel": "Σ Erlös nach Kanalgebühr − Σ Restbuchwert der Abgänge; Abweichung = (Annahme − Erlös) / Annahme je Modell, Speicher, Grade",
+   "quelle": "Verkaufsbelege und Kanalabrechnungen; Anlagenbuchhaltung für den Restbuchwert; Transferpreisliste je Grade",
+   "eigner": "Resale je Familie",
+   "pruefer": "Controlling; Wertberichtigung entscheidet der CFO",
+   "zaehlregel": "Erlös zählt nach Abzug der Kanalgebühr und erst bei Zahlungseingang. Zweite Vermietung: Erlös = interner Verrechnungspreis je Zustandsstufe, den Controlling setzt, gedeckelt auf Marktkurve minus Kanalgebühr; ohne Transferpreis ist die Zahl nicht messbar (Frage an das Haus). Bei dauernder Wertminderung außerplanmäßig abschreiben, bei Wegfall zuschreiben [36]. Simulation: 336.881 € Erlös gegen 375.130 € Buchwert, minus 38.249 €, Beispiel 2.",
+   "beispiel": true,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 0.05,
+    "richtung": "down",
+    "einheit": "ratio",
+    "zweite": {
+     "label": "Veräußerungsergebnis (Erlös minus Restbuchwert)",
+     "art": "absolut",
+     "wert": 0,
+     "richtung": "up",
+     "einheit": "eur"
+    }
+   },
+   "engine": {
+    "computable": "teilweise",
+    "source": "restwert/gold/kpis.py:470-507 KPI_RSL_REALISED_VS_RECORD (sum(resale_gross) / sum(estimate_rv_of_record)); Restbuchwert der Abgänge nach der Monatsregel des Reiters Bericht (web/tools/gen/make_report_data.py, Zeilen z2 und z3), Bilanzwert nur in der v0.1-Tabelle device_pnl",
+    "note": "C6 vergleicht den Erlös gegen den Restbuchwert (Bilanzsicht) und gegen die Annahme der Ratenkalkulation; die Engine hat Erlös gegen Prognose bei Rückgabe (Recommerce-Sicht) und den Restbuchwert als abgeleitete Monatsregel. Beide Teile existieren, aber nicht als eine zusammengeführte Kennzahl."
+   }
+  },
+  {
+   "nr": "C7",
+   "name": "Erlös gegen die Marktkurve",
+   "ziel": "≤ Kanalgebühr Lücke zwischen eigener Realisierung (Erlös in Prozent der UVP) und der Marktplatzkurve derselben Modellreihe höchstens die Kanalgebühr in Punkten",
+   "takt": "Monat",
+   "echt_ab": "Monat 3",
+   "rollen": "Resale",
+   "formel": "Realisierung eigen (netto) − (Realisierung Marktplatz Grade B bei gleichem Modellalter − Kanalgebühr in Punkten der UVP), nach 24 und 36 Monaten",
+   "quelle": "Verkaufsbelege; öffentliche Preisbelege je Modellreihe mit URL und Abrufdatum (Restwert Engine, 669 Belege)",
+   "eigner": "Resale je Familie",
+   "pruefer": "die Leitung",
+   "zaehlregel": "Marktplatzpreise sind Angebote, also Obergrenzen. Ein Beleg über 100 % der UVP ist ein Datenfehler. Modellreihen je Generation, unter zehn Belegen gilt die Reihe als nicht belegt. Die Kurve nach 36 Monaten, Grade B, Marktplatz: Laptop 65 %, Tablet 60 %, Smartphone 45 % der UVP; Ankaufgebote bei Smartphones neun Punkte darunter. Wertverlust im ersten Monat am größten: iPhone-15-Reihe 28,8 %, Galaxy S23 42,4 % [29]. Diese Zahl entscheidet über die Liste: ein Modell, dessen Reihe am Markt bei 23 % steht, braucht eine andere Miete oder kommt nicht auf die Liste, Beispiel 3.",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "referenz",
+    "wert": null,
+    "richtung": "down",
+    "einheit": "ratio",
+    "referenz": "Kanalgebühr in Punkten der UVP"
+   },
+   "engine": {
+    "computable": "teilweise",
+    "source": "outputs/market_anchors.csv und outputs/market_curves.csv (öffentliche Preisbelege, Quelle von market.js); silver.device_ledger.resale_gross, resale_channel, rrp_net_eur für die eigene Realisierung",
+    "note": "Beide Bausteine (öffentliche Kurve je Modellreihe und Alter; eigene Realisierung je Verkauf) existieren getrennt (Reiter Realisierung bzw. device_ledger), aber keine Tabelle bildet die Differenz eigen minus Marktplatzkurve minus Kanalgebühr."
+   }
+  },
+  {
+   "nr": "C8",
+   "name": "Tage bis Erlös und Lagerdauer",
+   "ziel": "≤ 30 Tage / 0 Median von Rückgabe bis Zahlungseingang höchstens 30 Tage; Buchwert mit Lagerdauer über 180 Tagen null",
+   "takt": "Monat",
+   "echt_ab": "Monat 3",
+   "rollen": "Resale",
+   "formel": "Tage bis Erlös = Zahlungseingang − Rückgabedatum, Median je Familie; Aging 180 = Buchwert über 180 Tage / Buchwert im Lager",
+   "quelle": "Versand- und Rücksendeprotokoll je Seriennummer, Lagerbestand mit Eingangsdatum, Anlagenbuchhaltung",
+   "eigner": "Resale je Familie setzt die Regel; Operations führt den Fall",
+   "pruefer": "Controlling",
+   "zaehlregel": "Kapitalbindung je Tag = Buchwert im Lager × Kapitalkostensatz / 365. Wertberichtigung nicht nach Kalendertagen allein, sondern nach Abverkaufsrate und Marktpreis je Lagerklasse [37]. Ein Gerät ohne Versandprotokoll gilt als im Lager. Median je Familie erst ab 30 Verkäufen im Monat. Zum Vergleich: ein testierter B2B-Refurbisher dreht sein Lager 8,16-mal im Jahr [37]. Simulation: ein ProBook liegt seit 1.120 Tagen verkaufsfähig im Lager, Beispiel 5.",
+   "beispiel": true,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 30,
+    "richtung": "down",
+    "einheit": "days",
+    "zweite": {
+     "label": "Buchwert mit Lagerdauer über 180 Tagen",
+     "art": "absolut",
+     "wert": 0,
+     "richtung": "down",
+     "einheit": "eur"
+    }
+   },
+   "engine": {
+    "computable": "teilweise",
+    "source": "restwert/gold/kpis.py:510-532 KPI_RSL_DAYS_RETURN_TO_CASH (Median, Tage von Rückgabe bis Zahlungseingang); restwert/kpi/inventory.py:158-175 KPI_INV_AGING_180 (Anteil Lagerbestand über 180 Tage, EUR-Buchwert in der Note, v0.1-Tabelle device_pnl)",
+    "note": "Der Tage-Teil ist exakt vorhanden. Der Aging-Teil misst den Stückzahl-Anteil über 180 Tage, den Buchwert nur als Zusatztext; die Kapitalbindungsformel (Buchwert mal Kapitalkostensatz durch 365) ist nicht implementiert, kein Kapitalkostensatz in den Konfigurationen."
+   }
+  },
+  {
+   "nr": "C9",
+   "name": "Genauigkeit der Zustandsprüfung",
+   "ziel": "≥ 95 % der Rückläufer mit Grade bei Eingang gleich Grade bei Abgang",
+   "takt": "Monat",
+   "echt_ab": "Monat 3",
+   "rollen": "Resale",
+   "formel": "Rückläufer mit Grade Eingang = Grade Abgang / alle Rückläufer mit Abgang",
+   "quelle": "Rücksendeprotokoll mit Zustandsprüfung; Verkaufsbeleg oder Vermietung mit Grade",
+   "eigner": "Resale je Familie schlägt die Grading-Regel vor, Controlling setzt sie; Operations gradet",
+   "pruefer": "Controlling, Stichprobe 5 % der Rückläufer je Monat unabhängig nachgegradet",
+   "zaehlregel": "Grade A wie neu, B sehr gut, C gut, D akzeptabel; die Prüfmerkmale je Stufe (Display, Gehäuse, Akku, Funktion) legt die Grading-Regel fest. Ein Grade-Wechsel nach Reparatur zählt als Treffer, wenn die Reparatur nach der Regel beschlossen war. Ein Gerät in besserem Zustand bringt bis zu 50 % mehr Erlös [33], deshalb entscheidet das Grading über C6. Die Zweitzyklus-Quote (Anteil Rückläufer, die wieder vermietet statt verkauft werden) wird berichtet, trägt aber kein Ziel, bis das Haus den heutigen Anteil nennt (Frage an das Haus).",
+   "beispiel": true,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 0.95,
+    "richtung": "up",
+    "einheit": "ratio"
+   },
+   "engine": {
+    "computable": "teilweise",
+    "source": "restwert/ledger/device_ledger.py:81 (Spalten grade_declared, grade_inspected, grade_out in DEVICE_LEDGER_COLUMNS); vorhandene Kennzahl restwert/kpi/recommerce.py:240-248 KPI_REC_GRADING_ACCURACY",
+    "note": "Die Rohdaten für C9 (Grade bei Eingang gegen Grade bei Abgang) liegen als Spalten vor; die existierende Kennzahl misst eine andere Paarung (vom Kunden deklariert gegen bei der Prüfung festgestellt). Der Generator zählt grade_inspected gegen grade_out; ob ein Grade-Wechsel nach Reparatur nach Regel beschlossen war, kennt das Modell nicht."
+   }
+  },
+  {
+   "nr": "C10",
+   "name": "Kanalverlust",
+   "ziel": "≤ 3 % des Nettoerlösses je Quartal: was der gewählte Kanal gegen den besten Kanal für dasselbe Modell und Grade im selben Monat gekostet hat",
+   "takt": "Monat",
+   "echt_ab": "Monat 3",
+   "rollen": "Resale",
+   "formel": "Σ (Netto bester Kanal − Netto gewählter Kanal) / Σ Nettoerlös; Netto = Erlös − Kanalgebühr − Versand je Gerät",
+   "quelle": "Kanalabrechnungen; Verkaufsbelege mit Kanal, Modell, Grade, Datum",
+   "eigner": "Resale je Familie",
+   "pruefer": "Controlling",
+   "zaehlregel": "Der beste Kanal wird je Monat aus den eigenen Verkäufen bestimmt, nicht aus Listenangeboten; je Quartal geht eine kleine Testmenge über einen ungenutzten Kanal. Ein schneller Kanal mit niedrigerem Netto kann richtig sein, wenn die Kapitalbindung (C8) den Unterschied frisst; dann steht die Rechnung dabei. Simulation: Kanalwahl ist mit 21.207 € im Jahr die größte Stellschraube, Kanalgebühren 24.500 €.",
+   "beispiel": true,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 0.03,
+    "richtung": "down",
+    "einheit": "ratio"
+   },
+   "engine": {
+    "computable": "teilweise",
+    "source": "restwert/lake/schema_lake.py:205-208 gold.resale_by_channel_grade (channel, grade_at_sale, sum_net, sum_gross, sum_fees); restwert/kpi/recommerce.py:116-192 KPI_REC_MARGIN_MIX_CHANNEL; gold.levers_summary und web/engine/levers.js (Kanalwahl als Stellschraube L03)",
+    "note": "Die Bausteine (Netto je Kanal und Grade, eine gerechnete Stellschraube Kanalwahl in EUR je Jahr) existieren, aber keine Kennzahl bildet C10s Regel bester Kanal je Monat für dasselbe Modell und Grade minus gewählter Kanal, geteilt durch den Gesamterlös; die Stellschraube rechnet gegen die Prognose bei Rückgabe, nicht gegen die eigenen Verkäufe des Monats."
+   }
+  }
+ ]
+}

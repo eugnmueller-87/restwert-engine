@@ -3,7 +3,7 @@
 (function (w) {
   'use strict';
   var RE = w.RE;
-  var TABS = ['report', 'device', 'forecast', 'tco', 'cycle', 'levers', 'term', 'market', 'series', 'studies', 'faq', 'lake'];
+  var TABS = ['report', 'device', 'forecast', 'tco', 'cycle', 'levers', 'term', 'kpis', 'market', 'series', 'studies', 'faq', 'lake'];
   var HELPERS = ['fmt', 'TABLE', 'H', 'ROW', 'C', 'N'];
   var missing = [];
   if (!RE) {

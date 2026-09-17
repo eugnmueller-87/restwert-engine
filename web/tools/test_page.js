@@ -18,7 +18,7 @@ const distArg = process.argv.find(a => a.startsWith('--dist='));   // --dist=dis
 const APP = path.join(V3, distArg ? distArg.slice(7) : 'dist'), OUT = path.join(V3, distArg ? 'out-' + distArg.slice(7) : 'out');
 const NM = path.join(V3, 'node_modules');
 // Reiter mit ihrem Bereich (Kopfzeile seit 16.09.2026: Bericht, Analytics, Market Intelligence, Daten; die Reiter eines Bereichs stehen in der zweiten Zeile)
-const TABS = [['report', 'Bericht', 'Bericht'], ['device', 'Gerät', 'Analytics'], ['forecast', 'Prognosegüte', 'Analytics'], ['tco', 'TCO', 'Analytics'], ['cycle', 'Kreislauf', 'Analytics'], ['levers', 'Stellschrauben', 'Analytics'], ['term', 'Laufzeit', 'Analytics'],
+const TABS = [['report', 'Bericht', 'Bericht'], ['device', 'Gerät', 'Analytics'], ['forecast', 'Prognosegüte', 'Analytics'], ['tco', 'TCO', 'Analytics'], ['cycle', 'Kreislauf', 'Analytics'], ['levers', 'Stellschrauben', 'Analytics'], ['term', 'Laufzeit', 'Analytics'], ['kpis', 'KPIs', 'Analytics'],
   ['market', 'Realisierung', 'Market Intelligence'], ['series', 'Serie gegen Serie', 'Market Intelligence'], ['studies', 'Studien', 'Market Intelligence'], ['faq', 'FAQ', 'Market Intelligence'], ['lake', 'Daten', 'Daten']];
 const groupOf = label => (TABS.find(t => t[1] === label) || [])[2] || label;
 const ARGS = process.argv.slice(2);

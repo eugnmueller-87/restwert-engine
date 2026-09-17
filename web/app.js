@@ -21,6 +21,7 @@
     { key: 'report', label: 'Bericht', group: 'report' },
     { key: 'device', label: 'Gerät', group: 'analytics' }, { key: 'forecast', label: 'Prognosegüte', group: 'analytics' }, { key: 'tco', label: 'TCO', group: 'analytics' },
     { key: 'cycle', label: 'Kreislauf', group: 'analytics' }, { key: 'levers', label: 'Stellschrauben', group: 'analytics' }, { key: 'term', label: 'Laufzeit', group: 'analytics' },
+    { key: 'kpis', label: 'KPIs', group: 'analytics' },
     { key: 'market', label: 'Realisierung', group: 'intel' }, { key: 'series', label: 'Serie gegen Serie', group: 'intel', data: 'market' },
     { key: 'studies', label: 'Studien', group: 'intel', data: 'market' }, { key: 'faq', label: 'FAQ', group: 'intel' },
     { key: 'lake', label: 'Daten', group: 'lake' }
@@ -76,6 +77,16 @@
         })));
   }
 
+  /* Verlaufslinie in einer Zelle (E.N mit spark, seit 17.09.2026, Reiter KPIs): Strich in der Textfarbe, ohne Stylesheet-Bedarf */
+  function CellSpark(v) {
+    var W = 72, H = 20, Pd = 2, lo = Math.min.apply(null, v), hi = Math.max.apply(null, v), span = hi - lo || 1;
+    var pts = v.map(function (y, i) { return [Pd + (W - 2 * Pd) * i / (v.length - 1), Pd + (H - 2 * Pd) * (1 - (y - lo) / span)]; });
+    var d = pts.map(function (p, i) { return (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1); }).join(' ');
+    var last = pts[pts.length - 1];
+    return h('svg', { className: 'spark', width: W, height: H, viewBox: '0 0 ' + W + ' ' + H, 'aria-hidden': true, style: { verticalAlign: 'middle', marginLeft: 6, overflow: 'visible' } },
+      h('path', { d: d, fill: 'none', stroke: 'currentColor', strokeWidth: 1.5, strokeLinejoin: 'round', strokeLinecap: 'round' }),
+      h('circle', { cx: last[0], cy: last[1], r: 2, fill: 'currentColor' }));
+  }
   function Cell(c, i, pad, padLeft) {
     var st = { textAlign: c.align, color: c.color, fontWeight: c.weight, whiteSpace: c.wrap, minWidth: c.minW, verticalAlign: 'top', padding: pad };
     if (c.indent) st.paddingLeft = padLeft + c.indent * 16;
@@ -84,6 +95,7 @@
       c.href ? h(React.Fragment, null, c.text ? ' ' : null, h('a', { href: c.href, target: '_blank', rel: 'noopener', style: { color: 'var(--color-accent-700)' } }, c.linkText)) : null,
       c.tag ? h(React.Fragment, null, ' ', h('span', { className: 'tag ' + c.tag, style: { fontSize: 10, padding: '1px 7px' } }, c.tagText)) : null,
       c.hasBar ? h('span', { className: 'cell-bar', style: { width: c.bar } }) : null,
+      c.hasSpark ? CellSpark(c.spark) : null,
       c.sub ? h('div', { style: { fontSize: 11.5, fontWeight: 400, lineHeight: 1.4, color: 'var(--ink-65)' } }, c.sub) : null,
       c.hasLinks ? c.links.map(function (l, j) {
         return h('div', { key: j, style: { fontSize: 12, lineHeight: 1.4 } }, h('a', { href: l.href, target: '_blank', rel: 'noopener', style: { color: 'var(--color-accent-700)' } }, l.text), ' ', l.rest);

@@ -1,4 +1,4 @@
-# The page: twelve tabs in four areas on one static file, in two looks
+# The page: thirteen tabs in four areas on one static file, in two looks
 
 Live: https://claude.ai/artifact/35YqfY2paPWtkn6yD32U7m (the same files, published as a multi-file artifact).
 
@@ -23,7 +23,7 @@ JSON file is written by a generator under `web/tools/gen/` from the tables and f
 | `data/<tab>.json` | the data load of each tab, generated; tracked so the page builds from a clone without DuckDB. `series` and `studies` read `market.json` | `build.py --generate` |
 | `data/config.json` | the purchase discount (value and owner) from `config/assumptions.yaml` | `build.py` |
 | `tools/gen/make_<tab>_data.py` | the generators, one per data file, reading `outputs/*.csv`, `data/restwert.duckdb`, `config/*.yaml`, `data/catalogue/*.csv` | hand |
-| `tools/gen/studies_de.json`, `tools/gen/faq.json` | curated knowledge with URLs: the published studies (international, 13.09.2026; German sources, 16.09.2026) and the FAQ entries. FAQ answers carry no number of the tool as text, only placeholders `{fact, fmt}` that `make_faq_data.py` fills from the run | hand, from read-only research agents |
+| `tools/gen/studies_de.json`, `tools/gen/faq.json`, `tools/gen/kpi_rahmen.json` | curated knowledge with URLs: the published studies (international, 13.09.2026; German sources, 16.09.2026) and the FAQ entries; `kpi_rahmen.json` is the KPI frame (Fassung 3, 17.09.2026) with, per KPI, a machine-readable target and the mapping to the engine (`engine.computable` ja, teilweise, nein with source and note). FAQ answers carry no number of the tool as text, only placeholders `{fact, fmt}` that `make_faq_data.py` fills from the run | hand, from read-only research agents |
 | `tools/test_page.js` | jsdom run: builds `dist/index.html` (or `--dist=dist-cockpit`) offline, clicks every tab and control, unfolds every button, checks cells per row and definitions per table, writes the visible text to `out/<tab>.txt` (`out-dist-cockpit/` for the second look), fails on console errors, dashes, hedge words, external addresses, missing theme tokens, phone width | hand |
 | `tools/parity.js` | every number in `ref/<tab>.txt` (the accepted version) must appear in `out/<tab>.txt` | hand |
 | `ref/<tab>.txt` | the visible text of the accepted version, one file per tab | `test_page.js` (copied by hand when a version is accepted) |
@@ -60,6 +60,7 @@ market and published sources say (structure since 16.09.2026, on the owner's req
 | Analytics | Kreislauf | `cycle.js` | the closed cycle per family and manufacturer, the levers, the cost lines | `silver.device_ledger`, `silver.ledger_lines`, `gold.levers_summary` |
 | Analytics | Stellschrauben | `levers.js` | where to tighten, with owner, threshold and rule per lever | `gold.levers_summary`, `gold.levers_by_cohort`, `config/thresholds.yaml` |
 | Analytics | Laufzeit | `term.js` | one year against three years on the same device, the rent a term needs | `outputs/market_curves.csv`, `outputs/market_anchors.csv`, `silver.device_ledger`, `config/lake.yaml` |
+| Analytics | KPIs | `kpis.js` | do we meet our KPIs, and which can we measure at all: the 21 KPIs of the KPI frame (Fassung 3, 17.09.2026) against the gold KPIs and the v0.1 registry, status per KPI never guessed (erfüllt, im Korridor, verfehlt, nicht messbar with reason, nicht im Werkzeug with the missing source), monthly series and baseline per KPI | `outputs/gold__kpi_values.csv`, `outputs/gold__kpi_breakdown.csv`, `outputs/kpi_values.csv`, `outputs/kpi_breakdown.csv`, `config/kpi_targets.yaml`, `silver.device_ledger`, `silver.contracts`, `main.indirect_spend`, `main.rv_forecast_error_monthly`, `main.device_pnl`, `gold.renewal_calendar_v2`, `gold.levers_summary`, `data/report.json`; the frame itself from `tools/gen/kpi_rahmen.json` |
 | Market Intelligence | Realisierung | `market.js` | where the public used market lands against launch RRP: curves per family and manufacturer, every price evidence with its URL | `outputs/market_anchors.csv`, `outputs/market_curves.csv` |
 | Market Intelligence | Serie gegen Serie | `series.js` | one model series against the other at the age of its evidence, plus the one-day spot check marketplace vs trade-in | `data/market.json` (series, studies.gegenprobe) |
 | Market Intelligence | Studien | `studies.js` | what published sources measure: German sources by kind of number, international studies, what was searched and not found | `data/market.json` (studies), from `tools/gen/studies_de.json` |

@@ -6,7 +6,7 @@
 'use strict';
 const fs = require('fs'), path = require('path');
 const V3 = path.join(__dirname, '..');
-const TABS = ['report', 'device', 'forecast', 'tco', 'cycle', 'levers', 'term', 'market', 'series', 'studies', 'faq', 'lake'];
+const TABS = ['report', 'device', 'forecast', 'tco', 'cycle', 'levers', 'term', 'kpis', 'market', 'series', 'studies', 'faq', 'lake'];
 const distArg = process.argv.find(a => a.startsWith('--dist='));   // --dist=dist-cockpit: die Ausgabe der zweiten Optik (out-dist-cockpit/)
 const OUT_DIR = distArg ? 'out-' + distArg.slice(7) : 'out';
 const only = process.argv.slice(2).find(a => !a.startsWith('--')) || null;
