@@ -18,6 +18,7 @@ source:
 api:
   url_env: RESTWERT_API_URL          # http://127.0.0.1:8420
   key_env: RESTWERT_API_KEY          # das Geheimnis eines Schlüssels mit source_systems: [servicedesk]
+  batch_size: 5000                   # Zeilen je Lieferung; die Schnittstelle nimmt höchstens RESTWERT_API_MAX_ROWS (50000)
 
 # Spalte des Feeds: Feld des Hauses (Punktpfad erlaubt, z. B. assigned_to.display_value)
 columns:

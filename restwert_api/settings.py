@@ -13,6 +13,13 @@ THE MODEL ADVISES, DETERMINISTIC CODE DECIDES, A NAMED HUMAN OWNS EVERY THRESHOL
 | ``RESTWERT_API_KEYS``      | leer                              | Schlüssel als Text, Alternative zur Datei (``auth.py``) |
 | ``RESTWERT_API_HOST``      | ``127.0.0.1``                     | Adresse des Servers |
 | ``RESTWERT_API_PORT``      | ``8420``                          | Port des Servers |
+| ``RESTWERT_API_MAX_BODY_MB`` | ``25``                          | Obergrenze je Request-Körper in MiB; darüber 413, bevor eine Zeile gelesen wird |
+| ``RESTWERT_API_MAX_ROWS``  | ``50000``                         | Obergrenze je Lieferung in Zeilen (JSON wie CSV); darüber 413, höchstens ``MAX_ROWS_CEILING`` |
+
+Die Grenzen sind eine Entscheidung gegen den offenen Schlauch: ohne sie liest die
+Schnittstelle jeden Körper vollständig in den Speicher, bevor sie ihn prüft. Wer mehr
+Zeilen hat, liefert in Teilen (der Konnektor teilt selbst, ``api.batch_size``); die
+Deduplizierung per SHA-256 und ``row_hash`` macht Teile gefahrlos.
 
 Die Ablageorte sind eine Entscheidung, nicht ein Zufall: ``data/`` ist der Ort der
 Laufzeitdaten, ``outputs/`` ist per ``.gitignore`` komplett ignoriert. Audit-Log und
@@ -31,6 +38,9 @@ from restwert.paths import CONFIG_DIR, DATA_DIR, DEFAULT_DB, LAKE_DIR, OUTPUTS_D
 
 DEFAULT_PORT = 8420
 DEFAULT_HOST = "127.0.0.1"
+DEFAULT_MAX_BODY_MB = 25
+DEFAULT_MAX_ROWS = 50_000
+MAX_ROWS_CEILING = 200_000  # auch die Umgebung hebt die Zeilengrenze nicht darüber; zugleich max_length im Schema
 
 
 @dataclass(frozen=True)
@@ -46,6 +56,14 @@ class Settings:
     keys_env: str | None = None
     host: str = DEFAULT_HOST
     port: int = DEFAULT_PORT
+    max_body_bytes: int = DEFAULT_MAX_BODY_MB * 1024 * 1024
+    max_rows: int = DEFAULT_MAX_ROWS
+
+    def __post_init__(self) -> None:
+        if self.max_body_bytes < 1:
+            raise ValueError(f"max_body_bytes muss mindestens 1 sein, ist {self.max_body_bytes}")
+        if not 1 <= self.max_rows <= MAX_ROWS_CEILING:
+            raise ValueError(f"max_rows muss zwischen 1 und {MAX_ROWS_CEILING} liegen, ist {self.max_rows}")
 
     @property
     def raw_dir(self) -> Path:
@@ -72,11 +90,22 @@ class Settings:
             v = e.get(name)
             return Path(v) if v else default
 
-        port_text = e.get("RESTWERT_API_PORT", "").strip()
-        try:
-            port = int(port_text) if port_text else DEFAULT_PORT
-        except ValueError as exc:
-            raise ValueError(f"RESTWERT_API_PORT ist keine Zahl: {port_text!r}") from exc
+        def _int(name: str, default: int) -> int:
+            text = e.get(name, "").strip()
+            if not text:
+                return default
+            try:
+                return int(text)
+            except ValueError as exc:
+                raise ValueError(f"{name} ist keine ganze Zahl: {text!r}") from exc
+
+        port = _int("RESTWERT_API_PORT", DEFAULT_PORT)
+        max_body_mb = _int("RESTWERT_API_MAX_BODY_MB", DEFAULT_MAX_BODY_MB)
+        if max_body_mb < 1:
+            raise ValueError(f"RESTWERT_API_MAX_BODY_MB muss mindestens 1 sein, ist {max_body_mb}")
+        max_rows = _int("RESTWERT_API_MAX_ROWS", DEFAULT_MAX_ROWS)
+        if not 1 <= max_rows <= MAX_ROWS_CEILING:
+            raise ValueError(f"RESTWERT_API_MAX_ROWS muss zwischen 1 und {MAX_ROWS_CEILING} liegen, ist {max_rows}")
         return cls(
             db_path=_p("RESTWERT_API_DB", base.db_path),
             lake_dir=_p("RESTWERT_API_LAKE_DIR", base.lake_dir),
@@ -87,7 +116,9 @@ class Settings:
             keys_env=(e.get("RESTWERT_API_KEYS") or None),
             host=e.get("RESTWERT_API_HOST", DEFAULT_HOST) or DEFAULT_HOST,
             port=port,
+            max_body_bytes=max_body_mb * 1024 * 1024,
+            max_rows=max_rows,
         )
 
 
-__all__ = ["Settings", "DEFAULT_PORT", "DEFAULT_HOST"]
+__all__ = ["Settings", "DEFAULT_PORT", "DEFAULT_HOST", "DEFAULT_MAX_BODY_MB", "DEFAULT_MAX_ROWS", "MAX_ROWS_CEILING"]

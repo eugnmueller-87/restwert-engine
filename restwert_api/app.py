@@ -75,6 +75,17 @@ def create_app(settings: Settings | None = None, keyring: KeyRing | None = None)
     async def audit_middleware(request: Request, call_next):  # type: ignore[no-untyped-def]
         request.state.audit = {}
         t0 = time.perf_counter()
+        declared = request.headers.get("content-length")
+        if declared is not None and declared.isdigit() and int(declared) > settings.max_body_bytes:
+            # jede Route, bevor irgendjemand den Körper liest; die Feed-Route prüft zusätzlich beim Lesen in Stücken
+            audit.write({
+                "method": request.method, "path": request.url.path, "status": 413,
+                "ms": round((time.perf_counter() - t0) * 1000, 1),
+                "client": request.client.host if request.client else None, "content_length": int(declared),
+            })
+            return JSONResponse(status_code=413, content={
+                "detail": f"Körper zu groß: {declared} Bytes, erlaubt sind höchstens {settings.max_body_bytes} Bytes; in Teilen liefern",
+            })
         try:
             response = await call_next(request)
         except Exception as exc:  # noqa: BLE001 - protokollieren, dann als 500 melden

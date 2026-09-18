@@ -18,6 +18,11 @@ Regeln, die hier durchgesetzt werden (alle aus ``restwert/lake``):
 * Die Identität einer Lieferung ist der SHA-256 der Datei. Er wird VOR dem
   Schreiben berechnet und gegen ``bronze.deliveries`` geprüft: dieselbe Lieferung
   ein zweites Mal legt keine zweite Datei an und meldet ``already_ingested``.
+* Eine Lieferung hat höchstens ``max_rows`` Zeilen (``Settings.max_rows``, JSON wie
+  CSV). Darüber ist ``TooManyRows`` (413), geprüft VOR jeder weiteren Arbeit an den
+  Zeilen; beim CSV bricht der Leser bei der ersten Zeile über der Grenze ab. Die
+  Größe des Körpers in Bytes prüft die Route (``routes/feeds.py``), bevor sie ihn
+  vollständig liest.
 * ``dry_run=true`` schreibt keine Datei und nichts in die Datenbank. Die Vorschau
   läuft über dieselben Funktionen, die der Import benutzt (``type_rows``,
   ``resolve_keys``, ``dedupe``), und ihre Grundcodes sind die geschlossene Liste
@@ -65,6 +70,19 @@ class BadDelivery(ValueError):
     """Ein Request, der nicht zum Vertrag passt (422); der Text sagt, was."""
 
 
+class TooManyRows(BadDelivery):
+    """Mehr Zeilen als ``max_rows`` erlaubt (413); in Teilen liefern."""
+
+
+def check_row_count(n: int, max_rows: int | None) -> None:
+    """``TooManyRows``, wenn ``n`` über ``max_rows`` liegt; ``None`` heißt keine Grenze (nur in Tests des Kerns)."""
+    if max_rows is not None and n > max_rows:
+        raise TooManyRows(
+            f"{n} Zeilen, erlaubt sind höchstens {max_rows} je Lieferung; in Teilen liefern "
+            "(die Deduplizierung per SHA-256 und row_hash macht Teile gefahrlos)"
+        )
+
+
 def resolve_feed(text: str) -> FeedSpec:
     """``"servicedesk/tickets"`` oder ``"sd_tickets"`` -> FeedSpec; sonst ``UnknownFeed``."""
     key = text.strip().strip("/")
@@ -110,12 +128,13 @@ def _synthetic_value_ok(value: Any) -> bool:
     return text == "" or text in _FALSE
 
 
-def rows_from_json(spec: FeedSpec, rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """JSON-Zeilen prüfen: Objekte, bekannte Spalten, ``is_synthetic`` nur ``false``. Werte bleiben, wie sie kamen."""
+def rows_from_json(spec: FeedSpec, rows: list[dict[str, Any]], *, max_rows: int | None = None) -> list[dict[str, Any]]:
+    """JSON-Zeilen prüfen: Anzahl, Objekte, bekannte Spalten, ``is_synthetic`` nur ``false``. Werte bleiben, wie sie kamen."""
     if not isinstance(rows, list):
         raise BadDelivery("rows muss eine Liste von Objekten sein")
     if not rows:
         raise BadDelivery("rows ist leer; eine Lieferung ohne Zeilen wird nicht gelandet")
+    check_row_count(len(rows), max_rows)
     columns: set[str] = set()
     for i, row in enumerate(rows, start=1):
         if not isinstance(row, dict):
@@ -127,8 +146,8 @@ def rows_from_json(spec: FeedSpec, rows: list[dict[str, Any]]) -> list[dict[str,
     return [{k: v for k, v in row.items() if k != "is_synthetic"} for row in rows]
 
 
-def rows_from_csv(spec: FeedSpec, text: str) -> list[dict[str, Any]]:
-    """CSV-Text prüfen (Kopfzeile, keine ``#``-Zeile, bekannte Spalten) und als Zeilen zurückgeben."""
+def rows_from_csv(spec: FeedSpec, text: str, *, max_rows: int | None = None) -> list[dict[str, Any]]:
+    """CSV-Text prüfen (Kopfzeile, keine ``#``-Zeile, bekannte Spalten, höchstens ``max_rows``) und als Zeilen zurückgeben."""
     if text.startswith("﻿"):
         text = text[1:]
     stripped = text.lstrip()
@@ -143,6 +162,7 @@ def rows_from_csv(spec: FeedSpec, text: str) -> list[dict[str, Any]]:
     _check_columns(spec, columns)
     rows: list[dict[str, Any]] = []
     for i, raw in enumerate(reader, start=1):
+        check_row_count(i, max_rows)
         row = {k.strip(): (v if v is not None else "") for k, v in raw.items() if k is not None}
         if None in raw:
             raise BadDelivery(f"Zeile {i}: mehr Werte als Spalten")
@@ -390,7 +410,7 @@ def utc_now() -> datetime:
 
 
 __all__ = [
-    "SHORT_KEYS", "PREVIEW_LIMIT", "UnknownFeed", "BadDelivery", "DeliveryResult",
-    "resolve_feed", "short_key", "rows_from_json", "rows_from_csv", "render_landing_csv", "sha256_text",
+    "SHORT_KEYS", "PREVIEW_LIMIT", "UnknownFeed", "BadDelivery", "TooManyRows", "DeliveryResult",
+    "check_row_count", "resolve_feed", "short_key", "rows_from_json", "rows_from_csv", "render_landing_csv", "sha256_text",
     "next_seq", "write_landing_file", "deliver",
 ]

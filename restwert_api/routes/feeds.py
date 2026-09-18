@@ -6,6 +6,12 @@ THE MODEL ADVISES, DETERMINISTIC CODE DECIDES, A NAMED HUMAN OWNS EVERY THRESHOL
 Bronze-Tabelle (``sd_tickets``). Der Körper von ``POST`` ist JSON
 (``{"rows": [...], "delivered_on": "YYYY-MM-DD"}`` oder eine nackte Liste) oder
 ``text/csv`` mit Kopfzeile. ``?dry_run=true`` schreibt nichts und zeigt die Vorschau.
+
+Zwei Obergrenzen, beide aus ``Settings`` und beide 413: der Körper in Bytes
+(``max_body_bytes``; erst ``Content-Length``, dann beim Lesen in Stücken, damit auch
+ein Körper ohne Längenangabe die Grenze nicht umgeht) und die Zeilen je Lieferung
+(``max_rows``, JSON wie CSV, geprüft vor der Zeilenprüfung). Beide greifen, bevor
+irgendetwas gelandet wird.
 """
 
 from __future__ import annotations
@@ -49,24 +55,61 @@ def get_feed(feed_key: str) -> FeedInfo:
     return feed_info(_spec_or_404(feed_key))
 
 
-async def _parse_body(request: Request, spec) -> tuple[list[dict[str, Any]], date | None]:
+def _too_large(limit: int, seen: int | None = None) -> HTTPException:
+    got = f"{seen} Bytes" if seen is not None else "mehr"
+    return HTTPException(
+        status_code=413,
+        detail=f"Körper zu groß: {got}, erlaubt sind höchstens {limit} Bytes je Lieferung; in Teilen liefern",
+    )
+
+
+async def read_body_limited(request: Request, limit: int) -> bytes:
+    """Den Körper in Stücken lesen und bei ``limit`` abbrechen (413), nie erst alles in den Speicher holen."""
+    declared = request.headers.get("content-length")
+    if declared is not None:
+        try:
+            n = int(declared)
+        except ValueError as exc:
+            raise HTTPException(status_code=400, detail=f"Content-Length ist keine Zahl: {declared!r}") from exc
+        if n > limit:
+            raise _too_large(limit, n)
+    chunks: list[bytes] = []
+    size = 0
+    async for chunk in request.stream():
+        size += len(chunk)
+        if size > limit:
+            raise _too_large(limit)
+        chunks.append(chunk)
+    return b"".join(chunks)
+
+
+def _bad(exc: landing.BadDelivery) -> HTTPException:
+    return HTTPException(status_code=413 if isinstance(exc, landing.TooManyRows) else 422, detail=str(exc))
+
+
+async def _parse_body(request: Request, spec, settings: Settings) -> tuple[list[dict[str, Any]], date | None]:
     content_type = (request.headers.get("content-type") or "").split(";", 1)[0].strip().lower()
-    raw = await request.body()
+    raw = await read_body_limited(request, settings.max_body_bytes)
     if content_type in ("text/csv", "application/csv", "text/plain"):
         try:
             text = raw.decode("utf-8")
         except UnicodeDecodeError as exc:
             raise HTTPException(status_code=422, detail=f"CSV ist kein UTF-8: {exc}") from exc
         try:
-            return landing.rows_from_csv(spec, text), None
+            return landing.rows_from_csv(spec, text, max_rows=settings.max_rows), None
         except landing.BadDelivery as exc:
-            raise HTTPException(status_code=422, detail=str(exc)) from exc
+            raise _bad(exc) from exc
     try:
         payload = json.loads(raw.decode("utf-8")) if raw else None
     except (UnicodeDecodeError, ValueError) as exc:
         raise HTTPException(status_code=422, detail=f"Körper ist weder JSON noch text/csv: {exc}") from exc
     if isinstance(payload, list):
         payload = {"rows": payload}
+    if isinstance(payload, dict) and isinstance(payload.get("rows"), list):
+        try:
+            landing.check_row_count(len(payload["rows"]), settings.max_rows)  # vor der Zeilenprüfung, nie danach
+        except landing.TooManyRows as exc:
+            raise _bad(exc) from exc
     try:
         body = DeliveryBody.model_validate(payload)
     except ValidationError as exc:
@@ -84,9 +127,9 @@ async def _parse_body(request: Request, spec) -> tuple[list[dict[str, Any]], dat
     if errors:
         raise HTTPException(status_code=422, detail={"message": f"Feed {spec.key}: Zeilen passen nicht zum Vertrag", "errors": errors})
     try:
-        rows = landing.rows_from_json(spec, body.rows)
+        rows = landing.rows_from_json(spec, body.rows, max_rows=settings.max_rows)
     except landing.BadDelivery as exc:
-        raise HTTPException(status_code=422, detail=str(exc)) from exc
+        raise _bad(exc) from exc
     return rows, body.delivered_on
 
 
@@ -109,7 +152,7 @@ async def post_feed(
     spec = _spec_or_404(feed_key)
     require_system(key, spec)
     request.state.audit.update({"source_system": spec.source_system, "feed": spec.feed, "dry_run": dry_run})
-    rows, body_date = await _parse_body(request, spec)
+    rows, body_date = await _parse_body(request, spec, settings)
     when = delivered_on or body_date or date.today()
 
     with DB_LOCK:

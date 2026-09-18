@@ -9,19 +9,23 @@ the repository's ``data/`` and ``config/`` are never touched. The rows come from
 
 from __future__ import annotations
 
+import json
 import re
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
+from datetime import date
 from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
 
 from restwert import db
-from restwert.lake.feeds import FEEDS, UNRESOLVED_REASONS, parse_landing_name
+from restwert.lake.feeds import FEEDS, UNRESOLVED_REASONS, landing_path, parse_landing_name
+from restwert_api import landing
 from restwert_api.app import create_app
 from restwert_api.auth import ApiKey, KeyRing, parse_keys_env
-from restwert_api.settings import Settings
+from restwert_api.schemas import DeliveryBody
+from restwert_api.settings import MAX_ROWS_CEILING, Settings
 from tests.fixtures.allowlist import is_allowed
 from tests.fixtures.api_rows import CAT_MODELS, CAT_VARIANTS, ERP_PO_LINES, ERP_PURCHASE_ORDERS, SD_TICKETS
 from tests.fixtures.denylist import find_denylisted
@@ -221,6 +225,117 @@ def test_unknown_column_and_wrong_feed_are_refused_before_landing(api: Api):
     r = api.client.post("/v1/feeds/sd_tickets", json={"rows": []}, headers=SD)
     assert r.status_code == 422
     assert not _landing_files(api.settings)
+
+
+# --------------------------------------------------------------------------- limits: body size and row count
+
+
+SD_HEADER = ",".join(FEEDS["servicedesk/tickets"].column_names)
+SD_LINE = "T-{i},SN-T-{i},,2026-09-03T00:00:00,,screen,repair,10,,,Refurbishment and repair partner (role-only)"
+
+
+def _sd_rows(n: int) -> list[dict]:
+    return [dict(SD_TICKETS[0], ticket_id=f"T-{i:04d}", serial=f"SN-T-{i:04d}") for i in range(n)]
+
+
+def _sd_csv(n: int) -> str:
+    return SD_HEADER + "\n" + "\n".join(SD_LINE.format(i=i) for i in range(n)) + "\n"
+
+
+def test_limits_come_from_the_environment_and_never_exceed_the_ceiling():
+    s = Settings.from_env({"RESTWERT_API_MAX_BODY_MB": "2", "RESTWERT_API_MAX_ROWS": "1234"})
+    assert s.max_body_bytes == 2 * 1024 * 1024 and s.max_rows == 1234
+    assert Settings.from_env({}).max_body_bytes == 25 * 1024 * 1024 and Settings.from_env({}).max_rows == 50_000
+    with pytest.raises(ValueError, match="RESTWERT_API_MAX_ROWS"):
+        Settings.from_env({"RESTWERT_API_MAX_ROWS": str(MAX_ROWS_CEILING + 1)})
+    with pytest.raises(ValueError, match="RESTWERT_API_MAX_BODY_MB"):
+        Settings.from_env({"RESTWERT_API_MAX_BODY_MB": "0"})
+    with pytest.raises(ValueError, match="keine ganze Zahl"):
+        Settings.from_env({"RESTWERT_API_MAX_ROWS": "viele"})
+    with pytest.raises(ValueError, match="max_rows"):
+        Settings(max_rows=0)
+    # the schema carries the ceiling, so /docs and the OpenAPI file say it too
+    assert DeliveryBody.model_json_schema()["properties"]["rows"]["maxItems"] == MAX_ROWS_CEILING
+    assert DeliveryBody.model_json_schema()["properties"]["rows"]["minItems"] == 1
+
+
+def test_oversized_body_is_413_on_every_route_before_anything_is_read_or_landed(tmp_path):
+    settings = replace(Settings().with_paths(tmp_path), max_body_bytes=2048, max_rows=3)
+    with TestClient(create_app(settings, _ring())) as client:
+        big = {"rows": [dict(SD_TICKETS[0], repair_partner_ref="x" * 3000)]}
+        r = client.post("/v1/feeds/sd_tickets", json=big, headers=SD)
+        assert r.status_code == 413 and "Körper zu groß" in r.json()["detail"]
+        # no Content-Length (chunked): the route reads in pieces and cuts at the limit
+        raw = json.dumps(big).encode("utf-8")
+        r = client.post(
+            "/v1/feeds/sd_tickets", content=(raw[i:i + 500] for i in range(0, len(raw), 500)),
+            headers={**SD, "Content-Type": "application/json"},
+        )
+        assert r.status_code == 413 and "Körper zu groß" in r.json()["detail"]
+        # CSV, same limit
+        r = client.post("/v1/feeds/sd_tickets", content=_sd_csv(40), headers={**SD, "Content-Type": "text/csv"})
+        assert r.status_code == 413
+        # every route, even without a key: nobody reads a body over the limit
+        r = client.post("/v1/runs", content=b"{" + b" " * 3000 + b"}", headers={**RUN, "Content-Type": "application/json"})
+        assert r.status_code == 413
+        r = client.post("/v1/feeds/sd_tickets", json=big)
+        assert r.status_code == 413
+        # under the limit the contract check runs as before
+        r = client.post("/v1/feeds/sd_tickets?dry_run=true", json={"rows": SD_TICKETS[:1]}, headers=SD)
+        assert r.status_code == 200, r.text
+        assert not list(tmp_path.rglob("*.csv")) and not settings.db_path.exists()
+        audit = settings.audit_path.read_text(encoding="utf-8")
+        assert '"status": 413' in audit and SD_SECRET not in audit
+
+
+def test_too_many_rows_is_413_for_json_and_csv_and_nothing_lands(tmp_path):
+    settings = replace(Settings().with_paths(tmp_path), max_rows=3)
+    with TestClient(create_app(settings, _ring())) as client:
+        four = _sd_rows(4)
+        r = client.post("/v1/feeds/sd_tickets", json={"rows": four}, headers=SD)
+        assert r.status_code == 413 and "höchstens 3" in r.json()["detail"], r.text
+        r = client.post("/v1/feeds/sd_tickets", json=four, headers=SD)  # bare list, same gate
+        assert r.status_code == 413
+        r = client.post("/v1/feeds/sd_tickets?dry_run=true", json=four, headers=SD)  # a dry run counts too
+        assert r.status_code == 413
+        r = client.post("/v1/feeds/sd_tickets", content=_sd_csv(4), headers={**SD, "Content-Type": "text/csv"})
+        assert r.status_code == 413 and "höchstens 3" in r.json()["detail"]
+        assert not list(tmp_path.rglob("*.csv")) and not settings.db_path.exists()
+        # exactly at the limit is a delivery
+        r = client.post("/v1/feeds/sd_tickets", json={"rows": four[:3]}, headers=SD)
+        assert r.status_code == 201, r.text
+        assert r.json()["rows_read"] == 3 and len(_landing_files(settings)) == 1
+    # the core functions carry the same gate, so nothing depends on the route alone
+    spec = FEEDS["servicedesk/tickets"]
+    with pytest.raises(landing.TooManyRows):
+        landing.rows_from_json(spec, four, max_rows=3)
+    with pytest.raises(landing.TooManyRows):
+        landing.rows_from_csv(spec, _sd_csv(4), max_rows=3)
+    assert len(landing.rows_from_csv(spec, _sd_csv(3), max_rows=3)) == 3
+
+
+# --------------------------------------------------------------------------- the feed key never becomes a path
+
+
+def test_feed_key_with_path_segments_is_404_and_the_landing_path_comes_from_the_contract(api: Api, tmp_path):
+    for text in ("../../etc/passwd", "servicedesk/../erp/purchase_orders", "sd_tickets/..", "..\\..\\sd_tickets",
+                 "/sd_tickets/../../x", "servicedesk/tickets/../tickets", "sd_tickets\x00"):
+        with pytest.raises(landing.UnknownFeed):
+            landing.resolve_feed(text)
+    # percent-encoded so the client does not normalise the dots away before they reach the server
+    for key in ("%2e%2e%2f%2e%2e%2fsd_tickets", "servicedesk%2f%2e%2e%2ferp%2fpurchase_orders", "sd_tickets%2f%2e%2e",
+                "%2e%2e%5c%2e%2e%5csd_tickets", "sd_tickets%00"):
+        r = api.client.post(f"/v1/feeds/{key}", json={"rows": SD_TICKETS}, headers=SD)
+        assert r.status_code == 404, (key, r.status_code, r.text)
+        r = api.client.get(f"/v1/feeds/{key}")
+        assert r.status_code == 404, (key, r.status_code)
+    assert not list(tmp_path.rglob("*.csv")) and not api.settings.db_path.exists()
+    # the file name and folder come from the FeedSpec, never from the request text
+    raw = api.settings.raw_dir.resolve()
+    for spec in FEEDS.values():
+        p = landing_path(api.settings.raw_dir, spec, date(2026, 9, 18), 1).resolve()
+        assert raw in p.parents and NAME_RE.match(p.name), p
+        assert p.parent == raw / spec.source_system / spec.feed
 
 
 # --------------------------------------------------------------------------- runs and kpis

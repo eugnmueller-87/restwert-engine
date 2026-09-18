@@ -19,7 +19,10 @@ Drei Schritte, jeder für sich testbar:
 3. **Schieben** (``push_rows``): ``POST <RESTWERT_API_URL>/v1/feeds/sd_tickets`` mit
    ``X-API-Key`` aus ``RESTWERT_API_KEY``. Die Schnittstelle landet die Datei,
    importiert sie und antwortet mit ``delivery_id``, Zählern und der Vorschau der
-   ungeklärten Zeilen. Der Konnektor prüft nichts doppelt.
+   ungeklärten Zeilen. Der Konnektor prüft nichts doppelt. Mehr als
+   ``api.batch_size`` Zeilen (Standard 5000, unter der Grenze der Schnittstelle von
+   50000 je Lieferung) gehen in Teilen, eine Lieferung je Teil; das Wasserzeichen
+   rückt erst vor, wenn jeder Teil angenommen wurde.
 
 Wasserzeichen: ``connectors/state/servicenow_tickets.json`` hält den größten
 ``sys_updated_on`` der zuletzt erfolgreich geschobenen Lieferung. Ein ``--dry-run``
@@ -60,6 +63,8 @@ DEFAULT_STATE = HERE / "state" / "servicenow_tickets.json"
 FetchFn = Callable[[str | None], list[dict[str, Any]]]
 PushFn = Callable[[list[dict[str, Any]], bool], dict[str, Any]]
 
+DEFAULT_BATCH_SIZE = 5000  # Zeilen je Lieferung; die Schnittstelle nimmt höchstens Settings.max_rows (Standard 50000)
+
 
 # ------------------------------------------------------------------------------------ Mapping
 
@@ -77,6 +82,14 @@ class Mapping:
     @property
     def spec(self) -> FeedSpec:
         return FEEDS[self.feed]
+
+    @property
+    def batch_size(self) -> int:
+        raw = self.api.get("batch_size")
+        n = DEFAULT_BATCH_SIZE if raw is None or raw == "" else int(raw)
+        if n < 1:
+            raise ValueError(f"api.batch_size muss mindestens 1 sein, ist {n}")
+        return n
 
     @property
     def watermark_field(self) -> str:
@@ -281,7 +294,7 @@ def push_rows(
 def run(
     mapping: Mapping, state_path: Path, *, fetch: FetchFn, push: PushFn, dry_run: bool,
 ) -> dict[str, Any]:
-    """Holen, abbilden, schieben, Wasserzeichen vorrücken (nur ohne dry_run und nur bei Erfolg)."""
+    """Holen, abbilden, in Teilen schieben, Wasserzeichen vorrücken (nur ohne dry_run und nur, wenn jeder Teil angenommen wurde)."""
     state = load_state(state_path)
     since = state.get("watermark")
     records = fetch(since)
@@ -295,16 +308,23 @@ def run(
         summary["note"] = "nichts Neues seit dem Wasserzeichen; nichts geschoben"
         return summary
     rows = [map_record(mapping, r) for r in records]
-    result = push(rows, dry_run)
-    summary["result"] = result
+    size = mapping.batch_size
+    results = [push(rows[start:start + size], dry_run) for start in range(0, len(rows), size)]
+    result = results[-1]
+    summary["result"] = result  # der letzte Teil; bei einem Teil die ganze Lieferung
+    summary["batches"] = len(results)
+    summary["delivery_ids"] = [r.get("delivery_id") for r in results]
+    summary["rows_new"] = sum(int(r.get("rows_new") or 0) for r in results)
+    summary["n_unresolved"] = sum(int(r.get("n_unresolved") or 0) for r in results)
     newest = max((str(_get_path(r, wm) or "") for r in records), default="")
     if not dry_run and newest:
         state["watermark"] = newest
         state["last_run"] = summary["started_at"]
         state["last_delivery_id"] = result.get("delivery_id")
         state.setdefault("runs", []).append({
-            "at": summary["started_at"], "records": len(records), "delivery_id": result.get("delivery_id"),
-            "rows_new": result.get("rows_new"), "n_unresolved": result.get("n_unresolved"),
+            "at": summary["started_at"], "records": len(records), "batches": len(results),
+            "delivery_id": result.get("delivery_id"), "delivery_ids": summary["delivery_ids"],
+            "rows_new": summary["rows_new"], "n_unresolved": summary["n_unresolved"],
         })
         state["runs"] = state["runs"][-50:]
         save_state(state_path, state)

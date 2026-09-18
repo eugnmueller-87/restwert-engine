@@ -6,6 +6,7 @@ THE MODEL ADVISES, DETERMINISTIC CODE DECIDES, A NAMED HUMAN OWNS EVERY THRESHOL
 from __future__ import annotations
 
 import json
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
@@ -111,6 +112,28 @@ def test_run_for_real_lands_and_advances_the_watermark(client, tmp_path):
     assert seen == [None, "2026-09-05 12:00:00"]
     assert second["records"] == 0 and second["result"] is None and "nichts Neues" in second["note"]
     assert len(list(client.rw_settings.raw_dir.rglob("*.csv"))) == 1
+
+
+def test_run_delivers_in_batches_under_the_api_row_limit(client, tmp_path):
+    m = replace(load_mapping(DEFAULT_MAPPING), api={"batch_size": 2})
+    assert m.batch_size == 2 and load_mapping(DEFAULT_MAPPING).batch_size == 5000
+    state_path = tmp_path / "state" / "servicenow_tickets.json"
+
+    def push(rows, dry_run):
+        assert len(rows) <= 2, "a batch never exceeds api.batch_size"
+        return push_rows(client, "", SECRET, "sd_tickets", rows, dry_run=dry_run)
+
+    summary = run(m, state_path, fetch=lambda since: RECORDS, push=push, dry_run=False)
+    assert summary["records"] == 3 and summary["batches"] == 2
+    assert len(summary["delivery_ids"]) == 2 and all(summary["delivery_ids"])
+    assert summary["result"]["delivery_id"] == summary["delivery_ids"][-1]
+    assert summary["rows_new"] == 0 and summary["n_unresolved"] == 3  # unknown_serial x2, bad_enum x1 across both parts
+    files = sorted(client.rw_settings.raw_dir.rglob("*.csv"))
+    assert [p.name[-7:] for p in files] == ["001.csv", "002.csv"]
+    state = load_state(state_path)
+    assert state["last_delivery_id"] == summary["delivery_ids"][-1] and state["runs"][0]["batches"] == 2
+    with pytest.raises(ValueError, match="batch_size"):
+        _ = replace(m, api={"batch_size": 0}).batch_size
 
 
 def test_fixture_json_matches_the_python_fixture():

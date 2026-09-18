@@ -20,6 +20,8 @@ from pydantic import BaseModel, ConfigDict, Field, create_model
 
 from restwert.lake.feeds import FEEDS, FeedSpec
 
+from restwert_api.settings import MAX_ROWS_CEILING
+
 _TYPE_HINT = {"str": "string", "int": "integer", "float": "number", "date": "string, ISO YYYY-MM-DD",
               "datetime": "string, ISO YYYY-MM-DDTHH:MM:SS", "bool": "boolean, true/false"}
 
@@ -94,7 +96,11 @@ class DeliveryBody(BaseModel):
     """JSON-Körper von ``POST /v1/feeds/<feed>``; alternativ ``text/csv`` mit Kopfzeile."""
 
     model_config = ConfigDict(extra="forbid")
-    rows: list[dict[str, Any]] = Field(description="eine Zeile je Objekt, Spalten wie im Feed-Vertrag")
+    rows: list[dict[str, Any]] = Field(
+        min_length=1, max_length=MAX_ROWS_CEILING,
+        description=f"eine Zeile je Objekt, Spalten wie im Feed-Vertrag; höchstens {MAX_ROWS_CEILING} "
+                    "(die laufende Grenze ist Settings.max_rows, Standard 50000; darüber 413)",
+    )
     delivered_on: date | None = Field(default=None, description="Lieferdatum im Dateinamen; Standard heute")
 
 
