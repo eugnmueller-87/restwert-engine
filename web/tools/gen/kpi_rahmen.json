@@ -660,7 +660,7 @@
    "quelle": "Rücklaufbelege, Aufbereitungsaufträge mit Ergebnis, Verkaufsaufträge, Recycling-Nachweise, je Seriennummer",
    "eigner": "Resale je Familie",
    "pruefer": "Nachhaltigkeitsmanagement, sonst Controlling",
-   "zaehlregel": "Ein Gerät hat ein zweites Leben, wenn es nach der Rückgabe aufbereitet und entweder erneut vermietet oder verkauft wurde; Verschrottung und Recycling zählen zum Nenner, nie zum Zähler. Ersatzteilgewinnung aus einem Gerät ist Recycling, kein zweites Leben. Das Haus meldet für 2024 99 Prozent für Smartphones und Tablets [44]; das ist die Baseline-Erwartung, das Ziel hält sie, statt sie zu übertreffen. Simulation: 1.061 von 1.074 Abgängen verkauft, 13 verschrottet, also 98,8 Prozent.",
+   "zaehlregel": "Ein Gerät hat ein zweites Leben, wenn es nach der Rückgabe aufbereitet und entweder erneut vermietet oder verkauft wurde; Verschrottung und Recycling zählen zum Nenner, nie zum Zähler. Ersatzteilgewinnung aus einem Gerät ist Recycling, kein zweites Leben. Das Haus meldet für 2024 99 Prozent für Smartphones und Tablets [44][45]; das ist die Baseline-Erwartung, das Ziel hält sie, statt sie zu übertreffen. Simulation: 1.061 von 1.074 Abgängen verkauft, 13 verschrottet, also 98,8 Prozent.",
    "beispiel": true,
    "ziel_wert": {
     "art": "absolut",
@@ -689,7 +689,7 @@
    "quelle": "Aufbereitungsaufträge mit Ergebnis je Seriennummer; Faktortabelle je Gerätefamilie mit Quelle und Datum (Impact-Report des Hauses, sonst Herstellerangabe)",
    "eigner": "Resale je Familie",
    "pruefer": "Nachhaltigkeitsmanagement",
-   "zaehlregel": "Gezählt wird nur ein Gerät, das nach D1 tatsächlich ein zweites Leben bekommen hat. Der Faktor ist eine Vermeidung gegen die Neuproduktion, keine Treibhausgasbilanz nach GHG-Protokoll, und wird nie mit Einsparungen in Euro addiert. Kein Faktor ohne Quelle: das Haus nennt 58 kg CO2 je aufbereitetem Smartphone und mehr als das Doppelte je Tablet [44]; Apple weist für ein iPhone der 15er-Reihe rund 56 kg CO2e über den Lebenszyklus aus, davon der größte Teil in der Produktion [48]; für Laptops fehlt der Faktor des Hauses und wird erfragt.",
+   "zaehlregel": "Gezählt wird nur ein Gerät, das nach D1 tatsächlich ein zweites Leben bekommen hat. Der Faktor ist eine Vermeidung gegen die Neuproduktion, keine Treibhausgasbilanz nach GHG-Protokoll, und wird nie mit Einsparungen in Euro addiert. Kein Faktor ohne Quelle: die Nachhaltigkeitsseite des Hauses nennt 58 kg CO2 je aufbereitetem Smartphone und mehr als das Doppelte je Tablet; das ist eine Angabe des Hauses, keine Messung (an anderer Stelle derselben Website stehen 46 kg), und der Nachhaltigkeitsbericht 2025 des Hauses rechnet keine Einsparung je Gerät aus [44][45]. Zum Vergleich: Apple weist für ein iPhone 16 mit 128 GB 56 kg CO2e über den Lebenszyklus aus, 80 Prozent davon in der Produktion [48]. Für Laptops fehlt der Faktor und wird erfragt.",
    "beispiel": false,
    "ziel_wert": {
     "art": "referenz",
@@ -721,7 +721,7 @@
    "quelle": "Tickets mit Schadensart, Kostenvoranschlag und Lösung je Seriennummer",
    "eigner": "Indirekt 4 (Services um das Gerät) für die Partner, Resale für die Regel",
    "pruefer": "Controlling",
-   "zaehlregel": "Nur abgeschlossene Fälle. Ein Fall zählt als repariert, wenn dieselbe Seriennummer nach der Reparatur weiterläuft oder wieder vermietbar ist; ein Totalschaden zählt zum Nenner. Die Regel Reparatur nur bis zu einem Anteil des Restwerts (R01 im Werkzeug, Owner Service) setzt die Grenze; D3 misst, ob innerhalb der Grenze repariert wird, nicht ob um jeden Preis. Die Ökodesign-Verordnung verlangt für Smartphones und Tablets seit dem 20.06.2025 Ersatzteile über sieben Jahre und Reparierbarkeit nach Klassen [45]; ein Modell ohne Ersatzteilzusage drückt D3 und gehört in die Einkaufsentscheidung (D5).",
+   "zaehlregel": "Nur abgeschlossene Fälle. Ein Fall zählt als repariert, wenn dieselbe Seriennummer nach der Reparatur weiterläuft oder wieder vermietbar ist; ein Totalschaden zählt zum Nenner. Die Regel Reparatur nur bis zu einem Anteil des Restwerts (R01 im Werkzeug, Owner Service) setzt die Grenze; D3 misst, ob innerhalb der Grenze repariert wird, nicht ob um jeden Preis. Die Ökodesign-Verordnung (EU) 2023/1670 verlangt für Smartphones und Tablets seit dem 20.06.2025 Ersatzteile bis sieben Jahre nach dem Ende des Inverkehrbringens, und das Energielabel nach der Delegierten Verordnung (EU) 2023/1669 zeigt die Reparierbarkeitsklasse A bis E [46]; ein Modell mit schlechter Klasse oder ohne Ersatzteilzusage drückt D3 und gehört in die Einkaufsentscheidung (D5).",
    "beispiel": true,
    "ziel_wert": {
     "art": "absolut",
@@ -750,7 +750,7 @@
    "quelle": "Geräte-Hauptbuch je Seriennummer: Start der ersten Vermietung, Ende der letzten, Abgangsdatum",
    "eigner": "Resale je Familie",
    "pruefer": "Controlling",
-   "zaehlregel": "Die Nutzungsdauer ist die Zeit, in der das Gerät bei einem Kunden war, über alle Mietzyklen; Lagertage zählen nicht. Eine zweite Vermietung verlängert sie, eine vorzeitige Rückgabe verkürzt sie. Je Familie berichtet, weil Laptops länger laufen als Smartphones. Die Kennzahl steht neben C4, weil längere Nutzung nur dann gut ist, wenn die Lifecycle-Marge je Gerät positiv bleibt; die Ökodesign-Verordnung verlangt mindestens fünf Jahre Sicherheitsupdates nach dem Ende des Inverkehrbringens [45], die technische Grenze liegt also über 36 Monaten.",
+   "zaehlregel": "Die Nutzungsdauer ist die Zeit, in der das Gerät bei einem Kunden war, über alle Mietzyklen; Lagertage zählen nicht. Eine zweite Vermietung verlängert sie, eine vorzeitige Rückgabe verkürzt sie. Je Familie berichtet, weil Laptops länger laufen als Smartphones. Die Kennzahl steht neben C4, weil längere Nutzung nur dann gut ist, wenn die Lifecycle-Marge je Gerät positiv bleibt; die Ökodesign-Verordnung verlangt mindestens fünf Jahre Sicherheitsupdates nach dem Ende des Inverkehrbringens [46], die technische Grenze liegt also über 36 Monaten.",
    "beispiel": true,
    "ziel_wert": {
     "art": "absolut",
@@ -779,7 +779,7 @@
    "quelle": "Bestellzeilen je Modell; Stammdatum Support-Ende je Modell aus der Herstellerzusage, mit Quelle und Datum",
    "eigner": "Resale je Familie",
    "pruefer": "Controlling",
-   "zaehlregel": "Das Support-Ende kommt aus der veröffentlichten Zusage des Herstellers, nicht aus einer Schätzung; ein Modell ohne Zusage im Stammdatensatz zählt als nein. Samsung sagt seit dem Galaxy S24 sieben Jahre zu, Google seit dem Pixel 8 [46]; die Ökodesign-Verordnung verlangt mindestens fünf Jahre nach dem Ende des Inverkehrbringens [45]. Die Kennzahl schützt Restwert und Zweitzyklus zugleich: ein Gerät ohne Updates ist am Ende des zweiten Zyklus unverkäuflich (Teil G des Deep Dives, Support-Ende als harte Grenze).",
+   "zaehlregel": "Das Support-Ende kommt aus der veröffentlichten Zusage des Herstellers, nicht aus einer Schätzung; ein Modell ohne Zusage im Stammdatensatz zählt als nein. Samsung sagt seit dem Galaxy S24 sieben Generationen Betriebssystem-Updates und sieben Jahre Sicherheitsupdates zu, Google sieben Jahre ab Pixel 8, gerechnet ab der Verfügbarkeit im US-Store [47]; die Ökodesign-Verordnung verlangt mindestens fünf Jahre nach dem Ende des Inverkehrbringens des Modells [46]. Die Kennzahl schützt Restwert und Zweitzyklus zugleich: ein Gerät ohne Updates ist am Ende des zweiten Zyklus unverkäuflich.",
    "beispiel": true,
    "ziel_wert": {
     "art": "absolut",
@@ -808,7 +808,7 @@
    "quelle": "Bewertungsnachweis je Lieferant mit Datum und Ergebnis (EcoVadis-Scorecard, Zertifikat, ausgefüllter Fragebogen); Kreditorenbuch für den Nenner",
    "eigner": "jede Rolle für ihre Lieferanten",
    "pruefer": "Nachhaltigkeitsmanagement, sonst Compliance",
-   "zaehlregel": "A3 prüft Risiko (Sanktionen, Eigentümer, Sorgfaltspflichten), D6 prüft die Nachhaltigkeitsleistung; beides an derselben Pflichtgruppe, damit kein Lieferant zweimal angeschrieben wird. Ein Ergebnis unter der Schwelle Frage löst einen Maßnahmenplan mit Frist aus, keinen Ausschluss. Das Haus hält selbst EcoVadis Silber 2025 [44] und wird von Kunden nach Scope-3-Daten gefragt; eine CSRD-Pflicht besteht nach der Omnibus-Richtlinie (EU) 2026/470 erst ab 1.000 Beschäftigten und 450 Mio. EUR Umsatz [49], die Kennzahl ist kundengetrieben, nicht gesetzlich.",
+   "zaehlregel": "A3 prüft Risiko (Sanktionen, Eigentümer, Sorgfaltspflichten), D6 prüft die Nachhaltigkeitsleistung; beides an derselben Pflichtgruppe, damit kein Lieferant zweimal angeschrieben wird. Ein Ergebnis unter der Schwelle (Frage an das Haus) löst einen Maßnahmenplan mit Frist aus, keinen Ausschluss. EcoVadis vergibt Silber an die besten 15 Prozent der bewerteten Unternehmen bei mindestens 30 Punkten je Thema [49]; das Haus hält Silber 2025, seine vierte Bewertung [45], und wird von Kunden nach Scope-3-Daten gefragt. Eine CSRD-Pflicht besteht nach der Richtlinie (EU) 2026/470 erst ab 1.000 Beschäftigten und 450 Mio. EUR Umsatz [50]; die Kennzahl ist kundengetrieben, nicht gesetzlich.",
    "beispiel": false,
    "ziel_wert": {
     "art": "absolut",
