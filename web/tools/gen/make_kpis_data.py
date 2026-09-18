@@ -519,12 +519,22 @@ add("C9", "naeherung", {"v": fl(n_eq / n_g) if n_g else None, "einheit": "ratio"
 add("C10", "luecke", {"v": None, "einheit": "ratio", "n": None}, fehlt="Regel bester Kanal je Monat und Grade")
 
 # ---------------------------------------------------------------- Satz D: ESG
+# Satz D hat keine Gold-Kennzahl hinter sich; die Mindeststichprobe steht in kpi_targets.yaml unter der Nummer im Rahmen.
+def d_min_n(nr, n, was):
+    """(min_n, unterschritten, grund): unter min_n bleibt der Wert None, der Grund nennt n von min_n."""
+    mn = MIN_N.get(nr, 1)
+    if n is not None and n < mn:
+        return mn, True, f"Mindeststichprobe: {dn(n)} von {dn(mn)} {was}"
+    return mn, False, ""
+
+
 # D1 Zweites Leben: Abgaenge im Fenster, verkauft gegen verschrottet (ohne Zweitzyklus-Kanal heisst zweites Leben heute verkauft)
 ABGANG = f"from {LEDGER} where lifecycle_status in ('sold', 'scrapped') and closed_date is not null"
 n_ab, n_zl = con.execute(f"select count(*), sum(case when lifecycle_status = 'sold' then 1 else 0 end) {ABGANG} and closed_date >= ? and closed_date <= ?", [WIN_START.date(), AS_OF.date()]).fetchone()
 ser = monthly(f"""select date_trunc('month', closed_date) m, sum(case when lifecycle_status = 'sold' then 1 else 0 end) / nullif(count(*), 0) v, count(*) n
                   {ABGANG} group by 1 order by 1""")
-add("D1", "direkt", {"v": fl(n_zl / n_ab) if n_ab else None, "einheit": "ratio", "n": iv(n_ab), "grund": "kein Abgang im Fenster"}, serie=ser, min_n=1)
+mn1, unter1, grund1 = d_min_n("D1", iv(n_ab), "Abgängen")
+add("D1", "direkt", {"v": fl(n_zl / n_ab) if n_ab and not unter1 else None, "einheit": "ratio", "n": iv(n_ab), "grund": grund1 or "kein Abgang im Fenster"}, serie=ser, min_n=mn1)
 
 # D2 CO2 vermieden: D1-Zaehler je Familie mal Faktor aus esg.yaml; Familie ohne Faktor n/a, die Summe ohne sie
 zl_fam = dict(con.execute(f"select catalogue_family, count(*) {ABGANG} and lifecycle_status = 'sold' and closed_date >= ? and closed_date <= ? group by 1", [WIN_START.date(), AS_OF.date()]).fetchall())
@@ -544,22 +554,25 @@ for fam in sorted(set(ESG_FACTORS) | {str(k) for k in zl_fam}, key=lambda x: (x 
 fac_sql = " ".join(f"when catalogue_family = '{f}' then {v['value']}" for f, v in ESG_FACTORS.items() if v.get("value") is not None)
 ser = monthly(f"""select date_trunc('month', closed_date) m, sum(case {fac_sql} else 0 end) / 1000.0 v, count(*) n
                   {ABGANG} and lifecycle_status = 'sold' group by 1 order by 1""") if fac_sql else []
-add("D2", "naeherung", {"v": fl(t_sum, 3) if n_d2 else None, "einheit": "t_co2e", "n": n_d2, "grund": "kein Gerät mit zweitem Leben und Faktor",
-                        "hinweis": ("ohne " + " und ".join(ohne) + ": Faktor fehlt") if ohne else "", "je_familie": je_fam}, serie=ser, min_n=1)
+mn2, unter2, grund2 = d_min_n("D2", n_d2, "Geräten mit zweitem Leben und Faktor")
+add("D2", "naeherung", {"v": fl(t_sum, 3) if n_d2 and not unter2 else None, "einheit": "t_co2e", "n": n_d2, "grund": grund2 or "kein Gerät mit zweitem Leben und Faktor",
+                        "hinweis": ("ohne " + " und ".join(ohne) + ": Faktor fehlt") if ohne else "", "je_familie": je_fam}, serie=ser, min_n=mn2)
 
 # D3 Reparaturquote bei Defekt: abgeschlossene Tickets im Fenster, repair gegen replace
 TICKETS = "from bronze.sd_tickets where closed_at is not null and resolution in ('repair', 'replace')"
 n_t, n_rep = con.execute(f"select count(*), sum(case when resolution = 'repair' then 1 else 0 end) {TICKETS} and closed_at >= ? and closed_at < ?", [WIN_START.date(), (AS_OF + pd.Timedelta(days=1)).date()]).fetchone()
 ser = monthly(f"""select date_trunc('month', closed_at) m, sum(case when resolution = 'repair' then 1 else 0 end) / nullif(count(*), 0) v, count(*) n
                   {TICKETS} group by 1 order by 1""")
-add("D3", "direkt", {"v": fl(n_rep / n_t) if n_t else None, "einheit": "ratio", "n": iv(n_t), "grund": "kein abgeschlossener Defektfall im Fenster"}, serie=ser, min_n=1)
+mn3, unter3, grund3 = d_min_n("D3", iv(n_t), "abgeschlossenen Defektfällen")
+add("D3", "direkt", {"v": fl(n_rep / n_t) if n_t and not unter3 else None, "einheit": "ratio", "n": iv(n_t), "grund": grund3 or "kein abgeschlossener Defektfall im Fenster"}, serie=ser, min_n=mn3)
 
 # D4 Nutzungsdauer je Geraet: Monate von der ersten Vermietung bis zum Abgang, Mittel je Familie und gesamt
 MONATE = "datediff('day', contract_start, closed_date) / 30.4375"
 n_d4, m_d4 = con.execute(f"select count(*), avg({MONATE}) {ABGANG} and contract_start is not null and closed_date >= ? and closed_date <= ?", [WIN_START.date(), AS_OF.date()]).fetchone()
 je_fam4 = [{"familie": str(f), "n": iv(n), "v": fl(v, 1)} for f, n, v in con.execute(f"select catalogue_family, count(*), avg({MONATE}) {ABGANG} and contract_start is not null and closed_date >= ? and closed_date <= ? group by 1 order by 1", [WIN_START.date(), AS_OF.date()]).fetchall()]
 ser = monthly(f"""select date_trunc('month', closed_date) m, avg({MONATE}) v, count(*) n {ABGANG} and contract_start is not null group by 1 order by 1""")
-add("D4", "direkt", {"v": fl(m_d4, 2) if n_d4 else None, "einheit": "months", "n": iv(n_d4), "grund": "kein Abgang mit Vermietungsstart im Fenster", "je_familie": je_fam4}, serie=ser, min_n=1)
+mn4, unter4, grund4 = d_min_n("D4", iv(n_d4), "Abgängen mit Vermietungsstart")
+add("D4", "direkt", {"v": fl(m_d4, 2) if n_d4 and not unter4 else None, "einheit": "months", "n": iv(n_d4), "grund": grund4 or "kein Abgang mit Vermietungsstart im Fenster", "je_familie": je_fam4}, serie=ser, min_n=mn4)
 
 # D5, D6: nicht im Werkzeug
 add("D5", "keine", {"v": None, "einheit": "ratio", "n": None}, fehlt="Support-Ende je Modell im Katalog")

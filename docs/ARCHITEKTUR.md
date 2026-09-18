@@ -207,8 +207,8 @@ Voraussetzung für Historie ist eine **bestehende** Datenbankdatei: `all` ohne `
 
 ### (c) Ziele, Baselines, Mindeststichproben
 
-- `config/kpi_targets.yaml`: `targets` für sieben v0.1-Kennzahlen (Owner `targets_owner`, CFO), `min_n` für alle 14 Gold-Kennzahlen (Owner `min_n_owner`, CFO), `savings_plan_eur` je Jahr (Owner `savings_plan_owner`, Head of Indirect Procurement).
-- `web/tools/gen/kpi_rahmen.json`: der KPI-Rahmen, Fassung 3 vom 17.09.2026, 21 Kennzahlen A1 bis C10 mit `ziel_wert` (`art` absolut, `baseline_delta` oder `baseline_faktor`; `richtung`; `einheit`), `horizont`, `eigner`, `pruefer` und `engine.computable`. Kuratiert von Hand; wer ein Ziel ändert, ändert es hier.
+- `config/kpi_targets.yaml`: `targets` für sieben v0.1-Kennzahlen (Owner `targets_owner`, CFO), `min_n` für alle 14 Gold-Kennzahlen und für D1 bis D4 des Rahmens (Schlüssel ist dort die Nummer im Rahmen, weil keine Gold-Kennzahl dahintersteht; nur der Generator des Reiters liest sie) (Owner `min_n_owner`, CFO), `savings_plan_eur` je Jahr (Owner `savings_plan_owner`, Head of Indirect Procurement).
+- `web/tools/gen/kpi_rahmen.json`: der KPI-Rahmen, Fassung 4 vom 18.09.2026, 27 Kennzahlen A1 bis D6 (Satz D ist ESG) mit `ziel_wert` (`art` absolut, `baseline_delta`, `baseline_faktor` oder `referenz` ohne Zahl; `richtung`; `einheit`), `horizont`, `eigner`, `pruefer` und `engine.computable`. Kuratiert von Hand; wer ein Ziel ändert, ändert es hier.
 - Die **Baseline** wird nicht eingetragen, sondern gerechnet: das Mittel der ersten drei Monate mit Daten und `n >= min_n` (`BASELINE_MONTHS = 3`, Funktion `baseline_of` in `web/tools/gen/make_kpis_data.py`). Ohne drei solche Monate ist die Kennzahl `nicht_messbar`, und der Text nennt den Grund.
 - `config/performance_cycle.yaml`: `cycle: q`, `start_date: 2026-10-01`, Owner `Leitung`. Bestimmt „Bis" und „Soll heute".
 - `config/owners.yaml`: sechs Rollen I1 bis I4, R1, R2 mit `categories` und `families`; was nicht gelistet ist, bucht auf `Team`. Owner `Leitung`.

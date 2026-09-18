@@ -40,3 +40,12 @@ min_n:
   KPI_RSLT_CLOSED_PER_DEVICE: 30
   KPI_LEV_ADDITIVE_EUR_PA: 1
   KPI_CTR_COVERAGE_BY_OEM: 30
+  # Set D of the KPI frame (ESG, Fassung 4). Keyed by the frame number because there is no gold
+  # KPI id behind them; only web/tools/gen/make_kpis_data.py reads these. n = closed devices in the
+  # window (D1, D4), closed devices with a second life and an avoidance factor (D2), closed defect
+  # tickets (D3). Below min_n the tile reads n/a with the reason, and a month below min_n does not
+  # count for the baseline. Placeholders like the rest of this block; owned by min_n_owner.
+  D1: 30
+  D2: 30
+  D3: 30
+  D4: 30

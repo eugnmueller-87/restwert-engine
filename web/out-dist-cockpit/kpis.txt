@@ -39,7 +39,7 @@ Quartal, Start 01.10.2026, gesetzt von Leitung
 Stichtag
 13.09.2026, Daten Stand 16.09.2026
 Weg zum Ziel im Mittel
-47 %
+45 %
 über 13 messbare Kennzahlen von 27
 erfüllt · im Korridor · verfehlt
 3 · 2 · 8
@@ -164,6 +164,6 @@ Nr | Kennzahl | Ziel | Ist | Fortschritt | Bis | Beiträge | Eigner | Status
 D1 | Zweites Leben | mindestens 97,0 % Beispiel | 98,8 % | 100 % Soll heute 0 % | Q2 2027 | Resale 1: 809 Maßnahmen; Resale 2: 257 Maßnahmen | TeamIndividuell | erfüllt
 D2 | CO2 vermieden durch Wiederverwendung | berichtet, Zielwert offen | 56,8 t CO2e Laptop n/a, Smartphone 38,0 t CO2e, Tablet 18,8 t CO2e; ohne Laptops: Faktor fehlt | Ziel ohne Zahl: berichtet, Zielwert offen | Q1 2027 | Resale 1: 809 Maßnahmen; Resale 2: 257 Maßnahmen | TeamIndividuell | nicht messbar
 D3 | Reparaturquote bei Defekt | mindestens 60,0 % Beispiel | 77,3 % | 100 % Soll heute 0 % | Q1 2027 | Resale 1: 135 Maßnahmen; Resale 2: 45 Maßnahmen | TeamIndividuell | erfüllt
-D4 | Nutzungsdauer je Gerät | mindestens 36,0 Monate Beispiel | 28,9 Monate Laptop 32,3 Monate, Smartphone 27,5 Monate, Tablet 29,8 Monate | 78 % Soll heute 0 % | Q1 2027 | Resale 1: 135 Maßnahmen; Resale 2: 45 Maßnahmen | TeamIndividuell | im Korridor
+D4 | Nutzungsdauer je Gerät | mindestens 36,0 Monate Beispiel | 28,9 Monate Laptop 32,3 Monate, Smartphone 27,5 Monate, Tablet 29,8 Monate | 54 % Soll heute 0 % | Q1 2027 | Resale 1: 135 Maßnahmen; Resale 2: 45 Maßnahmen | TeamIndividuell | im Korridor
 D5 | Update-Zusage beim Einkauf | mindestens 90,0 % Beispiel | n/a | Quelle fehlt: Support-Ende je Modell im Katalog | Q1 2027 | keine gebucht | TeamIndividuell | nicht im Werkzeug
 D6 | Lieferanten mit Nachhaltigkeitsbewertung | mindestens 100,0 % | n/a | Quelle fehlt: Feed suppliers/reviews mit Datum und Ergebnis je Lieferant | Q3 2027 | keine gebucht | TeamIndividuell | nicht im Werkzeug
