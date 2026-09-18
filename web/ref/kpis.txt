@@ -24,21 +24,22 @@ Zyklus
 Quartal
 Halbjahr
 Jahr
-KPI-Tracker, Fassung 3 des Rahmens, Stand 17.09.2026
+KPI-Tracker, Fassung 4 des Rahmens, Stand 18.09.2026
 Wo stehen wir gegen die Ziele, und wer hat was beigetragen?
 Zyklus
 Quartal, Start 01.10.2026, gesetzt von Leitung
 Stichtag
 13.09.2026, Daten Stand 16.09.2026
 Weg zum Ziel im Mittel
-33 %
-über 10 messbare Kennzahlen von 21
+47 %
+über 13 messbare Kennzahlen von 27
 erfüllt · im Korridor · verfehlt
-1 · 1 · 8
-10 Kennzahlen mit Status; im Korridor heißt innerhalb 20 % des Ziels
+3 · 2 · 8
+13 Kennzahlen mit Status; im Korridor heißt innerhalb 20 % des Ziels
 nicht messbar · nicht im Werkzeug
-8 · 3
-11 Kennzahlen ohne Ist; was fehlt, steht in der Spalte Fortschritt
+9 · 5
+14 Kennzahlen ohne Status gegen ein Ziel; was fehlt, steht in der Spalte Fortschritt
+Eigner je Kennzahl: Team oder Individuell mit Rolle und Name. Namen bleiben in diesem Browser, sie werden nirgends gespeichert oder übertragen.
 Satz A, alle Rollen
 4 Zeilen
 Begriffe ausblenden
@@ -57,13 +58,15 @@ Beiträge
 je Rolle die gebuchten Maßnahmen und ihre Wirkung in Euro; leer heißt keine gebucht. Stufe realisiert bei Bestätigung oder Gutschrift, verhandelt bei unbestätigter Preisreduktion, sonst identifiziert.
 Beleg-ID
 die Kennung in der Quelle; bei Entscheidungen die ersten Zeichen der decision_id.
+Eigner
+Team (Standard) oder Individuell mit einer der sechs Rollen und einem Namen; bei Individuell zeigt die Zeile Rolle und Name neben der Kennzahl und die Beiträge nur dieser Rolle. Die Wahl bleibt in diesem Browser.
 Status
 erfüllt, im Korridor (innerhalb 20 % des Ziels auf der schlechteren Seite), verfehlt, nicht messbar, nicht im Werkzeug; bei zwei Teilzahlen zählt die schlechtere.
-Nr | Kennzahl | Ziel | Ist | Fortschritt | Bis | Beiträge | Status
-A1 | Spend unter Management | mindestens 99,7 % Beispiel | 93,1 % | 35 % Soll heute 0 % | Q4 2027 | keine gebucht | verfehlt
-A2 | Vertragsregister vollständig | mindestens 100,0 % | n/a | Feld Eigner im Team und Wertschwelle | Q4 2026 | Indirekt 1: 2 Maßnahmen; Indirekt 2: 2 Maßnahmen; Indirekt 3: 1 Maßnahme; Indirekt 4: 2 Maßnahmen; Resale 1: 4 Maßnahmen; Resale 2: 3 Maßnahmen; Team: 8 Maßnahmen | nicht messbar
-A3 | Risikoabdeckung der Lieferanten | mindestens 100,0 % | n/a | Quelle fehlt: Prüfprotokoll je Lieferant mit Datum | Q2 2027 | keine gebucht | nicht im Werkzeug
-A4 | Wiederverwendbare Verbesserung | mindestens 1 je Rolle und Quartal | n/a | Quelle fehlt: Speicher des Teams mit Abnahme | Q1 2027 | keine gebucht | nicht im Werkzeug
+Nr | Kennzahl | Ziel | Ist | Fortschritt | Bis | Beiträge | Eigner | Status
+A1 | Spend unter Management | mindestens 99,7 % Beispiel | 93,1 % | 35 % Soll heute 0 % | Q4 2027 | keine gebucht | TeamIndividuell | verfehlt
+A2 | Vertragsregister vollständig | mindestens 100,0 % | n/a | Feld Eigner im Team und Wertschwelle | Q4 2026 | Indirekt 1: 2 Maßnahmen; Indirekt 2: 2 Maßnahmen; Indirekt 3: 1 Maßnahme; Indirekt 4: 2 Maßnahmen; Resale 1: 4 Maßnahmen; Resale 2: 3 Maßnahmen; Team: 8 Maßnahmen | TeamIndividuell | nicht messbar
+A3 | Risikoabdeckung der Lieferanten | mindestens 100,0 % | n/a | Quelle fehlt: Prüfprotokoll je Lieferant mit Datum | Q2 2027 | keine gebucht | TeamIndividuell | nicht im Werkzeug
+A4 | Wiederverwendbare Verbesserung | mindestens 1 je Rolle und Quartal | n/a | Quelle fehlt: Speicher des Teams mit Abnahme | Q1 2027 | keine gebucht | TeamIndividuell | nicht im Werkzeug
 Satz B, Indirekt
 7 Zeilen
 Begriffe ausblenden
@@ -82,16 +85,18 @@ Beiträge
 je Rolle die gebuchten Maßnahmen und ihre Wirkung in Euro; leer heißt keine gebucht. Stufe realisiert bei Bestätigung oder Gutschrift, verhandelt bei unbestätigter Preisreduktion, sonst identifiziert.
 Beleg-ID
 die Kennung in der Quelle; bei Entscheidungen die ersten Zeichen der decision_id.
+Eigner
+Team (Standard) oder Individuell mit einer der sechs Rollen und einem Namen; bei Individuell zeigt die Zeile Rolle und Name neben der Kennzahl und die Beiträge nur dieser Rolle. Die Wahl bleibt in diesem Browser.
 Status
 erfüllt, im Korridor (innerhalb 20 % des Ziels auf der schlechteren Seite), verfehlt, nicht messbar, nicht im Werkzeug; bei zwei Teilzahlen zählt die schlechtere.
-Nr | Kennzahl | Ziel | Ist | Fortschritt | Bis | Beiträge | Status
-B1 | Hard Savings, validiert | mindestens 3,0 % Beispiel | 0,5 % | 4 % Soll heute 0 % | Q4 2027 | Indirekt 1: 11 Maßnahmen, 1.996 €; Indirekt 2: 10 Maßnahmen, 1.345 €; Indirekt 3: 23 Maßnahmen, 3.882 €; Indirekt 4: 10 Maßnahmen, 2.254 € | verfehlt
-B3 | Verlängerungen mit Vorlauf | mindestens 100,0 % Beispiel | n/a | Datum der ersten Verhandlungshandlung | Q2 2027 | keine gebucht | nicht messbar
-B4 | Preisänderung bei Verlängerung | höchstens VPI Beispiel | n/a | Quelle fehlt: Vertragsversionen je Lieferant und VPI | Q1 2027 | keine gebucht | nicht im Werkzeug
-B5 | Stille Verlängerungen | höchstens 0 Verträge | n/a | Feld Entscheidung mit Datum und Eigner | Q1 2027 | keine gebucht | nicht messbar
-B6 | Maverick-Quote | höchstens 5,2 % Beispiel | 6,9 % | 67 % Soll heute 0 % | Q4 2027 | keine gebucht | verfehlt
-B7 | Scorecard und Quartalsgespräch | mindestens 100,0 % | n/a | Scorecard und Gesprächsprotokoll je Lieferant | Q4 2027 | keine gebucht | nicht messbar
-B8 | Gewichtetes Zahlungsziel | mindestens 45,0 Tage Beispiel | 31,7 Tage | 12 % Soll heute 0 % | Q1 2027 | keine gebucht | verfehlt
+Nr | Kennzahl | Ziel | Ist | Fortschritt | Bis | Beiträge | Eigner | Status
+B1 | Hard Savings, validiert | mindestens 3,0 % Beispiel | 0,5 % | 4 % Soll heute 0 % | Q4 2027 | Indirekt 1: 11 Maßnahmen, 1.996 €; Indirekt 2: 10 Maßnahmen, 1.345 €; Indirekt 3: 23 Maßnahmen, 3.882 €; Indirekt 4: 10 Maßnahmen, 2.254 € | TeamIndividuell | verfehlt
+B3 | Verlängerungen mit Vorlauf | mindestens 100,0 % Beispiel | n/a | Datum der ersten Verhandlungshandlung | Q2 2027 | keine gebucht | TeamIndividuell | nicht messbar
+B4 | Preisänderung bei Verlängerung | höchstens VPI Beispiel | n/a | Quelle fehlt: Vertragsversionen je Lieferant und VPI | Q1 2027 | keine gebucht | TeamIndividuell | nicht im Werkzeug
+B5 | Stille Verlängerungen | höchstens 0 Verträge | n/a | Feld Entscheidung mit Datum und Eigner | Q1 2027 | keine gebucht | TeamIndividuell | nicht messbar
+B6 | Maverick-Quote | höchstens 5,2 % Beispiel | 6,9 % | 67 % Soll heute 0 % | Q4 2027 | keine gebucht | TeamIndividuell | verfehlt
+B7 | Scorecard und Quartalsgespräch | mindestens 100,0 % | n/a | Scorecard und Gesprächsprotokoll je Lieferant | Q4 2027 | keine gebucht | TeamIndividuell | nicht messbar
+B8 | Gewichtetes Zahlungsziel | mindestens 45,0 Tage Beispiel | 31,7 Tage | 12 % Soll heute 0 % | Q1 2027 | keine gebucht | TeamIndividuell | verfehlt
 Satz C, Resale
 10 Zeilen
 Begriffe ausblenden
@@ -110,16 +115,47 @@ Beiträge
 je Rolle die gebuchten Maßnahmen und ihre Wirkung in Euro; leer heißt keine gebucht. Stufe realisiert bei Bestätigung oder Gutschrift, verhandelt bei unbestätigter Preisreduktion, sonst identifiziert.
 Beleg-ID
 die Kennung in der Quelle; bei Entscheidungen die ersten Zeichen der decision_id.
+Eigner
+Team (Standard) oder Individuell mit einer der sechs Rollen und einem Namen; bei Individuell zeigt die Zeile Rolle und Name neben der Kennzahl und die Beiträge nur dieser Rolle. Die Wahl bleibt in diesem Browser.
 Status
 erfüllt, im Korridor (innerhalb 20 % des Ziels auf der schlechteren Seite), verfehlt, nicht messbar, nicht im Werkzeug; bei zwei Teilzahlen zählt die schlechtere.
-Nr | Kennzahl | Ziel | Ist | Fortschritt | Bis | Beiträge | Status
-C1 | Einstandspreis gegen UVP | höchstens 85,9 % Beispiel | 87,6 % | 14 % Soll heute 0 % | Q4 2027 | keine gebucht | verfehlt
-C2 | Preisschutz geltend gemacht | mindestens 100,0 % | n/a | Mindeststichprobe: 1 von 30 Seriennummern | Q1 2027 | Resale 1: 1 Maßnahme, 79 € | nicht messbar
-C3 | Zuteilung beim Launch | mindestens 90,0 % Beispiel | n/a | Vorbestellfenster, geliefert gegen bestellt | nächster Launch | keine gebucht | nicht messbar
-C4 | Lifecycle-Marge je Modell | über 0,00 € | 63,69 € | 100 % Soll heute 0 % | Q1 2027 | Resale 1: 17 Maßnahmen, 548 €; Resale 2: 4 Maßnahmen, 648 € | erfüllt
-C5 | Restwertprognose: Fehler und Verzerrung | höchstens 12,0 % Beispiel Verzerrung höchstens 8,0 % | 19,0 % Verzerrung 1,2 % | 0 % Soll heute 0 % | Q1 2027 | keine gebucht | verfehlt
-C6 | Restwert realisiert gegen Annahme | höchstens 5,0 % Beispiel Veräußerungsergebnis mindestens 0,00 € | 4,2 % Veräußerungsergebnis -38.249 € | 0 % Soll heute 0 % | Q1 2027 | keine gebucht | verfehlt
-C7 | Erlös gegen die Marktkurve | höchstens Kanalgebühr | n/a | Rechnung eigener Erlös gegen Marktkurve | Q1 2027 | keine gebucht | nicht messbar
-C8 | Tage bis Erlös und Lagerdauer | höchstens 30,0 Tage Beispiel Buchwert über 180 Tage höchstens 0,00 € | 81,0 Tage Buchwert über 180 Tage 4.124 € | 0 % Soll heute 0 % | Q1 2027 | keine gebucht | verfehlt
-C9 | Genauigkeit der Zustandsprüfung | mindestens 95,0 % Beispiel | 92,5 % | 97 % Soll heute 0 % | Q1 2027 | keine gebucht | im Korridor
-C10 | Kanalverlust | höchstens 3,0 % Beispiel | n/a | Regel bester Kanal je Monat und Grade | Q1 2027 | Resale 1: 92 Maßnahmen, 1.956 €; Resale 2: 43 Maßnahmen, 1.365 € | nicht messbar
+Nr | Kennzahl | Ziel | Ist | Fortschritt | Bis | Beiträge | Eigner | Status
+C1 | Einstandspreis gegen UVP | höchstens 85,9 % Beispiel | 87,6 % | 14 % Soll heute 0 % | Q4 2027 | keine gebucht | TeamIndividuell | verfehlt
+C2 | Preisschutz geltend gemacht | mindestens 100,0 % | n/a | Mindeststichprobe: 1 von 30 Seriennummern | Q1 2027 | Resale 1: 1 Maßnahme, 79 € | TeamIndividuell | nicht messbar
+C3 | Zuteilung beim Launch | mindestens 90,0 % Beispiel | n/a | Vorbestellfenster, geliefert gegen bestellt | nächster Launch | keine gebucht | TeamIndividuell | nicht messbar
+C4 | Lifecycle-Marge je Modell | über 0,00 € | 63,69 € | 100 % Soll heute 0 % | Q1 2027 | Resale 1: 17 Maßnahmen, 548 €; Resale 2: 4 Maßnahmen, 648 € | TeamIndividuell | erfüllt
+C5 | Restwertprognose: Fehler und Verzerrung | höchstens 12,0 % Beispiel Verzerrung höchstens 8,0 % | 19,0 % Verzerrung 1,2 % | 0 % Soll heute 0 % | Q1 2027 | keine gebucht | TeamIndividuell | verfehlt
+C6 | Restwert realisiert gegen Annahme | höchstens 5,0 % Beispiel Veräußerungsergebnis mindestens 0,00 € | 4,2 % Veräußerungsergebnis -38.249 € | 0 % Soll heute 0 % | Q1 2027 | keine gebucht | TeamIndividuell | verfehlt
+C7 | Erlös gegen die Marktkurve | höchstens Kanalgebühr | n/a | Rechnung eigener Erlös gegen Marktkurve | Q1 2027 | keine gebucht | TeamIndividuell | nicht messbar
+C8 | Tage bis Erlös und Lagerdauer | höchstens 30,0 Tage Beispiel Buchwert über 180 Tage höchstens 0,00 € | 81,0 Tage Buchwert über 180 Tage 4.124 € | 0 % Soll heute 0 % | Q1 2027 | keine gebucht | TeamIndividuell | verfehlt
+C9 | Genauigkeit der Zustandsprüfung | mindestens 95,0 % Beispiel | 92,5 % | 97 % Soll heute 0 % | Q1 2027 | keine gebucht | TeamIndividuell | im Korridor
+C10 | Kanalverlust | höchstens 3,0 % Beispiel | n/a | Regel bester Kanal je Monat und Grade | Q1 2027 | Resale 1: 92 Maßnahmen, 1.956 €; Resale 2: 43 Maßnahmen, 1.365 € | TeamIndividuell | nicht messbar
+Satz D, ESG
+6 Zeilen
+Begriffe ausblenden
+6 Kennzahlen: 2 erfüllt, 1 im Korridor, 1 nicht messbar, 2 nicht im Werkzeug. Rot, wenn verfehlt; Zeile anklicken für die Beiträge und die Definition.
+Nr, Kennzahl
+Nummer und Name laut Rahmen; die Zeile klappt auf Klick ihre Beiträge und den Link Definition auf.
+Ziel
+eine Zahl mit Einheit; bei Zielen gegen die Baseline die gerechnete Zahl; Beispiel markiert Zielwerte ohne Baseline des Hauses; die Regel dahinter steht in der Definition.
+Ist
+der Wert der Engine im Lauf, rollierend zwölf Monate; n/a, wenn nicht messbar oder nicht im Werkzeug; darunter die zweite Teilzahl eines Doppelziels.
+Fortschritt
+Balken und Prozent als Anteil des Wegs von der Baseline zum Ziel, darunter Soll heute; bei nicht messbar das fehlende Feld, bei nicht im Werkzeug die fehlende Quelle.
+Bis
+Zyklusstart plus Horizont des Rahmens, gerundet auf das Ende des Zyklusabschnitts (Quartal), in dem das Datum liegt.
+Beiträge
+je Rolle die gebuchten Maßnahmen und ihre Wirkung in Euro; leer heißt keine gebucht. Stufe realisiert bei Bestätigung oder Gutschrift, verhandelt bei unbestätigter Preisreduktion, sonst identifiziert.
+Beleg-ID
+die Kennung in der Quelle; bei Entscheidungen die ersten Zeichen der decision_id.
+Eigner
+Team (Standard) oder Individuell mit einer der sechs Rollen und einem Namen; bei Individuell zeigt die Zeile Rolle und Name neben der Kennzahl und die Beiträge nur dieser Rolle. Die Wahl bleibt in diesem Browser.
+Status
+erfüllt, im Korridor (innerhalb 20 % des Ziels auf der schlechteren Seite), verfehlt, nicht messbar, nicht im Werkzeug; bei zwei Teilzahlen zählt die schlechtere.
+Nr | Kennzahl | Ziel | Ist | Fortschritt | Bis | Beiträge | Eigner | Status
+D1 | Zweites Leben | mindestens 97,0 % Beispiel | 98,8 % | 100 % Soll heute 0 % | Q2 2027 | Resale 1: 809 Maßnahmen; Resale 2: 257 Maßnahmen | TeamIndividuell | erfüllt
+D2 | CO2 vermieden durch Wiederverwendung | berichtet, Zielwert offen | 56,8 t CO2e Laptop n/a, Smartphone 38,0 t CO2e, Tablet 18,8 t CO2e; ohne Laptops: Faktor fehlt | Ziel ohne Zahl: berichtet, Zielwert offen | Q1 2027 | Resale 1: 809 Maßnahmen; Resale 2: 257 Maßnahmen | TeamIndividuell | nicht messbar
+D3 | Reparaturquote bei Defekt | mindestens 60,0 % Beispiel | 77,3 % | 100 % Soll heute 0 % | Q1 2027 | Resale 1: 135 Maßnahmen; Resale 2: 45 Maßnahmen | TeamIndividuell | erfüllt
+D4 | Nutzungsdauer je Gerät | mindestens 36,0 Monate Beispiel | 28,9 Monate Laptop 32,3 Monate, Smartphone 27,5 Monate, Tablet 29,8 Monate | 78 % Soll heute 0 % | Q1 2027 | Resale 1: 135 Maßnahmen; Resale 2: 45 Maßnahmen | TeamIndividuell | im Korridor
+D5 | Update-Zusage beim Einkauf | mindestens 90,0 % Beispiel | n/a | Quelle fehlt: Support-Ende je Modell im Katalog | Q1 2027 | keine gebucht | TeamIndividuell | nicht im Werkzeug
+D6 | Lieferanten mit Nachhaltigkeitsbewertung | mindestens 100,0 % | n/a | Quelle fehlt: Feed suppliers/reviews mit Datum und Ergebnis je Lieferant | Q3 2027 | keine gebucht | TeamIndividuell | nicht im Werkzeug

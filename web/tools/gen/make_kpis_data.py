@@ -1,6 +1,6 @@
 """Kennzahlen: data/kpis.json fuer den Reiter "KPIs" (Bereich Analytics) der Restwert Engine, als schlanker Tracker.
 
-Der Reiter zeigt je Kennzahl des KPI-Rahmens (web/tools/gen/kpi_rahmen.json, Fassung 3, kuratiert): Ziel, Ist,
+Der Reiter zeigt je Kennzahl des KPI-Rahmens (web/tools/gen/kpi_rahmen.json, Fassung 4, kuratiert): Ziel, Ist,
 Fortschritt, Bis, Beitraege, Status. Sonst nichts; Formel, Zaehlregel, Quelle, Eigner und Pruefer stehen im Rahmen,
 auf den jede Zeile verlinkt (Feld url des Rahmens plus #<nr>). Umbau am 17.09.2026 auf Eugens Ansage: kein
 Erklaertext, alles gerade runter, ein Zyklus (Quartal, Halbjahr, Jahr) und die Frage, wie viel Prozent des Wegs
@@ -10,6 +10,16 @@ Quellen: die 14 gold-KPIs (outputs/gold__kpi_values.csv), die 20 KPIs der eingef
 (outputs/kpi_values.csv), Ziele und Mindeststichproben aus config/kpi_targets.yaml, Monatsreihen und Baseline
 (Mittel der ersten drei Monate mit Daten) aus data/restwert.duckdb mit denselben Formeln wie die gold-KPIs, der
 Zyklus aus config/performance_cycle.yaml, die Rollen aus config/owners.yaml.
+
+Satz D, ESG (seit Fassung 4, 18.09.2026), sechs Kennzahlen D1 bis D6:
+  D1  Zweites Leben: Abgaenge im rollierenden Zwoelfmonatsfenster aus silver.device_ledger, verkauft (heute ohne
+      Zweitzyklus-Kanal, also nur verkauft) gegen verschrottet; Monatsreihe je Abgangsmonat (closed_date)
+  D2  CO2 vermieden: D1-Zaehler je Familie mal Vermeidungsfaktor aus config/esg.yaml (kg CO2e je Geraet, mit Quelle),
+      durch 1.000 in t CO2e; eine Familie ohne Faktor (Laptop, tag frage) bleibt n/a, die Summe traegt den Hinweis
+      "ohne Laptops"; Ziel referenz ohne Zahl, also Status nicht_messbar mit sichtbarem Ist
+  D3  Reparaturquote: bronze.sd_tickets, nur abgeschlossene (closed_at), resolution repair gegen replace
+  D4  Nutzungsdauer: Monate von contract_start bis closed_date je Abgang, Mittel je Familie und gesamt
+  D5, D6  nicht_im_werkzeug (Support-Ende je Modell im Katalog, Feed mit Bewertungsnachweisen fehlen)
 
 Status je Kennzahl, deterministisch und nie geraten (unveraendert seit dem 17.09.2026, Version 3):
   erfuellt            Ist erreicht das Ziel
@@ -35,6 +45,10 @@ Beitragsbuch je Kennzahl aus Ereignissen mit Akteur (Datum, Rolle, Massnahme, Wi
   C10 main.decision_log, Regel R02 (Kanalwahl je Geraet), Rolle wie C4; Stufe identifiziert
   A2  silver.contracts, Vertraege mit den sieben vorhandenen Pflichtfeldern, Rolle ueber Kategorie oder OEM;
       Stufe identifiziert (das achte Feld fehlt im Register, siehe Status)
+  D1, D2  bronze.rf_work_orders im Fenster mit Ergebnis sellable oder as_is (kein scrap), Rolle ueber die Familie
+      der Seriennummer im Hauptbuch; Stufe realisiert (Auftrag abgeschlossen); Beleg work_order_id
+  D3, D4  bronze.sd_tickets im Fenster, abgeschlossen mit resolution repair, Rolle ueber die Familie; Stufe realisiert;
+      Beleg ticket_id. Nur Ereignisse mit Beleg-ID; ohne Beleg wird nichts gebucht.
 Wirkung nur, wo ein Betrag in der Quelle steht; sonst leer. Keine Zahl je Person: nur Rollencodes und Team.
 
 Aufruf: python make_kpis_data.py <REPO> <OUT.json> <TODAY>
@@ -133,6 +147,17 @@ if CYCLE_DEFAULT not in {p[0] for p in PERIODS}:
     raise SystemExit("performance_cycle.yaml: cycle muss q, h oder j sein")
 CYCLE_OWNER = own(cyc.get("owner", ""))
 TODAY_TS = pd.Timestamp(TODAY).normalize()
+
+# ---- die ESG-Faktoren (D2): kg CO2e je Geraet mit zweitem Leben, je Familie, mit Quelle; null heisst n/a, nie 0
+esg = yaml.safe_load(open(REPO / "config" / "esg.yaml", encoding="utf-8")) or {}
+ESG_OWNER = own(esg.get("owner", ""))
+ESG_FACTORS = {}       # Familie -> {value, source, tag, note}
+for fam, f in (esg.get("factors") or {}).items():
+    f = f or {}
+    if f.get("value") is not None and not str(f.get("source", "")).strip():
+        raise SystemExit(f"esg.yaml: Faktor {fam} ohne Quelle")
+    ESG_FACTORS[str(fam)] = {"value": fl(f.get("value")), "source": str(f.get("source", "")), "tag": str(f.get("tag", "")), "note": str(f.get("note", ""))}
+FAM_DE = {"Smartphone": "Smartphones", "Tablet": "Tablets", "Laptop": "Laptops"}
 
 # ---- die Rollen
 owners = yaml.safe_load(open(REPO / "config" / "owners.yaml", encoding="utf-8")) or {}
@@ -351,7 +376,8 @@ def add(nr, modus, ist, serie=None, min_n=1, fehlt="", zweite=None):
     rows.append({
         "nr": nr, "satz": nr[0], "name": k["name"], "beispiel": bool(k["beispiel"]), "takt": k["takt"], "echt_ab": k["echt_ab"],
         "eigner": k["eigner"], "pruefer": k["pruefer"], "status": status, "fehlt": fehlt,
-        "ist": {"v": ist.get("v"), "einheit": ist.get("einheit"), "n": ist.get("n"), "signed": ist.get("signed")},
+        "ist": {"v": ist.get("v"), "einheit": ist.get("einheit"), "n": ist.get("n"), "signed": ist.get("signed"),
+                "hinweis": ist.get("hinweis") or "", "je_familie": ist.get("je_familie") or []},
         "zweite": zweite, "ziel_wert": zw, "baseline": base, "fortschritt": {"v": fl(p), "art": p_art},
         "horizont": horizon_of(k), "definition_url": rahmen["url"] + "#" + nr.lower(), "min_n": min_n,
     })
@@ -492,6 +518,53 @@ add("C9", "naeherung", {"v": fl(n_eq / n_g) if n_g else None, "einheit": "ratio"
 # C10 Kanalverlust: Regel nicht gerechnet
 add("C10", "luecke", {"v": None, "einheit": "ratio", "n": None}, fehlt="Regel bester Kanal je Monat und Grade")
 
+# ---------------------------------------------------------------- Satz D: ESG
+# D1 Zweites Leben: Abgaenge im Fenster, verkauft gegen verschrottet (ohne Zweitzyklus-Kanal heisst zweites Leben heute verkauft)
+ABGANG = f"from {LEDGER} where lifecycle_status in ('sold', 'scrapped') and closed_date is not null"
+n_ab, n_zl = con.execute(f"select count(*), sum(case when lifecycle_status = 'sold' then 1 else 0 end) {ABGANG} and closed_date >= ? and closed_date <= ?", [WIN_START.date(), AS_OF.date()]).fetchone()
+ser = monthly(f"""select date_trunc('month', closed_date) m, sum(case when lifecycle_status = 'sold' then 1 else 0 end) / nullif(count(*), 0) v, count(*) n
+                  {ABGANG} group by 1 order by 1""")
+add("D1", "direkt", {"v": fl(n_zl / n_ab) if n_ab else None, "einheit": "ratio", "n": iv(n_ab), "grund": "kein Abgang im Fenster"}, serie=ser, min_n=1)
+
+# D2 CO2 vermieden: D1-Zaehler je Familie mal Faktor aus esg.yaml; Familie ohne Faktor n/a, die Summe ohne sie
+zl_fam = dict(con.execute(f"select catalogue_family, count(*) {ABGANG} and lifecycle_status = 'sold' and closed_date >= ? and closed_date <= ? group by 1", [WIN_START.date(), AS_OF.date()]).fetchall())
+je_fam, t_sum, ohne, n_d2 = [], 0.0, [], 0
+for fam in sorted(set(ESG_FACTORS) | {str(k) for k in zl_fam}, key=lambda x: (x not in ESG_FACTORS, x)):
+    n_f = iv(zl_fam.get(fam, 0))
+    fac = ESG_FACTORS.get(fam, {})
+    if fac.get("value") is None:
+        je_fam.append({"familie": fam, "n": n_f, "faktor": None, "v": None, "tag": fac.get("tag", "frage"), "quelle": fac.get("source", "")})
+        if n_f:
+            ohne.append(FAM_DE.get(fam, fam))
+        continue
+    t_f = n_f * fac["value"] / 1000.0
+    t_sum += t_f
+    n_d2 += n_f
+    je_fam.append({"familie": fam, "n": n_f, "faktor": fac["value"], "v": fl(t_f, 3), "tag": fac["tag"], "quelle": fac["source"]})
+fac_sql = " ".join(f"when catalogue_family = '{f}' then {v['value']}" for f, v in ESG_FACTORS.items() if v.get("value") is not None)
+ser = monthly(f"""select date_trunc('month', closed_date) m, sum(case {fac_sql} else 0 end) / 1000.0 v, count(*) n
+                  {ABGANG} and lifecycle_status = 'sold' group by 1 order by 1""") if fac_sql else []
+add("D2", "naeherung", {"v": fl(t_sum, 3) if n_d2 else None, "einheit": "t_co2e", "n": n_d2, "grund": "kein Gerät mit zweitem Leben und Faktor",
+                        "hinweis": ("ohne " + " und ".join(ohne) + ": Faktor fehlt") if ohne else "", "je_familie": je_fam}, serie=ser, min_n=1)
+
+# D3 Reparaturquote bei Defekt: abgeschlossene Tickets im Fenster, repair gegen replace
+TICKETS = "from bronze.sd_tickets where closed_at is not null and resolution in ('repair', 'replace')"
+n_t, n_rep = con.execute(f"select count(*), sum(case when resolution = 'repair' then 1 else 0 end) {TICKETS} and closed_at >= ? and closed_at < ?", [WIN_START.date(), (AS_OF + pd.Timedelta(days=1)).date()]).fetchone()
+ser = monthly(f"""select date_trunc('month', closed_at) m, sum(case when resolution = 'repair' then 1 else 0 end) / nullif(count(*), 0) v, count(*) n
+                  {TICKETS} group by 1 order by 1""")
+add("D3", "direkt", {"v": fl(n_rep / n_t) if n_t else None, "einheit": "ratio", "n": iv(n_t), "grund": "kein abgeschlossener Defektfall im Fenster"}, serie=ser, min_n=1)
+
+# D4 Nutzungsdauer je Geraet: Monate von der ersten Vermietung bis zum Abgang, Mittel je Familie und gesamt
+MONATE = "datediff('day', contract_start, closed_date) / 30.4375"
+n_d4, m_d4 = con.execute(f"select count(*), avg({MONATE}) {ABGANG} and contract_start is not null and closed_date >= ? and closed_date <= ?", [WIN_START.date(), AS_OF.date()]).fetchone()
+je_fam4 = [{"familie": str(f), "n": iv(n), "v": fl(v, 1)} for f, n, v in con.execute(f"select catalogue_family, count(*), avg({MONATE}) {ABGANG} and contract_start is not null and closed_date >= ? and closed_date <= ? group by 1 order by 1", [WIN_START.date(), AS_OF.date()]).fetchall()]
+ser = monthly(f"""select date_trunc('month', closed_date) m, avg({MONATE}) v, count(*) n {ABGANG} and contract_start is not null group by 1 order by 1""")
+add("D4", "direkt", {"v": fl(m_d4, 2) if n_d4 else None, "einheit": "months", "n": iv(n_d4), "grund": "kein Abgang mit Vermietungsstart im Fenster", "je_familie": je_fam4}, serie=ser, min_n=1)
+
+# D5, D6: nicht im Werkzeug
+add("D5", "keine", {"v": None, "einheit": "ratio", "n": None}, fehlt="Support-Ende je Modell im Katalog")
+add("D6", "keine", {"v": None, "einheit": "ratio", "n": None}, fehlt="Feed suppliers/reviews mit Datum und Ergebnis je Lieferant")
+
 
 # ---------------------------------------------------------------- Beitragsbuch: Ereignisse mit Akteur
 def book(nr, datum, rolle, massnahme, wirkung, beleg, stufe):
@@ -538,6 +611,28 @@ for cid, cat, covers, d in con.execute(f"select contract_id, category, covers_oe
         rolle = role_of_category(cat)
     book("A2", d, rolle, "Vertrag erfasst, sieben Felder, " + CAT_DE.get(str(cat), str(cat)), None, cid, STUFE_IDENT)
 
+# D1 und D2: Aufbereitungsauftraege im Fenster mit zweitem Leben (sellable oder as_is, kein scrap), Rolle ueber die Familie
+GRADE_DE = {"A": "Grade A", "B": "Grade B", "C": "Grade C", "D": "Grade D"}
+for wo, d, fam, outcome, grade in con.execute(f"""select w.work_order_id, w.finished_at, l.catalogue_family, w.outcome, w.grade_out
+                                                   from bronze.rf_work_orders w join {LEDGER} l on l.serial = w.serial
+                                                   where w.outcome <> 'scrap' and w.work_order_id is not null and w.finished_at >= ? and w.finished_at < ? order by w.finished_at, w.work_order_id""",
+                                               [WIN_START.date(), (AS_OF + pd.Timedelta(days=1)).date()]).fetchall():
+    rolle = role_of_family(fam)
+    text = "Aufbereitung, " + ("verkaufsfähig, " + GRADE_DE.get(str(grade), str(grade)) if outcome == "sellable" else CH_DE.get("as_is", "as_is")) + ", " + str(fam)
+    book("D1", d, rolle, text, None, wo, STUFE_REAL)
+    book("D2", d, rolle, text, None, wo, STUFE_REAL)
+
+# D3 und D4: abgeschlossene Reparaturtickets im Fenster, Rolle ueber die Familie
+DAMAGE_DE = {"battery": "Akku", "screen": "Display", "housing": "Gehäuse", "water": "Wasserschaden", "other": "sonstiger Schaden"}
+for tid, d, fam, dmg in con.execute(f"""select t.ticket_id, t.closed_at, l.catalogue_family, t.damage_type
+                                        from bronze.sd_tickets t join {LEDGER} l on l.serial = t.serial
+                                        where t.resolution = 'repair' and t.closed_at is not null and t.ticket_id is not null and t.closed_at >= ? and t.closed_at < ? order by t.closed_at, t.ticket_id""",
+                                    [WIN_START.date(), (AS_OF + pd.Timedelta(days=1)).date()]).fetchall():
+    rolle = role_of_family(fam)
+    text = "Reparatur statt Ersatz, " + DAMAGE_DE.get(str(dmg), str(dmg)) + ", " + str(fam)
+    book("D3", d, rolle, text, None, tid, STUFE_REAL)
+    book("D4", d, rolle, text, None, tid, STUFE_REAL)
+
 con.close()
 
 # ---- Buch an die Zeilen: Summen je Rolle, die juengsten Zeilen, der Rest gezaehlt
@@ -563,7 +658,7 @@ if [r["nr"] for r in rows] != ORDER:
     raise SystemExit("kpis.json: nicht jede Kennzahl des Rahmens hat eine Zeile")
 counts = {s: sum(1 for r in rows if r["status"] == s) for s in ("erfuellt", "gelb", "verfehlt", "nicht_messbar", "nicht_im_werkzeug")}
 measured = [r["fortschritt"]["v"] for r in rows if r["fortschritt"]["v"] is not None]
-SETS = [{"key": "A", "label": "Satz A, alle Rollen"}, {"key": "B", "label": "Satz B, Indirekt"}, {"key": "C", "label": "Satz C, Resale"}]
+SETS = [{"key": "A", "label": "Satz A, alle Rollen"}, {"key": "B", "label": "Satz B, Indirekt"}, {"key": "C", "label": "Satz C, Resale"}, {"key": "D", "label": "Satz D, ESG", "gruppe": "esg"}]
 
 data = {
     "today": TODAY, "as_of": AS_OF.date().isoformat(), "window": WINDOW, "window_start": WIN_START.date().isoformat(),
@@ -571,6 +666,7 @@ data = {
     "gelb_band": GELB_BAND, "baseline_months": BASELINE_MONTHS, "book_rows": BOOK_ROWS, "min_n_owner": MIN_N_OWNER,
     "cycle": {"start": CYCLE_START.date().isoformat(), "default": CYCLE_DEFAULT, "owner": CYCLE_OWNER, "periods": [{"key": p[0], "label": p[1], "months": p[2]} for p in PERIODS]},
     "owners": {"roles": ROLES, "unmapped": sorted(UNMAPPED)},
+    "esg": {"owner": ESG_OWNER, "unit": str(esg.get("unit", "")), "factors": [dict(v, familie=k) for k, v in ESG_FACTORS.items()]},
     "counts": counts, "n_kpis": len(rows), "n_measured": len(measured),
     "fortschritt_mittel": fl(sum(measured) / len(measured)) if measured else None,
     "sets": SETS, "rows": rows,

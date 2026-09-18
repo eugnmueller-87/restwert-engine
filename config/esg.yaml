@@ -1,0 +1,32 @@
+# ESG factors for the KPI tracker (web tab KPIs, Satz D, KPI D2 "CO2 vermieden durch Wiederverwendung").
+# THE MODEL ADVISES, DETERMINISTIC CODE DECIDES, A NAMED HUMAN OWNS EVERY THRESHOLD.
+#
+# One avoidance factor per device family, in kg CO2e per device that gets a second life (D1: refurbished and
+# sold or rented again). The factor is an avoidance against new production, not a greenhouse gas balance under
+# the GHG protocol, and is never added to savings in euro. No factor without a source: a family whose factor
+# is null stays n/a in D2 and the total carries the note "ohne <Familie>".
+#   value   kg CO2e per device, or null when no source exists yet
+#   source  where the number comes from (the DaaS provider's own website, sustainability page, archive 2025)
+#   tag     "haus" (published by the house as is), "abgeleitet" (derived from a published statement, how is
+#           stated in note), "frage" (no source yet; asked, not guessed)
+#   owner   who confirms or replaces the factor before use on real data
+version: 1
+owner: "Nachhaltigkeitsmanagement"
+unit: "kg CO2e je Gerät"
+source_note: "Website des Hauses, Nachhaltigkeitsseite, Archiv 2025: 58 kg CO2 je aufbereitetem Smartphone, mehr als das Doppelte je Tablet; für Laptops keine Angabe"
+factors:
+  Smartphone:
+    value: 58
+    source: "Website des Hauses, Nachhaltigkeitsseite, Archiv 2025"
+    tag: "haus"
+    note: "58 kg CO2 je aufbereitetem Smartphone, wie veröffentlicht"
+  Tablet:
+    value: 116
+    source: "Website des Hauses, Nachhaltigkeitsseite, Archiv 2025"
+    tag: "abgeleitet: mehr als das Doppelte"
+    note: "das Haus nennt mehr als das Doppelte des Smartphone-Werts; angesetzt ist genau das Doppelte, also die Untergrenze der Aussage"
+  Laptop:
+    value: null
+    source: "Website des Hauses, Nachhaltigkeitsseite, Archiv 2025"
+    tag: "frage"
+    note: "kein Faktor des Hauses veröffentlicht; wird beim Nachhaltigkeitsmanagement erfragt, bis dahin n/a"

@@ -103,7 +103,22 @@
       }) : null,
       c.hasActions ? h('span', { style: { display: 'inline-flex', gap: 2, whiteSpace: 'nowrap' } }, c.actions.map(function (a, j) {
         return h('button', { key: j, type: 'button', className: 'btn btn-ghost', onClick: a.onClick, style: { whiteSpace: 'nowrap', fontSize: 12, padding: '1px 6px' } }, a.label);
-      })) : null);
+      })) : null,
+      c.pill ? h(React.Fragment, null, ' ', h('span', { className: 'tag ' + c.pillCls, style: { fontSize: 10, padding: '1px 7px', textTransform: 'none', letterSpacing: '0.02em' } }, c.pill)) : null,
+      c.hasControls ? CellControls(c.controls) : null);
+  }
+  /* Bedienelemente in einer Zelle (seit 18.09.2026, Reiter KPIs: Eigner je Kennzahl). Klick und Tastatur bleiben im Feld,
+     sonst klappt die klickbare Zeile bei jedem Leerzeichen im Namensfeld auf und zu. */
+  function CellControls(list) {
+    var stop = function (e) { e.stopPropagation(); };
+    /* schmal (96 Pixel), damit die Tabelle mit neun Spalten bei 1400 Pixeln in die Karte passt, ohne Querscrollen */
+    var st = { minHeight: 26, fontSize: 12, padding: '2px 4px', width: 96, boxSizing: 'border-box' };
+    return h('span', { style: { display: 'grid', gap: 3, width: 96 }, onClick: stop, onKeyDown: stop },
+      list.map(function (k, j) {
+        if (k.kind === 'text') return h('input', { key: j, id: k.id, className: 'input', type: 'text', 'aria-label': k.label, value: k.value, placeholder: k.placeholder, autoComplete: 'off', onChange: function (e) { k.onChange(e.target.value); }, style: st });
+        return h('select', { key: j, id: k.id, className: 'input', 'aria-label': k.label, value: k.value, onChange: function (e) { k.onChange(e.target.value); }, style: st },
+          k.options.map(function (x) { return h('option', { key: x.value, value: x.value }, x.label); }));
+      }));
   }
   function Table(t, tableFont, pad, padLeft, extraStyle) {
     return h('div', { className: 'tablewrap' },
@@ -133,7 +148,7 @@
         tab: 'report', data: {}, loading: {}, failed: {}, open: {}, defs: {}, blocks: {}, kpiDefs: {}, kpiDetails: {}, introOpen: {},
         market: { family: 'Smartphone', detail: false }, dev: { id: null, term: 24, when: 'launch', over: {} }, editing: {}, draft: {},
         tco: { slug: null, storage: 'all', term: 'all' }, lever: null,
-        kpi: { period: null, open: null },   /* Reiter KPIs: Zyklus (null heisst Standard aus den Daten) und die aufgeklappte Kennzahl */
+        kpi: { period: null, open: null, owner: {} },   /* Reiter KPIs: Zyklus (null heisst Standard aus den Daten), die aufgeklappte Kennzahl, der Eigner je Kennzahl (nur in diesem Browser) */
         term: { slug: null, t1: null, t2: null },   /* Reiter Laufzeit (seit 17.09.2026): Geraet, Laufzeit, Vergleichslaufzeit; null heisst Standard aus den Daten */
         scenarios: [], manual: [], deliveries: [], thresholds: {}, assumptions: { disc: this.cfg.value }, log: [], runs: [], running: false,
         logOpen: false, dlg: null, form: {}
@@ -165,6 +180,8 @@
           var d = localStorage.getItem('restwert-device'); if (d) patch.dev = Object.assign({}, this.state.dev, { id: d });
           var tc = JSON.parse(localStorage.getItem('restwert-tco') || 'null'); if (tc && tc.slug) patch.tco = { slug: tc.slug, storage: tc.storage || 'all', term: tc.term || 'all' };
           var tm = JSON.parse(localStorage.getItem('restwert-term') || 'null'); if (tm && typeof tm === 'object') patch.term = { slug: tm.slug || null, t1: tm.t1 || null, t2: tm.t2 || null };
+          /* Eigner je Kennzahl (Team oder Individuell mit Rolle und Name): bleibt in diesem Browser, geht nie in eine Datei oder an einen Server */
+          var ko = JSON.parse(localStorage.getItem('restwert-kpi-owner') || 'null'); if (ko && typeof ko === 'object' && !Array.isArray(ko)) patch.kpi = Object.assign({}, this.state.kpi, { owner: ko });
         } catch (e) {}
       }
       this.setState(patch);
@@ -335,9 +352,17 @@
           };
           else if (S.tab === 'levers') opts = { lever: S.lever, thresholds: S.thresholds, select: function (id) { self.setState({ lever: id }); } };
           else if (S.tab === 'kpis') opts = {
-            period: S.kpi.period, open: S.kpi.open,
+            period: S.kpi.period, open: S.kpi.open, owner: S.kpi.owner,
             setPeriod: function (p) { self.setState(function (s) { return { kpi: Object.assign({}, s.kpi, { period: p }) }; }); },
-            toggle: function (nr) { self.setState(function (s) { return { kpi: Object.assign({}, s.kpi, { open: s.kpi.open === nr ? null : nr }) }; }); }
+            toggle: function (nr) { self.setState(function (s) { return { kpi: Object.assign({}, s.kpi, { open: s.kpi.open === nr ? null : nr }) }; }); },
+            setOwner: function (nr, patchO) {
+              self.setState(function (s) {
+                var all = Object.assign({}, s.kpi.owner);
+                all[nr] = Object.assign({ mode: 'team', role: '', name: '' }, all[nr] || {}, patchO);
+                self.persist('restwert-kpi-owner', JSON.stringify(all));
+                return { kpi: Object.assign({}, s.kpi, { owner: all }) };
+              });
+            }
           };
           V = motor(D, opts, P);
           if (!V || typeof V !== 'object') { V = null; error = 'Der Motor für diesen Reiter hat kein Ansichtsmodell geliefert.'; }

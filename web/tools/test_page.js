@@ -419,6 +419,47 @@ async function uiSmoke() {
     expect(links().length === 0 && !mainText().includes(withBook.beitraege.liste[0].beleg), 'Zeile wieder zu');
   });
 
+  await step('kpis', 'KPIs: Eigner auf Individuell setzen, Name eintragen, Seite neu laden, Wert bleibt', async () => {
+    await tab('KPIs');
+    const K = data('kpis');
+    expect(K.sets.length === 4 && K.sets[3].key === 'D', 'vier Sätze, der vierte ist D (ESG)');
+    expect($$('#app main section h3').filter(x => x.textContent.trim() === 'Satz D, ESG').length === 1, 'Tabelle Satz D, ESG');
+    expect(mainText().includes('Namen bleiben in diesem Browser, sie werden nirgends gespeichert oder übertragen.'), 'Satz zum Verbleib der Namen unter den Kacheln');
+    const nr = K.rows[0].nr, sel = () => $('#rw-kpi-owner-' + nr);
+    expect(sel() && sel().value === 'team', 'Eigner startet auf Team (' + nr + ')');
+    expect(!$('#rw-kpi-name-' + nr) && !$('#rw-kpi-role-' + nr), 'bei Team kein Rollen- und Namensfeld');
+    const opened = () => $$('#app main table.table a').filter(a => a.textContent.trim() === 'Definition').length;
+    setValue(sel(), 'ind'); await sleep(250);
+    expect(sel().value === 'ind' && $('#rw-kpi-role-' + nr) && $('#rw-kpi-name-' + nr), 'Individuell zeigt Rolle und Namensfeld');
+    expect(opened() === 0, 'die Auswahl klappt die Zeile nicht auf');
+    const role = K.owners.roles.find(r => r.code !== 'TEAM');
+    setValue($('#rw-kpi-role-' + nr), role.code); await sleep(200);
+    setValue($('#rw-kpi-name-' + nr), 'Probe Person'); await sleep(250);
+    expect($('#rw-kpi-name-' + nr).value === 'Probe Person', 'Name im Feld');
+    expect(mainText().includes(role.label + ' · Probe Person'), 'Pille mit Rolle und Name neben der Kennzahl');
+    const st = store('kpi-owner', null);
+    expect(st && st[nr] && st[nr].mode === 'ind' && st[nr].role === role.code && st[nr].name === 'Probe Person', 'Eigner in localStorage gemerkt (' + JSON.stringify(st) + ')');
+    expect(!JSON.stringify(K).includes('Probe Person'), 'Name nicht in den Daten');
+    const nb = blobs.length; click('Export CSV'); await sleep(250);
+    const b = blobs[blobs.length - 1];
+    const csv = blobs.length === nb + 1 && b ? await new Promise(res => { const fr = new w.FileReader(); fr.onload = () => res(String(fr.result)); fr.onerror = () => res(''); fr.readAsText(b); }) : '';
+    expect(csv.includes('Satz D, ESG') && !csv.includes('Probe Person') && !csv.includes('Individuell'), 'Export CSV mit Satz D, ohne Namen und ohne Eigner-Auswahl');
+    // Seite neu laden: ein zweites Fenster mit demselben localStorage
+    const seed = {}; for (let i = 0; i < w.localStorage.length; i++) { const k = w.localStorage.key(i); seed[k] = w.localStorage.getItem(k); }
+    const first = { w: w, plotly: plotly, blobs: blobs };
+    activate(makeWindow(seed));
+    await waitFor(rendered, 15000, 'Fenster nach dem Neuladen gerendert'); await sleep(300);
+    if (current() !== 'KPIs') await tab('KPIs');
+    expect(sel() && sel().value === 'ind', 'nach dem Neuladen steht der Eigner auf Individuell');
+    expect($('#rw-kpi-role-' + nr) && $('#rw-kpi-role-' + nr).value === role.code, 'nach dem Neuladen bleibt die Rolle ' + role.code);
+    expect($('#rw-kpi-name-' + nr) && $('#rw-kpi-name-' + nr).value === 'Probe Person', 'nach dem Neuladen bleibt der Name');
+    expect(mainText().includes(role.label + ' · Probe Person'), 'Pille nach dem Neuladen');
+    activate(first);
+    // zurueck auf Team, damit die folgenden Schritte alle Rollen sehen
+    setValue(sel(), 'team'); await sleep(250);
+    expect(sel().value === 'team' && !$('#rw-kpi-name-' + nr), 'zurück auf Team');
+  });
+
   await step('term', 'Laufzeit: Gerät und Laufzeit wechseln', async () => {
     await tab('Laufzeit');
     const T = data('term');

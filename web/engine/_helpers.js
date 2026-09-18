@@ -68,6 +68,15 @@
     var links = Array.isArray(o.links) ? o.links.map(function (l) { return { href: str(l.href), text: str(l.text), rest: str(l.rest) }; }) : [];
     var actions = Array.isArray(o.actions) ? o.actions.map(function (a) { return { label: str(a.label), onClick: typeof a.onClick === 'function' ? a.onClick : function () {} }; }) : [];
     var bar = o.bar ? Math.max(0, Math.round(Number(o.bar))) : 0;
+    /* seit 18.09.2026 (Reiter KPIs, Eigner je Kennzahl): Bedienelemente in einer Zelle (Auswahl oder Textfeld) und eine
+       Pille, die nur gezeichnet wird; beides bleibt aus dem Export CSV heraus (die Huelle exportiert text, linkText, tagText, sub) */
+    var controls = Array.isArray(o.controls) ? o.controls.map(function (k) {
+      return {
+        kind: k.kind === 'text' ? 'text' : 'select', id: str(k.id), label: str(k.label), value: str(k.value), placeholder: str(k.placeholder),
+        options: Array.isArray(k.options) ? k.options.map(function (x) { return { value: str(x.value), label: str(x.label) }; }) : [],
+        onChange: typeof k.onChange === 'function' ? k.onChange : function () {}
+      };
+    }) : [];
     return {
       text: str(text),
       align: align,
@@ -90,7 +99,11 @@
       indent: o.indent ? Math.max(0, Math.round(Number(o.indent))) : 0,
       /* seit 16.09.2026 (Cockpit-Optik): eine kleine Verlaufslinie neben dem Wert, Zahlen in Reihenfolge der Zeit */
       spark: Array.isArray(o.spark) ? o.spark.map(Number).filter(function (x) { return !isNaN(x); }) : [],
-      hasSpark: Array.isArray(o.spark) && o.spark.length > 1
+      hasSpark: Array.isArray(o.spark) && o.spark.length > 1,
+      pill: o.pill ? str(o.pill) : '',
+      pillCls: o.pill ? str(o.pillCls || 'tag-outline') : '',
+      hasControls: controls.length > 0,
+      controls: controls
     };
   }
   function C(text, o) { return cell(text, o, false); }
