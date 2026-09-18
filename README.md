@@ -1,4 +1,4 @@
-# Restwert Engine v0.3
+# Restwert Engine v0.4
 
 Live page (twelve tabs in four areas, German): https://claude.ai/artifact/35YqfY2paPWtkn6yD32U7m. Source of the page: [web/](web/README.md).
 
@@ -30,7 +30,7 @@ This is a working prototype and portfolio piece by a procurement leader, not a p
 * **Synthetic fleet, public catalogue.** Every landing file under `data/lake/raw/` starts with `# SYNTHETIC DATA` (fleet feeds) or `# PUBLIC DATA` (copies of `data/catalogue/*.csv` and `outputs/market_curves.csv`, every row with its source URL) and every row carries `is_synthetic`. The fleet is drawn from the real catalogue (233 models, real launch dates, real launch RRP per variant) and priced with a truth curve calibrated to the public anchors; the truth source per family and manufacturer, the haircut and the cap are listed in `data/lake/SYNTHETIC.md` (generated on every run) with one owner for the whole truth block. A synthetic realisation that lands near the public curve is a design consequence, not evidence.
 * **No real names beyond the catalogue.** The company is "the DaaS provider". Manufacturers carry their catalogue names (Apple, Samsung, Google, Motorola, Fairphone, HMD Global (Nokia), Lenovo, Dell, HP, Microsoft). Every other counterparty is role-only: `IT reseller A (role-only)`, `Carrier partner (role-only)`, `Refurbishment and repair partner (role-only)`, `Logistics partner (role-only)`, `Marketplace channel A (role-only)`, `Financing partner A (role-only)`, `Mobile threat defense partner (role-only)`, `Rugged-device OEM (role-only)`. A test scans every landing file and every bronze text column against a base64 denylist of real providers and employers, and a second test checks that every supplier and counterparty name is a catalogue manufacturer or ends with `(role-only)`.
 * **No market benchmarks.** Thresholds (`config/thresholds.yaml`), assumptions (`config/assumptions.yaml`) and KPI targets and minimum sample sizes (`config/kpi_targets.yaml`) are placeholders, labelled `placeholder_default: true` or "placeholder" in the note, each key with an owner. The generator's design parameters (discount bands, damage rates, fees, channel mix, defect rates, the truth block) live in `config/lake.yaml` and are owned per block in its `design_parameter_owners` map (a test walks it). Contract terms are synthetic placeholders and the register says so on every row (`terms_note`).
-* **No side effects.** Nothing in the package orders, lists, sends or emails. Tests grep the package for `smtplib`, `requests`, `httpx`, `urllib.request`, `boto3`, `paramiko` and `subprocess` (allowed in `cli.py` only, where it starts Streamlit).
+* **No side effects.** Nothing in the package orders, lists, sends or emails. Tests grep the package for `smtplib`, `requests`, `httpx`, `urllib.request`, `boto3`, `paramiko` and `subprocess` (allowed in `cli.py` only, where it starts Streamlit). That sentence is about the engine package `restwert/`. Since v0.4 two things live next to it on purpose: the interface `restwert_api/` (listens for deliveries and run requests, never calls out) and `connectors/` (call the house's own systems and the interface). Both are outside the grep and outside `restwert/`; the engine never imports them (tested).
 * **No fake zeros, no silent guesses.** A KPI whose denominator is zero returns `status = not_measurable`, never `0`. A landing row that cannot be typed or matched lands in `bronze.unresolved` with a reason code; a lever whose reference group is too small is `is_attributed = false`; an estimate line says `is_estimate = true` and names the assumption and its owner.
 * **AI-assisted.** Written with AI assistance from a frozen human-written specification; a human reviewed the design, the formulas and the tests (section 11).
 
@@ -44,6 +44,7 @@ python -m venv .venv
 pip install -e .[dev]             # or: pip install -r requirements.txt
 python -m restwert all            # the v0.2 chain, see below
 python -m restwert dashboard      # Streamlit on http://localhost:8501
+python -m restwert_api            # the interface on http://127.0.0.1:8420/docs (pip install -e .[api]); feeds land by HTTP, docs/ARCHITEKTUR.md section 5a
 pytest -q                         # add -m "not slow" to skip the 5000-serial timing test
 ```
 

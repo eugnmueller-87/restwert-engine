@@ -8,7 +8,8 @@
   base64-encoded and decodes them here).
 * ``GOVERNANCE_PRINCIPLE`` appears verbatim in ``README.md``.
 * No em dash in the prose this repository ships (README, package, tests,
-  config): the spec forbids them and they read as an AI tell.
+  config, and since v0.4 the interface ``restwert_api/``, the ``connectors/`` and
+  ``docs/ARCHITEKTUR.md``): the spec forbids them and they read as an AI tell.
 """
 
 from __future__ import annotations
@@ -129,7 +130,8 @@ def test_governance_principle_in_package_init():
 
 
 def test_no_em_dash_in_shipped_prose():
-    scan_roots = [ROOT / "README.md", PACKAGE, ROOT / "tests", ROOT / "config", ROOT / "pyproject.toml", ROOT / "requirements.txt"]
+    scan_roots = [ROOT / "README.md", PACKAGE, ROOT / "tests", ROOT / "config", ROOT / "pyproject.toml", ROOT / "requirements.txt",
+                  ROOT / "restwert_api", ROOT / "connectors", ROOT / "requirements-api.txt", ROOT / "docs" / "ARCHITEKTUR.md"]
     offenders: list[str] = []
     for root in scan_roots:
         paths = [root] if root.is_file() else sorted(root.rglob("*"))

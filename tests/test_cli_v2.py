@@ -143,9 +143,9 @@ def test_all_v01_flag_runs_legacy_chain(tmp_path, capsys):
 def test_version_is_0_2_0():
     from restwert import __version__
 
-    assert __version__ == "0.3.1"
+    assert __version__ == "0.4.0"
     text = (Path(__file__).resolve().parents[1] / "pyproject.toml").read_text(encoding="utf-8")
-    assert 'version = "0.3.1"' in text
+    assert 'version = "0.4.0"' in text
 
 
 # --------------------------------------------------------------------------- the v0.2 chain

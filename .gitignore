@@ -36,3 +36,9 @@ data/lake/raw/
 # page build: node modules for the jsdom tests and the rendered text of the last test run
 web/node_modules/
 web/out/
+
+# v0.4 Schnittstelle: echte Schluessel, Audit-Log, Laufzustand und Wasserzeichen der Konnektoren bleiben lokal
+config/api_keys.yaml
+data/api_audit.jsonl
+data/api_runs/
+connectors/state/*.json

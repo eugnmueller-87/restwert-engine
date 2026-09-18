@@ -1,0 +1,62 @@
+# Mapping ServiceNow-Tickets -> Feed servicedesk/tickets (Bronze-Tabelle sd_tickets).
+#
+# Die Feldnamen des Hauses (rechts) sind PLATZHALTER: u_* sind eigene Felder, die jede Instanz
+# anders nennt. Wer den Konnektor betreibt, trägt hier seine Felder ein; die Spalten links sind
+# der Vertrag aus docs/DATA_LAKE.md und werden vom Konnektor gegen restwert.lake.feeds.FEEDS geprüft.
+# Kein Geheimnis in dieser Datei: URL und Token kommen aus den genannten Umgebungsvariablen.
+feed: servicedesk/tickets
+
+source:
+  kind: servicenow_table
+  url_env: SERVICENOW_URL            # https://<instanz>.service-now.com
+  token_env: SERVICENOW_TOKEN        # Bearer-Token; nie im Repo
+  table: incident
+  watermark_field: sys_updated_on    # der Konnektor hängt sys_updated_on><letzter Stand> an
+  query: "u_device_serialISNOTEMPTY^category=hardware"
+  page_size: 500
+
+api:
+  url_env: RESTWERT_API_URL          # http://127.0.0.1:8420
+  key_env: RESTWERT_API_KEY          # das Geheimnis eines Schlüssels mit source_systems: [servicedesk]
+
+# Spalte des Feeds: Feld des Hauses (Punktpfad erlaubt, z. B. assigned_to.display_value)
+columns:
+  ticket_id: number
+  serial: u_device_serial
+  contract_id: u_rental_contract
+  opened_at: opened_at
+  closed_at: closed_at
+  damage_type: u_damage_type
+  resolution: u_resolution
+  quote_eur: u_quote_eur
+  repair_cost_eur: u_repair_cost_eur
+  replacement_serial: u_replacement_serial
+  repair_partner_ref: u_repair_partner
+
+# Werte des Hauses -> geschlossene Liste des Feeds. Was hier nicht steht, geht unverändert durch
+# und landet als bad_enum in bronze.unresolved; der Konnektor rät nicht.
+values:
+  damage_type:
+    Display: screen
+    Screen: screen
+    Battery: battery
+    Housing: housing
+    Water damage: water
+    Other: other
+  resolution:
+    Repaired: repair
+    Replaced: replace
+    Open: open
+    In progress: open
+    "": open
+
+# Fester Wert, wenn die Quelle nichts liefert. Partnernamen sind rollenbasiert (Allowlist der Tests).
+defaults:
+  repair_partner_ref: "Refurbishment and repair partner (role-only)"
+
+# ServiceNow schreibt "YYYY-MM-DD HH:MM:SS"; der Feed verlangt ISO mit T.
+transforms:
+  opened_at: datetime
+  closed_at: datetime
+  quote_eur: number
+  repair_cost_eur: number

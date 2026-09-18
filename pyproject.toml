@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "restwert"
-version = "0.3.1"
+version = "0.4.0"
 description = "Asset P&L, residual value forecast and deterministic decision rules for a Device-as-a-Service fleet. The model advises, deterministic code decides, a named human owns every threshold."
 readme = "README.md"
 requires-python = ">=3.12"
@@ -25,12 +25,15 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["pytest>=8"]
 ml = ["scikit-learn>=1.4"]
+# the interface (restwert_api) and the connectors; the engine package restwert/ never imports them
+api = ["fastapi>=0.115", "uvicorn>=0.30", "httpx>=0.27"]
 
 [project.scripts]
 restwert = "restwert.cli:main"
+restwert-api = "restwert_api.__main__:main"
 
 [tool.setuptools.packages.find]
-include = ["restwert*"]
+include = ["restwert*", "restwert_api*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

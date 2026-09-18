@@ -1,0 +1,6 @@
+# Optional group [api]: the interface (restwert_api/) and the connectors (connectors/). Pinned to the versions
+# installed and tested on the build host (Python 3.12, September 2026), on top of requirements.txt.
+# The engine package restwert/ never imports any of these (tests/test_no_side_effects.py).
+fastapi==0.141.1
+uvicorn==0.53.0
+httpx==0.28.1

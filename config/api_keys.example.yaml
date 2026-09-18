@@ -1,0 +1,26 @@
+# Restwert Engine v0.4: API-Schlüssel je Quellsystem. VORLAGE, nur Platzhalter.
+#
+# Kopieren nach config/api_keys.yaml (per .gitignore ausgeschlossen) und die Geheimnisse ersetzen,
+# oder die Umgebungsvariable RESTWERT_API_KEYS setzen:
+#   RESTWERT_API_KEYS="erp-export:GEHEIM1:erp;sd-export:GEHEIM2:servicedesk;scheduler:GEHEIM3:*:run"
+# Beide Quellen werden vereinigt. Ein Geheimnis hat mindestens 8 Zeichen; erzeugen zum Beispiel mit
+#   python -c "import secrets; print(secrets.token_urlsafe(32))"
+#
+# key_id steht im Audit-Log (data/api_audit.jsonl), das Geheimnis nie. source_systems sind die
+# Quellsysteme der Feeds (catalogue, market, contracts, erp, wms, portal, servicedesk, returns, refurb,
+# recommerce, finance) oder "*". may_run: true erlaubt POST /v1/runs. Ein Schlüssel ohne Geheimnis,
+# ohne Quellsystem oder mit unbekanntem Quellsystem bricht den Start ab.
+keys:
+  erp-export:
+    secret: "ERSETZEN-erp-mindestens-8-zeichen"
+    source_systems: [erp, wms]
+  sd-export:
+    secret: "ERSETZEN-servicedesk-mindestens-8-zeichen"
+    source_systems: [servicedesk]
+  clm-export:
+    secret: "ERSETZEN-contracts-mindestens-8-zeichen"
+    source_systems: [contracts]
+  scheduler:
+    secret: "ERSETZEN-scheduler-mindestens-8-zeichen"
+    source_systems: ["*"]
+    may_run: true
