@@ -6,10 +6,14 @@ auf den jede Zeile verlinkt (Feld url des Rahmens plus #<nr>). Umbau am 17.09.20
 Erklaertext, alles gerade runter, ein Zyklus (Quartal, Halbjahr, Jahr) und die Frage, wie viel Prozent des Wegs
 geschafft sind.
 
-Quellen: die 14 gold-KPIs (outputs/gold__kpi_values.csv), die 20 KPIs der eingefrorenen v0.1-Registry
+Quellen: die 14 gold-KPIs (outputs/gold__kpi_values.csv), die 15 KPIs der eingefrorenen v0.1-Registry
 (outputs/kpi_values.csv), Ziele und Mindeststichproben aus config/kpi_targets.yaml, Monatsreihen und Baseline
 (Mittel der ersten drei Monate mit Daten) aus data/restwert.duckdb mit denselben Formeln wie die gold-KPIs, der
 Zyklus aus config/performance_cycle.yaml, die Rollen aus config/owners.yaml.
+
+Seit 04.10.2026 ohne Satz B (Indirekt): der indirekte Einkauf ist nicht Teil des Werkzeugs. B8 (Gewichtetes Zahlungsziel)
+bleibt, weil es auf dem Vertragsregister der Hersteller und Partner rechnet, und steht seitdem in Satz A (Feld satz im
+Rahmen; die Nummer bleibt, damit der Link Definition weiter trifft). A1 rechnet seitdem auf dem Hardware-Einkauf.
 
 Satz D, ESG (seit Fassung 4, 18.09.2026), sechs Kennzahlen D1 bis D6:
   D1  Zweites Leben: Abgaenge im rollierenden Zwoelfmonatsfenster aus silver.device_ledger, verkauft (heute ohne
@@ -37,8 +41,6 @@ Bis: Zyklusstart plus Horizont des Rahmens (Feld horizont, aus dem Zieltext, son
 Ende des Zyklusabschnitts, in dem das Datum liegt.
 
 Beitragsbuch je Kennzahl aus Ereignissen mit Akteur (Datum, Rolle, Massnahme, Wirkung, Beleg-ID, Stufe):
-  B1  main.indirect_spend, bestaetigte oder unbestaetigte Preisreduktionen (saving_type hard_price_reduction),
-      Rolle ueber die Kategorie; Stufe realisiert, wenn Controlling bestaetigt hat, sonst verhandelt
   C2  bronze.erp_supplier_invoices, Zeilen line_kind price_protection_credit, Rolle ueber die Geraetefamilie der
       Bestellzeile im Hauptbuch; Stufe realisiert (gutgeschrieben)
   C4  main.decision_log, Regel R01 (Reparatur je Geraet), Rolle ueber die Familie in inputs_json; Stufe identifiziert
@@ -80,7 +82,6 @@ STUFE_REAL, STUFE_VERH, STUFE_IDENT = "realisiert", "verhandelt", "identifiziert
 # deutsche Beschriftung der Datenwerte, dieselbe wie auf den anderen Reitern (make_report_data.py, make_lake_data.py)
 CH_DE = {"employee_buyout": "Mitarbeiterkauf", "marketplace": "Marktplatz", "b2b_wholesale": "Großhandel", "as_is": "Verkauf ohne Aufbereitung"}
 CAT_DE = {"hardware": "Hardware", "logistics": "Logistik", "repair": "Reparatur", "refurbishment": "Aufbereitung", "software": "Software",
-          "marketing": "Marketing", "facilities": "Gebäude und Betrieb", "consulting": "Beratung", "packaging": "Verpackung",
           "connectivity": "Mobilfunk und Konnektivität", "resale_channel": "Verkaufskanal", "financing": "Finanzierung",
           "security_software": "Sicherheitssoftware", "rental": "Miete"}
 EN_DASH, EM_DASH = chr(0x2013), chr(0x2014)   # die Seite darf keinen Strich zeigen (build.py lehnt ihn ab)
@@ -374,23 +375,28 @@ def add(nr, modus, ist, serie=None, min_n=1, fehlt="", zweite=None):
         if p2 is not None:
             p = min(p, p2)
     rows.append({
-        "nr": nr, "satz": nr[0], "name": k["name"], "beispiel": bool(k["beispiel"]), "takt": k["takt"], "echt_ab": k["echt_ab"],
+        "nr": nr, "satz": k.get("satz", nr[0]), "name": k["name"], "beispiel": bool(k["beispiel"]), "takt": k["takt"], "echt_ab": k["echt_ab"],
         "eigner": k["eigner"], "pruefer": k["pruefer"], "status": status, "fehlt": fehlt,
         "ist": {"v": ist.get("v"), "einheit": ist.get("einheit"), "n": ist.get("n"), "signed": ist.get("signed"),
                 "hinweis": ist.get("hinweis") or "", "je_familie": ist.get("je_familie") or []},
         "zweite": zweite, "ziel_wert": zw, "baseline": base, "fortschritt": {"v": fl(p), "art": p_art},
-        "horizont": horizon_of(k), "definition_url": rahmen["url"] + "#" + nr.lower(), "min_n": min_n,
+        "horizont": horizon_of(k),
+        # Eine Kennzahl darf ihre eigene Definitionsadresse tragen: Satz E steht nicht im
+        # Rahmenblatt Fassung 4, sondern auf seinem eigenen. Ein Link auf ein Blatt, das die
+        # Kennzahl nicht definiert, waere schlimmer als keiner.
+        "definition_url": (k.get("url") or rahmen["url"]) + "#" + nr.lower(), "min_n": min_n,
     })
 
 
 LEDGER = "silver.device_ledger"
 
 # ---------------------------------------------------------------- Satz A: alle Rollen
-# A1 Spend unter Management: Naeherung ueber KPI_IND_SPEND_UNDER_MGMT (v0.1), Monatsreihe aus indirect_spend
-k = V["KPI_IND_SPEND_UNDER_MGMT"]
-ser = monthly("""select date_trunc('month', invoice_date) m,
-                        sum(case when has_po or has_contract then amount else 0 end) / nullif(sum(amount), 0) v, count(*) n
-                 from main.indirect_spend where invoice_date is not null group by 1 order by 1""")
+# A1 Spend unter Management: Naeherung ueber KPI_PROC_SPEND_UNDER_CONTRACT (v0.1, seit 04.10.2026 nur der Hardware-Einkauf:
+# gelieferter Bestellwert mit Vertragsbezug durch gelieferten Bestellwert), Monatsreihe je Liefermonat aus purchase_orders
+k = V["KPI_PROC_SPEND_UNDER_CONTRACT"]
+ser = monthly("""select date_trunc('month', delivered_date) m,
+                        sum(case when supplier_contract_id is not null then qty_delivered * unit_price else 0 end) / nullif(sum(qty_delivered * unit_price), 0) v, count(*) n
+                 from main.purchase_orders where delivered_date is not null group by 1 order by 1""")
 add("A1", "naeherung", {"v": k["value"], "einheit": "ratio", "n": k["n"]}, serie=ser, min_n=1)
 
 # A2 Vertragsregister vollstaendig: sieben von acht Feldern zaehlbar, das achte (Eigner im Team) fehlt im Register
@@ -403,36 +409,8 @@ add("A2", "luecke", {"v": None, "einheit": "ratio", "n": iv(n_ctr)}, fehlt="Feld
 add("A3", "keine", {"v": None, "einheit": "ratio", "n": None}, fehlt="Prüfprotokoll je Lieferant mit Datum")
 add("A4", "keine", {"v": None, "einheit": "count", "n": None}, fehlt="Speicher des Teams mit Abnahme")
 
-# ---------------------------------------------------------------- Satz B: Indirekt
-# B1 Hard Savings validiert: bestaetigte Preisreduktionen gegen den gesamten indirekten Spend, rollierend zwoelf Monate
-HARD = "saving_confirmed_by_controlling and coalesce(saving_type, 'hard_price_reduction') = 'hard_price_reduction'"
-hard, spend, n_inv = con.execute(f"""select sum(case when {HARD} then coalesce(saving, 0) else 0 end), sum(amount), count(*)
-                                     from main.indirect_spend where invoice_date >= ? and invoice_date <= ?""", [WIN_START.date(), AS_OF.date()]).fetchone()
-ser = monthly(f"""select date_trunc('month', invoice_date) m,
-                         sum(case when {HARD} then coalesce(saving, 0) else 0 end) / nullif(sum(amount), 0) v, count(*) n
-                  from main.indirect_spend where invoice_date is not null group by 1 order by 1""")
-add("B1", "naeherung", {"v": fl(hard / spend) if spend else None, "einheit": "ratio", "n": iv(n_inv), "grund": "Spend null"}, serie=ser, min_n=1)
-
-# B3 Verlaengerungen mit Vorlauf: Kalender vorhanden, Verhandlungsakte nicht
-add("B3", "luecke", {"v": None, "einheit": "ratio", "n": None}, fehlt="Datum der ersten Verhandlungshandlung")
-
-# B4: nicht im Werkzeug
-add("B4", "keine", {"v": None, "einheit": "ratio", "n": None}, fehlt="Vertragsversionen je Lieferant und VPI")
-
-# B5 Stille Verlaengerungen: Kandidaten zaehlbar, Entscheidung nicht
-add("B5", "luecke", {"v": None, "einheit": "count", "n": iv(n_ctr)}, fehlt="Feld Entscheidung mit Datum und Eigner")
-
-# B6 Maverick-Quote: Naeherung ueber KPI_IND_MAVERICK_SHARE, Monatsreihe aus indirect_spend, Ziel halbiert gegen die Baseline
-k = V["KPI_IND_MAVERICK_SHARE"]
-ser = monthly("""select date_trunc('month', invoice_date) m,
-                        sum(case when not has_po and not has_contract then amount else 0 end) / nullif(sum(amount), 0) v, count(*) n
-                 from main.indirect_spend where invoice_date is not null group by 1 order by 1""")
-add("B6", "naeherung", {"v": k["value"], "einheit": "ratio", "n": k["n"]}, serie=ser, min_n=1)
-
-# B7 Scorecard: nur OTIF gerechnet, nur Hardware
-add("B7", "luecke", {"v": None, "einheit": "ratio", "n": None}, fehlt="Scorecard und Gesprächsprotokoll je Lieferant")
-
-# B8 Gewichtetes Zahlungsziel: aus silver.contracts, Monatsreihe ueber die je Monat laufenden Vertraege
+# ---------------------------------------------------------------- B8, das Zahlungsziel, in Satz A (der Rest von Satz B ist seit 04.10.2026 weg)
+# B8 Gewichtetes Zahlungsziel: aus silver.contracts (Hersteller, Haendler, Partner um das Geraet), Monatsreihe ueber die je Monat laufenden Vertraege
 ser = monthly("""with months as (select unnest(generate_series(date_trunc('month', (select min(start_date) from silver.contracts)), date_trunc('month', ?::date), interval 1 month))::date m)
                  select m, sum(c.payment_terms_days * c.spend_under_contract_eur) / nullif(sum(c.spend_under_contract_eur), 0) v, count(*) n
                  from months join silver.contracts c on c.start_date <= last_day(m) and (c.end_date is null or c.end_date >= m)
@@ -578,18 +556,197 @@ add("D4", "direkt", {"v": fl(m_d4, 2) if n_d4 and not unter4 else None, "einheit
 add("D5", "keine", {"v": None, "einheit": "ratio", "n": None}, fehlt="Support-Ende je Modell im Katalog")
 add("D6", "keine", {"v": None, "einheit": "ratio", "n": None}, fehlt="Feed suppliers/reviews mit Datum und Ergebnis je Lieferant")
 
+# ---------------------------------------------------------------- Satz E: die sechs Stufen der Flotte
+# Angelegt am 04.10.2026. Eugens Leiter: jede Stufe hat ein Tor, und was darueber steht, ist erst
+# belastbar, wenn das Tor darunter haelt. Deshalb stehen die Stufen hier in der Reihenfolge der Leiter
+# und nicht nach Rechenbarkeit sortiert: eine Stufe, die nichts liefert, soll als Luecke sichtbar sein,
+# nicht ans Ende rutschen. Jede Einstufung wurde gegen data/restwert.duckdb nachgemessen, keine geschaetzt.
+
+TL = "silver.serial_timeline"
+
+# --- Stufe 1, Daten ---------------------------------------------------------
+# E1.1 Seriennummern-Historie: chain_complete prueft steps_expected gegen steps_present UND die
+# Reihenfolge der Daten. Fenster ueber den Wareneingang, damit ein Jahrgang nicht zweimal zaehlt.
+# KORREKTUR 04.10.2026: hier stand ein Zwoelfmonatsfenster, und das hat die Zahl
+# gruen gefaerbt, die rot ist. Von den 695 Geraeten im Fenster sind 688 noch
+# vermietet, und ein vermietetes Geraet muss nur 4 der 10 Schritte tragen: es kann
+# gar nicht unvollstaendig sein. Gemessen wurde also nicht die Datenqualitaet,
+# sondern das Alter des Jahrgangs. Eugens Definition kennt kein Fenster. Ueber alle
+# Geraete: 5.011 von 5.251, also 95,4 Prozent, und damit unter dem Ziel.
+n_e11, ok_e11 = con.execute(f"select count(*), sum(case when chain_complete then 1 else 0 end) from {TL}").fetchone()
+# Wo die Luecken sitzen, damit die Zeile nicht nur sagt, dass etwas fehlt.
+_schlecht = con.execute(f"""select lifecycle_status, count(*) - sum(case when chain_complete then 1 else 0 end) fehlt
+                            from {TL} group by 1 having fehlt > 0 order by fehlt desc limit 3""").fetchall()
+ser = monthly(f"""select date_trunc('month', received_at) m, sum(case when chain_complete then 1 else 0 end) / nullif(count(*), 0) v, count(*) n
+                  from {TL} where received_at is not null group by 1 order by 1""")
+add("E1.1", "direkt", {"v": fl(ok_e11 / n_e11) if n_e11 else None, "einheit": "ratio", "n": iv(n_e11),
+                       "grund": "kein Gerät mit Wareneingang",
+                       "hinweis": "über alle Jahrgänge, ohne Fenster; die Lücken sitzen bei "
+                                  + ", ".join(dn(f) + " " + str(st) for st, f in _schlecht)},
+    serie=ser, min_n=1)
+
+# E1.2 Inventurdifferenz: es gibt keine zweite, unabhaengige Zaehlung. silver.reconciliation gleicht
+# Kostenarten ab, nicht Stueckzahlen; ein Abgleich des Systems mit sich selbst ist keine Inventur.
+add("E1.2", "keine", {"v": None, "einheit": "ratio", "n": None},
+    fehlt="Zählliste einer körperlichen Inventur gegen den Systembestand")
+
+# --- Stufe 2, Aufbereitung --------------------------------------------------
+# E2.1 Durchsatz gegen Zulauf: fertige Werkstattauftraege gegen eingegangene Rueckläufer, gleiches Fenster.
+# Unter 100 Prozent waechst der Rueckstau, auch wenn die Stueckzahl steigt.
+fertig = con.execute("select count(*) from bronze.rf_work_orders where finished_at >= ? and finished_at <= ?", [WIN_START.date(), AS_OF.date()]).fetchone()[0]
+zulauf = con.execute("select count(*) from bronze.ret_receipts where returned_at >= ? and returned_at <= ?", [WIN_START.date(), AS_OF.date()]).fetchone()[0]
+ser = monthly("""with f as (select date_trunc('month', finished_at) m, count(*) k from bronze.rf_work_orders where finished_at is not null group by 1),
+                      r as (select date_trunc('month', returned_at) m, count(*) k from bronze.ret_receipts where returned_at is not null group by 1)
+                 select r.m, coalesce(f.k, 0) / nullif(r.k, 0) v, r.k n from r left join f on f.m = r.m order by 1""")
+add("E2.1", "direkt", {"v": fl(fertig / zulauf) if zulauf else None, "einheit": "ratio", "n": iv(zulauf),
+                       "grund": "kein Rückläufer im Fenster",
+                       "hinweis": dn(fertig) + " fertig gegen " + dn(zulauf) + " eingegangen"}, serie=ser, min_n=1)
+
+# E2.2 Time-to-Redeploy: Median, nicht Mittel. ABWEICHUNG, siehe Rahmen: das Werkzeug misst bis
+# verkaufsfaehig, nicht bis wiedervermietbar, weil in diesem Modell keine Seriennummer zweimal vermietet wird.
+m_e22, n_e22 = con.execute(f"select median(days_return_to_sellable), count(*) from {TL} where days_return_to_sellable is not null and sellable_at >= ? and sellable_at <= ?",
+                           [WIN_START.date(), AS_OF.date()]).fetchone()
+ser = monthly(f"""select date_trunc('month', sellable_at) m, median(days_return_to_sellable) v, count(*) n
+                  from {TL} where days_return_to_sellable is not null and sellable_at is not null group by 1 order by 1""")
+add("E2.2", "naeherung", {"v": fl(m_e22, 1), "einheit": "days", "n": iv(n_e22),
+                          "grund": "kein Rückläufer im Fenster verkaufsfähig geworden",
+                          "hinweis": "gemessen bis verkaufsfähig; das Modell vermietet kein Gerät ein zweites Mal"},
+    serie=ser, min_n=1)
+
+# E2.3 Kosten je aufbereitetem Geraet: sinkend gegen die Baseline der ersten drei Monate mit genug
+# Faellen, nicht gegen den Vormonat. min_n hoch genug, dass ein Monat mit zwei teuren Faellen nicht Baseline wird.
+c_e23, n_e23 = con.execute("select avg(cost), count(*) from main.refurbishment where cost is not null and end_date >= ? and end_date <= ?",
+                           [WIN_START.date(), AS_OF.date()]).fetchone()
+ser = monthly("""select date_trunc('month', end_date) m, avg(cost) v, count(*) n
+                 from main.refurbishment where cost is not null and end_date is not null group by 1 order by 1""")
+add("E2.3", "direkt", {"v": fl(c_e23, 2), "einheit": "eur", "n": iv(n_e23),
+                       "grund": "kein abgeschlossener Auftrag im Fenster"}, serie=ser, min_n=20)
+
+# --- Stufe 3, Entscheidungen ------------------------------------------------
+# E3.1 Triage automatisch: main.decision_queue kennt rule_id, rule_name und outcome, aber kein Feld,
+# das automatisch von manuell trennt. Ohne diesen Begriff gibt es keine Quote, nur eine Zaehlung.
+add("E3.1", "keine", {"v": None, "einheit": "ratio", "n": None},
+    fehlt="Kennzeichen am Vorgang, ob die Regel abschließend entschieden hat oder ein Mensch")
+
+# E3.2 Restwert-Realisierung: gegen die Prognose VON DAMALS (rv_forecast_of_record), nicht gegen den
+# Einstandspreis. Korridor mit zwei Seiten: dauerhaft ueber 105 Prozent heisst zu vorsichtig prognostiziert.
+v_e32, n_e32 = con.execute(f"select avg(realised_vs_record_ratio), count(*) from {LEDGER} where realised_vs_record_ratio is not null and sale_date >= ? and sale_date <= ?",
+                           [WIN_START.date(), AS_OF.date()]).fetchone()
+ser = monthly(f"""select date_trunc('month', sale_date) m, avg(realised_vs_record_ratio) v, count(*) n
+                  from {LEDGER} where realised_vs_record_ratio is not null and sale_date is not null group by 1 order by 1""")
+zwE32 = by_nr["E3.2"]["ziel_wert"]["zweite"]
+add("E3.2", "direkt", {"v": fl(v_e32), "einheit": "ratio", "n": iv(n_e32), "grund": "kein Verkauf mit Prognose im Fenster"},
+    serie=ser, min_n=1,
+    zweite={"label": zwE32["label_kurz"], "v": fl(v_e32), "einheit": "ratio",
+            "ziel_v": zwE32["wert"], "richtung": zwE32["richtung"]})
+
+# --- Stufe 4, Vertraege -----------------------------------------------------
+# E4.1 Volumen ueber Rahmenvertraege: dieselbe Quelle wie A1, aber gegen das absolute Ziel 85 Prozent
+# statt gegen eine Baseline. Wertanteil, nicht Stueckanteil: ein Rahmen wirkt auf Euro.
+v_e41 = con.execute("""select sum(case when supplier_contract_id is not null then qty_delivered * unit_price else 0 end) / nullif(sum(qty_delivered * unit_price), 0),
+                              count(*) from main.purchase_orders where delivered_date is not null and delivered_date >= ? and delivered_date <= ?""",
+                    [WIN_START.date(), AS_OF.date()]).fetchone()
+ser = monthly("""select date_trunc('month', delivered_date) m,
+                        sum(case when supplier_contract_id is not null then qty_delivered * unit_price else 0 end) / nullif(sum(qty_delivered * unit_price), 0) v,
+                        count(*) n from main.purchase_orders where delivered_date is not null group by 1 order by 1""")
+add("E4.1", "direkt", {"v": fl(v_e41[0]), "einheit": "ratio", "n": iv(v_e41[1]), "grund": "keine Lieferung im Fenster"},
+    serie=ser, min_n=1)
+
+# E4.2 Lieferzeit: ab Bestellung, nicht ab Auftragsbestaetigung. Je Geraet, damit eine Teillieferung
+# ihre Verspaetung behaelt, statt im Mittel der vollstaendigen Lieferungen zu verschwinden.
+d_e42, n_e42 = con.execute(f"select avg(days_order_to_receipt), count(*) from {TL} where days_order_to_receipt is not null and received_at >= ? and received_at <= ?",
+                           [WIN_START.date(), AS_OF.date()]).fetchone()
+ser = monthly(f"""select date_trunc('month', received_at) m, avg(days_order_to_receipt) v, count(*) n
+                  from {TL} where days_order_to_receipt is not null and received_at is not null group by 1 order by 1""")
+add("E4.2", "direkt", {"v": fl(d_e42, 1), "einheit": "days", "n": iv(n_e42), "grund": "kein Wareneingang im Fenster"},
+    serie=ser, min_n=1)
+
+# E4.3 Konsignation: es gibt keine Bestandsart. Jedes Geraet im Werkzeug ist Eigentum ab Wareneingang.
+add("E4.3", "keine", {"v": None, "einheit": "ratio", "n": None},
+    fehlt="Bestandsart am Wareneingang: Konsignation oder Eigentum")
+
+# --- Stufe 5, Abverkauf -----------------------------------------------------
+# E5.1 Sell-through: ab Verkaufsfaehigkeit gezaehlt, nicht ab Rueckgabe; alles davor ist Stufe 2.
+v_e51, n_e51 = con.execute(f"select avg(case when days_sellable_to_sold <= 30 then 1.0 else 0 end), count(*) from {TL} where days_sellable_to_sold is not null and sold_at >= ? and sold_at <= ?",
+                           [WIN_START.date(), AS_OF.date()]).fetchone()
+ser = monthly(f"""select date_trunc('month', sold_at) m, avg(case when days_sellable_to_sold <= 30 then 1.0 else 0 end) v, count(*) n
+                  from {TL} where days_sellable_to_sold is not null and sold_at is not null group by 1 order by 1""")
+add("E5.1", "direkt", {"v": fl(v_e51), "einheit": "ratio", "n": iv(n_e51), "grund": "kein Verkauf im Fenster"},
+    serie=ser, min_n=1)
+
+# E5.2 Bestand aelter 60 Tage: Stichtag auf den HEUTIGEN Bestand. Verkaufte Geraete gehoeren nicht in
+# den Nenner, sonst sinkt die Quote allein dadurch, dass viel verkauft wurde.
+v_e52, n_e52 = con.execute(f"select avg(case when days_in_stock_to_date > 60 then 1.0 else 0 end), count(*) from {LEDGER} where days_in_stock_to_date is not null and sale_date is null").fetchone()
+add("E5.2", "direkt", {"v": fl(v_e52), "einheit": "ratio", "n": iv(n_e52), "grund": "kein Gerät im Bestand",
+                       "hinweis": "Stichtag, nur Geräte ohne Verkaufsdatum"}, min_n=1)
+
+# --- Stufe 6, Rueckläufer vorne ---------------------------------------------
+# E6.1 Verlaengerungsquote: ZURUECKGEZOGEN am 04.10.2026 nach einer Gegenpruefung.
+# Hier stand 57 Prozent und gruen, gerechnet ueber replaces_contract_id. Das Feld
+# bedeutet aber etwas anderes: restwert/schema.py:290 sagt woertlich "For a
+# replacement contract: the contract of the damaged device it replaces", und
+# gesetzt wird es nur im Schadensfall (restwert/generate/events.py:150-170: erst
+# ein damage-Ereignis, dann ein replacement aus dem Ersatzpool, der Altvertrag
+# bekommt status 'replaced'). Gemessen wurde also die Schadenstausch-Quote, und
+# sie zeigt in die FALSCHE Richtung: je mehr Geraete kaputtgehen, desto hoeher die
+# Zahl, die als Erfolg gelesen wurde. Eine Kennzahl, die das Gegenteil dessen
+# belohnt, was sie verspricht, ist schlimmer als gar keine.
+# Richtig gepruefte Gleichheit (selber Kunde, andere Seriennummer) war wahr und
+# trotzdem kein Beweis: ein Schadenstausch sieht genauso aus. Die Gestalt der
+# Daten gepruefte und ihre Bedeutung nicht.
+add("E6.1", "keine", {"v": None, "einheit": "ratio", "n": None},
+    fehlt="Kennzeichen am Mietvertrag, das einen Anschlussvertrag nach planmäßigem Ende "
+          "mit dem Altvertrag verknüpft, getrennt vom Schadenstausch")
+
+# E6.2 Vorab-Selbsttest: FALLE, geprueft und verworfen. grade_declared ist bei 100 Prozent der
+# Rueckläufer gefuellt, weil es ein Pflichtfeld des Eingangs ist, kein Selbsttest-Kennzeichen.
+# Eine Quote, die immer 100 ergibt, misst nichts.
+add("E6.2", "keine", {"v": None, "einheit": "ratio", "n": None},
+    fehlt="Kennzeichen, ob der Kunde vor der Rückgabe selbst geprüft hat")
+
+# --- Gegen-Kennzahlen -------------------------------------------------------
+# EG1 Menge gegen Realisierung: beide Seiten in einer Zeile, Status gleich der schlechteren. Menge
+# allein laesst sich jederzeit kaufen, indem man den Preis senkt.
+n_eg1 = con.execute(f"select count(*) from {LEDGER} where sale_date >= ? and sale_date <= ?", [WIN_START.date(), AS_OF.date()]).fetchone()[0]
+ser = monthly(f"select date_trunc('month', sale_date) m, count(*) v, count(*) n from {LEDGER} where sale_date is not null group by 1 order by 1")
+zwEG1 = by_nr["EG1"]["ziel_wert"]["zweite"]
+add("EG1", "direkt", {"v": fl(n_eg1 / 12.0, 1) if n_eg1 else None, "einheit": "count", "n": iv(n_eg1),
+                      "grund": "kein Verkauf im Fenster",
+                      "hinweis": dn(n_eg1) + " Verkäufe im Fenster, hier je Monat"},
+    serie=ser, min_n=5,
+    zweite={"label": zwEG1["label_kurz"], "v": fl(v_e32), "einheit": "ratio",
+            "ziel_v": zwEG1["wert"], "richtung": zwEG1["richtung"]})
+
+# EG2 Durchsatz gegen Reklamationen nach Redeploy: die Gegenseite existiert im Werkzeug nicht. Keine
+# Seriennummer traegt einen zweiten Mietvertrag, also gibt es keinen Wiedereinsatz, nach dem reklamiert
+# werden koennte. bronze.sd_tickets fuehrt Schaeden waehrend der ERSTEN Miete.
+add("EG2", "keine", {"v": None, "einheit": "ratio", "n": None},
+    fehlt="Wiedereinsatz je Seriennummer und Störungsmeldung danach")
+
+# EG3 Lieferfaehigkeit gegen gebundenes Kapital: nur die Gegenseite ist rechenbar. Die Zeile zeigt den
+# Preis des Bestands, nicht den Nutzen; der Servicegrad braucht eine Liste der Anforderungen.
+d_eg3, n_eg3, w_eg3 = con.execute(f"select avg(days_in_stock_to_date), count(*), sum(landed_cost) from {LEDGER} where sale_date is null and days_in_stock_to_date is not null").fetchone()
+add("EG3", "naeherung", {"v": fl(d_eg3, 1), "einheit": "days", "n": iv(n_eg3), "grund": "kein Gerät im Bestand",
+                         "hinweis": "gebundener Bestandswert " + dn(w_eg3, 0) + " Euro" + "; der Servicegrad fehlt, es gibt keine Anforderungsliste"},
+    min_n=1)
+
+# EG4 Neue Flottengeraete gegen Auslastung: vermietet durch FLOTTE, nicht belegte Lagerplaetze durch
+# Lagerplaetze. Verkaufte Geraete gehoeren nicht in den Nenner, sie sind keine Flotte mehr.
+rented, instock = con.execute(f"""select count(*) filter (where lifecycle_status = 'rented'),
+                                         count(*) filter (where lifecycle_status = 'in_stock') from {LEDGER}""").fetchone()
+zugang = con.execute(f"select count(*) from {TL} where received_at >= ? and received_at <= ?", [WIN_START.date(), AS_OF.date()]).fetchone()[0]
+flotte = (rented or 0) + (instock or 0)
+add("EG4", "direkt", {"v": fl(rented / flotte) if flotte else None, "einheit": "ratio", "n": iv(flotte),
+                      "grund": "keine Geräte in der Flotte",
+                      "hinweis": dn(zugang) + " Zugänge im Fenster; " + dn(rented or 0) + " vermietet, " + dn(instock or 0) + " auf Lager"},
+    min_n=1)
+
 
 # ---------------------------------------------------------------- Beitragsbuch: Ereignisse mit Akteur
 def book(nr, datum, rolle, massnahme, wirkung, beleg, stufe):
     BOOK.setdefault(nr, []).append({"datum": pd.Timestamp(datum).date().isoformat(), "rolle": rolle, "massnahme": massnahme,
                                     "wirkung": fl(wirkung, 2), "beleg": str(beleg), "stufe": stufe})
 
-
-# B1: Preisreduktionen im Fenster der Kennzahl, Rolle ueber die Kategorie
-for spend_id, d, cat, sav, ok in con.execute("""select spend_id, invoice_date, category, saving, saving_confirmed_by_controlling from main.indirect_spend
-                                                 where coalesce(saving, 0) > 0 and coalesce(saving_type, 'hard_price_reduction') = 'hard_price_reduction'
-                                                   and invoice_date >= ? and invoice_date <= ? order by invoice_date""", [WIN_START.date(), AS_OF.date()]).fetchall():
-    book("B1", d, role_of_category(cat), "Preisreduktion, " + CAT_DE.get(str(cat), str(cat)), sav, spend_id, STUFE_REAL if ok else STUFE_VERH)
 
 # C2: Preisschutz-Gutschriften im Fenster, Rolle ueber die Geraetefamilie der Bestellzeile
 for inv, d, amt, fam in con.execute(f"""select i.invoice_number, i.invoice_date, i.amount_eur, l.catalogue_family
@@ -671,7 +828,16 @@ if [r["nr"] for r in rows] != ORDER:
     raise SystemExit("kpis.json: nicht jede Kennzahl des Rahmens hat eine Zeile")
 counts = {s: sum(1 for r in rows if r["status"] == s) for s in ("erfuellt", "gelb", "verfehlt", "nicht_messbar", "nicht_im_werkzeug")}
 measured = [r["fortschritt"]["v"] for r in rows if r["fortschritt"]["v"] is not None]
-SETS = [{"key": "A", "label": "Satz A, alle Rollen"}, {"key": "B", "label": "Satz B, Indirekt"}, {"key": "C", "label": "Satz C, Resale"}, {"key": "D", "label": "Satz D, ESG", "gruppe": "esg"}]
+SETS = [{"key": "A", "label": "Satz A, alle Rollen"}, {"key": "C", "label": "Satz C, Resale"}, {"key": "D", "label": "Satz D, ESG", "gruppe": "esg"},
+        # Satz E, 04.10.2026: eine Tabelle je Stufe, in der Reihenfolge der Leiter. Das Tor steht als
+        # Feld dabei, weil eine Stufe ohne ihr Tor nur eine Liste von Kennzahlen ist.
+        {"key": "E1", "label": "Stufe 1, Daten", "gate": "Jedes Gerät ist jederzeit auffindbar, Bestände stimmen mit der Inventur überein"},
+        {"key": "E2", "label": "Stufe 2, Aufbereitung", "gate": "Kein Rückstau mehr, die Strecke schafft mehr als reinkommt"},
+        {"key": "E3", "label": "Stufe 3, Entscheidungen", "gate": "Regeln entscheiden, Menschen nur noch Ausnahmen"},
+        {"key": "E4", "label": "Stufe 4, Verträge", "gate": "Einkauf läuft über Abrufe statt Einzelverhandlungen"},
+        {"key": "E5", "label": "Stufe 5, Abverkauf", "gate": "Ware dreht schnell, ohne Preise zu verschenken"},
+        {"key": "E6", "label": "Stufe 6, Rückläufer vorne", "gate": "Weniger Rückläufer je Flottengerät"},
+        {"key": "EG", "label": "Gegen-Kennzahlen, immer paarweise gelesen", "gate": "Kein Bereich glänzt auf Kosten eines anderen"}]
 
 data = {
     "today": TODAY, "as_of": AS_OF.date().isoformat(), "window": WINDOW, "window_start": WIN_START.date().isoformat(),

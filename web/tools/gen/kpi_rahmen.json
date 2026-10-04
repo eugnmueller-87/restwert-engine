@@ -1,5 +1,5 @@
 {
- "quelle": "KPI-Rahmen für sechs Category Manager, Fassung 4, Stand 18.09.2026, claude.ai/artifact/AKznpKknsPjrL1SXUtFUDr; Satz D (ESG) ergänzt am 18.09.2026",
+ "quelle": "KPI-Rahmen für sechs Category Manager, Fassung 4, Stand 18.09.2026, claude.ai/artifact/AKznpKknsPjrL1SXUtFUDr; Satz D (ESG) ergänzt am 18.09.2026; Satz B (Indirekt) am 04.10.2026 entfernt, der indirekte Einkauf ist nicht Teil des Werkzeugs; B8 steht seitdem in Satz A",
  "url": "https://claude.ai/artifact/AKznpKknsPjrL1SXUtFUDr",
  "fassung": "Fassung 4",
  "stand": "2026-09-18",
@@ -30,8 +30,8 @@
    },
    "engine": {
     "computable": "teilweise",
-    "source": "restwert/kpi/indirect.py:172-186 KPI_IND_SPEND_UNDER_MGMT (sum(amount where has_po or has_contract) / sum(amount), Tabelle indirect_spend, restwert/schema.py:126-131 bzw. bronze.fin_indirect_spend restwert/lake/schema_lake.py:119-122); nahe verwandt restwert/kpi/procurement.py:120-146 KPI_PROC_SPEND_UNDER_CONTRACT",
-    "note": "Formen sind ähnlich (has_po, has_contract als Filter im Zähler), aber A1 verlangt zusätzlich die dokumentierte Einkaufsbeteiligung vor der Unterschrift und einen bereinigten Nenner ohne Löhne, Steuern, Zinsen, Konzernverrechnung; das Schema kennt nur has_po und has_contract als Booleans, keine Beteiligungsprüfung und keine Ausschlusskategorie."
+    "source": "restwert/kpi/procurement.py KPI_PROC_SPEND_UNDER_CONTRACT (gelieferter Hardware-Bestellwert mit Vertragsbezug / gesamter gelieferter Bestellwert, Tabelle purchase_orders; seit 04.10.2026 ohne indirekten Spend)",
+    "note": "A1 verlangt die dokumentierte Einkaufsbeteiligung vor der Unterschrift und einen bereinigten Nenner ohne Löhne, Steuern, Zinsen, Konzernverrechnung; das Werkzeug kennt nur den Vertragsbezug der Bestellung. Der indirekte Spend ist seit dem 04.10.2026 nicht Teil des Werkzeugs; die Kennzahl misst den Hardware-Einkauf unter Vertrag."
    }
   },
   {
@@ -123,183 +123,6 @@
    }
   },
   {
-   "nr": "B1",
-   "name": "Hard Savings, validiert",
-   "ziel": "3 % des adressierbaren Spends der Kategorie in Jahr 1, realisiert und von Controlling abgenommen",
-   "takt": "Quartal (Pipeline monatlich)",
-   "echt_ab": "Monat 3",
-   "horizont": {
-    "monate": 12,
-    "quelle": "Ziel"
-   },
-   "rollen": "Indirekt",
-   "formel": "Σ realisierte Einsparung gegen die schriftliche Baseline / adressierbarer Spend der Kategorie",
-   "quelle": "Savings-Register mit Beleg je Fall; Kreditorenbuch für die Realisierung",
-   "eigner": "die Rolle je Fall",
-   "pruefer": "Controlling, Abnahme quartalsweise",
-   "zaehlregel": "Rechenwege: Preis (Baseline − neuer Preis) × Menge; Volumen (alte − neue Menge) × neuer Preis, nur bei gleicher Leistung; Spezifikation (Preis alt − Preis neu) × Menge. Vier Stufen: identifiziert, verhandelt, validiert, realisiert; nur realisiert zählt. Pipeline wird mit Faktor 1,7 auf das Ziel geplant, weil typischerweise 40 % zwischen identifiziert und realisiert verloren gehen [7]. Eine abgewehrte Erhöhung ist kein Hard Saving, sondern Cost Avoidance (Regel 2). Warum 3 %: zwischen dem APQC-Median für Cost Takeout von 2,0 % [2] und der Savings-Rate von 6,6 % im Schnitt, 8,0 % in der besten Gruppe [4].",
-   "beispiel": true,
-   "ziel_wert": {
-    "art": "absolut",
-    "wert": 0.03,
-    "richtung": "up",
-    "einheit": "ratio"
-   },
-   "engine": {
-    "computable": "teilweise",
-    "source": "restwert/kpi/indirect.py:88-169 KPI_IND_SAVINGS_CONFIRMED (nur saving_type hard_price_reduction mit saving_confirmed_by_controlling, Nenner der Jahresplan aus config/kpi_targets.yaml)",
-    "note": "Der Zähler (bestätigte Hard Savings mit Beleg-Flag) ist vorhanden; der Nenner der Engine ist ein fester Jahresplan, nicht der adressierbare Spend der Kategorie. Die vier Reifegrade identifiziert, verhandelt, validiert, realisiert gibt es im Schema nicht, nur bestätigt oder unbestätigt."
-   }
-  },
-  {
-   "nr": "B3",
-   "name": "Verlängerungen mit Vorlauf",
-   "ziel": "100 % der Verlängerungen mit Verhandlungsbeginn ≥ 90 Tage vor dem Kündigungstermin, ab Quartal 3; über 100.000 € Jahreswert 120 Tage",
-   "takt": "Monat",
-   "echt_ab": "Quartal 2",
-   "horizont": {
-    "monate": 6,
-    "quelle": "Ziel"
-   },
-   "rollen": "Indirekt",
-   "formel": "Verlängerungen mit Vorlauf ≥ 90 Tage / alle Verlängerungen mit Kündigungstermin im Quartal",
-   "quelle": "Vertragsregister (Kündigungstermin) und Verhandlungsakte",
-   "eigner": "die Rolle",
-   "pruefer": "die Leitung, monatlich aus dem Register",
-   "zaehlregel": "Vorlauf = Kündigungstermin minus Datum der ersten dokumentierten Verhandlungshandlung (Schreiben mit Ziel oder Angebot an den Lieferanten; keine Terminerinnerung, keine interne Notiz). Gemessen gegen den Kündigungstermin, nie gegen das Vertragsende; ein verstrichener Kündigungstermin zählt mit Vorlauf null. Warum 90 Tage: wer mehr als 90 Tage vor dem Stichtag beginnt, spart im Schnitt 49 % mehr als bei Start unter 30 Tagen (Vertice, Anbieterzahl) [15].",
-   "beispiel": true,
-   "ziel_wert": {
-    "art": "absolut",
-    "wert": 1.0,
-    "richtung": "up",
-    "einheit": "ratio"
-   },
-   "engine": {
-    "computable": "teilweise",
-    "source": "restwert/lake/schema_lake.py:235-239 gold.renewal_calendar_v2 (end_date, notice_days, notice_deadline, days_to_notice_deadline, days_to_end, auto_renewal)",
-    "note": "Welche Verträge in welchem Fenster zur Kündigung anstehen, ist berechnet. Der Zähler von B3 (Vorlauf gleich Kündigungstermin minus Datum der ersten dokumentierten Verhandlungshandlung) fehlt: keine Verhandlungsakte und kein Aktivitätslog im Schema."
-   }
-  },
-  {
-   "nr": "B4",
-   "name": "Preisänderung bei Verlängerung",
-   "ziel": "≤ VPI Median der Preisänderung bei gleicher Leistung höchstens die amtliche Inflation; keine Verlängerung über 5 % ohne Begründung im Register",
-   "takt": "Quartal",
-   "echt_ab": "Monat 3",
-   "horizont": {
-    "monate": 3,
-    "quelle": "Echt ab"
-   },
-   "rollen": "Indirekt",
-   "formel": "(neuer Jahrespreis − alter Jahrespreis) / alter Jahrespreis, Median über alle Verlängerungen des Quartals",
-   "quelle": "Vertragsregister (alter und neuer Vertrag); Statistisches Bundesamt für den VPI",
-   "eigner": "die Rolle",
-   "pruefer": "Controlling",
-   "zaehlregel": "Ändert sich der Leistungsumfang, wird auf Preis je Einheit (Lizenz, Nutzer, Gigabyte) normiert. Die Differenz zwischen Erstforderung und Abschluss ist Cost Avoidance, die Differenz zum alten Preis ist B4, eine Verlängerung unter dem alten Preis ist B1. Was der Markt sagt: typischer Aufschlag 3 bis 9 %, Erstforderungen mit KI-Funktionen 20 bis 37 % [17]; SaaS-Index Juni 2026 16,4 % [14]; beides Anbieterzahlen. Die Zahl, die ein COO ohne Savings-Methodik versteht: was kostet dieselbe Leistung heute gegen vor zwölf Monaten.",
-   "beispiel": true,
-   "ziel_wert": {
-    "art": "referenz",
-    "wert": null,
-    "richtung": "down",
-    "einheit": "ratio",
-    "referenz": "VPI des Statistischen Bundesamts",
-    "referenz_kurz": "VPI"
-   },
-   "engine": {
-    "computable": "nein",
-    "source": "",
-    "note": "Weder ein Feld, das alte und neue Vertragsversion desselben Lieferanten verknüpft, noch ein VPI-Referenzwert im Repo. silver.contracts führt je Vertrag einen Zeitraum, keine Historie von Preiserhöhungen bei Verlängerung."
-   }
-  },
-  {
-   "nr": "B5",
-   "name": "Stille Verlängerungen",
-   "ziel": "0 Verträge, die sich ohne protokollierte Entscheidung vor dem Kündigungstermin verlängert haben, ab Quartal 2",
-   "takt": "Monat",
-   "echt_ab": "Monat 2",
-   "horizont": {
-    "monate": 3,
-    "quelle": "Ziel"
-   },
-   "rollen": "Indirekt",
-   "formel": "Anzahl und Jahreswert der Verträge: verlängert sich automatisch UND keine Entscheidung (verlängern, kündigen, neu verhandeln) mit Eigner und Datum vor dem Kündigungstermin",
-   "quelle": "Vertragsregister, Feld Entscheidung mit Datum aus der versionierten Änderungshistorie",
-   "eigner": "die Rolle",
-   "pruefer": "die Leitung",
-   "zaehlregel": "Still heißt: keine dokumentierte Entscheidung, nicht: keine Verhandlung. Eine bewusste Verlängerung ohne Verhandlung ist keine stille, wenn die Entscheidung mit Begründung im Register steht. Warum: 89 % der SaaS-Verträge enthalten eine Klausel zur automatischen Verlängerung [15], 33 % der Anbieter dürfen bei Verlängerung erhöhen [43]; nach Unterschrift gehen im Schnitt 11 % des Vertragswerts verloren [13].",
-   "beispiel": false,
-   "ziel_wert": {
-    "art": "absolut",
-    "wert": 0,
-    "richtung": "down",
-    "einheit": "count",
-    "einheit_wort": "Verträge"
-   },
-   "engine": {
-    "computable": "teilweise",
-    "source": "restwert/lake/schema_lake.py:173-180 silver.contracts (auto_renewal, notice_deadline)",
-    "note": "Kandidaten (auto_renewal wahr, Kündigungstermin überschritten) sind zählbar. Es gibt kein Feld Entscheidung mit Datum und Eigner in einer versionierten Änderungshistorie; ohne das lässt sich ohne protokollierte Entscheidung nicht von mit Entscheidung, aber nicht erfasst unterscheiden."
-   }
-  },
-  {
-   "nr": "B6",
-   "name": "Maverick-Quote",
-   "ziel": "halbiert gegen die Baseline aus Monat 3, bis Monat 12",
-   "takt": "Quartal",
-   "echt_ab": "Monat 3",
-   "horizont": {
-    "monate": 12,
-    "quelle": "Ziel"
-   },
-   "rollen": "Indirekt",
-   "formel": "Spend über der Wertschwelle ohne Vertrag oder ohne Bestellnummer / adressierbarer Spend über der Wertschwelle",
-   "quelle": "Kreditorenbuch gegen Bestellungen und Vertragsregister",
-   "eigner": "die Rolle je Kategorie",
-   "pruefer": "Controlling",
-   "zaehlregel": "Ein Abruf aus einem Rahmenvertrag ohne Einzelbestellung ist kein Maverick, sofern der Rahmen im Register steht; ein Kauf per Kreditkarte über der Schwelle ist einer. Käufe desselben Lieferanten werden über 90 Tage rollierend addiert, damit Stückelung die Schwelle nicht umgeht. Die Wertschwelle setzt Controlling in Woche 2 aus der Freigabematrix (Frage an das Haus). Warum: nicht konformer Spend kostet je Euro 12 bis 18 % mehr [6].",
-   "beispiel": true,
-   "ziel_wert": {
-    "art": "baseline_faktor",
-    "wert": 0.5,
-    "richtung": "down",
-    "einheit": "ratio"
-   },
-   "engine": {
-    "computable": "teilweise",
-    "source": "restwert/kpi/indirect.py:206-220 KPI_IND_MAVERICK_SHARE (sum(amount where not has_po and not has_contract) / sum(amount), Tabelle indirect_spend)",
-    "note": "Kernformel existiert nahezu eins zu eins. Es fehlen die rollierende 90-Tage-Bündelung je Lieferant gegen Stückelung, die Wertschwelle und die Ausnahme für Abrufe aus einem registrierten Rahmenvertrag ohne Einzelbestellung."
-   }
-  },
-  {
-   "nr": "B7",
-   "name": "Scorecard und Quartalsgespräch",
-   "ziel": "100 % der strategischen Lieferanten mit gepflegter Scorecard und Quartalsgespräch mit Protokoll, ab Monat 12",
-   "takt": "Quartal",
-   "echt_ab": "Monat 9",
-   "horizont": {
-    "monate": 12,
-    "quelle": "Ziel"
-   },
-   "rollen": "Indirekt",
-   "formel": "strategische Lieferanten mit Scorecard und Quartalsgespräch / alle strategischen Lieferanten (oberste 80 % des Kategoriespends plus kritische)",
-   "quelle": "Scorecard je Lieferant; Gesprächsprotokoll mit Datum; Wareneingang oder Ticketsystem für Lieferleistung",
-   "eigner": "die Rolle",
-   "pruefer": "die Leitung; der Lieferant sieht seine Scorecard",
-   "zaehlregel": "Scorecard je Lieferant: Lieferleistung (OTIF oder SLA erfüllt, in %), Qualität (Reklamationen je 100 Aufträge), Preisverhalten (B4), Risiko (A3). OTIF zählt einen Auftrag nur, wenn Termin und Menge gleichzeitig stimmen; die Zählbasis legt Controlling je Warengruppe fest. Ein Quartalsgespräch zählt nur mit Protokoll über alle vier Dimensionen. Für Hardware zusätzlich die Ausfallrate beim ersten Gebrauch (DOA) nach TL 9000 [22]. Was der Markt sagt: fehlerfreie Lieferung Median rund 90 %, bestes Viertel 95 % [21]; Lieferantenmanagement bringt 3,2 % [24].",
-   "beispiel": false,
-   "ziel_wert": {
-    "art": "absolut",
-    "wert": 1.0,
-    "richtung": "up",
-    "einheit": "ratio"
-   },
-   "engine": {
-    "computable": "teilweise",
-    "source": "restwert/kpi/procurement.py:149-193 KPI_PROC_SUPPLIER_OTIF (count(delivered_date <= promised_date and qty_delivered >= qty_ordered) / count(delivered), Tabelle purchase_orders, v0.1)",
-    "note": "Nur die Dimension Lieferleistung (OTIF) ist gerechnet, und nur für den Hardware-Einkauf (v0.1, laut docs/GOLD_KPIS.md eingefroren). Reklamationsquote, Preisverhalten (B4) und Risiko (A3) fehlen; kein Feld für Scorecard oder Gesprächsprotokoll."
-   }
-  },
-  {
    "nr": "B8",
    "name": "Gewichtetes Zahlungsziel",
    "ziel": "+15 Tage gegen die Baseline aus Monat 3, ohne Skontoverlust; Cash, nicht Ergebnis",
@@ -309,7 +132,7 @@
     "monate": 3,
     "quelle": "Echt ab"
    },
-   "rollen": "Indirekt",
+   "rollen": "alle",
    "formel": "Σ (Tage je Lieferant × Spend je Lieferant) / Σ Spend",
    "quelle": "Vertragsregister (Zahlungsbedingung) und Kreditorenbuch (tatsächliche Zahlung)",
    "eigner": "die Rolle",
@@ -325,8 +148,9 @@
    "engine": {
     "computable": "ja",
     "source": "restwert/lake/schema_lake.py:173-180 silver.contracts (payment_terms_days NOT NULL, spend_under_contract_eur, spend_actual_12m_eur)",
-    "note": "Summe(payment_terms_days mal Spend) durch Summe(Spend) ist aus einer Tabelle rechenbar, für jeden Vertrag im Register. Einschränkung: nur Spend mit registriertem Vertrag; indirekter Spend ohne Vertrag trägt kein Zahlungsziel-Feld."
-   }
+    "note": "Summe(payment_terms_days mal Spend) durch Summe(Spend) ist aus einer Tabelle rechenbar, für jeden Vertrag im Register (Hersteller, Händler, Partner um das Gerät). Seit 04.10.2026 in Satz A: die Nummer bleibt, damit der Link Definition trifft."
+   },
+   "satz": "A"
   },
   {
    "nr": "C1",
@@ -716,10 +540,10 @@
     "monate": 3,
     "quelle": "Echt ab"
    },
-   "rollen": "Indirekt 4 mit Resale",
+   "rollen": "Service 3 mit Resale",
    "formel": "abgeschlossene Defektfälle mit Reparatur / (Defektfälle mit Reparatur + Defektfälle mit Ersatzgerät ohne Reparatur)",
    "quelle": "Tickets mit Schadensart, Kostenvoranschlag und Lösung je Seriennummer",
-   "eigner": "Indirekt 4 (Services um das Gerät) für die Partner, Resale für die Regel",
+   "eigner": "Service 3 (Reparatur und Aufbereitung) für die Partner, Resale für die Regel",
    "pruefer": "Controlling",
    "zaehlregel": "Nur abgeschlossene Fälle. Ein Fall zählt als repariert, wenn dieselbe Seriennummer nach der Reparatur weiterläuft oder wieder vermietbar ist; ein Totalschaden zählt zum Nenner. Die Regel Reparatur nur bis zu einem Anteil des Restwerts (R01 im Werkzeug, Owner Service) setzt die Grenze; D3 misst, ob innerhalb der Grenze repariert wird, nicht ob um jeden Preis. Die Ökodesign-Verordnung (EU) 2023/1670 verlangt für Smartphones und Tablets seit dem 20.06.2025 Ersatzteile bis sieben Jahre nach dem Ende des Inverkehrbringens, und das Energielabel nach der Delegierten Verordnung (EU) 2023/1669 zeigt die Reparierbarkeitsklasse A bis E [46]; ein Modell mit schlechter Klasse oder ohne Ersatzteilzusage drückt D3 und gehört in die Einkaufsentscheidung (D5).",
    "beispiel": true,
@@ -821,7 +645,585 @@
     "source": "kein Feed mit Bewertungsnachweisen",
     "note": "Quelle fehlt: Feed suppliers/reviews mit Datum und Ergebnis je Lieferant"
    }
+  },
+  {
+   "nr": "E1.1",
+   "satz": "E1",
+   "name": "Geräte mit lückenloser Seriennummern-Historie",
+   "ziel": "mindestens 98 Prozent",
+   "takt": "Monat",
+   "echt_ab": "Monat 1",
+   "horizont": {
+    "monate": 12,
+    "quelle": "Ziel"
+   },
+   "rollen": "alle",
+   "formel": "Geräte mit vollständiger Ereigniskette / alle Geräte mit Wareneingang im Fenster",
+   "quelle": "Zeitstrahl je Seriennummer (silver.serial_timeline) aus Bestellung, Wareneingang, Einlagerung, Versand, Rückgabe, Löschung, Grading, Verkauf",
+   "eigner": "die Rolle Operations für die Strecke, Resale für den Wert",
+   "pruefer": "Controlling",
+   "zaehlregel": "Lückenlos heißt: zu jedem erwarteten Schritt gibt es ein Ereignis mit Datum, und die Daten laufen vorwärts. Ein Gerät mit einem Sprung ohne Ereignis zählt als Lücke, auch wenn Anfang und Ende stimmen; ein Gerät mit zwei Ereignissen in falscher Reihenfolge ebenso. Das ist die Grundstufe: jede Zahl der Stufen darüber steht auf dieser Kette.",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 0.98,
+    "richtung": "up",
+    "einheit": "ratio"
+   },
+   "engine": {
+    "computable": "teilweise",
+    "source": "silver.serial_timeline.chain_complete, über alle Geräte, ohne Fenster",
+    "note": "Herabgestuft 04.10.2026: chain_complete beweist, dass die gebuchte Kette in sich stimmt, nicht dass ein Gerät auffindbar ist. Es gibt keinen Ort je Seriennummer über die Zeit, und fehlt das Ende einer Kette, sinkt die Erwartung mit, so dass die Kette als vollständig gilt. Dazu zählen rund 100 noch nicht fällige Gutschriften als Bruch. Ohne diese Fristfälle läge der Wert bei etwa 97,3 Prozent, also weiterhin unter dem Ziel. KORRIGIERT am 04.10.2026 nach einer Gegenprüfung. Zuerst stand hier ein Zwölfmonatsfenster und damit 99,6 Prozent, also erfüllt. Das war ein Artefakt: 688 der 695 Geräte im Fenster sind noch vermietet, und ein vermietetes Gerät muss nur 4 der 10 Schritte tragen, kann also gar nicht unvollständig sein. Gemessen wurde das Alter des Jahrgangs, nicht die Datenqualität. Ohne Fenster, wie die Definition es verlangt: 5.011 von 5.251, also 95,4 Prozent und damit verfehlt. Je Status: verkauft 91,1 Prozent, auf Lager 95,6 Prozent, vermietet 99,8 Prozent."
+   },
+   "url": "https://claude.ai/artifact/1VmFt6fRomTifWWo1JZgUJ"
+  },
+  {
+   "nr": "E1.2",
+   "satz": "E1",
+   "name": "Inventurdifferenz",
+   "ziel": "höchstens 0,5 Prozent",
+   "takt": "Quartal",
+   "echt_ab": "Monat 1",
+   "horizont": {
+    "monate": 12,
+    "quelle": "Ziel"
+   },
+   "rollen": "alle",
+   "formel": "Betrag der Abweichung zwischen gezähltem Bestand und Systembestand / Systembestand",
+   "quelle": "Zählliste einer körperlichen Inventur gegen den Systembestand am Stichtag",
+   "eigner": "die Rolle Operations für die Strecke, Resale für den Wert",
+   "pruefer": "Controlling",
+   "zaehlregel": "Die Zählung muss unabhängig vom System entstehen, sonst misst sie sich selbst. Abweichungen zählen mit Betrag, nicht mit Vorzeichen: zu viel und zu wenig heben sich nicht auf. Dies ist das Tor der Stufe 1, nicht die Seriennummern-Quote: eine vollständige Kette beweist, dass das System in sich stimmt, nicht dass es mit dem Regal übereinstimmt.",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 0.005,
+    "richtung": "down",
+    "einheit": "ratio"
+   },
+   "engine": {
+    "computable": "nein",
+    "source": "",
+    "note": "Es gibt keine zweite, unabhängige Zählung. silver.reconciliation gleicht Kostenarten ab, nicht Stückzahlen. Was fehlt, ist eine Zählliste, die ohne das System entsteht."
+   },
+   "url": "https://claude.ai/artifact/1VmFt6fRomTifWWo1JZgUJ"
+  },
+  {
+   "nr": "E2.1",
+   "satz": "E2",
+   "name": "Grading-Durchsatz gegen Rückläufer je Tag",
+   "ziel": "mindestens 115 Prozent",
+   "takt": "Monat",
+   "echt_ab": "Monat 1",
+   "horizont": {
+    "monate": 12,
+    "quelle": "Ziel"
+   },
+   "rollen": "alle",
+   "formel": "fertig geprüfte Geräte im Monat / eingegangene Rückläufer im Monat",
+   "quelle": "Werkstattaufträge (bronze.rf_work_orders.finished_at) gegen Rückgabe-Eingänge (bronze.ret_receipts.returned_at)",
+   "eigner": "die Rolle Operations für die Strecke, Resale für den Wert",
+   "pruefer": "Controlling",
+   "zaehlregel": "Beide Seiten im selben Zeitfenster. Unter 100 Prozent wächst der Rückstau jeden Tag, auch wenn die Stückzahl steigt. 115 Prozent ist kein Komfortpuffer, sondern der Satz, mit dem ein vorhandener Rückstau in einem Quartal abgebaut wird.",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 1.15,
+    "richtung": "up",
+    "einheit": "ratio"
+   },
+   "engine": {
+    "computable": "teilweise",
+    "source": "bronze.rf_work_orders.finished_at gegen bronze.ret_receipts.returned_at, Monatsreihe",
+    "note": "Herabgestuft 04.10.2026: Werkstattaufträge gegen Rückgabe-Eingänge im Monat, nicht je Arbeitstag, und ein Auftrag ist nicht dasselbe wie ein fertig gegradetes Gerät. Gemessen am 04.10.2026: im Fenster 1.075 fertige gegen 1.080 eingegangene, also 99,5 Prozent. Der Rückstau wächst, wenn auch langsam."
+   },
+   "url": "https://claude.ai/artifact/1VmFt6fRomTifWWo1JZgUJ"
+  },
+  {
+   "nr": "E2.2",
+   "satz": "E2",
+   "name": "Time-to-Redeploy, Rückkehr bis versandbereit",
+   "ziel": "höchstens 3 Tage",
+   "takt": "Monat",
+   "echt_ab": "Monat 1",
+   "horizont": {
+    "monate": 12,
+    "quelle": "Ziel"
+   },
+   "rollen": "alle",
+   "formel": "Median der Tage von der Rückgabe bis zur Versandbereitschaft",
+   "quelle": "silver.serial_timeline.days_return_to_sellable",
+   "eigner": "die Rolle Operations für die Strecke, Resale für den Wert",
+   "pruefer": "Controlling",
+   "zaehlregel": "Median, nicht Mittelwert: ein einzelnes liegengebliebenes Gerät verzerrt den Mittelwert, und die Frage ist, wie lange ein normales Gerät braucht. Versandbereit heißt geprüft, gelöscht und eingelagert, nicht nur geprüft.",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 3,
+    "richtung": "down",
+    "einheit": "days"
+   },
+   "engine": {
+    "computable": "teilweise",
+    "source": "silver.serial_timeline.days_return_to_sellable, Median im Fenster",
+    "note": "ABWEICHUNG, und sie ist wichtig: das Werkzeug misst Rückgabe bis VERKAUFSFAEHIG, nicht bis WIEDERVERMIETBAR. In diesem Modell wird ein Gerät einmal vermietet und danach verkauft; keine Seriennummer trägt zwei Mietverträge (am 04.10.2026 nachgezählt: null). Die Zahl ist die richtige Strecke für den Resale-Weg und die falsche für den Redeploy-Weg. Gemessen: Median 11 Tage bei 1.066 Geräten."
+   },
+   "url": "https://claude.ai/artifact/1VmFt6fRomTifWWo1JZgUJ"
+  },
+  {
+   "nr": "E2.3",
+   "satz": "E2",
+   "name": "Kosten je aufbereitetem Gerät",
+   "ziel": "sinkend gegen die Baseline",
+   "takt": "Monat",
+   "echt_ab": "Monat 1",
+   "horizont": {
+    "monate": 12,
+    "quelle": "Ziel"
+   },
+   "rollen": "alle",
+   "formel": "Summe der Aufbereitungskosten im Monat / aufbereitete Geräte im Monat",
+   "quelle": "main.refurbishment.cost je abgeschlossenem Auftrag",
+   "eigner": "die Rolle Operations für die Strecke, Resale für den Wert",
+   "pruefer": "Controlling",
+   "zaehlregel": "Sinkend heißt gegen den Mittelwert der ersten drei Monate mit genug Beobachtungen, nicht gegen den Vormonat: ein Monat mit wenigen teuren Fällen ist kein Trend. Die Kosten der Löschung und des Gradings zählen mit, die der Reparatur nicht, weil die an anderer Stelle schon gebucht ist.",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "baseline_delta",
+    "wert": -5,
+    "richtung": "down",
+    "einheit": "eur"
+   },
+   "engine": {
+    "computable": "teilweise",
+    "source": "main.refurbishment.cost, Monatsreihe über end_date",
+    "note": "Herabgestuft 04.10.2026: main.refurbishment.cost deckt die Aufbereitung, nicht Löschung und Grading, die Eugens Zählregel einschließt. Gemessen am 04.10.2026: 40,55 Euro je Gerät im Fenster bei 1.079 Aufträgen."
+   },
+   "url": "https://claude.ai/artifact/1VmFt6fRomTifWWo1JZgUJ"
+  },
+  {
+   "nr": "E3.1",
+   "satz": "E3",
+   "name": "Anteil automatisch getroffener Triage-Entscheidungen",
+   "ziel": "mindestens 80 Prozent",
+   "takt": "Monat",
+   "echt_ab": "Monat 1",
+   "horizont": {
+    "monate": 12,
+    "quelle": "Ziel"
+   },
+   "rollen": "alle",
+   "formel": "Entscheidungen, die eine Regel abschließend getroffen hat / alle Triage-Entscheidungen",
+   "quelle": "Entscheidungsliste (main.decision_queue, main.decision_log) mit einem Kennzeichen je Vorgang",
+   "eigner": "die Rolle Operations für die Strecke, Resale für den Wert",
+   "pruefer": "Controlling",
+   "zaehlregel": "Automatisch heißt: die Regel hat entschieden und kein Mensch hat eingegriffen. Ein Vorgang, den eine Regel vorschlägt und ein Mensch bestätigt, zählt als manuell, sonst misst die Quote die Vorschlagsdichte und nicht den Automatisierungsgrad.",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 0.8,
+    "richtung": "up",
+    "einheit": "ratio"
+   },
+   "engine": {
+    "computable": "nein",
+    "source": "",
+    "note": "main.decision_queue kennt rule_id, rule_name und outcome, aber KEIN Feld, das automatisch von manuell unterscheidet. Ohne diesen Begriff gibt es keine Quote, nur eine Zählung von Vorschlägen. Was fehlt, ist ein Kennzeichen am Vorgang: hat die Regel abschließend entschieden, ja oder nein."
+   },
+   "url": "https://claude.ai/artifact/1VmFt6fRomTifWWo1JZgUJ"
+  },
+  {
+   "nr": "E3.2",
+   "satz": "E3",
+   "name": "Restwert-Realisierung, Erlös gegen Prognose",
+   "ziel": "zwischen 95 und 105 Prozent",
+   "takt": "Monat",
+   "echt_ab": "Monat 1",
+   "horizont": {
+    "monate": 12,
+    "quelle": "Ziel"
+   },
+   "rollen": "alle",
+   "formel": "erzielter Netto-Erlös / die Prognose, die zum Rückgabetag im Protokoll stand",
+   "quelle": "silver.device_ledger.realised_vs_record_ratio gegen main.rv_forecast_of_record",
+   "eigner": "die Rolle Operations für die Strecke, Resale für den Wert",
+   "pruefer": "Controlling",
+   "zaehlregel": "Gegen die PROGNOSE, nicht gegen den Einstandspreis. Erlös durch Einstandspreis ist eine Werterhaltungsquote und sagt nichts darüber, ob man der Zahl trauen darf, auf der Miete und Kredit stehen. Maßgeblich ist die Prognose von damals, nicht die von heute: eine nachträglich korrigierte Prognose trifft immer. Der Korridor hat zwei Seiten, weil eine dauerhafte Übererfüllung heißt, dass zu vorsichtig prognostiziert wurde, und das kostet im Angebot.",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 0.95,
+    "richtung": "up",
+    "einheit": "ratio",
+    "zweite": {
+     "label": "Obergrenze des Korridors",
+     "label_kurz": "höchstens 105 Prozent",
+     "art": "absolut",
+     "wert": 1.05,
+     "richtung": "down",
+     "einheit": "ratio"
+    }
+   },
+   "engine": {
+    "computable": "teilweise",
+    "source": "silver.device_ledger.realised_vs_record_ratio, Fenster über sale_date",
+    "note": "Herabgestuft 04.10.2026: die Quote rechnet brutto gegen die Bruttoprognose; die Zählregel sagt Netto-Erlös, netto wären es rund 89,5 Prozent. Und die Prognose ist die bei Rückgabe, nicht die bei Vertragsbeginn, auf der laut Zählregel Miete und Kredit stehen. Welche von beiden gemeint ist, muss Eugen sagen. Das Werkzeug führt eine Prognose von Record (main.rv_forecast_of_record) und misst den Erlös dagegen, also genau Eugens Definition. Gemessen am 04.10.2026: 96,8 Prozent bei 1.061 Verkäufen."
+   },
+   "url": "https://claude.ai/artifact/1VmFt6fRomTifWWo1JZgUJ"
+  },
+  {
+   "nr": "E4.1",
+   "satz": "E4",
+   "name": "Anteil Volumen über Rahmenverträge",
+   "ziel": "mindestens 85 Prozent",
+   "takt": "Quartal",
+   "echt_ab": "Monat 1",
+   "horizont": {
+    "monate": 12,
+    "quelle": "Ziel"
+   },
+   "rollen": "alle",
+   "formel": "gelieferter Bestellwert mit Bezug auf einen Rahmenvertrag / gesamter gelieferter Bestellwert",
+   "quelle": "main.purchase_orders.supplier_contract_id gegen main.supplier_contracts",
+   "eigner": "die Rolle Operations für die Strecke, Resale für den Wert",
+   "pruefer": "Controlling",
+   "zaehlregel": "Ein Bezug gilt, wenn die Bestellung auf einen Vertrag zeigt, der am Bestelltag gültig war. Eine Bestellung, die nachträglich einem Vertrag zugeordnet wird, zählt nicht: die Frage ist, ob der Rahmen beim Einkauf stand, nicht ob er sich hinterher finden lässt.",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 0.85,
+    "richtung": "up",
+    "einheit": "ratio"
+   },
+   "engine": {
+    "computable": "teilweise",
+    "source": "main.purchase_orders.supplier_contract_id, Wertanteil über qty_delivered mal unit_price",
+    "note": "Herabgestuft 04.10.2026: Rahmenvertrag ist im Werkzeug kein Merkmal. Gezählt wird jeder Hardware-Vertrag, den die Bestellung nennt; eine Typspalte gibt es nicht, und die Volumenzusage geht nicht ein. Dieselbe Quelle wie A1, hier aber mit dem absoluten Ziel 85 Prozent statt gegen eine Baseline. Gemessen am 04.10.2026: 96,3 Prozent."
+   },
+   "url": "https://claude.ai/artifact/1VmFt6fRomTifWWo1JZgUJ"
+  },
+  {
+   "nr": "E4.2",
+   "satz": "E4",
+   "name": "Durchschnittliche Lieferzeit Neugeräte",
+   "ziel": "höchstens 10 Tage",
+   "takt": "Monat",
+   "echt_ab": "Monat 1",
+   "horizont": {
+    "monate": 12,
+    "quelle": "Ziel"
+   },
+   "rollen": "alle",
+   "formel": "Mittel der Tage von der Bestellung bis zum Wareneingang",
+   "quelle": "silver.serial_timeline.days_order_to_receipt",
+   "eigner": "die Rolle Operations für die Strecke, Resale für den Wert",
+   "pruefer": "Controlling",
+   "zaehlregel": "Von der Bestellung, nicht von der Auftragsbestätigung: die Wartezeit des Hauses beginnt, wenn bestellt wurde. Teillieferungen zählen mit dem Eingang des jeweiligen Geräts, sonst verschwindet die Verspätung im Mittel der vollständigen Lieferungen.",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 10,
+    "richtung": "down",
+    "einheit": "days"
+   },
+   "engine": {
+    "computable": "ja",
+    "source": "silver.serial_timeline.days_order_to_receipt, Fenster über received_at",
+    "note": "Gemessen am 04.10.2026: 25,3 Tage bei 695 Geräten im Fenster."
+   },
+   "url": "https://claude.ai/artifact/1VmFt6fRomTifWWo1JZgUJ"
+  },
+  {
+   "nr": "E4.3",
+   "satz": "E4",
+   "name": "Anteil Neugeräte-Puffer in Konsignation",
+   "ziel": "mindestens 50 Prozent",
+   "takt": "Quartal",
+   "echt_ab": "Monat 1",
+   "horizont": {
+    "monate": 12,
+    "quelle": "Ziel"
+   },
+   "rollen": "alle",
+   "formel": "Puffergeräte im Eigentum des Lieferanten / alle Puffergeräte",
+   "quelle": "Bestandsart am Wareneingang, zu führen im Vertragsregister und am Bestand",
+   "eigner": "die Rolle Operations für die Strecke, Resale für den Wert",
+   "pruefer": "Controlling",
+   "zaehlregel": "Konsignation heißt: das Gerät liegt bei uns, gehört aber dem Lieferanten, bis es gezogen wird. Das ist eine Vertragsklausel und eine Bestandsart, keine Rechnung. Der Hebel ist nicht der Preis, sondern das gebundene Kapital.",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 0.5,
+    "richtung": "up",
+    "einheit": "ratio"
+   },
+   "engine": {
+    "computable": "nein",
+    "source": "",
+    "note": "Weder am Bestand noch im Vertragsregister gibt es eine Bestandsart. Jedes Gerät im Werkzeug ist Eigentum ab Wareneingang. Was fehlt, ist ein Feld Eigentumsübergang am Wareneingang und die passende Klausel im Rahmenvertrag."
+   },
+   "url": "https://claude.ai/artifact/1VmFt6fRomTifWWo1JZgUJ"
+  },
+  {
+   "nr": "E5.1",
+   "satz": "E5",
+   "name": "Sell-through in 30 Tagen",
+   "ziel": "mindestens 70 Prozent",
+   "takt": "Monat",
+   "echt_ab": "Monat 1",
+   "horizont": {
+    "monate": 12,
+    "quelle": "Ziel"
+   },
+   "rollen": "alle",
+   "formel": "Geräte, die binnen 30 Tagen nach Verkaufsfähigkeit verkauft wurden / alle verkaufsfähig gewordenen Geräte",
+   "quelle": "silver.serial_timeline.days_sellable_to_sold",
+   "eigner": "die Rolle Operations für die Strecke, Resale für den Wert",
+   "pruefer": "Controlling",
+   "zaehlregel": "Gezählt ab Verkaufsfähigkeit, nicht ab Rückgabe: alles davor ist die Aufbereitung und gehört in Stufe 2. Ein Gerät, das nach 31 Tagen verkauft wird, zählt voll dagegen; die Grenze ist hart, weil der Wertverfall es ist.",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 0.7,
+    "richtung": "up",
+    "einheit": "ratio"
+   },
+   "engine": {
+    "computable": "teilweise",
+    "source": "silver.serial_timeline.days_sellable_to_sold, Anteil kleiner gleich 30, Fenster über sold_at",
+    "note": "Herabgestuft 04.10.2026: gezählt werden verkaufte Geräte im Fenster, nicht alle verkaufsfähig gewordenen. Was nie verkauft wurde, fehlt im Nenner und schönt die Quote. Gemessen am 04.10.2026: 47,1 Prozent bei 1.061 Verkäufen im Fenster."
+   },
+   "url": "https://claude.ai/artifact/1VmFt6fRomTifWWo1JZgUJ"
+  },
+  {
+   "nr": "E5.2",
+   "satz": "E5",
+   "name": "Anteil Bestand älter als 60 Tage",
+   "ziel": "höchstens 5 Prozent",
+   "takt": "Monat",
+   "echt_ab": "Monat 1",
+   "horizont": {
+    "monate": 12,
+    "quelle": "Ziel"
+   },
+   "rollen": "alle",
+   "formel": "Geräte im Bestand mit Lagerdauer über 60 Tagen / alle Geräte im Bestand",
+   "quelle": "silver.device_ledger.days_in_stock_to_date für Geräte ohne Verkaufsdatum",
+   "eigner": "die Rolle Operations für die Strecke, Resale für den Wert",
+   "pruefer": "Controlling",
+   "zaehlregel": "Stichtagsbetrachtung auf den heutigen Bestand, nicht auf das Verkaufte: die Frage ist, was JETZT zu lange liegt. Verkaufte Geräte gehören nicht in den Nenner, sonst sinkt die Quote allein dadurch, dass viel verkauft wurde.",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 0.05,
+    "richtung": "down",
+    "einheit": "ratio"
+   },
+   "engine": {
+    "computable": "ja",
+    "source": "silver.device_ledger.days_in_stock_to_date, Geräte mit sale_date leer",
+    "note": "Gemessen am 04.10.2026: 21,5 Prozent von 135 Geräten im Bestand."
+   },
+   "url": "https://claude.ai/artifact/1VmFt6fRomTifWWo1JZgUJ"
+  },
+  {
+   "nr": "E6.1",
+   "satz": "E6",
+   "name": "Verlängerungsquote bei Vertragsende",
+   "ziel": "steigend gegen die Baseline",
+   "takt": "Monat",
+   "echt_ab": "Monat 1",
+   "horizont": {
+    "monate": 12,
+    "quelle": "Ziel"
+   },
+   "rollen": "alle",
+   "formel": "beendete Verträge mit Folgevertrag beim selben Kunden / alle beendeten Verträge",
+   "quelle": "main.rental_contracts über replaces_contract_id auf den beendeten Vertrag",
+   "eigner": "die Rolle Operations für die Strecke, Resale für den Wert",
+   "pruefer": "Controlling",
+   "zaehlregel": "Eine Verlängerung ist ein neuer Vertrag beim selben Kunden, nicht zwingend auf demselben Gerät: der Kunde bleibt, das Gerät wird getauscht. Das ist der wirksamste Hebel der ganzen Leiter, weil ein verlängerter Vertrag gar keinen Rückläufer erzeugt, der aufbereitet werden müsste.",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "baseline_delta",
+    "wert": 0.05,
+    "richtung": "up",
+    "einheit": "ratio"
+   },
+   "engine": {
+    "computable": "nein",
+    "source": "",
+    "note": "ZURÜCKGEZOGEN am 04.10.2026 nach einer Gegenprüfung. Hier stand 57 Prozent und erfüllt, gerechnet über replaces_contract_id. Das Feld bedeutet laut Schema ausdrücklich \"For a replacement contract: the contract of the damaged device it replaces\" und wird nur im Schadensfall gesetzt. Gemessen wurde die Schadenstausch-Quote, und sie zeigt in die falsche Richtung: je mehr Geräte kaputtgehen, desto höher die Zahl. Die Prüfung \"selber Kunde, andere Seriennummer\" war wahr und trotzdem kein Beweis, weil ein Schadenstausch genauso aussieht. Was fehlt, ist ein Kennzeichen für den Anschlussvertrag nach planmäßigem Ende, getrennt vom Tausch."
+   },
+   "url": "https://claude.ai/artifact/1VmFt6fRomTifWWo1JZgUJ"
+  },
+  {
+   "nr": "E6.2",
+   "satz": "E6",
+   "name": "Anteil Rückläufer mit Vorab-Selbsttest",
+   "ziel": "mindestens 50 Prozent",
+   "takt": "Monat",
+   "echt_ab": "Monat 1",
+   "horizont": {
+    "monate": 12,
+    "quelle": "Ziel"
+   },
+   "rollen": "alle",
+   "formel": "Rückläufer, bei denen der Kunde vor der Rückgabe selbst geprüft hat / alle Rückläufer",
+   "quelle": "Kennzeichen im Kundenportal oder in der Geräteverwaltung, geführt am Rückgabe-Eingang",
+   "eigner": "die Rolle Operations für die Strecke, Resale für den Wert",
+   "pruefer": "Controlling",
+   "zaehlregel": "Der Selbsttest ist eine Handlung des Kunden VOR der Rückgabe, kein Feld, das wir beim Eingang füllen. Sein Zweck ist, den Zustand früher zu kennen, damit die Prognose und die Kapazitätsplanung früher stimmen.",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 0.5,
+    "richtung": "up",
+    "einheit": "ratio"
+   },
+   "engine": {
+    "computable": "nein",
+    "source": "",
+    "note": "FALLE, am 04.10.2026 geprüft und verworfen: bronze.ret_receipts.grade_declared ist bei 100 Prozent der 2.745 Rückläufer gefüllt, weil es ein Pflichtfeld des Eingangs ist, kein Selbsttest-Kennzeichen. Eine Quote, die immer 100 ergibt, misst nichts. Was fehlt, ist ein Kennzeichen, ob der Kunde vor der Rückgabe selbst geprüft hat."
+   },
+   "url": "https://claude.ai/artifact/1VmFt6fRomTifWWo1JZgUJ"
+  },
+  {
+   "nr": "EG1",
+   "satz": "EG",
+   "name": "Abverkaufsmenge gegen Restwert-Realisierung",
+   "ziel": "Menge steigend, Realisierung bleibt über 95 Prozent",
+   "takt": "Monat",
+   "echt_ab": "Monat 1",
+   "horizont": {
+    "monate": 12,
+    "quelle": "Ziel"
+   },
+   "rollen": "alle",
+   "formel": "verkaufte Geräte im Monat, gelesen gegen die Restwert-Realisierung desselben Monats",
+   "quelle": "silver.device_ledger über sale_date und realised_vs_record_ratio",
+   "eigner": "die Rolle Operations für die Strecke, Resale für den Wert",
+   "pruefer": "Controlling",
+   "zaehlregel": "Die beiden werden nie einzeln gelesen. Menge allein lässt sich jederzeit kaufen, indem man den Preis senkt; erst die Realisierung daneben zeigt, ob die Menge Geld gebracht oder Geld gekostet hat. Die Zeile gilt als verfehlt, sobald eine der beiden Seiten verfehlt ist.",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "baseline_delta",
+    "wert": 10,
+    "richtung": "up",
+    "einheit": "count",
+    "einheit_wort": "Geräte je Monat",
+    "zweite": {
+     "label": "Restwert-Realisierung im selben Fenster",
+     "label_kurz": "Realisierung",
+     "art": "absolut",
+     "wert": 0.95,
+     "richtung": "up",
+     "einheit": "ratio"
+    }
+   },
+   "engine": {
+    "computable": "teilweise",
+    "source": "silver.device_ledger: Anzahl Verkäufe und realised_vs_record_ratio, selbes Fenster",
+    "note": "Herabgestuft 04.10.2026: die Menge ist ein Monatsmittel über das Fenster, keine Reihe, und die Baseline stammt aus Monaten mit sehr wenigen Verkäufen. Beide Seiten aus derselben Tabelle, aber aus verschiedenen Spalten; kein Zirkelschluss. Gemessen am 04.10.2026: 1.061 Verkäufe bei 96,8 Prozent Realisierung."
+   },
+   "url": "https://claude.ai/artifact/1VmFt6fRomTifWWo1JZgUJ"
+  },
+  {
+   "nr": "EG2",
+   "satz": "EG",
+   "name": "Grading-Durchsatz gegen Reklamationen nach Redeploy",
+   "ziel": "Durchsatz über 115 Prozent, Reklamationen nicht steigend",
+   "takt": "Monat",
+   "echt_ab": "Monat 1",
+   "horizont": {
+    "monate": 12,
+    "quelle": "Ziel"
+   },
+   "rollen": "alle",
+   "formel": "Durchsatz der Aufbereitung, gelesen gegen Reklamationen binnen 30 Tagen nach Wiedereinsatz",
+   "quelle": "bronze.rf_work_orders gegen Störungsmeldungen am wiedereingesetzten Gerät",
+   "eigner": "die Rolle Operations für die Strecke, Resale für den Wert",
+   "pruefer": "Controlling",
+   "zaehlregel": "Schneller ist nur dann besser, wenn das Gerät beim nächsten Nutzer hält. Ohne die zweite Seite belohnt der Durchsatz das Durchwinken.",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 1.15,
+    "richtung": "up",
+    "einheit": "ratio"
+   },
+   "engine": {
+    "computable": "nein",
+    "source": "",
+    "note": "Es gibt keinen Redeploy im Modell: am 04.10.2026 nachgezählt trägt KEINE Seriennummer einen zweiten Mietvertrag. bronze.sd_tickets führt Schadensmeldungen während der ersten Miete, nicht nach einem Wiedereinsatz. Die Gegenseite dieser Zeile existiert im Werkzeug nicht."
+   },
+   "url": "https://claude.ai/artifact/1VmFt6fRomTifWWo1JZgUJ"
+  },
+  {
+   "nr": "EG3",
+   "satz": "EG",
+   "name": "Lieferfähigkeit gegen gebundenes Kapital",
+   "ziel": "Servicegrad halten, Kapitalbindung unter 45 Tagen",
+   "takt": "Monat",
+   "echt_ab": "Monat 1",
+   "horizont": {
+    "monate": 12,
+    "quelle": "Ziel"
+   },
+   "rollen": "alle",
+   "formel": "Anteil sofort bedienbarer Anforderungen, gelesen gegen die mittlere Lagerdauer des Bestands",
+   "quelle": "Lagerdauer aus silver.device_ledger.days_in_stock_to_date; der Servicegrad braucht eine Anforderungsliste",
+   "eigner": "die Rolle Operations für die Strecke, Resale für den Wert",
+   "pruefer": "Controlling",
+   "zaehlregel": "Volle Regale sind kein Erfolg, sondern eine Entscheidung, Geld liegen zu lassen. Die Zeile existiert, damit niemand den Servicegrad durch Bestand kauft, ohne dass der Preis dafür sichtbar wird.",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 45,
+    "richtung": "down",
+    "einheit": "days"
+   },
+   "engine": {
+    "computable": "teilweise",
+    "source": "silver.device_ledger.days_in_stock_to_date für Geräte ohne Verkaufsdatum",
+    "note": "Nur die Gegenseite ist rechenbar: mittlere Lagerdauer 52,2 Tage bei 2,35 Millionen Euro Bestandswert (gemessen 04.10.2026). Der Servicegrad fehlt, weil es keine Liste der Anforderungen gibt, gegen die man sofort bedienbar messen könnte. Die Zeile zeigt also den Preis ohne den Nutzen."
+   },
+   "url": "https://claude.ai/artifact/1VmFt6fRomTifWWo1JZgUJ"
+  },
+  {
+   "nr": "EG4",
+   "satz": "EG",
+   "name": "Neue Flottengeräte gegen Utilization",
+   "ziel": "Auslastung über 90 Prozent, erst dann neue Geräte",
+   "takt": "Monat",
+   "echt_ab": "Monat 1",
+   "horizont": {
+    "monate": 12,
+    "quelle": "Ziel"
+   },
+   "rollen": "alle",
+   "formel": "Gerätezugänge im Monat, gelesen gegen vermietete Geräte durch vermietete plus auf Lager",
+   "quelle": "silver.device_ledger.lifecycle_status gegen die Wareneingänge des Monats",
+   "eigner": "die Rolle Operations für die Strecke, Resale für den Wert",
+   "pruefer": "Controlling",
+   "zaehlregel": "Auslastung heißt hier vermietet durch FLOTTE, nicht belegte Lagerplätze durch Lagerplätze. Wer das verwechselt, meldet eine volle Halle als ausgelastete Flotte. Verkaufte Geräte gehören nicht in den Nenner, sie sind keine Flotte mehr.",
+   "beispiel": false,
+   "ziel_wert": {
+    "art": "absolut",
+    "wert": 0.9,
+    "richtung": "up",
+    "einheit": "ratio"
+   },
+   "engine": {
+    "computable": "teilweise",
+    "source": "silver.device_ledger.lifecycle_status: rented / (rented + in_stock); Zugänge über received_at",
+    "note": "Herabgestuft 04.10.2026: der Nenner trägt den Verkaufsbestand mit, der keine Flotte mehr ist, und nicht die Geräte in Prüfung oder mit ausstehender Rückgabe. Gekaufte, nie vermietete Geräte bewegen die Zahl gar nicht, obwohl genau das das Risiko dieser Zeile ist. Gemessen am 04.10.2026: 2.473 vermietet, 135 auf Lager, also 94,8 Prozent Auslastung. Die 2.544 verkauften Geräte bleiben außen vor; mit ihnen im Nenner käme 47,1 Prozent heraus, und das wäre die falsche Zahl."
+   },
+   "url": "https://claude.ai/artifact/1VmFt6fRomTifWWo1JZgUJ"
   }
  ],
- "satz_d_hinweis": "Satz D, ESG, seit Fassung 4: sechs Kennzahlen D1 bis D6 aus dem Geräte-Hauptbuch oder aus Nachweisen mit Datum; Gruppe esg."
+ "satz_d_hinweis": "Satz D, ESG, seit Fassung 4: sechs Kennzahlen D1 bis D6 aus dem Geräte-Hauptbuch oder aus Nachweisen mit Datum; Gruppe esg.",
+ "satz_e_hinweis": "Satz E, angelegt am 04.10.2026: die sechs Stufen der Lager- und Flottenskalierung plus die vier Gegenpaare. Jede Stufe hat ein Tor; was darüber steht, ist erst belastbar, wenn das Tor darunter hält. Die Einstufung in engine.computable wurde je Kennzahl gegen data/restwert.duckdb nachgemessen, nicht geschätzt.",
+ "satz_e_url": "https://claude.ai/artifact/1VmFt6fRomTifWWo1JZgUJ",
+ "satz_e_pruefung": "Gegengeprüft am 04.10.2026 von einem zweiten, unabhängigen Lauf. Ergebnis: zwei Kennzahlen halten als 'ja' (E4.2 Lieferzeit, E5.2 Bestandsalter), neun sind Näherungen, sieben fehlen. E6.1 wurde ganz zurückgezogen, weil sie das Gegenteil dessen belohnte, was sie versprach."
 }

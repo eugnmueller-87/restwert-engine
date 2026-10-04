@@ -8,8 +8,9 @@
    im Rahmen, den jede Zeile über den Link Definition mit Anker erreicht. Eine Zeile klappt auf Klick ihre Beitragszeilen auf und trägt den Link Definition auf den
    Rahmen. Der Zyklus (Quartal, Halbjahr, Jahr) kommt über opts.period, der Wechsel über opts.setPeriod, die offene
    Zeile über opts.open und opts.toggle.
-   Seit 18.09.2026: Satz D (ESG, sechs Kennzahlen) als vierte Tabelle, und je Zeile der Eigner (Spalte Eigner): Team
-   (Standard) oder Individuell mit einer der sechs Rollen aus owners.yaml und einem Namen. Der Eigner kommt über opts.owner
+   Seit 18.09.2026: Satz D (ESG, sechs Kennzahlen) als eigene Tabelle, und je Zeile der Eigner (Spalte Eigner): Team
+   (Standard) oder Individuell mit einer der Rollen aus owners.yaml und einem Namen. Seit 04.10.2026 ohne Satz B
+   (Indirekt): drei Sätze, A, C und D. Der Eigner kommt über opts.owner
    (Abbild Nr zu {mode, role, name}) und wird über opts.setOwner(nr, patch) geändert; die Hülle hält ihn ausschließlich im
    Browser (localStorage 'restwert-kpi-owner'), nie in data/*.json. Bei Individuell zeigt die Zeile Rolle und Name als
    Pille neben der Kennzahl und die Beiträge nur dieser Rolle; Team zeigt alle Rollen. Pille und Bedienelemente gehen
@@ -46,7 +47,7 @@
     var setOwner = typeof opts.setOwner === 'function' ? opts.setOwner : null;
     var ownerMap = opts.owner && typeof opts.owner === 'object' ? opts.owner : {};
     var band = isNum(D.gelb_band) ? f.pct(D.gelb_band) : '';
-    /* die sechs Rollen aus owners.yaml (ohne Team) für die Auswahl bei Individuell */
+    /* die Rollen aus owners.yaml (ohne Team) für die Auswahl bei Individuell; die Zahl kommt aus den Daten */
     var roles = (D.owners && Array.isArray(D.owners.roles) ? D.owners.roles : []).filter(function (r) { return r.code !== 'TEAM'; });
     var roleLabel = function (code) { var r = roles.filter(function (x) { return x.code === code; })[0]; return r ? r.label : ''; };
     var ownerOf = function (nr) {
@@ -187,7 +188,7 @@
       { k: 'Bis', v: 'Zyklusstart plus Horizont des Rahmens, gerundet auf das Ende des Zyklusabschnitts (' + periodLabel + '), in dem das Datum liegt.' },
       { k: 'Beiträge', v: 'je Rolle die gebuchten Maßnahmen und ihre Wirkung in Euro; leer heißt keine gebucht. Stufe realisiert bei Bestätigung oder Gutschrift, verhandelt bei unbestätigter Preisreduktion, sonst identifiziert.' },
       { k: 'Beleg-ID', v: 'die Kennung in der Quelle; bei Entscheidungen die ersten Zeichen der decision_id.' },
-      { k: 'Eigner', v: 'Team (Standard) oder Individuell mit einer der sechs Rollen und einem Namen; bei Individuell zeigt die Zeile Rolle und Name neben der Kennzahl und die Beiträge nur dieser Rolle. Die Wahl bleibt in diesem Browser.' },
+      { k: 'Eigner', v: 'Team (Standard) oder Individuell mit einer der ' + f.qty(roles.length) + ' Rollen und einem Namen; bei Individuell zeigt die Zeile Rolle und Name neben der Kennzahl und die Beiträge nur dieser Rolle. Die Wahl bleibt in diesem Browser.' },
       { k: 'Status', v: 'erfüllt, im Korridor (innerhalb ' + band + ' des Ziels auf der schlechteren Seite), verfehlt, nicht messbar, nicht im Werkzeug; bei zwei Teilzahlen zählt die schlechtere.' }
     ];
     var tables = D.sets.map(function (s) {
@@ -206,9 +207,13 @@
         if (isOpen) trs = trs.concat(bookRows(r));
       });
       var nStatus = ['erfuellt', 'gelb', 'verfehlt', 'nicht_messbar', 'nicht_im_werkzeug'].map(function (k) { var n = list.filter(function (r) { return r.status === k; }).length; return n ? f.qty(n) + ' ' + STATUS[k].label : ''; }).filter(Boolean).join(', ');
+      /* Satz E (04.10.2026) trägt je Tabelle ein Tor: die Bedingung, ab der die Stufe darüber überhaupt
+         belastbar ist. Es steht VOR der Zählung, weil es die Frage ist, auf die die Zeilen antworten;
+         ein Satz ohne Tor (A, C, D) liest sich unverändert weiter. */
+      var tor = s.gate ? 'Tor zur nächsten Stufe: ' + s.gate + '. ' : '';
       return E.TABLE('k-' + s.key, s.label, cols, trs, {
         n: list.length, defs: defs,
-        note: f.qty(list.length) + ' Kennzahlen: ' + nStatus + '. Rot, wenn verfehlt; Zeile anklicken für die Beiträge und die Definition.'
+        note: tor + f.qty(list.length) + ' Kennzahlen: ' + nStatus + '. Rot, wenn verfehlt; Zeile anklicken für die Beiträge und die Definition.'
       });
     });
 
@@ -219,5 +224,5 @@
       periodOpts: periodOpts, period: period
     };
   };
-  w.RE.kpis.version = 6;
+  w.RE.kpis.version = 7;
 })(window);

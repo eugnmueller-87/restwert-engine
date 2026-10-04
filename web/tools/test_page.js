@@ -422,7 +422,15 @@ async function uiSmoke() {
   await step('kpis', 'KPIs: Eigner auf Individuell setzen, Name eintragen, Seite neu laden, Wert bleibt', async () => {
     await tab('KPIs');
     const K = data('kpis');
-    expect(K.sets.length === 4 && K.sets[3].key === 'D', 'vier Sätze, der vierte ist D (ESG)');
+    /* 04.10.2026: A, C, D plus die sieben Tabellen des Satzes E (sechs Stufen und die Gegenpaare).
+       Satz B bleibt draussen, der indirekte Einkauf ist nicht Teil des Werkzeugs. Jede Stufentabelle
+       muss ihr Tor tragen: eine Stufe ohne Tor ist nur eine Liste. */
+    const stufen = K.sets.filter(s => /^E/.test(s.key));
+    expect(K.sets.length === 10 && !K.sets.some(s => s.key === 'B'), 'zehn Tabellen ohne Satz B');
+    expect(['A', 'C', 'D'].every((k, i) => K.sets[i].key === k), 'erst A, C, D');
+    expect(stufen.length === 7 && stufen.every(s => s.gate && s.gate.length > 10), 'sieben Tabellen des Satzes E, jede mit ihrem Tor');
+    expect(K.rows.filter(r => /^E/.test(r.satz)).length === 18, 'achtzehn Kennzahlen in Satz E');
+    expect(!mainText().includes('Indirekt'), 'kein indirekter Einkauf auf dem Reiter');
     expect($$('#app main section h3').filter(x => x.textContent.trim() === 'Satz D, ESG').length === 1, 'Tabelle Satz D, ESG');
     expect(mainText().includes('Namen bleiben in diesem Browser, sie werden nirgends gespeichert oder übertragen.'), 'Satz zum Verbleib der Namen unter den Kacheln');
     const nr = K.rows[0].nr, sel = () => $('#rw-kpi-owner-' + nr);
