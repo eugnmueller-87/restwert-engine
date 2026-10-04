@@ -181,11 +181,22 @@
         x: xs, y: ys, line: { color: pal.ink, dash: p[1], width: 2 }, hoverinfo: 'skip'
       });
     });
+    /* Die Achse lief fest von 0 bis XMAX, obwohl kein Beleg vor Monat 20 existiert: zwei Drittel
+       der Flaeche blieben leer und die Kurven klebten rechts zusammen. Jetzt spannt sie sich ueber
+       die Belege, mit drei Monaten Luft, und sie umfasst immer die Marken bei 24 und 36 Monaten,
+       weil man gegen die beiden liest. Keine Daten, keine Spanne: dann die alte Vorgabe. */
+    var xAll = [];
+    traces.forEach(function (t) { (t.x || []).forEach(function (v) { if (isNum(v)) xAll.push(+v); }); });
+    var xRange = [0, XMAX];
+    if (xAll.length) {
+      var xlo = Math.min.apply(null, xAll), xhi = Math.max.apply(null, xAll);
+      xRange = [Math.max(0, Math.min(xlo - 3, H24 - 2)), Math.min(XMAX, Math.max(xhi + 3, H36 + 2))];
+    }
     var chart = {
       traces: traces,
       layout: {
         paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', font: { family: pal.font, color: pal.ink, size: 13 },
-        xaxis: { title: { text: 'Monate seit deutschem Verkaufsstart des Modells' }, gridcolor: pal.grid, linecolor: pal.line, zeroline: false, range: [0, XMAX] },
+        xaxis: { title: { text: 'Monate seit deutschem Verkaufsstart des Modells' }, gridcolor: pal.grid, linecolor: pal.line, zeroline: false, range: xRange },
         yaxis: { title: { text: 'Realisierung in % der UVP' }, tickvals: YTICKS, ticktext: YTICKS.map(function (t) { return f.pct(t); }), range: [0, 1.05], gridcolor: pal.grid, linecolor: pal.line, zeroline: false },
         legend: { orientation: 'h', y: 1.02, yanchor: 'bottom', x: 0, xanchor: 'left', font: { color: pal.ink } },
         hoverlabel: { font: { family: pal.font } },

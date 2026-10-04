@@ -112,8 +112,13 @@
   function ROW(cells, o) {
     o = o || {};
     var bold = !!(o.bold || o.sum);
+    cells = Array.isArray(cells) ? cells : [];
+    /* seit 21.09.2026: fett fuer die Zeile heisst fett fuer jede Zelle. Vorher stand das Gewicht nur am tr, und jede
+       Zelle setzte ihr eigenes 400 darueber; die Summenzeilen (TCO: Kosten bis Verkauf, TCO) blieben deshalb mager,
+       obwohl die Definition "die zwei fetten Zeilen" versprach. Eine Zelle, die selbst fett ist, bleibt es. */
+    if (bold) cells = cells.map(function (x) { return x && x.weight === 400 ? Object.assign({}, x, { weight: 600 }) : x; });
     return {
-      cells: Array.isArray(cells) ? cells : [],
+      cells: cells,
       weight: bold ? 600 : 400,
       bg: o.bg ? String(o.bg) : 'transparent',
       cursor: typeof o.onClick === 'function' ? 'pointer' : 'default',

@@ -127,14 +127,23 @@
   function renderDeviceSettings(o) {
     if (!o.isDevice || !o.ready) return null;
     var numField = function (label, id, step, value, onFocus, onChange, onBlur, border) {
-      return S.Field(label, id, h('input', { className: 'input', id: id, type: 'number', step: step, value: value, onFocus: onFocus, onChange: onChange, onBlur: onBlur, onKeyDown: o.onKeyCommit, style: { textAlign: 'right', borderColor: border === 'var(--color-accent)' ? 'var(--c-green)' : undefined } }), { width: 150 });
+      // 150 war schmaler als die Beschriftung ("EINKAUFSPREIS OHNE MEHRWERTSTEUER, €" braucht
+      // rund 250 px einzeilig). Die Beschriftung lief aus ihrem Feld heraus, frass den Abstand
+      // zum naechsten und schob das dritte Feld allein in eine zweite Zeile. 184 traegt zwei
+      // saubere Zeilen Beschriftung, minWidth 0 haelt das Grid davon ab, wieder auszubrechen.
+      return S.Field(label, id, h('input', { className: 'input', id: id, type: 'number', step: step, value: value, onFocus: onFocus, onChange: onChange, onBlur: onBlur, onKeyDown: o.onKeyCommit, style: { textAlign: 'right', borderColor: border === 'var(--color-accent)' ? 'var(--c-green)' : undefined } }), { width: 184, minWidth: 0 });
     };
+    // Die drei Geldfelder gehoeren zusammen und brechen deshalb zusammen. Vorher wanderte bei
+    // engem Fenster nur "Kosten bis Verkauf" allein in die zweite Zeile, was aussah, als haette
+    // jemand etwas vergessen. Jetzt steht oben, was man einstellt, darunter, was es kostet.
+    var geld = h('div', { style: { display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', gap: '12px 18px', minWidth: 0 } },
+      numField('Einkaufspreis ohne Mehrwertsteuer, €', 'rw-buy', '1', o.buyValue, o.onFocusBuy, o.onDraftBuy, o.onBlurBuy, o.buyBorder),
+      numField('Miete je Monat ohne Mehrwertsteuer, €', 'rw-rate', '0.01', o.rateValue, o.onFocusRate, o.onDraftRate, o.onBlurRate, o.rateBorder),
+      numField('Kosten bis Verkauf, €', 'rw-cost', '1', o.costValue, o.onFocusCost, o.onDraftCost, o.onBlurCost, o.costBorder));
     return h('section', { 'aria-label': 'Rechnung einstellen', className: 'card toolbar' },
       S.Seg('rw-term-l', 'Laufzeit', 'rw-term', o.termOpts),
       S.Seg('rw-when-l', 'Kauf', 'rw-when', o.whenOpts),
-      numField('Einkaufspreis ohne Mehrwertsteuer, €', 'rw-buy', '1', o.buyValue, o.onFocusBuy, o.onDraftBuy, o.onBlurBuy, o.buyBorder),
-      numField('Miete je Monat ohne Mehrwertsteuer, €', 'rw-rate', '0.01', o.rateValue, o.onFocusRate, o.onDraftRate, o.onBlurRate, o.rateBorder),
-      numField('Kosten bis Verkauf, €', 'rw-cost', '1', o.costValue, o.onFocusCost, o.onDraftCost, o.onBlurCost, o.costBorder),
+      geld,
       o.hasOverride ? h('button', { type: 'button', className: 'btn btn-ghost', onClick: o.resetOverrides, style: { alignSelf: 'flex-end' } }, 'Vorbelegung wiederherstellen') : null);
   }
 
