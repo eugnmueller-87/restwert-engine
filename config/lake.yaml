@@ -131,15 +131,6 @@ po_short_delivery_share: 0.10
 price_drop_share: 0.15
 price_drop_pct: 0.10
 suppliers_hardware: []       # unused by the lake generator (supplier_route decides)
-suppliers_indirect: ["Facilities provider (role-only)", "Marketing agency (role-only)", "Consulting firm (role-only)",
-                     "Packaging supplier (role-only)", "Software vendor (role-only)", "Logistics partner (role-only)"]
-indirect_categories: [logistics, repair, refurbishment, software, marketing, facilities, consulting, packaging]
-indirect_rows_per_month: 40
-indirect_has_po: 0.75
-indirect_has_contract: 0.65
-indirect_saving_share: 0.15
-indirect_confirmed_share: 0.60
-indirect_saving_type_mix: {hard_price_reduction: 0.60, cost_avoidance: 0.30, rebate: 0.10}  # only hard counts vs plan
 # ----------------------------------------------------------------------------- v0.2 blocks
 # Every block below is a synthetic design parameter with an owner: design_parameter_owners
 # names, per top-level block, the role that signs the value (placeholder "(name)" until a real
@@ -188,14 +179,6 @@ design_parameter_owners:
   po_short_delivery_share: "Head of Procurement (name)"
   price_drop_share: "Category Manager Hardware (name)"
   price_drop_pct: "Category Manager Hardware (name)"
-  suppliers_indirect: "Head of Indirect Procurement (name)"
-  indirect_categories: "Head of Indirect Procurement (name)"
-  indirect_rows_per_month: "Head of Indirect Procurement (name)"
-  indirect_has_po: "Head of Indirect Procurement (name)"
-  indirect_has_contract: "Head of Indirect Procurement (name)"
-  indirect_saving_share: "Head of Indirect Procurement (name)"
-  indirect_confirmed_share: "Head of Indirect Procurement (name)"
-  indirect_saving_type_mix: "Head of Indirect Procurement (name)"
 fleet_mix: {Smartphone: 0.60, Tablet: 0.15, Laptop: 0.25}
 oem_share:
   Smartphone: {Apple: 0.50, Samsung: 0.30, Google: 0.10, Motorola: 0.06, Fairphone: 0.03, "HMD Global (Nokia)": 0.01}

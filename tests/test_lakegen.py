@@ -123,7 +123,6 @@ def test_lake_config_loads_and_validates(lake_cfg, assumptions):
     assert lake_cfg.families["android_like"].launch_cadence_months == 1
     assert lake_cfg.families["tablet_like"].launch_cadence_months == 2
     assert lake_cfg.families["laptop_like"].launch_cadence_months == 2
-    assert all(s.endswith(ROLE_ONLY_SUFFIX) for s in lake_cfg.suppliers_indirect)
     assert all(r.endswith(ROLE_ONLY_SUFFIX) for r in lake_cfg.resellers)
     text = LAKE_CONFIG.read_text(encoding="utf-8")
     assert EM_DASH not in text
@@ -368,7 +367,7 @@ def test_different_seed_differs(tmp_path, lake_cfg):
 def test_every_landing_file_has_synthetic_line_and_column(session_lake):
     keys = {_feed_key_of(p) for p in session_lake.files}
     assert keys == set(FEED_KEYS), sorted(set(FEED_KEYS) - keys)
-    assert len(FEED_KEYS) == 19
+    assert len(FEED_KEYS) == 18
     for p in session_lake.files:
         first, df = _read_landing(p)
         key = _feed_key_of(p)

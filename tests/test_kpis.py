@@ -37,11 +37,6 @@ EXPECTED_IDS_AND_NAMES = {
     "KPI_REC_MARGIN_MIX_CHANNEL": "Margin mix by channel",
     "KPI_REC_DAYS_TO_SALE": "Days to sale",
     "KPI_REC_GRADING_ACCURACY": "Grading accuracy",
-    "KPI_IND_SAVINGS_CONFIRMED": "Savings vs plan confirmed by controlling",
-    "KPI_IND_SPEND_UNDER_MGMT": "Share of spend under management",
-    "KPI_IND_PO_RATE": "PO rate",
-    "KPI_IND_MAVERICK_SHARE": "Maverick share",
-    "KPI_IND_ACTIVE_SUPPLIERS": "Active suppliers",
 }
 
 
@@ -82,9 +77,9 @@ def test_registry_specs_are_complete():
         assert callable(spec.fn)
 
 
-def test_tree_has_five_areas_top_first_and_covers_registry():
+def test_tree_has_four_areas_top_first_and_covers_registry():
     areas = [area for area, _ in KPI_TREE]
-    assert areas == ["Top", "Procurement", "Inventory", "Recommerce", "Indirect"]
+    assert areas == ["Top", "Procurement", "Inventory", "Recommerce"]
     tree_ids = [k for _, ids in KPI_TREE for k in ids]
     assert sorted(tree_ids) == sorted(KPI_REGISTRY)
     assert len(tree_ids) == len(set(tree_ids))
@@ -155,22 +150,6 @@ def test_weeks_of_cover_26(con):
     assert kv.denominator == pytest.approx(2 / 13)
 
 
-def test_savings_ignores_unconfirmed_rows_claimed_only_in_note(con):
-    kv = value_of("KPI_IND_SAVINGS_CONFIRMED", con)
-    assert kv.status == "ok"
-    assert kv.value == pytest.approx(120 / 1000)
-    assert kv.numerator == pytest.approx(120.0)
-    assert kv.denominator == pytest.approx(1000.0)
-    assert "170.00" in kv.note  # claimed total including the unconfirmed 50
-    assert kv.n == 2
-
-
-def test_savings_not_measurable_without_plan(con):
-    no_plan = KpiTargets(version=1, savings_plan_eur={2024: 1.0}, savings_plan_owner="x", targets={}, targets_owner="y")
-    kv = KPI_REGISTRY["KPI_IND_SAVINGS_CONFIRMED"].fn(con, AS_OF, no_plan)
-    assert kv.status == "not_measurable" and kv.value is None
-
-
 def test_landed_vs_benchmark_excludes_and_counts_models_without_benchmark(con):
     kv = value_of("KPI_PROC_LANDED_VS_BENCHMARK", con)
     assert kv.status == "ok"
@@ -187,26 +166,10 @@ def test_landed_vs_benchmark_excludes_and_counts_models_without_benchmark(con):
 def test_spend_under_contract_hand_number(con):
     kv = value_of("KPI_PROC_SPEND_UNDER_CONTRACT", con)
     assert kv.status == "ok"
-    assert kv.value == pytest.approx(2650 / 4450)
+    assert kv.value == pytest.approx(1450 / 2450)
     bd = kv.breakdown.set_index("dimension_value")
+    assert list(bd.index) == ["hardware"]  # hardware only since 04.10.2026
     assert bd.loc["hardware", "value"] == pytest.approx(1450 / 2450)
-    assert bd.loc["indirect", "value"] == pytest.approx(1200 / 2000)
-
-
-def test_indirect_shares(con):
-    assert value_of("KPI_IND_SPEND_UNDER_MGMT", con).value == pytest.approx(1700 / 2000)
-    assert value_of("KPI_IND_PO_RATE", con).value == pytest.approx(1500 / 2000)
-    assert value_of("KPI_IND_MAVERICK_SHARE", con).value == pytest.approx(300 / 2000)
-
-
-def test_active_suppliers(con):
-    kv = value_of("KPI_IND_ACTIVE_SUPPLIERS", con)
-    assert kv.status == "ok"
-    assert kv.value == 5.0  # G, H, I from indirect; A, B from delivered POs; J outside window; C not delivered
-    assert kv.denominator is None
-    assert kv.n == 5
-    bd = dict(zip(kv.breakdown["dimension_value"], kv.breakdown["n"]))
-    assert bd["hardware"] == 2 and bd["logistics"] == 1
 
 
 def test_lifecycle_margin_per_device(con):
@@ -336,7 +299,7 @@ def test_compute_all_frames_have_table_shape(con):
     values, breakdown = compute_all(con, AS_OF, TARGETS, run_id="test-run")
     assert list(values.columns) == list(compute.KPI_VALUES_COLUMNS)
     assert list(breakdown.columns) == list(compute.KPI_BREAKDOWN_COLUMNS)
-    assert len(values) == 20 and values["kpi_id"].is_unique
+    assert len(values) == 15 and values["kpi_id"].is_unique
     assert values["kpi_id"].tolist()[:2] == ["KPI_TOP_LIFECYCLE_MARGIN", "KPI_TOP_RV_FORECAST_ERROR"]
     assert set(values["status"]) <= {"ok", "not_measurable"}
     nm = values[values["status"] == "not_measurable"]
@@ -360,15 +323,15 @@ def test_run_kpis_writes_tables_and_catalogue(tmp_path, monkeypatch):
     monkeypatch.setattr(catalogue, "write_catalogue", fake_write)
     summary = run_kpis(con, AS_OF, TARGETS, write_catalogue_md=True)
     assert summary.command == "kpis"
-    assert summary.counts["kpi_values"] == 20
+    assert summary.counts["kpi_values"] == 15
     assert summary.counts["kpi_breakdown"] > 0
     values = db.read_df(con, "SELECT kpi_id, status, value FROM kpi_values ORDER BY kpi_id")
-    assert len(values) == 20
+    assert len(values) == 15
     assert db.read_df(con, "SELECT count(*) AS n FROM kpi_breakdown")["n"].iloc[0] == summary.counts["kpi_breakdown"]
     assert target.exists()
     # rerun for the same as_of replaces instead of duplicating
     run_kpis(con, AS_OF, TARGETS, write_catalogue_md=False)
-    assert db.read_df(con, "SELECT count(*) AS n FROM kpi_values")["n"].iloc[0] == 20
+    assert db.read_df(con, "SELECT count(*) AS n FROM kpi_values")["n"].iloc[0] == 15
 
 
 def test_render_catalogue_contains_every_id_and_governance_sentence():
@@ -378,18 +341,19 @@ def test_render_catalogue_contains_every_id_and_governance_sentence():
     for kpi_id, name in EXPECTED_IDS_AND_NAMES.items():
         assert kpi_id in text
         assert name in text
-    for area in ("Top", "Procurement", "Inventory", "Recommerce", "Indirect"):
+    for area in ("Top", "Procurement", "Inventory", "Recommerce"):
         assert f"## {area}" in text
+    assert "## Indirect" not in text
     assert "\u2014" not in text  # no em dash in generated prose
     with_targets = catalogue.render_catalogue(targets=TARGETS)
-    assert "Head of Indirect Procurement (fixture)" in with_targets
+    assert "CFO (fixture)" in with_targets
 
 
 def test_write_catalogue_writes_file(tmp_path):
     path = catalogue.write_catalogue(tmp_path / "docs" / "KPI_CATALOGUE.md", targets=TARGETS)
     raw = path.read_bytes()
     assert not raw.startswith(b"\xef\xbb\xbf")
-    assert b"KPI_IND_ACTIVE_SUPPLIERS" in raw
+    assert b"KPI_PROC_SPEND_UNDER_CONTRACT" in raw and b"KPI_IND_" not in raw
 
 
 def test_never_zero_when_denominator_is_zero():
@@ -401,26 +365,6 @@ def test_never_zero_when_denominator_is_zero():
     assert registry.ratio(5.0, 0.0) is None
     assert registry.ratio(5.0, math.nan) is None
 
-
-def test_savings_only_hard_price_reductions_count(con):
-    con.execute("UPDATE indirect_spend SET saving_type = 'cost_avoidance', baseline_amount = amount + saving WHERE spend_id = 'IS-4'")
-    con.execute("UPDATE indirect_spend SET saving_type = 'hard_price_reduction', baseline_amount = amount + saving WHERE spend_id = 'IS-1'")
-    kv = value_of("KPI_IND_SAVINGS_CONFIRMED", con)
-    assert kv.status == "ok"
-    assert kv.numerator == pytest.approx(100.0)          # IS-4 (20, confirmed) is avoidance: reported, not counted
-    assert kv.value == pytest.approx(100 / 1000)
-    assert "cost avoidance 20.00 EUR" in kv.note
-    assert "untyped" not in kv.note
-    bd = kv.breakdown.set_index("dimension_value")
-    assert bd.loc["cost_avoidance", "numerator"] == pytest.approx(20.0)
-    assert bd.loc["hard_price_reduction", "numerator"] == pytest.approx(100.0)
-
-
-def test_savings_untyped_rows_count_as_hard_and_are_flagged():
-    fresh = kf.fixture_con()                                  # untouched fixture: rows carry no saving_type
-    kv = value_of("KPI_IND_SAVINGS_CONFIRMED", fresh)
-    assert kv.numerator == pytest.approx(120.0)
-    assert "2 confirmed row(s) without saving_type counted as hard (untyped)" in kv.note
 
 
 def test_margin_mix_is_labelled_net_recovery_before_asset_cost(con):

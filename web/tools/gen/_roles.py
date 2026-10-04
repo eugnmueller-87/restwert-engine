@@ -6,7 +6,6 @@ The motors carry the same table in web/engine/_helpers.js (E.fmt.role) for texts
 ROLE_DE = [
     ("Head of Service Operations", "Leitung Service"),
     ("Head of Recommerce", "Leitung Recommerce"),
-    ("Head of Indirect Procurement", "Leitung Indirekter Einkauf"),
     ("Head of Procurement", "Einkaufsleitung"),
     ("Head of Customer Success", "Leitung Customer Success"),
     ("Data owner", "Dateneigner"),

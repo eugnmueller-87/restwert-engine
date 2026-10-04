@@ -18,8 +18,8 @@ Choices where the spec is silent (all documented here):
   OR ``as_of <= notice_deadline <= horizon_end`` with
   ``horizon_end = add_months(as_of, horizon_months)``; both bounds inclusive.
   ``action_required = notice_deadline <= add_months(as_of, 2) or auto_renewal``.
-- ``contract_coverage`` windows hardware spend by ``delivered_date`` and
-  indirect spend by ``invoice_date``, trailing 12 months, both inclusive.
+- ``contract_coverage`` windows hardware spend by ``delivered_date``,
+  trailing 12 months, both bounds inclusive (hardware only since 04.10.2026).
 """
 
 from __future__ import annotations
@@ -232,14 +232,13 @@ def renewal_calendar(register: pd.DataFrame, as_of: date, horizon_months: int = 
 # ---------------------------------------------------------------------------
 
 
-def contract_coverage(purchase_orders: pd.DataFrame | None, indirect_spend: pd.DataFrame | None, as_of: date) -> KpiValue:
-    """Share of spend under contract, trailing 12 months.
+def contract_coverage(purchase_orders: pd.DataFrame | None, as_of: date) -> KpiValue:
+    """Share of hardware spend under contract, trailing 12 months.
 
     numerator = sum(po.qty_delivered * po.unit_price where supplier_contract_id is not null)
-                + sum(indirect_spend.amount where has_contract)
-    denominator = sum(all PO value with delivered_date not null) + sum(all indirect amount)
-    Hardware windowed by delivered_date, indirect by invoice_date. Breakdown by
-    ``spend_type`` in (hardware, indirect). Not measurable on an empty denominator.
+    denominator = sum(all PO value with delivered_date not null)
+    Windowed by delivered_date. Breakdown by ``spend_type`` with the single row
+    ``hardware``. Not measurable on an empty denominator.
     """
 
     start = add_months(as_of, -12) + timedelta(days=1)
@@ -266,44 +265,22 @@ def contract_coverage(purchase_orders: pd.DataFrame | None, indirect_spend: pd.D
     else:
         notes.append("no purchase orders")
 
-    ind_contracted = 0.0
-    ind_total = 0.0
-    ind_n = 0
-    if indirect_spend is not None and not indirect_spend.empty:
-        need = ("amount", "has_contract", "invoice_date")
-        missing = [c for c in need if c not in indirect_spend.columns]
-        if missing:
-            notes.append(f"indirect_spend lacks {', '.join(missing)}; indirect spend ignored")
-        else:
-            ind = indirect_spend.copy()
-            ind["invoice_date"] = _dt(ind["invoice_date"])
-            ind["amount"] = _num(ind["amount"])
-            in_win = ind["invoice_date"].notna() & (ind["invoice_date"] >= lo) & (ind["invoice_date"] <= hi)
-            ind = ind[in_win & ind["amount"].notna()]
-            ind_total = float(ind["amount"].sum())
-            ind_contracted = float(ind.loc[_bool(ind["has_contract"]), "amount"].sum())
-            ind_n = int(len(ind))
-    else:
-        notes.append("no indirect spend")
-
-    numerator = hw_contracted + ind_contracted
-    denominator = hw_total + ind_total
-    n = hw_n + ind_n
+    numerator = hw_contracted
+    denominator = hw_total
+    n = hw_n
     if denominator == 0 or not np.isfinite(denominator):
         return KpiValue.not_measurable(
-            "no delivered PO value and no indirect spend between "
+            "no delivered PO value between "
             f"{start.isoformat()} and {as_of.isoformat()}" + (f" ({'; '.join(notes)})" if notes else "")
         )
     rows = [
         {"dimension": "spend_type", "dimension_value": "hardware", "value": (hw_contracted / hw_total) if hw_total else None,
          "numerator": hw_contracted, "denominator": hw_total, "n": hw_n},
-        {"dimension": "spend_type", "dimension_value": "indirect", "value": (ind_contracted / ind_total) if ind_total else None,
-         "numerator": ind_contracted, "denominator": ind_total, "n": ind_n},
     ]
     breakdown = pd.DataFrame.from_records(rows, columns=list(BREAKDOWN_COLUMNS))
     note = (
-        f"hardware {hw_contracted:,.2f} of {hw_total:,.2f} EUR under contract; indirect {ind_contracted:,.2f} of "
-        f"{ind_total:,.2f} EUR; window {start.isoformat()} to {as_of.isoformat()}"
+        f"hardware {hw_contracted:,.2f} of {hw_total:,.2f} EUR under contract; "
+        f"window {start.isoformat()} to {as_of.isoformat()}"
     )
     if notes:
         note += "; " + "; ".join(notes)

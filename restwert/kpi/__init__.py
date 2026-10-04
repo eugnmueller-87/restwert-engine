@@ -4,12 +4,12 @@ THE MODEL ADVISES, DETERMINISTIC CODE DECIDES, A NAMED HUMAN OWNS EVERY THRESHOL
 
 What lives here
 ---------------
-- ``registry``: ``KpiSpec``, the ``register`` decorator, ``KPI_REGISTRY`` (the 18
-  KPI ids of SPEC 7.2) and ``KPI_TREE`` (five areas, Top first), plus small
-  shared helpers for reading DuckDB tables defensively.
-- ``top``, ``procurement``, ``inventory``, ``recommerce``, ``indirect``: one
-  function per KPI, each reading only DuckDB tables and returning a
-  ``records.KpiValue``.
+- ``registry``: ``KpiSpec``, the ``register`` decorator, ``KPI_REGISTRY`` (the 15
+  KPI ids of SPEC 7.2 without the Indirect area, removed 04.10.2026) and
+  ``KPI_TREE`` (four areas, Top first), plus small shared helpers for reading
+  DuckDB tables defensively.
+- ``top``, ``procurement``, ``inventory``, ``recommerce``: one function per KPI,
+  each reading only DuckDB tables and returning a ``records.KpiValue``.
 - ``compute``: ``compute_one``, ``compute_all`` (kpi_values + kpi_breakdown
   frames) and ``run_kpis`` (writes both tables and the catalogue).
 - ``catalogue``: ``render_catalogue`` and ``write_catalogue`` which generate
@@ -30,7 +30,6 @@ from restwert.kpi import top as top  # noqa: F401
 from restwert.kpi import procurement as procurement  # noqa: F401
 from restwert.kpi import inventory as inventory  # noqa: F401
 from restwert.kpi import recommerce as recommerce  # noqa: F401
-from restwert.kpi import indirect as indirect  # noqa: F401
 from restwert.kpi.registry import KPI_REGISTRY, KPI_TREE, KpiSpec, register, trailing_window
 from restwert.kpi.compute import compute_all, compute_one, run_kpis
 from restwert.kpi.catalogue import render_catalogue, write_catalogue

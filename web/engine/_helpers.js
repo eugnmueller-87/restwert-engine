@@ -43,7 +43,7 @@
   }
   /* Rollen: die Konfiguration fuehrt englische Platzhalter ("Head of Recommerce (name)"), die Seite spricht deutsch;
      eine Schreibweise je Rolle auf allen Reitern (Befund der Durchsicht vom 16.09.2026) */
-  var ROLE_DE = [['Head of Service Operations', 'Leitung Service'], ['Head of Recommerce', 'Leitung Recommerce'], ['Head of Indirect Procurement', 'Leitung Indirekter Einkauf'],
+  var ROLE_DE = [['Head of Service Operations', 'Leitung Service'], ['Head of Recommerce', 'Leitung Recommerce'],
     ['Head of Procurement', 'Einkaufsleitung'], ['Head of Customer Success', 'Leitung Customer Success'], ['Data owner', 'Dateneigner']];
   function role(s) {
     var t = str(s).replace(/ \(name\)/g, '');

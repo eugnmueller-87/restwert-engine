@@ -24,7 +24,7 @@ flowchart LR
   MKT["outputs/market_curves.csv<br/>(restwert market)"]
   subgraph DB["data/restwert.duckdb"]
     BR["bronze.*<br/>getypt, registriert"]
-    MAIN["main.*<br/>zehn v0.1-Tabellen, device_pnl,<br/>forecast_runs, decision_log"]
+    MAIN["main.*<br/>neun v0.1-Tabellen, device_pnl,<br/>forecast_runs, decision_log"]
     SI["silver.*<br/>ledger_lines, serial_timeline,<br/>device_ledger, reconciliation, contracts"]
     GO["gold.*<br/>Kohorten, Hebel, Coverage,<br/>kpi_values, kpi_breakdown"]
   end
@@ -78,7 +78,6 @@ Neunzehn Feeds sind als Quellverträge in `restwert/lake/feeds.py` definiert und
 | Aufbereitung | `refurb/work_orders` | work_order_id, serial, started_at, finished_at, cost_eur, grade_out, outcome, partner_ref, is_synthetic | Aufbereitungspartner (Generator, synthetisch) | je Quartal | Zeile `refurbishment`; `grade_out`; Zeitstempel `sellable_at` |
 | Wiederverkauf | `recommerce/orders` | order_id, serial, channel, listed_at, sold_at, gross_price_eur, buyer_type, grade_at_sale, is_synthetic | Verkaufssystem je Kanal (Generator, synthetisch) | je Quartal | Zeile `resale_gross`; `KPI_RSL_REALISED_VS_RECORD`; Regel R02, Hebel L03 |
 | Kanalabrechnung | `recommerce/credit_notes` | credit_note_id, order_id, serial, channel, credited_at, gross_eur, fee_pct_eur, fee_fixed_eur, net_eur, is_synthetic | Kanalabrechnung (Generator, synthetisch) | je Quartal | Zeile `channel_fee`; Zeitstempel `credited_at`; senkt `KPI_TCO_ESTIMATE_SHARE` |
-| Finanzen | `finance/indirect_spend` | spend_id, invoice_date, category, supplier_name, amount_eur, has_po, has_contract, saving_eur, saving_confirmed_by_controlling, is_synthetic | Kreditorenbuch indirekt (Generator, synthetisch) | je Quartal | `main.indirect_spend`; v0.1-Kennzahlen der Fläche Indirekt; Beiträge B1 |
 
 ## 2. Die Landung und der Import
 
@@ -114,11 +113,11 @@ Alles liegt in einer Datei, `data/restwert.duckdb`, mit den Schemas `bronze`, `s
 
 ### Bronze: getypte Kopie der Landung
 
-Bronze ist die Landung, nur getypt und registriert: eine Tabelle je Feed (19 Feedtabellen, `bronze.cat_models` bis `bronze.fin_indirect_spend`) mit den Spalten des Feeds, dazu zwei Registertabellen. `bronze.deliveries` hält eine Zeile je gelandeter Datei mit ihrem Fingerabdruck und den Zählern des Imports; `bronze.unresolved` hält jede Zeile, die nicht getypt oder nicht zugeordnet werden konnte, mit ihrem Grund. Beide speisen den Reiter Daten und `KPI_DATA_UNRESOLVED_SHARE`. Von Bronze lesen `conform`, `timeline` und `ledger`. Tabellen und Spalten: Anhang A.
+Bronze ist die Landung, nur getypt und registriert: eine Tabelle je Feed (18 Feedtabellen, `bronze.cat_models` bis `bronze.ctr_register`) mit den Spalten des Feeds, dazu zwei Registertabellen. `bronze.deliveries` hält eine Zeile je gelandeter Datei mit ihrem Fingerabdruck und den Zählern des Imports; `bronze.unresolved` hält jede Zeile, die nicht getypt oder nicht zugeordnet werden konnte, mit ihrem Grund. Beide speisen den Reiter Daten und `KPI_DATA_UNRESOLVED_SHARE`. Von Bronze lesen `conform`, `timeline` und `ledger`. Tabellen und Spalten: Anhang A.
 
 ### Main: die v0.1-Engine, unverändert
 
-`conform` baut aus Bronze die zehn v0.1-Quelltabellen (`model_catalogue`, `devices`, `purchase_orders`, `benchmarks`, `rental_contracts`, `events`, `refurbishment`, `resale`, `supplier_contracts`, `indirect_spend`) und schreibt sie bei jedem Lauf komplett neu; zusätzlich als Kompatibilitäts-CSV nach `data/raw_csv/`. Darauf laufen unverändert `forecast` (`forecast_runs`, `rv_forecast_grid`, `rv_forecast_current`, `rv_forecast_of_record`, `rv_forecast_error_monthly`, `backtest_result`, `advisories`), `pnl` (`device_pnl`, `tco_per_model`, `pnl_aggregate`), `decide` (`decision_log`, `decision_queue`, `write_down_ledger`), die 20 v0.1-Kennzahlen (`kpi_values`, `kpi_breakdown`, `docs/KPI_CATALOGUE.md`) und `contracts` v0.1 (`contracts_register`, `renewal_calendar`). Die Tabelle `runs` protokolliert jeden Schritt mit `run_id`, `command`, `as_of`, `started_at`, `finished_at`, `counts_json`.
+`conform` baut aus Bronze die neun v0.1-Quelltabellen (`model_catalogue`, `devices`, `purchase_orders`, `benchmarks`, `rental_contracts`, `events`, `refurbishment`, `resale`, `supplier_contracts`) und schreibt sie bei jedem Lauf komplett neu; zusätzlich als Kompatibilitäts-CSV nach `data/raw_csv/`. Darauf laufen unverändert `forecast` (`forecast_runs`, `rv_forecast_grid`, `rv_forecast_current`, `rv_forecast_of_record`, `rv_forecast_error_monthly`, `backtest_result`, `advisories`), `pnl` (`device_pnl`, `tco_per_model`, `pnl_aggregate`), `decide` (`decision_log`, `decision_queue`, `write_down_ledger`), die 20 v0.1-Kennzahlen (`kpi_values`, `kpi_breakdown`, `docs/KPI_CATALOGUE.md`) und `contracts` v0.1 (`contracts_register`, `renewal_calendar`). Die Tabelle `runs` protokolliert jeden Schritt mit `run_id`, `command`, `as_of`, `started_at`, `finished_at`, `counts_json`.
 
 ### Silber: das Geräte-Hauptbuch
 
@@ -149,7 +148,7 @@ Gold beantwortet je Tabelle eine Frage: Wie sauber war der Import (`gold.ingest_
 | 0 | `market` (nur wenn `outputs/market_curves.csv` fehlt) | `data/catalogue/*.csv`, `data/anchors/used_prices.csv` | `outputs/market_curves.csv`, `outputs/market_anchors.csv`, `outputs/market_summary.md` | 0,4 s |
 | 1 | `generate-lake` | `config/lake.yaml`, Katalog, Kurven | die Landing-Dateien unter `data/lake/raw/` (283 im ausgelieferten Lauf laut `_manifest.json`), `data/lake/SYNTHETIC.md` | 2,7 s |
 | 2 | `ingest` | die Landung | `bronze.*`, `bronze.deliveries`, `bronze.unresolved`, `gold.ingest_summary` | 11,1 s |
-| 3 | `conform` | `bronze.*` | die zehn v0.1-Tabellen in `main`, `data/raw_csv/*.csv` | 1,1 s |
+| 3 | `conform` | `bronze.*` | die neun v0.1-Tabellen in `main`, `data/raw_csv/*.csv` | 1,1 s |
 | 4 | `forecast` | `main`, `config/assumptions.yaml`, `config/thresholds.yaml` | `forecast_runs` (nur neue Monatsenden), `rv_forecast_*`, `backtest_result`, `advisories` | 4,7 s |
 | 5 | `pnl` | `main`, die Prognosetabellen | `device_pnl`, `tco_per_model`, `pnl_aggregate` | 0,8 s |
 | 6 | `timeline` | `bronze.*`, `device_pnl` | `silver.serial_timeline`, `gold.chain_quality` | 1,0 s |
@@ -197,7 +196,7 @@ Jede der 14 Gold-Kennzahlen ist eine Rechenvorschrift in `restwert/gold/kpis.py`
 
 | Historie über Stichtage | Nur der letzte Stand |
 |---|---|
-| `gold.kpi_values`, `gold.kpi_breakdown`, `kpi_values`, `kpi_breakdown` (Delete-then-Insert nur für das eigene `as_of`) | die zehn v0.1-Tabellen in `main` (`conform`) |
+| `gold.kpi_values`, `gold.kpi_breakdown`, `kpi_values`, `kpi_breakdown` (Delete-then-Insert nur für das eigene `as_of`) | die neun v0.1-Tabellen in `main` (`conform`) |
 | `forecast_runs` (ein Monatsende-Fit wird nie überschrieben) | `device_pnl`, `tco_per_model`, `pnl_aggregate` |
 | `decision_log` (anhängen, dedupliziert per `input_hash`) | `silver.ledger_lines`, `silver.device_ledger`, `silver.reconciliation`, `silver.serial_timeline` |
 | `write_down_ledger` (einmal je `serial`, `rule_id`, `as_of`) | `gold.chain_quality`, die Kohortentabellen, `gold.levers_*`, `decision_queue` |
@@ -207,21 +206,21 @@ Voraussetzung für Historie ist eine **bestehende** Datenbankdatei: `all` ohne `
 
 ### (c) Ziele, Baselines, Mindeststichproben
 
-- `config/kpi_targets.yaml`: `targets` für sieben v0.1-Kennzahlen (Owner `targets_owner`, CFO), `min_n` für alle 14 Gold-Kennzahlen und für D1 bis D4 des Rahmens (Schlüssel ist dort die Nummer im Rahmen, weil keine Gold-Kennzahl dahintersteht; nur der Generator des Reiters liest sie) (Owner `min_n_owner`, CFO), `savings_plan_eur` je Jahr (Owner `savings_plan_owner`, Head of Indirect Procurement).
-- `web/tools/gen/kpi_rahmen.json`: der KPI-Rahmen, Fassung 4 vom 18.09.2026, 27 Kennzahlen A1 bis D6 (Satz D ist ESG) mit `ziel_wert` (`art` absolut, `baseline_delta`, `baseline_faktor` oder `referenz` ohne Zahl; `richtung`; `einheit`), `horizont`, `eigner`, `pruefer` und `engine.computable`. Kuratiert von Hand; wer ein Ziel ändert, ändert es hier.
+- `config/kpi_targets.yaml`: `targets` für sechs v0.1-Kennzahlen (Owner `targets_owner`, CFO), \1(Owner `min_n_owner`, CFO).
+- `web/tools/gen/kpi_rahmen.json`: der KPI-Rahmen, Fassung 4 vom 18.09.2026, seit dem 04.10.2026 ohne Satz B (Indirekt): 21 Kennzahlen in den Sätzen A, C und D (Satz D ist ESG; B8, das Zahlungsziel, steht in Satz A, weil es auf dem Vertragsregister der Hersteller und Partner rechnet) mit `ziel_wert` (`art` absolut, `baseline_delta`, `baseline_faktor` oder `referenz` ohne Zahl; `richtung`; `einheit`), `horizont`, `eigner`, `pruefer` und `engine.computable`. Kuratiert von Hand; wer ein Ziel ändert, ändert es hier.
 - Die **Baseline** wird nicht eingetragen, sondern gerechnet: das Mittel der ersten drei Monate mit Daten und `n >= min_n` (`BASELINE_MONTHS = 3`, Funktion `baseline_of` in `web/tools/gen/make_kpis_data.py`). Ohne drei solche Monate ist die Kennzahl `nicht_messbar`, und der Text nennt den Grund.
 - `config/performance_cycle.yaml`: `cycle: q`, `start_date: 2026-10-01`, Owner `Leitung`. Bestimmt „Bis" und „Soll heute".
-- `config/owners.yaml`: sechs Rollen I1 bis I4, R1, R2 mit `categories` und `families`; was nicht gelistet ist, bucht auf `Team`. Owner `Leitung`.
+- `config/owners.yaml`: fünf Rollen S1 bis S3 (Dienste um das Gerät), R1, R2 mit `categories` und `families`; was nicht gelistet ist, bucht auf `Team`. Owner `Leitung`. Die vier Rollen Indirekt 1 bis 4 sind seit dem 04.10.2026 weg, mit dem indirekten Einkauf.
 
 ### (d) Der Reiter KPIs
 
-`web/tools/gen/make_kpis_data.py` (Aufruf `python make_kpis_data.py <REPO> <OUT.json> <TODAY>`, ausgelöst von `web/build.py --generate`) liest `outputs/gold__kpi_values.csv`, `outputs/kpi_values.csv`, die drei YAML-Dateien und per DuckDB Monatsscheiben aus `silver.device_ledger`, `silver.contracts`, `main.indirect_spend`, `main.decision_log`, `main.device_pnl`, `main.rv_forecast_error_monthly`, `bronze.erp_supplier_invoices`, `bronze.cat_models`. Je Kennzahl des Rahmens entsteht eine Zeile:
+`web/tools/gen/make_kpis_data.py` (Aufruf `python make_kpis_data.py <REPO> <OUT.json> <TODAY>`, ausgelöst von `web/build.py --generate`) liest `outputs/gold__kpi_values.csv`, `outputs/kpi_values.csv`, die drei YAML-Dateien und per DuckDB Monatsscheiben aus `silver.device_ledger`, `silver.contracts`, `main.decision_log`, `main.device_pnl`, `main.rv_forecast_error_monthly`, `bronze.erp_supplier_invoices`, `bronze.cat_models`. Je Kennzahl des Rahmens entsteht eine Zeile:
 
-- **Ist** aus der Engine-Kennzahl (Modus `direkt`: B8, C1, C2, C4, C5, C8), aus einer Näherung mit denselben Tabellen (`naeherung`: A1, B1, B6, C6, C9), oder ohne Wert, weil der Zähler im Modell nicht gebildet ist (`luecke`, Status `nicht_messbar`: A2, B3, B5, B7, C3, C7, C10) oder die Daten in der Engine nicht existieren (`keine`, Status `nicht_im_werkzeug`: A3, A4, B4).
+- **Ist** aus der Engine-Kennzahl (Modus `direkt`: B8, C1, C2, C4, C5, C8), aus einer Näherung mit denselben Tabellen (`naeherung`: A1, C6, C9), oder ohne Wert, weil der Zähler im Modell nicht gebildet ist (`luecke`, Status `nicht_messbar`: A2, C3, C7, C10) oder die Daten in der Engine nicht existieren (`keine`, Status `nicht_im_werkzeug`: A3, A4).
 - **Status** (`judge`): `erfuellt`, `gelb` (innerhalb `GELB_BAND = 0.2` des Ziels oder der geforderten Bewegung), `verfehlt`, `nicht_messbar`, `nicht_im_werkzeug`.
 - **Fortschritt** (`progress_of`): Anteil des Wegs von der Baseline zum Ziel, bei absoluten Zielen der Anteil am Ziel; erfüllt heißt 1.
 - **Soll heute** (`horizon_of`): lineare Erwartung zwischen `start_date` und „Bis"; vor dem 01.10.2026 steht sie auf 0 Prozent, weil der Zyklus noch nicht begonnen hat.
-- **Beiträge je Rolle** aus Ereignissen mit Akteur: B1 aus `main.indirect_spend` (Preisreduktionen, Rolle über Kategorie), C2 aus `bronze.erp_supplier_invoices` (`line_kind = price_protection_credit`, Rolle über Gerätefamilie), C4 und C10 aus `main.decision_log` (R01 und R02 zum Stichtag), A2 aus `silver.contracts`. Nur Rollencodes, keine Namen.
+- **Beiträge je Rolle** aus Ereignissen mit Akteur: C2 aus `bronze.erp_supplier_invoices` (`line_kind = price_protection_credit`, Rolle über Gerätefamilie), C4 und C10 aus `main.decision_log` (R01 und R02 zum Stichtag), A2 aus `silver.contracts`. Nur Rollencodes, keine Namen.
 
 Der Generator schreibt `web/data/kpis.json`; `web/build.py` bettet die Datei als `<script type="application/json" id="data-kpis">` in `web/dist-cockpit/index.html` ein; der Motor `web/engine/kpis.js` rechnet daraus die Ansicht.
 
@@ -326,8 +325,8 @@ Ein Motor ist eine reine Funktion `window.RE.<tab>(D, opts, P)`, die eine JSON-D
 | `config/generator.yaml` | dieselbe Rolle für die alte v0.1-Kette (`all --v01`) | der Bauer |
 | `config/thresholds.yaml` | jede Schwelle der Regeln R01 bis R07 und der Advisories, je mit Owner, Gültigkeitsbeginn und Begründung | der Owner der Schwelle (Head of Service Operations, Head of Recommerce, CFO, Head of Procurement, Category Manager Hardware, Head of Customer Success) |
 | `config/assumptions.yaml` | die Annahmen der Rechnung: geplanter Restwert, Abschreibungsdauer, Lagerkosten je Tag, Support und MDM je Gerätemonat, Kanalgebühren, erwartete Rückgabequalität und Verkaufsdauer, Mehrwertsteuersatz | der Owner des Blocks (CFO, Head of Service Operations, Head of Recommerce) |
-| `config/kpi_targets.yaml` | Ziele der v0.1-Kennzahlen, Mindeststichprobe je Gold-Kennzahl, Sparplan je Jahr | der genannte Owner (CFO, Head of Indirect Procurement) |
-| `config/owners.yaml` | die sechs Rollen des KPI-Rahmens und welche Kategorien und Gerätefamilien sie verantworten | `Leitung` |
+| `config/kpi_targets.yaml` | Ziele der v0.1-Kennzahlen, Mindeststichprobe je Gold-Kennzahl | der genannte Owner (CFO) |
+| `config/owners.yaml` | die fünf Rollen des KPI-Rahmens und welche Kategorien und Gerätefamilien sie verantworten | `Leitung` |
 | `config/performance_cycle.yaml` | Zyklus und Startdatum, für „Bis" und „Soll heute" | `Leitung` |
 
 Der Loader `restwert/config.py` bricht ab, wenn ein Owner fehlt. Eine Konfigurationsänderung wirkt beim nächsten Lauf; auf der Seite erst nach Build und Veröffentlichung. Die Schlüssel je Datei: Anhang B.
@@ -373,7 +372,7 @@ Bronze:
 |---|---|---|---|---|
 | `bronze.deliveries` | `delivery_id`, `sha256` UNIQUE | `feed`, `delivered_on`, `rows_read`, `rows_new`, `duplicates_conflict`, `n_unresolved` | `ingest` | `gold.ingest_summary`, `KPI_DATA_UNRESOLVED_SHARE` |
 | `bronze.unresolved` | `unresolved_id` | `delivery_id`, `row_number`, `reason_code`, `reason_text`, `row_json` | `ingest` | Reiter Daten, `KPI_DATA_UNRESOLVED_SHARE` |
-| 19 Feedtabellen `bronze.<kurz>_<feed>`: `cat_models`, `cat_variants`, `mkt_curves`, `ctr_register`, `erp_purchase_orders`, `erp_po_lines`, `erp_goods_receipts`, `erp_supplier_invoices`, `erp_price_changes`, `wms_staging_log`, `wms_shipments`, `portal_rental_contracts`, `portal_rental_invoices`, `sd_tickets`, `ret_receipts`, `rf_work_orders`, `rc_orders`, `rc_credit_notes`, `fin_indirect_spend` | der Geschäftsschlüssel des Feeds | die Spalten des Feeds plus Schwanzspalte | `ingest` | `conform`, `timeline`, `ledger` |
+| 18 Feedtabellen `bronze.<kurz>_<feed>`: `cat_models`, `cat_variants`, `mkt_curves`, `ctr_register`, `erp_purchase_orders`, `erp_po_lines`, `erp_goods_receipts`, `erp_supplier_invoices`, `erp_price_changes`, `wms_staging_log`, `wms_shipments`, `portal_rental_contracts`, `portal_rental_invoices`, `sd_tickets`, `ret_receipts`, `rf_work_orders`, `rc_orders`, `rc_credit_notes` | der Geschäftsschlüssel des Feeds | die Spalten des Feeds plus Schwanzspalte | `ingest` | `conform`, `timeline`, `ledger` |
 
 Silber:
 

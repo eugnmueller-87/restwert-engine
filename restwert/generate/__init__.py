@@ -10,7 +10,7 @@ employer is real; suppliers are ``Supplier-A`` .. ``Supplier-L``, customers
 
 Generation is deterministic for a given seed: ONE ``numpy.random.default_rng(seed)``
 is passed through the builders in a fixed call order (catalogue, fleet, rentals,
-events, refurbishment, resale, supplier contracts, indirect spend).
+events, refurbishment, resale, supplier contracts).
 """
 
 from __future__ import annotations
@@ -28,7 +28,7 @@ from restwert.config import GeneratorConfig
 from restwert.generate.catalogue import build_catalogue
 from restwert.generate.events import build_events
 from restwert.generate.fleet import DEVICE_COLUMNS, build_devices
-from restwert.generate.procurement import build_indirect_spend, build_supplier_contracts, link_purchase_orders
+from restwert.generate.procurement import build_supplier_contracts, link_purchase_orders
 from restwert.generate.recommerce import build_refurbishment, build_resale
 from restwert.generate.rentals import build_rental_contracts
 from restwert.paths import RAW_CSV_DIR
@@ -71,7 +71,6 @@ def generate_all(
     resale = build_resale(cfg, devices, refurb, events, catalogue, rng)
     supplier_contracts = build_supplier_contracts(cfg, rng, purchase_orders=purchase_orders)
     purchase_orders = link_purchase_orders(purchase_orders, supplier_contracts)
-    indirect = build_indirect_spend(cfg, supplier_contracts, rng)
 
     devices = devices[DEVICE_COLUMNS]
     raw = {
@@ -83,7 +82,6 @@ def generate_all(
         "resale": resale,
         "supplier_contracts": supplier_contracts,
         "purchase_orders": purchase_orders,
-        "indirect_spend": indirect,
         "benchmarks": benchmarks,
     }
     frames: dict[str, pd.DataFrame] = {}

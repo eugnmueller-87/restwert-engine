@@ -100,7 +100,7 @@ BRONZE_SHORT_NAMES: tuple[str, ...] = (
     "cat_models", "cat_variants", "mkt_curves", "erp_purchase_orders", "erp_po_lines", "erp_goods_receipts",
     "erp_supplier_invoices", "erp_price_changes", "wms_staging_log", "wms_shipments", "portal_rental_contracts",
     "portal_rental_invoices", "sd_tickets", "ret_receipts", "rf_work_orders", "rc_orders", "rc_credit_notes",
-    "ctr_register", "fin_indirect_spend",
+    "ctr_register",
 )
 
 
@@ -126,7 +126,6 @@ class BronzeFrames:
     rc_orders: pd.DataFrame
     rc_credit_notes: pd.DataFrame
     ctr_register: pd.DataFrame
-    fin_indirect_spend: pd.DataFrame
 
     @classmethod
     def empty(cls, **frames: pd.DataFrame) -> "BronzeFrames":

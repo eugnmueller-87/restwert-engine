@@ -15,7 +15,7 @@ from restwert.dashboard import charts, data
 
 TOP_MARGIN = "KPI_TOP_LIFECYCLE_MARGIN"
 TOP_ERROR = "KPI_TOP_RV_FORECAST_ERROR"
-AREA_ORDER = ["Top", "Procurement", "Inventory", "Recommerce", "Indirect"]
+AREA_ORDER = ["Top", "Procurement", "Inventory", "Recommerce"]
 
 
 def _target(row: pd.Series | None) -> float | None:

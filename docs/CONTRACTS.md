@@ -83,7 +83,7 @@ Actual spend per role (the transaction that names the counterparty):
 | marketplace | credit note gross of the `marketplace` channel by `credited_at`; the credit note carries the channel, not the counterparty, so the total is split equally over the active marketplace rows (documented allocation) |
 | refurb_repair | `silver.ledger_lines` magnitudes of line type `refurbishment` (the refurbishment row) or `repair` (the repair row) by `event_date` |
 | logistics | ledger line types `outbound_shipping`, `return_logistics`, `replacement_logistics` |
-| carrier, financing, mtd | `bronze.fin_indirect_spend` amounts whose `supplier_name` equals the counterparty; when no invoice names it, the category total (`connectivity`, `financing`, `security_software`) split equally over the register rows of that category |
+| carrier, financing, mtd | no transaction source in the lake since 04.10.2026 (the indirect spend feed was removed with the indirect procurement); `spend_actual_12m_eur` stays NULL, never 0 |
 
 ## 4. `gold.contract_coverage_by_oem`
 

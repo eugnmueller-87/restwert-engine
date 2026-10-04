@@ -148,10 +148,10 @@ def test_renewal_calendar_on_fixture_includes_rentals():
 
 def test_contract_coverage_equals_kpi_on_same_fixture():
     con = kf.fixture_con()
-    direct = contract_coverage(kf.purchase_orders_frame(), kf.indirect_spend_frame(), AS_OF)
+    direct = contract_coverage(kf.purchase_orders_frame(), AS_OF)
     via_kpi = KPI_REGISTRY["KPI_PROC_SPEND_UNDER_CONTRACT"].fn(con, AS_OF, kf.TARGETS)
     assert direct.status == via_kpi.status == "ok"
-    assert direct.value == pytest.approx(2650 / 4450)
+    assert direct.value == pytest.approx(1450 / 2450)
     assert via_kpi.value == pytest.approx(direct.value)
     assert via_kpi.numerator == pytest.approx(direct.numerator)
     assert via_kpi.denominator == pytest.approx(direct.denominator)
@@ -159,16 +159,10 @@ def test_contract_coverage_equals_kpi_on_same_fixture():
 
 
 def test_contract_coverage_not_measurable_when_empty():
-    kv = contract_coverage(pd.DataFrame(), pd.DataFrame(), AS_OF)
+    kv = contract_coverage(pd.DataFrame(), AS_OF)
     assert kv.status == "not_measurable" and kv.value is None
-    kv = contract_coverage(None, None, AS_OF)
+    kv = contract_coverage(None, AS_OF)
     assert kv.status == "not_measurable" and kv.value is None
-
-
-def test_contract_coverage_one_side_only():
-    kv = contract_coverage(None, kf.indirect_spend_frame(), AS_OF)
-    assert kv.status == "ok"
-    assert kv.value == pytest.approx(1200 / 2000)
 
 
 def test_run_contracts_writes_tables(thresholds):

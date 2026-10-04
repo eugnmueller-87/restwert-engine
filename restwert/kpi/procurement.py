@@ -122,17 +122,17 @@ def landed_cost_vs_benchmark(con: duckdb.DuckDBPyConnection, as_of: date, target
     name="Share of spend under contract",
     area="Procurement",
     definition=(
-        "Share of hardware PO value (delivered, linked to a supplier contract) plus indirect spend flagged "
-        "has_contract in all delivered PO value plus all indirect spend, trailing 12 months. One definition, "
-        "shared with the contracts register (contracts.register.contract_coverage)."
+        "Share of hardware PO value (delivered, linked to a supplier contract) in all delivered PO value, "
+        "trailing 12 months. One definition, shared with the contracts register "
+        "(contracts.register.contract_coverage). Hardware only since 04.10.2026: the indirect spend is not "
+        "part of the tool."
     ),
     formula_text=(
-        "(sum(po.qty_delivered * po.unit_price where supplier_contract_id is not null) + "
-        "sum(indirect_spend.amount where has_contract)) / (sum(all PO value with delivered_date not null) + "
-        "sum(all indirect amount)), trailing 12 months by delivered_date / invoice_date"
+        "sum(po.qty_delivered * po.unit_price where supplier_contract_id is not null) / "
+        "sum(all PO value with delivered_date not null), trailing 12 months by delivered_date"
     ),
-    source_tables=("purchase_orders", "supplier_contracts", "indirect_spend"),
-    measurable_from="purchase orders carry supplier_contract_id and indirect invoices carry a has_contract flag",
+    source_tables=("purchase_orders", "supplier_contracts"),
+    measurable_from="purchase orders carry supplier_contract_id",
     unit="ratio",
     direction="up",
 )
@@ -140,10 +140,9 @@ def share_of_spend_under_contract(con: duckdb.DuckDBPyConnection, as_of: date, t
     """Delegates to ``contract_coverage`` so the KPI and the register never diverge."""
 
     po, _ = load_table(con, "purchase_orders", allow_empty=True)
-    ind, _ = load_table(con, "indirect_spend", allow_empty=True)
-    if po is None and ind is None:
-        return KpiValue.not_measurable("neither purchase_orders nor indirect_spend exists")
-    return contract_coverage(po, ind, as_of)
+    if po is None:
+        return KpiValue.not_measurable("purchase_orders does not exist")
+    return contract_coverage(po, as_of)
 
 
 @register(

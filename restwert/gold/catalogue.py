@@ -73,7 +73,7 @@ def render_gold_catalogue(targets: KpiTargets | None = None) -> str:
         f"> {GOVERNANCE_SENTENCE}",
         "",
         "These KPIs read the silver ledger, the timeline, the reconciliation and the gold tables of the data lake and "
-        "write `gold.kpi_values` and `gold.kpi_breakdown`. The v0.1 registry (20 KPIs, five areas, `docs/KPI_CATALOGUE.md`) "
+        "write `gold.kpi_values` and `gold.kpi_breakdown`. The v0.1 registry (15 KPIs, four areas, `docs/KPI_CATALOGUE.md`) "
         "is frozen and untouched. A KPI whose denominator is 0 or whose table or column is missing is reported as "
         "`not_measurable` with `value = None` and a note that says why, never as 0; a KPI whose observation count is below "
         "its `min_n` (`config/kpi_targets.yaml`, owned) keeps the value for reference but is flagged `not_measurable` and the "

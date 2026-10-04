@@ -5,8 +5,8 @@ THE MODEL ADVISES, DETERMINISTIC CODE DECIDES, A NAMED HUMAN OWNS EVERY THRESHOL
 * No denylisted name in any landing file of the session lake nor in any VARCHAR
   column of any bronze table.
 * Every supplier and counterparty name is a catalogue manufacturer or ends with
-  ``(role-only)``: purchase order headers, the contracts register, indirect
-  spend, carrier and repair partner references.
+  ``(role-only)``: purchase order headers, the contracts register, carrier and
+  repair partner references.
 * No em dash in the v0.2 docs, ``config/lake.yaml``, the README, every ``#``
   header line of every landing file, ``SYNTHETIC.md``.
 * Every landing file starts with ``# SYNTHETIC DATA`` or ``# PUBLIC DATA`` and
@@ -35,7 +35,6 @@ _IMPORT_RE = re.compile(r"^\s*(?:import\s+(?P<mod>[\w.]+)|from\s+(?P<frm>[\w.]+)
 NAME_COLUMNS = {
     "bronze.erp_purchase_orders": ("supplier_name",),
     "bronze.ctr_register": ("counterparty_name",),
-    "bronze.fin_indirect_spend": ("supplier_name",),
     "bronze.wms_shipments": ("carrier_ref",),
     "bronze.sd_tickets": ("repair_partner_ref",),
     "bronze.rf_work_orders": ("partner_ref",),

@@ -82,7 +82,7 @@ def _plain(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def _fleet_flag(bronze: dict[str, pd.DataFrame]) -> bool:
-    for name in ("erp_goods_receipts", "erp_purchase_orders", "portal_rental_contracts", "ctr_register", "fin_indirect_spend"):
+    for name in ("erp_goods_receipts", "erp_purchase_orders", "portal_rental_contracts", "ctr_register"):
         df = bronze.get(name)
         if df is not None and len(df) and "is_synthetic" in df.columns:
             return bool(df["is_synthetic"].iloc[0])
@@ -473,19 +473,6 @@ def conform_frames(
     supplier_contracts["is_synthetic"] = syn
     supplier_contracts["source_file"] = "bronze.ctr_register"
     frames["supplier_contracts"] = supplier_contracts
-
-    # ---- indirect spend ----------------------------------------------------------------------
-    fin = b["fin_indirect_spend"]
-    indirect = pd.DataFrame({
-        "spend_id": fin.get("spend_id", pd.Series(dtype=object)), "invoice_date": _dates(fin["invoice_date"]) if len(fin) else fin.get("invoice_date"),
-        "category": fin.get("category"), "supplier": fin.get("supplier_name"), "amount": fin.get("amount_eur"),
-        "has_po": fin.get("has_po"), "has_contract": fin.get("has_contract"), "saving": fin.get("saving_eur"),
-        "saving_confirmed_by_controlling": fin.get("saving_confirmed_by_controlling"), "saving_type": fin.get("saving_type"),
-        "baseline_amount": fin.get("baseline_amount_eur"),
-    })
-    indirect["is_synthetic"] = syn
-    indirect["source_file"] = "bronze.fin_indirect_spend"
-    frames["indirect_spend"] = indirect
 
     # ---- validate ----------------------------------------------------------------------------
     validated: dict[str, pd.DataFrame] = {}

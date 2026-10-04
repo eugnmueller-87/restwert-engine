@@ -179,11 +179,6 @@ FEEDS: dict[str, FeedLanding] = {
             ("credited_at", "datetime"), ("gross_eur", "money"), ("fee_pct_eur", "money"), ("fee_fixed_eur", "money"),
             ("net_eur", "money"),
         ], "credited_at"),
-        _f("finance/indirect_spend", [
-            ("spend_id", "str"), ("invoice_date", "date"), ("category", "str"), ("supplier_name", "str"),
-            ("amount_eur", "money"), ("has_po", "bool"), ("has_contract", "bool"), ("saving_eur", "money"),
-            ("saving_confirmed_by_controlling", "bool"), ("saving_type", "str"), ("baseline_amount_eur", "money"),
-        ], "invoice_date"),
     )
 }
 FEED_KEYS: tuple[str, ...] = tuple(FEEDS)
@@ -191,7 +186,6 @@ TRANSACTIONAL_FEEDS: tuple[str, ...] = tuple(k for k, f in FEEDS.items() if not 
 SERIAL_NAME_COLUMNS: dict[str, tuple[str, ...]] = {
     "erp/purchase_orders": ("supplier_name",),
     "contracts/register": ("counterparty_name",),
-    "finance/indirect_spend": ("supplier_name",),
     "wms/shipments": ("carrier_ref",),
     "servicedesk/tickets": ("repair_partner_ref",),
     "refurb/work_orders": ("partner_ref",),

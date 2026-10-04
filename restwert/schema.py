@@ -28,7 +28,6 @@ from restwert.enums import (
     Family,
     Grade,
     RefurbOutcome,
-    SavingType,
     SpendCategory,
 )
 from restwert.paths import DOCS_DIR
@@ -44,7 +43,6 @@ SOURCE_TABLES: tuple[str, ...] = (
     "resale",
     "supplier_contracts",
     "purchase_orders",
-    "indirect_spend",
     "benchmarks",
 )
 
@@ -122,12 +120,6 @@ DDL: dict[str, str] = {
   order_date DATE NOT NULL, promised_date DATE NOT NULL, delivered_date DATE,
   qty_ordered INTEGER NOT NULL, qty_delivered INTEGER NOT NULL, unit_price DECIMAL(12,2) NOT NULL,
   benchmark_price DECIMAL(12,2), price_drop_date DATE, price_drop_amount DECIMAL(12,2),
-  is_synthetic BOOLEAN NOT NULL, source_file VARCHAR);""",
-    "indirect_spend": """CREATE TABLE IF NOT EXISTS indirect_spend (
-  spend_id VARCHAR PRIMARY KEY, invoice_date DATE NOT NULL, category VARCHAR NOT NULL, supplier VARCHAR NOT NULL,
-  amount DECIMAL(12,2) NOT NULL, has_po BOOLEAN NOT NULL, has_contract BOOLEAN NOT NULL,
-  saving DECIMAL(12,2) NOT NULL DEFAULT 0, saving_confirmed_by_controlling BOOLEAN NOT NULL DEFAULT false,
-  saving_type VARCHAR, baseline_amount DECIMAL(12,2),
   is_synthetic BOOLEAN NOT NULL, source_file VARCHAR);""",
     "benchmarks": """CREATE TABLE IF NOT EXISTS benchmarks (
   model VARCHAR NOT NULL, valid_from DATE NOT NULL, landed_cost_benchmark DECIMAL(12,2) NOT NULL,
@@ -339,8 +331,8 @@ COLUMN_DOCS: dict[str, dict[str, str]] = {
     },
     "supplier_contracts": {
         "supplier_contract_id": "Contract id, primary key (SC-01 style).",
-        "supplier": "Counterparty (Supplier-A .. Supplier-L).",
-        "category": "Spend category (hardware or an indirect category).",
+        "supplier": "Counterparty (a catalogue manufacturer, a reseller or a role-only partner around the device).",
+        "category": "Spend category (hardware, or the category of a partner around the device: logistics, repair, refurbishment, software).",
         "start_date": "Contract start.",
         "end_date": "Contract end.",
         "auto_renewal": "Renews automatically unless notice is given.",
@@ -365,20 +357,6 @@ COLUMN_DOCS: dict[str, dict[str, str]] = {
         "benchmark_price": "Reference unit price in EUR (synthetic band midpoint, not a market figure).",
         "price_drop_date": "Date the supplier's price dropped after delivery; NULL if none.",
         "price_drop_amount": "Price drop per unit in EUR; the claim value is amount x qty_delivered.",
-        **_COMMON_SOURCE_DOCS,
-    },
-    "indirect_spend": {
-        "spend_id": "Invoice line id, primary key (IS-000001 style).",
-        "invoice_date": "Invoice date.",
-        "category": "Indirect spend category.",
-        "supplier": "Indirect supplier (Supplier-G .. Supplier-L).",
-        "amount": "Invoice amount in EUR.",
-        "has_po": "A purchase order existed for the invoice.",
-        "has_contract": "The supplier had a contract for the category.",
-        "saving": "Claimed saving in EUR (0 if none): baseline_amount - amount.",
-        "saving_confirmed_by_controlling": "Controlling confirmed the saving; only confirmed savings count against the plan.",
-        "saving_type": "hard_price_reduction | cost_avoidance | rebate; NULL when no saving is claimed. Only hard_price_reduction counts in the savings KPI numerator; avoidance and rebates are reported separately.",
-        "baseline_amount": "Price before the saving in EUR (what would have been paid); NULL when no saving is claimed.",
         **_COMMON_SOURCE_DOCS,
     },
     "benchmarks": {
@@ -598,22 +576,6 @@ class PurchaseOrderRow(_Row):
     source_file: str | None = None
 
 
-class IndirectSpendRow(_Row):
-    spend_id: str
-    invoice_date: date
-    category: SpendCategory
-    supplier: str
-    amount: float
-    has_po: bool
-    has_contract: bool
-    saving: float = 0.0
-    saving_confirmed_by_controlling: bool = False
-    saving_type: SavingType | None = None
-    baseline_amount: float | None = None
-    is_synthetic: bool
-    source_file: str | None = None
-
-
 class BenchmarkRow(_Row):
     model: str
     valid_from: date
@@ -632,7 +594,6 @@ ROW_MODELS: dict[str, type[BaseModel]] = {
     "resale": ResaleRow,
     "supplier_contracts": SupplierContractRow,
     "purchase_orders": PurchaseOrderRow,
-    "indirect_spend": IndirectSpendRow,
     "benchmarks": BenchmarkRow,
 }
 
@@ -813,7 +774,6 @@ __all__ = [
     "ResaleRow",
     "SupplierContractRow",
     "PurchaseOrderRow",
-    "IndirectSpendRow",
     "BenchmarkRow",
     "validate_frame",
     "render_data_model_md",

@@ -144,13 +144,6 @@ class GeneratorConfig(BaseModel):
     price_drop_share: float
     price_drop_pct: float
     suppliers_hardware: list[str]
-    suppliers_indirect: list[str]
-    indirect_categories: list[str]
-    indirect_rows_per_month: int
-    indirect_has_po: float
-    indirect_has_contract: float
-    indirect_saving_share: float
-    indirect_confirmed_share: float
     # share of sellable devices that do not sell inside the channel's normal window but
     # linger 90 to 400 days (design parameter; gives the aging KPIs and rule R03 subjects)
     slow_mover_share: float = 0.04
@@ -160,10 +153,6 @@ class GeneratorConfig(BaseModel):
     # (0 = exact calendar). With slip, the forecaster's calendar assumption for launches
     # after as_of is wrong by construction, so the backtest carries launch-timing risk.
     launch_slip_months_max: int = 0
-    # how claimed indirect savings split by type (hard price reduction, cost avoidance, rebate)
-    indirect_saving_type_mix: dict[str, float] = Field(
-        default_factory=lambda: {"hard_price_reduction": 0.60, "cost_avoidance": 0.30, "rebate": 0.10}
-    )
 
     @model_validator(mode="after")
     def _check_term_rate_factor(self) -> "GeneratorConfig":
@@ -307,13 +296,11 @@ class Assumptions(BaseModel):
 
 
 class KpiTargets(BaseModel):
-    """Savings plan and KPI targets, each with an owner."""
+    """KPI targets and minimum sample sizes, each block with an owner."""
 
     model_config = ConfigDict(extra="ignore")
 
     version: int
-    savings_plan_eur: dict[int, float]
-    savings_plan_owner: str
     targets: dict[str, float] = Field(default_factory=dict)
     targets_owner: str
     # minimum sample size per gold KPI (v0.2): below it the value is stored but flagged not_measurable
@@ -374,9 +361,8 @@ def load_assumptions(path: Path = CONFIG_DIR / "assumptions.yaml") -> Assumption
 def load_kpi_targets(path: Path = CONFIG_DIR / "kpi_targets.yaml") -> KpiTargets:
     """Load ``config/kpi_targets.yaml``."""
     raw = _read_yaml(path)
-    for owner_key in ("savings_plan_owner", "targets_owner"):
-        if not str(raw.get(owner_key, "")).strip():
-            raise ValueError(f"kpi_targets.yaml: {owner_key} missing")
+    if not str(raw.get("targets_owner", "")).strip():
+        raise ValueError("kpi_targets.yaml: targets_owner missing")
     return KpiTargets.model_validate(raw)
 
 

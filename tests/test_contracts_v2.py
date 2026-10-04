@@ -93,7 +93,7 @@ def hand_register() -> pd.DataFrame:
             # refurbishment and logistics rows fed by ledger lines
             _ctr_row("CTR-RFB", "Refurbishment and repair partner" + ROLE_ONLY_SUFFIX, "refurb_repair", "refurbishment", "2024-01-01", "2027-06-30"),
             _ctr_row("CTR-LOG", "Logistics partner" + ROLE_ONLY_SUFFIX, "logistics", "logistics", "2024-01-01", "2027-06-30"),
-            # carrier fed by indirect spend of category connectivity
+            # carrier: no transaction source in the lake, its actual spend stays NULL
             _ctr_row("CTR-CAR", "Carrier partner" + ROLE_ONLY_SUFFIX, "carrier", "connectivity", "2024-01-01", "2027-06-30"),
         ]
     )
@@ -141,11 +141,10 @@ def hand_purchases() -> dict[str, pd.DataFrame]:
             dict(line_type="outbound_shipping", event_date="2024-04-02", amount_eur=-99.0),  # outside window
         ]
     )
-    indirect = pd.DataFrame([dict(invoice_date="2026-05-10", category="connectivity", supplier_name="Carrier partner" + ROLE_ONLY_SUFFIX, amount_eur=250.0)])
     price_changes = pd.DataFrame([dict(change_id="PC-1", supplier_id="S-RSA", slug="iphone-15", storage_gb=128, valid_from="2026-04-05", old_unit_price_eur=700.0, new_unit_price_eur=650.0)])
     return dict(
         po_headers=po_headers, po_lines=po_lines, goods_receipts=goods_receipts, cat_models=cat_models,
-        credit_notes=credit_notes, lines=lines, indirect=indirect, price_changes=price_changes,
+        credit_notes=credit_notes, lines=lines, price_changes=price_changes,
     )
 
 
@@ -195,7 +194,7 @@ def test_counterparty_terms_as_specified():
 
 def test_contracts_v2_status_and_deadlines(hand_register, hand_purchases):
     p = hand_purchases
-    out = contracts_v2(hand_register, p["po_headers"], p["po_lines"], p["goods_receipts"], p["credit_notes"], p["lines"], p["indirect"], AS_OF, cat_models=p["cat_models"])
+    out = contracts_v2(hand_register, p["po_headers"], p["po_lines"], p["goods_receipts"], p["credit_notes"], p["lines"], AS_OF, cat_models=p["cat_models"])
     assert list(out.columns) == list(SILVER_CONTRACT_COLUMNS)
     assert len(out) == len(hand_register)
     by_id = out.set_index("contract_id")
@@ -221,14 +220,14 @@ def test_contracts_v2_status_and_deadlines(hand_register, hand_purchases):
     assert by_id.loc["CTR-MKA", "spend_actual_12m_eur"] == pytest.approx(300.0)  # marketplace channel only
     assert by_id.loc["CTR-RFB", "spend_actual_12m_eur"] == pytest.approx(40.0)  # refurbishment category, not repair
     assert by_id.loc["CTR-LOG", "spend_actual_12m_eur"] == pytest.approx(21.0)  # 6 + 7 + 8, the 99 is outside the window
-    assert by_id.loc["CTR-CAR", "spend_actual_12m_eur"] == pytest.approx(250.0)
+    assert pd.isna(by_id.loc["CTR-CAR", "spend_actual_12m_eur"])  # no transaction source names the carrier: NULL, never 0
     assert by_id.loc["CTR-RSA", "spend_actual_vs_planned_pct"] == pytest.approx(0.28)
     assert (out["terms_note"] == cp.TERMS_NOTE).all()
     assert out["is_synthetic"].all()
 
 
 def test_contracts_v2_without_transactions_keeps_rows_and_nulls_spend(hand_register):
-    out = contracts_v2(hand_register, None, None, None, None, None, None, AS_OF)
+    out = contracts_v2(hand_register, None, None, None, None, None, AS_OF)
     assert len(out) == len(hand_register)
     assert out["spend_actual_12m_eur"].isna().all()
     assert out["covers_oems"].isna().all()
@@ -236,7 +235,7 @@ def test_contracts_v2_without_transactions_keeps_rows_and_nulls_spend(hand_regis
 
 
 def test_contracts_v2_empty_register():
-    out = contracts_v2(pd.DataFrame(), None, None, None, None, None, None, AS_OF)
+    out = contracts_v2(pd.DataFrame(), None, None, None, None, None, AS_OF)
     assert out.empty and list(out.columns) == list(SILVER_CONTRACT_COLUMNS)
 
 
@@ -273,7 +272,7 @@ def test_coverage_by_oem_counts_reseller_spend_for_the_oem(hand_register, hand_p
 
 def test_renewal_calendar_v2_matches_v01_action_required(hand_register, hand_purchases):
     p = hand_purchases
-    contracts = contracts_v2(hand_register, p["po_headers"], p["po_lines"], p["goods_receipts"], p["credit_notes"], p["lines"], p["indirect"], AS_OF, cat_models=p["cat_models"])
+    contracts = contracts_v2(hand_register, p["po_headers"], p["po_lines"], p["goods_receipts"], p["credit_notes"], p["lines"], AS_OF, cat_models=p["cat_models"])
     cal2 = renewal_calendar_v2(contracts, p["po_lines"], p["price_changes"], p["goods_receipts"], AS_OF, po_headers=p["po_headers"])
     assert list(cal2.columns) == list(CALENDAR_V2_COLUMNS)
     # the same rows through the v0.1 path: supplier_contracts shape -> contracts_register -> renewal_calendar
@@ -310,7 +309,7 @@ def test_renewal_calendar_v2_matches_v01_action_required(hand_register, hand_pur
 
 def test_price_protection_window_open_only_while_claim_window_runs(hand_register, hand_purchases):
     p = hand_purchases
-    contracts = contracts_v2(hand_register, p["po_headers"], p["po_lines"], p["goods_receipts"], None, None, None, AS_OF)
+    contracts = contracts_v2(hand_register, p["po_headers"], p["po_lines"], p["goods_receipts"], None, None, AS_OF)
     # PO-1 received 2026-03-20, protection 30 days -> drop on 2026-04-05 is inside; claim window 14 days -> open until 2026-04-19
     for day, expected in ((date(2026, 4, 10), True), (date(2026, 4, 19), True), (date(2026, 4, 20), False)):
         flags = price_protection_windows_open(contracts, p["po_lines"], p["price_changes"], p["goods_receipts"], day, po_headers=p["po_headers"])
@@ -325,7 +324,7 @@ def test_price_protection_window_open_only_while_claim_window_runs(hand_register
 
 def test_rebate_progress_next_tier(hand_register, hand_purchases):
     p = hand_purchases
-    contracts = contracts_v2(hand_register, p["po_headers"], p["po_lines"], p["goods_receipts"], None, None, None, AS_OF)
+    contracts = contracts_v2(hand_register, p["po_headers"], p["po_lines"], p["goods_receipts"], None, None, AS_OF)
     reb = rebate_progress(contracts, p["po_headers"], p["po_lines"], p["goods_receipts"], AS_OF)
     assert list(reb.columns) == list(REBATE_COLUMNS)
     assert list(reb["contract_id"]) == ["CTR-RSA"]  # the only row with tiers

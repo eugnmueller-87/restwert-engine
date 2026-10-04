@@ -23,11 +23,12 @@ Choices where the spec is silent (all documented here and in docs/CONTRACTS.md):
   of PO lines whose header carries ``contract_ref`` (manufacturer, reseller,
   rugged OEM); credit note gross of the ``marketplace`` channel (marketplace);
   the matching ledger line types (refurbishment and repair by register
-  category; outbound, return and replacement logistics); indirect invoices
-  (carrier, financing, mobile threat defense). Where a source carries no
-  counterparty reference (credit notes, indirect rows whose supplier name does
-  not match), the category total is split equally over the register rows of
-  that category and the docs say so. Nothing matched gives NULL, never 0.
+  category; outbound, return and replacement logistics). The carrier, financing
+  and mobile threat defense rows have no transaction source in the lake (the
+  indirect spend feed was removed on 04.10.2026), so their actual spend stays
+  NULL. Where a source carries no counterparty reference (credit notes), the
+  category total is split equally over the register rows of that category and
+  the docs say so. Nothing matched gives NULL, never 0.
 - ``n_serials_under_contract`` counts every goods receipt on the contract
   (all time), ``covers_oems`` lists the manufacturers of the slugs bought on
   it (all time) so that a reseller contract shows which manufacturers it
@@ -138,7 +139,6 @@ REBATE_COLUMNS: tuple[str, ...] = (
 
 HARDWARE_ROLES: tuple[str, ...] = ("manufacturer", "reseller", "rugged_oem")
 LOGISTICS_LINE_TYPES: tuple[str, ...] = ("outbound_shipping", "return_logistics", "replacement_logistics")
-INDIRECT_ROLES: tuple[str, ...] = ("carrier", "financing", "mtd")
 MARKETPLACE_CHANNEL = "marketplace"
 
 
@@ -342,33 +342,6 @@ def _spend_lines(c: pd.DataFrame, lines: pd.DataFrame | None, lo: pd.Timestamp, 
     return out
 
 
-def _spend_indirect(c: pd.DataFrame, indirect: pd.DataFrame | None, lo: pd.Timestamp, hi: pd.Timestamp) -> pd.Series:
-    """Indirect invoices in the window: by supplier name when it matches, else category total split equally."""
-
-    rows = c[c["counterparty_role"].isin(INDIRECT_ROLES)]
-    out = pd.Series(np.nan, index=rows.index, dtype="float64")
-    if rows.empty or not _has(indirect, "invoice_date", "category", "amount_eur"):
-        return out
-    ind = indirect.copy()
-    ind["invoice_date"] = _dt(ind["invoice_date"])
-    ind["amount_eur"] = _num(ind["amount_eur"])
-    ind = ind[(ind["invoice_date"] >= lo) & (ind["invoice_date"] <= hi)]
-    if ind.empty:
-        return out
-    names = ind["supplier_name"].astype(str) if "supplier_name" in ind.columns else pd.Series("", index=ind.index)
-    by_name = ind.groupby(names)["amount_eur"].sum()
-    by_cat = ind.groupby(ind["category"].astype(str))["amount_eur"].sum()
-    for idx, row in rows.iterrows():
-        name = str(row["counterparty_name"])
-        if name in by_name.index:
-            out.loc[idx] = round(float(by_name.loc[name]), 2)
-            continue
-        cat = str(row["category"])
-        if cat in by_cat.index:
-            n_same = int((rows["category"].astype(str) == cat).sum())
-            out.loc[idx] = round(float(by_cat.loc[cat]) / max(n_same, 1), 2)
-    return out
-
 
 def _covers_oems(units: pd.DataFrame, cat_models: pd.DataFrame | None) -> pd.Series:
     """Comma list of manufacturers of the slugs bought on each contract (keyed by contract id)."""
@@ -391,7 +364,6 @@ def contracts_v2(
     goods_receipts: pd.DataFrame | None,
     credit_notes: pd.DataFrame | None,
     lines: pd.DataFrame | None,
-    indirect: pd.DataFrame | None,
     as_of: date,
     cat_models: pd.DataFrame | None = None,
     horizon_months: int = 6,
@@ -462,8 +434,6 @@ def contracts_v2(
     spend.loc[mk.index] = mk
     ln = _spend_lines(c, lines, lo, hi)
     spend.loc[ln.index] = ln
-    ind = _spend_indirect(c, indirect, lo, hi)
-    spend.loc[ind.index] = ind
     c["spend_actual_12m_eur"] = spend.round(2)
     c["n_serials_under_contract"] = n_serials
     planned = c["spend_under_contract_eur"].astype("float64")
@@ -844,13 +814,12 @@ def run_contracts_v2(con: duckdb.DuckDBPyConnection, as_of: date, thr: Threshold
     goods_receipts = _read_optional(con, "bronze.erp_goods_receipts")
     credit_notes = _read_optional(con, "bronze.rc_credit_notes")
     price_changes = _read_optional(con, "bronze.erp_price_changes")
-    indirect = _read_optional(con, "bronze.fin_indirect_spend")
     cat_models = _read_optional(con, "bronze.cat_models")
     lines = _read_optional(con, "silver.ledger_lines")
     if lines is None or lines.empty:
         notes.append("silver.ledger_lines missing or empty: refurbishment, repair and logistics spend stay NULL (run ledger first)")
 
-    contracts = contracts_v2(ctr, po_headers, po_lines, goods_receipts, credit_notes, lines, indirect, as_of, cat_models=cat_models)
+    contracts = contracts_v2(ctr, po_headers, po_lines, goods_receipts, credit_notes, lines, as_of, cat_models=cat_models)
     coverage = coverage_by_oem(po_headers, po_lines, goods_receipts, cat_models, ctr, as_of)
     calendar = renewal_calendar_v2(contracts, po_lines, price_changes, goods_receipts, as_of, po_headers=po_headers)
     rebates = rebate_progress(contracts, po_headers, po_lines, goods_receipts, as_of)

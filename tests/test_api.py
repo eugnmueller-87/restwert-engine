@@ -72,7 +72,7 @@ def test_feeds_list_is_the_contract(api: Api):
     assert r.status_code == 200
     body = r.json()
     assert [f["key"] for f in body] == list(FEEDS)
-    assert len(body) == 19
+    assert len(body) == 18
     sd = next(f for f in body if f["key"] == "servicedesk/tickets")
     assert sd["short_key"] == "sd_tickets"
     assert [c["name"] for c in sd["columns"]] == list(FEEDS["servicedesk/tickets"].column_names)
@@ -83,7 +83,7 @@ def test_feeds_list_is_the_contract(api: Api):
 def test_health_needs_no_key_and_has_no_side_effect(api: Api):
     r = api.client.get("/v1/health")
     assert r.status_code == 200
-    assert r.json()["db_exists"] is False and r.json()["feeds"] == 19 and r.json()["keys_configured"] == 3
+    assert r.json()["db_exists"] is False and r.json()["feeds"] == 18 and r.json()["keys_configured"] == 3
     assert not api.settings.db_path.exists()
 
 

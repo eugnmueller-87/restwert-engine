@@ -15,7 +15,7 @@ What lives here
 - ``catalogue``: ``render_gold_catalogue`` and ``write_gold_catalogue`` which
   generate ``docs/GOLD_KPIS.md`` from the registry. Never hand-edited.
 
-The v0.1 KPI registry stays frozen at 20 KPIs in five areas; nothing here
+The v0.1 KPI registry stays frozen at 15 KPIs in four areas; nothing here
 registers into it. Importing this package imports the KPI module so that
 ``GOLD_KPI_REGISTRY`` is complete after ``import restwert.gold``.
 """

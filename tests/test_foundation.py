@@ -284,13 +284,12 @@ def test_assumptions_and_kpi_targets_loaders(tmp_path: Path):
 
     k_path = tmp_path / "kpi_targets.yaml"
     k_path.write_text(
-        "version: 1\nsavings_plan_owner: 'Head of Indirect Procurement (name)'\n"
-        "savings_plan_eur: {2024: 200000, 2025: 250000}\ntargets_owner: 'CFO (name)'\n"
+        "version: 1\ntargets_owner: 'CFO (name)'\n"
         "targets: {KPI_TOP_LIFECYCLE_MARGIN: 40}\n",
         encoding="utf-8",
     )
     t = config.load_kpi_targets(k_path)
-    assert t.savings_plan_eur[2025] == 250000
+    assert t.targets_owner == "CFO (name)"
     assert t.targets["KPI_TOP_LIFECYCLE_MARGIN"] == 40
 
 

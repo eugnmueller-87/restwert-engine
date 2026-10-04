@@ -114,11 +114,3 @@ po_short_delivery_share: 0.10
 price_drop_share: 0.15
 price_drop_pct: 0.10
 suppliers_hardware: [Supplier-A, Supplier-B, Supplier-C, Supplier-D, Supplier-E, Supplier-F]
-suppliers_indirect: [Supplier-G, Supplier-H, Supplier-I, Supplier-J, Supplier-K, Supplier-L]
-indirect_categories: [logistics, repair, refurbishment, software, marketing, facilities, consulting, packaging]
-indirect_rows_per_month: 40
-indirect_has_po: 0.75
-indirect_has_contract: 0.65
-indirect_saving_share: 0.15
-indirect_confirmed_share: 0.60
-indirect_saving_type_mix: {hard_price_reduction: 0.60, cost_avoidance: 0.30, rebate: 0.10}  # only hard counts vs plan

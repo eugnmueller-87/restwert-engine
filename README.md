@@ -104,7 +104,6 @@ One DuckDB file (`data/restwert.duckdb`) holds three schemas `bronze`, `silver`,
 | `returns/receipts` | returns desk (grading, wipe certificate) | receipt_id |
 | `refurb/work_orders` | refurbishment partner | work_order_id |
 | `recommerce/orders`, `recommerce/credit_notes` | resale channels | order_id, credit_note_id |
-| `finance/indirect_spend` | finance | spend_id |
 
 Rules of the door: a serial is minted by `erp/goods_receipts` and every later serial-level row must resolve against it (`unknown_serial` otherwise, never auto-created); `(source_system, external_ref)` is the business key of every bronze row and `silver.ledger_lines.source_ref = "<system>:<external_ref>"` traces every euro to one landing line; the same file twice is a no-op (sha256), the same key with a different content is a `duplicate_conflict` in `bronze.unresolved` and the first delivery stays. `python -m restwert ingest --source erp/goods_receipts --file <path> --dry-run` reports read, new, duplicate and unresolved counts and writes nothing. The generator injects defects on purpose (serial typos, repeated rows, conflicting rows, missing credit notes, orphan freight lines) so the unresolved path is exercised on every run; `bronze.unresolved` is never empty on the shipped fleet and the Data page lists it first.
 

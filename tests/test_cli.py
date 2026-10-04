@@ -149,7 +149,13 @@ def test_kpis_catalogue_flag_writes_file(capsys):
 
 def test_kpi_values_have_status_and_no_zero_for_not_measurable(full_pipeline_db):
     kv = db.read_df(full_pipeline_db, "SELECT kpi_id, value, status FROM kpi_values")
-    assert len(kv) >= 18
+    # 15, not 18: the indirect procurement KPIs (KPI_IND_*) were removed on
+    # 04.10.2026 with restwert/kpi/indirect.py, because indirect spend is not part
+    # of this tool any more. The threshold moved with that decision; the line below
+    # is what actually guards it, because a count alone would pass again the moment
+    # somebody re-added an indirect KPI under another name.
+    assert len(kv) >= 15
+    assert not [k for k in kv["kpi_id"] if str(k).startswith("KPI_IND_")]
     assert set(kv["status"]).issubset({"ok", "not_measurable"})
     top = kv[kv["kpi_id"] == "KPI_TOP_LIFECYCLE_MARGIN"]
     assert len(top) == 1

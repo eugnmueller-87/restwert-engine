@@ -55,7 +55,6 @@ KPI_BREAKDOWN_COLUMNS: tuple[str, ...] = ("kpi_id", "as_of", "dimension", "dimen
 def _ensure_registry_loaded() -> None:
     """Import the KPI modules so the registry is complete even on a direct import of this module."""
 
-    import restwert.kpi.indirect  # noqa: F401
     import restwert.kpi.inventory  # noqa: F401
     import restwert.kpi.procurement  # noqa: F401
     import restwert.kpi.recommerce  # noqa: F401

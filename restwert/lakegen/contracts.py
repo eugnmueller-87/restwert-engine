@@ -1,4 +1,4 @@
-"""Contracts register and indirect spend of the lake (SPEC_v0.2 section 5.4).
+"""Contracts register of the lake (SPEC_v0.2 section 5.4; the indirect spend feed was removed on 04.10.2026).
 
 ``build_register`` renders one register row per entry of
 ``restwert.contracts.counterparties.COUNTERPARTIES`` (22 rows: the ten catalogue
@@ -19,9 +19,6 @@ purchase orders show up as spend without a contract).
 for manufacturers and resellers; for the other roles a design band per category scaled
 by fleet size (there are no purchase orders for them; the band is a placeholder).
 
-``build_indirect`` wraps the v0.1 ``build_indirect_spend`` with role-only suppliers and
-renames the columns to the ``finance/indirect_spend`` landing shape.
-
 The register is built BEFORE the purchase step in the rng order (purchase orders need
 the contract ids), which is why ``build_register`` draws nothing that depends on the
 fleet; the fleet-dependent spend is deterministic arithmetic.
@@ -37,7 +34,6 @@ import pandas as pd
 
 from restwert.contracts.counterparties import COUNTERPARTIES, TERMS_NOTE, is_allowed_name
 from restwert.dates import add_months
-from restwert.generate.procurement import build_indirect_spend
 from restwert.lakegen.config import LakeConfig
 
 REGISTER_COLUMNS: tuple[str, ...] = (
@@ -45,10 +41,6 @@ REGISTER_COLUMNS: tuple[str, ...] = (
     "end_date", "notice_days", "auto_renewal", "price_protection", "price_protection_days", "claim_window_days",
     "warranty_months", "rebate_tiers_json", "volume_commitment_units", "payment_terms_days", "sla_json",
     "spend_under_contract_eur", "terms_note",
-)
-INDIRECT_COLUMNS: tuple[str, ...] = (
-    "spend_id", "invoice_date", "category", "supplier_name", "amount_eur", "has_po", "has_contract", "saving_eur",
-    "saving_confirmed_by_controlling", "saving_type", "baseline_amount_eur",
 )
 
 NOTICE_DAYS_OPTIONS: tuple[int, ...] = (30, 60, 90, 120)
@@ -70,18 +62,6 @@ SPEND_BAND_BY_CATEGORY: dict[str, float] = {
 SPEND_BAND_REFERENCE_SERIALS: int = 5000
 FRAMEWORK_MIN_MONTHS_AFTER_AS_OF: int = 7
 FRAMEWORK_MAX_MONTHS_AFTER_AS_OF: int = 30
-
-# indirect categories (v0.1 SpendCategory values) -> contracted role-only supplier
-INDIRECT_CONTRACTED_SUPPLIER: dict[str, str] = {
-    "logistics": "Logistics partner (role-only)",
-    "repair": "Refurbishment and repair partner (role-only)",
-    "refurbishment": "Refurbishment and repair partner (role-only)",
-    "software": "Software vendor (role-only)",
-    "marketing": "Marketing agency (role-only)",
-    "facilities": "Facilities provider (role-only)",
-    "consulting": "Consulting firm (role-only)",
-    "packaging": "Packaging supplier (role-only)",
-}
 
 
 def build_register(cfg: LakeConfig, rng: np.random.Generator, as_of: date) -> pd.DataFrame:
@@ -181,36 +161,12 @@ def fill_register_spend(
     return out
 
 
-def build_indirect(cfg: LakeConfig, register: pd.DataFrame, rng: np.random.Generator) -> pd.DataFrame:
-    """v0.1 ``build_indirect_spend`` with role-only suppliers, in the ``finance/indirect_spend`` shape."""
-    contracted = pd.DataFrame(
-        [
-            {"supplier": INDIRECT_CONTRACTED_SUPPLIER.get(str(cat), str(cfg.suppliers_indirect[0])), "category": str(cat)}
-            for cat in cfg.indirect_categories
-        ]
-    )
-    v01 = build_indirect_spend(cfg, contracted, rng)
-    out = v01.rename(
-        columns={
-            "supplier": "supplier_name",
-            "amount": "amount_eur",
-            "saving": "saving_eur",
-            "baseline_amount": "baseline_amount_eur",
-        }
-    )
-    out = out[list(INDIRECT_COLUMNS)].reset_index(drop=True)
-    assert all(is_allowed_name(n) for n in out["supplier_name"].unique())
-    return out
-
 
 __all__ = [
     "REGISTER_COLUMNS",
-    "INDIRECT_COLUMNS",
     "SPEND_BAND_BY_CATEGORY",
-    "INDIRECT_CONTRACTED_SUPPLIER",
     "build_register",
     "register_index",
     "contract_in_force",
     "fill_register_spend",
-    "build_indirect",
 ]

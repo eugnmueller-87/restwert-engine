@@ -246,7 +246,7 @@
         items: top ? [{ lead: 'Größte Stellschraube in der Simulation:', text: (LN[top.lever_name] || top.lever_name) + ' (Verantwortlich: ' + owner(top.threshold_owner) + '). Jahreszahl und Herleitung stehen auf dem Reiter Stellschrauben.' }] : [] },
       { key: 'c-tool', title: 'Wie das Werkzeug aufgebaut ist (v0.2)', ordered: false, items: [
         { lead: 'Vier Datenschichten:', text: 'Rohdateien je Quelle (unverändert); geprüfte Zeilen mit Seriennummer und Quellverweis, Doppelte und Ungeklärtes gezählt; das Geräte-Hauptbuch (jede Kosten- und Erlöszeile mit Herkunft); Kennzahlen, Gruppen und Stellschrauben.' },
-        { lead: 'Quellen:', text: 'Bestellungen und Lieferantenrechnungen (ERP), Einrichtung vor Versand und Versand (Lager), Mietverträge und Mietrechnungen (Portal), Tickets (Service), Rückläufer mit Zustandsprüfung und Löschzertifikat, Aufbereitung, Verkaufsaufträge und Gutschriften je Kanal, Vertragsregister, indirekte Ausgaben.' },
+        { lead: 'Quellen:', text: 'Bestellungen und Lieferantenrechnungen (ERP), Einrichtung vor Versand und Versand (Lager), Mietverträge und Mietrechnungen (Portal), Tickets (Service), Rückläufer mit Zustandsprüfung und Löschzertifikat, Aufbereitung, Verkaufsaufträge und Gutschriften je Kanal, Vertragsregister.' },
         { lead: 'Prinzip:', text: 'das Modell berät, deterministischer Code entscheidet, ein benannter Mensch ist für jede Schwelle verantwortlich. Kosten sind Summen aus Zeilen, nie ein Prozentsatz auf eine Summe, wenn eine Transaktion existiert.' },
         { lead: 'Offene Kreisläufe', text: 'zeigen zwei getrennte Zahlen: bei Verkauf heute und am Leasingende voraussichtlich. Nie addiert.' }
       ] }

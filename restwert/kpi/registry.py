@@ -5,8 +5,9 @@ THE MODEL ADVISES, DETERMINISTIC CODE DECIDES, A NAMED HUMAN OWNS EVERY THRESHOL
 ``KpiSpec`` describes one KPI: id, exact name, area, definition, formula text,
 source tables, the "measurable from" sentence, unit, direction and ``min_n``.
 The ``register`` decorator adds a KPI function to ``KPI_REGISTRY`` and to the
-area's id list in ``KPI_TREE``. The tree has exactly five areas in this order:
-Top, Procurement, Inventory, Recommerce, Indirect.
+area's id list in ``KPI_TREE``. The tree has exactly four areas in this order:
+Top, Procurement, Inventory, Recommerce (the Indirect area was removed on
+04.10.2026: indirect procurement is not part of the tool).
 
 Every KPI function has the signature ``fn(con, as_of, targets) -> KpiValue``.
 It reads DuckDB tables only, never another module's Python.
@@ -38,7 +39,7 @@ from restwert.records import KpiValue
 
 KpiFn = Callable[[duckdb.DuckDBPyConnection, date, KpiTargets], KpiValue]
 
-AREAS: tuple[str, ...] = ("Top", "Procurement", "Inventory", "Recommerce", "Indirect")
+AREAS: tuple[str, ...] = ("Top", "Procurement", "Inventory", "Recommerce")
 DIRECTIONS: tuple[str, ...] = ("up", "down", "zero", "one")
 BREAKDOWN_COLUMNS: tuple[str, ...] = ("dimension", "dimension_value", "value", "numerator", "denominator", "n")
 

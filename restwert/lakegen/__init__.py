@@ -2,7 +2,7 @@
 
 THE MODEL ADVISES, DETERMINISTIC CODE DECIDES, A NAMED HUMAN OWNS EVERY THRESHOLD.
 
-``generate_world`` builds, in memory, what nineteen source systems would export about
+``generate_world`` builds, in memory, what eighteen source feeds would export about
 a fleet of several thousand serials drawn from ``data/catalogue`` (real models, real
 launch dates, real launch RRPs, the ten catalogue manufacturers), priced with a truth
 calibrated to the public anchor curves (``outputs/market_curves.csv``), and
@@ -19,7 +19,7 @@ No market benchmark is quoted; no customer, employer or partner is real.
 One ``numpy.random.default_rng(seed)`` is passed through the builders in this fixed
 order: catalogue pool (no draws) -> fleet -> contracts register (dates) -> purchase ->
 v0.1 rentals -> v0.1 events -> v0.1 refurbishment -> resale and credit notes ->
-indirect spend -> defects -> writer (no draws). The register precedes the purchase
+defects -> writer (no draws). The register precedes the purchase
 step because purchase orders reference its contract ids; its fleet-dependent spend
 is filled afterwards by deterministic arithmetic. Same seed, same files, byte for byte.
 
@@ -43,7 +43,7 @@ from restwert.lakegen import writer as _writer
 from restwert.lakegen.calibrate import TruthCurve, load_curves, truth_curve
 from restwert.lakegen.catalogue import FleetCatalogue, load_fleet_catalogue
 from restwert.lakegen.config import CATALOGUE_DIR, LAKE_RAW_DIR, MARKET_CURVES_CSV, LakeConfig, load_lake_config
-from restwert.lakegen.contracts import build_indirect, build_register, fill_register_spend
+from restwert.lakegen.contracts import build_register, fill_register_spend
 from restwert.lakegen.defects import inject
 from restwert.lakegen.fleet import build_fleet
 from restwert.lakegen.operations import build_operations
@@ -176,8 +176,7 @@ def generate_world(
         fam, oem = group.split(" / ", 1)
         world.truth_curves[group] = truth_curve(curves, fam, oem, cfg.truth_v2)
 
-    # indirect spend, defects
-    world.frames["finance/indirect_spend"] = build_indirect(cfg, register, rng)
+    # defects
     inject(world, cfg, rng)
     world.role_only_names = _role_only_names(world)
 
@@ -202,7 +201,7 @@ def landing_file_is_generated(path: Path) -> bool:
 
 
 def scan_landing_files(raw_dir: Path) -> tuple[list[Path], list[Path]]:
-    """``(generated, real)`` landing CSVs under the nineteen feed folders of ``raw_dir``."""
+    """``(generated, real)`` landing CSVs under the eighteen feed folders of ``raw_dir``."""
     raw_dir = Path(raw_dir)
     generated: list[Path] = []
     real: list[Path] = []
@@ -215,7 +214,7 @@ def scan_landing_files(raw_dir: Path) -> tuple[list[Path], list[Path]]:
 
 
 def clear_landing_files(raw_dir: Path, *, force: bool = False) -> int:
-    """Remove the GENERATED landing files of the nineteen feeds (and the manifest) under ``raw_dir``; returns the count.
+    """Remove the GENERATED landing files of the eighteen feeds (and the manifest) under ``raw_dir``; returns the count.
 
     A regenerated synthetic lake replaces the previous one; landing files are never modified
     in place, they are removed as a whole and written again. Only files whose first line is

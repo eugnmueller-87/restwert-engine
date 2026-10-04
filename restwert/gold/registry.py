@@ -2,7 +2,7 @@
 
 THE MODEL ADVISES, DETERMINISTIC CODE DECIDES, A NAMED HUMAN OWNS EVERY THRESHOLD.
 
-The v0.1 registry (``restwert.kpi.registry``) is frozen at 20 KPIs in five
+The v0.1 registry (``restwert.kpi.registry``) is frozen at 15 KPIs in four
 areas and pinned by tests. The v0.2 cycle KPIs live here, in a separate
 registry keyed by the eight cycle pages, and write ``gold.kpi_values`` and
 ``gold.kpi_breakdown``. Every spec carries the owner of the page it sits on.

@@ -147,10 +147,6 @@ def _world(raw_dir: Path) -> dict[str, Path]:
         {"credit_note_id": "CN-1", "order_id": "RO-1", "serial": "SN-APL-00000001", "channel": "marketplace", "credited_at": "2024-09-29T09:00:00",
          "gross_eur": 420.0, "fee_pct_eur": 50.4, "fee_fixed_eur": 2.5, "net_eur": 367.1},
     ])
-    files["finance/indirect_spend"] = _write(raw_dir, "finance/indirect_spend", [
-        {"spend_id": "IS-1", "invoice_date": "2024-03-01", "category": "logistics", "supplier_name": "Logistics partner (role-only)",
-         "amount_eur": 1200.0, "has_po": "true", "has_contract": "true", "saving_eur": 0.0, "saving_confirmed_by_controlling": "false"},
-    ])
     return files
 
 
@@ -217,7 +213,7 @@ def test_feeds_cover_every_bronze_table_and_order_respects_depends_on():
     tables = {f.bronze_table for f in FEEDS.values()}
     expected = set(schema_lake.BRONZE_DDL) - {"bronze.deliveries", "bronze.unresolved"}
     assert tables == expected
-    assert len(FEEDS) == 19 and INGEST_ORDER == tuple(FEEDS)
+    assert len(FEEDS) == 18 and INGEST_ORDER == tuple(FEEDS)
     seen: set[str] = set()
     for key, spec in FEEDS.items():
         assert isinstance(spec, FeedSpec) and spec.key == key == f"{spec.source_system}/{spec.feed}"
@@ -309,7 +305,7 @@ def test_ingest_dry_run_writes_nothing(lake_con, world):
     assert _count(lake_con, "bronze.deliveries") == 0
     assert _count(lake_con, "runs") == 0
     summary = run_ingest(lake_con, raw, None, None, dry_run=True)
-    assert summary.counts["files"] == 19 and summary.run_id == "ingest-dry-run"
+    assert summary.counts["files"] == 18 and summary.run_id == "ingest-dry-run"
     assert _count(lake_con, "bronze.deliveries") == 0 and _count(lake_con, "runs") == 0
     for spec in FEEDS.values():
         assert _count(lake_con, spec.bronze_table) == 0, spec.key
@@ -325,12 +321,12 @@ def test_ingest_same_file_twice_is_noop(lake_con, world):
     assert second.delivery_id == first.delivery_id == common.delivery_id(first.sha256)
     assert _count(lake_con, "bronze.cat_models") == 3 and _count(lake_con, "bronze.deliveries") == 1
     reports = ingest_all(lake_con, raw)
-    assert len(reports) == 19 and sum(r.already_ingested for r in reports) == 1
+    assert len(reports) == 18 and sum(r.already_ingested for r in reports) == 1
     again = ingest_all(lake_con, raw)
     assert all(r.already_ingested for r in again)
-    assert _count(lake_con, "bronze.deliveries") == 19
+    assert _count(lake_con, "bronze.deliveries") == 18
     summary = db.read_df(lake_con, "SELECT * FROM gold.ingest_summary")
-    assert len(summary) == 19 and int(summary["n_files"].sum()) == 19
+    assert len(summary) == 18 and int(summary["n_files"].sum()) == 18
     assert summary.set_index("feed").loc["erp/goods_receipts", "bronze_rows"] == 2
 
 
@@ -405,7 +401,6 @@ def test_conform_frames_validate_and_allocate_cents(lake_con, world, assumptions
     assert rs.loc["RO-1", "fees"] == pytest.approx(52.9) and rs.loc["RO-1", "price"] == 420.0
     sc = frames["supplier_contracts"].set_index("supplier_contract_id")
     assert list(sc.index) == ["CTR-APL-01"] and sc.loc["CTR-APL-01", "price_protection_days"] == 14
-    assert frames["indirect_spend"].iloc[0]["supplier"] == "Logistics partner (role-only)"
 
     # run_conform writes main and the compat copies the v0.1 loader accepts
     csv_dir = tmp_path / "raw_csv"
@@ -425,7 +420,7 @@ def test_write_compat_csvs_marks_real_data(tmp_path: Path):
     frames = {t: pd.DataFrame(columns=list(schema.ROW_MODELS[t].model_fields)) for t in schema.SOURCE_TABLES}
     frames["devices"] = pd.DataFrame([{"serial": "S", "is_synthetic": False}])
     paths = write_compat_csvs(frames, tmp_path, None)
-    assert len(paths) == 10
+    assert len(paths) == 9  # nine v0.1 source tables since 04.10.2026 (indirect_spend removed)
     assert (tmp_path / "devices.csv").read_text(encoding="utf-8").startswith("# REAL DATA")
     assert (tmp_path / "events.csv").read_text(encoding="utf-8").startswith("# SYNTHETIC DATA")
 

@@ -30,17 +30,17 @@
     var rn = function (parts, total) { var s = 0; parts.forEach(function (p) { s += Math.round(p); }); return s !== Math.round(total) ? '; Glieder auf Euro gerundet' : ''; };
 
     var P_ = D.pnl, R = D.rental, S = D.supplier, I = D.impact, ST = D.status, K = D.kpi, FL = ST.fleet;
-    var S0 = P_.z1.sum + P_.z2.sum + P_.z3.sum + P_.z4.sum + P_.z5.sum, S1 = S0 + P_.z6.sum, S2 = S1 + P_.z7.sum + P_.z8.sum, Z3a = P_.z2.sum + P_.z3.sum;
+    /* Seit 04.10.2026 ohne die Zeile Indirekte Ausgaben (der indirekte Einkauf ist nicht Teil des Werkzeugs): S0 ist die
+       Zwischensumme des Gerätegeschäfts vor Abschreibung, S2 der Deckungsbeitrag nach Abschreibung; kein EBITDA, kein EBIT */
+    var S0 = P_.z1.sum + P_.z2.sum + P_.z3.sum + P_.z4.sum + P_.z5.sum, S2 = S0 + P_.z7.sum + P_.z8.sum, Z3a = P_.z2.sum + P_.z3.sum;
 
     /* ---------- Kopf ---------- */
     var kicker = 'Momentaufnahme für die Geschäftsführung, Stand ' + de(D.today) + ' (Stichtag der Daten ' + de(D.as_of) + ')';
     var subject = 'Wo das Gerätegeschäft steht: zwölf Monate bis ' + de(D.as_of);
-    var lead = 'Mieterlös, Restwert, EBITDA und EBIT als Näherung, die Kennzahlen, die Verträge, die in den nächsten zwölf Monaten enden, und was das Team bewegt hat; jede Zahl kommt aus dem Geräte-Hauptbuch, dem Vertragsregister oder den Konfigurationsdateien, nichts ist getippt.';
+    var lead = 'Mieterlös, Restwert, der Deckungsbeitrag des Gerätegeschäfts vor und nach Abschreibung, die Kennzahlen, die Verträge, die in den nächsten zwölf Monaten enden, und was das Team bewegt hat; jede Zahl kommt aus dem Geräte-Hauptbuch, dem Vertragsregister oder den Konfigurationsdateien, nichts ist getippt.';
     var banner = 'Simulierte Daten, echte Mechanik: ' + qty(D.n_serials) + ' Seriennummern aus dem echten Katalog, jede Buchung erfunden, kein Wert ist eine Tatsache über ein reales Unternehmen; mit den Daten eines Hauses zeigt dieselbe Seite dessen Zahlen.';
 
     /* ---------- Gewinn und Verlust: der Motor addiert nur; Erloese kommen positiv, Aufwand negativ aus den Daten ---------- */
-    var dblZ6 = P_.z6.dbl_names[0] + ' ' + eur(P_.z6.dbl.repair) + ' und ' + P_.z6.dbl_names[1] + ' ' + eur(P_.z6.dbl.refurbishment);
-    var dblZ5 = eur(P_.z5.dbl.repair) + ' und ' + eur(P_.z5.dbl.refurbishment);
     var pnl = [
       { id: 'Z1', name: 'Mieterlös', val: P_.z1.sum, qty: P_.z1.n, basis: 'Mietrechnungen', s0: true },
       { id: 'Z2', name: 'Restwert', val: P_.z2.sum, qty: P_.z2.n, basis: 'erzielter Verkaufspreis nach Verkaufsdatum, vor Kanalgebühren', s0: true },
@@ -48,19 +48,16 @@
       { id: 'Z3a', name: 'Veräußerungsergebnis', tag: DER, val: Z3a, qty: null, basis: 'Restwert minus Restbuchwert; verschrottet zählt mit 0 €' + rn([P_.z2.sum, P_.z3.sum], Z3a) },
       { id: 'Z4', name: 'Preisschutz-Gutschriften', val: P_.z4.sum, qty: P_.z4.n, basis: 'Gutschriften des Herstellers; als Ertrag der Periode gezeigt, in der Bilanz eine Minderung der Anschaffungskosten, hier vereinfacht', s0: true },
       { id: 'Z5', name: 'Kosten bis Verkauf', val: P_.z5.sum, qty: P_.z5.n, basis: qty(P_.z5.n_types) + ' Kostenarten, Fracht bis Kanalgebühren; davon geschätzt ' + eur(P_.z5.est) + ': Lagertage ' + eur(P_.z5.est_hold) + ', Umlage Nutzerbetreuung und Geräteverwaltung je Gerätemonat ' + eur(P_.z5.est_alloc || 0) + ', Kanalgebühren geschätzt bis zum Zahlungseingang ' + eur(P_.z5.est_fee), s0: true },
-      { id: 'S0', name: 'Zwischensumme Gerätegeschäft, vor indirekten Ausgaben', sum: 's0', basis: 'Mieterlös plus Veräußerungsergebnis plus Preisschutz-Gutschriften minus Kosten bis Verkauf' + rn([P_.z1.sum, P_.z2.sum, P_.z3.sum, P_.z4.sum, P_.z5.sum], S0) },
-      { id: 'Z6', name: 'Indirekte Ausgaben', val: P_.z6.sum, qty: P_.z6.n, basis: qty(P_.z6.n_cat) + ' Kategorien (' + P_.z6.cats.join(', ') + '), Platzhalterband des Generators (' + qty(P_.z6.rows_per_month) + ' Rechnungen je Monat, config/lake.yaml); nicht enthalten: ' + dblZ6 + ' (' + qty(P_.z6.dbl_n) + ' Rechnungen), weil beides je Gerät (' + dblZ5 + ') schon in Kosten bis Verkauf steht', s1: true },
-      { id: 'S1', name: 'EBITDA-Näherung', sum: 's1', basis: 'Zwischensumme Gerätegeschäft minus indirekte Ausgaben; vor Abschreibung, Wertberichtigung, Zinsen, Steuern' + rn([S0, P_.z6.sum], S1) },
+      { id: 'S0', name: 'Zwischensumme Gerätegeschäft vor Abschreibung', sum: 's0', basis: 'Mieterlös plus Veräußerungsergebnis plus Preisschutz-Gutschriften minus Kosten bis Verkauf; vor Abschreibung und Wertberichtigung' + rn([P_.z1.sum, P_.z2.sum, P_.z3.sum, P_.z4.sum, P_.z5.sum], S0) },
       { id: 'Z7', name: 'Planmäßige Abschreibung', val: P_.z7.sum, qty: P_.z7.n, basis: 'linear je Vertragsmonat; Restwertprognose bei Rückgabe für ' + qty(P_.z7.n_rec) + ' Geräte, zum Leasingende für ' + qty(P_.z7.n_lease) + ' Geräte, ohne Prognose ' + qty(P_.z7.n_none) + '; ' + qty(P_.z7.n_repl) + ' Ersatzverträge mit Laufzeit bis zum Ende des ersetzten Vertrags', s2: true },
       { id: 'Z8', name: 'Wertberichtigungen', val: P_.z8.sum, qty: P_.z8.n, basis: (P_.z8.rules ? 'Regel ' + P_.z8.rules : 'keine im Fenster') + ', Verantwortlich ' + P_.z8.owner, s2: true },
-      { id: 'S2', name: 'EBIT-Näherung', sum: 's2', basis: 'vor Zinsen und Steuern' + rn([S1, P_.z7.sum, P_.z8.sum], S2) }
+      { id: 'S2', name: 'Deckungsbeitrag Gerätegeschäft nach Abschreibung', sum: 's2', basis: 'Zwischensumme minus planmäßige Abschreibung minus Wertberichtigungen; nur was am Gerät hängt, deshalb kein EBITDA und kein EBIT' + rn([S0, P_.z7.sum, P_.z8.sum], S2) }
     ];
     var chkS0 = 0; pnl.forEach(function (r) { if (r.s0) chkS0 += r.val; });
-    var chkS1 = chkS0; pnl.forEach(function (r) { if (r.s1) chkS1 += r.val; });
-    var chkS2 = chkS1; pnl.forEach(function (r) { if (r.s2) chkS2 += r.val; });
-    if (Math.abs(chkS0 - S0) > 0.005 || Math.abs(chkS1 - S1) > 0.005 || Math.abs(chkS2 - S2) > 0.005 || Math.abs(S0 - P_.s0) > 0.005 || Math.abs(S1 - P_.s1) > 0.005 || Math.abs(S2 - P_.s2) > 0.005) throw new Error('Zeilensumme der G&V weicht ab');
+    var chkS2 = chkS0; pnl.forEach(function (r) { if (r.s2) chkS2 += r.val; });
+    if (Math.abs(chkS0 - S0) > 0.005 || Math.abs(chkS2 - S2) > 0.005 || Math.abs(S0 - P_.s0) > 0.005 || Math.abs(S2 - P_.s2) > 0.005) throw new Error('Zeilensumme der G&V weicht ab');
     var pnlRows = pnl.map(function (r) {
-      var v = r.sum === 's0' ? S0 : (r.sum === 's1' ? S1 : (r.sum === 's2' ? S2 : r.val));
+      var v = r.sum === 's0' ? S0 : (r.sum === 's2' ? S2 : r.val);
       return E.ROW([
         E.C(r.name, r.tag ? { tag: r.tag.cls, tagText: r.tag.text } : {}),
         E.N(eur(v), { neg: v < 0 }),
@@ -68,7 +65,7 @@
         E.C(r.basis, { minW: 260 })
       ], { bold: !!r.sum });
     });
-    var pnlFoot = 'Anlage-Sicht: die Geräte gelten hier als Anlagevermögen und werden linear auf die Restwertprognose abgeschrieben; ob das Haus sie als Anlage oder als Vorrat führt, ist offen und entscheidet die Bilanzierung, Verantwortlich CFO. Nicht enthalten: Finanzierungskosten, Steuern und das Personal des Teams (steht nicht im Geräte-Hauptbuch); Fracht, Zoll und Einrichtung sind hier Periodenaufwand, in einer Bilanz wären sie Anschaffungsnebenkosten; die Einkaufspreise der ' + qty(P_.n_pp) + ' im Fenster gekauften Geräte (' + eur(P_.sum_pp) + ') sind aktiviert und laufen über die Abschreibung, nicht über diese Tabelle.';
+    var pnlFoot = 'Nicht enthalten: alles, was nicht am einzelnen Gerät hängt. Keine Ausgaben des Hauses außerhalb des Geräts (Beratung, Marketing, Gebäude, Software und Dienste für das Haus), kein Personal des Teams, keine Finanzierungskosten, keine Steuern. Deshalb ist die letzte Zeile ein Deckungsbeitrag des Gerätegeschäfts und kein EBITDA und kein EBIT. Anlage-Sicht: die Geräte gelten hier als Anlagevermögen und werden linear auf die Restwertprognose abgeschrieben; ob das Haus sie als Anlage oder als Vorrat führt, ist offen und entscheidet die Bilanzierung, Verantwortlich CFO. Nicht enthalten: Finanzierungskosten, Steuern und das Personal des Teams (steht nicht im Geräte-Hauptbuch); Fracht, Zoll und Einrichtung sind hier Periodenaufwand, in einer Bilanz wären sie Anschaffungsnebenkosten; die Einkaufspreise der ' + qty(P_.n_pp) + ' im Fenster gekauften Geräte (' + eur(P_.sum_pp) + ') sind aktiviert und laufen über die Abschreibung, nicht über diese Tabelle.';
     var pnlDefs = [
       /* die beiden ersten Spalten haben heute keinen Legendensatz; der Vertrag verlangt einen je Spalte */
       { k: 'Zeile', v: 'Zeile der Gewinn- und Verlustrechnung; Zwischensummen stehen fett.' },
@@ -80,13 +77,11 @@
       { k: 'Restbuchwert der Abgänge', v: 'der Wert, mit dem die verkauften und verschrotteten Geräte noch in den Büchern standen: Einkaufspreis minus planmäßige Abschreibung bis zum Vertragsende, bei vorzeitiger Rückgabe bis zur Rückgabe, nach derselben Monatsregel wie die Zeile Planmäßige Abschreibung, minus frühere Wertberichtigungen.' },
       { k: 'Veräußerungsergebnis', v: 'Restwert minus Restbuchwert beim Abgang; negativ heißt unter Buchwert verkauft.' },
       { k: 'Preisschutz-Gutschriften', v: 'Gutschriften des Herstellers, weil er den Listenpreis kurz nach unserem Kauf gesenkt hat; hier als Ertrag der Periode, in einer Bilanz eine Minderung der Anschaffungskosten.' },
-      { k: 'Zwischensumme Gerätegeschäft', v: 'was das Gerätegeschäft vor den indirekten Ausgaben verdient: Mieterlös plus Veräußerungsergebnis plus Preisschutz-Gutschriften minus Kosten bis Verkauf.' },
-      { k: 'Kosten bis Verkauf', v: 'Fracht, Zoll, Einrichtung, Versand, Nutzerbetreuung und Geräteverwaltung je Gerätemonat (Umlage), Reparatur, Austauschversand, Rücksendung, Datenlöschung und Zustandsprüfung, Aufbereitung, Lagertage, Kanalgebühren; alles als Aufwand der Periode; Lagertage und die zwei Umlagen sind Schätzungen' },
-      { k: 'Indirekte Ausgaben', v: 'Rechnungen außerhalb des einzelnen Geräts; in der Simulation ein Platzhalterband (config/lake.yaml, Verantwortlich Leitung Indirekter Einkauf), auf echten Daten die Kreditorenbuchhaltung. Reparatur und Aufbereitung stehen in der Simulation auch als Rechnungen hier, sind aber je Gerät schon in Kosten bis Verkauf gebucht; deshalb zählen sie in dieser Zeile nicht (Betrag in der Zeile). Auf echten Daten gilt dieselbe Regel: jede Kostenart genau einmal, je Gerät oder als Rechnung.' },
-      { k: 'EBITDA-Näherung', v: 'Ergebnis vor Abschreibung, Wertberichtigung, Zinsen und Steuern; eine Näherung, weil Personal und Finanzierung fehlen und die indirekten Ausgaben in der Simulation ein Platzhalterband sind.' },
+      { k: 'Zwischensumme Gerätegeschäft vor Abschreibung', v: 'was das Gerätegeschäft vor Abschreibung und Wertberichtigung verdient: Mieterlös plus Veräußerungsergebnis plus Preisschutz-Gutschriften minus Kosten bis Verkauf; Ausgaben außerhalb des Geräts stehen nicht darin.' },
+      { k: 'Kosten bis Verkauf', v: 'Fracht, Zoll, Einrichtung, Versand, Nutzerbetreuung und Geräteverwaltung je Gerätemonat (Umlage), Reparatur, Austauschversand, Rücksendung, Datenlöschung und Zustandsprüfung, Aufbereitung, Lagertage, Kanalgebühren; alles als Aufwand der Periode; Lagertage und die zwei Umlagen sind Schätzungen. Jede Kostenart genau einmal, je Gerät; eine Rechnung, die kein Gerät trifft, steht in keiner Zeile dieser Tabelle.' },
       { k: 'Planmäßige Abschreibung', v: 'der Teil des Einkaufspreises, der in diesen zwölf Monaten verbraucht wurde: Einkaufspreis minus Restwertprognose zum Vertragsende, gleichmäßig auf die Vertragsmonate zwischen Vertragsbeginn und vertraglichem Ende verteilt; gebucht wird jeder Vertragsmonat, der vor dem wirksamen Ende beginnt.' },
       { k: 'Wertberichtigungen', v: 'außerplanmäßige Abschreibung nach der Regel, die die Zeile nennt; die Regel entscheidet, eine verantwortliche Rolle setzt die Schwelle.' },
-      { k: 'EBIT-Näherung', v: 'Ergebnis vor Zinsen und Steuern.' }
+      { k: 'Deckungsbeitrag Gerätegeschäft nach Abschreibung', v: 'Zwischensumme minus planmäßige Abschreibung minus Wertberichtigungen: was die Geräte nach ihrem Werteverzehr beitragen, bevor Gemeinkosten, Personal, Zinsen und Steuern abgehen. Kein EBITDA und kein EBIT, weil diese Posten nicht im Geräte-Hauptbuch stehen.' }
     ];
     var tPnl = E.TABLE('r-pnl', 'Gewinn und Verlust, zwölf Monate bis ' + de(D.as_of),
       [E.H('Zeile'), E.H('Euro zwölf Monate', 1), E.H('Anzahl', 1), E.H('Grundlage')], pnlRows,
@@ -103,17 +98,17 @@
         qty(P_.z2.n) + ' verkaufte Geräte, vor Abzug der Kanalgebühren (' + eur(D.tiles.fees) + ')',
         'gegen Restwertprognose bei Rückgabe ' + pct1(D.tiles.ratio_record) + ' (' + qty(I.w3.n) + ' Verkäufe ohne Ist-Zustand)',
         'dazu ' + qty(D.tiles.n_scrapped) + ' verschrottete Geräte mit 0 €'] },
-      { label: 'EBITDA-Näherung, zwölf Monate', tags: [SIM, DER], value: eur(S1), neg: S1 < 0, lines: [
-        'Gerätegeschäft ' + eur(S0) + ' minus indirekte Ausgaben ' + eur(Math.abs(P_.z6.sum)) + '; die indirekten Ausgaben sind in der Simulation ein Platzhalterband (' + qty(P_.z6.rows_per_month) + ' Rechnungen je Monat, config/lake.yaml), keine Tatsache; Reparatur und Aufbereitung (' + eur(P_.z6.dbl_sum) + ') zählen hier nicht, sie stehen je Gerät schon in Kosten bis Verkauf',
-        'vor Abschreibung, Wertberichtigung, Zinsen und Steuern; Personal des Teams fehlt, es steht nicht im Geräte-Hauptbuch',
+      { label: 'Gerätegeschäft vor Abschreibung, zwölf Monate', tags: [SIM, DER], value: eur(S0), neg: S0 < 0, lines: [
+        'Mieterlös ' + eur(P_.z1.sum) + ' plus Veräußerungsergebnis ' + eur(Z3a) + ' plus Preisschutz-Gutschriften ' + eur(P_.z4.sum) + ' minus Kosten bis Verkauf ' + eur(Math.abs(P_.z5.sum)),
+        'nur was am Gerät hängt; Ausgaben des Hauses außerhalb des Geräts, Personal, Finanzierung und Steuern stehen nicht im Geräte-Hauptbuch',
         'Anlage-Sicht als Näherung, Verantwortlich CFO'] },
-      { label: 'EBIT-Näherung, zwölf Monate', tags: [SIM, DER], value: eur(S2), neg: S2 < 0, lines: [
-        'EBITDA-Näherung minus planmäßige Abschreibung ' + eur(Math.abs(z7)) + ' minus Wertberichtigungen ' + eur(Math.abs(z8)),
+      { label: 'Deckungsbeitrag nach Abschreibung, zwölf Monate', tags: [SIM, DER], value: eur(S2), neg: S2 < 0, lines: [
+        'Gerätegeschäft vor Abschreibung minus planmäßige Abschreibung ' + eur(Math.abs(z7)) + ' minus Wertberichtigungen ' + eur(Math.abs(z8)) + '; kein EBIT, weil Gemeinkosten, Personal, Zinsen und Steuern fehlen',
         'Abschreibung linear je Vertragsmonat vom Einkaufspreis auf die Restwertprognose zum Vertragsende',
         'ob das Gerät beim Haus Anlage oder Vorrat ist, ist eine offene Frage an das Haus; hier Anlage'] }
     ];
     var kpiDefs = [
-      { k: 'Näherung', v: 'EBITDA und EBIT sind aus dem Geräte-Hauptbuch abgeleitet, nicht aus einer Buchhaltung; die Tabelle darunter zeigt jede Zeile und ihre Herkunft.' },
+      { k: 'Deckungsbeitrag', v: 'beide Ergebniszahlen sind aus dem Geräte-Hauptbuch abgeleitet, nicht aus einer Buchhaltung, und enthalten nur, was am einzelnen Gerät hängt; die Tabelle darunter zeigt jede Zeile, ihre Herkunft und was fehlt.' },
       { k: 'simuliert, abgeleitet', v: 'simuliert: Buchung des Generators; abgeleitet: aus Buchungen gerechnet, keine eigene Buchung.' }
     ];
 
@@ -226,9 +221,7 @@
       ['Restwert gegen Restwertprognose bei Rückgabe', 'simuliert, abgeleitet', I.w3.delta, pct1(I.w3.ratio) + ', ' + eur(I.w3.delta), pct1(I.w3.prev.ratio) + ', ' + eur(I.w3.prev.delta), dpp(I.w3.ratio, I.w3.prev.ratio) + ', ' + deur(I.w3.delta, I.w3.prev.delta),
         'Restwert minus Restwertprognose bei Rückgabe, ' + qty(I.w3.n) + ' Verkäufe ohne Ist-Zustand (Vorperiode ' + qty(I.w3.prev.n) + '); negativ heißt unter der Prognose', I.w3.owner],
       ['Tage von Rückgabe bis Zahlungseingang, mittleres Gerät', 'simuliert', I.w4.days, qty(I.w4.days) + ' Tage', qty(I.w4.prev.days) + ' Tage', ddays(I.w4.days, I.w4.prev.days),
-        'Rückgabe bis Zahlungseingang aus dem Verkauf, ' + qty(I.w4.n) + ' Verkäufe (Vorperiode ' + qty(I.w4.prev.n) + '); die Hälfte schneller, die Hälfte langsamer', I.w4.owner],
-      ['Indirekte Einsparungen, vom Controlling bestätigt', 'simuliert', I.w5.confirmed, eur(I.w5.confirmed), eur(I.w5.prev.confirmed), deur(I.w5.confirmed, I.w5.prev.confirmed),
-        'gemeldet ' + eur(I.w5.sum) + ', davon vom Controlling bestätigt ' + eur(I.w5.confirmed) + ', davon harte Preissenkung ' + eur(I.w5.confirmed_hard) + ', die gegen den Plan zählt' + (nn(I.plan) ? '' : ' (Plan ' + I.plan_year + ': ' + eur(I.plan) + ' je Kalenderjahr, config/kpi_targets.yaml)') + '; ' + qty(I.w5.n) + ' Rechnungen mit Einsparung (Vorperiode ' + qty(I.w5.prev.n) + ')', I.w5.owner]
+        'Rückgabe bis Zahlungseingang aus dem Verkauf, ' + qty(I.w4.n) + ' Verkäufe (Vorperiode ' + qty(I.w4.prev.n) + '); die Hälfte schneller, die Hälfte langsamer', I.w4.owner]
     ];
     var iRows = IR.map(function (r) {
       return E.ROW([E.C(r[0], { tag: 'tag-neutral', tagText: r[1] }), E.N(r[3], { neg: r[2] < 0 }), E.N(r[4]), E.N(r[5]), E.C(r[6], { minW: 260 }), E.C(r[7])]);

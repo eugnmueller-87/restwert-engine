@@ -12,8 +12,7 @@ The hand numbers the tests check (AS_OF = 2026-06-30, trailing 12 months =
 - PPV: only PO-1 carries a benchmark: (105 - 100) * 10 / (100 * 10) = 0.05;
   two delivered lines without benchmark excluded.
 - Spend under contract: hardware 1450 of 2450 EUR (PO-1, PO-3 contracted;
-  PO-2 not), indirect 1200 of 2000 EUR (IS-1, IS-4 have a contract)
-  -> 2650 / 4450.
+  PO-2 not) -> 1450 / 2450 (hardware only since 04.10.2026).
 - Grading accuracy: EV-1 A=A, EV-3 B=B match; EV-2 B>C optimistic; EV-4 C>B
   pessimistic; EV-5 outside the 6-month window -> 2 of 4.
 - Weeks of cover: 4 devices in stock, 2 sales in the trailing 13 weeks
@@ -21,8 +20,6 @@ The hand numbers the tests check (AS_OF = 2026-06-30, trailing 12 months =
 - Landed vs benchmark: D-1 900 vs 850 (latest valid benchmark, not the older
   950), D-2 500 vs 500, D-3 has no benchmark (excluded, counted), D-4
   purchased outside the window -> 1400 / 1350 - 1.
-- Savings 2026: confirmed 100 + 20 = 120, claimed 170 (IS-2 unconfirmed 50),
-  plan 1000 -> 0.12.
 """
 
 from __future__ import annotations
@@ -41,8 +38,6 @@ AS_OF = date(2026, 6, 30)
 
 TARGETS = KpiTargets(
     version=1,
-    savings_plan_eur={2025: 900.0, 2026: 1000.0},
-    savings_plan_owner="Head of Indirect Procurement (fixture)",
     targets={"KPI_PROC_SUPPLIER_OTIF": 0.9, "KPI_TOP_LIFECYCLE_MARGIN": 40.0},
     targets_owner="CFO (fixture)",
 )
@@ -58,10 +53,6 @@ COLUMNS: dict[str, tuple[str, ...]] = {
         "po_number", "supplier", "supplier_contract_id", "model", "order_date", "promised_date", "delivered_date",
         "qty_ordered", "qty_delivered", "unit_price", "benchmark_price", "price_drop_date", "price_drop_amount",
         "is_synthetic", "source_file",
-    ),
-    "indirect_spend": (
-        "spend_id", "invoice_date", "category", "supplier", "amount", "has_po", "has_contract", "saving",
-        "saving_confirmed_by_controlling", "is_synthetic", "source_file",
     ),
     "events": (
         "event_id", "serial", "contract_id", "event_type", "event_date", "cost", "damage_type", "resolved",
@@ -173,16 +164,6 @@ def purchase_orders_frame() -> pd.DataFrame:
     ]
     return frame("purchase_orders", [_src(r) for r in rows])
 
-
-def indirect_spend_frame() -> pd.DataFrame:
-    rows = [
-        dict(spend_id="IS-1", invoice_date=date(2026, 2, 1), category="logistics", supplier="Supplier-G", amount=1000.0, has_po=True, has_contract=True, saving=100.0, saving_confirmed_by_controlling=True),
-        dict(spend_id="IS-2", invoice_date=date(2026, 3, 1), category="software", supplier="Supplier-H", amount=500.0, has_po=True, has_contract=False, saving=50.0, saving_confirmed_by_controlling=False),
-        dict(spend_id="IS-3", invoice_date=date(2026, 4, 1), category="marketing", supplier="Supplier-I", amount=300.0, has_po=False, has_contract=False, saving=0.0, saving_confirmed_by_controlling=False),
-        dict(spend_id="IS-4", invoice_date=date(2026, 5, 1), category="repair", supplier="Supplier-G", amount=200.0, has_po=False, has_contract=True, saving=20.0, saving_confirmed_by_controlling=True),
-        dict(spend_id="IS-5", invoice_date=date(2025, 3, 1), category="consulting", supplier="Supplier-J", amount=900.0, has_po=True, has_contract=True, saving=90.0, saving_confirmed_by_controlling=True),
-    ]
-    return frame("indirect_spend", [_src(r) for r in rows])
 
 
 def events_frame() -> pd.DataFrame:
@@ -300,7 +281,6 @@ def all_frames() -> dict[str, pd.DataFrame]:
         "devices": devices_frame(),
         "benchmarks": benchmarks_frame(),
         "purchase_orders": purchase_orders_frame(),
-        "indirect_spend": indirect_spend_frame(),
         "events": events_frame(),
         "refurbishment": refurbishment_frame(),
         "resale": resale_frame(),

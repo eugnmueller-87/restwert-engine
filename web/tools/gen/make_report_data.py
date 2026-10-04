@@ -18,13 +18,11 @@ IDS = ["data", "today", "h1", "banner", "tiles", "tilenote", "pnl-h2", "pnl", "p
 
 FAM_DE = {"iphone_like": "iPhone", "android_like": "Android-Smartphone", "tablet_like": "Tablet", "laptop_like": "Laptop"}
 CAT_DE = {"hardware": "Hardware", "logistics": "Logistik", "repair": "Reparatur", "refurbishment": "Aufbereitung", "software": "Software",
-          "marketing": "Marketing", "facilities": "Gebäude und Betrieb", "consulting": "Beratung", "packaging": "Verpackung",
           "connectivity": "Mobilfunk und Konnektivität", "resale_channel": "Verkaufskanal", "financing": "Finanzierung",
           "security_software": "Sicherheitssoftware", "rental": "Miete"}
 ROLE_ONLY_SUFFIX = " (role-only)"  # restwert/lake/common.py
 ROLE_DE = {"Logistics partner": "Logistikpartner", "Refurbishment and repair partner": "Aufbereitungs- und Reparaturpartner",
-           "Software vendor": "Softwareanbieter", "Marketing agency": "Marketingagentur", "Facilities provider": "Gebäudedienstleister",
-           "Consulting firm": "Beratungsfirma", "Packaging supplier": "Verpackungslieferant", "IT reseller A": "IT-Zwischenhändler A",
+           "IT reseller A": "IT-Zwischenhändler A",
            "IT reseller B": "IT-Zwischenhändler B", "Carrier partner": "Mobilfunkpartner", "Marketplace channel A": "Marktplatz A",
            # two role names the register carries beyond the brief's list (found in main.contracts_register)
            "Rugged-device OEM": "Hersteller robuster Geräte", "Mobile threat defense partner": "Partner für mobile Bedrohungsabwehr"}
@@ -32,8 +30,6 @@ ROLE_DE = {"Logistics partner": "Logistikpartner", "Refurbishment and repair par
 LEVER_DE = {"purchase_discount": "Einkaufsrabatt", "price_protection": "Preisschutz", "channel_choice": "Kanalwahl",
             "grade_and_repair": "Zustand und Reparatur", "aging": "Liegetage", "term_length": "Laufzeit", "manufacturer_mix": "Herstellermix"}
 RULE_DE = {"aging_write_down": "Wertberichtigung bei zu langer Lagerdauer"}  # restwert/decisions/registry.py rule names
-# indirect categories that the device ledger books per device as well (config/lake.yaml indirect_categories against ledger line_type)
-DOUBLE_CATS = ("repair", "refurbishment")
 KPI_ROWS = [  # (group, kpi_id, German name); ten of the fourteen gold KPIs, in page order
     ("Daten", "KPI_DATA_CHAIN_COMPLETE", "Datumskette vollständig"),
     ("Einkauf", "KPI_PUR_DISCOUNT_VS_RRP", "Einkaufsrabatt gegen UVP ohne Mehrwertsteuer"),
@@ -76,7 +72,7 @@ def dec(v):
 
 
 OWNER_DE = {"Head of Procurement": "Einkaufsleitung", "Head of Recommerce": "Leitung Recommerce", "Head of Service Operations": "Leitung Service",
-            "Head of Customer Success": "Leitung Customer Success", "Head of Indirect Procurement": "Leitung Indirekter Einkauf", "Data owner": "Dateneigner",
+            "Head of Customer Success": "Leitung Customer Success", "Data owner": "Dateneigner",
             "CFO": "CFO", "Category Manager Hardware": "Category Manager Hardware"}
 
 
@@ -177,7 +173,10 @@ acc as (select serial, coalesce(sum(dep_month) filter (month_start < eff_end and
                count(*) filter (month_start < eff_end and month_start <= ?::date) n_booked from mm group by serial)"""
 ACC_P = [AS, AS]
 
-# ---- Gewinn und Verlust, Zeile fuer Zeile (Erloese positiv, Aufwand negativ, genau wie sie in die Summen eingehen)
+# ---- Gewinn und Verlust, Zeile fuer Zeile (Erloese positiv, Aufwand negativ, genau wie sie in die Summen eingehen).
+# Seit 04.10.2026 ohne die Zeile Indirekte Ausgaben: der indirekte Einkauf ist nicht Teil des Werkzeugs. Damit gibt es keine
+# EBITDA- und keine EBIT-Naeherung mehr, sondern eine Zwischensumme des Geraetegeschaefts vor Abschreibung (S0) und den
+# Deckungsbeitrag des Geraetegeschaefts nach Abschreibung (S2); was fehlt, sagt die Seite unter der Tabelle.
 z1_sum, z1_n, z1_serials = con.execute("""select coalesce(sum(amount_eur), 0), count(*), count(distinct serial) from silver.ledger_lines
   where line_type = 'rental_revenue' and event_date > ? and event_date <= ?""", W).fetchone()
 n_active, rate_active = con.execute("select count(*), coalesce(sum(monthly_rate), 0) from main.rental_contracts where status = 'active'").fetchone()
@@ -210,17 +209,6 @@ z5_sum, z5_n, z5_types, z5_est, z5_est_hold, z5_est_alloc, z5_est_fee = con.exec
   coalesce(-sum(case when is_estimate and line_type in ('support', 'mdm_operations') then amount_eur else 0 end), 0),
   coalesce(-sum(case when is_estimate and line_type not in ('holding_cost', 'support', 'mdm_operations') then amount_eur else 0 end), 0)
   from silver.ledger_lines where line_class = 'cost' and line_type <> 'purchase_price' and event_date > ? and event_date <= ?""", W).fetchone()
-z5_dbl = {t: fl(s) for t, s in con.execute("""select line_type, coalesce(-sum(amount_eur), 0) from silver.ledger_lines
-  where line_class = 'cost' and line_type in (?, ?) and event_date > ? and event_date <= ? group by 1""", list(DOUBLE_CATS) + W).fetchall()}
-# Z6 ohne die beiden Kategorien, die je Geraet schon in Z5 stehen (Reparatur, Aufbereitung); sonst zaehlt die EBITDA-Naeherung
-# sie doppelt. Die ausgeschlossene Summe wird beziffert und steht in der Zeile und in der Legende (Entscheidung 14.09.2026).
-z6_sum, z6_n, z6_cat = con.execute("""select coalesce(-sum(amount), 0), count(*), count(distinct category) from main.indirect_spend
-  where category not in (?, ?) and invoice_date > ? and invoice_date <= ?""", list(DOUBLE_CATS) + W).fetchone()
-z6_cats = [cat_de(c) for (c,) in con.execute("select distinct category from main.indirect_spend where category not in (?, ?) and invoice_date > ? and invoice_date <= ? order by 1", list(DOUBLE_CATS) + W).fetchall()]
-z6_dbl = {c: fl(s) for c, s in con.execute("""select category, coalesce(sum(amount), 0) from main.indirect_spend
-  where category in (?, ?) and invoice_date > ? and invoice_date <= ? group by 1""", list(DOUBLE_CATS) + W).fetchall()}
-z6_dbl_n, z6_dbl_sum = con.execute("""select count(*), coalesce(sum(amount), 0) from main.indirect_spend
-  where category in (?, ?) and invoice_date > ? and invoice_date <= ?""", list(DOUBLE_CATS) + W).fetchone()
 z7_sum, z7_n, z7_months, z7_rec, z7_lease, z7_none, z7_repl = con.execute(f"""
 with {DEP_CTE}
 select coalesce(-sum(dep_month), 0), count(distinct serial), count(*),
@@ -235,22 +223,17 @@ z8_rules_text = ", ".join(f"{rid} ({rule_de(name)})" for rid, name in z8_rules)
 n_pp, sum_pp = con.execute("""select count(*), coalesce(-sum(amount_eur), 0) from silver.ledger_lines
   where line_type = 'purchase_price' and event_date > ? and event_date <= ?""", W).fetchone()
 
-# z3_bv is a positive book value and gets its minus here; z5, z6, z7, z8 already come negative out of their queries
-Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8 = dec(z1_sum), dec(z2_sum), -dec(z3_bv), dec(z4_sum), dec(z5_sum), dec(z6_sum), dec(z7_sum), dec(z8_sum)
-S0 = Z1 + Z2 + Z3 + Z4 + Z5      # Geraetegeschaeft vor indirekten Ausgaben
-S1 = S0 + Z6                     # EBITDA-Naeherung
-S2 = S1 + Z7 + Z8                # EBIT-Naeherung
-# Nachrechnung auf zwei anderen Wegen: das Hauptbuch in einer Abfrage (alle Zeilen ausser Einkaufspreis) minus indirekte Ausgaben,
+# z3_bv is a positive book value and gets its minus here; z5, z7, z8 already come negative out of their queries
+Z1, Z2, Z3, Z4, Z5, Z7, Z8 = dec(z1_sum), dec(z2_sum), -dec(z3_bv), dec(z4_sum), dec(z5_sum), dec(z7_sum), dec(z8_sum)
+S0 = Z1 + Z2 + Z3 + Z4 + Z5      # Zwischensumme Geraetegeschaeft vor Abschreibung
+S2 = S0 + Z7 + Z8                # Deckungsbeitrag Geraetegeschaeft nach Abschreibung (kein EBIT: Gemeinkosten, Personal, Zinsen, Steuern fehlen)
+# Nachrechnung auf zwei anderen Wegen: das Hauptbuch in einer Abfrage (alle Zeilen ausser Einkaufspreis),
 # und die Abschreibung je Vertragsmonat in Python statt in SQL. Weicht eine Summe um einen Cent ab, bricht der Generator ab.
-ledger_all, indirect_all = con.execute("""select
-  (select coalesce(sum(amount_eur), 0) from silver.ledger_lines where line_type <> 'purchase_price' and event_date > ? and event_date <= ?),
-  (select coalesce(sum(amount), 0) from main.indirect_spend where category not in (?, ?) and invoice_date > ? and invoice_date <= ?)""", W + list(DOUBLE_CATS) + W).fetchone()
+ledger_all = con.execute("""select coalesce(sum(amount_eur), 0) from silver.ledger_lines
+  where line_type <> 'purchase_price' and event_date > ? and event_date <= ?""", W).fetchone()[0]
 S0_check = dec(ledger_all) + Z3
 if abs(S0_check - S0) > Decimal("0.005"):
     raise SystemExit(f"ABBRUCH: Zwischensumme Gerätegeschäft stimmt nicht auf den Cent: Zeilensumme {S0} gegen Nachrechnung {S0_check}")
-S1_check = S0_check - dec(indirect_all)
-if abs(S1_check - S1) > Decimal("0.005"):
-    raise SystemExit(f"ABBRUCH: EBITDA-Näherung stimmt nicht auf den Cent: Zeilensumme {S1} gegen Nachrechnung {S1_check}")
 dep_py = Decimal(0); acc_py = {}
 for serial, start, end, eff_end, pp, rv_end in con.execute(f"""with rv as ({RV_RECORD})
   select r.serial, r.start_date, r.end_date, coalesce(r.actual_end_date, r.end_date), d.purchase_price, coalesce(f.forecast_rv, d.estimate_rv_lease_end, 0)
@@ -272,24 +255,19 @@ acc_sql = dict(con.execute(f"with {DEP_CTE} select serial, acc_dep from acc", AC
 bad = [s for s in set(acc_sql) | set(acc_py) if abs(float(acc_sql.get(s, 0.0)) - acc_py.get(s, 0.0)) > 0.01]
 if bad:
     raise SystemExit(f"ABBRUCH: aufgelaufene Abschreibung weicht bei QTY {len(bad)} Seriennummern ab, zum Beispiel {bad[:3]}")
-S2_check = S1_check + Z7 + Z8
+S2_check = S0_check + Z7 + Z8
 if abs(S2_check - S2) > Decimal("0.005"):
-    raise SystemExit(f"ABBRUCH: EBIT-Näherung stimmt nicht auf den Cent: {S2} gegen {S2_check}")
-print(f"G&V nachgerechnet: Gerätegeschäft {S0}, EBITDA {S1} (Nachrechnung {S1_check}), EBIT {S2}, Abschreibung SQL {Z7} gegen Python {-dep_py}, acc je Serial geprüft QTY {len(acc_sql)}")
+    raise SystemExit(f"ABBRUCH: Deckungsbeitrag nach Abschreibung stimmt nicht auf den Cent: {S2} gegen {S2_check}")
+print(f"G&V nachgerechnet: Gerätegeschäft vor Abschreibung {S0} (Nachrechnung {S0_check}), Deckungsbeitrag nach Abschreibung {S2}, Abschreibung SQL {Z7} gegen Python {-dep_py}, acc je Serial geprüft QTY {len(acc_sql)}")
 
 pnl = {"z1": {"sum": fl(Z1), "n": iv(z1_n), "n_serials": iv(z1_serials)},
        "z2": {"sum": fl(Z2), "n": iv(z2_n)},
        "z3": {"sum": fl(Z3), "n": iv(z3_n)},
        "z4": {"sum": fl(Z4), "n": iv(z4_n)},
-       "z5": {"sum": fl(Z5), "n": iv(z5_n), "n_types": iv(z5_types), "est": fl(z5_est), "est_hold": fl(z5_est_hold), "est_alloc": fl(z5_est_alloc), "est_fee": fl(z5_est_fee),
-              "dbl": {c: z5_dbl.get(c, 0.0) for c in DOUBLE_CATS}},
-       "z6": {"sum": fl(Z6), "n": iv(z6_n), "n_cat": iv(z6_cat), "cats": z6_cats, "rows_per_month": iv(lake.get("indirect_rows_per_month")),
-              "dbl": {c: z6_dbl.get(c, 0.0) for c in DOUBLE_CATS}, "dbl_n": iv(z6_dbl_n), "dbl_sum": fl(z6_dbl_sum),
-              "dbl_names": [cat_de(c) for c in DOUBLE_CATS]},
+       "z5": {"sum": fl(Z5), "n": iv(z5_n), "n_types": iv(z5_types), "est": fl(z5_est), "est_hold": fl(z5_est_hold), "est_alloc": fl(z5_est_alloc), "est_fee": fl(z5_est_fee)},
        "z7": {"sum": fl(Z7), "n": iv(z7_n), "n_months": iv(z7_months), "n_rec": iv(z7_rec), "n_lease": iv(z7_lease), "n_none": iv(z7_none), "n_repl": iv(z7_repl)},
        "z8": {"sum": fl(Z8), "n": iv(z8_n), "owner": own(z8_owner) or own(targets_cfg.get("min_n_owner")), "rules": z8_rules_text},
-       "s0": fl(S0), "s1": fl(S1), "s2": fl(S2), "n_pp": iv(n_pp), "sum_pp": fl(sum_pp),
-       "indirect_owner": own(lake.get("design_parameter_owners", {}).get("indirect_categories")),
+       "s0": fl(S0), "s2": fl(S2), "n_pp": iv(n_pp), "sum_pp": fl(sum_pp),
        "holding_owner": own(con.execute("select min(assumption_owner) from silver.ledger_lines where line_type = 'holding_cost' and is_estimate").fetchone()[0])}
 
 # ---- Kennzahlen
@@ -372,15 +350,10 @@ def impact_window(win):
       where sale_date > ? and sale_date <= ? and resale_channel <> 'as_is' and estimate_rv_of_record is not null""", win).fetchone()
     med4, n4 = con.execute("""select median(days_return_to_cash), count(*) from silver.device_ledger
       where credited_at > ? and credited_at <= ? and days_return_to_cash is not null""", win).fetchone()
-    sum5, conf5, hard5, confhard5, n5 = con.execute("""select coalesce(sum(saving), 0), coalesce(sum(case when saving_confirmed_by_controlling then saving else 0 end), 0),
-      coalesce(sum(case when saving_type = 'hard_price_reduction' then saving else 0 end), 0),
-      coalesce(sum(case when saving_confirmed_by_controlling and saving_type = 'hard_price_reduction' then saving else 0 end), 0), count(*) filter (saving > 0)
-      from main.indirect_spend where invoice_date > ? and invoice_date <= ?""", win).fetchone()
     return {"w1": {"n": iv(n1), "eur": fl(eur1), "ratio": fl(ratio1)},
             "w2": {"sum": fl(sum2), "n": iv(n2)},
             "w3": {"n": iv(n3), "delta": fl(dec(gross3) - dec(rec3)), "ratio": (fl(dec(gross3) / dec(rec3)) if dec(rec3) != 0 else None)},
-            "w4": {"days": fl(med4), "n": iv(n4)},
-            "w5": {"sum": fl(sum5), "confirmed": fl(conf5), "hard": fl(hard5), "confirmed_hard": fl(confhard5), "n": iv(n5)}}
+            "w4": {"days": fl(med4), "n": iv(n4)}}
 
 
 cur, prev = impact_window(W), impact_window(PW)
@@ -393,14 +366,12 @@ for kid, mine, label in (("KPI_PUR_DISCOUNT_VS_RRP", cur["w1"]["ratio"], "Einkau
 if abs(dec(cur["w2"]["sum"]) - Z4) > Decimal("0.005"):
     warn(f"Preisschutz-Gutschriften: Wirkung {cur['w2']['sum']} gegen G&V {Z4}")
 ppc = kv.get("KPI_PUR_PRICE_PROTECTION_CAPTURE")
-plan = (targets_cfg.get("savings_plan_eur") or {}).get(AS_OF.year)
-impact = {"prev_start1": str(WS2 + timedelta(days=1)), "prev_end": str(WS), "plan_year": AS_OF.year, "plan": fl(plan),
+impact = {"prev_start1": str(WS2 + timedelta(days=1)), "prev_end": str(WS),
           "w1": dict(cur["w1"], ratio=kpi_val("KPI_PUR_DISCOUNT_VS_RRP"), owner=kpi_owner("KPI_PUR_DISCOUNT_VS_RRP"), prev=prev["w1"]),
           "w2": dict(cur["w2"], status=ppc[3] if ppc else None, kpi_n=iv(ppc[6]) if ppc else None,
                      min_n=kpi["min_n"].get("KPI_PUR_PRICE_PROTECTION_CAPTURE"), owner=kpi_owner("KPI_PUR_PRICE_PROTECTION_CAPTURE"), prev=prev["w2"]),
           "w3": dict(cur["w3"], ratio=kpi_val("KPI_RSL_REALISED_VS_RECORD"), owner=kpi_owner("KPI_RSL_REALISED_VS_RECORD"), prev=prev["w3"]),
-          "w4": dict(cur["w4"], days=kpi_val("KPI_RSL_DAYS_RETURN_TO_CASH"), owner=kpi_owner("KPI_RSL_DAYS_RETURN_TO_CASH"), prev=prev["w4"]),
-          "w5": dict(cur["w5"], owner=own(targets_cfg.get("savings_plan_owner")), prev=prev["w5"])}
+          "w4": dict(cur["w4"], days=kpi_val("KPI_RSL_DAYS_RETURN_TO_CASH"), owner=kpi_owner("KPI_RSL_DAYS_RETURN_TO_CASH"), prev=prev["w4"])}
 
 # ---- Stand der Dinge
 b1 = con.execute("""select

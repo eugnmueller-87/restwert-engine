@@ -31,8 +31,6 @@ from restwert.enums import (
     DamageType,
     Grade,
     RefurbOutcome,
-    SavingType,
-    SpendCategory,
     SupplierRole,
 )
 from restwert.lake import schema_lake
@@ -115,8 +113,6 @@ _DAMAGE_TYPES = tuple(d.value for d in DamageType)
 _OUTCOMES = tuple(o.value for o in RefurbOutcome)
 _CHANNELS = tuple(c.value for c in Channel)
 _BUYER_TYPES = tuple(b.value for b in BuyerType)
-_SPEND_CATEGORIES = tuple(c.value for c in SpendCategory)
-_SAVING_TYPES = tuple(s.value for s in SavingType)
 
 
 def _c(name: str, dtype: str, required: bool = True, enum: tuple[str, ...] | None = None, min_value: float | None = None) -> ColumnSpec:
@@ -129,7 +125,7 @@ def _money(name: str, required: bool = True) -> ColumnSpec:
 
 _GR = "bronze.erp_goods_receipts"
 
-# --------------------------------------------------------------------------- the 19 feeds (insertion order = ingest order)
+# --------------------------------------------------------------------------- the 18 feeds (insertion order = ingest order)
 
 _FEED_LIST: list[FeedSpec] = [
     FeedSpec(
@@ -376,26 +372,13 @@ _FEED_LIST: list[FeedSpec] = [
         soft_refs=(), depends_on=("recommerce/orders", "erp/goods_receipts"),
         description="Channel settlement per order: gross, percentage fee, fixed fee, net, credit date (cash).",
     ),
-    FeedSpec(
-        key="finance/indirect_spend", source_system="finance", feed="indirect_spend",
-        delivering_system="accounts payable (indirect)",
-        bronze_table="bronze.fin_indirect_spend", business_key=("spend_id",), serial_column=None, order_column="invoice_date",
-        columns=(
-            _c("spend_id", "str"), _c("invoice_date", "date"), _c("category", "str", enum=_SPEND_CATEGORIES), _c("supplier_name", "str"),
-            _money("amount_eur"), _c("has_po", "bool"), _c("has_contract", "bool"), _money("saving_eur"),
-            _c("saving_confirmed_by_controlling", "bool"), _c("saving_type", "str", False, enum=_SAVING_TYPES),
-            _money("baseline_amount_eur", False),
-        ),
-        resolves=(), soft_refs=(), depends_on=(),
-        description="Indirect invoice lines (v0.1 shape with _eur suffixes) for the procurement KPIs.",
-    ),
 ]
 
 FEEDS: dict[str, FeedSpec] = {f.key: f for f in _FEED_LIST}
 INGEST_ORDER: tuple[str, ...] = tuple(FEEDS)
 FEEDS_BY_TABLE: dict[str, FeedSpec] = {f.bronze_table: f for f in _FEED_LIST}
 
-assert len(FEEDS) == 19, "the lake has 19 feeds"
+assert len(FEEDS) == 18, "the lake has 18 feeds (the indirect spend feed was removed on 04.10.2026)"
 
 # --------------------------------------------------------------------------- landing file names
 
@@ -538,7 +521,7 @@ mapping, so the v0.1 forecast, P&L, decision, KPI and contract engines run uncha
   `wipe_certificate = wipe_certificate_id IS NOT NULL`.
 * `refurbishment` from work orders, `resale` from orders (`fees` = the credit note's percentage plus fixed fee when
   one exists, else the channel fee assumption), `supplier_contracts` from register rows with a supplier role
-  (`price_protection_days = claim_window_days`, the v0.1 meaning), `indirect_spend` renamed column for column.
+  (`price_protection_days = claim_window_days`, the v0.1 meaning).
 
 Every conformed row carries `is_synthetic` = the fleet flag (the catalogue rows are public one join away; the fleet
 that references them is synthetic) and `source_file = "bronze.<table>"`. With `--csv-dir` the ten tables are also

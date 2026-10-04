@@ -94,24 +94,11 @@ class SpendCategory(StrEnum):
     REPAIR = "repair"
     REFURBISHMENT = "refurbishment"
     SOFTWARE = "software"
-    MARKETING = "marketing"
-    FACILITIES = "facilities"
-    CONSULTING = "consulting"
-    PACKAGING = "packaging"
-    # v0.2 additions (contracts register v2 and the indirect feed)
+    # v0.2 additions (contracts register v2: the role-only partners around the device)
     CONNECTIVITY = "connectivity"
     FINANCING = "financing"
     RESALE_CHANNEL = "resale_channel"
     SECURITY_SOFTWARE = "security_software"
-
-
-class SavingType(StrEnum):
-    """How a claimed indirect saving was earned. Only hard price reductions count
-    against the savings plan; cost avoidance and rebates are reported separately."""
-
-    HARD_PRICE_REDUCTION = "hard_price_reduction"
-    COST_AVOIDANCE = "cost_avoidance"
-    REBATE = "rebate"
 
 
 # --------------------------------------------------------------------------- v0.2 lake enums
@@ -195,7 +182,6 @@ __all__ = [
     "DeviceStatus",
     "SubjectType",
     "SpendCategory",
-    "SavingType",
     "LineType",
     "LineClass",
     "SupplierRole",

@@ -122,7 +122,7 @@ def test_names_follow_synthetic_patterns(frames):
     supplier_re = re.compile(r"^Supplier-[A-L]$")
     customer_re = re.compile(r"^CUST-\d{4}$")
     model_re = re.compile(r"^[PAL]-Gen\d{2}$")
-    for table in ("devices", "purchase_orders", "supplier_contracts", "indirect_spend"):
+    for table in ("devices", "purchase_orders", "supplier_contracts"):
         assert frames[table]["supplier"].map(lambda v: bool(supplier_re.match(v))).all(), table
     assert frames["rental_contracts"]["customer_id"].map(lambda v: bool(customer_re.match(v))).all()
     for table in ("model_catalogue", "devices", "benchmarks"):
@@ -192,7 +192,6 @@ def test_referential_integrity_and_ids(frames):
     assert frames["resale"]["sale_id"].str.match(r"^S-\d{6}$").all()
     assert frames["supplier_contracts"]["supplier_contract_id"].str.match(r"^SC-\d{2}$").all()
     assert frames["purchase_orders"]["po_number"].str.match(r"^PO-\d{6}$").all()
-    assert frames["indirect_spend"]["spend_id"].str.match(r"^IS-\d{6}$").all()
     db.referential_checks(frames)
 
 
@@ -366,7 +365,7 @@ def test_purchase_orders_and_benchmarks(cfg, frames):
     assert np.allclose(bm["landed_cost_benchmark"].astype(float), (cat.loc[bm["model"], "list_price"].values.astype(float) * 0.85 * 1.03).round(2), atol=0.011)
 
 
-def test_supplier_contracts_and_indirect_spend(cfg, frames):
+def test_supplier_contracts(cfg, frames):
     sc = frames["supplier_contracts"]
     hw = sc[sc["category"] == "hardware"]
     assert len(hw) == len(cfg.suppliers_hardware) and set(hw["supplier"]) == set(cfg.suppliers_hardware)
@@ -374,8 +373,7 @@ def test_supplier_contracts_and_indirect_spend(cfg, frames):
     assert hw.loc[hw["price_protection"], "price_protection_days"].isin([30, 45, 60]).all()
     assert hw.loc[~hw["price_protection"], "price_protection_days"].isna().all()
     assert sc["payment_terms_days"].isin([30, 45, 60]).all()
-    ind = sc[sc["category"] != "hardware"]
-    assert set(ind["category"]) == set(cfg.indirect_categories) and set(ind["supplier"]) <= set(cfg.suppliers_indirect)
+    assert (sc["category"] == "hardware").all() and len(sc) == len(hw)  # no indirect contracts since 04.10.2026
     assert (sc["start_date"] <= cfg.as_of).all()
     assert (sc["end_date"] > sc["start_date"]).all()
     from restwert.dates import add_months
@@ -386,19 +384,6 @@ def test_supplier_contracts_and_indirect_spend(cfg, frames):
     assert 2 <= soon <= 6 and 1 <= expired <= 5
     assert 2 <= ((hw["end_date"] > cfg.as_of) & (hw["end_date"] <= horizon)).sum() <= 4
 
-    isp = frames["indirect_spend"]
-    n_months = (cfg.as_of.year - cfg.history_start.year) * 12 + cfg.as_of.month - cfg.history_start.month + 1
-    assert len(isp) == n_months * cfg.indirect_rows_per_month
-    assert (isp["invoice_date"] >= cfg.history_start).all() and (isp["invoice_date"] <= cfg.as_of).all()
-    assert set(isp["category"]) <= set(cfg.indirect_categories)
-    assert (isp["amount"] > 0).all()
-    assert abs(isp["has_po"].mean() - cfg.indirect_has_po) < 0.06
-    assert abs(isp["has_contract"].mean() - cfg.indirect_has_contract) < 0.08
-    saving_rows = isp[isp["saving"] > 0]
-    assert (isp.loc[isp["saving"] == 0, "saving_confirmed_by_controlling"] == False).all()  # noqa: E712
-    assert abs(len(saving_rows) / len(isp) - cfg.indirect_saving_share) < 0.05
-    ratio = saving_rows["saving"] / saving_rows["amount"]
-    assert ratio.min() >= 0.03 - 0.01 and ratio.max() <= 0.12 + 0.01
 
 
 def test_resale_prices_follow_hidden_truth_curve(cfg, frames_large):
@@ -559,17 +544,6 @@ def test_launch_slip_stays_inside_bounds_and_monotone(cfg, frames):
         for gen, d in zip(sub["generation"], sub["launch_date"]):
             assert d == add_months(fc.first_launch, (int(gen) - 1) * fc.launch_cadence_months)
 
-
-def test_indirect_savings_are_typed_with_a_baseline(cfg, frames):
-    isp = frames["indirect_spend"]
-    saving_rows = isp[isp["saving"] > 0]
-    none_rows = isp[isp["saving"] == 0]
-    assert set(saving_rows["saving_type"]) <= {"hard_price_reduction", "cost_avoidance", "rebate"}
-    assert saving_rows["saving_type"].notna().all()
-    assert none_rows["saving_type"].isna().all() and none_rows["baseline_amount"].isna().all()
-    assert np.allclose(saving_rows["baseline_amount"].astype(float), saving_rows["amount"].astype(float) + saving_rows["saving"].astype(float), atol=0.011)
-    hard = (saving_rows["saving_type"] == "hard_price_reduction").mean()
-    assert abs(hard - cfg.indirect_saving_type_mix["hard_price_reduction"]) < 0.12
 
 
 def test_rental_monthly_rate_scales_with_the_term_rate_factor(cfg):

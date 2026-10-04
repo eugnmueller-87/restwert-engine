@@ -65,9 +65,7 @@ def render_catalogue(registry: dict[str, KpiSpec] = KPI_REGISTRY, tree: list = K
         "",
     ]
     if targets is not None:
-        plan = ", ".join(f"{year}: {value:,.0f} EUR" for year, value in sorted(targets.savings_plan_eur.items()))
         out += [
-            f"Savings plan (owner: {targets.savings_plan_owner}, placeholder values): {plan}.",
             f"KPI targets owner: {targets.targets_owner}.",
             "",
         ]

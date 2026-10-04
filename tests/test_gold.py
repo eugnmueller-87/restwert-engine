@@ -57,7 +57,7 @@ EXPECTED_IDS: tuple[str, ...] = (
 
 
 def _targets() -> KpiTargets:
-    return KpiTargets(version=1, savings_plan_eur={2026: 1000.0}, savings_plan_owner="x", targets={"KPI_DATA_CHAIN_COMPLETE": 0.95}, targets_owner="CFO (name)")
+    return KpiTargets(version=1, targets={"KPI_DATA_CHAIN_COMPLETE": 0.95}, targets_owner="CFO (name)")
 
 
 def _lake_db(request):
@@ -199,7 +199,7 @@ def test_gold_registry_has_14_kpis_and_pages():
     # the v0.1 registry is untouched by the gold registrations
     from restwert.kpi import KPI_REGISTRY
 
-    assert len(KPI_REGISTRY) == 20
+    assert len(KPI_REGISTRY) == 15
     assert not set(KPI_REGISTRY) & set(GOLD_KPI_REGISTRY)
 
 

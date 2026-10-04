@@ -1,15 +1,10 @@
-# KPI targets and savings plan for the Restwert Engine (SPEC 7.5).
+# KPI targets and minimum sample sizes for the Restwert Engine (SPEC 7.5; the savings plan of the
+# indirect procurement was removed on 04.10.2026, indirect procurement is not part of the tool).
 # THE MODEL ADVISES, DETERMINISTIC CODE DECIDES, A NAMED HUMAN OWNS EVERY THRESHOLD.
 #
 # Every value here is a placeholder set for the synthetic dataset. None quotes an
 # external benchmark. Replace the owners with real names before use on real data.
 version: 1
-savings_plan_owner: "Head of Indirect Procurement (name)"
-# Placeholder plan, deliberately scaled to what the synthetic generator produces: about 5 to
-# 7 kEUR of confirmed HARD savings per year (indirect_saving_share x hard share x confirmed
-# share on ~2,160 invoices with a 1,800 EUR median). Only hard_price_reduction counts; cost
-# avoidance and rebates are reported next to it. Not a market or company figure; replace on real data.
-savings_plan_eur: {2024: 6000, 2025: 7000, 2026: 8000}
 targets_owner: "CFO (name)"
 targets:
   KPI_TOP_LIFECYCLE_MARGIN: 40
@@ -18,7 +13,6 @@ targets:
   KPI_PROC_SPEND_UNDER_CONTRACT: 0.85
   KPI_INV_AGING_90: 0.10
   KPI_REC_GRADING_ACCURACY: 0.80
-  KPI_IND_MAVERICK_SHARE: 0.10
 # v0.2 gold KPIs: minimum sample size before a value is reported as measurable (n = the
 # observations the KPI counts: serials, closed devices, sales, units; deliveries for the
 # unresolved share; additive levers for the lever KPI). Below min_n the value is stored for

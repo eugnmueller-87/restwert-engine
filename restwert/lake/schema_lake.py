@@ -115,11 +115,6 @@ BRONZE_DDL: dict[str, str] = {
   claim_window_days INTEGER, warranty_months INTEGER, rebate_tiers_json VARCHAR, volume_commitment_units INTEGER,
   payment_terms_days INTEGER NOT NULL, sla_json VARCHAR, spend_under_contract_eur DECIMAL(14,2) NOT NULL,
   terms_note VARCHAR NOT NULL, {_T});""",
-    # finance (indirect)
-    "bronze.fin_indirect_spend": f"""CREATE TABLE IF NOT EXISTS bronze.fin_indirect_spend (
-  spend_id VARCHAR PRIMARY KEY, invoice_date DATE NOT NULL, category VARCHAR NOT NULL, supplier_name VARCHAR NOT NULL,
-  amount_eur DECIMAL(12,2) NOT NULL, has_po BOOLEAN NOT NULL, has_contract BOOLEAN NOT NULL, saving_eur DECIMAL(12,2) NOT NULL,
-  saving_confirmed_by_controlling BOOLEAN NOT NULL, saving_type VARCHAR, baseline_amount_eur DECIMAL(12,2), {_T});""",
 }
 
 SILVER_DDL: dict[str, str] = {

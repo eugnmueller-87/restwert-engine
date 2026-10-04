@@ -38,7 +38,6 @@ BRONZE_TRANSACTIONAL = (
     "bronze.rc_orders",
     "bronze.rc_credit_notes",
     "bronze.ctr_register",
-    "bronze.fin_indirect_spend",
 )
 
 
@@ -320,7 +319,7 @@ def test_synthetic_md_both_locations(lake_pipeline_paths):
 def test_landing_files_land_under_lake_dir_and_raw_csv_is_conformed(lake_pipeline_paths):
     raw = lake_pipeline_paths.lake_dir / "raw"
     files = list(raw.rglob("*.csv"))
-    assert len(files) > 19, "one landing file per feed at least"
+    assert len(files) > 18, "one landing file per feed at least"
     assert (lake_pipeline_paths.csv_dir / "devices.csv").exists()
 
 
