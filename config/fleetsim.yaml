@@ -1,0 +1,140 @@
+# Restwert Engine, fleetsim: the device cycle at fleet scale (first rental, second rental, final sale, repairs).
+#
+# EVERY value here is a design parameter for a SYNTHETIC fleet. None is a customer, supplier or
+# employer figure. Where a public source exists it is named; where none exists the value is a
+# PLACEHOLDER with an owner (design_parameter_owners at the bottom). The company is "the DaaS provider".
+#
+# Scale: 400,000 serials is a public figure for a large European DaaS provider (press release,
+# 05.02.2026, "over 400,000 devices"). The split 300,000 in circulation / 100,000 in the warehouse is
+# the business owner's instruction of 21.09.2026, not a published number: the generator reports what
+# that split implies for dwell time (Little's law) instead of hiding it.
+version: 1
+seed: 42
+as_of: 2026-09-21
+n_in_circulation: 300000        # devices at a customer (first or second rental)          [owner instruction 21.09.2026]
+n_in_warehouse: 100000          # devices in stock, any warehouse state                   [owner instruction 21.09.2026]
+
+# Family mix of the fleet. Shares follow config/lake.yaml share_of_fleet (placeholders there too).
+family_mix: {Smartphone: 0.60, Tablet: 0.15, Laptop: 0.25}     # placeholder, no public source
+apple_share_of_smartphones: 0.55                                # placeholder, no public source
+
+# Term mix per family in months, first rental. Same placeholders as config/lake.yaml term_mix.
+term_mix_cycle1:
+  Smartphone: {12: 0.10, 24: 0.52, 36: 0.33, 48: 0.05}
+  Tablet:     {12: 0.05, 24: 0.40, 36: 0.45, 48: 0.10}
+  Laptop:     {12: 0.05, 24: 0.25, 36: 0.50, 48: 0.20}
+# Second rental: 24 or 36 months (the business owner's note "Zweitzyklus", 17.09.2026, example values;
+# a public DaaS provider offers 12 to 36 months for refurbished devices).
+term_mix_cycle2: {24: 0.60, 36: 0.40}                           # placeholder
+share_cycle2_in_circulation: 0.25   # PLACEHOLDER, no public source; the share of the rented fleet that is on its second rental.
+                                    # Public anchors measure something else: 99 % "second life" incl. sale (2024), ~95 % refurbished for reuse.
+early_termination_rate: 0.06        # share of contracts returned before the planned end (config/lake.yaml)
+early_termination_age_min_months: 3
+
+# Defects during rental (config/lake.yaml damage_rate_pa, repair_share, replacement_share_of_damage).
+damage_rate_pa: {Smartphone: 0.10, Tablet: 0.07, Laptop: 0.08}
+repair_share_of_damage: 0.70        # the rest is written off or replaced without repair
+swap_share_of_damage: 0.30          # damage that triggers a replacement device from the swap buffer
+
+# Grades at return (config/lake.yaml grade_pre_return_mix and grade_drift_worse).
+grade_mix_at_return: {A: 0.35, B: 0.40, C: 0.20, D: 0.05}
+grade_drift_worse: 0.20
+battery_health_threshold: 0.80      # PLACEHOLDER: below this a battery swap is due regardless of grade
+battery_health_loss_per_month: 0.006   # PLACEHOLDER: mean capacity loss per month of age
+
+# Manufacturer software support after launch, years. The hard limit of the second cycle: no second rental
+# may end after the support end. Sources in the business owner's note "Zweitzyklus" 17.09.2026 (Q86 to Q88):
+# Samsung 7 years from Galaxy S24 (01/2024), before that under 5 (S21: last patch 11/2025); Google 7 years from
+# Pixel 8 (10/2023); Apple names no date, iOS 26 still runs on the iPhone 11 (09/2019), so 7 is a floor.
+support_years:
+  Apple: {default: 7.0}
+  Samsung: {default: 5.0, from_launch: "2024-01-01", from_launch_years: 7.0}
+  Google: {default: 5.0, from_launch: "2023-10-01", from_launch_years: 7.0}
+  Motorola: {default: 3.0}                     # placeholder
+  "HMD Global (Nokia)": {default: 3.0}         # placeholder
+  Fairphone: {default: 8.0}                    # manufacturer promise for Gen. 5 and 6 (public), simplified
+  Lenovo: {default: 6.0}                       # placeholder (Windows lifecycle, not the OEM)
+  Dell: {default: 6.0}                         # placeholder
+  HP: {default: 6.0}                           # placeholder
+  Microsoft: {default: 6.0}                    # placeholder
+min_support_left_for_cycle2_months: 24
+
+# Decision after a return (business owner's note "Zweitzyklus" 17.09.2026, table G.3, simplified):
+#   cycle 1 return, grade A or B, support left >= 24 months, age <= max_age -> second rental
+#   cycle 1 return, grade C -> repair, then second rental with the share below, else sale
+#   grade D -> sale as is, or recycling
+#   cycle 2 return -> final sale, or recycling
+cycle2_max_age_at_return_months: 40      # placeholder
+cycle2_share_after_repair_grade_c: 0.50  # placeholder
+recycling_share: 0.04                    # public: "under 5 %" of returns (FAQ of a DaaS provider), simplified
+
+# Warehouse stations and dwell days [min, max], uniform. Sources: the note "Zweitzyklus" table G.2
+# (assumptions there), config/lake.yaml refurb_days and days_to_sale.
+dwell_days:
+  eingang: [5, 15]                 # return logistics, receipt, lock            [assumption]
+  mdm_freigabe: [0, 21]            # release from the old customer's MDM       [assumption, the most common wait]
+  loeschung_grading: [1, 3]        # certified wipe, function test, grade      [assumption]
+  reparatur: [8, 20]               # grade C repair                            [lake.yaml refurb_days C]
+  aufbereitung: {A: [3, 7], B: [5, 12], C: [8, 20], D: [2, 5]}   # lake.yaml refurb_days
+  verkaufsfaehig: [10, 60]         # days to sale, marketplace                 [lake.yaml days_to_sale]
+  neugeraet: [7, 30]               # new device from goods receipt to deployment [assumption]
+slow_mover_share: 0.04             # lake.yaml
+slow_mover_days: [90, 400]         # lake.yaml
+swap_buffer_share_of_circulation: 0.02   # PLACEHOLDER: replacement devices held ready, share of rented fleet
+
+# How the warehouse is filled up to n_in_warehouse when the flow (returns x dwell) explains fewer devices:
+# the remainder is booked as stock bought ahead (new devices) and as sellable backlog, in this split.
+# The report prints the flow-implied count next to the instructed count. PLACEHOLDER split.
+warehouse_topup_split: {neugeraet: 0.60, verkaufsfaehig: 0.40}
+
+# Money. Purchase discount below net launch RRP per manufacturer route (config/lake.yaml discount_by_oem, design).
+discount_by_oem:
+  Apple: [0.05, 0.12]
+  Samsung: [0.12, 0.25]
+  Google: [0.10, 0.22]
+  Motorola: [0.15, 0.30]
+  Fairphone: [0.03, 0.08]
+  "HMD Global (Nokia)": [0.15, 0.25]
+  Lenovo: [0.15, 0.30]
+  Dell: [0.15, 0.28]
+  HP: [0.15, 0.28]
+  Microsoft: [0.08, 0.15]
+vat: 0.19
+book_life_months: 36               # PLACEHOLDER: straight-line depreciation to the floor below
+book_floor_share: 0.10             # PLACEHOLDER
+capital_cost_rate_pa: 0.08         # PLACEHOLDER, the note "Rechenwege" 16.09.2026 uses 8 % as example
+repair_cost_eur: {Smartphone: [60, 320], Tablet: [50, 250], Laptop: [80, 400]}   # lake.yaml ranges, Tablet/Laptop placeholder
+refurb_cost_eur: {A: [10, 25], B: [20, 60], C: [40, 120], D: [5, 15]}          # lake.yaml
+rent_share_of_landed_per_month: {Smartphone: 0.042, Tablet: 0.040, Laptop: 0.038}   # lake.yaml monthly_rate_pct_of_landed
+term_rate_factor: {12: 1.5, 24: 1.0, 36: 0.85, 48: 0.75}                           # lake.yaml
+rent2_share_of_rent1: 0.70          # PLACEHOLDER, the one number only Sales knows (note "Zweitzyklus" G.4)
+residual_curve_file: outputs/market_curves.csv    # public anchors, fitted; family rows "marketplace"
+sale_channel_mix: {marketplace: 0.55, b2b_wholesale: 0.30, employee_buyout: 0.10, as_is: 0.05}   # placeholder
+channel_fee_share: {marketplace: 0.12, b2b_wholesale: 0.20, employee_buyout: 0.00, as_is: 0.25}   # placeholder, in line with the engine's channel factors 0.88 / 0.80
+
+design_parameter_owners:
+  n_in_circulation: "Business owner (instruction 21.09.2026)"
+  n_in_warehouse: "Business owner (instruction 21.09.2026)"
+  family_mix: "Head of Procurement (name)"
+  apple_share_of_smartphones: "Head of Procurement (name)"
+  term_mix_cycle1: "Head of Customer Success (name)"
+  term_mix_cycle2: "Head of Recommerce (name)"
+  share_cycle2_in_circulation: "Head of Recommerce (name)"
+  early_termination_rate: "Head of Customer Success (name)"
+  damage_rate_pa: "Head of Service Operations (name)"
+  repair_share_of_damage: "Head of Service Operations (name)"
+  swap_share_of_damage: "Head of Service Operations (name)"
+  grade_mix_at_return: "Head of Recommerce (name)"
+  battery_health_threshold: "Head of Refurbishment (name)"
+  support_years: "Data owner (name)"
+  cycle2_max_age_at_return_months: "Head of Recommerce (name)"
+  cycle2_share_after_repair_grade_c: "Head of Refurbishment (name)"
+  recycling_share: "Head of Operations (name)"
+  dwell_days: "Head of Operations (name)"
+  swap_buffer_share_of_circulation: "Head of Service Operations (name)"
+  warehouse_topup_split: "Head of Procurement (name)"
+  discount_by_oem: "Head of Procurement (name)"
+  book_life_months: "CFO (name)"
+  capital_cost_rate_pa: "CFO (name)"
+  rent2_share_of_rent1: "Head of Sales (name)"
+  sale_channel_mix: "Head of Recommerce (name)"
